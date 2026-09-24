@@ -28,8 +28,9 @@ from firebase_admin import credentials, firestore, messaging
 
 RESOURCE_ID = "9ef84268-d588-465a-a308-a864a43d0070"
 BASE_URL = f"https://api.data.gov.in/resource/{RESOURCE_ID}"
-PAGE_SIZE = 2000
-MAX_PAGES = 12
+PAGE_SIZE = 1000  # smaller pages answer faster
+MAX_PAGES = 24
+TIMEOUT = 120  # data.gov.in can take a while to answer
 MIN_PRICE = 20  # under ₹20 a quintal is always a data error
 
 ALL_STATES = [
@@ -49,26 +50,40 @@ def slug(text):
     return "_".join(part for part in "".join(out).split("_") if part)
 
 
+def get_page(api_key, state, offset):
+    """One page, with patience. The government API is often slow, so a
+    single timeout must not throw away the whole day."""
+    params = {
+        "api-key": api_key,
+        "format": "json",
+        "limit": PAGE_SIZE,
+        "offset": offset,
+        "filters[state]": state,
+    }
+    last_error = None
+    for attempt in range(1, 4):
+        try:
+            response = requests.get(BASE_URL, params=params, timeout=TIMEOUT)
+            response.raise_for_status()
+            return response.json()
+        except Exception as error:
+            last_error = error
+            print(f"    attempt {attempt} failed ({error}); retrying")
+            time.sleep(5 * attempt)
+    raise last_error
+
+
 def fetch_state(api_key, state):
     """Every price row for one state, across all pages."""
     rows = []
     for page in range(MAX_PAGES):
-        params = {
-            "api-key": api_key,
-            "format": "json",
-            "limit": PAGE_SIZE,
-            "offset": page * PAGE_SIZE,
-            "filters[state]": state,
-        }
-        response = requests.get(BASE_URL, params=params, timeout=60)
-        response.raise_for_status()
-        data = response.json()
+        data = get_page(api_key, state, page * PAGE_SIZE)
         batch = data.get("records") or []
         rows.extend(batch)
         total = int(data.get("total") or len(rows))
         if len(rows) >= total or not batch:
             break
-        time.sleep(0.5)  # be gentle with the government API
+        time.sleep(1)  # be gentle with the government API
     return rows
 
 
@@ -162,7 +177,9 @@ def main():
             failures += 1
             print(f"{state}: FAILED — {error}")
 
-    print(f"Done. {failures} state(s) failed.")
+    print(f"Done. {failures} of {len(states)} state(s) failed.")
+    if failures == len(states):
+        sys.exit("Every state failed — see the errors above.")
 
 
 if __name__ == "__main__":
