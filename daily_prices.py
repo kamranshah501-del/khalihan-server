@@ -127,8 +127,8 @@ def summarise(rows):
     return prices
 
 
-def save_and_notify(db, state, prices, day):
-    """Write the day's prices, then wake the phones in that state."""
+def save_prices(db, state, prices, day):
+    """Write the day's prices, keeping whichever copy is richer."""
     scope = slug(state)
     doc = db.collection("prices").document(scope).collection("days").document(day)
     payload = {
@@ -139,24 +139,23 @@ def save_and_notify(db, state, prices, day):
 
     existing = doc.get()
     if existing.exists:
-        # Phones save an early snapshot in the morning; only replace it when
-        # the government data has grown richer since.
         old = existing.to_dict() or {}
-        if len(old.get("c") or []) >= len(payload["c"]):
-            print(f"  {state}: keeping the phone-saved copy ({len(old.get('c') or [])} crops)")
-        else:
-            doc.set(payload)
-            print(f"  {state}: updated to {len(payload['c'])} crops")
-    else:
-        doc.set(payload)
-        print(f"  {state}: saved {len(payload['c'])} crops")
+        stored = len(old.get("c") or [])
+        if stored >= len(payload["c"]):
+            print(f"  {state}: phones already saved a fuller copy ({stored} crops)")
+            return
+    doc.set(payload)
+    print(f"  {state}: saved {len(payload['c'])} crops")
 
-    message = messaging.Message(
+
+def notify(state, day):
+    """Wake every phone in the state. The phone does the rest."""
+    scope = slug(state)
+    messaging.send(messaging.Message(
         topic=f"prices_{scope}",
         data={"type": "prices", "state": scope, "date": day},
         android=messaging.AndroidConfig(priority="high"),
-    )
-    messaging.send(message)
+    ))
     print(f"  {state}: push sent to prices_{scope}")
 
 
@@ -175,23 +174,35 @@ def main():
     day = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d")
     print(f"Khalihan daily job for {day} — {len(states)} states")
 
-    failures = 0
+    fetch_failures = 0
+    push_failures = 0
     for state in states:
+        # The government API answers phones happily but often refuses cloud
+        # servers with a 502. That must not stop the alerts: the app itself
+        # saves each day's prices to Firestore, so the data is already there.
         try:
             rows = fetch_state(api_key, state)
             prices = summarise(rows)
             print(f"{state}: {len(rows)} rows, {len(prices)} crops")
-            if not prices:
-                print(f"  {state}: nothing reported today, skipping")
-                continue
-            save_and_notify(db, state, prices, day)
-        except Exception as error:  # one bad state must not stop the rest
-            failures += 1
-            print(f"{state}: FAILED — {error}")
+            if prices:
+                save_prices(db, state, prices, day)
+            else:
+                print(f"  {state}: nothing reported today")
+        except Exception as error:
+            fetch_failures += 1
+            print(f"{state}: could not read the government API — {error}")
+            print(f"  {state}: carrying on with whatever the phones saved")
 
-    print(f"Done. {failures} of {len(states)} state(s) failed.")
-    if failures == len(states):
-        sys.exit("Every state failed — see the errors above.")
+        try:
+            notify(state, day)
+        except Exception as error:
+            push_failures += 1
+            print(f"{state}: PUSH FAILED — {error}")
+
+    print(f"Done. {fetch_failures} state(s) without fresh data, "
+          f"{push_failures} push failure(s).")
+    if push_failures == len(states):
+        sys.exit("No push could be sent — check the Firebase service account.")
 
 
 if __name__ == "__main__":
