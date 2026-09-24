@@ -180,18 +180,21 @@ def main():
         # The government API answers phones happily but often refuses cloud
         # servers with a 502. That must not stop the alerts: the app itself
         # saves each day's prices to Firestore, so the data is already there.
+        prices = {}
         try:
             rows = fetch_state(api_key, state)
             prices = summarise(rows)
             print(f"{state}: {len(rows)} rows, {len(prices)} crops")
-            if prices:
-                save_prices(db, state, prices, day)
-            else:
-                print(f"  {state}: nothing reported today")
         except Exception as error:
             fetch_failures += 1
             print(f"{state}: could not read the government API — {error}")
             print(f"  {state}: carrying on with whatever the phones saved")
+
+        if prices:
+            try:
+                save_prices(db, state, prices, day)
+            except Exception as error:
+                print(f"  {state}: could not save to Firestore — {error}")
 
         try:
             notify(state, day)
