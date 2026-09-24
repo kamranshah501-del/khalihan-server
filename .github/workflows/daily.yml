@@ -1,0 +1,24 @@
+name: Khalihan daily prices
+
+on:
+  schedule:
+    # 14:00 UTC = 7:30 PM India — mandis have reported by then.
+    - cron: "0 14 * * *"
+  workflow_dispatch: # lets you run it by hand from the Actions tab
+
+jobs:
+  prices:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: python daily_prices.py
+        env:
+          DATA_GOV_IN_API_KEY: ${{ secrets.DATA_GOV_IN_API_KEY }}
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          # Start with one state while testing, then remove this line
+          # to cover every state.
+          STATES: ${{ vars.STATES }}
