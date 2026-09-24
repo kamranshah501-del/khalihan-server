@@ -31,6 +31,15 @@ BASE_URL = f"https://api.data.gov.in/resource/{RESOURCE_ID}"
 PAGE_SIZE = 1000  # smaller pages answer faster
 MAX_PAGES = 24
 TIMEOUT = 120  # data.gov.in can take a while to answer
+ATTEMPTS = 5
+# Some government servers refuse plain script traffic but answer a browser.
+HEADERS = {
+    "User-Agent": (
+        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 "
+        "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+    ),
+    "Accept": "application/json",
+}
 MIN_PRICE = 20  # under ₹20 a quintal is always a data error
 
 ALL_STATES = [
@@ -61,15 +70,18 @@ def get_page(api_key, state, offset):
         "filters[state]": state,
     }
     last_error = None
-    for attempt in range(1, 4):
+    for attempt in range(1, ATTEMPTS + 1):
         try:
-            response = requests.get(BASE_URL, params=params, timeout=TIMEOUT)
+            response = requests.get(BASE_URL, params=params, headers=HEADERS, timeout=TIMEOUT)
             response.raise_for_status()
             return response.json()
         except Exception as error:
             last_error = error
-            print(f"    attempt {attempt} failed ({error}); retrying")
-            time.sleep(5 * attempt)
+            # 502/503 means the government server is busy, not that we asked
+            # wrongly — so wait longer each time instead of giving up.
+            wait = min(10 * attempt, 60)
+            print(f"    attempt {attempt}/{ATTEMPTS} failed ({error}); waiting {wait}s")
+            time.sleep(wait)
     raise last_error
 
 
