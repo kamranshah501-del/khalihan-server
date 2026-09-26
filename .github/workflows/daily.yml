@@ -2,13 +2,24 @@ name: Khalihan daily prices
 
 on:
   schedule:
-    # 14:00 UTC = 7:30 PM India — mandis have reported by then.
-    - cron: "0 14 * * *"
-  workflow_dispatch: # lets you run it by hand from the Actions tab
+    # All times UTC. India = UTC + 5:30.
+    - cron: "30 1 * * *"   # 7:00 am  — morning brief push
+    - cron: "30 5 * * *"   # 11:00 am — refresh only
+    - cron: "30 9 * * *"   # 3:00 pm  — refresh only
+    - cron: "0 14 * * *"   # 7:30 pm  — evening alerts push
+  workflow_dispatch:
+    inputs:
+      mode:
+        description: "morning (brief push), evening (alerts push) or refresh (data only)"
+        required: true
+        default: refresh
+        type: choice
+        options: [refresh, morning, evening]
 
 jobs:
   prices:
     runs-on: ubuntu-latest
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -19,6 +30,5 @@ jobs:
         env:
           DATA_GOV_IN_API_KEY: ${{ secrets.DATA_GOV_IN_API_KEY }}
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          # Start with one state while testing, then remove this line
-          # to cover every state.
           STATES: ${{ vars.STATES }}
+          MODE: ${{ github.event.inputs.mode || (github.event.schedule == '30 1 * * *' && 'morning') || (github.event.schedule == '0 14 * * *' && 'evening') || 'refresh' }}

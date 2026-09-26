@@ -105,3 +105,19 @@ Jaise subah 8 baje India = `"30 2 * * *"`.
 
 Jab app se kamai shuru ho, yahi kaam Firebase ke apne scheduler (Cloud Functions) par le
 jaya ja sakta hai — code lagbhag yahi rahega, sirf chalne ki jagah badlegi.
+
+---
+
+## Din me chaar baar (naya bandobast)
+
+Ab job din me chaar baar chalti hai. Har baar saare states ke bhav laakar Firestore me
+`live/{state}` par rakhti hai — **app ab sarkari API se seedha baat nahi karti**, yahin se padhti hai.
+
+| Waqt (India) | Kya hota hai |
+|---|---|
+| Subah 7:00 | Bhav taaza + **subah ka bhav** push (brief) |
+| 11:00 | Sirf bhav taaza |
+| 3:00 | Sirf bhav taaza |
+| Shaam 7:30 | Bhav taaza + **price alert** push |
+
+Haath se chalate waqt **Run workflow** me `mode` chuno: `refresh`, `morning` ya `evening`.

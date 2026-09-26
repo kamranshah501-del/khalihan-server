@@ -99,6 +99,71 @@ def fetch_state(api_key, state):
     return rows
 
 
+LIVE_PART_ROWS = 1500  # keeps each Firestore document well under its 1 MB limit
+
+
+def iso_date(text):
+    """'25/09/2026' -> '2026-09-25' (what the app's cache format expects)."""
+    parts = (text or "").strip().split("/")
+    if len(parts) != 3:
+        return None
+    day, month, year = parts
+    return f"{year}-{month.zfill(2)}-{day.zfill(2)}"
+
+
+def compact_rows(rows, state):
+    """Government rows in the app's short cache format."""
+    out = []
+    for row in rows:
+        try:
+            modal = float(row.get("modal_price") or 0)
+            low = float(row.get("min_price") or 0)
+            high = float(row.get("max_price") or 0)
+        except (TypeError, ValueError):
+            continue
+        crop = (row.get("commodity") or "").strip()
+        if not crop or modal < MIN_PRICE:
+            continue
+        item = {
+            "c": crop,
+            "m": (row.get("market") or "").strip(),
+            "s": state,
+            "d": (row.get("district") or "").strip(),
+            "v": (row.get("variety") or "").strip(),
+            "mn": low,
+            "mx": high,
+            "mo": modal,
+        }
+        date = iso_date(row.get("arrival_date"))
+        if date:
+            item["dt"] = date
+        out.append(item)
+    return out
+
+
+def newest_day(rows):
+    """The latest arrival date in the rows. The archive is filed under the
+    day the mandis reported, not the day the job ran — a 7 am run carries
+    yesterday's prices and must not file them as today's."""
+    days = [d for d in (iso_date(r.get("arrival_date")) for r in rows) if d]
+    return max(days) if days else None
+
+
+def save_live(db, state, rows):
+    """Today's rows for every phone to read: live/{state} + parts."""
+    scope = slug(state)
+    compact = compact_rows(rows, state)
+    if not compact:
+        return
+    ref = db.collection("live").document(scope)
+    parts = [compact[i:i + LIVE_PART_ROWS] for i in range(0, len(compact), LIVE_PART_ROWS)]
+    for index, chunk in enumerate(parts):
+        ref.collection("parts").document(str(index)).set({"r": chunk})
+    # The meta document goes last: phones never see a half-written day.
+    ref.set({"at": firestore.SERVER_TIMESTAMP, "parts": len(parts), "rows": len(compact)})
+    print(f"  {state}: live feed updated ({len(compact)} rows, {len(parts)} part(s))")
+
+
 def summarise(rows):
     """Crop -> (average modal price, number of mandis) on that crop's
     newest reported date. The mandi count lets phones ignore a price that
@@ -154,15 +219,16 @@ def save_prices(db, state, prices, day):
     print(f"  {state}: saved {len(payload['c'])} crops")
 
 
-def notify(state, day):
-    """Wake every phone in the state. The phone does the rest."""
+def notify(state, day, kind):
+    """Wake every phone in the state. The phone does the rest.
+    kind "brief": the morning summary. kind "prices": evening alerts."""
     scope = slug(state)
     messaging.send(messaging.Message(
         topic=f"prices_{scope}",
-        data={"type": "prices", "state": scope, "date": day},
+        data={"type": kind, "state": scope, "date": day},
         android=messaging.AndroidConfig(priority="high"),
     ))
-    print(f"  {state}: push sent to prices_{scope}")
+    print(f"  {state}: {kind} push sent to prices_{scope}")
 
 
 def main():
@@ -175,10 +241,17 @@ def main():
     if not states:
         states = ALL_STATES
 
+    # morning: refresh + the daily brief push
+    # evening: refresh + the price-alert push
+    # refresh: data only, no push (the midday runs)
+    mode = (os.environ.get("MODE") or "evening").strip().lower()
+    if mode not in ("morning", "evening", "refresh"):
+        mode = "evening"
+
     firebase_admin.initialize_app(credentials.Certificate(json.loads(service_account)))
     db = firestore.client()
     day = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d")
-    print(f"Khalihan daily job for {day} — {len(states)} states")
+    print(f"Khalihan {mode} job for {day} — {len(states)} states")
 
     fetch_failures = 0
     push_failures = 0
@@ -187,10 +260,16 @@ def main():
         # servers with a 502. That must not stop the alerts: the app itself
         # saves each day's prices to Firestore, so the data is already there.
         prices = {}
+        state_day = day
         try:
             rows = fetch_state(api_key, state)
+            state_day = newest_day(rows) or day
             prices = summarise(rows)
             print(f"{state}: {len(rows)} rows, {len(prices)} crops")
+            try:
+                save_live(db, state, rows)
+            except Exception as error:
+                print(f"  {state}: could not save the live feed — {error}")
         except Exception as error:
             fetch_failures += 1
             print(f"{state}: could not read the government API — {error}")
@@ -198,19 +277,21 @@ def main():
 
         if prices:
             try:
-                save_prices(db, state, prices, day)
+                save_prices(db, state, prices, state_day)
             except Exception as error:
                 print(f"  {state}: could not save to Firestore — {error}")
 
+        if mode == "refresh":
+            continue
         try:
-            notify(state, day)
+            notify(state, state_day, "brief" if mode == "morning" else "prices")
         except Exception as error:
             push_failures += 1
             print(f"{state}: PUSH FAILED — {error}")
 
     print(f"Done. {fetch_failures} state(s) without fresh data, "
           f"{push_failures} push failure(s).")
-    if push_failures == len(states):
+    if mode != "refresh" and push_failures == len(states):
         sys.exit("No push could be sent — check the Firebase service account.")
 
 
