@@ -100,18 +100,21 @@ def fetch_state(api_key, state):
 
 
 def summarise(rows):
-    """Crop -> average modal price on that crop's newest reported date."""
+    """Crop -> (average modal price, number of mandis) on that crop's
+    newest reported date. The mandi count lets phones ignore a price that
+    stands on a single mandi."""
     by_crop = defaultdict(list)
     for row in rows:
         crop = (row.get("commodity") or "").strip()
         date = (row.get("arrival_date") or "").strip()
+        market = (row.get("market") or "").strip()
         try:
             price = float(row.get("modal_price") or 0)
         except (TypeError, ValueError):
             continue
         if not crop or price < MIN_PRICE:
             continue
-        by_crop[crop].append((date, price))
+        by_crop[crop].append((date, price, market))
 
     def sort_key(date_text):
         # dates arrive as DD/MM/YYYY
@@ -120,10 +123,12 @@ def summarise(rows):
 
     prices = {}
     for crop, entries in by_crop.items():
-        newest = max(sort_key(d) for d, _ in entries)
-        same_day = [p for d, p in entries if sort_key(d) == newest]
+        newest = max(sort_key(d) for d, _, _ in entries)
+        same_day = [(p, m) for d, p, m in entries if sort_key(d) == newest]
         if same_day:
-            prices[crop] = round(sum(same_day) / len(same_day), 2)
+            average = round(sum(p for p, _ in same_day) / len(same_day), 2)
+            mandis = len({m for _, m in same_day if m}) or 1
+            prices[crop] = (average, mandis)
     return prices
 
 
@@ -134,7 +139,8 @@ def save_prices(db, state, prices, day):
     payload = {
         "d": day,
         "at": firestore.SERVER_TIMESTAMP,
-        "c": [{"n": name, "p": price} for name, price in sorted(prices.items())],
+        "c": [{"n": name, "p": price, "k": mandis}
+              for name, (price, mandis) in sorted(prices.items())],
     }
 
     existing = doc.get()
