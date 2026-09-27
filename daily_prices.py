@@ -19,6 +19,7 @@ import json
 import os
 import sys
 import time
+from concurrent.futures import ThreadPoolExecutor
 from collections import defaultdict
 from datetime import datetime, timezone
 
@@ -30,8 +31,11 @@ RESOURCE_ID = "9ef84268-d588-465a-a308-a864a43d0070"
 BASE_URL = f"https://api.data.gov.in/resource/{RESOURCE_ID}"
 PAGE_SIZE = 1000  # smaller pages answer faster
 MAX_PAGES = 24
-TIMEOUT = 120  # data.gov.in can take a while to answer
-ATTEMPTS = 5
+TIMEOUT = 60  # one slow answer shouldn't hold up the whole run
+# Four runs a day: a state missed now comes back in a few hours, so one run
+# doesn't need to be endlessly patient.
+ATTEMPTS = 3
+PARALLEL_STATES = 5  # gentle on the API, five times faster than one by one
 # Some government servers refuse plain script traffic but answer a browser.
 HEADERS = {
     "User-Agent": (
@@ -79,8 +83,10 @@ def get_page(api_key, state, offset):
             last_error = error
             # 502/503 means the government server is busy, not that we asked
             # wrongly — so wait longer each time instead of giving up.
-            wait = min(10 * attempt, 60)
-            print(f"    attempt {attempt}/{ATTEMPTS} failed ({error}); waiting {wait}s")
+            if attempt == ATTEMPTS:
+                break  # no point waiting after the last try
+            wait = 5 * attempt
+            print(f"    {state}: attempt {attempt}/{ATTEMPTS} failed ({error}); waiting {wait}s")
             time.sleep(wait)
     raise last_error
 
@@ -253,12 +259,13 @@ def main():
     day = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d")
     print(f"Khalihan {mode} job for {day} — {len(states)} states")
 
-    fetch_failures = 0
-    push_failures = 0
-    for state in states:
-        # The government API answers phones happily but often refuses cloud
-        # servers with a 502. That must not stop the alerts: the app itself
-        # saves each day's prices to Firestore, so the data is already there.
+    def process(state):
+        """One state, start to finish. Runs five at a time."""
+        result = {"fetch": 0, "push": 0}
+
+        # The government API sometimes turns away cloud servers. That must
+        # not stop the alerts: phones also save each day's prices, so the
+        # data is usually there already.
         prices = {}
         state_day = day
         try:
@@ -271,7 +278,7 @@ def main():
             except Exception as error:
                 print(f"  {state}: could not save the live feed — {error}")
         except Exception as error:
-            fetch_failures += 1
+            result["fetch"] = 1
             print(f"{state}: could not read the government API — {error}")
             print(f"  {state}: carrying on with whatever the phones saved")
 
@@ -282,12 +289,20 @@ def main():
                 print(f"  {state}: could not save to Firestore — {error}")
 
         if mode == "refresh":
-            continue
+            return result
         try:
             notify(state, state_day, "brief" if mode == "morning" else "prices")
         except Exception as error:
-            push_failures += 1
+            result["push"] = 1
             print(f"{state}: PUSH FAILED — {error}")
+        return result
+
+    started = time.time()
+    with ThreadPoolExecutor(max_workers=PARALLEL_STATES) as pool:
+        results = list(pool.map(process, states))
+    fetch_failures = sum(r["fetch"] for r in results)
+    push_failures = sum(r["push"] for r in results)
+    print(f"Took {int(time.time() - started)}s for {len(states)} states.")
 
     print(f"Done. {fetch_failures} state(s) without fresh data, "
           f"{push_failures} push failure(s).")

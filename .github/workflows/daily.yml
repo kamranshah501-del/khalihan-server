@@ -19,7 +19,7 @@ on:
 jobs:
   prices:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -28,6 +28,8 @@ jobs:
       - run: pip install -r requirements.txt
       - run: python daily_prices.py
         env:
+          # Print each line the moment it happens, so a running job's log isn't empty.
+          PYTHONUNBUFFERED: "1"
           DATA_GOV_IN_API_KEY: ${{ secrets.DATA_GOV_IN_API_KEY }}
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           STATES: ${{ vars.STATES }}
