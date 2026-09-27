@@ -15,9 +15,11 @@ The farmer's targets never reach this server. It only ever shouts to a
 whole state: "today's prices are in".
 """
 
+import builtins
 import json
 import os
 import sys
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from collections import defaultdict
@@ -26,6 +28,14 @@ from datetime import datetime, timezone
 import requests
 import firebase_admin
 from firebase_admin import credentials, firestore, messaging
+
+_print_lock = threading.Lock()
+
+
+def print(*args, **kwargs):  # five states talk at once: one whole line at a time
+    with _print_lock:
+        builtins.print(*args, **kwargs, flush=True)
+
 
 RESOURCE_ID = "9ef84268-d588-465a-a308-a864a43d0070"
 BASE_URL = f"https://api.data.gov.in/resource/{RESOURCE_ID}"
@@ -259,6 +269,11 @@ def main():
     day = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d")
     print(f"Khalihan {mode} job for {day} — {len(states)} states")
 
+    # If the first handful of states all fail, the API is down for this run:
+    # stop knocking on a closed door and fall straight back to the archive.
+    api = {"ok": 0, "failed": 0, "down": False}
+    api_lock = threading.Lock()
+
     def process(state):
         """One state, start to finish. Runs five at a time."""
         result = {"fetch": 0, "push": 0}
@@ -269,7 +284,11 @@ def main():
         prices = {}
         state_day = day
         try:
+            if api["down"]:
+                raise RuntimeError("skipped — the government API is down this run")
             rows = fetch_state(api_key, state)
+            with api_lock:
+                api["ok"] += 1
             state_day = newest_day(rows) or day
             prices = summarise(rows)
             print(f"{state}: {len(rows)} rows, {len(prices)} crops")
@@ -279,6 +298,12 @@ def main():
                 print(f"  {state}: could not save the live feed — {error}")
         except Exception as error:
             result["fetch"] = 1
+            with api_lock:
+                api["failed"] += 1
+                if not api["down"] and api["ok"] == 0 and api["failed"] >= PARALLEL_STATES:
+                    api["down"] = True
+                    print(f"*** Government API looks down ({api['failed']} states failed, none worked)."
+                          " Skipping it for the rest of this run.")
             print(f"{state}: could not read the government API — {error}")
             print(f"  {state}: carrying on with whatever the phones saved")
 
