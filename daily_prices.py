@@ -27,6 +27,8 @@ from datetime import datetime, timezone
 
 import requests
 import firebase_admin
+
+import msamb
 from firebase_admin import credentials, firestore, messaging
 
 _print_lock = threading.Lock()
@@ -232,7 +234,28 @@ def save_prices(db, state, prices, day):
             print(f"  {state}: phones already saved a fuller copy ({stored} crops)")
             return
     doc.set(payload)
-    print(f"  {state}: saved {len(payload['c'])} crops")
+    print(f"  {state}: saved {len(payload['c'])} crops for {day}")
+
+
+# States with a second, independent source for the days data.gov.in is down.
+SECOND_SOURCES = {
+    "Maharashtra": msamb.fetch_rows,
+}
+
+
+def backfill(db, state, rows, newest):
+    """The second source keeps a few days; file the earlier ones too, so the
+    history a phone reads has no hole where the national API was down."""
+    by_day = defaultdict(list)
+    for row in rows:
+        day = iso_date(row.get("arrival_date"))
+        if day and day != newest:
+            by_day[day].append(row)
+    for day, day_rows in sorted(by_day.items()):
+        try:
+            save_prices(db, state, summarise(day_rows), day)
+        except Exception as error:
+            print(f"  {state}: could not backfill {day} — {error}")
 
 
 def notify(state, day, kind):
@@ -297,7 +320,7 @@ def main():
             except Exception as error:
                 print(f"  {state}: could not save the live feed — {error}")
         except Exception as error:
-            result["fetch"] = 1
+            rows = []
             with api_lock:
                 api["failed"] += 1
                 if not api["down"] and api["ok"] == 0 and api["failed"] >= PARALLEL_STATES:
@@ -305,7 +328,24 @@ def main():
                     print(f"*** Government API looks down ({api['failed']} states failed, none worked)."
                           " Skipping it for the rest of this run.")
             print(f"{state}: could not read the government API — {error}")
-            print(f"  {state}: carrying on with whatever the phones saved")
+            # A second, independent source where we have one.
+            if state in SECOND_SOURCES:
+                try:
+                    rows = SECOND_SOURCES[state](log=print)
+                except Exception as second_error:
+                    print(f"  {state}: second source failed too — {second_error}")
+            if rows:
+                state_day = newest_day(rows) or day
+                prices = summarise(rows)
+                print(f"  {state}: {len(rows)} rows, {len(prices)} crops from the second source")
+                try:
+                    save_live(db, state, rows)
+                except Exception as live_error:
+                    print(f"  {state}: could not save the live feed — {live_error}")
+                backfill(db, state, rows, state_day)
+            else:
+                result["fetch"] = 1
+                print(f"  {state}: carrying on with whatever the phones saved")
 
         if prices:
             try:
