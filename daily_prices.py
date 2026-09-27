@@ -155,6 +155,9 @@ def compact_rows(rows, state):
         date = iso_date(row.get("arrival_date"))
         if date:
             item["dt"] = date
+        arrivals = row.get("arrivals")
+        if isinstance(arrivals, (int, float)) and arrivals > 0:
+            item["a"] = arrivals
         out.append(item)
     return out
 
@@ -207,12 +210,27 @@ def summarise(rows):
     prices = {}
     for crop, entries in by_crop.items():
         newest = max(sort_key(d) for d, _, _ in entries)
-        same_day = [(p, m) for d, p, m in entries if sort_key(d) == newest]
+        same_day = sane([(p, m) for d, p, m in entries if sort_key(d) == newest])
         if same_day:
             average = round(sum(p for p, _ in same_day) / len(same_day), 2)
-            mandis = len({m for _, m in same_day if m}) or 1
-            prices[crop] = (average, mandis)
+            markets = {m for _, m in same_day if m}
+            mandis = len(markets) or 1
+            districts = sum(1 for m in markets if m.endswith("(district)"))
+            prices[crop] = (average, mandis, districts)
     return prices
+
+
+def sane(pairs):
+    """Leave out a price far from every other mandi's that day (under 40% or
+    over 250% of the middle one). The app uses the same rule, so the phone
+    and the archive agree."""
+    if len(pairs) < 3:
+        return pairs
+    middle = sorted(p for p, _ in pairs)[len(pairs) // 2]
+    if middle <= 0:
+        return pairs
+    kept = [(p, m) for p, m in pairs if middle * 0.4 <= p <= middle * 2.5]
+    return kept or pairs
 
 
 def save_prices(db, state, prices, day):
@@ -222,8 +240,8 @@ def save_prices(db, state, prices, day):
     payload = {
         "d": day,
         "at": firestore.SERVER_TIMESTAMP,
-        "c": [{"n": name, "p": price, "k": mandis}
-              for name, (price, mandis) in sorted(prices.items())],
+        "c": [dict({"n": name, "p": price, "k": mandis}, **({"kd": districts} if districts else {}))
+              for name, (price, mandis, districts) in sorted(prices.items())],
     }
 
     existing = doc.get()
@@ -236,6 +254,10 @@ def save_prices(db, state, prices, day):
     doc.set(payload)
     print(f"  {state}: saved {len(payload['c'])} crops for {day}")
 
+
+# An earlier day with fewer crops than this is mostly late reports from a
+# few districts; filing it would draw a misleading point in the history.
+MIN_BACKFILL_CROPS = 20
 
 # States with a second, independent source for the days data.gov.in is down.
 SECOND_SOURCES = {
@@ -252,8 +274,12 @@ def backfill(db, state, rows, newest):
         if day and day != newest:
             by_day[day].append(row)
     for day, day_rows in sorted(by_day.items()):
+        prices = summarise(day_rows)
+        if len(prices) < MIN_BACKFILL_CROPS:
+            print(f"  {state}: skipped {day} — only {len(prices)} crops reported")
+            continue
         try:
-            save_prices(db, state, summarise(day_rows), day)
+            save_prices(db, state, prices, day)
         except Exception as error:
             print(f"  {state}: could not backfill {day} — {error}")
 

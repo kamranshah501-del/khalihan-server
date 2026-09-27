@@ -29,7 +29,7 @@ import requests
 BASE = "https://www.msamb.com"
 PAGE = f"{BASE}/ApmcDetail/APMCPriceInformation"
 TIMEOUT = 45
-KEEP_DAYS = 3  # the app needs today and a couple of days back
+KEEP_DAYS = 5  # enough for a mandi's last few days in the app
 
 HEADERS = {
     "User-Agent": (
@@ -149,8 +149,9 @@ def _recent(rows):
     return [r for r in rows if r[0] in dates]
 
 
-def _as_api_row(date, crop, market, district, variety, low, high, modal):
+def _as_api_row(date, crop, market, district, variety, low, high, modal, arrivals=None):
     return {
+        "arrivals": arrivals,
         "commodity": crop,
         "market": market,
         "state": "Maharashtra",
@@ -180,11 +181,12 @@ def _get(session, path, code):
 
 def _to_rows(parsed, market, district):
     rows = []
-    for date, name, variety, unit, _arrivals, low, high, modal in _recent(parsed):
+    for date, name, variety, unit, arrivals, low, high, modal in _recent(parsed):
         crop = CROPS.get(name.strip())
         if not crop or unit != QUINTAL or modal <= 0:
             continue
-        rows.append(_as_api_row(date, crop, market, district, variety, low, high, modal))
+        rows.append(_as_api_row(date, crop, market, district, variety, low, high, modal,
+                                arrivals if arrivals > 0 else None))
     return rows
 
 
