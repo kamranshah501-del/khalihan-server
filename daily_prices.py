@@ -284,16 +284,19 @@ def backfill(db, state, rows, newest):
             print(f"  {state}: could not backfill {day} — {error}")
 
 
-def notify(state, day, kind):
+def notify(state, day, kind, hour=None):
     """Wake every phone in the state. The phone does the rest.
-    kind "brief": the morning summary. kind "prices": evening alerts."""
+    kind "prices": evening alerts, to prices_<state>.
+    kind "brief": the morning summary, to brief_<state>_<hour> — each phone
+    listens only at the hour its farmer chose."""
     scope = slug(state)
+    topic = f"brief_{scope}_{hour}" if kind == "brief" else f"prices_{scope}"
     messaging.send(messaging.Message(
-        topic=f"prices_{scope}",
+        topic=topic,
         data={"type": kind, "state": scope, "date": day},
         android=messaging.AndroidConfig(priority="high"),
     ))
-    print(f"  {state}: {kind} push sent to prices_{scope}")
+    print(f"  {state}: {kind} push sent to {topic}")
 
 
 def main():
@@ -309,13 +312,30 @@ def main():
     # morning: refresh + the daily brief push
     # evening: refresh + the price-alert push
     # refresh: data only, no push (the midday runs)
+    # brief7 / brief8: no fetching — the 6 am run already filed the data;
+    # these only wake the phones whose farmers chose 7 or 8.
     mode = (os.environ.get("MODE") or "evening").strip().lower()
-    if mode not in ("morning", "evening", "refresh"):
+    if mode not in ("morning", "evening", "refresh", "brief7", "brief8"):
         mode = "evening"
 
     firebase_admin.initialize_app(credentials.Certificate(json.loads(service_account)))
-    db = firestore.client()
     day = datetime.now(timezone.utc).astimezone().strftime("%Y-%m-%d")
+
+    if mode in ("brief7", "brief8"):
+        hour = int(mode[-1])
+        failures = 0
+        for state in states:
+            try:
+                notify(state, day, "brief", hour=hour)
+            except Exception as error:
+                failures += 1
+                print(f"{state}: PUSH FAILED — {error}")
+        print(f"Done. {hour} am briefs sent, {failures} failure(s).")
+        if failures == len(states):
+            sys.exit(1)
+        return
+
+    db = firestore.client()
     print(f"Khalihan {mode} job for {day} — {len(states)} states")
 
     # If the first handful of states all fail, the API is down for this run:
@@ -382,7 +402,7 @@ def main():
         if mode == "refresh":
             return result
         try:
-            notify(state, state_day, "brief" if mode == "morning" else "prices")
+            notify(state, state_day, "brief" if mode == "morning" else "prices", hour=6)
         except Exception as error:
             result["push"] = 1
             print(f"{state}: PUSH FAILED — {error}")

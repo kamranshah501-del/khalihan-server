@@ -1,2 +1,5 @@
 firebase-admin==6.5.0
 requests==2.32.3
+# Pinned to the version pip settles on anyway: without it pip tried nine
+# releases one by one and the install took almost seven minutes.
+google-api-core[grpc]==2.30.3
