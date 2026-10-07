@@ -121,3 +121,11 @@ Ab job din me chaar baar chalti hai. Har baar saare states ke bhav laakar Firest
 | Shaam 7:30 | Bhav taaza + **price alert** push |
 
 Haath se chalate waqt **Run workflow** me `mode` chuno: `refresh`, `morning` ya `evening`.
+
+## Mandi ke din (7 Oct 2026 se)
+
+Har run me server ye bhi likhta hai ki **kaunsi mandi ne kis din bhav diya** —
+Firestore me `mandi_days/{state}` (pichhle ~90 din). Kuch hafton baad isse har
+mandi ka band rehne ka din pata chalega, aur app keh sakega "आज मंडी बंद है"
+(purana bhav aaj ka na lage). Abhi app ise padhta nahi — sirf data jama ho raha hai.
+Kisan ki koi jaankari isme nahi hai, sirf mandi ka naam aur tarikh.

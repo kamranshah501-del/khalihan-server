@@ -23,7 +23,7 @@ import threading
 import time
 from concurrent.futures import ThreadPoolExecutor
 from collections import defaultdict
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 
 import requests
 import firebase_admin
@@ -183,6 +183,40 @@ def save_live(db, state, rows):
     # The meta document goes last: phones never see a half-written day.
     ref.set({"at": firestore.SERVER_TIMESTAMP, "parts": len(parts), "rows": len(compact)})
     print(f"  {state}: live feed updated ({len(compact)} rows, {len(parts)} part(s))")
+
+
+MANDI_DAYS_KEEP = 90  # about three months: enough weeks to see each mandi's usual closed day
+
+
+def save_mandi_days(db, state, rows):
+    """Which days each mandi reported, kept for about three months:
+    mandi_days/{state} → {"m": [{"n": market, "d": "2026-10-01,2026-10-02,…"}]}.
+    Weeks of this show each mandi's usual closed day, so the app can later
+    say "आज मंडी बंद है" instead of letting an old price look like today's.
+    A list, not a map: mandi names carry dots and brackets."""
+    seen = defaultdict(set)
+    for row in rows:
+        market = (row.get("market") or "").strip()
+        day = iso_date(row.get("arrival_date"))
+        if market and day:
+            seen[market].add(day)
+    if not seen:
+        return
+    ref = db.collection("mandi_days").document(slug(state))
+    snap = ref.get()
+    old = {}
+    if snap.exists:
+        for item in (snap.to_dict() or {}).get("m") or []:
+            if isinstance(item, dict) and item.get("n"):
+                old[item["n"]] = set(filter(None, str(item.get("d") or "").split(",")))
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=MANDI_DAYS_KEEP)).strftime("%Y-%m-%d")
+    merged = []
+    for market in sorted(set(old) | set(seen)):
+        days = sorted(d for d in old.get(market, set()) | seen.get(market, set()) if d >= cutoff)
+        if days:
+            merged.append({"n": market, "d": ",".join(days)})
+    ref.set({"m": merged, "at": firestore.SERVER_TIMESTAMP})
+    print(f"  {state}: mandi days updated ({len(seen)} mandis in this run, {len(merged)} kept)")
 
 
 def summarise(rows):
@@ -365,6 +399,10 @@ def main():
                 save_live(db, state, rows)
             except Exception as error:
                 print(f"  {state}: could not save the live feed — {error}")
+            try:
+                save_mandi_days(db, state, rows)
+            except Exception as error:
+                print(f"  {state}: could not save mandi days — {error}")
         except Exception as error:
             rows = []
             with api_lock:
@@ -388,6 +426,10 @@ def main():
                     save_live(db, state, rows)
                 except Exception as live_error:
                     print(f"  {state}: could not save the live feed — {live_error}")
+                try:
+                    save_mandi_days(db, state, rows)
+                except Exception as days_error:
+                    print(f"  {state}: could not save mandi days — {days_error}")
                 backfill(db, state, rows, state_day)
             else:
                 result["fetch"] = 1
