@@ -1,0 +1,78 @@
+name: Khalihan buy offers
+
+# "Khalihan ko becho": start, change or stop the price Khalihan pays for a
+# crop — from the phone (GitHub app → Actions → Khalihan buy offers → Run
+# workflow). The app shows it within one app start. See buy_offers.py.
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "list = show offers · add = start/change an offer · end = stop it"
+        required: true
+        default: list
+        type: choice
+        options: [list, add, end]
+      crop:
+        description: "Crop: maize/makka, cotton/kapas, chana, tur, soybean, jowar, wheat…"
+        required: false
+        default: ""
+      price:
+        description: "₹ per quintal we pay the farmer (add only)"
+        required: false
+        default: ""
+      districts:
+        description: "District(s), comma separated"
+        required: false
+        default: "jalgaon"
+      centre:
+        description: "Collection centre name — leave empty if we pick up from the farm"
+        required: false
+        default: ""
+      payment_days:
+        description: "Days to pay the farmer (0 = same day)"
+        required: false
+        default: "0"
+      moisture_max:
+        description: "Highest moisture % we take (empty = not shown)"
+        required: false
+        default: ""
+      min_qty:
+        description: "Smallest lot in quintals (empty = not shown)"
+        required: false
+        default: ""
+      days:
+        description: "How many days the offer runs"
+        required: false
+        default: "7"
+      note:
+        description: "Short note for farmers (optional)"
+        required: false
+        default: ""
+
+jobs:
+  offers:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      # Inputs go in as environment variables, never into the command line.
+      - run: python buy_offers.py
+        env:
+          PYTHONUNBUFFERED: "1"
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          WHATSAPP: ${{ vars.KHALIHAN_WHATSAPP }}
+          ACTION: ${{ inputs.action }}
+          CROP: ${{ inputs.crop }}
+          PRICE: ${{ inputs.price }}
+          DISTRICTS: ${{ inputs.districts }}
+          CENTRE: ${{ inputs.centre }}
+          PAYMENT_DAYS: ${{ inputs.payment_days }}
+          MOISTURE_MAX: ${{ inputs.moisture_max }}
+          MIN_QTY: ${{ inputs.min_qty }}
+          DAYS: ${{ inputs.days }}
+          NOTE: ${{ inputs.note }}

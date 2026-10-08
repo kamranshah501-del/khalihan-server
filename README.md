@@ -129,3 +129,29 @@ Firestore me `mandi_days/{state}` (pichhle ~90 din). Kuch hafton baad isse har
 mandi ka band rehne ka din pata chalega, aur app keh sakega "आज मंडी बंद है"
 (purana bhav aaj ka na lage). Abhi app ise padhta nahi — sirf data jama ho raha hai.
 Kisan ki koi jaankari isme nahi hai, sirf mandi ka naam aur tarikh.
+
+## Khalihan ko becho — offer daalna (8 Oct 2026 se)
+
+App me "Khalihan ko becho" ka card **tabhi dikhta hai jab yahan se offer daala ho**.
+Offer na ho to app me kuch nahi dikhta.
+
+**Niyam:** offer tabhi daalein jab processor (ginning mill, feed mill, dal mill)
+ne bhav ka formula aur quality ki shart pehle pakki kar di ho.
+
+**Phone se (GitHub app):** Actions → **Khalihan buy offers** → Run workflow
+- `list` — abhi ke offers dekhein
+- `add` — naya offer ya bhav badlein: crop (makka, kapas, chana, tur, soybean…),
+  price (₹/quintal), districts (jaise `jalgaon`), centre (khaali = hum khet se
+  uthayenge), payment_days (0 = usi din), moisture_max, min_qty, days (kitne din
+  chalega), note
+- `end` — offer band karein (wahi crop aur districts)
+
+Offer `config/buy_offers` me jaata hai; agli baar app khulte hi dikhta hai, aur
+`days` poore hote hi apne aap hat jaata hai.
+
+**Ek baar:** Settings → Secrets and variables → Actions → **Variables** →
+`KHALIHAN_WHATSAPP` = aapka WhatsApp number. Kisan ki request isi number par
+WhatsApp me aati hai, aur Firestore `sell_requests` me bhi jama hoti hai.
+
+**Pehla offer daalne se pehle:** ROADMAP.md (app) ki "Switch-on checklist"
+poori karein — privacy policy, Play Data safety, Firestore rules.
