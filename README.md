@@ -155,3 +155,16 @@ WhatsApp me aati hai, aur Firestore `sell_requests` me bhi jama hoti hai.
 
 **Pehla offer daalne se pehle:** ROADMAP.md (app) ki "Switch-on checklist"
 poori karein — privacy policy, Play Data safety, Firestore rules.
+
+## Do sarkari sources ka milaan (8 Oct 2026 se)
+
+Jab data.gov.in (Agmarknet) chal raha ho, Maharashtra ke liye server **MSAMB se
+Jalgaon ki 12 mandiyon ke bhav bhi padhta hai** (12 chhoti requests) aur dono ko
+milata hai: wahi mandi, wahi fasal, wahi din. Agar dono ka bhav **20% se zyada
+alag** ho, to Agmarknet wali row me `"x": <MSAMB ka bhav>` jud jaata hai. App us
+mandi par chhota tag dikhata hai — "MSAMB ₹…" — aur likhta hai ki bechne se pehle
+mandi me pakka karein. Kuch hataya ya badla nahi jaata; kisan dono number dekhta hai.
+
+Log me dikhega: `cross-checked N mandi prices with the state board — M differ by over 20%`.
+data.gov.in band ho (25 Sep 2026 se) to ye milaan nahi chalta — tab MSAMB hi
+akela source hai.

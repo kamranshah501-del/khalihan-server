@@ -18,6 +18,7 @@ whole state: "today's prices are in".
 import builtins
 import json
 import os
+import re
 import sys
 import threading
 import time
@@ -158,6 +159,11 @@ def compact_rows(rows, state):
         arrivals = row.get("arrivals")
         if isinstance(arrivals, (int, float)) and arrivals > 0:
             item["a"] = arrivals
+        # The other government source said something quite different for
+        # this mandi, crop and day: the app shows both numbers.
+        cross = row.get("cross")
+        if isinstance(cross, (int, float)) and cross > 0:
+            item["x"] = cross
         out.append(item)
     return out
 
@@ -318,6 +324,72 @@ def backfill(db, state, rows, newest):
             print(f"  {state}: could not backfill {day} — {error}")
 
 
+# States where a second source can check the national feed, mandi by mandi.
+CROSS_CHECKS = {
+    "Maharashtra": msamb.fetch_mandi_rows,
+}
+CROSS_GAP = 0.20  # more than 20% apart on the same mandi, crop and day
+
+
+def _cross_key(row):
+    """(district, market, crop, day) with spacing and brackets ignored:
+    "Jalgaon(Masawat)" and "Jalgaon (Masawat)" are the same mandi."""
+    def plain(text):
+        return re.sub(r"[^a-z0-9]", "", (text or "").lower())
+    return (plain(row.get("district")), plain(row.get("market")),
+            (row.get("commodity") or "").strip().lower(), iso_date(row.get("arrival_date")))
+
+
+def _middle(values):
+    values = sorted(values)
+    return values[len(values) // 2] if values else 0
+
+
+def cross_check(state, rows, fetch=None, log=print):
+    """Marks national-feed rows whose price the state board reports very
+    differently (row["cross"] = the board's price). Nothing is changed or
+    dropped: a farmer seeing both numbers can ask at the mandi. Returns
+    (mandi-crop-days compared, how many differ)."""
+    fetch = fetch or CROSS_CHECKS.get(state)
+    if fetch is None or not rows:
+        return (0, 0)
+    try:
+        other = fetch(log=log)
+    except Exception as error:
+        log(f"  {state}: cross-check skipped — {error}")
+        return (0, 0)
+
+    def modal(row):
+        try:
+            return float(row.get("modal_price") or 0)
+        except (TypeError, ValueError):
+            return 0.0
+
+    theirs = defaultdict(list)
+    for row in other:
+        key = _cross_key(row)
+        if key[3] and modal(row) >= MIN_PRICE:
+            theirs[key].append(modal(row))
+    ours = defaultdict(list)
+    for row in rows:
+        key = _cross_key(row)
+        if key in theirs and modal(row) >= MIN_PRICE:
+            ours[key].append(row)
+
+    differ = 0
+    for key, mine in ours.items():
+        a = _middle([modal(r) for r in mine])
+        b = _middle(theirs[key])
+        if a <= 0 or b <= 0:
+            continue
+        if abs(a - b) / min(a, b) > CROSS_GAP:
+            differ += 1
+            for row in mine:
+                row["cross"] = round(b)
+    log(f"  {state}: cross-checked {len(ours)} mandi prices with the state board — {differ} differ by over 20%")
+    return (len(ours), differ)
+
+
 def notify(state, day, kind, hour=None):
     """Wake every phone in the state. The phone does the rest.
     kind "prices": evening alerts, to prices_<state>.
@@ -395,6 +467,7 @@ def main():
             state_day = newest_day(rows) or day
             prices = summarise(rows)
             print(f"{state}: {len(rows)} rows, {len(prices)} crops")
+            cross_check(state, rows, log=print)
             try:
                 save_live(db, state, rows)
             except Exception as error:

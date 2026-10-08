@@ -190,8 +190,10 @@ def _to_rows(parsed, market, district):
     return rows
 
 
-def fetch_rows(log=print):
-    """Every usable Maharashtra row MSAMB has right now."""
+def fetch_rows(log=print, districts=True):
+    """Every usable Maharashtra row MSAMB has right now. [districts] False:
+    only the Jalgaon mandis, one by one (12 small requests) — enough to
+    cross-check data.gov.in's prices for the same mandis."""
     session = requests.Session()
     session.headers.update(HEADERS)
     try:
@@ -221,8 +223,18 @@ def fetch_rows(log=print):
 
     with ThreadPoolExecutor(max_workers=4) as pool:
         mandi_rows = [r for chunk in pool.map(apmc, JALGAON_APMCS.items()) for r in chunk]
-        district_rows = [r for chunk in pool.map(district, DISTRICTS.items()) for r in chunk]
+        district_rows = (
+            [r for chunk in pool.map(district, DISTRICTS.items()) for r in chunk] if districts else []
+        )
 
-    log(f"  MSAMB: {len(mandi_rows)} rows from {len(JALGAON_APMCS)} Jalgaon mandis, "
-        f"{len(district_rows)} rows from {len(DISTRICTS) - 1} other districts")
+    if districts:
+        log(f"  MSAMB: {len(mandi_rows)} rows from {len(JALGAON_APMCS)} Jalgaon mandis, "
+            f"{len(district_rows)} rows from {len(DISTRICTS) - 1} other districts")
+    else:
+        log(f"  MSAMB: {len(mandi_rows)} rows from {len(JALGAON_APMCS)} Jalgaon mandis (cross-check)")
     return mandi_rows + district_rows
+
+
+def fetch_mandi_rows(log=print):
+    """Only the Jalgaon mandis — for checking the national feed against."""
+    return fetch_rows(log=log, districts=False)
