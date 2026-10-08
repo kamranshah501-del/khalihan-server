@@ -127,6 +127,9 @@ def main():
             "id": f"{crop_word}-{'-'.join(districts) or 'all'}-{today:%Y%m%d}",
             "crops": crops,
             "districts": districts,
+            # District names repeat across states; Khalihan is live in
+            # Maharashtra only — add a STATE input when more states open.
+            "state": "Maharashtra",
             "price": price,
             "pickup": "centre" if centre else "doorstep",
             "centre": centre,
