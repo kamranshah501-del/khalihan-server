@@ -104,6 +104,14 @@ textarea { min-height: 70px; resize: vertical; }
 .form { display: grid; gap: 0 14px; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
 .form .wide { grid-column: 1 / -1; }
 
+.choices { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.choice {
+  display: flex; align-items: center; gap: 8px; margin: 0; cursor: pointer;
+  border: 1px solid var(--line); border-radius: 12px; padding: 8px 14px; font-weight: 700; background: #fff;
+}
+.choice input { width: auto; margin: 0; accent-color: var(--navy); }
+.choice:has(input:checked) { border-color: var(--navy); background: #eef3f8; }
+
 .switch { display: flex; align-items: flex-start; gap: 12px; }
 .switch input { width: 46px; height: 26px; accent-color: var(--green); flex: none; margin-top: 2px; }
 

@@ -8,6 +8,12 @@ sirf wahi log jo `staff` me hain.
 `?demo` lagake kholo (jaise `…web.app/?demo`) to banawati data ke saath
 saari screens dekh sakte ho — kuch save nahi hota.
 
+**Bhasha:** panel **English** me khulta hai. Hindi chahiye to **⚙️ Settings →
+Language → हिन्दी** — har browser apni pasand yaad rakhta hai (login page pe
+bhi "हिन्दी / English" button hai). Settings me samay (India time / is
+computer ka time), aapka khata, panel version aur Firebase ke kaam ke link bhi
+hain.
+
 **Abhi ke liye Blaze plan ki zaroorat nahi** — panel, Google login aur Hosting
 free (Spark) plan pe chalte hain. Blaze sirf tab, jab app me mobile OTP login
 chalu karna ho (neeche "Baad me").
@@ -84,17 +90,20 @@ pehle se **band** hain. Chalu karne se pehle ye karo, phir panel ke
 
 ## Panel me kya hai
 
+(Naam English me; Hindi me wahi tab डैशबोर्ड, बिक्री रिक्वेस्ट, … dikhte hain.)
+
 | Tab | Kaam |
 |---|---|
-| डैशबोर्ड | Nayi requests (phone karna baaki), aaj ki, chal rahe saude, poore, chalu offers, khate wale kisan, naye sujhav, khata hatane ki maang |
-| बिक्री रिक्वेस्ट | Har request: kisan, OTP wala number ✓, gaon, fasal, maal, bhav. 📞 phone / 💬 WhatsApp. Status: **नई → फ़ोन किया → सौदा पक्का → माल उठाया → पैसा दिया** (ya रद्द), note, pakka bhav, taul. Kisne kya kiya — itihaas. Kisan app ke "मेरी बिक्री" me wahi status dekhta hai. |
-| ऑफ़र | Chalu offers, बंद करें, naya offer — GitHub wale "Khalihan buy offers" jaisa hi (dono chalte hain) |
-| सुझाव | "सुझाव दें" ke message, "हो गया ✓" |
-| किसान | Khate wale kisan (aakhiri 200), number se dhoondo, unki requests |
-| खाता हटाना | Jinhone app se khata hataya: owner unki requests + data hatata hai (30 din ke andar); WhatsApp chat phone me khud hatao |
-| फ़ीचर स्विच (owner) | App ke features chalu/band — agli baar app khulne pe lagu, update ki zaroorat nahi (v1.0.3 se) |
-| टीम (owner) | Kaun panel khol sakta hai |
-| रिकॉर्ड (owner) | Har badlav: kab, kisne, kya |
+| Dashboard · डैशबोर्ड | Nayi requests (phone karna baaki), aaj ki, chal rahe saude, poore, chalu offers, khate wale kisan, naye sujhav, khata hatane ki maang |
+| Sell requests · बिक्री रिक्वेस्ट | Har request: kisan, OTP wala number ✓, gaon, fasal, maal, bhav. 📞 phone / 💬 WhatsApp. Status: **नई → फ़ोन किया → सौदा पक्का → माल उठाया → पैसा दिया** (ya रद्द), note, pakka bhav, taul. Kisne kya kiya — itihaas. Kisan app ke "मेरी बिक्री" me wahi status dekhta hai. |
+| Offers · ऑफ़र | Chalu offers, बंद करें, naya offer — GitHub wale "Khalihan buy offers" jaisa hi (dono chalte hain) |
+| Suggestions · सुझाव | "सुझाव दें" ke message, "हो गया ✓" |
+| Farmers · किसान | Khate wale kisan (aakhiri 200), number se dhoondo, unki requests |
+| Account deletions · खाता हटाना | Jinhone app se khata hataya: owner unki requests + data hatata hai (30 din ke andar); WhatsApp chat phone me khud hatao |
+| Feature switches · फ़ीचर स्विच (owner) | App ke features chalu/band — agli baar app khulne pe lagu, update ki zaroorat nahi (v1.0.3 se) |
+| Team · टीम (owner) | Kaun panel khol sakta hai |
+| Change log · रिकॉर्ड (owner) | Har badlav: kab, kisne, kya |
+| ⚙️ Settings · सेटिंग्स (sab) | Bhasha (English / हिन्दी), samay (India / is computer ka), aapka khata, version, Firebase console · Firestore · Analytics · Crashlytics · Play Console ke link |
 
 Rules (`firestore.rules`): kisan sirf apna khata aur apni requests padh sakta
 hai; staff requests/offers/sujhav sambhalta hai; switches, team aur record

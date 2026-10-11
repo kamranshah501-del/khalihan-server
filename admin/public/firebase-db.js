@@ -34,6 +34,7 @@ export async function connect() {
 
   return {
     demo: false,
+    project: app.options.projectId || '',
 
     onUser(callback) {
       onAuthStateChanged(auth, async (user) => {

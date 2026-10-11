@@ -26,6 +26,7 @@ export async function connect() {
 
   return {
     demo: true,
+    project: 'demo',
     onUser(cb) { setTimeout(() => cb(me), 50); },
     login: async () => {},
     logout: async () => { location.href = location.pathname; },
