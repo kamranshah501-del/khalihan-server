@@ -1,5 +1,8 @@
 :root {
-  --navy: #244969;
+  --navy: #20405E;
+  --yellow: #FEC407;
+  --orange: #FFA100;
+  --grid: #E3E8ED;
   --ink: #0a2e4a;
   --muted: #55697a;
   --line: #e3e8ed;
@@ -33,7 +36,8 @@ a { color: var(--navy); }
 }
 .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .top button { flex: none; white-space: nowrap; }
-.logo { font-size: 28px; }
+.logo { display: flex; align-items: center; }
+.logo svg { display: block; }
 .name { font-weight: 800; font-size: 18px; line-height: 1.1; }
 .who { font-size: 13px; opacity: .8; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 
@@ -141,4 +145,134 @@ th { background: var(--page); }
   main { padding: 12px; }
   .kv { grid-template-columns: 100px 1fr; }
   .stat .n { font-size: 26px; }
+}
+
+/* ── Dashboard: the desk ───────────────────────────────────────────────── */
+.desk {
+  display: grid; grid-template-columns: 1fr auto; gap: 18px 28px; align-items: center;
+  background:
+    radial-gradient(circle at 70px 60px, rgba(254, 196, 7, .16), rgba(254, 196, 7, 0) 190px),
+    var(--navy);
+  color: #fff; border-radius: 22px; padding: 22px 24px; margin-bottom: 14px;
+}
+.desk-id { display: flex; align-items: center; gap: 18px; min-width: 0; }
+.desk h1 { color: #fff; margin: 0 0 4px; font-size: 26px; }
+.live-line { margin: 0; font-size: 14px; color: rgba(255, 255, 255, .82); display: flex; align-items: center; gap: 8px; }
+.live-dot { position: relative; width: 9px; height: 9px; border-radius: 50%; background: #7ED957; flex: none; }
+.live-dot::after {
+  content: ""; position: absolute; inset: -4px; border-radius: 50%;
+  border: 2px solid #7ED957; opacity: 0; animation: livepulse 2.4s ease-out infinite;
+}
+.live-dot.off { background: #9AAEC2; }
+.live-dot.off::after { display: none; }
+@keyframes livepulse { 0% { transform: scale(.6); opacity: .8; } 100% { transform: scale(1.9); opacity: 0; } }
+
+.desk-wait { text-align: right; }
+.hero { display: flex; align-items: baseline; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+.hero-n { font-size: 64px; line-height: 1; font-weight: 800; color: var(--yellow); font-variant-numeric: tabular-nums; display: inline-block; }
+.hero-l { font-size: 18px; font-weight: 700; }
+.hero.calm .hero-l { font-size: 22px; }
+.hero-s { margin: 6px 0 10px; color: rgba(255, 255, 255, .78); font-size: 14px; }
+.hero-s.hot { color: #FFB8B2; font-weight: 700; }
+
+.dash { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.dash .card { margin: 0; }
+.dash .wide { grid-column: 1 / -1; }
+.dash h2 { margin: 0 0 10px; font-size: 18px; }
+
+/* Charts */
+figure.chart { position: relative; margin: 0 0 6px; }
+figure.chart .ax { fill: var(--muted); font-size: 10px; }
+figure.chart .val { fill: var(--ink); font-size: 11px; font-weight: 700; }
+figure.chart .bar path { fill: #7590AB; transition: fill .15s; }
+figure.chart .bar.today path { fill: var(--navy); }
+figure.chart .bar.on path { fill: var(--orange); }
+figure.chart .bar { cursor: pointer; outline: none; }
+figure.chart .bar:focus-visible path { stroke: var(--ink); stroke-width: 1.5; }
+.tip {
+  position: absolute; top: 0; transform: translate(-50%, -110%); pointer-events: none; white-space: nowrap;
+  background: var(--ink); color: #fff; font-size: 13px; padding: 4px 10px; border-radius: 8px;
+}
+details summary { cursor: pointer; color: var(--navy); font-weight: 700; }
+table.data { margin-top: 8px; font-variant-numeric: tabular-nums; }
+table.data td:not(:first-child), table.data th:not(:first-child) { text-align: right; }
+
+/* The steps of a purchase */
+.pipe { display: grid; gap: 6px; margin-bottom: 8px; }
+.pipe-row {
+  display: grid; grid-template-columns: 110px 1fr 40px; align-items: center; gap: 10px;
+  background: none; border: 0; padding: 4px 6px; border-radius: 10px; cursor: pointer; text-align: left;
+}
+.pipe-row:hover, .pipe-row:focus-visible { background: var(--page); }
+.pipe-l { font-weight: 700; font-size: 14px; }
+.pipe-track { height: 14px; background: #EEF2F5; border-radius: 7px; overflow: hidden; }
+.pipe-bar { display: block; height: 100%; border-radius: 7px; }
+.pipe-n { font-weight: 800; text-align: right; font-variant-numeric: tabular-nums; }
+
+.minis { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+.mini {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 2px; text-align: left;
+  background: var(--page); border: 1px solid var(--line); border-radius: 14px; padding: 10px 12px; cursor: default;
+}
+.mini[data-go] { cursor: pointer; }
+.mini[data-go]:hover { border-color: var(--navy); }
+.mini.warn { background: var(--amber-tint); border-color: #f2d9a6; }
+.mini-n { font-size: 24px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.mini-l { color: var(--muted); font-size: 13px; font-weight: 600; }
+
+/* Money — owner only */
+.money { border-color: #f2d9a6; }
+.lock { color: var(--muted); font-size: 13px; }
+.tiles { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px; margin: 4px 0 8px; }
+.tile { background: #FFF8E6; border-radius: 14px; padding: 12px; }
+.tile-n { font-size: 26px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.tile-n small { font-size: 14px; font-weight: 700; color: var(--muted); }
+.tile-l { color: var(--muted); font-weight: 600; font-size: 13px; }
+.pos, .tile.pos .tile-n { color: var(--green-dark); }
+.neg, .tile.neg .tile-n { color: var(--red); }
+.moneybox { background: #FFF8E6; border: 1px solid #f2d9a6; border-radius: 14px; padding: 4px 14px 12px; margin: 14px 0; }
+.moneybox h2 { font-size: 16px; }
+.msum .kv { margin: 10px 0 0; }
+.warnline { color: var(--amber); font-weight: 700; margin: 4px 0 0; }
+.ownerline { font-weight: 700; }
+
+/* Request cards */
+.side { display: flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.wait { font-size: 12.5px; font-weight: 700; border-radius: 999px; padding: 1px 9px; background: #edf1f4; color: var(--navy); white-space: nowrap; }
+.wait.warm { background: var(--amber-tint); color: var(--amber); }
+.wait.hot { background: var(--red-tint); color: var(--red); }
+.mbadge { font-size: 12.5px; font-weight: 800; border-radius: 999px; padding: 1px 9px; background: var(--green-tint); color: var(--green-dark); }
+.mbadge.neg { background: var(--red-tint); color: var(--red); }
+.card.fresh { animation: fresh 2.6s ease-out; }
+@keyframes fresh { from { background: #FFF1C2; border-color: var(--orange); } to { background: #fff; } }
+.bump { animation: bump .55s ease-out; }
+@keyframes bump { 30% { transform: scale(1.22); } 100% { transform: scale(1); } }
+
+label.check { display: flex; align-items: center; gap: 10px; font-weight: 600; margin: 10px 0 0; cursor: pointer; }
+label.check input { width: 18px; height: 18px; accent-color: var(--navy); }
+.login-mark { display: flex; justify-content: center; margin-bottom: 8px; }
+
+/* The mark grows out of the ground once, when the dashboard first opens. */
+.mark.rise .mk-col { animation: mkrise .7s cubic-bezier(.2, .8, .2, 1) both; transform-box: fill-box; transform-origin: 50% 100%; }
+.mark.rise .mk-c1 { animation-delay: .09s; }
+.mark.rise .mk-c2 { animation-delay: .18s; }
+.mark.rise .mk-dot { animation: mkdot .75s .55s cubic-bezier(.3, 1.6, .55, 1) both; transform-box: fill-box; transform-origin: center; }
+@keyframes mkrise { from { transform: translateY(105%); } to { transform: translateY(0); } }
+@keyframes mkdot { 0% { transform: translateY(-26px) scale(.5); opacity: 0; } 40% { opacity: 1; } 100% { transform: none; opacity: 1; } }
+
+button:focus-visible, a:focus-visible, .mini:focus-visible { outline: 3px solid var(--orange); outline-offset: 2px; }
+
+@media (max-width: 860px) {
+  .dash { grid-template-columns: 1fr; }
+  .desk { grid-template-columns: 1fr; }
+  .desk-wait { text-align: left; }
+  .hero { justify-content: flex-start; }
+}
+@media (max-width: 600px) {
+  .desk { padding: 18px; }
+  .hero-n { font-size: 52px; }
+  .pipe-row { grid-template-columns: 92px 1fr 34px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .mark.rise .mk-col, .mark.rise .mk-dot, .live-dot::after, .bump, .card.fresh { animation: none !important; }
 }

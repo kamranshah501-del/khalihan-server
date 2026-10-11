@@ -94,9 +94,9 @@ pehle se **band** hain. Chalu karne se pehle ye karo, phir panel ke
 
 | Tab | Kaam |
 |---|---|
-| Dashboard · डैशबोर्ड | Nayi requests (phone karna baaki), aaj ki, chal rahe saude, poore, chalu offers, khate wale kisan, naye sujhav, khata hatane ki maang |
-| Sell requests · बिक्री रिक्वेस्ट | Har request: kisan, OTP wala number ✓, gaon, fasal, maal, bhav. 📞 phone / 💬 WhatsApp. Status: **नई → फ़ोन किया → सौदा पक्का → माल उठाया → पैसा दिया** (ya रद्द), note, pakka bhav, taul. Kisne kya kiya — itihaas. Kisan app ke "मेरी बिक्री" me wahi status dekhta hai. |
-| Offers · ऑफ़र | Chalu offers, बंद करें, naya offer — GitHub wale "Khalihan buy offers" jaisa hi (dono chalte hain) |
+| Dashboard · डैशबोर्ड | **Live**: kisan ke bhejte hi nayi request aati hai (aawaz + upar "(2) Khalihan Admin"), kitne kisan phone ka intezaar kar rahe hain aur sabse purani kab se · saudon ke kadam (Nayi → … → Paisa diya) · pichhle 14 din ki requests ka chart · pehle phone tak ka ausat samay · **owner ko: is mahine ki kamai** (kitna kharida, kisanon ko kitna diya, hamara margin, prati quintal, fasal ke hisaab se) |
+| Sell requests · बिक्री रिक्वेस्ट | Har request: kisan, OTP wala number ✓, gaon, fasal, maal, bhav. 📞 phone / 💬 WhatsApp. Status: **नई → फ़ोन किया → सौदा पक्का → माल उठाया → पैसा दिया** (ya रद्द), note, pakka bhav, taul. Kisne kya kiya — itihaas. Kisan app ke "मेरी बिक्री" me wahi status dekhta hai. Nayi request pe "kab se intezaar" ka chip (30 min ke baad peela, 2 ghante ke baad laal). **Owner:** har saude me "🔒 Paisa" — processor ka bhav, bhada, hamali, baaki kharch → margin apne aap. |
+| Offers · ऑफ़र | **Owner:** naya offer banate waqt "🔒 Margin ka hisaab" — processor ka bhav aur prati quintal kharch daalo, prati quintal aur 100 quintal ki gaadi pe margin turant dikhta hai (2% se kam ho to chetavni). Chalu offers, बंद करें, naya offer — GitHub wale "Khalihan buy offers" jaisa hi (dono chalte hain) |
 | Suggestions · सुझाव | "सुझाव दें" ke message, "हो गया ✓" |
 | Farmers · किसान | Khate wale kisan (aakhiri 200), number se dhoondo, unki requests |
 | Account deletions · खाता हटाना | Jinhone app se khata hataya: owner unki requests + data hatata hai (30 din ke andar); WhatsApp chat phone me khud hatao |
@@ -104,6 +104,12 @@ pehle se **band** hain. Chalu karne se pehle ye karo, phir panel ke
 | Team · टीम (owner) | Kaun panel khol sakta hai |
 | Change log · रिकॉर्ड (owner) | Har badlav: kab, kisne, kya |
 | ⚙️ Settings · सेटिंग्स (sab) | Bhasha (English / हिन्दी), samay (India / is computer ka), aapka khata, version, Firebase console · Firestore · Analytics · Crashlytics · Play Console ke link |
+
+**Paisa kahan rehta hai:** processor ka bhav aur margin `deal_money` aur
+`offer_money` me — sirf owner padh/likh sakta hai. Ye jaan-boojh kar
+`sell_requests` aur offers se alag hai, kyunki kisan apni request padh sakta
+hai aur offers har phone padhta hai — hamara margin kisi kisan tak nahi
+pahunchna chahiye.
 
 Rules (`firestore.rules`): kisan sirf apna khata aur apni requests padh sakta
 hai; staff requests/offers/sujhav sambhalta hai; switches, team aur record

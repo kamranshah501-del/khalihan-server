@@ -145,6 +145,17 @@ service cloud.firestore {
       allow delete: if isOwner();
     }
 
+    // ── Khalihan's own money: owner only ───────────────────────────────
+    // What the processor pays and what a deal cost us. Kept apart from
+    // sell_requests (a farmer can read their own) and from the offers (every
+    // phone reads them), so no farmer ever sees our rates or margin.
+    match /deal_money/{id} {
+      allow read, write: if isOwner();
+    }
+    match /offer_money/{id} {
+      allow read, write: if isOwner();
+    }
+
     // ── Khalihan Admin ─────────────────────────────────────────────────
     match /staff/{email} {
       // Everyone on the team can see the team; only the owner changes it.

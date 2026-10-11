@@ -7,7 +7,7 @@ import {
 import {
   getFirestore, collection, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, addDoc,
   query, where, orderBy, limit, serverTimestamp, arrayUnion, Timestamp, runTransaction,
-  getCountFromServer, writeBatch,
+  getCountFromServer, writeBatch, onSnapshot,
 } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 import { initializeAppCheck, ReCaptchaV3Provider } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app-check.js';
 
@@ -68,6 +68,47 @@ export async function connect() {
       if (note) patch.note = note;
       await updateDoc(doc(db, 'sell_requests', id), patch);
       log('sell_request_status', { id, status, note: note || '' });
+    },
+
+    /** New sell requests as they arrive (the newest 20 are watched). */
+    watchRequests(onAdded, onState) {
+      let first = true;
+      return onSnapshot(
+        query(collection(db, 'sell_requests'), orderBy('at', 'desc'), limit(20)),
+        (snap) => {
+          if (onState) onState(true);
+          if (first) { first = false; return; } // what is already there isn't news
+          snap.docChanges().forEach((ch) => {
+            if (ch.type !== 'added') return;
+            const r = { id: ch.doc.id, ...ch.doc.data() };
+            onAdded({ ...r, at: toDate(r.at) || new Date(), status: r.status || 'new' });
+          });
+        },
+        (e) => { console.warn('live', e); if (onState) onState(false); },
+      );
+    },
+
+    // ── money (owner only: rules) — never in sell_requests or the offers,
+    //    which farmers can read ──
+    async allDealMoney() {
+      const snap = await getDocs(query(collection(db, 'deal_money'), limit(2000)));
+      const out = {};
+      snap.docs.forEach((d) => { out[d.id] = d.data(); });
+      return out;
+    },
+    async saveDealMoney(id, data) {
+      await setDoc(doc(db, 'deal_money', id), { ...data, updated: serverTimestamp(), by: me.email });
+      log('deal_money', { id, rate: data.rate });
+    },
+    async allOfferMoney() {
+      const snap = await getDocs(query(collection(db, 'offer_money'), limit(500)));
+      const out = {};
+      snap.docs.forEach((d) => { out[d.id] = d.data(); });
+      return out;
+    },
+    async saveOfferMoney(id, data) {
+      await setDoc(doc(db, 'offer_money', id), { ...data, updated: serverTimestamp(), by: me.email });
+      log('offer_money', { id, rate: data.rate });
     },
 
     // ── offers (same format as buy_offers.py) ──

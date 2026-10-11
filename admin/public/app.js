@@ -7,7 +7,12 @@
 // Languages: English (default) and Hindi — chosen in Settings, kept in this
 // browser. Every word on screen comes from I18N below.
 
-const ADMIN_VERSION = '1.1 · 11 Oct 2026';
+import { markSVG } from './mark.js';
+import { columnChart, wireTips, pipeline, table } from './charts.js';
+import { chime, askDesktop, desktopAllowed, desktopNotify } from './live.js';
+import { dealNumbers, monthSummary, offerPlan } from './money.js';
+
+const ADMIN_VERSION = '1.2 · 11 Oct 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -195,6 +200,64 @@ const I18N = {
     l_play: 'Google Play Console',
     set_saved: 'Saved',
     set_note: 'These settings stay in this browser only.',
+    live: 'Live',
+    live_title: 'New requests appear here the moment a farmer sends one.',
+    live_off: 'Not live — refresh the page',
+    live_new: 'New request: {crop} · {qty} quintal · {village}',
+    waiting_many: 'farmers waiting for a call',
+    waiting_one: 'farmer waiting for a call',
+    waiting_none: 'No one is waiting for a call',
+    waiting_none_d: 'Every new request has been called. New ones show up here.',
+    oldest: 'The oldest has waited {t}',
+    open_oldest: 'Open the oldest',
+    waited: 'waiting {t}',
+    t_min: '{n} min',
+    t_hr: '{h} h {m} min',
+    t_day: '{d} d {h} h',
+    first_call: 'Average time to the first call, last 30 days',
+    pipeline_h: 'Deals right now',
+    pipeline_d: 'Tap a step to see its requests. Cancelled: {n}',
+    days_h: 'Requests, last 14 days',
+    days_tip: '{d}: {n} requests · {q} quintal',
+    days_table: 'Show as a table',
+    day_col: 'Day',
+    req_col: 'Requests',
+    qtl_col: 'Quintal',
+    money_h: 'Earnings this month',
+    money_owner: 'Only owners see this — not staff, and never farmers.',
+    m_bought: 'Bought',
+    m_paid: 'Paid to farmers',
+    m_margin: 'Our margin',
+    m_per_q: 'Margin per quintal',
+    m_deals: '{n} paid deals',
+    m_missing: '{n} paid deals have no processor rate yet — open them in Sell requests to add it.',
+    m_crop: 'Crop',
+    m_none: 'No paid deals this month yet.',
+    more_h: 'Also',
+    money_section: 'Money — only owners see this',
+    mo_rate: 'Processor pays (₹ per quintal)',
+    mo_transport: 'Transport (₹, whole deal)',
+    mo_labour: 'Labour and loading (₹, whole deal)',
+    mo_other: 'Other costs (₹, whole deal)',
+    mo_farmer: 'Paid to the farmer',
+    mo_sale: 'From the processor',
+    mo_costs: 'Costs',
+    mo_margin: 'Margin',
+    mo_save: 'Save money details',
+    mo_saved: 'Money details saved',
+    plan_h: 'Margin planner — only owners see this',
+    plan_transport: 'Transport per quintal (₹)',
+    plan_other: 'Other costs per quintal (₹)',
+    plan_result: 'Margin {m} per quintal · {t} on a 100-quintal truck',
+    plan_thin: 'Thin margin — under 2% of what the processor pays.',
+    plan_loss: 'Loss — the farmer price and costs come to more than the processor pays.',
+    plan_card: 'Processor ₹{r} · margin {m} per quintal',
+    set_alerts: 'New request alerts',
+    set_alerts_d: 'For whoever keeps the panel open at work.',
+    set_sound: 'Play a sound',
+    set_desktop: 'Show a computer notification when this tab is in the background',
+    set_desktop_blocked: 'The browser has blocked notifications for this site — allow them in the browser settings.',
+    notif_title: 'New sell request',
   },
   hi: {
     loading: 'लोड हो रहा है…',
@@ -363,6 +426,64 @@ const I18N = {
     l_play: 'Google Play Console',
     set_saved: 'सेव हो गया',
     set_note: 'ये सेटिंग्स सिर्फ़ इस ब्राउज़र में रहती हैं।',
+    live: 'लाइव',
+    live_title: 'किसान के भेजते ही नई रिक्वेस्ट यहाँ दिखती है।',
+    live_off: 'लाइव नहीं — पेज रिफ़्रेश करें',
+    live_new: 'नई रिक्वेस्ट: {crop} · {qty} क्विंटल · {village}',
+    waiting_many: 'किसान फ़ोन का इंतज़ार कर रहे हैं',
+    waiting_one: 'किसान फ़ोन का इंतज़ार कर रहा है',
+    waiting_none: 'कोई फ़ोन का इंतज़ार नहीं कर रहा',
+    waiting_none_d: 'हर नई रिक्वेस्ट पर फ़ोन हो चुका है। नई यहाँ दिखेंगी।',
+    oldest: 'सबसे पुरानी {t} से इंतज़ार में',
+    open_oldest: 'सबसे पुरानी खोलें',
+    waited: '{t} से इंतज़ार',
+    t_min: '{n} मिनट',
+    t_hr: '{h} घंटे {m} मिनट',
+    t_day: '{d} दिन {h} घंटे',
+    first_call: 'पहले फ़ोन तक औसत समय, पिछले 30 दिन',
+    pipeline_h: 'अभी के सौदे',
+    pipeline_d: 'किसी क़दम को दबाएँ, उसकी रिक्वेस्ट दिखेंगी। रद्द: {n}',
+    days_h: 'रिक्वेस्ट, पिछले 14 दिन',
+    days_tip: '{d}: {n} रिक्वेस्ट · {q} क्विंटल',
+    days_table: 'टेबल में देखें',
+    day_col: 'दिन',
+    req_col: 'रिक्वेस्ट',
+    qtl_col: 'क्विंटल',
+    money_h: 'इस महीने की कमाई',
+    money_owner: 'ये सिर्फ़ मालिक देखते हैं — staff नहीं, और किसान कभी नहीं।',
+    m_bought: 'ख़रीदा',
+    m_paid: 'किसानों को दिया',
+    m_margin: 'हमारा मार्जिन',
+    m_per_q: 'प्रति क्विंटल मार्जिन',
+    m_deals: '{n} पूरे सौदे',
+    m_missing: '{n} पूरे सौदों में प्रोसेसर का भाव नहीं डाला — "बिक्री रिक्वेस्ट" में खोलकर डालें।',
+    m_crop: 'फ़सल',
+    m_none: 'इस महीने अभी कोई पूरा सौदा नहीं।',
+    more_h: 'और',
+    money_section: 'पैसा — सिर्फ़ मालिक देखते हैं',
+    mo_rate: 'प्रोसेसर देगा (₹ प्रति क्विंटल)',
+    mo_transport: 'गाड़ी भाड़ा (₹, पूरा सौदा)',
+    mo_labour: 'हमाली और लोडिंग (₹, पूरा सौदा)',
+    mo_other: 'बाक़ी ख़र्च (₹, पूरा सौदा)',
+    mo_farmer: 'किसान को दिया',
+    mo_sale: 'प्रोसेसर से मिला',
+    mo_costs: 'ख़र्च',
+    mo_margin: 'मार्जिन',
+    mo_save: 'पैसे का हिसाब सेव करें',
+    mo_saved: 'पैसे का हिसाब सेव हो गया',
+    plan_h: 'मार्जिन का हिसाब — सिर्फ़ मालिक देखते हैं',
+    plan_transport: 'प्रति क्विंटल भाड़ा (₹)',
+    plan_other: 'प्रति क्विंटल बाक़ी ख़र्च (₹)',
+    plan_result: 'मार्जिन {m} प्रति क्विंटल · 100 क्विंटल की गाड़ी पर {t}',
+    plan_thin: 'मार्जिन बहुत कम — प्रोसेसर के भाव के 2% से कम।',
+    plan_loss: 'घाटा — किसान का भाव और ख़र्च मिलाकर प्रोसेसर के भाव से ज़्यादा है।',
+    plan_card: 'प्रोसेसर ₹{r} · मार्जिन {m} प्रति क्विंटल',
+    set_alerts: 'नई रिक्वेस्ट की सूचना',
+    set_alerts_d: 'जो काम पर पैनल खुला रखता है, उसके लिए।',
+    set_sound: 'आवाज़ करें',
+    set_desktop: 'टैब पीछे हो तो कंप्यूटर पर सूचना दिखाएँ',
+    set_desktop_blocked: 'ब्राउज़र ने इस साइट की सूचनाएँ बंद कर रखी हैं — ब्राउज़र की सेटिंग में चालू करें।',
+    notif_title: 'नई बिक्री रिक्वेस्ट',
   },
 };
 
@@ -547,6 +668,8 @@ function tabs() {
   nav.innerHTML = list.map(([k, l]) =>
     `<button data-tab="${k}" class="${k === page ? 'on' : ''}">${l}${k === 'requests' && fresh ? `<span class="badge">${fresh}</span>` : ''}</button>`).join('');
   nav.querySelectorAll('button').forEach((b) => { b.onclick = () => go(b.dataset.tab); });
+  // The browser tab shows how many are waiting: "(2) Khalihan Admin".
+  document.title = fresh ? `(${fresh}) Khalihan Admin` : 'Khalihan Admin';
   // Keep the open tab in view on a narrow screen.
   const on = nav.querySelector('button.on');
   if (on && on.scrollIntoView) on.scrollIntoView({ block: 'nearest', inline: 'nearest' });
@@ -568,38 +691,116 @@ async function go(next) {
 // ── pages ──────────────────────────────────────────────────────────────
 const PAGES = {
   async home() {
-    const [requests, feedback, deletions, offers, users] = await Promise.all([
+    const owner = me.role === 'owner';
+    const [requests, feedback, deletions, offers, users, money] = await Promise.all([
       db.sellRequests(), db.feedback(), db.deletions(), db.offers(), db.usersCount().catch(() => null),
+      owner ? db.allDealMoney().catch(() => ({})) : Promise.resolve({}),
     ]);
     cache.requests = requests;
+    cache.money = money;
     tabs();
-    const now = new Date();
-    const count = (s) => requests.filter((r) => r.status === s).length;
-    const todayN = requests.filter((r) => r.at && sameDay(r.at, now)).length;
-    const live = offers.list.filter((o) => String(o.until || '') >= istToday()).length;
+    const now = Date.now();
+    const count = (st) => requests.filter((r) => r.status === st).length;
+    const waiting = requests.filter((r) => r.status === 'new' && r.at instanceof Date).sort((x, y) => x.at - y.at);
+    const oldest = waiting[0];
+    const liveOffers = offers.list.filter((o) => String(o.until || '') >= istToday()).length;
     const openFeedback = feedback.filter((f) => !f.done).length;
     const openDel = deletions.filter((d) => !d.done).length;
-    const stat = (n, l, cls, to) => `<div class="stat ${cls || ''} ${to ? 'link' : ''}" ${to ? `data-go="${to}"` : ''}><div class="n">${n}</div><div class="l">${l}</div></div>`;
+
+    // The last 14 days, by the panel's clock.
+    const points = [];
+    for (let i = 13; i >= 0; i--) {
+      const d = new Date(now - i * 864e5);
+      const those = requests.filter((r) => r.at instanceof Date && sameDay(r.at, d));
+      const q = those.reduce((sum, r) => sum + (Number(r.qty) || 0), 0);
+      const p = parts(d);
+      const label = `${p.day} ${MONTHS[p.m]}`;
+      points.push({ label: String(p.day), value: those.length, tip: tr('days_tip', { d: label, n: those.length, q }), full: label, q });
+    }
+
+    // How long farmers wait for the first call (last 30 days).
+    const waits = requests
+      .filter((r) => r.at instanceof Date && now - r.at < 30 * 864e5)
+      .map((r) => {
+        const first = (r.history || []).map((h) => toDate(h.at)).filter(Boolean).sort((x, y) => x - y)[0];
+        return first ? first - r.at : null;
+      })
+      .filter((v) => v != null && v >= 0);
+    const avgWait = waits.length ? waits.reduce((x, y) => x + y, 0) / waits.length : null;
+
+    const sum = owner ? monthSummary(requests, money, monthStart()) : null;
+    const firstVisit = !cache.dashSeen;
+    cache.dashSeen = true;
+    const n = waiting.length;
+
+    const small = (value, label, cls, to) => `<button class="mini ${cls || ''}" ${to ? `data-go="${to}"` : ''}>
+      <span class="mini-n">${value}</span><span class="mini-l">${label}</span></button>`;
+
     setMain(`
-      <h1>${tr('hello', { n: me.name ? ' ' + esc(me.name) : '' })}</h1>
       ${db.demo ? `<p class="note">${tr('demo_note')}</p>` : ''}
-      <div class="grid">
-        ${stat(count('new'), tr('s_new'), count('new') ? 'warn' : '', 'requests')}
-        ${stat(todayN, tr('s_today'), '', 'requests')}
-        ${stat(count('called') + count('agreed') + count('picked'), tr('s_running'), '', 'requests')}
-        ${stat(count('paid'), tr('s_paid'), 'good', 'requests')}
-        ${stat(live, tr('s_offers'), '', 'offers')}
-        ${stat(users == null ? '—' : users, tr('s_users'), '', 'farmers')}
-        ${stat(openFeedback, tr('s_feedback'), openFeedback ? 'warn' : '', 'feedback')}
-        ${stat(openDel, tr('s_deletions'), openDel ? 'warn' : '', 'deletions')}
-      </div>
-      <p class="muted small" style="margin-top:14px">${tr('home_foot')}</p>`);
-    document.querySelectorAll('[data-go]').forEach((n) => { n.onclick = () => go(n.dataset.go); });
+      <section class="desk">
+        <div class="desk-id">
+          ${markSVG(78, { animate: firstVisit })}
+          <div>
+            <h1>${tr('hello', { n: me.name ? ' ' + esc(me.name) : '' })}</h1>
+            <p class="live-line"><span class="live-dot ${cache.live === false ? 'off' : ''}"></span>${cache.live === false ? tr('live_off') : `${tr('live')} · ${tr('live_title')}`}</p>
+          </div>
+        </div>
+        <div class="desk-wait ${n ? 'has' : ''}">
+          ${n ? `
+            <div class="hero"><span class="hero-n" data-count="${n}">${firstVisit ? 0 : n}</span>
+              <span class="hero-l">${n === 1 ? tr('waiting_one') : tr('waiting_many')}</span></div>
+            <p class="hero-s ${now - oldest.at > 2 * 3600e3 ? 'hot' : ''}">${tr('oldest', { t: dur(now - oldest.at) })}</p>
+            <button class="main" id="open-oldest">${tr('open_oldest')}</button>`
+          : `<div class="hero calm"><span class="hero-l">${tr('waiting_none')}</span></div>
+            <p class="hero-s">${tr('waiting_none_d')}</p>`}
+        </div>
+      </section>
+
+      <div class="dash">
+        <section class="card">
+          <h2>${tr('pipeline_h')}</h2>
+          ${pipeline(['new', 'called', 'agreed', 'picked', 'paid'].map((k) => ({ key: k, label: statusLabel(k), value: count(k) })))}
+          <p class="muted small">${tr('pipeline_d', { n: count('cancelled') })}</p>
+        </section>
+        <section class="card">
+          <h2>${tr('days_h')}</h2>
+          ${columnChart(points, { title: tr('days_h') })}
+          <details class="small"><summary>${tr('days_table')}</summary>
+            ${table([tr('day_col'), tr('req_col'), tr('qtl_col')], points.slice().reverse().map((p) => [p.full, p.value, p.q]))}
+          </details>
+        </section>
+        ${sum ? moneyCard(sum) : ''}
+        <section class="card wide">
+          <h2>${tr('more_h')}</h2>
+          <div class="minis">
+            ${small(avgWait == null ? '—' : dur(avgWait), tr('first_call'), avgWait != null && avgWait > 2 * 3600e3 ? 'warn' : '')}
+            ${small(liveOffers, tr('s_offers'), '', 'offers')}
+            ${small(users == null ? '—' : users, tr('s_users'), '', 'farmers')}
+            ${small(openFeedback, tr('s_feedback'), openFeedback ? 'warn' : '', 'feedback')}
+            ${small(openDel, tr('s_deletions'), openDel ? 'warn' : '', 'deletions')}
+          </div>
+          <p class="muted small" style="margin:10px 0 0">${tr('home_foot')}</p>
+        </section>
+      </div>`);
+    document.querySelectorAll('[data-go]').forEach((el) => { el.onclick = () => go(el.dataset.go); });
+    document.querySelectorAll('.pipe-row').forEach((el) => {
+      el.onclick = () => { cache.reqFilter = el.dataset.f; go('requests'); };
+    });
+    const openOldest = $('#open-oldest');
+    if (openOldest) openOldest.onclick = () => showRequest(oldest);
+    wireTips($('#main'));
+    if (firstVisit) countUp();
   },
 
   async requests() {
-    const list = await db.sellRequests();
+    const owner = me.role === 'owner';
+    const [list, money] = await Promise.all([
+      db.sellRequests(),
+      owner ? db.allDealMoney().catch(() => ({})) : Promise.resolve({}),
+    ]);
     cache.requests = list;
+    cache.money = money;
     tabs();
     const filter = cache.reqFilter || 'open';
     const shown = list.filter((r) =>
@@ -618,7 +819,12 @@ const PAGES = {
   },
 
   async offers() {
-    const { version, list } = await db.offers();
+    const owner = me.role === 'owner';
+    const [{ version, list }, offerMoney] = await Promise.all([
+      db.offers(),
+      owner ? db.allOfferMoney().catch(() => ({})) : Promise.resolve({}),
+    ]);
+    cache.offerMoney = offerMoney;
     const today = istToday();
     const live = list.filter((o) => String(o.until || '') >= today);
     setMain(`
@@ -639,8 +845,30 @@ const PAGES = {
           <div><label>${tr('o_wa')}</label><input id="o-wa" inputmode="numeric" value="${esc(phoneTen((live[0] || list[0] || {}).whatsapp || ''))}"></div>
           <div class="wide"><label>${tr('o_note')}</label><input id="o-note" maxlength="200"></div>
         </div>
+        ${owner ? `
+        <section class="moneybox">
+          <h2>🔒 ${tr('plan_h')}</h2>
+          <div class="form">
+            <div><label for="p-rate">${tr('mo_rate')}</label><input id="p-rate" type="number" min="0" inputmode="numeric"></div>
+            <div><label for="p-transport">${tr('plan_transport')}</label><input id="p-transport" type="number" min="0" inputmode="numeric"></div>
+            <div><label for="p-other">${tr('plan_other')}</label><input id="p-other" type="number" min="0" inputmode="numeric"></div>
+          </div>
+          <div class="msum" id="p-sum" aria-live="polite"></div>
+        </section>` : ''}
         <div class="actions"><button class="main" id="o-save">${tr('o_save')}</button></div>
       </div>`);
+    if (owner) {
+      const render = () => {
+        const plan = offerPlan($('#o-price').value, $('#p-rate').value, $('#p-transport').value, $('#p-other').value);
+        const box = $('#p-sum');
+        if (!plan) { box.innerHTML = ''; return; }
+        const warn = plan.perQ < 0 ? tr('plan_loss') : plan.pct < 2 ? tr('plan_thin') : '';
+        box.innerHTML = `<p class="${plan.perQ < 0 ? 'neg' : 'pos'}"><b>${tr('plan_result', {
+          m: signedRs(plan.perQ), t: signedRs(plan.truck),
+        })}</b> · ${plan.pct.toFixed(1)}%</p>${warn ? `<p class="warnline">⚠️ ${warn}</p>` : ''}`;
+      };
+      ['#o-price', '#p-rate', '#p-transport', '#p-other'].forEach((id) => { $(id).oninput = render; });
+    }
     document.querySelectorAll('[data-end]').forEach((b) => {
       b.onclick = async () => {
         const o = live.find((x) => x.id === b.dataset.end);
@@ -805,6 +1033,13 @@ const PAGES = {
         </div>
       </div>
       <div class="card">
+        <div class="title">${tr('set_alerts')}</div>
+        <div class="sub">${tr('set_alerts_d')}</div>
+        <label class="check"><input type="checkbox" id="s-sound" ${store.get('sound', 'on') === 'on' ? 'checked' : ''}> ${tr('set_sound')}</label>
+        <label class="check"><input type="checkbox" id="s-desktop" ${desktopAllowed() && store.get('desktop', 'off') === 'on' ? 'checked' : ''}> ${tr('set_desktop')}</label>
+        <p class="muted small" id="s-desktop-note" hidden>${tr('set_desktop_blocked')}</p>
+      </div>
+      <div class="card">
         <div class="title">${tr('set_me')}</div>
         <div class="kv">
           <div>${tr('k_email')}</div><div>${esc(me.email)}</div>
@@ -850,10 +1085,84 @@ const PAGES = {
         toast(tr('set_saved'));
       };
     });
+    $('#s-sound').onchange = (e) => {
+      store.set('sound', e.target.checked ? 'on' : 'off');
+      if (e.target.checked) chime(); // so one hears what it sounds like
+      toast(tr('set_saved'));
+    };
+    $('#s-desktop').onchange = async (e) => {
+      if (!e.target.checked) { store.set('desktop', 'off'); toast(tr('set_saved')); return; }
+      const answer = await askDesktop();
+      const ok = answer === 'granted';
+      e.target.checked = ok;
+      store.set('desktop', ok ? 'on' : 'off');
+      $('#s-desktop-note').hidden = ok;
+      if (ok) toast(tr('set_saved'));
+    };
   },
 };
 
 // ── pieces ─────────────────────────────────────────────────────────────
+const signedRs = (n) => (typeof n === 'number' && isFinite(n) ? (n < 0 ? '−' : '') + rs(Math.abs(n)) : '—');
+const reducedMotion = () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/** "25 min", "2 h 10 min", "3 d 4 h". */
+function dur(ms) {
+  const min = Math.max(0, Math.round(ms / 60000));
+  if (min < 60) return tr('t_min', { n: min });
+  const h = Math.floor(min / 60);
+  if (h < 24) return tr('t_hr', { h, m: min % 60 });
+  return tr('t_day', { d: Math.floor(h / 24), h: h % 24 });
+}
+
+/** The 1st of this month, 00:00 India time. */
+function monthStart() {
+  const ist = new Date(Date.now() + 5.5 * 3600e3);
+  return new Date(Date.UTC(ist.getUTCFullYear(), ist.getUTCMonth(), 1) - 5.5 * 3600e3);
+}
+
+/** Numbers marked data-count roll up from 0 — once, when the dashboard opens. */
+function countUp() {
+  const els = [...document.querySelectorAll('[data-count]')];
+  if (reducedMotion()) { els.forEach((el) => { el.textContent = el.dataset.count; }); return; }
+  const start = performance.now();
+  const step = (now) => {
+    const k = Math.min(1, (now - start) / 750);
+    const e = 1 - (1 - k) ** 3;
+    els.forEach((el) => { el.textContent = Math.round(Number(el.dataset.count) * e); });
+    if (k < 1) requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+/** Owner only: what this month's paid deals left us. */
+function moneyCard(sum) {
+  const q = (v) => Math.round(v).toLocaleString('en-IN');
+  const tile = (label, value, cls) => `<div class="tile ${cls || ''}"><div class="tile-n">${value}</div><div class="tile-l">${label}</div></div>`;
+  return `<section class="card wide money">
+    <div class="row between"><h2>${tr('money_h')}</h2><span class="lock">🔒 ${tr('money_owner')}</span></div>
+    ${sum.deals ? `
+      <div class="tiles">
+        ${tile(tr('m_bought'), `${q(sum.qty)} <small>${tr('qtl')}</small>`)}
+        ${tile(tr('m_paid'), rs(sum.farmer))}
+        ${tile(tr('m_margin'), signedRs(sum.margin), sum.margin < 0 ? 'neg' : 'pos')}
+        ${tile(tr('m_per_q'), sum.perQ == null ? '—' : signedRs(sum.perQ), (sum.perQ || 0) < 0 ? 'neg' : 'pos')}
+      </div>
+      <p class="muted small">${tr('m_deals', { n: sum.deals })}${sum.missing ? ' · ' + tr('m_missing', { n: sum.missing }) : ''}</p>
+      ${table([tr('m_crop'), tr('qtl_col'), tr('m_paid'), tr('m_margin')],
+        sum.byCrop.map((c) => [c.crop, q(c.qty), rs(c.farmer), c.known ? signedRs(c.margin) : '—']))}`
+      : `<p class="muted">${tr('m_none')}</p>`}
+  </section>`;
+}
+
+/** "waiting 2 h 10 min" on a request nobody has called yet. */
+function waitChip(r) {
+  if (r.status !== 'new' || !(r.at instanceof Date)) return '';
+  const ms = Date.now() - r.at;
+  const cls = ms > 2 * 3600e3 ? 'hot' : ms > 30 * 60e3 ? 'warm' : '';
+  return `<span class="wait ${cls}">${tr('waited', { t: dur(ms) })}</span>`;
+}
+
 function istToday() {
   return new Date(Date.now() + 5.5 * 3600 * 1000).toISOString().slice(0, 10);
 }
@@ -866,9 +1175,17 @@ function reqCard(r) {
         <div class="sub">${esc(r.village)}${r.district ? ', ' + esc(r.district) : ''} · ${r.name ? esc(r.name) + ' · ' : ''}${phoneShow(r.phone)}</div>
         <div class="sub">${when(r.at)}${r.uid ? ' · ' + tr('otp_verified') : ''}${r.assigned ? ' · ' + esc(r.assigned) : ''}</div>
       </div>
-      ${chip(r.status)}
+      <div class="side">${chip(r.status)}${waitChip(r)}${marginBadge(r)}</div>
     </div>
   </div>`;
+}
+
+/** Owner only: the margin a deal left, when its money is entered. */
+function marginBadge(r) {
+  if (!me || me.role !== 'owner' || !cache.money) return '';
+  const n = dealNumbers(r, cache.money[r.id]);
+  if (n.margin == null) return '';
+  return `<span class="mbadge ${n.margin < 0 ? 'neg' : ''}">${signedRs(n.margin)}</span>`;
 }
 
 function showRequest(r) {
@@ -876,9 +1193,11 @@ function showRequest(r) {
   const ten = phoneTen(r.phone);
   const nexts = NEXT[r.status] || [];
   const history = (r.history || []).slice().sort((a, b) => toMs(a.at) - toMs(b.at));
+  const owner = me.role === 'owner';
+  const m = owner ? (cache.money && cache.money[r.id]) || {} : null;
   const panel = openPanel(`
     <h1>${esc(r.crop)} — ${esc(r.qty)} ${tr('qtl')}</h1>
-    <div>${chip(r.status)}</div>
+    <div class="row">${chip(r.status)}${waitChip(r)}</div>
     <div class="kv">
       <div>${tr('k_farmer')}</div><div>${esc(r.name || '—')}</div>
       <div>${tr('k_mobile')}</div><div>${phoneShow(r.phone)} ${r.uid ? '✓ OTP' : ''}</div>
@@ -902,10 +1221,23 @@ function showRequest(r) {
       </div>
       <div class="actions">${nexts.map((s) => `<button class="${s === 'cancelled' ? 'danger' : 'main'}" data-move="${s}">${statusLabel(s)}</button>`).join('')}</div>`
       : `<p class="muted">${tr('deal_done')}</p>`}
+    ${owner ? `
+    <section class="moneybox">
+      <h2>🔒 ${tr('money_section')}</h2>
+      <div class="form">
+        <div><label for="m-rate">${tr('mo_rate')}</label><input id="m-rate" type="number" min="0" inputmode="numeric" value="${esc(m.rate ?? '')}"></div>
+        <div><label for="m-transport">${tr('mo_transport')}</label><input id="m-transport" type="number" min="0" inputmode="numeric" value="${esc(m.transport ?? '')}"></div>
+        <div><label for="m-labour">${tr('mo_labour')}</label><input id="m-labour" type="number" min="0" inputmode="numeric" value="${esc(m.labour ?? '')}"></div>
+        <div><label for="m-other">${tr('mo_other')}</label><input id="m-other" type="number" min="0" inputmode="numeric" value="${esc(m.other ?? '')}"></div>
+      </div>
+      <div class="msum" id="m-sum" aria-live="polite"></div>
+      <div class="actions"><button class="plain" id="m-save">${tr('mo_save')}</button></div>
+    </section>` : ''}
     <h2>${tr('history')}</h2>
     <div class="timeline">${history.length ? history.map((h) =>
       `<div>${chip(h.status)} <span class="sub">${when(toDate(h.at))} · ${esc(h.by)}</span>${h.note ? `<div>${esc(h.note)}</div>` : ''}</div>`).join('')
       : `<div class="muted">${tr('nothing_yet')}</div>`}</div>`);
+  if (owner) wireMoney(panel, r);
   panel.querySelectorAll('[data-move]').forEach((b) => {
     b.onclick = async () => {
       const status = b.dataset.move;
@@ -922,6 +1254,38 @@ function showRequest(r) {
       } catch (e) { b.disabled = false; fail(e); }
     };
   });
+}
+
+/** The owner's money box in a request: sums update as numbers are typed. */
+function wireMoney(panel, r) {
+  const val = (id) => { const el = panel.querySelector(id); return el && el.value !== '' ? Number(el.value) : null; };
+  const money = () => ({ rate: val('#m-rate'), transport: val('#m-transport'), labour: val('#m-labour'), other: val('#m-other') });
+  const render = () => {
+    // The agreed price and weight being typed above count too.
+    const deal = { ...r, final_price: val('#r-price') || r.final_price, final_qty: val('#r-qty') || r.final_qty };
+    const n = dealNumbers(deal, money());
+    const line = (k, v, cls) => `<div>${k}</div><div class="${cls || ''}">${v}</div>`;
+    panel.querySelector('#m-sum').innerHTML = `<div class="kv">
+      ${line(tr('mo_farmer'), rs(n.farmer))}
+      ${n.sale == null ? '' : line(tr('mo_sale'), rs(n.sale))}
+      ${n.costs == null ? '' : line(tr('mo_costs'), rs(n.costs))}
+      ${n.margin == null ? '' : line(tr('mo_margin'),
+        `${signedRs(n.margin)}${n.perQ == null ? '' : ` · ${signedRs(n.perQ)}${tr('per_qtl')}`}${n.pct == null ? '' : ` · ${n.pct.toFixed(1)}%`}`,
+        n.margin < 0 ? 'neg' : 'pos')}
+    </div>`;
+  };
+  panel.querySelectorAll('#m-rate, #m-transport, #m-labour, #m-other, #r-price, #r-qty').forEach((el) => { el.oninput = render; });
+  render();
+  panel.querySelector('#m-save').onclick = async () => {
+    const data = money();
+    for (const k of Object.keys(data)) if (data[k] == null) data[k] = 0;
+    try {
+      await db.saveDealMoney(r.id, data);
+      cache.money = { ...(cache.money || {}), [r.id]: data };
+      toast(tr('mo_saved'));
+      if (page === 'requests') PAGES.requests().then(() => {});
+    } catch (e) { fail(e); }
+  };
 }
 
 function toDate(v) {
@@ -942,10 +1306,21 @@ function offerCard(o) {
         <div class="sub">${esc((o.districts || []).join(', ') || tr('o_all_districts'))} · ${where} · ${pay}
           ${o.moisture_max ? tr('o_moist_max', { n: esc(o.moisture_max) }) : ''}${o.min_qty ? tr('o_min_q', { n: esc(o.min_qty) }) : ''}</div>
         <div class="sub">${tr('o_until', { d: esc(o.until) })} · ${o.whatsapp ? 'WhatsApp ' + phoneShow(o.whatsapp) : tr('o_no_wa')} · ${esc(o.id)}</div>
+        ${offerMoneyLine(o)}
       </div>
       <button class="danger" data-end="${esc(o.id)}">${tr('o_end')}</button>
     </div>
   </div>`;
+}
+
+/** Owner only: the processor rate and margin behind an offer. */
+function offerMoneyLine(o) {
+  if (!me || me.role !== 'owner' || !cache.offerMoney) return '';
+  const m = cache.offerMoney[o.id];
+  if (!m || !m.rate) return '';
+  const plan = offerPlan(o.price, m.rate, m.transport, m.other);
+  if (!plan) return '';
+  return `<div class="sub ownerline ${plan.perQ < 0 ? 'neg' : 'pos'}">🔒 ${tr('plan_card', { r: Math.round(m.rate).toLocaleString('en-IN'), m: signedRs(plan.perQ) })}</div>`;
 }
 
 async function saveOffer() {
@@ -992,6 +1367,17 @@ async function saveOffer() {
   if (!confirm(tr('q_save_offer', { crop: cropLabel(crop), price: rs(price), until: offer.until }))) return;
   try {
     await db.saveOffers((all) => [...all.filter((o) => !same(o) && String(o.until || '') >= today), offer]);
+    // The processor rate stays in the owner's own record, never in the
+    // offers that phones read.
+    const rateEl = document.querySelector('#p-rate');
+    if (me.role === 'owner' && rateEl && rateEl.value) {
+      await db.saveOfferMoney(offer.id, {
+        rate: Number(rateEl.value),
+        transport: Number($('#p-transport').value || 0),
+        other: Number($('#p-other').value || 0),
+        price,
+      }).catch(fail);
+    }
     toast(tr('o_saved'));
     PAGES.offers();
   } catch (e) { fail(e); }
@@ -1026,6 +1412,37 @@ async function showUser(u) {
   } catch (e) { fail(e); }
 }
 
+// ── live: new requests as they come ────────────────────────────────────
+let unwatch = null;
+
+function startLive() {
+  if (unwatch) unwatch();
+  unwatch = db.watchRequests(onNewRequest, (ok) => {
+    cache.live = ok;
+    document.querySelectorAll('.live-dot').forEach((d) => d.classList.toggle('off', !ok));
+  });
+}
+
+function onNewRequest(r) {
+  cache.requests = [r, ...(cache.requests || []).filter((x) => x.id !== r.id)];
+  const text = tr('live_new', { crop: r.crop, qty: r.qty, village: r.village || '' });
+  toast(text);
+  if (store.get('sound', 'on') === 'on') chime();
+  if (store.get('desktop', 'off') === 'on') desktopNotify(tr('notif_title'), text);
+  tabs();
+  const badge = document.querySelector('[data-tab="requests"] .badge');
+  if (badge) badge.classList.add('bump');
+  // Refresh what is on screen, unless a request is open in the side panel.
+  if ((page === 'home' || page === 'requests') && !document.querySelector('.panel')) {
+    PAGES[page]().then(() => {
+      const hero = document.querySelector('.hero-n');
+      if (hero) hero.classList.add('bump');
+      const card = document.querySelector(`[data-req="${CSS.escape(r.id)}"]`);
+      if (card) card.classList.add('fresh');
+    }).catch(fail);
+  }
+}
+
 // ── start ──────────────────────────────────────────────────────────────
 function whoLine() {
   return me ? `${me.email} · ${me.role}${db && db.demo ? ' · ' + tr('demo') : ''}` : '';
@@ -1036,6 +1453,7 @@ function loginScreen(message) {
   $('#logout').hidden = true;
   $('#who').textContent = '';
   setMain(`<section class="center"><div>
+    <div class="login-mark">${markSVG(96, { animate: true })}</div>
     <h1>Khalihan Admin</h1>
     <p class="muted">${message || tr('login_msg')}</p>
     <button class="main" id="login">${tr('login_btn')}</button>
@@ -1056,6 +1474,7 @@ function loginScreen(message) {
 
 async function start() {
   applyLanguage();
+  $('#logo').innerHTML = markSVG(30);
   setMain(`<section class="center"><p class="muted">${tr('loading')}</p></section>`);
   try {
     const mod = DEMO ? await import('./demo-db.js') : await import('./firebase-db.js');
@@ -1065,9 +1484,13 @@ async function start() {
     setMain(`<section class="center"><div><h1>${tr('not_started')}</h1><p class="muted">${esc(e.message || e)}</p></div></section>`);
     return;
   }
-  $('#logout').onclick = () => db.logout();
+  $('#logout').onclick = () => { if (unwatch) unwatch(); unwatch = null; db.logout(); };
   db.onUser((user) => {
-    if (!user) { me = null; return loginScreen(); }
+    if (!user) {
+      me = null;
+      if (unwatch) { unwatch(); unwatch = null; }
+      return loginScreen();
+    }
     if (!user.role) {
       me = null;
       loginScreen(tr('not_team', { e: esc(user.email), x: user.error ? ' (' + esc(user.error) + ')' : '' }));
@@ -1078,6 +1501,7 @@ async function start() {
     $('#who').textContent = whoLine();
     $('#logout').hidden = false;
     go('home');
+    startLive();
   });
 }
 
