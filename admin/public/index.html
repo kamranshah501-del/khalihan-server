@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Khalihan Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="logo">🌾</span>
+    <div>
+      <div class="name">Khalihan Admin</div>
+      <div class="who" id="who"></div>
+    </div>
+  </div>
+  <button id="logout" class="ghost" hidden>लॉग आउट</button>
+</header>
+
+<nav id="tabs" class="tabs" hidden></nav>
+
+<main id="main">
+  <section class="center">
+    <p class="muted">लोड हो रहा है…</p>
+  </section>
+</main>
+
+<div id="toast" class="toast" hidden></div>
+<!-- Optional keys (reCAPTCHA for App Check). Safe to be public. -->
+<script src="config.js"></script>
+<script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,164 @@
+rules_version = '2';
+
+// Khalihan — Firestore rules (8 Oct 2026).
+//
+// Who is who:
+//   • Farmers: the app. Prices, schemes, calendar and offers are open to
+//     everyone; a farmer's own account (users/{uid}) only to that farmer.
+//   • Staff: people in staff/{email} (role "owner" or "staff"), logged in to
+//     Khalihan Admin with Google. Only the owner adds staff or changes
+//     feature switches.
+//   • The daily server (GitHub Actions) uses a service account, which these
+//     rules don't apply to.
+//
+// Deploy: from this folder, `firebase deploy --only firestore:rules`
+// (see admin/README.md). Copy the old rules from the console first.
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ── helpers ────────────────────────────────────────────────────────
+    function signedIn() {
+      return request.auth != null;
+    }
+    function isSelf(uid) {
+      return signedIn() && request.auth.uid == uid;
+    }
+    // A farmer's phone login has no email: then this is ''.
+    function staffEmail() {
+      return signedIn() && ('email' in request.auth.token)
+        && request.auth.token.get('email_verified', false) == true
+        ? request.auth.token.email.lower() : '';
+    }
+    function isStaff() {
+      return staffEmail() != ''
+        && exists(/databases/$(database)/documents/staff/$(staffEmail()));
+    }
+    function isOwner() {
+      return isStaff()
+        && get(/databases/$(database)/documents/staff/$(staffEmail())).data.role == 'owner';
+    }
+    function phoneOfLogin() {
+      return request.auth.token.get('phone_number', '');
+    }
+
+    // ── prices: the server writes; phones read, and keep a backup copy ─
+    match /live/{scope} {
+      allow read: if true;
+      allow write: if false;
+      match /parts/{part} {
+        allow read: if true;
+        allow write: if false;
+      }
+    }
+
+    match /prices/{scope}/days/{day} {
+      allow read: if true;
+      // A phone may file a day's averages (a richer list replaces a thinner).
+      allow create, update: if request.resource.data.keys().hasOnly(['d', 'at', 'c'])
+        && request.resource.data.d == day
+        && request.resource.data.c is list
+        && request.resource.data.c.size() <= 800
+        && request.resource.data.at == request.time;
+      allow delete: if false;
+    }
+
+    match /mandi_days/{state} {
+      allow read: if true;
+      allow write: if false;
+    }
+
+    // ── content the app reads; staff change it from Khalihan Admin ─────
+    match /config/{doc} {
+      allow read: if true;
+      // Offers: any staff member. Feature switches, schemes, calendar: owner.
+      allow write: if (doc == 'buy_offers' && isStaff()) || isOwner();
+    }
+
+    // ── "सुझाव दें" ────────────────────────────────────────────────────
+    match /feedback/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['text', 'state', 'district', 'lang', 'app', 'at'])
+        && request.resource.data.text is string
+        && request.resource.data.text.size() > 0
+        && request.resource.data.text.size() <= 500
+        && request.resource.data.at == request.time;
+      allow read: if isStaff();
+      allow update: if isStaff()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['done', 'note', 'by']);
+      allow delete: if isOwner();
+    }
+
+    // ── "Khalihan ko becho" ────────────────────────────────────────────
+    match /sell_requests/{id} {
+      // Logged in: the request carries the uid and the OTP-checked number.
+      // Login switched off from Admin: the old way, a typed 10-digit number.
+      allow create: if request.resource.data.keys().hasOnly(
+            ['offer', 'crop', 'qty', 'price', 'village', 'district', 'name', 'phone', 'lang', 'app', 'at', 'uid', 'status'])
+        && request.resource.data.get('status', 'new') == 'new'
+        && request.resource.data.qty is number
+        && request.resource.data.qty > 0
+        && request.resource.data.qty <= 10000
+        && request.resource.data.village is string
+        && request.resource.data.village.size() <= 60
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 60
+        && request.resource.data.phone is string
+        && request.resource.data.at == request.time
+        && (
+          (signedIn()
+            && request.resource.data.uid == request.auth.uid
+            && request.resource.data.phone == phoneOfLogin())
+          ||
+          (!('uid' in request.resource.data)
+            && request.resource.data.phone.matches('^[6-9][0-9]{9}$'))
+        );
+      // "मेरी बिक्री": a farmer reads only their own.
+      allow read: if isStaff() || (signedIn() && resource.data.uid == request.auth.uid);
+      // Staff move it along: Nayi → Call kiya → Deal pakki → Maal uthaya → Paisa diya.
+      allow update: if isStaff()
+        && request.resource.data.diff(resource.data).affectedKeys()
+             .hasOnly(['status', 'history', 'assigned', 'note', 'updated', 'final_price', 'final_qty']);
+      allow delete: if isOwner();
+    }
+
+    // ── a farmer's account ─────────────────────────────────────────────
+    match /users/{uid} {
+      allow read: if isSelf(uid) || isStaff();
+      allow create, update: if isSelf(uid)
+        && request.resource.data.keys().hasOnly(
+             ['phone', 'name', 'state', 'district', 'lang', 'app', 'crops', 'seen', 'created', 'data'])
+        && request.resource.data.phone == phoneOfLogin()
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 60
+        && request.resource.data.data is map;
+      allow delete: if isSelf(uid) || isOwner();
+    }
+
+    match /deletion_requests/{uid} {
+      allow create, update: if isSelf(uid)
+        && request.resource.data.keys().hasOnly(['phone', 'at', 'done', 'by'])
+        && request.resource.data.at == request.time;
+      allow read: if isStaff();
+      // Staff mark it done after clearing sell requests and WhatsApp copies.
+      allow update: if isStaff()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['done', 'by']);
+      allow delete: if isOwner();
+    }
+
+    // ── Khalihan Admin ─────────────────────────────────────────────────
+    match /staff/{email} {
+      // Everyone on the team can see the team; only the owner changes it.
+      allow read: if isStaff();
+      allow write: if isOwner();
+    }
+
+    match /audit/{id} {
+      // Every change made from Admin leaves one line here; nobody edits it.
+      allow create: if isStaff()
+        && request.resource.data.by == staffEmail()
+        && request.resource.data.at == request.time;
+      allow read: if isOwner();
+      allow update, delete: if false;
+    }
+  }
+}
