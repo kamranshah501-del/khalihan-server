@@ -124,7 +124,15 @@ textarea { min-height: 70px; resize: vertical; }
   background: #fff; box-shadow: -12px 0 40px rgba(10, 46, 74, .18);
   overflow-y: auto; padding: 16px;
 }
-.shade { position: fixed; inset: 0; background: rgba(10, 46, 74, .3); z-index: 9; }
+.shade { position: fixed; inset: 0; background: rgba(10, 46, 74, .3); z-index: 9; animation: shadein .24s ease-out both; }
+/* The side panel slides in from its edge, and back out when closed. */
+.panel { animation: panelin .28s cubic-bezier(.2, .8, .2, 1) both; }
+.panel.closing { animation: panelout .22s ease-in both; }
+.shade.closing { animation: shadeout .22s ease-in both; }
+@keyframes panelin { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes panelout { from { transform: translateX(0); } to { transform: translateX(100%); } }
+@keyframes shadein { from { opacity: 0; } to { opacity: 1; } }
+@keyframes shadeout { from { opacity: 1; } to { opacity: 0; } }
 .kv { display: grid; grid-template-columns: 120px 1fr; gap: 4px 10px; margin: 10px 0; }
 .kv div:nth-child(odd) { color: var(--muted); }
 .timeline { border-left: 3px solid var(--line); margin: 8px 0 8px 6px; padding-left: 12px; }
@@ -274,5 +282,6 @@ button:focus-visible, a:focus-visible, .mini:focus-visible { outline: 3px solid 
   .pipe-row { grid-template-columns: 92px 1fr 34px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .mark.rise .mk-col, .mark.rise .mk-dot, .live-dot::after, .bump, .card.fresh { animation: none !important; }
+  .mark.rise .mk-col, .mark.rise .mk-dot, .live-dot::after, .bump, .card.fresh,
+  .panel, .panel.closing, .shade, .shade.closing { animation: none !important; }
 }

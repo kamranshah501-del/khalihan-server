@@ -44,6 +44,10 @@ cd ~/khalihan-server 2>/dev/null || git clone https://github.com/kamranshah501-d
 cd ~/khalihan-server && git pull
 bash admin/deploy.sh                          # panel + rules
 ```
+Sirf panel badla ho to `bash admin/deploy.sh hosting` kaafi hai; **jab
+`firestore.rules` bhi badle** (jaise 11 Oct ko paisa wale `deal_money` /
+`offer_money` ke liye) to poora `bash admin/deploy.sh` chalao.
+
 Pehli baar ye Google login aur project chunne ko kahega (Khalihan wala project
 chuno, alias kuch bhi, jaise `khalihan`). Aakhir me **Hosting URL** dikhega
 (jaise `https://<project>.web.app`) — wahi admin panel hai. Bookmark kar lo.

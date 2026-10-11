@@ -626,11 +626,20 @@ function fail(e) {
 
 function setMain(html) { $('#main').innerHTML = html; }
 
+/** The side panel slides back out, then goes. */
 function closePanel() {
-  document.querySelectorAll('.panel, .shade').forEach((n) => n.remove());
+  const nodes = document.querySelectorAll('.panel, .shade');
+  if (!nodes.length) return;
+  if (reducedMotion()) { nodes.forEach((n) => n.remove()); return; }
+  nodes.forEach((n) => {
+    if (n.classList.contains('closing')) return;
+    n.classList.add('closing');
+    setTimeout(() => n.remove(), 240);
+  });
 }
 function openPanel(html) {
-  closePanel();
+  // Replacing an open panel: no slide out and in again.
+  document.querySelectorAll('.panel, .shade').forEach((n) => n.remove());
   const shade = document.createElement('div');
   shade.className = 'shade';
   shade.onclick = closePanel;
