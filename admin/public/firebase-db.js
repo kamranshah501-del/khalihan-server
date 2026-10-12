@@ -207,6 +207,95 @@ export async function connect() {
       log('staff_remove', { email });
     },
 
+    // ── Khalihan Kendra ──
+    async kendraInfo() {
+      const snap = await getDoc(doc(db, 'kendra', 'info'));
+      return snap.data() || {};
+    },
+    async saveKendraInfo(data) {
+      await setDoc(doc(db, 'kendra', 'info'), { ...data, updated: serverTimestamp(), by: me.email }, { merge: true });
+      log('kendra_info', { name: data.name || '' });
+    },
+    async setKendraStock(key, level) {
+      await setDoc(doc(db, 'kendra', 'info'), { stock: { [key]: level }, stockAt: serverTimestamp(), by: me.email }, { merge: true });
+      log('kendra_stock', { key, level });
+    },
+    async kendraCard() {
+      const snap = await getDoc(doc(db, 'kendra', 'home_card'));
+      const d = snap.data() || {};
+      return { on: d.on === true, secs: Number(d.secs || 4), slides: Array.isArray(d.slides) ? d.slides : [] };
+    },
+    async saveKendraCard(card) {
+      await setDoc(doc(db, 'kendra', 'home_card'), {
+        on: card.on === true, secs: Number(card.secs || 4), slides: card.slides || [], updated: serverTimestamp(), by: me.email,
+      });
+      log('kendra_card', { on: card.on === true, slides: (card.slides || []).length });
+    },
+    async kendraProducts() {
+      const snap = await getDocs(query(collection(db, 'kendra_products'), limit(500)));
+      return rows(snap);
+    },
+    async saveKendraProduct(id, data) {
+      const ref = id ? doc(db, 'kendra_products', id) : doc(collection(db, 'kendra_products'));
+      await setDoc(ref, { ...data, updated: serverTimestamp(), by: me.email });
+      log('kendra_product', { id: ref.id, cat: data.cat });
+      return ref.id;
+    },
+    async deleteKendraProduct(id) {
+      await deleteDoc(doc(db, 'kendra_products', id));
+      log('kendra_product_delete', { id });
+    },
+    async kendraCosts() {
+      const snap = await getDocs(query(collection(db, 'kendra_cost'), limit(500)));
+      const out = {};
+      snap.docs.forEach((d) => { out[d.id] = d.data(); });
+      return out;
+    },
+    async saveKendraCost(id, costs) {
+      await setDoc(doc(db, 'kendra_cost', id), { costs, updated: serverTimestamp(), by: me.email });
+    },
+    async kendraOrders() {
+      const snap = await getDocs(query(collection(db, 'kendra_orders'), orderBy('at', 'desc'), limit(300)));
+      return rows(snap).map((r) => ({ ...r, at: toDate(r.at), status: r.status || 'new' }));
+    },
+    async moveKendraOrder(id, status, extra) {
+      const patch = {
+        status,
+        history: arrayUnion({ status, by: me.email, at: Timestamp.now() }),
+        updated: serverTimestamp(),
+        by: me.email,
+      };
+      if (extra && extra.paid) patch.paid = extra.paid;
+      if (extra && extra.bill) patch.bill = extra.bill;
+      if (extra && extra.note) patch.note = extra.note;
+      await updateDoc(doc(db, 'kendra_orders', id), patch);
+      log('kendra_order', { id, status });
+    },
+    /** New Kendra orders as they arrive (the newest 20 are watched). */
+    watchKendraOrders(onAdded) {
+      let first = true;
+      return onSnapshot(
+        query(collection(db, 'kendra_orders'), orderBy('at', 'desc'), limit(20)),
+        (snap) => {
+          if (first) { first = false; return; }
+          snap.docChanges().forEach((ch) => {
+            if (ch.type !== 'added') return;
+            const r = { id: ch.doc.id, ...ch.doc.data() };
+            onAdded({ ...r, at: toDate(r.at) || new Date(), status: r.status || 'new' });
+          });
+        },
+        (e) => console.warn('kendra live', e),
+      );
+    },
+    async kendraComplaints() {
+      const snap = await getDocs(query(collection(db, 'kendra_complaints'), orderBy('at', 'desc'), limit(200)));
+      return rows(snap).map((r) => ({ ...r, at: toDate(r.at) }));
+    },
+    async kendraComplaintDone(id, done) {
+      await updateDoc(doc(db, 'kendra_complaints', id), { done, by: me.email });
+      log('kendra_complaint_done', { id, done });
+    },
+
     // ── record (owner) ──
     async audit() {
       const snap = await getDocs(query(collection(db, 'audit'), orderBy('at', 'desc'), limit(300)));

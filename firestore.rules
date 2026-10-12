@@ -1,6 +1,6 @@
 rules_version = '2';
 
-// Khalihan — Firestore rules (8 Oct 2026).
+// Khalihan — Firestore rules (8 Oct 2026; Kendra added 12 Oct 2026).
 //
 // Who is who:
 //   • Farmers: the app. Prices, schemes, calendar and offers are open to
@@ -154,6 +154,88 @@ service cloud.firestore {
     }
     match /offer_money/{id} {
       allow read, write: if isOwner();
+    }
+
+    // ── Khalihan Kendra (seed & fertiliser shop) ───────────────────────
+    // The shop's facts, Home card and goods: every phone reads them; staff
+    // change them from Khalihan Admin. Pesticides are never listed (the app
+    // also refuses any category it doesn't know).
+    match /kendra/{doc} {
+      allow read: if true;
+      allow write: if isStaff() && doc in ['info', 'home_card'];
+    }
+    match /kendra_products/{id} {
+      allow read: if true;
+      allow write: if isStaff()
+        && request.resource.data.cat in ['seed', 'fert', 'organic', 'micro', 'tools'];
+      allow delete: if isStaff();
+    }
+    // What we pay for each product: owner only, never where phones read.
+    match /kendra_cost/{id} {
+      allow read, write: if isOwner();
+    }
+
+    // A farmer's reservation: pick up at the Kendra, pay there. No login
+    // needed; the phone keeps the order's id and reads it back by id only
+    // (nobody can list orders but staff).
+    match /kendra_orders/{id} {
+      allow create: if request.resource.data.keys().hasOnly(
+            ['code', 'items', 'total', 'day', 'slot', 'name', 'phone', 'village', 'district', 'uid', 'lang', 'app', 'at', 'status'])
+        && request.resource.data.status == 'new'
+        && request.resource.data.items is list
+        && request.resource.data.items.size() > 0
+        && request.resource.data.items.size() <= 20
+        && request.resource.data.total is number
+        && request.resource.data.total >= 0
+        && request.resource.data.total < 10000000
+        && request.resource.data.day is string
+        && request.resource.data.day.size() == 10
+        && request.resource.data.slot in ['m', 'a', 'e']
+        && request.resource.data.code is string
+        && request.resource.data.code.size() <= 12
+        && request.resource.data.name is string
+        && request.resource.data.name.size() <= 60
+        && request.resource.data.village is string
+        && request.resource.data.village.size() > 0
+        && request.resource.data.village.size() <= 60
+        && request.resource.data.phone is string
+        && request.resource.data.at == request.time
+        && (
+          (signedIn()
+            && request.resource.data.uid == request.auth.uid
+            && request.resource.data.phone == phoneOfLogin())
+          ||
+          (!('uid' in request.resource.data)
+            && request.resource.data.phone.matches('^[6-9][0-9]{9}$'))
+        );
+      allow get: if true;
+      allow list: if isStaff();
+      // Staff move it along: new → ready → done (or cancelled).
+      allow update: if (isStaff()
+          && request.resource.data.diff(resource.data).affectedKeys()
+               .hasOnly(['status', 'history', 'note', 'updated', 'by', 'paid', 'bill']))
+        // The farmer may cancel their own (they hold the id) while it is open.
+        || (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'cancelled'])
+          && request.resource.data.status == 'cancelled'
+          && resource.data.status in ['new', 'ready']
+          && request.resource.data.cancelled == request.time);
+      allow delete: if isOwner();
+    }
+
+    match /kendra_complaints/{id} {
+      allow create: if request.resource.data.keys().hasOnly(['order', 'code', 'text', 'phone', 'lang', 'app', 'at'])
+        && request.resource.data.order is string
+        && request.resource.data.order.size() <= 40
+        && request.resource.data.text is string
+        && request.resource.data.text.size() > 0
+        && request.resource.data.text.size() <= 500
+        && request.resource.data.phone is string
+        && request.resource.data.phone.size() <= 20
+        && request.resource.data.at == request.time;
+      allow read: if isStaff();
+      allow update: if isStaff()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['done', 'note', 'by']);
+      allow delete: if isOwner();
     }
 
     // ── Khalihan Admin ─────────────────────────────────────────────────

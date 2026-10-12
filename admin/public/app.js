@@ -11,8 +11,9 @@ import { markSVG } from './mark.js';
 import { columnChart, wireTips, pipeline, table } from './charts.js';
 import { chime, askDesktop, desktopAllowed, desktopNotify } from './live.js';
 import { dealNumbers, monthSummary, offerPlan } from './money.js';
+import { KENDRA_WORDS, createKendra } from './kendra.js';
 
-const ADMIN_VERSION = '1.2 · 11 Oct 2026';
+const ADMIN_VERSION = '1.3 · 12 Oct 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -487,6 +488,10 @@ const I18N = {
   },
 };
 
+// Khalihan Kendra's words live in kendra.js.
+Object.assign(I18N.en, KENDRA_WORDS.en);
+Object.assign(I18N.hi, KENDRA_WORDS.hi);
+
 let lang = store.get('lang', 'en');
 if (!I18N[lang]) lang = 'en';
 let tz = store.get('tz', 'ist') === 'local' ? 'local' : 'ist';
@@ -597,6 +602,11 @@ const FEATURES = [
     d: { en: 'The Home button and the "Listen" button on the morning message.', hi: 'Home का बटन और सुबह के मैसेज का "सुनें" बटन।' },
   },
   {
+    key: 'kendra', def: false,
+    label: { en: KENDRA_WORDS.en.feat_kendra, hi: KENDRA_WORDS.hi.feat_kendra },
+    d: { en: KENDRA_WORDS.en.feat_kendra_d, hi: KENDRA_WORDS.hi.feat_kendra_d },
+  },
+  {
     key: 'share_picture', def: true,
     label: { en: 'Send prices as a picture', hi: 'भाव की फ़ोटो भेजें' },
     d: { en: 'Off = Share sends a plain WhatsApp message.', hi: 'बंद = Share सीधे WhatsApp मैसेज भेजेगा।' },
@@ -607,6 +617,7 @@ const featText = (f) => f.d[lang] || f.d.en;
 
 let db = null;
 let me = null;
+let kendraPages = null;
 let page = 'home';
 let cache = {};
 
@@ -665,6 +676,7 @@ function tabs() {
     ['home', tr('tab_home')],
     ['requests', tr('tab_requests')],
     ['offers', tr('tab_offers')],
+    ['kendra', tr('tab_kendra')],
     ['feedback', tr('tab_feedback')],
     ['farmers', tr('tab_farmers')],
     ['deletions', tr('tab_deletions')],
@@ -890,6 +902,18 @@ const PAGES = {
       };
     });
     $('#o-save').onclick = saveOffer;
+  },
+
+  async kendra() {
+    kendraPages = kendraPages || createKendra({
+      tr, esc, rs, when, toast, fail, setMain, openPanel, closePanel, $, dur, monthStart, phoneShow, signedRs,
+      db: () => db, me: () => me, lang: () => lang, page: () => page,
+      ding: (text) => {
+        if (store.get('sound', 'on') === 'on') chime();
+        if (store.get('desktop', 'off') === 'on') desktopNotify('Khalihan Kendra', text);
+      },
+    });
+    await kendraPages.page();
   },
 
   async features() {

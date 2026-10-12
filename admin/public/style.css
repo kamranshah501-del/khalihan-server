@@ -285,3 +285,49 @@ button:focus-visible, a:focus-visible, .mini:focus-visible { outline: 3px solid 
   .mark.rise .mk-col, .mark.rise .mk-dot, .live-dot::after, .bump, .card.fresh,
   .panel, .panel.closing, .shade, .shade.closing { animation: none !important; }
 }
+
+/* ── Khalihan Kendra ─────────────────────────────────────────────── */
+.kgrid { display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-start; }
+.kgrid > :first-child { flex: 999 1 520px; min-width: 0; }
+.kgrid > aside { flex: 1 1 280px; min-width: 0; display: flex; flex-direction: column; gap: 0; }
+.kitems { margin: 8px 0 4px; font-size: 14px; line-height: 1.5; background: var(--page); border-radius: 10px; padding: 8px 10px; }
+.card .actions.row { margin-top: 10px; }
+.kgovt { margin: 8px 0; }
+.segs { display: inline-flex; border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.seg { border: 0; background: #fff; padding: 6px 12px; font-weight: 700; cursor: pointer; }
+.seg + .seg { border-left: 1px solid var(--line); }
+.seg.on.ok { background: var(--green-dark); color: #fff; }
+.seg.on.low { background: var(--amber); color: #fff; }
+.seg.on.out { background: var(--red); color: #fff; }
+.kswitch {
+  display: inline-flex; align-items: center; gap: 12px; border: 0; border-radius: 14px;
+  padding: 10px 14px 10px 16px; font-weight: 800; cursor: pointer; background: #dde3e8; color: var(--ink);
+}
+.kswitch .knob { width: 44px; height: 24px; border-radius: 12px; background: rgba(0,0,0,.15); position: relative; }
+.kswitch .knob::after { content: ''; position: absolute; top: 2px; left: 2px; width: 20px; height: 20px; border-radius: 10px; background: #fff; transition: left .2s; }
+.kswitch.on { background: var(--green-dark); color: #fff; }
+.kswitch.on .knob { background: rgba(255,255,255,.35); }
+.kswitch.on .knob::after { left: 22px; }
+.kslide { display: flex; align-items: center; gap: 10px; border: 1px solid var(--line); border-radius: 12px; padding: 8px 10px; margin-top: 8px; flex-wrap: wrap; }
+.kslide button.plain { padding: 4px 10px; }
+.kslide button:disabled { opacity: .35; cursor: default; }
+.kstate { font-size: 13px; font-weight: 800; min-width: 70px; text-align: right; }
+.kstate.pos { color: var(--green-dark); }
+.kstate.sky { color: var(--sky-dark); }
+.kstate.muted { color: var(--muted); }
+.chip.kt-offer { background: var(--red); color: #fff; }
+.chip.kt-stock { background: var(--green-tint); color: var(--green-dark); }
+.chip.kt-new { background: var(--green-dark); color: #fff; }
+.chip.kt-notice { background: var(--yellow); color: var(--ink); }
+.chip.kown { background: var(--navy); color: #fff; font-size: 12px; }
+.kpv { width: 240px; height: 240px; border-radius: 16px; padding: 14px; display: flex; flex-direction: column; gap: 8px; border: 1px solid var(--line); margin: 0 auto; }
+.kpv-t { font-weight: 800; font-size: 16px; margin-top: 8px; line-height: 1.2; }
+.kpv-l { font-size: 14px; font-weight: 700; }
+.kpv-l.offer { color: var(--red); font-size: 18px; font-weight: 800; }
+.kpv-row { background: rgba(0,0,0,.04); border-radius: 8px; padding: 4px 8px; font-size: 14px; }
+.kpv-cta { margin-top: auto; align-self: flex-start; border-radius: 8px; padding: 5px 10px; font-size: 12px; font-weight: 800; }
+.kpack { display: grid; grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); gap: 6px; margin-bottom: 6px; }
+#kp-addpack { margin: 2px 0 6px; }
+@media (prefers-reduced-motion: reduce) { .kswitch .knob::after { transition: none; } }
+.kpack.khead { margin-bottom: 2px; }
+.kpack.khead span { font-size: 12px; font-weight: 700; color: var(--muted); }

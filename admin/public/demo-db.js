@@ -33,7 +33,7 @@ export async function connect() {
   });
   const offerMoney = { 'makka-jalgaon-20261008': { rate: 2140, transport: 45, other: 15 } };
   let offers = { version: 3, list: [{ id: 'makka-jalgaon-20261008', crops: ['maize'], districts: ['jalgaon'], state: 'Maharashtra', price: 1980, pickup: 'doorstep', centre: '', payment_days: 0, until: day(-6).toISOString().slice(0, 10), whatsapp: '919800000000', moisture_max: 14, min_qty: 10, note: { hi: 'खेत से उठाएँगे' } }] };
-  const features = { login: true, sell: true };
+  const features = { login: true, sell: true, kendra: true };
   const feedback = [
     { id: 'f1', text: 'Kapas ka bhav Pachora ka bhi dikhao', state: 'Maharashtra', district: 'Jalgaon', lang: 'hi', app: '1.0.2', at: day(0, 8) },
     { id: 'f2', text: 'खताची किंमत पाहिजे', state: 'Maharashtra', district: 'Jalgaon', lang: 'mr', app: '1.0.2', at: day(3), done: true },
@@ -46,6 +46,29 @@ export async function connect() {
   const staff = [{ id: 'owner@example.com', role: 'owner', name: 'Demo owner' }, { id: 'staff@example.com', role: 'staff', name: 'Jamner' }];
   const audit = [{ id: 'a1', by: 'staff@example.com', action: 'sell_request_status', details: { id: 'r2', status: 'called' }, at: day(1, 17) }];
   const log = (action, details) => audit.unshift({ id: 'a' + Date.now(), by: me.email, action, details, at: new Date() });
+
+  // Khalihan Kendra — made-up goods and orders (names and prices are samples).
+  let kInfo = { name: 'Khalihan Kendra, Jamner', address: 'Pahur road, Jamner', phone: '9800000000', lic: 'DEMO-LIC-001', open: 8, close: 19, closedDay: 0, holidays: [], districts: ['jalgaon'], km: 25, holdDays: 2, stock: { urea: 'ok', dap: 'low', mop: 'out' }, stockAt: new Date() };
+  let kProducts = [
+    { id: 'kp1', n: { hi: 'चना बीज · किस्म A', mr: 'हरभरा बियाणे · वाण A', en: 'Chana seed · variety A' }, cat: 'seed', crops: ['bengal gram'], brand: 'Company 1', own: false, govt: false, show: true, order: 10, packs: [{ s: '10 kg', mrp: 1250, p: 1200, stock: 14 }, { s: '30 kg', mrp: 3600, p: 3450, stock: 22 }], facts: { variety: 'A', days: '105', lot: 'L-2291', test: '2026-08-20', germ: '85%' }, lic: '' },
+    { id: 'kp2', n: { hi: 'चना बीज · किस्म B', en: 'Chana seed · variety B' }, cat: 'seed', crops: ['bengal gram'], brand: 'Company 2', own: false, govt: false, show: true, order: 11, packs: [{ s: '30 kg', mrp: 3500, p: 3400, stock: 4 }], facts: {}, lic: '' },
+    { id: 'kp3', n: { hi: 'राइज़ोबियम कल्चर (चना)', en: 'Rhizobium culture (chana)' }, cat: 'organic', crops: ['bengal gram', 'soyabean', 'arhar'], brand: '', own: true, govt: false, show: true, order: 20, packs: [{ s: '250 ml', mrp: 120, p: 99, stock: 40 }], facts: {}, lic: '' },
+    { id: 'kp4', n: { hi: 'सूक्ष्म पोषक मिश्रण', en: 'Micronutrient mix' }, cat: 'micro', crops: ['cotton', 'bengal gram', 'wheat'], brand: '', own: true, govt: false, show: true, order: 21, packs: [{ s: '1 kg', mrp: 260, p: 230, stock: 3 }], facts: { grade: 'Maharashtra notified grade' }, lic: '' },
+    { id: 'kp5', n: { hi: 'DAP', en: 'DAP' }, cat: 'fert', crops: ['bengal gram', 'wheat', 'cotton'], brand: 'Company 3', own: false, govt: true, show: true, order: 30, packs: [{ s: '50 kg', mrp: 1350, p: null, stock: 8 }], facts: {}, lic: '' },
+  ];
+  const kCost = { kp1: { costs: { '10 kg': 1080, '30 kg': 3150 } }, kp3: { costs: { '250 ml': 55 } } };
+  let kCard = { on: true, secs: 4, slides: [
+    { type: 'offer', title: { hi: 'Khalihan वर्मी कम्पोस्ट' }, line: { hi: '5 बैग पर ₹50 कम' }, pid: '', from: '', to: day(-7).toISOString().slice(0, 10), live: true },
+    { type: 'stock', title: {}, line: {}, pid: '', from: '', to: '', live: true },
+    { type: 'new', title: { hi: 'रबी के लिए चना बीज' }, line: { hi: 'किस्म A · Company 1' }, pid: 'kp1', from: '', to: '', live: true },
+    { type: 'notice', title: { hi: 'दिवाली पर Kendra बंद' }, line: { hi: '[तारीख] से [तारीख] तक' }, pid: '', from: day(-20).toISOString().slice(0, 10), to: day(-24).toISOString().slice(0, 10), live: true },
+  ] };
+  let kOrders = [
+    { id: 'ko1', code: 'KJ-7F3QX', items: [{ pid: 'kp1', n: 'चना बीज · किस्म A', s: '30 kg', q: 2, p: 3450 }, { pid: 'kp3', n: 'राइज़ोबियम कल्चर (चना)', s: '250 ml', q: 1, p: 99 }], total: 6999, day: day(-1).toISOString().slice(0, 10), slot: 'm', name: 'Ramesh Patil', phone: '9876543210', village: 'Shendurni', district: 'jalgaon', lang: 'mr', app: '1.0.4', at: new Date(Date.now() - 40 * 60e3), status: 'new' },
+    { id: 'ko2', code: 'KJ-2MB8D', items: [{ pid: 'kp5', n: 'DAP', s: '50 kg', q: 4, p: 1350 }], total: 5400, day: day(0).toISOString().slice(0, 10), slot: 'e', name: '', phone: '9812345678', village: 'Pahur', district: 'jalgaon', lang: 'hi', app: '1.0.4', at: new Date(Date.now() - 3 * 3600e3), status: 'ready' },
+    { id: 'ko3', code: 'KJ-Q8N1A', items: [{ pid: 'kp1', n: 'चना बीज · किस्म A', s: '10 kg', q: 3, p: 1200 }], total: 3600, day: day(2).toISOString().slice(0, 10), slot: 'a', name: 'Sunil', phone: '9822001122', village: 'Jamner', district: 'jalgaon', lang: 'mr', app: '1.0.4', at: day(2, 11), status: 'done', paid: 'cash' },
+  ];
+  const kComplaints = [{ id: 'kc1', order: 'ko3', code: 'KJ-Q8N1A', text: 'Ek bori fati hui thi', phone: '9822001122', at: day(1, 12) }];
 
   return {
     demo: true,
@@ -97,5 +120,34 @@ export async function connect() {
     async addStaff(email, role, name) { staff.push({ id: email.toLowerCase(), role, name }); },
     async removeStaff(email) { const i = staff.findIndex((s) => s.id === email); if (i >= 0) staff.splice(i, 1); },
     async audit() { return audit.map((a) => ({ ...a })); },
+    async kendraInfo() { return JSON.parse(JSON.stringify({ ...kInfo, stockAt: undefined })); },
+    async saveKendraInfo(data) { kInfo = { ...kInfo, ...data }; log('kendra_info', {}); },
+    async setKendraStock(key, level) { kInfo = { ...kInfo, stock: { ...kInfo.stock, [key]: level }, stockAt: new Date() }; },
+    async kendraCard() { return JSON.parse(JSON.stringify(kCard)); },
+    async saveKendraCard(card) { kCard = JSON.parse(JSON.stringify(card)); log('kendra_card', { on: card.on }); },
+    async kendraProducts() { return JSON.parse(JSON.stringify(kProducts)); },
+    async saveKendraProduct(id, data) {
+      const pid = id || 'kp' + Date.now();
+      kProducts = [...kProducts.filter((p) => p.id !== pid), { id: pid, ...JSON.parse(JSON.stringify(data)) }];
+      return pid;
+    },
+    async deleteKendraProduct(id) { kProducts = kProducts.filter((p) => p.id !== id); },
+    async kendraCosts() { return JSON.parse(JSON.stringify(kCost)); },
+    async saveKendraCost(id, costs) { kCost[id] = { costs: { ...costs } }; },
+    async kendraOrders() { return kOrders.map((o) => ({ ...o })); },
+    async moveKendraOrder(id, status, extra) {
+      kOrders = kOrders.map((o) => (o.id !== id ? o : { ...o, status, ...(extra || {}) }));
+    },
+    watchKendraOrders(onAdded) {
+      // A made-up farmer reserves something a little after opening.
+      const t = setTimeout(() => {
+        const o = { id: 'ko' + Date.now(), code: 'KJ-NEW01', items: [{ pid: 'kp4', n: 'सूक्ष्म पोषक मिश्रण', s: '1 kg', q: 2, p: 230 }], total: 460, day: day(-1).toISOString().slice(0, 10), slot: 'm', name: 'Ganesh', phone: '9850011223', village: 'Neri', status: 'new', at: new Date() };
+        kOrders = [o, ...kOrders];
+        onAdded({ ...o });
+      }, 12000);
+      return () => clearTimeout(t);
+    },
+    async kendraComplaints() { return kComplaints.map((x) => ({ ...x })); },
+    async kendraComplaintDone(id, done) { const x = kComplaints.find((k) => k.id === id); if (x) x.done = done; },
   };
 }
