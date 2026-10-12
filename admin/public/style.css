@@ -36,6 +36,9 @@ a { color: var(--navy); }
 }
 .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
 .top button { flex: none; white-space: nowrap; }
+.topbtns { display: flex; gap: 8px; flex: none; }
+/* Phones get "Install" from Settings — the bar stays short. */
+@media (max-width: 600px) { #install { display: none; } }
 .logo { display: flex; align-items: center; }
 .logo svg { display: block; }
 .name { font-weight: 800; font-size: 18px; line-height: 1.1; }

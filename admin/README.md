@@ -5,8 +5,11 @@ sujhav, kisan, khata hatane ki maang, team aur har badlav ka record.
 Ye usi Firebase project pe chalta hai jis pe app hai. Login: Google account se,
 sirf wahi log jo `staff` me hain.
 
-`?demo` lagake kholo (jaise `…web.app/?demo`) to banawati data ke saath
-saari screens dekh sakte ho — kuch save nahi hota.
+Pata: **https://khalihan-admin.web.app** — computer pe app ki tarah install ho
+jata hai (neeche "Computer pe app").
+
+`?demo` lagake kholo (`https://khalihan-admin.web.app/?demo`) to banawati data
+ke saath saari screens dekh sakte ho — kuch save nahi hota.
 
 **Bhasha:** panel **English** me khulta hai. Hindi chahiye to **⚙️ Settings →
 Language → हिन्दी** — har browser apni pasand yaad rakhta hai (login page pe
@@ -49,8 +52,27 @@ Sirf panel badla ho to `bash admin/deploy.sh hosting` kaafi hai; **jab
 `offer_money` ke liye) to poora `bash admin/deploy.sh` chalao.
 
 Pehli baar ye Google login aur project chunne ko kahega (Khalihan wala project
-chuno, alias kuch bhi, jaise `khalihan`). Aakhir me **Hosting URL** dikhega
-(jaise `https://<project>.web.app`) — wahi admin panel hai. Bookmark kar lo.
+chuno, alias kuch bhi, jaise `khalihan`).
+
+**Panel ka pata: `https://khalihan-admin.web.app`** (12 Oct 2026 se). Script
+pehli baar ye site khud banata hai (naam kisi aur ka nikla to
+`khalihan-admin-panel`), aur project ka purana pata
+(`https://<project>.web.app`) sirf naye pe bhej deta hai — `?demo` ke saath.
+Naya site banne ke baad script rukta hai: **Authentication → Settings →
+Authorized domains → Add domain → `khalihan-admin.web.app`** — ye kiye bina
+naye pate pe Google login nahi chalega (`auth/unauthorized-domain`).
+Agar naye pate pe "Firebase config not found" aaye: Hosting → `khalihan-admin`
+site → ⋮ → *Link to a Firebase web app* → "Khalihan Admin", phir dobara deploy.
+
+### Computer pe app (desktop icon)
+
+Har staff ke computer pe ek baar: Chrome ya Edge me panel kholo → address bar
+ke right me **Install** icon (screen pe teer) → *Install*. Ya panel me
+**⚙️ Settings → "Khalihan Admin as an app" → 💻 Install**. Iske baad desktop /
+Start menu / Dock pe navy-peela "ADMIN" wala Khalihan icon — click karte hi
+panel apni alag window me khulta hai. Taskbar/Dock pe right-click → *Pin*.
+Mac Safari: *File → Add to Dock…*. Firefox me install nahi hota — Chrome/Edge
+use karo. Hatana ho to app window ke ⋮ menu → *Uninstall*.
 
 ## C. Pehla owner (ek baar)
 

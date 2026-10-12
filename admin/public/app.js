@@ -13,7 +13,7 @@ import { chime, askDesktop, desktopAllowed, desktopNotify } from './live.js';
 import { dealNumbers, monthSummary, offerPlan } from './money.js';
 import { KENDRA_WORDS, createKendra } from './kendra.js';
 
-const ADMIN_VERSION = '1.3 · 12 Oct 2026';
+const ADMIN_VERSION = '1.4 · 12 Oct 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -259,6 +259,15 @@ const I18N = {
     set_desktop: 'Show a computer notification when this tab is in the background',
     set_desktop_blocked: 'The browser has blocked notifications for this site — allow them in the browser settings.',
     notif_title: 'New sell request',
+    install_btn: 'Install',
+    set_app: 'Khalihan Admin as an app',
+    set_app_d: 'An icon on the desktop, Dock or taskbar — one click opens the panel in its own window. Do it once on each computer.',
+    set_app_done: '✅ This panel is open as an app on this computer.',
+    set_app_menu: 'Chrome or Edge: click the install icon at the right end of the address bar (a screen with an arrow) → Install. Or Chrome menu ⋮ → "Cast, save and share" → "Install page as app…"; Edge menu ⋯ → Apps → "Install this site as an app". Then pin it to the taskbar or Dock.',
+    set_app_safari: 'Safari on a Mac: menu File → "Add to Dock…" → Add.',
+    set_app_ios: 'iPhone / iPad: the Share button → "Add to Home Screen".',
+    set_app_firefox: 'Firefox cannot install it as an app — open this link in Chrome or Edge and install from there.',
+    app_installed: 'Installed — open Khalihan Admin from the desktop, Dock or taskbar.',
   },
   hi: {
     loading: 'लोड हो रहा है…',
@@ -485,6 +494,15 @@ const I18N = {
     set_desktop: 'टैब पीछे हो तो कंप्यूटर पर सूचना दिखाएँ',
     set_desktop_blocked: 'ब्राउज़र ने इस साइट की सूचनाएँ बंद कर रखी हैं — ब्राउज़र की सेटिंग में चालू करें।',
     notif_title: 'नई बिक्री रिक्वेस्ट',
+    install_btn: 'इंस्टॉल',
+    set_app: 'Khalihan Admin ऐप की तरह',
+    set_app_d: 'डेस्कटॉप, Dock या टास्कबार पर एक आइकन — एक क्लिक में पैनल अपनी अलग विंडो में खुलेगा। हर कंप्यूटर पर एक बार करें।',
+    set_app_done: '✅ ये पैनल इस कंप्यूटर पर ऐप की तरह खुला है।',
+    set_app_menu: 'Chrome या Edge: एड्रेस बार के दाएँ कोने में इंस्टॉल वाला आइकन (स्क्रीन पर तीर) → Install। या Chrome मेन्यू ⋮ → "Cast, save and share" → "Install page as app…"; Edge मेन्यू ⋯ → Apps → "Install this site as an app"। फिर उसे टास्कबार या Dock पर पिन कर लें।',
+    set_app_safari: 'Mac पर Safari: मेन्यू File → "Add to Dock…" → Add।',
+    set_app_ios: 'iPhone / iPad: Share बटन → "Add to Home Screen"।',
+    set_app_firefox: 'Firefox में ऐप इंस्टॉल नहीं होता — ये लिंक Chrome या Edge में खोलकर वहाँ से इंस्टॉल करें।',
+    app_installed: 'इंस्टॉल हो गया — Khalihan Admin अब डेस्कटॉप, Dock या टास्कबार से खोलें।',
   },
 };
 
@@ -663,10 +681,50 @@ function openPanel(html) {
 }
 document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePanel(); });
 
+// ── install as an app on the computer (manifest.webmanifest) ───────────
+const installedAsApp = () =>
+  (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone === true;
+
+/** How this browser installs: 'prompt' (our button can do it), 'safari',
+ *  'ios', 'firefox', or 'menu' (Chrome / Edge, from their own menu). */
+function installWay() {
+  if (window.khalihanInstall) return 'prompt';
+  const ua = navigator.userAgent;
+  if (/iPhone|iPad|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1)) return 'ios';
+  if (/Firefox\//.test(ua)) return 'firefox';
+  if (/Safari\//.test(ua) && !/Chrome|Chromium|CriOS|Edg/.test(ua)) return 'safari';
+  return 'menu';
+}
+
+function showInstall() {
+  $('#install').hidden = !window.khalihanInstall || installedAsApp();
+}
+
+async function installApp() {
+  const ask = window.khalihanInstall;
+  if (!ask) return;
+  window.khalihanInstall = null; // the browser lets us ask only once
+  showInstall();
+  ask.prompt();
+  try { await ask.userChoice; } catch (_) { /* closed */ }
+  if (page === 'settings' && me) PAGES.settings();
+}
+
+window.addEventListener('khalihan-installable', () => {
+  showInstall();
+  if (page === 'settings' && me) PAGES.settings();
+});
+window.addEventListener('appinstalled', () => {
+  window.khalihanInstall = null;
+  showInstall();
+  toast(tr('app_installed'));
+});
+
 /** The words that live in index.html, in the chosen language. */
 function applyLanguage() {
   document.documentElement.lang = lang;
   $('#logout').textContent = tr('logout');
+  $('#install').textContent = `💻 ${tr('install_btn')}`;
 }
 
 // ── tabs ───────────────────────────────────────────────────────────────
@@ -1047,6 +1105,17 @@ const PAGES = {
     const p = db.project && db.project !== 'demo' ? encodeURIComponent(db.project) : '';
     const fb = (path) => `https://console.firebase.google.com/project/${p}/${path}`;
     const link = (href, label) => `<a class="btnlink" href="${href}" target="_blank" rel="noopener">${label} ↗</a>`;
+    const appCard = () => {
+      if (installedAsApp()) return `<div class="card"><div class="title">${tr('set_app')}</div><div class="sub">${tr('set_app_done')}</div></div>`;
+      const way = installWay();
+      return `<div class="card">
+        <div class="title">${tr('set_app')}</div>
+        <div class="sub">${tr('set_app_d')}</div>
+        ${way === 'prompt'
+          ? `<div class="actions"><button class="main" id="s-install">💻 ${tr('install_btn')}</button></div>`
+          : `<p class="small" style="margin:8px 0 0;line-height:1.5">${tr('set_app_' + way)}</p>`}
+      </div>`;
+    };
     setMain(`
       <h1>${tr('tab_settings')}</h1>
       <div class="card">
@@ -1072,6 +1141,7 @@ const PAGES = {
         <label class="check"><input type="checkbox" id="s-desktop" ${desktopAllowed() && store.get('desktop', 'off') === 'on' ? 'checked' : ''}> ${tr('set_desktop')}</label>
         <p class="muted small" id="s-desktop-note" hidden>${tr('set_desktop_blocked')}</p>
       </div>
+      ${appCard()}
       <div class="card">
         <div class="title">${tr('set_me')}</div>
         <div class="kv">
@@ -1118,6 +1188,7 @@ const PAGES = {
         toast(tr('set_saved'));
       };
     });
+    if ($('#s-install')) $('#s-install').onclick = installApp;
     $('#s-sound').onchange = (e) => {
       store.set('sound', e.target.checked ? 'on' : 'off');
       if (e.target.checked) chime(); // so one hears what it sounds like
@@ -1518,6 +1589,8 @@ async function start() {
     return;
   }
   $('#logout').onclick = () => { if (unwatch) unwatch(); unwatch = null; db.logout(); };
+  $('#install').onclick = installApp;
+  showInstall();
   db.onUser((user) => {
     if (!user) {
       me = null;

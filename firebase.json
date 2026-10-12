@@ -1,17 +1,38 @@
 {
-  "hosting": {
-    "public": "admin/public",
-    "ignore": ["**/.*", "**/README.md"],
-    "headers": [
-      {
-        "source": "**",
-        "headers": [
-          { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
-          { "key": "Cache-Control", "value": "no-cache" }
-        ]
-      }
-    ]
-  },
+  "hosting": [
+    {
+      "target": "admin",
+      "public": "admin/public",
+      "ignore": ["**/.*", "**/README.md"],
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+            { "key": "Cache-Control", "value": "no-cache" }
+          ]
+        },
+        {
+          "source": "/manifest.webmanifest",
+          "headers": [{ "key": "Content-Type", "value": "application/manifest+json" }]
+        }
+      ]
+    },
+    {
+      "target": "moved",
+      "public": "admin/moved",
+      "rewrites": [{ "source": "**", "destination": "/index.html" }],
+      "headers": [
+        {
+          "source": "**",
+          "headers": [
+            { "key": "X-Robots-Tag", "value": "noindex, nofollow" },
+            { "key": "Cache-Control", "value": "no-cache" }
+          ]
+        }
+      ]
+    }
+  ],
   "firestore": {
     "rules": "firestore.rules"
   }

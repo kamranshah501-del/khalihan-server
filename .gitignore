@@ -3,3 +3,6 @@
 .firebase/
 firebase-debug.log
 __pycache__/
+
+# Made by admin/deploy.sh (the old address forwarding to the new one)
+admin/moved/

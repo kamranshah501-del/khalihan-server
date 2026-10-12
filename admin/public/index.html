@@ -5,6 +5,25 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <title>Khalihan Admin</title>
+<!-- Installable as an app on the computer (Chrome / Edge: "Install"; Mac Safari: File → Add to Dock). -->
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#20405E">
+<meta name="application-name" content="Khalihan Admin">
+<meta name="apple-mobile-web-app-title" content="Khalihan Admin">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<script>
+  // Chrome / Edge say "this can be installed" once — keep it for the
+  // panel's own Install button (app.js), which may load a moment later.
+  window.addEventListener('beforeinstallprompt', function (e) {
+    e.preventDefault();
+    window.khalihanInstall = e;
+    window.dispatchEvent(new Event('khalihan-installable'));
+  });
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@400;600;800&display=swap" rel="stylesheet">
@@ -19,7 +38,10 @@
       <div class="who" id="who"></div>
     </div>
   </div>
-  <button id="logout" class="ghost" hidden>Log out</button>
+  <div class="topbtns">
+    <button id="install" class="ghost" hidden>💻 Install</button>
+    <button id="logout" class="ghost" hidden>Log out</button>
+  </div>
 </header>
 
 <nav id="tabs" class="tabs" hidden></nav>
