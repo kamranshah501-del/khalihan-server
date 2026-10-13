@@ -141,11 +141,41 @@ export async function connect() {
     async appConfig() {
       const snap = await getDoc(doc(db, 'config', 'app'));
       const data = snap.data() || {};
-      return { features: data.features || {}, launch_states: data.launch_states || [] };
+      return { features: data.features || {}, launch_states: data.launch_states || [], districts: data.districts || {} };
     },
     async setFeature(key, on) {
       await setDoc(doc(db, 'config', 'app'), { features: { [key]: on } }, { merge: true });
       log('feature', { key, on });
+    },
+    // States farmers can pick (Maharashtra always first).
+    async setLaunchStates(list) {
+      await setDoc(doc(db, 'config', 'app'), { launch_states: list }, { merge: true });
+      log('launch_states', { states: list.join(', ') });
+    },
+    // Districts where Khalihan's own business runs in one state. Merge keeps
+    // the other states' lists; the array itself is replaced.
+    async setDistricts(state, keys) {
+      await setDoc(doc(db, 'config', 'app'), { districts: { [state]: keys } }, { merge: true });
+      log('districts', { state, on: keys.length });
+    },
+    // The daily job's latest price feed per state: live/{slug} → {at, rows}.
+    async liveStatus(pairs) {
+      const out = {};
+      await Promise.all(pairs.map(async ([state, slug]) => {
+        try {
+          const snap = await getDoc(doc(db, 'live', slug));
+          const d = snap.data();
+          out[state] = d ? { at: toDate(d.at), rows: d.rows || 0 } : null;
+        } catch (e) { out[state] = null; }
+      }));
+      return out;
+    },
+    // District names in a state's latest price feed (owner only, on demand).
+    async liveDistricts(slug) {
+      const snap = await getDocs(collection(db, 'live', slug, 'parts'));
+      const names = new Set();
+      snap.docs.forEach((d) => (d.data().r || []).forEach((row) => { if (row && row.d) names.add(String(row.d)); }));
+      return [...names];
     },
 
     // ── suggestions ──

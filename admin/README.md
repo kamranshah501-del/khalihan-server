@@ -88,7 +88,7 @@ jodo (`staff` ya `owner`).
 
 App (v1.0.3 se) me **mobile OTP login** aur **"Khalihan को बेचें"** dono
 pehle se **band** hain. Chalu karne se pehle ye karo, phir panel ke
-**फ़ीचर स्विच** me dono ON:
+**स्विच** page pe dono ON (aur jis zile me kharidi hai wo zila ON):
 
 1. **Blaze plan** — console → "Upgrade" → Blaze. Phir Google Cloud → Billing →
    **Budgets & alerts** → budget (jaise ₹2,000/mahina), 50% / 90% / 100% pe email.
@@ -109,8 +109,8 @@ pehle se **band** hain. Chalu karne se pehle ye karo, phir panel ke
    fasalein) ki baat jodni hai; main likh dunga.
 7. **Play Console → App access** — "All or some functionality is restricted" →
    test number + code (step 4) do, taaki Google review login kar sake.
-8. Panel → **फ़ीचर स्विच** → "Khalihan को बेचें" ON, "मोबाइल OTP लॉग इन" ON →
-   **ऑफ़र** tab se pehla offer.
+8. Panel → **स्विच** → "Khalihan को बेचें" ON, "मोबाइल OTP लॉग इन" ON →
+   **राज्य और ज़िले** me us zile ka button ON → **ऑफ़र** tab se pehla offer.
 
 ---
 
@@ -123,11 +123,11 @@ pehle se **band** hain. Chalu karne se pehle ye karo, phir panel ke
 | Dashboard · डैशबोर्ड | **Live**: kisan ke bhejte hi nayi request aati hai (aawaz + upar "(2) Khalihan Admin"), kitne kisan phone ka intezaar kar rahe hain aur sabse purani kab se · saudon ke kadam (Nayi → … → Paisa diya) · pichhle 14 din ki requests ka chart · pehle phone tak ka ausat samay · **owner ko: is mahine ki kamai** (kitna kharida, kisanon ko kitna diya, hamara margin, prati quintal, fasal ke hisaab se) |
 | Sell requests · बिक्री रिक्वेस्ट | Har request: kisan, OTP wala number ✓, gaon, fasal, maal, bhav. 📞 phone / 💬 WhatsApp. Status: **नई → फ़ोन किया → सौदा पक्का → माल उठाया → पैसा दिया** (ya रद्द), note, pakka bhav, taul. Kisne kya kiya — itihaas. Kisan app ke "मेरी बिक्री" me wahi status dekhta hai. Nayi request pe "kab se intezaar" ka chip (30 min ke baad peela, 2 ghante ke baad laal). **Owner:** har saude me "🔒 Paisa" — processor ka bhav, bhada, hamali, baaki kharch → margin apne aap. |
 | Offers · ऑफ़र | **Owner:** naya offer banate waqt "🔒 Margin ka hisaab" — processor ka bhav aur prati quintal kharch daalo, prati quintal aur 100 quintal ki gaadi pe margin turant dikhta hai (2% se kam ho to chetavni). Chalu offers, बंद करें, naya offer — GitHub wale "Khalihan buy offers" jaisa hi (dono chalte hain) |
-| Kendra (12 Oct 2026) | **Khalihan Kendra** ki dukan — 5 hisse: **Orders** (kisan ne app se rakhwaya: नया → तैयार → उठा लिया, paisa kaise mila (nakad/UPI), bill no.; 📞/WhatsApp; nayi order pe aawaz; urea / DAP / potash ke **है / कम / नहीं** switch — app me turant; kam stock; **owner:** is mahine ki bikri, margin, Khalihan brand ka hissa) · **Products** (naam 3 bhasha, shreni, kaunsi fasal, brand ya "Khalihan brand", sarkari daam, har pack ka MRP / hamara daam / stock, label ki jaankari, licence; **owner:** "🔒 hum kitne me kharidte hain" → margin. **Keetnashak daal hi nahi sakte**) · **Home card** (bada ON/OFF, slides: ऑफ़र / आज का स्टॉक / नया माल / सूचना, tareekh se tareekh, ↑↓ kram, kitne second me badle, jhalak) · **Kendra** (naam, pata, phone, licence, khulne/band hone ka ghanta, hafte ki chhutti, chhuttiyan, kaunse zile, km, kitne din rakhein) · **Complaints**. Poori dukan **Feature switches → Khalihan Kendra** se chalu hoti hai (shuru me OFF). |
+| Kendra (12 Oct 2026) | **Khalihan Kendra** ki dukan — 5 hisse: **Orders** (kisan ne app se rakhwaya: नया → तैयार → उठा लिया, paisa kaise mila (nakad/UPI), bill no.; 📞/WhatsApp; nayi order pe aawaz; urea / DAP / potash ke **है / कम / नहीं** switch — app me turant; kam stock; **owner:** is mahine ki bikri, margin, Khalihan brand ka hissa) · **Products** (naam 3 bhasha, shreni, kaunsi fasal, brand ya "Khalihan brand", sarkari daam, har pack ka MRP / hamara daam / stock, label ki jaankari, licence; **owner:** "🔒 hum kitne me kharidte hain" → margin. **Keetnashak daal hi nahi sakte**) · **Home card** (bada ON/OFF, slides: ऑफ़र / आज का स्टॉक / नया माल / सूचना, tareekh se tareekh, ↑↓ kram, kitne second me badle, jhalak) · **Kendra** (naam, pata, phone, licence, khulne/band hone ka ghanta, hafte ki chhutti, chhuttiyan, kaunse zile, km, kitne din rakhein) · **Complaints**. Poori dukan **Switches → Services tab → Khalihan Kendra** se chalu hoti hai (shuru me OFF), aur sirf un zilon me dikhti hai jo **राज्य और ज़िले** me ON hain. |
 | Suggestions · सुझाव | "सुझाव दें" ke message, "हो गया ✓" |
 | Farmers · किसान | Khate wale kisan (aakhiri 200), number se dhoondo, unki requests |
 | Account deletions · खाता हटाना | Jinhone app se khata hataya: owner unki requests + data hatata hai (30 din ke andar); WhatsApp chat phone me khud hatao |
-| Feature switches · फ़ीचर स्विच (owner) | App ke features chalu/band — agli baar app khulne pe lagu, update ki zaroorat nahi (v1.0.3 se) |
+| Switches · स्विच (owner, 13 Oct 2026) | Har feature ka apna **section**: upar bada ON/OFF, andar usse jude chhote features. **📍 राज्य और ज़िले:** har state ka button + "aakhiri bhav kab aaya, kitni lines" + app me us state ka kitna data hai (Maharashtra: taiyar · MP: v1.0.5). State ON = wahan ke kisan state chun sakte hain, bhav/mausam/calendar/yojana poore state me. Andar **ज़िले** ke buttons = Khalihan ka apna dhandha (Khalihan ko becho, Kendra) sirf ON zilon me. **📈 मंडी भाव** (hamesha ON; andar: naksha, rukein ya bechein, bhav sunein, photo, bhav alert, subah ka message) · **🌦 मौसम** · **🌱 कैलेंडर** · **🏛 Services टैब** (andar: yojanayein, Kendra) · **🤝 Khalihan को बेचें** · **👤 OTP लॉग इन** · **💬 सुझाव**. "v1.0.4+" wala switch sirf v1.0.4 aur naye app me chalta hai. Badlav agli baar app khulne pe lagu. |
 | Team · टीम (owner) | Kaun panel khol sakta hai |
 | Change log · रिकॉर्ड (owner) | Har badlav: kab, kisne, kya |
 | ⚙️ Settings · सेटिंग्स (sab) | Bhasha (English / हिन्दी), samay (India / is computer ka), aapka khata, version, Firebase console · Firestore · Analytics · Crashlytics · Play Console ke link |

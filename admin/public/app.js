@@ -12,8 +12,9 @@ import { columnChart, wireTips, pipeline, table } from './charts.js';
 import { chime, askDesktop, desktopAllowed, desktopNotify } from './live.js';
 import { dealNumbers, monthSummary, offerPlan } from './money.js';
 import { KENDRA_WORDS, createKendra } from './kendra.js';
+import { SWITCH_WORDS, createSwitches } from './switches.js';
 
-const ADMIN_VERSION = '1.4 · 12 Oct 2026';
+const ADMIN_VERSION = '1.5 · 13 Oct 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -128,8 +129,6 @@ const I18N = {
     q_no_wa: 'No WhatsApp number — requests will come only here (Admin). OK?',
     q_save_offer: '{crop}: {price}/quintal, until {until} — save?',
     o_saved: 'Offer saved',
-    feat_intro: 'A switch changed here applies the next time the app opens — no app update needed. These switches are read from v1.0.3 on; older apps (v1.0.2 and before) don\'t read them.',
-    open_states: 'Open states',
     on: 'On',
     off: 'Off',
     fb_only_new: 'Only new',
@@ -268,6 +267,17 @@ const I18N = {
     set_app_ios: 'iPhone / iPad: the Share button → "Add to Home Screen".',
     set_app_firefox: 'Firefox cannot install it as an app — open this link in Chrome or Edge and install from there.',
     app_installed: 'Installed — open Khalihan Admin from the desktop, Dock or taskbar.',
+    help_home: 'Today at a glance — what is waiting for the team. Click any box to open its list.',
+    help_requests: 'Farmers who want to sell to Khalihan. Call the farmer, then move the request on: New → Called → Deal agreed → Picked up → Paid (or Cancelled). Every step keeps your name.',
+    help_offers: 'The price Khalihan pays for a crop, and where. Start, change or end an offer here; the app shows it at its next start — only where "Sell to Khalihan" is on.',
+    help_kendra: 'The Khalihan Kendra shop: orders (mark Ready, then Picked up), products and stock, the square card on Home, the shop\'s details, and complaints.',
+    help_feedback: 'Suggestions farmers send from the app. Read them, then tick Done. Good ideas go to the next update.',
+    help_farmers: 'Farmers who made an account (mobile login). Find one by mobile number.',
+    help_deletions: 'Farmers who deleted their account. Remove their sell requests and WhatsApp chat within 30 days, then mark Done.',
+    help_features: 'Owner only. Switch parts of the app on or off, open states, and choose the districts where Khalihan does business.',
+    help_team: 'Who can open this panel. Add a Gmail as staff (daily work) or owner (everything, including switches and money).',
+    help_audit: 'Every change made in this panel — who, what and when.',
+    help_settings: 'Language, time, alerts and the desktop app — for this computer only.',
   },
   hi: {
     loading: 'लोड हो रहा है…',
@@ -363,8 +373,6 @@ const I18N = {
     q_no_wa: 'WhatsApp नंबर नहीं है — रिक्वेस्ट सिर्फ़ यहाँ (Admin) आएँगी। ठीक है?',
     q_save_offer: '{crop}: {price}/क्विंटल, {until} तक — सेव करें?',
     o_saved: 'ऑफ़र सेव हो गया',
-    feat_intro: 'यहाँ बदला हुआ स्विच ऐप में अगली बार खुलने पर लागू होता है — ऐप अपडेट की ज़रूरत नहीं। ये स्विच v1.0.3 से पढ़े जाते हैं; पुराने ऐप (v1.0.2 और पहले) इन्हें नहीं पढ़ते।',
-    open_states: 'खुले राज्य',
     on: 'चालू',
     off: 'बंद',
     fb_only_new: 'सिर्फ़ नए',
@@ -503,12 +511,25 @@ const I18N = {
     set_app_ios: 'iPhone / iPad: Share बटन → "Add to Home Screen"।',
     set_app_firefox: 'Firefox में ऐप इंस्टॉल नहीं होता — ये लिंक Chrome या Edge में खोलकर वहाँ से इंस्टॉल करें।',
     app_installed: 'इंस्टॉल हो गया — Khalihan Admin अब डेस्कटॉप, Dock या टास्कबार से खोलें।',
+    help_home: 'आज का हाल — टीम के लिए क्या बाकी है। किसी भी डिब्बे पर क्लिक करके उसकी सूची खोलें।',
+    help_requests: 'जो किसान Khalihan को बेचना चाहते हैं। किसान को फ़ोन करें, फिर रिक्वेस्ट आगे बढ़ाएँ: नई → फ़ोन किया → सौदा पक्का → माल उठाया → पैसा दिया (या रद्द)। हर कदम पर आपका नाम सेव होता है।',
+    help_offers: 'Khalihan किसी फ़सल का क्या भाव देगा, और कहाँ। यहाँ ऑफ़र शुरू करें, बदलें या बंद करें; ऐप अगली बार खुलने पर दिखाएगा — सिर्फ़ वहाँ जहाँ "Khalihan को बेचें" चालू है।',
+    help_kendra: 'Khalihan Kendra दुकान: ऑर्डर (पहले "तैयार", फिर "उठा लिया"), माल और स्टॉक, Home का square card, दुकान की जानकारी और शिकायतें।',
+    help_feedback: 'किसानों के ऐप से भेजे सुझाव। पढ़ें, फिर "हो गया" पर टिक करें। अच्छे आइडिया अगले अपडेट में जाते हैं।',
+    help_farmers: 'जिन किसानों ने खाता बनाया (मोबाइल लॉग इन)। मोबाइल नंबर से ढूँढें।',
+    help_deletions: 'जिन किसानों ने खाता हटाया। उनकी बिक्री रिक्वेस्ट और WhatsApp चैट 30 दिन में हटाएँ, फिर "हो गया" करें।',
+    help_features: 'सिर्फ़ मालिक। ऐप के हिस्से चालू/बंद करें, राज्य खोलें, और वो ज़िले चुनें जहाँ Khalihan धंधा करता है।',
+    help_team: 'ये पैनल कौन खोल सकता है। Gmail को staff (रोज़ का काम) या owner (सब कुछ, स्विच और पैसा भी) बनाकर जोड़ें।',
+    help_audit: 'इस पैनल में हुआ हर बदलाव — किसने, क्या, कब।',
+    help_settings: 'भाषा, समय, सूचना और डेस्कटॉप ऐप — सिर्फ़ इस कंप्यूटर के लिए।',
   },
 };
 
 // Khalihan Kendra's words live in kendra.js.
 Object.assign(I18N.en, KENDRA_WORDS.en);
 Object.assign(I18N.hi, KENDRA_WORDS.hi);
+Object.assign(I18N.en, SWITCH_WORDS.en);
+Object.assign(I18N.hi, SWITCH_WORDS.hi);
 
 let lang = store.get('lang', 'en');
 if (!I18N[lang]) lang = 'en';
@@ -573,69 +594,11 @@ const CROPS = [
 ];
 const cropLabel = (c) => (lang === 'hi' ? `${c.hi} (${c.en})` : `${c.en} (${c.hi})`);
 
-// Switches the app reads from config/app → features (see app_config.dart).
-// `def` = what the app does while the server has said nothing — it must
-// match AppConfig.featureDefaults. Login and selling start OFF (owner,
-// 11 Oct 2026): they go on together when Khalihan starts buying in a district.
-const FEATURES = [
-  {
-    key: 'sell', def: false,
-    label: { en: 'Sell to Khalihan', hi: 'Khalihan को बेचें' },
-    d: {
-      en: 'The offer card and sell requests. Turn on only when a processor\'s price is confirmed in the district. Off = no offer is shown.',
-      hi: 'ऑफ़र कार्ड और बेचने की रिक्वेस्ट। तभी चालू करें जब ज़िले में प्रोसेसर का भाव पक्का हो। बंद = कोई ऑफ़र नहीं दिखेगा।',
-    },
-  },
-  {
-    key: 'login', def: false,
-    label: { en: 'Mobile OTP login', hi: 'मोबाइल OTP लॉग इन' },
-    d: {
-      en: '"My account" and an OTP before selling. Every SMS costs money (about ₹6) — before turning it on, finish part D of the admin README (Blaze, Phone sign-in, SHA).',
-      hi: '"मेरा खाता" और बेचने से पहले OTP। हर SMS का पैसा लगता है (लगभग ₹6) — चालू करने से पहले admin README का भाग D पूरा करें (Blaze, Phone sign-in, SHA)।',
-    },
-  },
-  {
-    key: 'calendar', def: true,
-    label: { en: 'Crop calendar', hi: 'फ़सल कैलेंडर' },
-    d: { en: 'The Home button, the crop page tile, "This week on the farm".', hi: 'Home का बटन, फ़सल पेज की टाइल, "इस हफ़्ते खेत में"।' },
-  },
-  {
-    key: 'schemes', def: true,
-    label: { en: 'Government schemes', hi: 'सरकारी योजनाएँ' },
-    d: { en: 'The schemes card in Services.', hi: 'Services में योजनाओं का कार्ड।' },
-  },
-  {
-    key: 'price_map', def: true,
-    label: { en: 'Price map', hi: 'भाव का नक्शा' },
-    d: { en: 'List | Map in "Where to sell?".', hi: '"कहाँ बेचें?" में सूची | नक्शा।' },
-  },
-  {
-    key: 'hold_sell', def: true,
-    label: { en: 'Sell now or wait?', hi: 'अभी बेचें या रुकें?' },
-    d: { en: 'What waiting costs, and the break-even price.', hi: 'रुकने का ख़र्च और ब्रेक-ईवन भाव।' },
-  },
-  {
-    key: 'day_voice', def: true,
-    label: { en: 'Hear today\'s prices', hi: 'आज का भाव सुनें' },
-    d: { en: 'The Home button and the "Listen" button on the morning message.', hi: 'Home का बटन और सुबह के मैसेज का "सुनें" बटन।' },
-  },
-  {
-    key: 'kendra', def: false,
-    label: { en: KENDRA_WORDS.en.feat_kendra, hi: KENDRA_WORDS.hi.feat_kendra },
-    d: { en: KENDRA_WORDS.en.feat_kendra_d, hi: KENDRA_WORDS.hi.feat_kendra_d },
-  },
-  {
-    key: 'share_picture', def: true,
-    label: { en: 'Send prices as a picture', hi: 'भाव की फ़ोटो भेजें' },
-    d: { en: 'Off = Share sends a plain WhatsApp message.', hi: 'बंद = Share सीधे WhatsApp मैसेज भेजेगा।' },
-  },
-];
-const featLabel = (f) => f.label[lang] || f.label.en;
-const featText = (f) => f.d[lang] || f.d.en;
 
 let db = null;
 let me = null;
 let kendraPages = null;
+let switchPages = null;
 let page = 'home';
 let cache = {};
 
@@ -653,7 +616,20 @@ function fail(e) {
   toast(msg.includes('permission') ? tr('err_permission') : tr('err_generic') + msg);
 }
 
-function setMain(html) { $('#main').innerHTML = html; }
+function setMain(html) {
+  const main = $('#main');
+  main.innerHTML = html;
+  // One line under the title: what this page is for (owner, 13 Oct 2026).
+  const help = me ? (I18N[lang]['help_' + page] || I18N.en['help_' + page]) : '';
+  const h1 = main.querySelector('h1');
+  if (help && h1) {
+    const p = document.createElement('p');
+    p.className = 'pagehelp';
+    p.textContent = help;
+    const row = h1.parentElement && h1.parentElement !== main && h1.parentElement.classList.contains('row') ? h1.parentElement : h1;
+    row.after(p);
+  }
+}
 
 /** The side panel slides back out, then goes. */
 function closePanel() {
@@ -974,27 +950,10 @@ const PAGES = {
     await kendraPages.page();
   },
 
+  // Owner: every feature, state and district switch, in sections.
   async features() {
-    const { features, launch_states } = await db.appConfig();
-    setMain(`
-      <h1>${tr('tab_features')}</h1>
-      <p class="muted">${tr('feat_intro')}</p>
-      ${FEATURES.map((f) => {
-        const on = typeof features[f.key] === 'boolean' ? features[f.key] : f.def;
-        return `<div class="card switch"><input type="checkbox" data-feature="${f.key}" ${on ? 'checked' : ''} aria-label="${esc(featLabel(f))}">
-          <div><div class="title">${esc(featLabel(f))}</div><div class="sub">${esc(featText(f))}</div></div></div>`;
-      }).join('')}
-      <h2>${tr('open_states')}</h2>
-      <p>${launch_states.length ? launch_states.map(esc).join(', ') : 'Maharashtra'}</p>`);
-    document.querySelectorAll('[data-feature]').forEach((box) => {
-      box.onchange = async () => {
-        const key = box.dataset.feature;
-        try {
-          await db.setFeature(key, box.checked);
-          toast(`${featLabel(FEATURES.find((f) => f.key === key))}: ${box.checked ? tr('on') : tr('off')}`);
-        } catch (e) { box.checked = !box.checked; fail(e); }
-      };
-    });
+    switchPages = switchPages || createSwitches({ tr, esc, toast, fail, setMain, db: () => db, lang: () => lang });
+    await switchPages.page();
   },
 
   async feedback() {

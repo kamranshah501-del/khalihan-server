@@ -19,7 +19,8 @@ export const KENDRA_WORDS = {
     k_card: 'Home card',
     k_info: 'Kendra',
     k_complaints: 'Complaints',
-    k_off_note: 'The Kendra switch is OFF — farmers don\'t see the shop yet. Owner: Feature switches → Khalihan Kendra.',
+    k_off_note: 'The Kendra switch is OFF — farmers don\'t see the shop yet. Owner: Switches → Services tab → Khalihan Kendra.',
+    k_nodist_note: 'No district is ON for business — farmers don\'t see the shop yet. Owner: Switches → States & districts → Districts.',
     k_new: 'New',
     k_ready: 'Ready',
     k_done: 'Picked up',
@@ -122,7 +123,8 @@ export const KENDRA_WORDS = {
     k_card: 'Home card',
     k_info: 'Kendra',
     k_complaints: 'शिकायतें',
-    k_off_note: 'Kendra स्विच बंद है — किसानों को अभी दुकान नहीं दिखती। Owner: फ़ीचर स्विच → Khalihan Kendra।',
+    k_off_note: 'Kendra स्विच बंद है — किसानों को अभी दुकान नहीं दिखती। Owner: स्विच → Services टैब → Khalihan Kendra।',
+    k_nodist_note: 'धंधे के लिए कोई ज़िला चालू नहीं — किसानों को अभी दुकान नहीं दिखती। Owner: स्विच → राज्य और ज़िले → ज़िले।',
     k_new: 'नया',
     k_ready: 'तैयार',
     k_done: 'उठा लिया',
@@ -248,11 +250,15 @@ export function createKendra(c) {
   const slotWord = (s) => tr({ m: 'k_m', a: 'k_a', e: 'k_e' }[s] || 'k_m');
 
   async function page() {
-    const features = await c.db().appConfig().then((x) => x.features).catch(() => ({}));
-    const on = features.kendra === true;
+    const cfg = await c.db().appConfig().catch(() => ({ features: {}, districts: {} }));
+    const features = cfg.features || {};
+    // In the app (v1.0.4+) the Kendra sits inside the Services tab, and only
+    // in districts switched ON for business.
+    const on = features.kendra === true && features.services !== false;
+    const anyDistrict = Object.values(cfg.districts || {}).some((list) => (list || []).length);
     const subs = [['orders', tr('k_orders')], ['products', tr('k_products')], ['card', tr('k_card')], ['info', tr('k_info')], ['complaints', tr('k_complaints')]];
     const head = `<h1>Khalihan Kendra</h1>
-      ${on ? '' : `<p class="note">${tr('k_off_note')}</p>`}
+      ${on ? (anyDistrict ? '' : `<p class="note">${tr('k_nodist_note')}</p>`) : `<p class="note">${tr('k_off_note')}</p>`}
       <div class="filters">${subs.map(([k, l]) => `<button data-ksub="${k}" class="${k === state.sub ? 'on' : ''}">${l}</button>`).join('')}</div>
       <div id="ksub"><p class="muted">${tr('loading')}</p></div>`;
     setMain(head);

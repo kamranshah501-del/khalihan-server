@@ -34,6 +34,8 @@ export async function connect() {
   const offerMoney = { 'makka-jalgaon-20261008': { rate: 2140, transport: 45, other: 15 } };
   let offers = { version: 3, list: [{ id: 'makka-jalgaon-20261008', crops: ['maize'], districts: ['jalgaon'], state: 'Maharashtra', price: 1980, pickup: 'doorstep', centre: '', payment_days: 0, until: day(-6).toISOString().slice(0, 10), whatsapp: '919800000000', moisture_max: 14, min_qty: 10, note: { hi: 'खेत से उठाएँगे' } }] };
   const features = { login: true, sell: true, kendra: true };
+  let launchStates = ['Maharashtra'];
+  const districts = { Maharashtra: ['jalgaon'] };
   const feedback = [
     { id: 'f1', text: 'Kapas ka bhav Pachora ka bhi dikhao', state: 'Maharashtra', district: 'Jalgaon', lang: 'hi', app: '1.0.2', at: day(0, 8) },
     { id: 'f2', text: 'खताची किंमत पाहिजे', state: 'Maharashtra', district: 'Jalgaon', lang: 'mr', app: '1.0.2', at: day(3), done: true },
@@ -106,8 +108,27 @@ export async function connect() {
       log('offers', { version: offers.version });
       return offers;
     },
-    async appConfig() { return { features: { ...features }, launch_states: ['Maharashtra'] }; },
+    async appConfig() { return { features: { ...features }, launch_states: [...launchStates], districts: JSON.parse(JSON.stringify(districts)) }; },
     async setFeature(key, on) { features[key] = on; log('feature', { key, on }); },
+    async setLaunchStates(list) { launchStates = [...list]; log('launch_states', { states: list.join(', ') }); },
+    async setDistricts(state, keys) { districts[state] = [...keys]; log('districts', { state, on: keys.length }); },
+    async liveStatus(pairs) {
+      const out = {};
+      const fresh = { Maharashtra: 4210, 'Madhya Pradesh': 3120, Gujarat: 2450, Karnataka: 1800, 'Uttar Pradesh': 5200, Rajasthan: 2100 };
+      for (const [state] of pairs) {
+        if (fresh[state]) out[state] = { at: new Date(Date.now() - 3 * 3600e3), rows: fresh[state] };
+        else if (state === 'Telangana') out[state] = { at: new Date(Date.now() - 18 * 86400e3), rows: 900 };
+        else out[state] = null;
+      }
+      return out;
+    },
+    async liveDistricts(slug) {
+      const lists = {
+        madhya_pradesh: ['Burhanpur', 'Khandwa', 'Khargone', 'Barwani', 'Dhar', 'Indore', 'Ujjain', 'Dewas', 'Bhopal', 'Sehore', 'Vidisha', 'Sagar', 'Jabalpur', 'Chhindwara', 'Betul', 'Harda', 'Hoshangabad', 'Ratlam', 'Mandsaur', 'Neemuch'],
+        gujarat: ['Surat', 'Tapi', 'Navsari', 'Vadodara(Baroda)', 'Rajkot', 'Ahmedabad', 'Junagarh', 'Amreli', 'Bhavnagar', 'Mehsana'],
+      };
+      return lists[slug] || [];
+    },
     async feedback() { return feedback.map((f) => ({ ...f })); },
     async feedbackDone(id, done) { const f = feedback.find((x) => x.id === id); if (f) f.done = done; },
     async usersCount() { return users.length; },
