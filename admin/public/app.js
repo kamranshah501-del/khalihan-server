@@ -14,7 +14,7 @@ import { dealNumbers, monthSummary, offerPlan } from './money.js';
 import { KENDRA_WORDS, createKendra } from './kendra.js';
 import { SWITCH_WORDS, createSwitches } from './switches.js';
 
-const ADMIN_VERSION = '1.6 · 14 Oct 2026';
+const ADMIN_VERSION = '1.7 · 14 Oct 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -268,13 +268,39 @@ const I18N = {
     set_app_firefox: 'Firefox cannot install it as an app — open this link in Chrome or Edge and install from there.',
     app_installed: 'Installed — open Khalihan Admin from the desktop, Dock or taskbar.',
     help_home: 'Today at a glance — what is waiting for the team. Click any box to open its list.',
+    search_ph: 'Search a farmer\'s number, name, village, order code…',
+    search_none: 'Nothing found.',
+    search_ph_short: 'Search…',
+    search_farmer: 'Farmer account with {p}',
+    menu: 'Menu',
+    n_live: '{n} live',
+    nav_owner: 'Owner',
+    open: 'Open', read: 'Read',
+    ago: '{t} ago',
+    a_offer: '+ New offer', a_kendra: 'Kendra',
+    g_waiting: '{n} waiting for a call', g_calm: 'no one is waiting for a call', g_orders: '{n} new Kendra order(s)',
+    k1: 'Waiting for a call', k1_none: 'All called ✓',
+    k2: 'Sell requests · 7 days', k2_sub: 'week before: {n}', vs_last: 'vs last week',
+    k3: 'Kendra orders · today', k3_sub: '{rs} reserved', k3_none: 'None yet today',
+    k4_sub: '{n} joined this week', k4_wait: 'First call in {t} on average',
+    need_h: 'Needs attention', need_none: 'Nothing waiting — all done ✓', need_none_d: 'New requests, Kendra orders and suggestions show up here.',
+    feed_h: 'Live activity', feed_none: 'Nothing in the last two weeks yet.',
+    t_call: 'Call {who} — {qty} q {crop}', t_waited: 'Waiting {t}',
+    t_more_waiting: '{n} more farmer(s) waiting', t_more_waiting_d: 'Oldest first in Sell requests',
+    t_k_new: '{n} new Kendra order(s) to prepare', t_k_ready: '{n} ready, waiting to be picked up', t_k_new_d: 'Mark them Ready when the bags are set aside',
+    t_stock: 'Kendra stock: {s}', t_stock_d: 'Farmers see this in the app — update it when stock comes', t_update: 'Update',
+    t_complaints: '{n} complaint(s) about Kendra orders', t_oldest_on: 'Oldest: {d}',
+    t_feedback: '{n} new suggestion(s)',
+    t_deletions: '{n} account deletion(s) to finish', t_del_d: 'Remove their sell requests and WhatsApp chat', t_del_left: '{d} days left to remove their data',
+    t_offers_end: '{n} offer(s) end in the next 2 days',
+    e_wants: 'wants to sell {qty} q {crop}', e_moved: 'moved {who}', e_order: 'reserved {code} · {rs}', e_feedback: 'suggested: “{t}”',
     help_requests: 'Farmers who want to sell to Khalihan. Call the farmer, then move the request on: New → Called → Deal agreed → Picked up → Paid (or Cancelled). Every step keeps your name.',
     help_offers: 'The price Khalihan pays for a crop, and where. Start, change or end an offer here; the app shows it at its next start — only where "Sell to Khalihan" is on.',
     help_kendra: 'The Khalihan Kendra shop: orders (mark Ready, then Picked up), products and stock, the square card on Home, the shop\'s details, and complaints.',
     help_feedback: 'Suggestions farmers send from the app. Read them, then tick Done. Good ideas go to the next update.',
     help_farmers: 'Farmers who made an account (mobile login). Find one by mobile number.',
     help_deletions: 'Farmers who deleted their account. Remove their sell requests and WhatsApp chat within 30 days, then mark Done.',
-    help_features: 'Owner only. Switch parts of the app on or off, open states, and choose the districts where Khalihan does business.',
+    help_features: 'Owner only. One section per feature: click it to switch it on or off and change its settings — states, where Khalihan buys, the Kendra\'s districts and location.',
     help_team: 'Who can open this panel. Add a Gmail as staff (daily work) or owner (everything, including switches and money).',
     help_audit: 'Every change made in this panel — who, what and when.',
     help_settings: 'Language, time, alerts and the desktop app — for this computer only.',
@@ -512,13 +538,39 @@ const I18N = {
     set_app_firefox: 'Firefox में ऐप इंस्टॉल नहीं होता — ये लिंक Chrome या Edge में खोलकर वहाँ से इंस्टॉल करें।',
     app_installed: 'इंस्टॉल हो गया — Khalihan Admin अब डेस्कटॉप, Dock या टास्कबार से खोलें।',
     help_home: 'आज का हाल — टीम के लिए क्या बाकी है। किसी भी डिब्बे पर क्लिक करके उसकी सूची खोलें।',
+    search_ph: 'किसान का नंबर, नाम, गाँव, ऑर्डर कोड खोजें…',
+    search_none: 'कुछ नहीं मिला।',
+    search_ph_short: 'खोजें…',
+    search_farmer: '{p} वाला किसान खाता',
+    menu: 'मेन्यू',
+    n_live: '{n} चालू',
+    nav_owner: 'मालिक',
+    open: 'खोलें', read: 'पढ़ें',
+    ago: '{t} पहले',
+    a_offer: '+ नया ऑफ़र', a_kendra: 'Kendra',
+    g_waiting: '{n} फ़ोन का इंतज़ार कर रहे हैं', g_calm: 'कोई फ़ोन का इंतज़ार नहीं कर रहा', g_orders: '{n} नए Kendra ऑर्डर',
+    k1: 'फ़ोन का इंतज़ार', k1_none: 'सबको फ़ोन हो गया ✓',
+    k2: 'बिक्री रिक्वेस्ट · 7 दिन', k2_sub: 'उससे पहले का हफ़्ता: {n}', vs_last: 'पिछले हफ़्ते से',
+    k3: 'Kendra ऑर्डर · आज', k3_sub: '{rs} का माल रखवाया', k3_none: 'आज अभी कोई नहीं',
+    k4_sub: 'इस हफ़्ते {n} जुड़े', k4_wait: 'पहला फ़ोन औसतन {t} में',
+    need_h: 'ध्यान दें', need_none: 'कुछ बाकी नहीं — सब हो गया ✓', need_none_d: 'नई रिक्वेस्ट, Kendra ऑर्डर और सुझाव यहाँ दिखेंगे।',
+    feed_h: 'अभी क्या हुआ', feed_none: 'पिछले दो हफ़्ते में अभी कुछ नहीं।',
+    t_call: '{who} को फ़ोन करें — {qty} क्विंटल {crop}', t_waited: '{t} से इंतज़ार',
+    t_more_waiting: '{n} और किसान इंतज़ार में', t_more_waiting_d: 'बिक्री रिक्वेस्ट में सबसे पुराने पहले',
+    t_k_new: '{n} नए Kendra ऑर्डर तैयार करने हैं', t_k_ready: '{n} तैयार, उठाने का इंतज़ार', t_k_new_d: 'बोरियाँ अलग रखते ही "तैयार" करें',
+    t_stock: 'Kendra स्टॉक: {s}', t_stock_d: 'किसान ऐप में यही देखते हैं — माल आते ही बदलें', t_update: 'बदलें',
+    t_complaints: 'Kendra ऑर्डर की {n} शिकायत', t_oldest_on: 'सबसे पुरानी: {d}',
+    t_feedback: '{n} नए सुझाव',
+    t_deletions: '{n} खाता हटाने का काम बाकी', t_del_d: 'उनकी बिक्री रिक्वेस्ट और WhatsApp चैट हटाएँ', t_del_left: 'डेटा हटाने के {d} दिन बचे',
+    t_offers_end: '{n} ऑफ़र अगले 2 दिन में ख़त्म',
+    e_wants: '{qty} क्विंटल {crop} बेचना चाहते हैं', e_moved: 'ने {who} की रिक्वेस्ट आगे बढ़ाई', e_order: 'ने {code} रखवाया · {rs}', e_feedback: 'का सुझाव: “{t}”',
     help_requests: 'जो किसान Khalihan को बेचना चाहते हैं। किसान को फ़ोन करें, फिर रिक्वेस्ट आगे बढ़ाएँ: नई → फ़ोन किया → सौदा पक्का → माल उठाया → पैसा दिया (या रद्द)। हर कदम पर आपका नाम सेव होता है।',
     help_offers: 'Khalihan किसी फ़सल का क्या भाव देगा, और कहाँ। यहाँ ऑफ़र शुरू करें, बदलें या बंद करें; ऐप अगली बार खुलने पर दिखाएगा — सिर्फ़ वहाँ जहाँ "Khalihan को बेचें" चालू है।',
     help_kendra: 'Khalihan Kendra दुकान: ऑर्डर (पहले "तैयार", फिर "उठा लिया"), माल और स्टॉक, Home का square card, दुकान की जानकारी और शिकायतें।',
     help_feedback: 'किसानों के ऐप से भेजे सुझाव। पढ़ें, फिर "हो गया" पर टिक करें। अच्छे आइडिया अगले अपडेट में जाते हैं।',
     help_farmers: 'जिन किसानों ने खाता बनाया (मोबाइल लॉग इन)। मोबाइल नंबर से ढूँढें।',
     help_deletions: 'जिन किसानों ने खाता हटाया। उनकी बिक्री रिक्वेस्ट और WhatsApp चैट 30 दिन में हटाएँ, फिर "हो गया" करें।',
-    help_features: 'सिर्फ़ मालिक। ऐप के हिस्से चालू/बंद करें, राज्य खोलें, और वो ज़िले चुनें जहाँ Khalihan धंधा करता है।',
+    help_features: 'सिर्फ़ मालिक। हर फ़ीचर का अपना हिस्सा: उस पर क्लिक करके चालू/बंद करें और सेटिंग बदलें — राज्य, Khalihan कहाँ ख़रीदे, Kendra के ज़िले और जगह।',
     help_team: 'ये पैनल कौन खोल सकता है। Gmail को staff (रोज़ का काम) या owner (सब कुछ, स्विच और पैसा भी) बनाकर जोड़ें।',
     help_audit: 'इस पैनल में हुआ हर बदलाव — किसने, क्या, कब।',
     help_settings: 'भाषा, समय, सूचना और डेस्कटॉप ऐप — सिर्फ़ इस कंप्यूटर के लिए।',
@@ -626,8 +678,9 @@ function setMain(html) {
     const p = document.createElement('p');
     p.className = 'pagehelp';
     p.textContent = help;
-    const row = h1.parentElement && h1.parentElement !== main && h1.parentElement.classList.contains('row') ? h1.parentElement : h1;
-    row.after(p);
+    let block = h1;
+    while (block.parentElement && block.parentElement !== main) block = block.parentElement;
+    block.after(p);
   }
 }
 
@@ -701,40 +754,177 @@ function applyLanguage() {
   document.documentElement.lang = lang;
   $('#logout').textContent = tr('logout');
   $('#install').textContent = `💻 ${tr('install_btn')}`;
+  $('#q').placeholder = window.innerWidth < 600 ? tr('search_ph_short') : tr('search_ph');
+  $('#q').setAttribute('aria-label', tr('search_ph'));
+  $('#langbtn').textContent = lang === 'en' ? 'हिं' : 'EN';
+  $('#langbtn').title = lang === 'en' ? 'हिन्दी' : 'English';
+  $('#livetext').textContent = tr('live');
+  $('#menu').setAttribute('aria-label', tr('menu'));
 }
 
-// ── tabs ───────────────────────────────────────────────────────────────
+// ── the side menu ──────────────────────────────────────────────────────
+const ICON_PATHS = {
+  home: 'M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z',
+  requests: 'M4 7h16M4 12h16M4 17h10',
+  offers: 'M3 12V5a2 2 0 0 1 2-2h7l9 9-9 9zM8 6.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3',
+  kendra: 'M4 9h16l-1.5-5h-13zM5 9v11h14V9M9.5 20v-6h5v6',
+  feedback: 'M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z',
+  farmers: 'M9 4.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7M2.5 20a6.5 6.5 0 0 1 13 0M16 4a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6',
+  deletions: 'M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3',
+  features: 'M8 7h8a5 5 0 0 1 0 10H8A5 5 0 0 1 8 7zM16 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6',
+  team: 'M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8M4 21a8 8 0 0 1 16 0',
+  audit: 'M12 8v4l3 2M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18',
+  settings: 'M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12a7 7 0 0 0 .1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6A7 7 0 0 0 19 12z',
+};
+const icon = (k) => `<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ICON_PATHS[k] || ''}"/></svg>`;
+
 function tabs() {
   const owner = me && me.role === 'owner';
-  const list = [
-    ['home', tr('tab_home')],
-    ['requests', tr('tab_requests')],
-    ['offers', tr('tab_offers')],
-    ['kendra', tr('tab_kendra')],
-    ['feedback', tr('tab_feedback')],
-    ['farmers', tr('tab_farmers')],
-    ['deletions', tr('tab_deletions')],
-    ...(owner ? [['features', tr('tab_features')], ['team', tr('tab_team')], ['audit', tr('tab_audit')]] : []),
-    ['settings', `⚙️ ${tr('tab_settings')}`],
-  ];
+  const fresh = (cache.requests || []).filter((r) => r.status === 'new').length;
+  const counts = {
+    requests: fresh ? [fresh, 'red'] : null,
+    kendra: cache.kendraNew ? [cache.kendraNew, 'red'] : null,
+    feedback: cache.fbOpen ? [cache.fbOpen, 'amber'] : null,
+    deletions: cache.delOpen ? [cache.delOpen, 'amber'] : null,
+    offers: cache.liveOffers ? [tr('n_live', { n: cache.liveOffers }), 'grey'] : null,
+  };
+  const item = (k, label) => `<button data-tab="${k}" class="${k === page ? 'on' : ''}" ${k === page ? 'aria-current="page"' : ''}>
+      ${icon(k)}<span class="lbl">${label}</span>${counts[k] ? `<span class="badge ${counts[k][1]}">${counts[k][0]}</span>` : ''}</button>`;
   const nav = $('#tabs');
   nav.hidden = false;
-  const fresh = (cache.requests || []).filter((r) => r.status === 'new').length;
-  nav.innerHTML = list.map(([k, l]) =>
-    `<button data-tab="${k}" class="${k === page ? 'on' : ''}">${l}${k === 'requests' && fresh ? `<span class="badge">${fresh}</span>` : ''}</button>`).join('');
-  nav.querySelectorAll('button').forEach((b) => { b.onclick = () => go(b.dataset.tab); });
+  nav.innerHTML = `
+    ${item('home', tr('tab_home'))}
+    ${item('requests', tr('tab_requests'))}
+    ${item('offers', tr('tab_offers'))}
+    ${item('kendra', tr('tab_kendra'))}
+    ${item('feedback', tr('tab_feedback'))}
+    ${item('farmers', tr('tab_farmers'))}
+    ${item('deletions', tr('tab_deletions'))}
+    ${owner ? `<div class="navh">${tr('nav_owner')}</div>${item('features', tr('tab_features'))}${item('team', tr('tab_team'))}${item('audit', tr('tab_audit'))}` : ''}
+    <div class="navgap"></div>
+    ${item('settings', tr('tab_settings'))}
+    <div class="navfoot">Khalihan Admin ${ADMIN_VERSION.split(' ')[0]}</div>`;
+  nav.querySelectorAll('button[data-tab]').forEach((b) => { b.onclick = () => { closeNav(); go(b.dataset.tab); }; });
   // The browser tab shows how many are waiting: "(2) Khalihan Admin".
   document.title = fresh ? `(${fresh}) Khalihan Admin` : 'Khalihan Admin';
-  // Keep the open tab in view on a narrow screen.
-  const on = nav.querySelector('button.on');
-  if (on && on.scrollIntoView) on.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+  $('#menu').hidden = false;
+  $('#search').hidden = false;
+  $('#langbtn').hidden = false;
+  $('#livebadge').hidden = cache.live === false;
 }
+
+// Phones: the side menu slides in over the page.
+function openNav() {
+  $('#tabs').classList.add('open');
+  $('#navscrim').hidden = false;
+  $('#menu').setAttribute('aria-expanded', 'true');
+}
+function closeNav() {
+  $('#tabs').classList.remove('open');
+  $('#navscrim').hidden = true;
+  $('#menu').setAttribute('aria-expanded', 'false');
+}
+
+// ── the top bar: account menu, language, search ────────────────────────
+function syncMe() {
+  const signedIn = !$('#logout').hidden;
+  const av = $('#avatar');
+  av.hidden = !signedIn;
+  const who = (me && (me.name || me.email)) || $('#who').textContent || '';
+  av.textContent = who ? who.trim().charAt(0).toUpperCase() : '•';
+  if (!signedIn) $('#memenu').hidden = true;
+}
+
+let searchData = null;
+async function searchIndex() {
+  if (searchData && Date.now() - searchData.at < 60e3) return searchData;
+  const [requests, orders] = await Promise.all([
+    db.sellRequests().catch(() => []),
+    db.kendraOrders ? db.kendraOrders().catch(() => []) : Promise.resolve([]),
+  ]);
+  searchData = { at: Date.now(), requests, orders };
+  return searchData;
+}
+
+async function runSearch(q) {
+  const box = $('#results');
+  const t = q.trim().toLowerCase();
+  const digits = t.replace(/\D/g, '');
+  if (t.length < 2) { box.hidden = true; return; }
+  const d = await searchIndex();
+  if ($('#q').value.trim().toLowerCase() !== t) return; // typed on meanwhile
+  const has = (v) => String(v || '').toLowerCase().includes(t);
+  const phone = (p) => digits.length >= 4 && String(p || '').replace(/\D/g, '').includes(digits);
+  const reqs = d.requests.filter((r) => phone(r.phone) || has(r.name) || has(r.village) || has(r.crop)).slice(0, 6);
+  const ords = d.orders.filter((o) => phone(o.phone) || has(o.name) || has(o.village) || has(o.code)).slice(0, 5);
+  const group = (title, html) => (html ? `<div class="rgroup">${title}</div>${html}` : '');
+  const reqHtml = reqs.map((r, i) => `<button class="ritem" data-r="${i}">
+      <span class="chip ${(STATUS[r.status] || STATUS.new).cls}">${statusLabel(r.status)}</span>
+      <span class="grow"><b>${esc(r.name || phoneShow(r.phone))}</b> · ${esc(r.crop)} ${esc(r.qty)} q<br><span class="muted small">${esc(r.village || '')} · ${when(r.at)}</span></span></button>`).join('');
+  const ordHtml = ords.map((o) => `<button class="ritem" data-k="1">
+      <span class="chip">${esc(o.code || '')}</span>
+      <span class="grow"><b>${esc(o.name || phoneShow(o.phone))}</b> · ${rs(o.total)}<br><span class="muted small">${esc(o.village || '')} · ${when(o.at)}</span></span></button>`).join('');
+  const farmer = digits.length >= 10 ? `<button class="ritem" data-f="${esc(digits.slice(-10))}">${icon('farmers')}<span class="grow">${tr('search_farmer', { p: phoneShow(digits.slice(-10)) })}</span></button>` : '';
+  box.innerHTML = group(tr('tab_requests'), reqHtml) + group('Khalihan Kendra', ordHtml) + group(tr('tab_farmers'), farmer)
+    || `<div class="rnone">${tr('search_none')}</div>`;
+  box.hidden = false;
+  box.querySelectorAll('[data-r]').forEach((b) => { b.onclick = () => { closeSearch(); showRequest(reqs[Number(b.dataset.r)]); }; });
+  box.querySelectorAll('[data-k]').forEach((b) => { b.onclick = () => { closeSearch(); go('kendra'); }; });
+  box.querySelectorAll('[data-f]').forEach((b) => {
+    b.onclick = async () => {
+      closeSearch();
+      await go('farmers');
+      const input = $('#u-phone');
+      if (input) { input.value = b.dataset.f; const find = $('#u-find'); if (find) find.click(); }
+    };
+  });
+}
+function closeSearch() { $('#results').hidden = true; $('#q').value = ''; $('#q').blur(); }
+
+function wireTop() {
+  $('#menu').onclick = () => ($('#tabs').classList.contains('open') ? closeNav() : openNav());
+  $('#navscrim').onclick = closeNav;
+  $('#avatar').onclick = (e) => {
+    e.stopPropagation();
+    const m = $('#memenu');
+    m.hidden = !m.hidden;
+    $('#avatar').setAttribute('aria-expanded', String(!m.hidden));
+  };
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('.me')) $('#memenu').hidden = true;
+    if (!e.target.closest('#search')) $('#results').hidden = true;
+  });
+  $('#langbtn').onclick = () => {
+    lang = lang === 'en' ? 'hi' : 'en';
+    store.set('lang', lang);
+    applyLanguage();
+    $('#who').textContent = whoLine();
+    tabs();
+    go(page);
+  };
+  let timer = null;
+  $('#q').oninput = () => { clearTimeout(timer); timer = setTimeout(() => runSearch($('#q').value).catch(fail), 220); };
+  $('#search').onsubmit = (e) => { e.preventDefault(); runSearch($('#q').value).catch(fail); };
+  document.addEventListener('keydown', (e) => {
+    const typing = /^(INPUT|TEXTAREA|SELECT)$/.test((document.activeElement || {}).tagName || '');
+    if (e.key === '/' && !typing && !$('#search').hidden) { e.preventDefault(); $('#q').focus(); }
+    if (e.key === 'Escape') { $('#results').hidden = true; $('#memenu').hidden = true; closeNav(); }
+  });
+  // Whoever can log out has an account menu.
+  new MutationObserver(syncMe).observe($('#logout'), { attributes: true, attributeFilter: ['hidden'] });
+}
+
+/** Grey blocks in the shape of a page while its data loads. */
+const skeleton = () => `<div class="skel" aria-hidden="true">
+  <div class="sk sk-h"></div><div class="sk sk-l"></div>
+  <div class="sk-row"><div class="sk sk-c"></div><div class="sk sk-c"></div><div class="sk sk-c"></div><div class="sk sk-c"></div></div>
+  <div class="sk sk-b"></div></div><p class="sr-only">${tr('loading')}</p>`;
 
 async function go(next) {
   page = next;
   closePanel();
   tabs();
-  setMain(`<p class="muted">${tr('loading')}</p>`);
+  setMain(skeleton());
   try {
     await (PAGES[next] || PAGES.home)();
   } catch (e) {
@@ -747,35 +937,59 @@ async function go(next) {
 const PAGES = {
   async home() {
     const owner = me.role === 'owner';
-    const [requests, feedback, deletions, offers, users, money] = await Promise.all([
+    const none = (v) => Promise.resolve(v);
+    const [requests, feedback, deletions, offers, users, money, orders, complaints, kinfo, people] = await Promise.all([
       db.sellRequests(), db.feedback(), db.deletions(), db.offers(), db.usersCount().catch(() => null),
-      owner ? db.allDealMoney().catch(() => ({})) : Promise.resolve({}),
+      owner ? db.allDealMoney().catch(() => ({})) : none({}),
+      db.kendraOrders ? db.kendraOrders().catch(() => []) : none([]),
+      db.kendraComplaints ? db.kendraComplaints().catch(() => []) : none([]),
+      db.kendraInfo ? db.kendraInfo().catch(() => ({})) : none({}),
+      db.users ? db.users().catch(() => []) : none([]),
     ]);
-    cache.requests = requests;
-    cache.money = money;
-    tabs();
     const now = Date.now();
+    const day = 864e5;
     const count = (st) => requests.filter((r) => r.status === st).length;
     const waiting = requests.filter((r) => r.status === 'new' && r.at instanceof Date).sort((x, y) => x.at - y.at);
     const oldest = waiting[0];
-    const liveOffers = offers.list.filter((o) => String(o.until || '') >= istToday()).length;
-    const openFeedback = feedback.filter((f) => !f.done).length;
-    const openDel = deletions.filter((d) => !d.done).length;
+    const liveOffers = offers.list.filter((o) => String(o.until || '') >= istToday());
+    const openFeedback = feedback.filter((f) => !f.done);
+    const openDel = deletions.filter((d) => !d.done);
+    const kNew = orders.filter((o) => o.status === 'new');
+    const kReady = orders.filter((o) => o.status === 'ready');
+    const openComplaints = complaints.filter((x) => !x.done);
+    cache.requests = requests;
+    cache.money = money;
+    cache.kendraNew = kNew.length;
+    cache.fbOpen = openFeedback.length;
+    cache.delOpen = openDel.length;
+    cache.liveOffers = liveOffers.length;
+    tabs();
 
-    // The last 14 days, by the panel's clock.
+    // 14 days, by the panel's clock: requests (chart, sparkline) and Kendra orders.
     const points = [];
+    const reqDays = [];
+    const ordDays = [];
     for (let i = 13; i >= 0; i--) {
-      const d = new Date(now - i * 864e5);
+      const d = new Date(now - i * day);
       const those = requests.filter((r) => r.at instanceof Date && sameDay(r.at, d));
       const q = those.reduce((sum, r) => sum + (Number(r.qty) || 0), 0);
       const p = parts(d);
       const label = `${p.day} ${MONTHS[p.m]}`;
       points.push({ label: String(p.day), value: those.length, tip: tr('days_tip', { d: label, n: those.length, q }), full: label, q });
+      reqDays.push(those.length);
+      ordDays.push(orders.filter((o) => o.at instanceof Date && sameDay(o.at, d) && o.status !== 'cancelled').length);
     }
+    const inDays = (list, from, to) => list.filter((r) => r.at instanceof Date && now - r.at >= from * day && now - r.at < to * day).length;
+    const req7 = inDays(requests, 0, 7);
+    const prev7 = inDays(requests, 7, 14);
+    const change = prev7 ? Math.round(((req7 - prev7) / prev7) * 100) : null;
+    const todayOrders = orders.filter((o) => o.at instanceof Date && sameDay(o.at, new Date(now)) && o.status !== 'cancelled');
+    const reserved = todayOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
+    const joined7 = people.length && people.length < 200 ? people.filter((u) => u.created instanceof Date && now - u.created < 7 * day).length : null;
 
     // How long farmers wait for the first call (last 30 days).
     const waits = requests
-      .filter((r) => r.at instanceof Date && now - r.at < 30 * 864e5)
+      .filter((r) => r.at instanceof Date && now - r.at < 30 * day)
       .map((r) => {
         const first = (r.history || []).map((h) => toDate(h.at)).filter(Boolean).sort((x, y) => x - y)[0];
         return first ? first - r.at : null;
@@ -788,62 +1002,116 @@ const PAGES = {
     cache.dashSeen = true;
     const n = waiting.length;
 
-    const small = (value, label, cls, to) => `<button class="mini ${cls || ''}" ${to ? `data-go="${to}"` : ''}>
-      <span class="mini-n">${value}</span><span class="mini-l">${label}</span></button>`;
+    // ── what needs doing ──
+    const tasks = [];
+    if (oldest) {
+      tasks.push({ icon: '📞', tone: 'red', title: tr('t_call', { who: esc(oldest.name || phoneShow(oldest.phone)), qty: esc(oldest.qty), crop: esc(oldest.crop) }),
+        sub: [tr('t_waited', { t: dur(now - oldest.at) }), esc(oldest.village || '')].filter(Boolean).join(' · '),
+        actions: `<a class="btn pri" href="tel:${esc(phoneTen(oldest.phone) ? '+91' + phoneTen(oldest.phone) : oldest.phone)}">${tr('call')}</a><button class="btn sec" id="open-oldest">${tr('open')}</button>` });
+      if (n > 1) tasks.push({ icon: '⏳', tone: 'amber', title: tr('t_more_waiting', { n: n - 1 }), sub: tr('t_more_waiting_d'), actions: `<button class="btn sec" data-filter="new">${tr('open')}</button>` });
+    }
+    if (kNew.length) tasks.push({ icon: '🧾', tone: 'sky', title: tr('t_k_new', { n: kNew.length }), sub: kReady.length ? tr('t_k_ready', { n: kReady.length }) : tr('t_k_new_d'), actions: `<button class="btn sec" data-go="kendra">${tr('open')}</button>` });
+    const stock = kinfo.stock || {};
+    const lowStock = ['urea', 'dap', 'mop'].filter((k) => stock[k] === 'low' || stock[k] === 'out');
+    if (lowStock.length) tasks.push({ icon: '📦', tone: 'amber', title: tr('t_stock', { s: lowStock.map((k) => `${tr('k_' + k)} ${tr('k_' + stock[k])}`).join(', ') }), sub: tr('t_stock_d'), actions: `<button class="btn sec" data-go="kendra">${tr('t_update')}</button>` });
+    if (openComplaints.length) tasks.push({ icon: '⚠️', tone: 'red', title: tr('t_complaints', { n: openComplaints.length }), sub: tr('t_oldest_on', { d: when(openComplaints[openComplaints.length - 1].at) }), actions: `<button class="btn sec" data-go="kendra">${tr('read')}</button>` });
+    if (openFeedback.length) tasks.push({ icon: '💬', tone: 'amber', title: tr('t_feedback', { n: openFeedback.length }), sub: `“${esc(String(openFeedback[0].text || '').slice(0, 70))}”`, actions: `<button class="btn sec" data-go="feedback">${tr('read')}</button>` });
+    if (openDel.length) {
+      const first = openDel.filter((d) => d.at instanceof Date).sort((x, y) => x.at - y.at)[0];
+      const left = first ? Math.max(0, 30 - Math.floor((now - first.at) / day)) : null;
+      tasks.push({ icon: '🗑️', tone: 'red', title: tr('t_deletions', { n: openDel.length }), sub: left == null ? tr('t_del_d') : tr('t_del_left', { d: left }), actions: `<button class="btn sec" data-go="deletions">${tr('open')}</button>` });
+    }
+    const ending = liveOffers.filter((o) => { const u = String(o.until || ''); return u && u <= new Date(now + 2 * day + 5.5 * 3600e3).toISOString().slice(0, 10); });
+    if (ending.length) tasks.push({ icon: '🏷️', tone: 'sky', title: tr('t_offers_end', { n: ending.length }), sub: ending.map((o) => esc(o.crop || '')).join(', '), actions: `<button class="btn sec" data-go="offers">${tr('open')}</button>` });
+
+    // ── what just happened ──
+    const person = (email) => { const u = String(email || '').split('@')[0]; return u ? u.charAt(0).toUpperCase() + u.slice(1) : '—'; };
+    const events = [];
+    requests.slice(0, 30).forEach((r) => {
+      if (r.at instanceof Date) events.push({ at: r.at, who: r.name || phoneShow(r.phone), html: tr('e_wants', { qty: esc(r.qty), crop: esc(r.crop) }), chip: 'new' });
+      (r.history || []).forEach((h) => { const at = toDate(h.at); if (at) events.push({ at, who: person(h.by), html: tr('e_moved', { who: esc(r.name || phoneShow(r.phone)) }), chip: h.status }); });
+    });
+    orders.slice(0, 20).forEach((o) => {
+      if (o.at instanceof Date) events.push({ at: o.at, who: o.name || phoneShow(o.phone), html: tr('e_order', { code: esc(o.code || ''), rs: rs(o.total) }), tag: 'Kendra' });
+    });
+    feedback.slice(0, 10).forEach((f) => { if (f.at instanceof Date) events.push({ at: f.at, who: '💡', html: tr('e_feedback', { t: esc(String(f.text || '').slice(0, 60)) }) }); });
+    const feed = events.filter((e) => now - e.at < 14 * day).sort((x, y) => y.at - x.at).slice(0, 8);
+    const hue = (t) => { let h = 0; for (const ch of String(t)) h = (h * 31 + ch.charCodeAt(0)) % 360; return h; };
+    const initials = (t) => {
+      if (/^\p{Extended_Pictographic}/u.test(t)) return t;
+      const letters = String(t).replace(/[^\p{L}\s]/gu, '').split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('');
+      return letters || String(t).replace(/\D/g, '').slice(-2) || '•'; // a phone number: its last two digits
+    };
+
+    const kpi = (o) => `<button class="kpi ${o.cls || ''}" ${o.go ? `data-go="${o.go}"` : ''} ${o.id ? `id="${o.id}"` : ''}>
+        <span class="kl">${o.label}</span>
+        <span class="kv"${o.count != null && firstVisit ? ` data-count="${o.count}"` : ''}>${o.count != null && firstVisit ? 0 : o.value}</span>
+        <span class="kd ${o.subCls || ''}">${o.sub || '&nbsp;'}</span>
+        ${o.spark ? sparkline(o.spark, o.color) : ''}</button>`;
+
+    const greet = [
+      n ? tr('g_waiting', { n }) : tr('g_calm'),
+      kNew.length ? tr('g_orders', { n: kNew.length }) : '',
+    ].filter(Boolean).join(' · ');
 
     setMain(`
       ${db.demo ? `<p class="note">${tr('demo_note')}</p>` : ''}
-      <section class="desk">
-        <div class="desk-id">
-          ${markSVG(78, { animate: firstVisit })}
-          <div>
-            <h1>${tr('hello', { n: me.name ? ' ' + esc(me.name) : '' })}</h1>
-            <p class="live-line"><span class="live-dot ${cache.live === false ? 'off' : ''}"></span>${cache.live === false ? tr('live_off') : `${tr('live')} · ${tr('live_title')}`}</p>
-          </div>
+      <div class="ph">
+        <div class="ph-t"><h1>${tr('tab_home')}</h1><span class="ph-date">${esc(todayLabel())}</span></div>
+        <div class="ph-acts">
+          <button class="btn sec" data-go="kendra">${tr('a_kendra')}</button>
+          <button class="btn pri" data-go="offers">${tr('a_offer')}</button>
         </div>
-        <div class="desk-wait ${n ? 'has' : ''}">
-          ${n ? `
-            <div class="hero"><span class="hero-n" data-count="${n}">${firstVisit ? 0 : n}</span>
-              <span class="hero-l">${n === 1 ? tr('waiting_one') : tr('waiting_many')}</span></div>
-            <p class="hero-s ${now - oldest.at > 2 * 3600e3 ? 'hot' : ''}">${tr('oldest', { t: dur(now - oldest.at) })}</p>
-            <button class="main" id="open-oldest">${tr('open_oldest')}</button>`
-          : `<div class="hero calm"><span class="hero-l">${tr('waiting_none')}</span></div>
-            <p class="hero-s">${tr('waiting_none_d')}</p>`}
-        </div>
+      </div>
+      <p class="hello">${markSVG(22, { animate: firstVisit })}<span>${tr('hello', { n: me.name ? ' ' + esc(me.name) : '' })} — ${greet}</span></p>
+
+      <section class="kpis">
+        ${kpi({ label: `<span class="dot ${n ? 'red' : 'green'}"></span>${tr('k1')}`, value: n, count: n, sub: oldest ? tr('t_waited', { t: dur(now - oldest.at) }) : tr('k1_none'), subCls: n ? (now - oldest.at > 2 * 3600e3 ? 'down' : 'warnt') : 'up', cls: n ? 'alert' : '', id: n ? 'kpi-wait' : '', go: n ? '' : 'requests', spark: reqDays, color: n ? '#d9534f' : '#2f7a00' })}
+        ${kpi({ label: tr('k2'), value: req7, count: req7, sub: change == null ? tr('k2_sub', { n: prev7 }) : `${change >= 0 ? '▲' : '▼'} ${Math.abs(change)}% ${tr('vs_last')}`, subCls: change == null ? '' : change >= 0 ? 'up' : 'down', go: 'requests', spark: reqDays, color: '#20405E' })}
+        ${kpi({ label: tr('k3'), value: todayOrders.length, count: todayOrders.length, sub: todayOrders.length ? tr('k3_sub', { rs: rs(reserved) }) : tr('k3_none'), subCls: todayOrders.length ? 'up' : '', go: 'kendra', spark: ordDays, color: '#2f7a00' })}
+        ${kpi({ label: tr('s_users'), value: users == null ? '—' : users, count: users == null ? null : users, sub: joined7 ? `▲ ${tr('k4_sub', { n: joined7 })}` : (avgWait == null ? '' : tr('k4_wait', { t: dur(avgWait) })), subCls: joined7 ? 'up' : '', go: 'farmers', spark: null })}
       </section>
 
       <div class="dash">
         <section class="card">
-          <h2>${tr('pipeline_h')}</h2>
-          ${pipeline(['new', 'called', 'agreed', 'picked', 'paid'].map((k) => ({ key: k, label: statusLabel(k), value: count(k) })))}
-          <p class="muted small">${tr('pipeline_d', { n: count('cancelled') })}</p>
+          <div class="ch"><h2>${tr('need_h')}</h2><span class="pill ${tasks.length ? 'warn' : 'on'}">${tasks.length}</span></div>
+          ${tasks.length ? `<div class="todo">${tasks.map((t) => `<div class="ti">
+              <span class="tic ${t.tone}" aria-hidden="true">${t.icon}</span>
+              <div class="grow"><div class="tt">${t.title}</div><div class="ts">${t.sub}</div></div>
+              <div class="tact">${t.actions}</div></div>`).join('')}</div>`
+            : `<div class="calm"><div class="calm-i">✅</div><b>${tr('need_none')}</b><p class="muted small">${tr('need_none_d')}</p></div>`}
         </section>
         <section class="card">
-          <h2>${tr('days_h')}</h2>
+          <div class="ch"><h2>${tr('feed_h')}</h2><span class="livebadge in ${cache.live === false ? 'off' : ''}"><i></i>${cache.live === false ? tr('live_off') : tr('live')}</span></div>
+          ${feed.length ? `<div class="feed">${feed.map((e) => `<div class="fi">
+              <span class="fa" style="background:hsl(${hue(e.who)} 45% 42%)">${esc(initials(e.who))}</span>
+              <div class="grow"><div class="fx"><b>${esc(e.who)}</b> ${e.html} ${e.chip ? `<span class="chip ${(STATUS[e.chip] || STATUS.new).cls}">${statusLabel(e.chip)}</span>` : ''}${e.tag ? `<span class="chip kt-stock">${e.tag}</span>` : ''}</div>
+                <div class="fw">${tr('ago', { t: dur(now - e.at) })}</div></div></div>`).join('')}</div>`
+            : `<div class="calm"><div class="calm-i">🌱</div><p class="muted small">${tr('feed_none')}</p></div>`}
+        </section>
+        <section class="card">
+          <div class="ch"><h2>${tr('pipeline_h')}</h2><button class="linkbtn" data-go="requests">${tr('tab_requests')} →</button></div>
+          ${pipeline(['new', 'called', 'agreed', 'picked', 'paid'].map((k) => ({ key: k, label: statusLabel(k), value: count(k) })))}
+          <p class="muted small">${tr('pipeline_d', { n: count('cancelled') })}${avgWait == null ? '' : ` · ${tr('first_call')}: <b>${dur(avgWait)}</b>`}</p>
+        </section>
+        <section class="card">
+          <div class="ch"><h2>${tr('days_h')}</h2></div>
           ${columnChart(points, { title: tr('days_h') })}
           <details class="small"><summary>${tr('days_table')}</summary>
             ${table([tr('day_col'), tr('req_col'), tr('qtl_col')], points.slice().reverse().map((p) => [p.full, p.value, p.q]))}
           </details>
         </section>
         ${sum ? moneyCard(sum) : ''}
-        <section class="card wide">
-          <h2>${tr('more_h')}</h2>
-          <div class="minis">
-            ${small(avgWait == null ? '—' : dur(avgWait), tr('first_call'), avgWait != null && avgWait > 2 * 3600e3 ? 'warn' : '')}
-            ${small(liveOffers, tr('s_offers'), '', 'offers')}
-            ${small(users == null ? '—' : users, tr('s_users'), '', 'farmers')}
-            ${small(openFeedback, tr('s_feedback'), openFeedback ? 'warn' : '', 'feedback')}
-            ${small(openDel, tr('s_deletions'), openDel ? 'warn' : '', 'deletions')}
-          </div>
-          <p class="muted small" style="margin:10px 0 0">${tr('home_foot')}</p>
-        </section>
       </div>`);
-    document.querySelectorAll('[data-go]').forEach((el) => { el.onclick = () => go(el.dataset.go); });
+    document.querySelectorAll('[data-go]').forEach((el) => { if (el.dataset.go) el.onclick = () => go(el.dataset.go); });
     document.querySelectorAll('.pipe-row').forEach((el) => {
       el.onclick = () => { cache.reqFilter = el.dataset.f; go('requests'); };
     });
+    document.querySelectorAll('[data-filter]').forEach((el) => { el.onclick = () => { cache.reqFilter = el.dataset.filter; go('requests'); }; });
     const openOldest = $('#open-oldest');
     if (openOldest) openOldest.onclick = () => showRequest(oldest);
+    const waitKpi = $('#kpi-wait');
+    if (waitKpi) waitKpi.onclick = () => showRequest(oldest);
     wireTips($('#main'));
     if (firstVisit) countUp();
   },
@@ -1185,6 +1453,21 @@ function monthStart() {
 }
 
 /** Numbers marked data-count roll up from 0 — once, when the dashboard opens. */
+/** A small line of the last days' numbers, for a KPI card. */
+function sparkline(values, color) {
+  const v = values.map((x) => Number(x) || 0);
+  const max = Math.max(1, ...v);
+  const w = 96, h = 34;
+  const pts = v.map((x, i) => [(i / Math.max(1, v.length - 1)) * w, h - 3 - (x / max) * (h - 8)]);
+  const line = pts.map(([x, y], i) => `${i ? 'L' : 'M'}${x.toFixed(1)} ${y.toFixed(1)}`).join(' ');
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" aria-hidden="true"><path d="${line} L${w} ${h} L0 ${h}Z" fill="${color}" opacity=".12"/><path d="${line}" fill="none" stroke="${color}" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+}
+
+/** "Wed, 14 Oct" in India time (or this computer's, per Settings). */
+function todayLabel() {
+  return new Date().toLocaleDateString(lang === 'hi' ? 'hi-IN' : 'en-IN', { weekday: 'short', day: 'numeric', month: 'short', ...(tz === 'ist' ? { timeZone: 'Asia/Kolkata' } : {}) });
+}
+
 function countUp() {
   const els = [...document.querySelectorAll('[data-count]')];
   if (reducedMotion()) { els.forEach((el) => { el.textContent = el.dataset.count; }); return; }
@@ -1483,6 +1766,7 @@ function startLive() {
   unwatch = db.watchRequests(onNewRequest, (ok) => {
     cache.live = ok;
     document.querySelectorAll('.live-dot').forEach((d) => d.classList.toggle('off', !ok));
+    if (me) $('#livebadge').hidden = !ok;
   });
 }
 
@@ -1513,6 +1797,8 @@ function whoLine() {
 
 function loginScreen(message) {
   $('#tabs').hidden = true;
+  ['#search', '#langbtn', '#menu', '#livebadge'].forEach((id) => { $(id).hidden = true; });
+  closeNav();
   $('#logout').hidden = true;
   $('#who').textContent = '';
   setMain(`<section class="center"><div>
@@ -1536,6 +1822,7 @@ function loginScreen(message) {
 }
 
 async function start() {
+  wireTop();
   applyLanguage();
   $('#logo').innerHTML = markSVG(30);
   setMain(`<section class="center"><p class="muted">${tr('loading')}</p></section>`);
@@ -1565,6 +1852,7 @@ async function start() {
     me = user;
     $('#who').textContent = whoLine();
     $('#logout').hidden = false;
+    syncMe();
     go('home');
     startLive();
   });

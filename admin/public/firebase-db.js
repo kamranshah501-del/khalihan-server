@@ -141,7 +141,7 @@ export async function connect() {
     async appConfig() {
       const snap = await getDoc(doc(db, 'config', 'app'));
       const data = snap.data() || {};
-      return { features: data.features || {}, launch_states: data.launch_states || [], districts: data.districts || {} };
+      return { features: data.features || {}, launch_states: data.launch_states || [], sell_districts: data.sell_districts || {} };
     },
     async setFeature(key, on) {
       await setDoc(doc(db, 'config', 'app'), { features: { [key]: on } }, { merge: true });
@@ -152,11 +152,11 @@ export async function connect() {
       await setDoc(doc(db, 'config', 'app'), { launch_states: list }, { merge: true });
       log('launch_states', { states: list.join(', ') });
     },
-    // Districts where Khalihan's own business runs in one state. Merge keeps
-    // the other states' lists; the array itself is replaced.
-    async setDistricts(state, keys) {
-      await setDoc(doc(db, 'config', 'app'), { districts: { [state]: keys } }, { merge: true });
-      log('districts', { state, on: keys.length });
+    // Districts where Khalihan buys ("Khalihan ko becho") in one state. Merge
+    // keeps the other states' lists; the array itself is replaced.
+    async setSellDistricts(state, keys) {
+      await setDoc(doc(db, 'config', 'app'), { sell_districts: { [state]: keys } }, { merge: true });
+      log('sell_districts', { state, on: keys.length });
     },
     // The daily job's latest price feed per state: live/{slug} → {at, rows}.
     async liveStatus(pairs) {

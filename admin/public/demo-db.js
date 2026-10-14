@@ -35,7 +35,7 @@ export async function connect() {
   let offers = { version: 3, list: [{ id: 'makka-jalgaon-20261008', crops: ['maize'], districts: ['jalgaon'], state: 'Maharashtra', price: 1980, pickup: 'doorstep', centre: '', payment_days: 0, until: day(-6).toISOString().slice(0, 10), whatsapp: '919800000000', moisture_max: 14, min_qty: 10, note: { hi: 'खेत से उठाएँगे' } }] };
   const features = { login: true, sell: true, kendra: true };
   let launchStates = ['Maharashtra'];
-  const districts = { Maharashtra: ['jalgaon'] };
+  const sellDistricts = { Maharashtra: ['jalgaon'] };
   const feedback = [
     { id: 'f1', text: 'Kapas ka bhav Pachora ka bhi dikhao', state: 'Maharashtra', district: 'Jalgaon', lang: 'hi', app: '1.0.2', at: day(0, 8) },
     { id: 'f2', text: 'खताची किंमत पाहिजे', state: 'Maharashtra', district: 'Jalgaon', lang: 'mr', app: '1.0.2', at: day(3), done: true },
@@ -50,7 +50,7 @@ export async function connect() {
   const log = (action, details) => audit.unshift({ id: 'a' + Date.now(), by: me.email, action, details, at: new Date() });
 
   // Khalihan Kendra — made-up goods and orders (names and prices are samples).
-  let kInfo = { name: 'Khalihan Kendra, Jamner', address: 'Pahur road, Jamner', phone: '9800000000', lic: 'DEMO-LIC-001', open: 8, close: 19, closedDay: 0, holidays: [], districts: ['jalgaon'], km: 25, holdDays: 2, stock: { urea: 'ok', dap: 'low', mop: 'out' }, stockAt: new Date() };
+  let kInfo = { name: 'Khalihan Kendra, Jamner', address: 'Pahur road, Jamner', phone: '9800000000', lic: 'DEMO-LIC-001', open: 8, close: 19, closedDay: 0, holidays: [], districts: ['jalgaon'], lat: 20.8106, lon: 75.7798, km: 25, holdDays: 2, stock: { urea: 'ok', dap: 'low', mop: 'out' }, stockAt: new Date() };
   let kProducts = [
     { id: 'kp1', n: { hi: 'चना बीज · किस्म A', mr: 'हरभरा बियाणे · वाण A', en: 'Chana seed · variety A' }, cat: 'seed', crops: ['bengal gram'], brand: 'Company 1', own: false, govt: false, show: true, order: 10, packs: [{ s: '10 kg', mrp: 1250, p: 1200, stock: 14 }, { s: '30 kg', mrp: 3600, p: 3450, stock: 22 }], facts: { variety: 'A', days: '105', lot: 'L-2291', test: '2026-08-20', germ: '85%' }, lic: '' },
     { id: 'kp2', n: { hi: 'चना बीज · किस्म B', en: 'Chana seed · variety B' }, cat: 'seed', crops: ['bengal gram'], brand: 'Company 2', own: false, govt: false, show: true, order: 11, packs: [{ s: '30 kg', mrp: 3500, p: 3400, stock: 4 }], facts: {}, lic: '' },
@@ -108,10 +108,10 @@ export async function connect() {
       log('offers', { version: offers.version });
       return offers;
     },
-    async appConfig() { return { features: { ...features }, launch_states: [...launchStates], districts: JSON.parse(JSON.stringify(districts)) }; },
+    async appConfig() { return { features: { ...features }, launch_states: [...launchStates], sell_districts: JSON.parse(JSON.stringify(sellDistricts)) }; },
     async setFeature(key, on) { features[key] = on; log('feature', { key, on }); },
     async setLaunchStates(list) { launchStates = [...list]; log('launch_states', { states: list.join(', ') }); },
-    async setDistricts(state, keys) { districts[state] = [...keys]; log('districts', { state, on: keys.length }); },
+    async setSellDistricts(state, keys) { sellDistricts[state] = [...keys]; log('sell_districts', { state, on: keys.length }); },
     async liveStatus(pairs) {
       const out = {};
       const fresh = { Maharashtra: 4210 };

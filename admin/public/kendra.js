@@ -20,7 +20,8 @@ export const KENDRA_WORDS = {
     k_info: 'Kendra',
     k_complaints: 'Complaints',
     k_off_note: 'The Kendra switch is OFF — farmers don\'t see the shop yet. Owner: Switches → Services tab → Khalihan Kendra.',
-    k_nodist_note: 'No district is ON for business — farmers don\'t see the shop yet. Owner: Switches → States & districts → Districts.',
+    k_nodist_note: 'The Kendra has no district yet — farmers don\'t see the shop. Owner: Switches → Khalihan Kendra → Districts.',
+    k_where_note: 'Address, map location, districts and km (who sees the shop) are under Switches → Khalihan Kendra (owner).',
     k_new: 'New',
     k_ready: 'Ready',
     k_done: 'Picked up',
@@ -124,7 +125,8 @@ export const KENDRA_WORDS = {
     k_info: 'Kendra',
     k_complaints: 'शिकायतें',
     k_off_note: 'Kendra स्विच बंद है — किसानों को अभी दुकान नहीं दिखती। Owner: स्विच → Services टैब → Khalihan Kendra।',
-    k_nodist_note: 'धंधे के लिए कोई ज़िला चालू नहीं — किसानों को अभी दुकान नहीं दिखती। Owner: स्विच → राज्य और ज़िले → ज़िले।',
+    k_nodist_note: 'Kendra का अभी कोई ज़िला नहीं — किसानों को दुकान नहीं दिखती। Owner: स्विच → Khalihan Kendra → ज़िले।',
+    k_where_note: 'पता, नक्शे पर जगह, ज़िले और km (दुकान किसे दिखे) — स्विच → Khalihan Kendra में (owner)।',
     k_new: 'नया',
     k_ready: 'तैयार',
     k_done: 'उठा लिया',
@@ -250,12 +252,17 @@ export function createKendra(c) {
   const slotWord = (s) => tr({ m: 'k_m', a: 'k_a', e: 'k_e' }[s] || 'k_m');
 
   async function page() {
-    const cfg = await c.db().appConfig().catch(() => ({ features: {}, districts: {} }));
+    const [cfg, kinfo] = await Promise.all([
+      c.db().appConfig().catch(() => ({ features: {} })),
+      c.db().kendraInfo().catch(() => ({})),
+    ]);
     const features = cfg.features || {};
-    // In the app (v1.0.4+) the Kendra sits inside the Services tab, and only
-    // in districts switched ON for business.
+    // In the app (v1.0.4+) the Kendra sits inside the Services tab, and shows
+    // only to farmers in its own districts (or within its km).
     const on = features.kendra === true && features.services !== false;
-    const anyDistrict = Object.values(cfg.districts || {}).some((list) => (list || []).length);
+    // The app's default when the shop has never been given districts: Jalgaon.
+    const kd = Array.isArray(kinfo.districts) ? kinfo.districts : (Object.keys(kinfo).length ? ['jalgaon'] : []);
+    const anyDistrict = kd.length > 0 || Number(kinfo.km) > 0;
     const subs = [['orders', tr('k_orders')], ['products', tr('k_products')], ['card', tr('k_card')], ['info', tr('k_info')], ['complaints', tr('k_complaints')]];
     const head = `<h1>Khalihan Kendra</h1>
       ${on ? (anyDistrict ? '' : `<p class="note">${tr('k_nodist_note')}</p>`) : `<p class="note">${tr('k_off_note')}</p>`}
@@ -505,19 +512,15 @@ export function createKendra(c) {
         <div class="form">
           <div><label for="ki-name">${tr('k_kname')}</label><input id="ki-name" maxlength="60" value="${v(i.name || 'Khalihan Kendra, Jamner')}"></div>
           <div><label for="ki-phone">${tr('k_phone')}</label><input id="ki-phone" inputmode="tel" maxlength="20" value="${v(i.phone)}"></div>
-          <div class="wide"><label for="ki-address">${tr('k_address')}</label><input id="ki-address" maxlength="120" value="${v(i.address)}"></div>
           <div><label for="ki-lic">${tr('k_lic')}</label><input id="ki-lic" maxlength="80" value="${v(i.lic)}"></div>
           <div><label for="ki-open">${tr('k_open')}</label><input id="ki-open" type="number" min="0" max="23" value="${v(i.open ?? 8)}"></div>
           <div><label for="ki-close">${tr('k_close')}</label><input id="ki-close" type="number" min="0" max="23" value="${v(i.close ?? 19)}"></div>
           <div><label for="ki-day">${tr('k_closed_day')}</label><select id="ki-day"><option value="0">${tr('k_none_day')}</option>${days.map((d, n) => `<option value="${n + 1}" ${Number(i.closedDay) === n + 1 ? 'selected' : ''}>${esc(d)}</option>`).join('')}</select></div>
           <div class="wide"><label for="ki-hol">${tr('k_holidays')}</label><input id="ki-hol" value="${v((i.holidays || []).join(', '))}"></div>
-          <div class="wide"><label for="ki-dist">${tr('k_districts')}</label><input id="ki-dist" value="${v((i.districts || ['jalgaon']).join(', '))}"></div>
-          <div><label for="ki-lat">${tr('k_lat')}</label><input id="ki-lat" inputmode="decimal" value="${v(i.lat)}"></div>
-          <div><label for="ki-lon">${tr('k_lon')}</label><input id="ki-lon" inputmode="decimal" value="${v(i.lon)}"></div>
-          <div><label for="ki-km">${tr('k_km')}</label><input id="ki-km" type="number" min="0" max="200" value="${v(i.km)}"></div>
           <div><label for="ki-hold">${tr('k_hold')}</label><input id="ki-hold" type="number" min="1" max="14" value="${v(i.holdDays ?? 2)}"></div>
         </div>
         <div class="actions"><button class="main" id="ki-save">${tr('k_save')}</button></div>
+        <p class="note" style="margin-top:12px">${tr('k_where_note')}</p>
       </section>`);
       $('#ki-save').onclick = async () => {
         const list = (id) => $(id).value.split(',').map((s) => s.trim()).filter(Boolean);
@@ -525,16 +528,11 @@ export function createKendra(c) {
         const data = {
           name: $('#ki-name').value.trim().slice(0, 60),
           phone: $('#ki-phone').value.replace(/[^0-9+]/g, '').slice(0, 20),
-          address: $('#ki-address').value.trim().slice(0, 120),
           lic: $('#ki-lic').value.trim().slice(0, 80),
           open: hour('#ki-open', 8),
           close: hour('#ki-close', 19),
           closedDay: Number($('#ki-day').value) || 0,
           holidays: list('#ki-hol').filter((d) => /^\d{4}-\d{2}-\d{2}$/.test(d)),
-          districts: list('#ki-dist').map((d) => d.toLowerCase()),
-          lat: num($('#ki-lat').value),
-          lon: num($('#ki-lon').value),
-          km: num($('#ki-km').value),
           holdDays: Math.max(1, Math.min(14, Math.round(num($('#ki-hold').value) || 2))),
         };
         try { await c.db().saveKendraInfo(data); toast(tr('k_info_saved')); } catch (e) { fail(e); }
