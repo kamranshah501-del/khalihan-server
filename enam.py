@@ -145,19 +145,32 @@ def fetch_rows(state, log=print):
     session = _open_session()
     name = _state_name(session, state, log)
     today = datetime.now(IST).date()
-    form = {
-        "language": "en",
-        "stateName": name,
-        "fromDate": (today - timedelta(days=6)).isoformat(),
-        "toDate": today.isoformat(),
-    }
-    r = session.post(f"{BASE}/Liveprice_ctrl/trade_data_list", data=form, timeout=TIMEOUT)
-    if not r.ok:
-        raise RuntimeError(f"eNAM trade data: HTTP {r.status_code}")
-    try:
-        payload = r.json()
-    except ValueError:
-        raise RuntimeError(f"eNAM trade data: not JSON ({len(r.text)} bytes)") from None
+    start = today - timedelta(days=6)
+    # The page's exact spelling isn't known from here: try the likely forms,
+    # at most three requests, and keep what the server said for the status.
+    tries = [
+        (name, start.isoformat(), today.isoformat()),
+        (name.upper(), start.isoformat(), today.isoformat()),
+        (name, start.strftime("%d-%m-%Y"), today.strftime("%d-%m-%Y")),
+    ]
+    payload, said = None, []
+    for state_name, start_s, end_s in dict.fromkeys(tries):
+        form = {"language": "en", "stateName": state_name, "fromDate": start_s, "toDate": end_s}
+        r = session.post(f"{BASE}/Liveprice_ctrl/trade_data_list", data=form, timeout=TIMEOUT)
+        body = re.sub(r"\s+", " ", r.text or "")[:120]
+        if not r.ok:
+            said.append(f"HTTP {r.status_code} ({state_name}, {start_s}){': ' + body if body else ''}")
+            continue
+        try:
+            payload = r.json()
+        except ValueError:
+            said.append(f"not JSON ({state_name}, {start_s}): {body}")
+            continue
+        if _rows_in(payload):
+            break
+        said.append(f"no rows ({state_name}, {start_s})")
+    if payload is None:
+        raise RuntimeError("eNAM trade data: " + " | ".join(said))
     raw = _rows_in(payload)
     towns = _towns(state)
     out, unplaced, skipped_unit = [], set(), 0
