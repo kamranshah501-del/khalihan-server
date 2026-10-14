@@ -22,6 +22,9 @@ jobs:
   prices:
     runs-on: ubuntu-latest
     timeout-minutes: 45
+    # Only to push status.json to the "status" branch (see the last step).
+    permissions:
+      contents: write
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -37,3 +40,19 @@ jobs:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
           STATES: ${{ vars.STATES }}
           MODE: ${{ github.event.inputs.mode || (github.event.schedule == '30 0 * * *' && 'morning') || (github.event.schedule == '30 1 * * *' && 'brief7') || (github.event.schedule == '30 2 * * *' && 'brief8') || (github.event.schedule == '0 14 * * *' && 'evening') || 'refresh' }}
+
+      # How the run went, per state (sources, rows, scrubbed errors — never a
+      # key): one file on its own branch, replaced each run, so it can be read
+      # without opening the Actions log. Never blocks the prices.
+      - name: Share the run's status
+        if: always()
+        continue-on-error: true
+        run: |
+          [ -f status.json ] || exit 0
+          mkdir -p /tmp/status && cp status.json /tmp/status/
+          cd /tmp/status
+          git init -q -b status
+          git add status.json
+          git -c user.name="khalihan-bot" -c user.email="41898282+github-actions[bot]@users.noreply.github.com" \
+            commit -qm "Daily job status $(date -u +%Y-%m-%dT%H:%MZ)"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" status

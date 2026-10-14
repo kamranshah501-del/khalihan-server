@@ -114,13 +114,23 @@ export async function connect() {
     async setDistricts(state, keys) { districts[state] = [...keys]; log('districts', { state, on: keys.length }); },
     async liveStatus(pairs) {
       const out = {};
-      const fresh = { Maharashtra: 4210, 'Madhya Pradesh': 3120, Gujarat: 2450, Karnataka: 1800, 'Uttar Pradesh': 5200, Rajasthan: 2100 };
+      const fresh = { Maharashtra: 4210 };
       for (const [state] of pairs) {
         if (fresh[state]) out[state] = { at: new Date(Date.now() - 3 * 3600e3), rows: fresh[state] };
         else if (state === 'Telangana') out[state] = { at: new Date(Date.now() - 18 * 86400e3), rows: 900 };
         else out[state] = null;
       }
       return out;
+    },
+    async serverStatus() {
+      return {
+        at: new Date(Date.now() - 2 * 3600e3), mode: 'refresh', took_s: 287, gov_api_down: true,
+        states: {
+          Maharashtra: { source: 'msamb', rows: 4210, error: 'data.gov.in: 503 Server Error: Service Unavailable' },
+          'Madhya Pradesh': { source: '', rows: 0, error: 'data.gov.in: skipped — the government API is down this run · second source: eNAM trade data: HTTP 500' },
+          Gujarat: { source: '', rows: 0, error: 'data.gov.in: skipped — the government API is down this run' },
+        },
+      };
     },
     async liveDistricts(slug) {
       const lists = {

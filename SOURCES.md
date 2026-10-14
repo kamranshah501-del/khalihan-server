@@ -1,7 +1,7 @@
 # Price sources — what we use, what we checked
 
 Kept so the research is never lost when old folders are cleaned up.
-Last checked: **3 October 2026**.
+Last checked: **3 October 2026** (eNAM added as Madhya Pradesh's second source on 14 Oct 2026).
 
 ## In use
 
@@ -10,7 +10,24 @@ Last checked: **3 October 2026**.
 | **data.gov.in** (Agmarknet API) | All states, per mandi | `GET https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070` with `api-key`, `format=json`, `limit`, `offset`, `filters[state]` | **503 / timeouts since 25 Sep 2026 — for everyone, inside India too** (tested from Kuwait, from India on a phone, and from GitHub). Server retries 5× a day; all states return on their own. |
 | **MSAMB** (Maharashtra board) | Maharashtra: 12 Jalgaon APMCs + 33 districts | `msamb.py` in this repo (session cookie + the board's own JSON calls) | ✅ Working — Maharashtra stays fresh. |
 
-## Candidate: eNAM Live Price (for many states, once it works)
+## Second source for Madhya Pradesh: eNAM (in the job since 14 Oct 2026)
+
+`enam.py` reads eNAM's Live Price for the states in `enam.ENAM_STATES`
+(Madhya Pradesh first, owner 13 Oct 2026) **only when data.gov.in fails**.
+eNAM names the mandi but not the district, so `data/towns_<state>.json`
+(GeoNames via cities.json, `tools/make_towns.py`) gives the district; a mandi
+not in the table keeps an empty district (still counted state-wide).
+Not tested against the live site from here (eNAM was down on 29 Sep) — the
+first runs' result shows in `status.json` and in Admin → Switches.
+
+## How each run went
+
+The job writes `status.json` (per state: source, rows, error — the API key is
+always scrubbed) to Firestore `status/daily` (Admin → Switches shows it) and
+pushes it to the **`status` branch** of this repo (one file, replaced each
+run): `git fetch origin status && git show origin/status:status.json`.
+
+## eNAM Live Price — notes from 29 Sep 2026
 
 - Site moved: everything is now under **`https://enam.gov.in/`** — the old `/web/...` paths only return the home page.
 - Page: `https://enam.gov.in/dashboard/live_price` (open it first to get the session cookie).

@@ -170,6 +170,12 @@ export async function connect() {
       }));
       return out;
     },
+    // How the daily job's last run went (needs the 14 Oct rules).
+    async serverStatus() {
+      const snap = await getDoc(doc(db, 'status', 'daily'));
+      const d = snap.data();
+      return d ? { ...d, at: toDate(d.at) } : null;
+    },
     // District names in a state's latest price feed (owner only, on demand).
     async liveDistricts(slug) {
       const snap = await getDocs(collection(db, 'live', slug, 'parts'));

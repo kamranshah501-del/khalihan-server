@@ -68,6 +68,12 @@ service cloud.firestore {
       allow write: if false;
     }
 
+    // ── how the daily job went, per state (the server writes; Admin reads)
+    match /status/{doc} {
+      allow read: if isStaff();
+      allow write: if false;
+    }
+
     // ── content the app reads; staff change it from Khalihan Admin ─────
     match /config/{doc} {
       allow read: if true;

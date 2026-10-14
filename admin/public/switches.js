@@ -50,6 +50,12 @@ export const SWITCH_WORDS = {
     sw_dist_nodata: 'No price data for this state yet — its districts show here once prices arrive.',
     sw_dist_help: 'Tap a district to switch Khalihan\'s business there (Sell to Khalihan, the Kendra).',
     sw_saved: 'Saved — the app picks it up at its next start',
+    sw_server: '🖥️ Server\'s last run: {t}',
+    sw_gov_down: 'Government price API (data.gov.in): not answering ❌ — only states with a second source get fresh prices.',
+    sw_gov_ok: 'Government price API (data.gov.in): working ✅',
+    sw_server_none: '🖥️ The server hasn\'t reported yet (after the next run — needs the 14 Oct rules: bash admin/deploy.sh).',
+    sw_via: 'via {s}',
+    sw_last_err: 'Last run: {e}',
     f_price_map: 'Price map', f_price_map_d: 'List | Map in "Where to sell?".',
     f_hold_sell: 'Sell now or wait?', f_hold_sell_d: 'What waiting costs, and the break-even price.',
     f_day_voice: 'Hear today\'s prices', f_day_voice_d: 'The Home button and the "Listen" button on the morning message.',
@@ -96,6 +102,12 @@ export const SWITCH_WORDS = {
     sw_dist_nodata: 'इस राज्य का अभी भाव नहीं आया — भाव आते ही ज़िले यहाँ दिखेंगे।',
     sw_dist_help: 'किसी ज़िले पर टैप करके वहाँ Khalihan का धंधा चालू/बंद करें (Khalihan को बेचें, Kendra)।',
     sw_saved: 'सेव हो गया — ऐप अगली बार खुलने पर ले लेगा',
+    sw_server: '🖥️ सर्वर की आख़िरी बार: {t}',
+    sw_gov_down: 'सरकारी भाव API (data.gov.in): जवाब नहीं दे रहा ❌ — ताज़ा भाव सिर्फ़ उन राज्यों के जिनका दूसरा स्रोत है।',
+    sw_gov_ok: 'सरकारी भाव API (data.gov.in): चल रहा है ✅',
+    sw_server_none: '🖥️ सर्वर ने अभी रिपोर्ट नहीं दी (अगली बार के बाद — 14 Oct के rules चाहिए: bash admin/deploy.sh)।',
+    sw_via: '{s} से',
+    sw_last_err: 'पिछली बार: {e}',
     f_price_map: 'भाव का नक्शा', f_price_map_d: '"कहाँ बेचें?" में सूची | नक्शा।',
     f_hold_sell: 'अभी बेचें या रुकें?', f_hold_sell_d: 'रुकने का ख़र्च और ब्रेक-ईवन भाव।',
     f_day_voice: 'आज का भाव सुनें', f_day_voice_d: 'Home का बटन और सुबह के मैसेज का "सुनें" बटन।',
@@ -179,6 +191,8 @@ const MH_DISTRICTS = [
   ['wardha', 'Wardha'], ['washim', 'Washim'], ['yavatmal', 'Yavatmal'],
 ];
 
+const SOURCE_NAME = { 'data.gov.in': 'data.gov.in', msamb: 'MSAMB', enam: 'eNAM' };
+
 /** The server's document name for a state ("NCT of Delhi" → "nct_of_delhi"). */
 export const stateSlug = (s) => String(s).trim().toLowerCase().replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
 
@@ -250,6 +264,28 @@ export function createSwitches(c) {
       : `<span class="chip swdata old">${tr('sw_data_old', { d: day })}</span>`;
   }
 
+  function serverRun(state) {
+    return memo.server && memo.server.states ? memo.server.states[state] : null;
+  }
+
+  function sourceChip(state) {
+    const run = serverRun(state);
+    return run && run.rows && run.source ? `<span class="chip swsrc">${tr('sw_via', { s: SOURCE_NAME[run.source] || run.source })}</span>` : '';
+  }
+
+  function lastError(state) {
+    const run = serverRun(state);
+    if (!run || run.rows || !run.error) return '';
+    return `<div class="small swerr">${esc(tr('sw_last_err', { e: run.error }))}</div>`;
+  }
+
+  function serverLine() {
+    const sv = memo.server;
+    if (!sv) return `<p class="small muted swserver">${tr('sw_server_none')}</p>`;
+    const t = sv.at instanceof Date ? sv.at.toLocaleString(c.lang() === 'hi' ? 'hi-IN' : 'en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }) : '—';
+    return `<div class="swserver ${sv.gov_api_down ? 'down' : 'up'}"><b>${esc(tr('sw_server', { t }))}</b><br>${tr(sv.gov_api_down ? 'sw_gov_down' : 'sw_gov_ok')}</div>`;
+  }
+
   function appChip(state) {
     const r = APP_READY[state];
     return `<span class="chip swapp ${r || 'basic'}">${tr(r === 'full' ? 'sw_app_full' : r === 'soon' ? 'sw_app_soon' : 'sw_app_basic')}</span>`;
@@ -261,7 +297,8 @@ export function createSwitches(c) {
     return `<div class="swstate${open ? ' on' : ''}">
       <button class="kswitch small${open ? ' on' : ''}" data-state="${esc(state)}" aria-pressed="${open}" ${mh ? `disabled title="${esc(tr('sw_mh_locked'))}"` : ''}><span class="knob"></span></button>
       <div class="grow"><div class="swkt">${esc(stateName(state))}</div>
-        <div class="row swchips">${statusChip(state)} ${appChip(state)}</div></div>
+        <div class="row swchips">${statusChip(state)} ${sourceChip(state)} ${appChip(state)}</div>
+        ${open ? lastError(state) : ''}</div>
       ${open ? `<button class="plain" data-dists="${esc(state)}" aria-expanded="${memo.open.has(state)}">${tr('sw_districts', { n: nOn })} ${memo.open.has(state) ? '▴' : '▾'}</button>` : ''}
     </div>
     ${open && memo.open.has(state) ? `<div class="swdists" data-for="${esc(state)}">${districtPanel(state, districts)}</div>` : ''}`;
@@ -292,6 +329,7 @@ export function createSwitches(c) {
         <div class="grow"><div class="title">${tr('sw_states')}</div><div class="sub">${tr('sw_states_d')}</div></div>
         <button class="plain" id="sw-refresh">${tr('sw_refresh')}</button>
       </div>
+      ${serverLine()}
       <div class="swstates">${openList.map((s) => stateRow(s, true, districts)).join('')}</div>
       <details class="swmore"${memo.moreOpen ? ' open' : ''}><summary>${tr('sw_other_states', { n: rest.length })}</summary>
         <div class="swstates">${rest.map((s) => stateRow(s, false, districts)).join('')}</div>
@@ -301,7 +339,12 @@ export function createSwitches(c) {
 
   async function loadStatus(force) {
     if (memo.status && !force) return;
-    try { memo.status = await c.db().liveStatus(STATES.map((s) => [s, stateSlug(s)])); } catch (e) { console.warn(e); memo.status = {}; }
+    const [live, server] = await Promise.all([
+      c.db().liveStatus(STATES.map((s) => [s, stateSlug(s)])).catch((e) => { console.warn(e); return {}; }),
+      (c.db().serverStatus ? c.db().serverStatus() : Promise.resolve(null)).catch(() => null),
+    ]);
+    memo.status = live;
+    memo.server = server;
   }
 
   async function loadDistricts(state) {

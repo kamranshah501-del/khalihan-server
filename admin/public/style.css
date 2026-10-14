@@ -377,3 +377,10 @@ button.plain.small { padding: 4px 10px; font-size: 13px; }
   .swhead { flex-wrap: wrap; }
   .swhead .kswitch, .swhead #sw-refresh { margin-left: 48px; }
 }
+.chip.swsrc { background: #eef1f4; color: var(--ink); }
+.swerr { color: var(--red); margin-top: 4px; overflow-wrap: anywhere; }
+.swserver { margin: 12px 0 0 48px; padding: 10px 12px; border-radius: 12px; font-size: 14px; }
+.swserver.down { background: var(--red-tint); }
+.swserver.up { background: var(--green-tint); }
+p.swserver { background: none; padding: 0; }
+@media (max-width: 600px) { .swserver { margin-left: 0; } }

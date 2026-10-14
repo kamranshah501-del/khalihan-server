@@ -29,6 +29,7 @@ from datetime import datetime, timedelta, timezone
 import requests
 import firebase_admin
 
+import enam
 import msamb
 from firebase_admin import credentials, firestore, messaging
 
@@ -302,7 +303,19 @@ MIN_BACKFILL_CROPS = 20
 # States with a second, independent source for the days data.gov.in is down.
 SECOND_SOURCES = {
     "Maharashtra": msamb.fetch_rows,
+    # eNAM names only the mandi; enam.py finds its district (data/towns_*.json).
+    **{state: (lambda log=print, _s=state: enam.fetch_rows(_s, log=log)) for state in enam.ENAM_STATES},
 }
+
+
+def scrub(error, api_key=""):
+    """An error as text that is safe to show anywhere: never the API key
+    (requests puts the whole URL, key included, into its messages)."""
+    text = str(error)
+    text = re.sub(r"(api-key=)[^&\s]+", r"\1***", text)
+    if api_key:
+        text = text.replace(api_key, "***")
+    return text[:300]
 
 
 def backfill(db, state, rows, newest):
@@ -405,6 +418,32 @@ def notify(state, day, kind, hour=None):
     print(f"  {state}: {kind} push sent to {topic}")
 
 
+def save_status(db, mode, took, api_down, results):
+    """How this run went, per state — for Khalihan Admin (Firestore
+    status/daily, staff only) and for whoever maintains this job
+    (status.json, which the workflow pushes to the "status" branch).
+    Errors are scrubbed: no keys, ever."""
+    status = {
+        "at": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "mode": mode,
+        "took_s": took,
+        "gov_api_down": bool(api_down),
+        "states": {
+            r["state"]: {"source": r["source"], "rows": r["rows"], "error": r["error"]}
+            for r in results
+        },
+    }
+    try:
+        with open("status.json", "w", encoding="utf-8") as fh:
+            json.dump(status, fh, ensure_ascii=False, indent=1)
+    except OSError as error:
+        print(f"status.json not written — {error}")
+    try:
+        db.collection("status").document("daily").set({**status, "at": firestore.SERVER_TIMESTAMP})
+    except Exception as error:
+        print(f"status/daily not saved — {error}")
+
+
 def main():
     api_key = os.environ.get("DATA_GOV_IN_API_KEY", "").strip()
     service_account = os.environ.get("FIREBASE_SERVICE_ACCOUNT", "").strip()
@@ -451,7 +490,7 @@ def main():
 
     def process(state):
         """One state, start to finish. Runs five at a time."""
-        result = {"fetch": 0, "push": 0}
+        result = {"fetch": 0, "push": 0, "state": state, "source": "", "rows": 0, "error": ""}
 
         # The government API sometimes turns away cloud servers. That must
         # not stop the alerts: phones also save each day's prices, so the
@@ -467,6 +506,7 @@ def main():
             state_day = newest_day(rows) or day
             prices = summarise(rows)
             print(f"{state}: {len(rows)} rows, {len(prices)} crops")
+            result.update(source="data.gov.in", rows=len(rows))
             cross_check(state, rows, log=print)
             try:
                 save_live(db, state, rows)
@@ -485,16 +525,19 @@ def main():
                     print(f"*** Government API looks down ({api['failed']} states failed, none worked)."
                           " Skipping it for the rest of this run.")
             print(f"{state}: could not read the government API — {error}")
+            result["error"] = "data.gov.in: " + scrub(error, api_key)
             # A second, independent source where we have one.
             if state in SECOND_SOURCES:
                 try:
                     rows = SECOND_SOURCES[state](log=print)
                 except Exception as second_error:
                     print(f"  {state}: second source failed too — {second_error}")
+                    result["error"] += " · second source: " + scrub(second_error, api_key)
             if rows:
                 state_day = newest_day(rows) or day
                 prices = summarise(rows)
                 print(f"  {state}: {len(rows)} rows, {len(prices)} crops from the second source")
+                result.update(source="msamb" if state == "Maharashtra" else "enam", rows=len(rows))
                 try:
                     save_live(db, state, rows)
                 except Exception as live_error:
@@ -532,6 +575,7 @@ def main():
 
     print(f"Done. {fetch_failures} state(s) without fresh data, "
           f"{push_failures} push failure(s).")
+    save_status(db, mode, int(time.time() - started), api["down"], results)
     if mode != "refresh" and push_failures == len(states):
         sys.exit("No push could be sent — check the Firebase service account.")
 
