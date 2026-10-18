@@ -1,0 +1,153 @@
+{
+ "at": "2026-10-18T01:11:09+00:00",
+ "mode": "morning",
+ "took_s": 108,
+ "gov_api_down": true,
+ "states": {
+  "Andhra Pradesh": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Andhra+Pradesh (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7f"
+  },
+  "Assam": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Assam (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7faec65b971"
+  },
+  "Bihar": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Bihar (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7faec65c5fd"
+  },
+  "Chhattisgarh": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Chhattisgarh (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7fae"
+  },
+  "Goa": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Goa (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7faec65bb2d0>"
+  },
+  "Gujarat": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Haryana": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Himachal Pradesh": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Jammu and Kashmir": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Jharkhand": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Karnataka": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Kerala": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Madhya Pradesh": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run · second source: eNAM trade data: HTTP 500 (Madhya Pradesh, 2026-10-12) | HTTP 500 (MADHYA PRADESH, 2026-10-12) | HTTP 500 (Madhya Pradesh, 12-10-2026)"
+  },
+  "Maharashtra": {
+   "source": "msamb",
+   "rows": 4881,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Manipur": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Meghalaya": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Mizoram": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Nagaland": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "NCT of Delhi": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Odisha": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Punjab": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Rajasthan": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Sikkim": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Tamil Nadu": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Telangana": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Tripura": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Uttar Pradesh": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "Uttarakhand": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  },
+  "West Bengal": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: skipped — the government API is down this run"
+  }
+ }
+}
