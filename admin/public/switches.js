@@ -50,6 +50,7 @@ export const SWITCH_WORDS = {
     sw_gov_down: 'Government price API (data.gov.in): not answering ❌ — only states with a second source get fresh prices.',
     sw_gov_ok: 'Government price API (data.gov.in): working ✅',
     sw_server_none: '🖥️ The server hasn\'t reported yet.',
+    sw_phone: '📱 Khalihan collector (phone): prices for {n} states ✅',
     sw_via: 'via {s}',
     sw_last_err: 'Last run: {e}',
     sw_all_on: 'All ON',
@@ -126,6 +127,7 @@ export const SWITCH_WORDS = {
     sw_gov_down: 'सरकारी भाव API (data.gov.in): जवाब नहीं दे रहा ❌ — ताज़ा भाव सिर्फ़ उन राज्यों के जिनका दूसरा स्रोत है।',
     sw_gov_ok: 'सरकारी भाव API (data.gov.in): चल रहा है ✅',
     sw_server_none: '🖥️ सर्वर ने अभी रिपोर्ट नहीं दी।',
+    sw_phone: '📱 खलिहान कलेक्टर (फ़ोन): {n} राज्यों के भाव ✅',
     sw_via: '{s} से',
     sw_last_err: 'पिछली बार: {e}',
     sw_all_on: 'सब चालू',
@@ -240,7 +242,7 @@ const MH_DISTRICTS = [
   ['wardha', 'Wardha'], ['washim', 'Washim'], ['yavatmal', 'Yavatmal'],
 ];
 
-const SOURCE_NAME = { 'data.gov.in': 'data.gov.in', msamb: 'MSAMB', enam: 'eNAM' };
+const SOURCE_NAME = { 'data.gov.in': 'data.gov.in', msamb: 'MSAMB', enam: 'eNAM', phone: 'data.gov.in · 📱' };
 const KM_CHOICES = [0, 10, 15, 25, 40, 60];
 
 /** The server's document name for a state ("NCT of Delhi" → "nct_of_delhi"). */
@@ -391,7 +393,8 @@ export function createSwitches(c) {
     const sv = memo.server;
     if (!sv) return `<p class="small muted">${tr('sw_server_none')}</p>`;
     const t = sv.at instanceof Date ? sv.at.toLocaleString(c.lang() === 'hi' ? 'hi-IN' : 'en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }) : '—';
-    return `<div class="swserver ${sv.gov_api_down ? 'down' : 'up'}"><b>${esc(tr('sw_server', { t }))}</b><br>${tr(sv.gov_api_down ? 'sw_gov_down' : 'sw_gov_ok')}</div>`;
+    const phone = sv.phone_states > 0 ? `<br>${esc(tr('sw_phone', { n: sv.phone_states }))}` : '';
+    return `<div class="swserver ${sv.gov_api_down && !phone ? 'down' : 'up'}"><b>${esc(tr('sw_server', { t }))}</b><br>${tr(sv.gov_api_down ? 'sw_gov_down' : 'sw_gov_ok')}${phone}</div>`;
   }
   function stateRow(state, open) {
     const mh = state === 'Maharashtra';

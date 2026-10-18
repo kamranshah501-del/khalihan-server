@@ -30,6 +30,7 @@ import requests
 import firebase_admin
 
 import enam
+import feed
 import msamb
 from firebase_admin import credentials, firestore, messaging
 
@@ -418,7 +419,7 @@ def notify(state, day, kind, hour=None):
     print(f"  {state}: {kind} push sent to {topic}")
 
 
-def save_status(db, mode, took, api_down, results):
+def save_status(db, mode, took, api_down, results, phone=0):
     """How this run went, per state — for Khalihan Admin (Firestore
     status/daily, staff only) and for whoever maintains this job
     (status.json, which the workflow pushes to the "status" branch).
@@ -428,6 +429,7 @@ def save_status(db, mode, took, api_down, results):
         "mode": mode,
         "took_s": took,
         "gov_api_down": bool(api_down),
+        "phone_states": phone,  # states that came from the collector's feed
         "states": {
             r["state"]: {"source": r["source"], "rows": r["rows"], "error": r["error"]}
             for r in results
@@ -482,6 +484,9 @@ def main():
 
     db = firestore.client()
     print(f"Khalihan {mode} job for {day} — {len(states)} states")
+    # Rows the collector (a phone on a home connection) read from
+    # data.gov.in — used first, since the API turns this server away.
+    from_phone = feed.load(log=print)
 
     # If the first handful of states all fail, the API is down for this run:
     # stop knocking on a closed door and fall straight back to the archive.
@@ -498,15 +503,20 @@ def main():
         prices = {}
         state_day = day
         try:
-            if api["down"]:
-                raise RuntimeError("skipped — the government API is down this run")
-            rows = fetch_state(api_key, state)
-            with api_lock:
-                api["ok"] += 1
+            if from_phone.get(state):
+                rows = from_phone[state]
+                source = "phone"
+            else:
+                if api["down"]:
+                    raise RuntimeError("skipped — the government API is down this run")
+                rows = fetch_state(api_key, state)
+                source = "data.gov.in"
+                with api_lock:
+                    api["ok"] += 1
             state_day = newest_day(rows) or day
             prices = summarise(rows)
-            print(f"{state}: {len(rows)} rows, {len(prices)} crops")
-            result.update(source="data.gov.in", rows=len(rows))
+            print(f"{state}: {len(rows)} rows, {len(prices)} crops ({source})")
+            result.update(source=source, rows=len(rows))
             cross_check(state, rows, log=print)
             try:
                 save_live(db, state, rows)
@@ -575,7 +585,7 @@ def main():
 
     print(f"Done. {fetch_failures} state(s) without fresh data, "
           f"{push_failures} push failure(s).")
-    save_status(db, mode, int(time.time() - started), api["down"], results)
+    save_status(db, mode, int(time.time() - started), api["down"], results, phone=len(from_phone))
     if mode != "refresh" and push_failures == len(states):
         sys.exit("No push could be sent — check the Firebase service account.")
 
