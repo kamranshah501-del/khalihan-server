@@ -37,6 +37,13 @@ and the job reads it without a key.
 4. `khalihan` (keeps running, every 3 h) · `khalihan log` · `khalihan once` · `khalihan update`.
    Termux battery: Unrestricted. Wi-Fi + charger.
 
+## Mumbai server (Google Cloud) or any Linux box
+data.gov.in looks India-only by IP (19 Oct test), so the collector must sit
+on an Indian IP. On a VM in asia-south1 (Mumbai), browser SSH, then:
+`curl -fsSL https://raw.githubusercontent.com/kamranshah501-del/khalihan-server/main/collector/setup_linux.sh | bash`
+(Enter at the token prompt = test only). Cron: `10 0,5,9,13,18 * * *` UTC,
+before the daily job's runs. `~/bin/khalihan` shows the log.
+
 ## Later: a computer at Jamner
 Same script on any always-on Linux box (e.g. a Raspberry Pi): put `key` and
 `token` in `~/.khalihan/`, and a cron line like
