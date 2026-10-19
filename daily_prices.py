@@ -108,6 +108,9 @@ def get_page(api_key, state, offset):
             response.raise_for_status()
             return response.json()
         except Exception as error:
+            # The error text carries the request URL, key included. GitHub
+            # masks secrets in this public log, but never rely on that alone.
+            error = RuntimeError(scrub(error, api_key))
             last_error = error
             # 502/503 means the government server is busy, not that we asked
             # wrongly — so wait longer each time instead of giving up.

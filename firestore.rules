@@ -1,10 +1,10 @@
 rules_version = '2';
 
-// Khalihan — Firestore rules (8 Oct 2026; Kendra added 12 Oct 2026).
+// Khalihan — Firestore rules (8 Oct 2026; Kendra 12 Oct; price history server-only 19 Oct 2026).
 //
 // Who is who:
 //   • Farmers: the app. Prices, schemes, calendar and offers are open to
-//     everyone; a farmer's own account (users/{uid}) only to that farmer.
+//     everyone to read (only the server writes prices); a farmer's own account (users/{uid}) only to that farmer.
 //   • Staff: people in staff/{email} (role "owner" or "staff"), logged in to
 //     Khalihan Admin with Google. Only the owner adds staff or changes
 //     feature switches.
@@ -54,13 +54,12 @@ service cloud.firestore {
 
     match /prices/{scope}/days/{day} {
       allow read: if true;
-      // A phone may file a day's averages (a richer list replaces a thinner).
-      allow create, update: if request.resource.data.keys().hasOnly(['d', 'at', 'c'])
-        && request.resource.data.d == day
-        && request.resource.data.c is list
-        && request.resource.data.c.size() <= 800
-        && request.resource.data.at == request.time;
-      allow delete: if false;
+      // Only the server files a day's averages (19 Oct 2026). Phones used to
+      // keep a backup copy, but anyone holding the app's public config could
+      // then write made-up prices into the history — and since the collector
+      // brings every state, the server's copy is complete anyway. Old app
+      // versions still try; their write is refused quietly (try/catch).
+      allow write: if false;
     }
 
     match /mandi_days/{state} {
