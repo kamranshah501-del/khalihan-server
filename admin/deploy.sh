@@ -1,5 +1,7 @@
 #!/bin/bash
-# Khalihan Admin + Firestore rules → Firebase (run on the Mac).
+# Khalihan Admin + Firestore rules → Firebase. Runs on the Mac, or from a
+# phone in Google Cloud Shell (shell.cloud.google.com — no typing of lists,
+# no arrow keys needed):
 #   bash admin/deploy.sh          → panel + rules
 #   bash admin/deploy.sh hosting  → only the panel
 #   bash admin/deploy.sh rules    → only the rules
@@ -12,20 +14,47 @@ cd "$(dirname "$0")/.."
 MODE="${1:-all}"
 
 if ! command -v firebase >/dev/null 2>&1; then
+  if command -v npm >/dev/null 2>&1; then
+    echo "⏳ Firebase CLI install ho raha hai (ek baar, 1–2 minute)…"
+    npm install -g firebase-tools >/dev/null 2>&1 || true
+  fi
+fi
+if ! command -v firebase >/dev/null 2>&1; then
   echo "❌ Firebase CLI nahi mila. Pehle ye chalao (ek baar):"
   echo "   curl -sL https://firebase.tools | bash"
   exit 1
 fi
 
 # One-time: log in with the Google account that owns the Firebase project.
+# In Cloud Shell or over SSH the browser can't call back: the CLI shows a
+# link, you log in there and paste the code back.
 if ! firebase projects:list >/dev/null 2>&1; then
-  firebase login
+  if [ -n "$CLOUD_SHELL" ] || [ -n "$SSH_CONNECTION" ]; then
+    firebase login --no-localhost
+  else
+    firebase login
+  fi
 fi
 
 # One-time: pick the Khalihan project (saved in .firebaserc, not in git).
+# Only one project on the account → taken without asking; several → type
+# its ID (easier on a phone than a list).
 if [ ! -f .firebaserc ]; then
-  echo "👉 Khalihan wala Firebase project chuno:"
-  firebase use --add
+  CHOSEN="${PROJECT_ID:-}"
+  if [ -z "$CHOSEN" ]; then
+    IDS=$(firebase projects:list --json 2>/dev/null \
+      | sed -n 's/.*"projectId"[[:space:]]*:[[:space:]]*"\([a-z0-9-]*\)".*/\1/p' | sort -u)
+    if [ "$(printf '%s\n' "$IDS" | grep -c .)" = "1" ]; then
+      CHOSEN="$IDS"
+    else
+      echo "👉 Aapke Firebase projects:"
+      printf '   %s\n' $IDS
+      read -r -p "   Khalihan wale project ka ID likho: " CHOSEN </dev/tty
+    fi
+  fi
+  [ -n "$CHOSEN" ] || { echo "❌ Project nahi chuna — ruk gaya."; exit 1; }
+  printf '{\n  "projects": {\n    "default": "%s"\n  }\n}\n' "$CHOSEN" > .firebaserc
+  echo "✅ Project: $CHOSEN"
 fi
 
 # The project's ID: the first "alias": "project-id" pair in .firebaserc.
@@ -48,27 +77,33 @@ if [ "$MODE" != "rules" ]; then
     APP_ID=$(firebase apps:list WEB --json 2>/dev/null \
       | sed -n 's/.*"appId"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/p' | head -n 1)
     SITE=""
+    MADE=""
     for NAME in khalihan-admin khalihan-admin-panel khalihan-team; do
       if firebase hosting:sites:get "$NAME" >/dev/null 2>&1; then SITE="$NAME"; break; fi
       if [ -n "$APP_ID" ] && firebase hosting:sites:create "$NAME" --app "$APP_ID" --non-interactive >/dev/null 2>&1; then
-        SITE="$NAME"; break
+        SITE="$NAME"; MADE=1; break
       fi
-      if firebase hosting:sites:create "$NAME" --non-interactive >/dev/null 2>&1; then SITE="$NAME"; break; fi
+      if firebase hosting:sites:create "$NAME" --non-interactive >/dev/null 2>&1; then SITE="$NAME"; MADE=1; break; fi
       echo "   '$NAME' nahi mila (shayad kisi aur ka hai) — agla naam try…"
     done
     if [ -z "$SITE" ]; then
       echo "⚠️  Khud nahi ban paya. Firebase console → Hosting → 'Add another site' →"
       echo "   naam likho (jaise khalihan-admin) → bana lo."
-      read -r -p "   Jo naam banaya wo yahan likho: " SITE
+      read -r -p "   Jo naam banaya wo yahan likho: " SITE </dev/tty
       [ -n "$SITE" ] || { echo "❌ Naam nahi diya — ruk gaya."; exit 1; }
+      MADE=1
     fi
     firebase target:apply hosting admin "$SITE"
     firebase target:apply hosting moved "$PROJECT"
-    echo ""
-    echo "👉 ZAROORI — warna naye pate pe Google login nahi chalega:"
-    echo "   Firebase console → Authentication → Settings → Authorized domains"
-    echo "   → Add domain → $SITE.web.app → Add"
-    read -r -p "   Add kar diya? Enter dabao… " _
+    # A site that already existed (a new computer, Cloud Shell) has its
+    # login domain added long ago — ask only for a brand-new one.
+    if [ -n "$MADE" ]; then
+      echo ""
+      echo "👉 ZAROORI — warna naye pate pe Google login nahi chalega:"
+      echo "   Firebase console → Authentication → Settings → Authorized domains"
+      echo "   → Add domain → $SITE.web.app → Add"
+      read -r -p "   Add kar diya? Enter dabao… " _ </dev/tty
+    fi
   fi
   SITE="$(admin_site)"
   SITE="${SITE:-khalihan-admin}"
