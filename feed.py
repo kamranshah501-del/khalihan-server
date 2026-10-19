@@ -13,9 +13,10 @@ from datetime import datetime, timedelta, timezone
 
 import requests
 
+FEED_REPO = os.environ.get("KHALIHAN_FEED_REPO", "kamranshah501-del/khalihan-feed")
 FEED_URL = os.environ.get(
     "KHALIHAN_FEED_URL",
-    "https://raw.githubusercontent.com/kamranshah501-del/khalihan-feed/main/latest.json.gz",
+    f"https://raw.githubusercontent.com/{FEED_REPO}/main/latest.json.gz",
 )
 MAX_AGE = timedelta(hours=30)
 
@@ -50,15 +51,29 @@ def parse(raw, now=None):
 
 def load(log=print):
     """The collector's latest rows, or {} when there is no fresh feed."""
+    token = os.environ.get("FEED_TOKEN", "").strip()
     try:
-        response = requests.get(FEED_URL, timeout=30)
+        if token:
+            # A private feed repo: read the file through GitHub's API.
+            response = requests.get(
+                f"https://api.github.com/repos/{FEED_REPO}/contents/latest.json.gz",
+                headers={
+                    "Authorization": f"Bearer {token}",
+                    "Accept": "application/vnd.github.raw",
+                    "X-GitHub-Api-Version": "2022-11-28",
+                },
+                timeout=30,
+            )
+        else:
+            response = requests.get(FEED_URL, timeout=30)
         if response.status_code == 404:
             log("Feed: none yet (no collector has uploaded).")
             return {}
         response.raise_for_status()
         states, made = parse(response.content)
     except Exception as error:
-        log(f"Feed: not read — {error}")
+        message = str(error).replace(token, "***") if token else str(error)
+        log(f"Feed: not read — {message}")
         return {}
     log(f"Feed: {len(states)} state(s) from the collector (made {made}).")
     return states

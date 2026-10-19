@@ -38,6 +38,8 @@ jobs:
           PYTHONUNBUFFERED: "1"
           DATA_GOV_IN_API_KEY: ${{ secrets.DATA_GOV_IN_API_KEY }}
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          # Only needed if khalihan-feed is private: a token that can read it.
+          FEED_TOKEN: ${{ secrets.FEED_TOKEN }}
           STATES: ${{ vars.STATES }}
           MODE: ${{ github.event.inputs.mode || (github.event.schedule == '30 0 * * *' && 'morning') || (github.event.schedule == '30 1 * * *' && 'brief7') || (github.event.schedule == '30 2 * * *' && 'brief8') || (github.event.schedule == '0 14 * * *' && 'evening') || 'refresh' }}
 

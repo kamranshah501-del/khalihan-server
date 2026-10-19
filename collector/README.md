@@ -25,8 +25,10 @@ data.gov.in ──► phone / Jamner computer (collect.py) ──► GitHub repo
 `~/.khalihan/key` (data.gov.in key) and `~/.khalihan/token` (GitHub
 fine-grained token: **khalihan-feed only, Contents: Read and write** — it
 cannot touch this repo or Firebase). Lost phone → delete the token on GitHub.
-The feed repo is public on purpose: it holds only public government prices,
-and the job reads it without a key.
+The feed repo can be public (only public government prices; the job reads
+it without a key) or private — then add a token that can read it as the
+secret `FEED_TOKEN` in khalihan-server (Settings → Secrets and variables →
+Actions); the job then reads the file through GitHub's API.
 
 ## Android (Termux)
 1. GitHub → new repo `khalihan-feed`, Public, with a README.
