@@ -120,17 +120,26 @@ def get_page(key, state, offset):
     raise last
 
 
+def _state_key(name):
+    return "".join(ch for ch in (name or "").lower().replace("&", "and") if ch.isalpha())
+
+
 def fetch_state(key, state):
-    """Every row for one state, only the fields the job uses."""
+    """Every row for one state, only the fields the job uses. The API's
+    filter matches words ("Madhya Pradesh" also brings Uttar Pradesh), so
+    rows are checked against the whole state name."""
+    want = _state_key(state)
     rows = []
     total = 0
     for page in range(MAX_PAGES):
         data = get_page(key, state, page * PAGE)
         batch = data.get("records") or []
         for record in batch:
+            if record.get("state") and _state_key(record.get("state")) != want:
+                continue
             rows.append({f: record.get(f) for f in FIELDS if record.get(f) is not None})
-        total = int(data.get("total") or len(rows))
-        if len(rows) >= total or not batch:
+        total = int(data.get("total") or 0)
+        if (page + 1) * PAGE >= total or not batch:
             break
         time.sleep(1)  # gentle on the government server
     return rows, total

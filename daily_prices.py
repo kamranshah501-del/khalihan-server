@@ -78,6 +78,19 @@ def slug(text):
     return "_".join(part for part in "".join(out).split("_") if part)
 
 
+def _state_key(name):
+    return re.sub(r"[^a-z]", "", (name or "").lower().replace("&", "and"))
+
+
+def only_state(rows, state):
+    """The government API's state filter matches words, not the whole name:
+    "Madhya Pradesh" also brings Uttar, Himachal and Andhra Pradesh, and
+    "Jammu and Kashmir" brings Andaman and Nicobar. Keep only rows that are
+    really this state's (rows without a state field are kept)."""
+    want = _state_key(state)
+    return [r for r in rows if not r.get("state") or _state_key(r.get("state")) == want]
+
+
 def get_page(api_key, state, offset):
     """One page, with patience. The government API is often slow, so a
     single timeout must not throw away the whole day."""
@@ -446,6 +459,35 @@ def save_status(db, mode, took, api_down, results, phone=0):
         print(f"status/daily not saved — {error}")
 
 
+# The first collector run (19 Oct 2026) filed rows of several states under
+# each "Pradesh" state and Andaman's under Jammu and Kashmir. Once: drop that
+# day's summary (a richer-looking wrong copy would otherwise be kept) and the
+# mandis it added, so this run files the right rows. Guarded by a flag.
+MIXED_DAY = "2026-10-19"
+MIXED_STATES = ["Andhra Pradesh", "Himachal Pradesh", "Madhya Pradesh", "Uttar Pradesh", "Jammu and Kashmir"]
+
+
+def repair_mixed_day(db):
+    flag = db.collection("status").document("repairs")
+    try:
+        snap = flag.get()
+        if snap.exists and (snap.to_dict() or {}).get("mixed_2026_10_19"):
+            return
+        for state in MIXED_STATES:
+            scope = slug(state)
+            db.collection("prices").document(scope).collection("days").document(MIXED_DAY).delete()
+            ref = db.collection("mandi_days").document(scope)
+            doc = ref.get()
+            if doc.exists:
+                kept = [m for m in (doc.to_dict() or {}).get("m") or []
+                        if isinstance(m, dict) and str(m.get("d") or "") != MIXED_DAY]
+                ref.set({"m": kept, "at": firestore.SERVER_TIMESTAMP})
+            print(f"Repair: {state} — {MIXED_DAY} summary and its new mandis removed")
+        flag.set({"mixed_2026_10_19": True, "at": firestore.SERVER_TIMESTAMP}, merge=True)
+    except Exception as error:
+        print(f"Repair not done — {error}")
+
+
 def main():
     api_key = os.environ.get("DATA_GOV_IN_API_KEY", "").strip()
     service_account = os.environ.get("FIREBASE_SERVICE_ACCOUNT", "").strip()
@@ -487,6 +529,7 @@ def main():
     # Rows the collector (a phone on a home connection) read from
     # data.gov.in — used first, since the API turns this server away.
     from_phone = feed.load(log=print)
+    repair_mixed_day(db)
 
     # If the first handful of states all fail, the API is down for this run:
     # stop knocking on a closed door and fall straight back to the archive.
@@ -503,13 +546,14 @@ def main():
         prices = {}
         state_day = day
         try:
-            if from_phone.get(state):
-                rows = from_phone[state]
+            phone_rows = only_state(from_phone.get(state) or [], state)
+            if phone_rows:
+                rows = phone_rows
                 source = "phone"
             else:
                 if api["down"]:
                     raise RuntimeError("skipped — the government API is down this run")
-                rows = fetch_state(api_key, state)
+                rows = only_state(fetch_state(api_key, state), state)
                 source = "data.gov.in"
                 with api_lock:
                     api["ok"] += 1
