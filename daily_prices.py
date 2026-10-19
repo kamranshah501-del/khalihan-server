@@ -314,6 +314,9 @@ def save_prices(db, state, prices, day):
 # few districts; filing it would draw a misleading point in the history.
 MIN_BACKFILL_CROPS = 20
 
+# Where the second source is richer than data.gov.in, it comes first.
+RICHER_SECOND = {"Maharashtra": "msamb"}
+
 # States with a second, independent source for the days data.gov.in is down.
 SECOND_SOURCES = {
     "Maharashtra": msamb.fetch_rows,
@@ -547,7 +550,20 @@ def main():
         state_day = day
         try:
             phone_rows = only_state(from_phone.get(state) or [], state)
-            if phone_rows:
+            # Maharashtra's own board (MSAMB) lists about four times the
+            # mandis data.gov.in does: when it answers with more, use it.
+            board = None
+            if phone_rows and state in RICHER_SECOND:
+                try:
+                    board = SECOND_SOURCES[state](log=print)
+                except Exception as board_error:
+                    print(f"  {state}: {RICHER_SECOND[state]} failed — {board_error}; using the phone's rows")
+                if not board or len(board) <= len(phone_rows):
+                    board = None
+            if board:
+                rows = board
+                source = RICHER_SECOND[state]
+            elif phone_rows:
                 rows = phone_rows
                 source = "phone"
             else:
@@ -561,7 +577,8 @@ def main():
             prices = summarise(rows)
             print(f"{state}: {len(rows)} rows, {len(prices)} crops ({source})")
             result.update(source=source, rows=len(rows))
-            cross_check(state, rows, log=print)
+            if not board:  # the board's own rows need no check against the board
+                cross_check(state, rows, log=print)
             try:
                 save_live(db, state, rows)
             except Exception as error:
@@ -570,6 +587,8 @@ def main():
                 save_mandi_days(db, state, rows)
             except Exception as error:
                 print(f"  {state}: could not save mandi days — {error}")
+            if board:
+                backfill(db, state, rows, state_day)
         except Exception as error:
             rows = []
             with api_lock:
