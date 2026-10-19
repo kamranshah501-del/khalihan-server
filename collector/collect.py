@@ -147,8 +147,18 @@ def upload(token, repo, payload, message):
         "X-GitHub-Api-Version": "2022-11-28",
         "User-Agent": "khalihan-collector",
     }
-    blob = http_json(f"{api}/git/blobs", headers=headers, method="POST",
-                     body={"content": base64.b64encode(payload).decode("ascii"), "encoding": "base64"})
+    content = base64.b64encode(payload).decode("ascii")
+    try:
+        blob = http_json(f"{api}/git/blobs", headers=headers, method="POST",
+                         body={"content": content, "encoding": "base64"})
+    except urllib.error.HTTPError as error:
+        if error.code != 409:
+            raise
+        # A brand-new, empty repo (made without a README): the first file
+        # has to go in through the contents API; later rounds use the above.
+        made = http_json(f"{api}/contents/latest.json.gz", headers=headers, method="PUT",
+                         body={"message": message, "content": content})
+        return made["commit"]["sha"]
     tree = http_json(f"{api}/git/trees", headers=headers, method="POST",
                      body={"tree": [{"path": "latest.json.gz", "mode": "100644", "type": "blob", "sha": blob["sha"]}]})
     commit = http_json(f"{api}/git/commits", headers=headers, method="POST",
