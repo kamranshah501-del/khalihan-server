@@ -11,6 +11,8 @@
 //   config/app → sell_districts.{State}  where Khalihan buys ("Khalihan ko becho")
 //   kendra/info → districts, km, lat, lon, address   who sees the Kendra
 //   kendra/home_card → on                the square card on Home
+//   config/app → notice                  a strip on the app's Home (v1.0.4+)
+//   waiting/{id} → s                     "my state isn't in the list" (counted)
 //
 // In the app (v1.0.4+) Schemes and the Kendra sit inside the Services tab
 // (AppConfig.featureParent). `def` = what the app does while the server has
@@ -42,8 +44,41 @@ export const SWITCH_WORDS = {
     sw_data_ok: 'Prices: {d} · {n} rows',
     sw_data_old: 'Last prices: {d}',
     sw_app_full: 'App: ready',
-    sw_app_soon: 'App: towns & map in v1.0.5',
+    sw_app_soon: 'App: towns & map from v1.0.4',
     sw_app_basic: 'App: prices only',
+    sw_state_confirm_soon: 'Open {s}? Its mandi towns, district map and schemes come with app v1.0.4 — farmers on older versions see prices, weather and the calendar only.',
+    sw_waiting: '⏳ {n} waiting',
+    sw_waiting_total: 'Farmers waiting for their state (from the app): {n}',
+    sw_waiting_none: 'No farmer has asked for another state yet.',
+    sw_notice: 'Notice on Home',
+    sw_notice_d: 'A strip at the top of Home on the days you choose — mandis closed for a festival, prices late, or your own words. Farmers can hide it; a new notice shows again. App v1.0.4+.',
+    sw_notice_none: 'No notice',
+    sw_notice_live: 'Live',
+    sw_notice_sched: 'From {d}',
+    sw_notice_ended: 'Ended',
+    sw_n_now: 'Now on the app',
+    sw_n_kind: 'Type',
+    sw_n_closed: 'Mandis closed (festival / holiday)',
+    sw_n_late: 'Prices late today',
+    sw_n_custom: 'My own words',
+    sw_n_a: 'Mandis closed from',
+    sw_n_b: 'to',
+    sw_n_from: 'Show from',
+    sw_n_until: 'Show until',
+    sw_n_states: 'Which states',
+    sw_n_all: 'All open states',
+    sw_n_words: 'Your words (write at least one language)',
+    sw_n_extra: 'Extra line (optional), e.g. "Diwali"',
+    sw_n_preview: 'How farmers see it',
+    sw_n_save: 'Put up the notice',
+    sw_n_remove: 'Take it down',
+    sw_n_remove_q: 'Take the notice down from every phone?',
+    sw_n_saved: 'Notice saved — open phones show it within seconds',
+    sw_n_removed: 'Notice taken down',
+    sw_n_bad_dates: 'Check the dates: "Show until" must be on or after "Show from".',
+    sw_n_bad_closed: 'Give the day the mandis close.',
+    sw_n_bad_words: 'Write the notice in at least one language.',
+    sw_n_old: 'Phones on app v1.0.3 or older don\'t show notices.',
     sw_state_confirm: 'Open {s}? The app has only its prices so far — no mandi distances, district map or state schemes yet. Farmers there will see prices, weather and the calendar.',
     sw_state_close: 'Close {s}? Farmers who already picked it keep it, but new farmers can\'t pick it.',
     sw_server: '🖥️ Server\'s last run: {t}',
@@ -119,7 +154,40 @@ export const SWITCH_WORDS = {
     sw_data_ok: 'भाव: {d} · {n} लाइनें',
     sw_data_old: 'आख़िरी भाव: {d}',
     sw_app_full: 'ऐप: तैयार',
-    sw_app_soon: 'ऐप: मंडी व नक्शा v1.0.5 में',
+    sw_app_soon: 'ऐप: मंडी व नक्शा v1.0.4 से',
+    sw_state_confirm_soon: '{s} खोलें? इसकी मंडियाँ, ज़िलों का नक्शा और योजनाएँ ऐप v1.0.4 के साथ आती हैं — पुराने ऐप वाले किसानों को सिर्फ़ भाव, मौसम और कैलेंडर दिखेंगे।',
+    sw_waiting: '⏳ {n} इंतज़ार में',
+    sw_waiting_total: 'अपने राज्य का इंतज़ार कर रहे किसान (ऐप से): {n}',
+    sw_waiting_none: 'अभी किसी किसान ने दूसरा राज्य नहीं माँगा।',
+    sw_notice: 'Home पर सूचना',
+    sw_notice_d: 'Home के ऊपर एक पट्टी, आपके चुने दिनों में — त्योहार पर मंडी बंद, भाव देर से, या आपके अपने शब्द। किसान इसे हटा सकते हैं; नई सूचना फिर दिखती है। ऐप v1.0.4+।',
+    sw_notice_none: 'कोई सूचना नहीं',
+    sw_notice_live: 'चालू',
+    sw_notice_sched: '{d} से',
+    sw_notice_ended: 'ख़त्म',
+    sw_n_now: 'अभी ऐप में',
+    sw_n_kind: 'प्रकार',
+    sw_n_closed: 'मंडी बंद (त्योहार / छुट्टी)',
+    sw_n_late: 'आज भाव देर से',
+    sw_n_custom: 'मेरे अपने शब्द',
+    sw_n_a: 'मंडी बंद, कब से',
+    sw_n_b: 'कब तक',
+    sw_n_from: 'दिखाना, कब से',
+    sw_n_until: 'दिखाना, कब तक',
+    sw_n_states: 'किन राज्यों में',
+    sw_n_all: 'सभी चालू राज्य',
+    sw_n_words: 'आपके शब्द (कम से कम एक भाषा में)',
+    sw_n_extra: 'एक और लाइन (चाहें तो), जैसे "दिवाली"',
+    sw_n_preview: 'किसान को ऐसे दिखेगा',
+    sw_n_save: 'सूचना लगाएँ',
+    sw_n_remove: 'सूचना हटाएँ',
+    sw_n_remove_q: 'सभी फ़ोन से सूचना हटाएँ?',
+    sw_n_saved: 'सूचना लग गई — खुले फ़ोन पर कुछ सेकंड में दिखेगी',
+    sw_n_removed: 'सूचना हटा दी',
+    sw_n_bad_dates: 'तारीख़ देखें: "कब तक" "कब से" के बाद होनी चाहिए।',
+    sw_n_bad_closed: 'मंडी बंद होने का दिन डालें।',
+    sw_n_bad_words: 'कम से कम एक भाषा में सूचना लिखें।',
+    sw_n_old: 'ऐप v1.0.3 या पुराने वाले फ़ोन पर सूचना नहीं दिखती।',
     sw_app_basic: 'ऐप: सिर्फ़ भाव',
     sw_state_confirm: '{s} खोलें? ऐप में अभी इसके सिर्फ़ भाव हैं — मंडी की दूरी, ज़िलों का नक्शा और राज्य की योजनाएँ नहीं। वहाँ के किसानों को भाव, मौसम और कैलेंडर दिखेंगे।',
     sw_state_close: '{s} बंद करें? जिन किसानों ने चुन लिया है उनके पास रहेगा, नए किसान नहीं चुन पाएँगे।',
@@ -198,6 +266,7 @@ export const FEATURE_INFO = {
 /** The sections, in order. `kind` picks a special settings panel. */
 const SECTIONS = [
   { id: 'states', icon: '📍', kind: 'states' },
+  { id: 'notice', icon: '📣', kind: 'notice' },
   { id: 'prices', icon: '📈', master: null, kids: ['price_map', 'hold_sell', 'day_voice', 'share_picture', 'alerts', 'brief'] },
   { id: 'weather', icon: '🌦️', master: 'weather', kids: [] },
   { id: 'calendar', icon: '🌱', master: 'calendar', kids: [] },
@@ -227,7 +296,38 @@ const STATE_HI = {
 };
 
 /** How much of a state the app knows beyond its prices (mandi towns, map, schemes). */
+// MP's pack is in app v1.0.4 (not on Play yet, 20 Oct 2026): 'full' once it is.
 const APP_READY = { Maharashtra: 'full', 'Madhya Pradesh': 'soon' };
+
+/** The ready-made notices, word for word as the app writes them (lib/l10n
+ *  strings notice_closed / notice_late) — for the preview. */
+const NOTICE_TEXT = {
+  closed: {
+    en: 'Many mandis are closed {d} — no new prices for those days.',
+    hi: '{d} कई मंडियाँ बंद रहेंगी — इन दिनों के भाव नहीं आएँगे।',
+    mr: '{d} अनेक बाजार समित्या बंद राहतील — या दिवसांचे भाव येणार नाहीत.',
+  },
+  late: {
+    en: 'Today\'s prices are coming late — check again in a few hours.',
+    hi: 'आज के भाव देर से आ रहे हैं — कुछ घंटों बाद फिर देखें।',
+    mr: 'आजचे भाव उशिरा येत आहेत — काही तासांनी पुन्हा पाहा.',
+  },
+};
+const NOTICE_LANGS = [['hi', 'हिंदी'], ['mr', 'मराठी'], ['en', 'English']];
+
+/** "08–10 Nov", as the app writes it (AppNotice.days); a and b are "YYYY-MM-DD". */
+export function noticeDays(a, b) {
+  const M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const parts = (x) => String(x).split('-').map(Number);
+  const [ya, ma, da] = parts(a);
+  const [yb, mb, db] = parts(b || a);
+  const two = (n) => String(n).padStart(2, '0');
+  const one = (d, m) => `${two(d)} ${M[m - 1]}`;
+  if (ya === yb && ma === mb && da === db) return one(da, ma);
+  if (ya === yb && ma === mb) return `${two(da)}–${one(db, mb)}`;
+  return `${one(da, ma)} – ${one(db, mb)}`;
+}
+const todayIst = () => new Date().toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
 
 /** Maharashtra's districts, with the keys the app uses (lib/data/mandi_places.dart). */
 const MH_DISTRICTS = [
@@ -292,11 +392,24 @@ export function createSwitches(c) {
   // ── the list of sections ──────────────────────────────────────────────
   function sectionTitle(s) {
     if (s.kind === 'states') return tr('sw_states');
+    if (s.kind === 'notice') return tr('sw_notice');
     return s.master ? tr('f_' + s.master) : tr('sw_prices');
   }
 
   /** One line under a section's name: what is on. */
+  function noticeState(n) {
+    if (!n || !n.from || !n.until) return null;
+    const today = todayIst();
+    if (n.until < today) return 'ended';
+    return n.from > today ? 'sched' : 'live';
+  }
   function summary(s) {
+    if (s.kind === 'notice') {
+      const n = data.notice;
+      const st = noticeState(n);
+      if (!st || st === 'ended') return esc(tr('sw_notice_none'));
+      return esc(`${tr('sw_n_' + n.kind)} · ${noticeDays(n.from, n.until)}`);
+    }
     if (s.kind === 'states') {
       const list = openStates().map(stateName).join(', ');
       return esc(tr('sw_states_sum', { s: list }));
@@ -320,6 +433,12 @@ export function createSwitches(c) {
 
   function statePill(s) {
     if (s.kind === 'states') return `<span class="pill info">${openStates().length}</span>`;
+    if (s.kind === 'notice') {
+      const st = noticeState(data.notice);
+      if (st === 'live') return `<span class="pill on">${tr('sw_notice_live')}</span>`;
+      if (st === 'sched') return `<span class="pill info">${esc(tr('sw_notice_sched', { d: noticeDays(data.notice.from) }))}</span>`;
+      return `<span class="pill off">${tr('sw_off')}</span>`;
+    }
     if (!s.master) return `<span class="pill on">${tr('sw_always')}</span>`;
     const on = featOn(s.master) && (s.id !== 'kendra' || featOn('services'));
     const warn = on && ((s.kind === 'kendra' && !kendraDistricts().length && !Number(data.kinfo.km))
@@ -343,7 +462,7 @@ export function createSwitches(c) {
     return `<div class="swdh">
       <span class="swicon big" aria-hidden="true">${s.icon}</span>
       <div class="grow"><h2>${esc(sectionTitle(s))} ${s.master ? sinceChip(s.master) : ''}</h2><p class="sub">${esc(desc)}</p></div>
-      ${s.kind === 'states' ? '' : master}
+      ${s.kind === 'states' || s.kind === 'notice' ? '' : master}
     </div>`;
   }
 
@@ -396,12 +515,24 @@ export function createSwitches(c) {
     const phone = sv.phone_states > 0 ? `<br>${esc(tr('sw_phone', { n: sv.phone_states }))}` : '';
     return `<div class="swserver ${sv.gov_api_down && !phone ? 'down' : 'up'}"><b>${esc(tr('sw_server', { t }))}</b><br>${tr(sv.gov_api_down ? 'sw_gov_down' : 'sw_gov_ok')}${phone}</div>`;
   }
+  function waitChip(state) {
+    const n = memo.waiting && memo.waiting[state];
+    return n ? `<span class="chip swwait">${esc(tr('sw_waiting', { n: Number(n).toLocaleString('en-IN') }))}</span>` : '';
+  }
+  function waitingLine() {
+    const w = memo.waiting;
+    if (!w) return '';
+    if (!w._total) return `<p class="small muted">${tr('sw_waiting_none')}</p>`;
+    const top = Object.entries(w).filter(([k]) => k !== '_total').sort((a, b) => b[1] - a[1]).slice(0, 3)
+      .map(([k, n]) => `${esc(stateName(k))} ${Number(n).toLocaleString('en-IN')}`).join(' · ');
+    return `<p class="small"><b>${esc(tr('sw_waiting_total', { n: Number(w._total).toLocaleString('en-IN') }))}</b>${top ? ` — ${top}` : ''}</p>`;
+  }
   function stateRow(state, open) {
     const mh = state === 'Maharashtra';
     return `<div class="swstate${open ? ' on' : ''}">
       <button class="kswitch small${open ? ' on' : ''}" data-state="${esc(state)}" aria-pressed="${open}" aria-label="${esc(stateName(state))}" ${mh ? `disabled title="${esc(tr('sw_mh_locked'))}"` : ''}><span class="knob"></span></button>
       <div class="grow"><div class="swkt">${esc(stateName(state))}</div>
-        <div class="row swchips">${statusChip(state)} ${sourceChip(state)} ${appChip(state)}</div>
+        <div class="row swchips">${statusChip(state)} ${sourceChip(state)} ${appChip(state)} ${waitChip(state)}</div>
         ${open ? lastError(state) : ''}</div>
     </div>`;
   }
@@ -411,6 +542,7 @@ export function createSwitches(c) {
     return `${head(s, tr('sw_states_d'))}
       <div class="swblock">
         <div class="row between" style="margin-bottom:8px">${serverLine()}</div>
+        ${waitingLine()}
         <div class="row" style="justify-content:flex-end;margin:-4px 0 6px"><button class="plain small" id="sw-refresh">${tr('sw_refresh')}</button></div>
         ${open.map((x) => stateRow(x, true)).join('')}
         <details class="swmore"${memo.moreOpen ? ' open' : ''}><summary>${tr('sw_other_states', { n: rest.length })}</summary>
@@ -481,21 +613,82 @@ export function createSwitches(c) {
       <p class="small muted">${tr('sw_k_more')}</p>`;
   }
 
+  // ── Notice on Home ──
+  function noticeDraft() {
+    if (memo.nf) return memo.nf;
+    const n = data.notice;
+    const live = noticeState(n);
+    const today = todayIst();
+    memo.nf = live && live !== 'ended'
+      ? { kind: n.kind, a: n.a || today, b: n.b || n.a || today, from: n.from, until: n.until, states: new Set(n.states || []), text: { ...(n.text || {}) } }
+      : { kind: 'closed', a: today, b: today, from: today, until: today, states: new Set(), text: {} };
+    return memo.nf;
+  }
+  function noticePreview(d) {
+    const days = noticeDays(d.a, d.b);
+    return NOTICE_LANGS.map(([lang, label]) => {
+      const main = d.kind === 'custom'
+        ? (d.text[lang] || '').trim()
+        : NOTICE_TEXT[d.kind][lang].replace('{d}', days);
+      const extra = d.kind === 'custom' ? '' : (d.text[lang] || '').trim();
+      if (!main) return '';
+      return `<div class="nprev"><span class="small muted">${label}</span><div class="nstrip"><b>📣 ${esc(main)}</b>${extra ? `<br><span class="small">${esc(extra)}</span>` : ''}</div></div>`;
+    }).join('') || `<p class="small muted">${tr('sw_n_bad_words')}</p>`;
+  }
+  function noticeDetail(s) {
+    const d = noticeDraft();
+    const n = data.notice;
+    const st = noticeState(n);
+    const open = openStates();
+    const now = st && st !== 'ended'
+      ? `<div class="swblock"><h3>${tr('sw_n_now')} · <span class="pill ${st === 'live' ? 'on' : 'info'}">${st === 'live' ? tr('sw_notice_live') : esc(tr('sw_notice_sched', { d: noticeDays(n.from) }))}</span></h3>
+          <p class="small">${esc(tr('sw_n_' + n.kind))} · ${esc(noticeDays(n.from, n.until))} · ${esc((n.states || []).length ? (n.states || []).map(stateName).join(', ') : tr('sw_n_all'))}</p>
+          <div class="actions"><button class="danger" id="n-remove">${tr('sw_n_remove')}</button></div></div>`
+      : '';
+    return `${head(s, tr('sw_notice_d'))}
+      ${now}
+      <div class="swblock">
+        <div class="form">
+          <div class="wide"><label for="n-kind">${tr('sw_n_kind')}</label><select id="n-kind">
+            ${['closed', 'late', 'custom'].map((k) => `<option value="${k}" ${d.kind === k ? 'selected' : ''}>${esc(tr('sw_n_' + k))}</option>`).join('')}
+          </select></div>
+          <div data-nclosed ${d.kind === 'closed' ? '' : 'hidden'}><label for="n-a">${tr('sw_n_a')}</label><input type="date" id="n-a" value="${esc(d.a)}"></div>
+          <div data-nclosed ${d.kind === 'closed' ? '' : 'hidden'}><label for="n-b">${tr('sw_n_b')}</label><input type="date" id="n-b" value="${esc(d.b)}"></div>
+          <div><label for="n-from">${tr('sw_n_from')}</label><input type="date" id="n-from" value="${esc(d.from)}"></div>
+          <div><label for="n-until">${tr('sw_n_until')}</label><input type="date" id="n-until" value="${esc(d.until)}"></div>
+        </div>
+        <h3>${tr('sw_n_states')}</h3>
+        <label class="swkid"><input type="checkbox" id="n-all" ${d.states.size ? '' : 'checked'}><div class="grow"><div class="swkt">${tr('sw_n_all')}</div></div></label>
+        ${open.map((x) => `<label class="swkid${d.states.size ? '' : ' dim'}"><input type="checkbox" data-nstate="${esc(x)}" ${d.states.has(x) ? 'checked' : ''} ${d.states.size ? '' : 'disabled'}><div class="grow"><div class="swkt">${esc(stateName(x))}</div></div></label>`).join('')}
+        <h3 id="n-words-h">${d.kind === 'custom' ? tr('sw_n_words') : tr('sw_n_extra')}</h3>
+        <div class="form">
+          ${NOTICE_LANGS.map(([lang, label]) => `<div class="wide"><label for="n-t-${lang}">${label}</label><textarea id="n-t-${lang}" maxlength="240" rows="2">${esc(d.text[lang] || '')}</textarea></div>`).join('')}
+        </div>
+        <h3>${tr('sw_n_preview')}</h3>
+        <div id="n-preview">${noticePreview(d)}</div>
+        <p class="small muted">${tr('sw_n_old')}</p>
+        <div class="actions"><button class="main" id="n-save">${tr('sw_n_save')}</button></div>
+      </div>`;
+  }
+
   function detailHtml() {
     const s = SECTIONS.find((x) => x.id === memo.sel) || SECTIONS[0];
-    const body = s.kind === 'states' ? statesDetail(s) : s.kind === 'kendra' ? kendraDetail(s) : s.kind === 'sell' ? sellDetail(s) : featureDetail(s);
+    const body = s.kind === 'states' ? statesDetail(s) : s.kind === 'notice' ? noticeDetail(s) : s.kind === 'kendra' ? kendraDetail(s) : s.kind === 'sell' ? sellDetail(s) : featureDetail(s);
     return `<section class="card swdetail">${wide() ? '' : `<button class="plain small swback" id="sw-back">${tr('sw_back')}</button>`}${body}</section>`;
   }
 
   // ── loading ───────────────────────────────────────────────────────────
   async function loadStatus(force) {
     if (memo.status && !force) return;
-    const [live, server] = await Promise.all([
+    const [live, server, waiting] = await Promise.all([
       c.db().liveStatus(STATES.map((s) => [s, stateSlug(s)])).catch((e) => { console.warn(e); return {}; }),
       (c.db().serverStatus ? c.db().serverStatus() : Promise.resolve(null)).catch(() => null),
+      // Needs the 20 Oct rules (waiting/); before the deploy this just shows nothing.
+      (c.db().waitingCounts ? c.db().waitingCounts(STATES) : Promise.resolve(null)).catch(() => null),
     ]);
     memo.status = live;
     memo.server = server;
+    memo.waiting = waiting;
   }
 
   async function loadDistricts(state) {
@@ -521,7 +714,7 @@ export function createSwitches(c) {
       c.db().kendraCard().catch(() => ({ on: false, secs: 4, slides: [] })),
       loadStatus(false),
     ]);
-    data = { features: cfg.features || {}, launch: cfg.launch_states || [], sell: cfg.sell_districts || {}, kinfo: kinfo || {}, kcard };
+    data = { features: cfg.features || {}, launch: cfg.launch_states || [], sell: cfg.sell_districts || {}, notice: cfg.notice || null, kinfo: kinfo || {}, kcard };
   }
 
   function render() {
@@ -587,7 +780,7 @@ export function createSwitches(c) {
         const state = b.dataset.state;
         if (state === 'Maharashtra') return;
         const isOpen = data.launch.includes(state);
-        if (!isOpen && APP_READY[state] !== 'full' && !confirm(tr('sw_state_confirm', { s: stateName(state) }))) return;
+        if (!isOpen && APP_READY[state] !== 'full' && !confirm(tr(APP_READY[state] === 'soon' ? 'sw_state_confirm_soon' : 'sw_state_confirm', { s: stateName(state) }))) return;
         if (isOpen && !confirm(tr('sw_state_close', { s: stateName(state) }))) return;
         const others = data.launch.filter((s) => s !== 'Maharashtra' && s !== state);
         const next = isOpen ? others : [...others, state];
@@ -673,6 +866,52 @@ export function createSwitches(c) {
         toast(tr('sw_saved'));
         await refresh();
       } catch (e) { save.disabled = false; fail(e); }
+    };
+
+    // ── notice form ──
+    const nk = document.getElementById('n-kind');
+    if (nk) {
+      const val = (id) => (document.getElementById(id) || {}).value || '';
+      const read = () => {
+        const d = noticeDraft();
+        d.kind = val('n-kind');
+        d.a = val('n-a'); d.b = val('n-b') || d.a;
+        d.from = val('n-from'); d.until = val('n-until');
+        const all = document.getElementById('n-all').checked;
+        d.states = new Set(all ? [] : [...document.querySelectorAll('[data-nstate]')].filter((x) => x.checked).map((x) => x.dataset.nstate));
+        NOTICE_LANGS.forEach(([lang]) => { d.text[lang] = val('n-t-' + lang).trim(); });
+        return d;
+      };
+      const paint = () => {
+        const d = read();
+        document.querySelectorAll('[data-nclosed]').forEach((el) => { el.hidden = d.kind !== 'closed'; });
+        document.getElementById('n-words-h').textContent = d.kind === 'custom' ? tr('sw_n_words') : tr('sw_n_extra');
+        const all = document.getElementById('n-all').checked;
+        document.querySelectorAll('[data-nstate]').forEach((x) => { x.disabled = all; x.closest('label').classList.toggle('dim', all); });
+        document.getElementById('n-preview').innerHTML = noticePreview(d);
+      };
+      document.querySelectorAll('#n-kind, #n-a, #n-b, #n-from, #n-until, #n-all, [data-nstate], [id^="n-t-"]').forEach((el) => {
+        el.addEventListener(el.tagName === 'TEXTAREA' ? 'input' : 'change', paint);
+      });
+      document.getElementById('n-save').onclick = async () => {
+        const d = read();
+        if (d.kind === 'closed' && !d.a) { toast(tr('sw_n_bad_closed')); return; }
+        if (!d.from || !d.until || d.until < d.from) { toast(tr('sw_n_bad_dates')); return; }
+        const text = {};
+        NOTICE_LANGS.forEach(([lang]) => { if (d.text[lang]) text[lang] = d.text[lang].slice(0, 240); });
+        if (d.kind === 'custom' && !Object.keys(text).length) { toast(tr('sw_n_bad_words')); return; }
+        const notice = { id: Date.now().toString(36), kind: d.kind, from: d.from, until: d.until, states: [...d.states], text };
+        if (d.kind === 'closed') { notice.a = d.a; notice.b = d.b < d.a ? d.a : d.b; }
+        const btn = document.getElementById('n-save');
+        btn.disabled = true;
+        try { await c.db().setNotice(notice); memo.nf = null; toast(tr('sw_n_saved')); await refresh(); } catch (e) { btn.disabled = false; fail(e); }
+      };
+    }
+    const nr = document.getElementById('n-remove');
+    if (nr) nr.onclick = async () => {
+      if (!confirm(tr('sw_n_remove_q'))) return;
+      nr.disabled = true;
+      try { await c.db().setNotice(null); memo.nf = null; toast(tr('sw_n_removed')); await refresh(); } catch (e) { nr.disabled = false; fail(e); }
     };
 
     const more = document.querySelector('.swmore');

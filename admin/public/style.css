@@ -26,6 +26,7 @@ body {
   background: var(--page);
 }
 button, input, select, textarea { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
 a { color: var(--navy); }
 
 .top {
@@ -503,6 +504,10 @@ button:focus-visible, a:focus-visible, .mini:focus-visible { outline: 3px solid 
 .chip.swdata.none { background: #eef1f4; color: var(--muted); }
 .chip.swapp.full { background: var(--navy); color: #fff; }
 .chip.swapp.soon { background: var(--yellow); color: var(--ink); }
+.chip.swwait { background: var(--amber-tint); color: var(--amber); }
+/* Notice on Home: the preview looks like the app's strip */
+.nprev { display: flex; flex-direction: column; gap: 4px; margin: 0 0 10px; }
+.nstrip { background: #FFF6CC; border: 1px solid #F0DC8A; border-radius: 14px; padding: 10px 12px; color: #0A2E4A; line-height: 1.45; }
 .chip.swapp.basic { background: #eef1f4; color: var(--muted); }
 .chip.swsrc { background: #eef1f4; color: var(--ink); }
 .swerr { color: var(--red); margin-top: 4px; overflow-wrap: anywhere; }

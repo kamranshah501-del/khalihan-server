@@ -36,6 +36,7 @@ export async function connect() {
   const features = { login: true, sell: true, kendra: true };
   let launchStates = ['Maharashtra'];
   const sellDistricts = { Maharashtra: ['jalgaon'] };
+  let notice = null;
   const feedback = [
     { id: 'f1', text: 'Kapas ka bhav Pachora ka bhi dikhao', state: 'Maharashtra', district: 'Jalgaon', lang: 'hi', app: '1.0.2', at: day(0, 8) },
     { id: 'f2', text: 'खताची किंमत पाहिजे', state: 'Maharashtra', district: 'Jalgaon', lang: 'mr', app: '1.0.2', at: day(3), done: true },
@@ -108,7 +109,9 @@ export async function connect() {
       log('offers', { version: offers.version });
       return offers;
     },
-    async appConfig() { return { features: { ...features }, launch_states: [...launchStates], sell_districts: JSON.parse(JSON.stringify(sellDistricts)) }; },
+    async appConfig() { return { features: { ...features }, launch_states: [...launchStates], sell_districts: JSON.parse(JSON.stringify(sellDistricts)), notice: notice ? JSON.parse(JSON.stringify(notice)) : null }; },
+    async setNotice(n) { notice = n ? JSON.parse(JSON.stringify(n)) : null; log('notice', n ? { kind: n.kind } : { removed: true }); },
+    async waitingCounts() { return { _total: 737, 'Madhya Pradesh': 412, Gujarat: 230, 'Uttar Pradesh': 95 }; },
     async setFeature(key, on) { features[key] = on; log('feature', { key, on }); },
     async setLaunchStates(list) { launchStates = [...list]; log('launch_states', { states: list.join(', ') }); },
     async setSellDistricts(state, keys) { sellDistricts[state] = [...keys]; log('sell_districts', { state, on: keys.length }); },

@@ -7,7 +7,7 @@ import {
 import {
   getFirestore, collection, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, addDoc,
   query, where, orderBy, limit, serverTimestamp, arrayUnion, Timestamp, runTransaction,
-  getCountFromServer, writeBatch, onSnapshot,
+  getCountFromServer, writeBatch, onSnapshot, deleteField,
 } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 import { initializeAppCheck, ReCaptchaV3Provider } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app-check.js';
 
@@ -141,7 +141,28 @@ export async function connect() {
     async appConfig() {
       const snap = await getDoc(doc(db, 'config', 'app'));
       const data = snap.data() || {};
-      return { features: data.features || {}, launch_states: data.launch_states || [], sell_districts: data.sell_districts || {} };
+      return { features: data.features || {}, launch_states: data.launch_states || [], sell_districts: data.sell_districts || {}, notice: data.notice || null };
+    },
+    // The notice on the app's Home (app v1.0.4+). The whole map is replaced,
+    // so an old notice's words never mix into a new one; null takes it down.
+    async setNotice(notice) {
+      await updateDoc(doc(db, 'config', 'app'), { notice: notice || deleteField() });
+      log('notice', notice ? { kind: notice.kind, from: notice.from, until: notice.until, states: (notice.states || []).join(', ') || 'all' } : { removed: true });
+    },
+    // "My state isn't in the list": how many phones wait for each state.
+    async waitingCounts(states) {
+      const out = {};
+      const total = await getCountFromServer(collection(db, 'waiting'));
+      out._total = total.data().count;
+      if (!out._total) return out;
+      await Promise.all(states.map(async (s) => {
+        try {
+          const snap = await getCountFromServer(query(collection(db, 'waiting'), where('s', '==', s)));
+          const n = snap.data().count;
+          if (n) out[s] = n;
+        } catch (e) { /* one state failing doesn't hide the rest */ }
+      }));
+      return out;
     },
     async setFeature(key, on) {
       await setDoc(doc(db, 'config', 'app'), { features: { [key]: on } }, { merge: true });

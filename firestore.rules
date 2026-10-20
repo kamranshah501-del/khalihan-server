@@ -76,7 +76,8 @@ service cloud.firestore {
     // ── content the app reads; staff change it from Khalihan Admin ─────
     match /config/{doc} {
       allow read: if true;
-      // Offers: any staff member. Feature switches, schemes, calendar: owner.
+      // Offers: any staff member. Feature switches, the notice (config/app
+      // .notice), schemes, calendar: owner.
       allow write: if (doc == 'buy_offers' && isStaff()) || isOwner();
     }
 
@@ -90,6 +91,23 @@ service cloud.firestore {
       allow read: if isStaff();
       allow update: if isStaff()
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['done', 'note', 'by']);
+      allow delete: if isOwner();
+    }
+
+    // ── "My state isn't in the list" (app v1.0.4+, 20 Oct 2026) ─────────
+    // One document per phone, under a random id the phone made: only the
+    // state, the app version and the time — no name, number or place.
+    // Admin counts them per state to choose the next state to open.
+    match /waiting/{id} {
+      allow create, update: if id.matches('^[a-z0-9]{20}$')
+        && request.resource.data.keys().hasOnly(['s', 'app', 'at'])
+        && request.resource.data.s is string
+        && request.resource.data.s.size() > 0
+        && request.resource.data.s.size() <= 40
+        && request.resource.data.app is string
+        && request.resource.data.app.size() <= 20
+        && request.resource.data.at == request.time;
+      allow read: if isStaff();
       allow delete: if isOwner();
     }
 
