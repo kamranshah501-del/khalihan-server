@@ -291,9 +291,12 @@ def sane(pairs):
     return kept or pairs
 
 
-def save_prices(db, state, prices, day):
-    """Write the day's prices, keeping whichever copy is richer."""
-    scope = slug(state)
+def save_prices(db, state, prices, day, scope=None, label=None):
+    """Write the day's prices, keeping whichever copy is richer. `scope` is
+    the archive's document ("maharashtra", or "maharashtra__jalgaon" for a
+    district); the state's own by default."""
+    scope = scope or slug(state)
+    state = label or state
     doc = db.collection("prices").document(scope).collection("days").document(day)
     payload = {
         "d": day,
@@ -311,6 +314,29 @@ def save_prices(db, state, prices, day):
             return
     doc.set(payload)
     print(f"  {state}: saved {len(payload['c'])} crops for {day}")
+
+
+def save_district_prices(db, state, rows):
+    """Each district's day prices: prices/{state}__{district}/days/{day} —
+    the history behind a farmer's own-district chart. Phones used to write
+    these; since the 19 Oct 2026 rules the archive is server-only, so the
+    job files them now (open states only, to stay inside the free quota).
+    Same district names and slugs as the app (MarketRepository: the rows'
+    own district → PriceArchive.scopeId)."""
+    by_district = defaultdict(list)
+    for row in rows:
+        district = (row.get("district") or "").strip()
+        if district:
+            by_district[district].append(row)
+    saved = 0
+    for district, district_rows in sorted(by_district.items()):
+        prices = summarise(district_rows)
+        day = newest_day(district_rows)
+        if not prices or not day:
+            continue
+        save_prices(db, state, prices, day, scope=f"{slug(state)}__{slug(district)}", label=f"{state} / {district}")
+        saved += 1
+    print(f"  {state}: district archives checked ({saved} districts)")
 
 
 # An earlier day with fewer crops than this is mostly late reports from a
@@ -537,6 +563,15 @@ def main():
     from_phone = feed.load(log=print)
     repair_mixed_day(db)
 
+    # District histories only for the states farmers can pick (Admin →
+    # Switches → States); Maharashtra always.
+    open_states = {"Maharashtra"}
+    try:
+        cfg = db.collection("config").document("app").get().to_dict() or {}
+        open_states |= {str(s) for s in (cfg.get("launch_states") or []) if s}
+    except Exception as error:
+        print(f"Could not read the open states ({error}); district archives for Maharashtra only.")
+
     # If the first handful of states all fail, the API is down for this run:
     # stop knocking on a closed door and fall straight back to the archive.
     api = {"ok": 0, "failed": 0, "down": False}
@@ -632,6 +667,11 @@ def main():
                 save_prices(db, state, prices, state_day)
             except Exception as error:
                 print(f"  {state}: could not save to Firestore — {error}")
+        if rows and state in open_states:
+            try:
+                save_district_prices(db, state, rows)
+            except Exception as error:
+                print(f"  {state}: could not save district archives — {error}")
 
         if mode == "refresh":
             return result
