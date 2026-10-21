@@ -337,6 +337,7 @@ def save_district_prices(db, state, rows):
         save_prices(db, state, prices, day, scope=f"{slug(state)}__{slug(district)}", label=f"{state} / {district}")
         saved += 1
     print(f"  {state}: district archives checked ({saved} districts)")
+    return saved
 
 
 # An earlier day with fewer crops than this is mostly late reports from a
@@ -476,7 +477,8 @@ def save_status(db, mode, took, api_down, results, phone=0):
         "gov_api_down": bool(api_down),
         "phone_states": phone,  # states that came from the collector's feed
         "states": {
-            r["state"]: {"source": r["source"], "rows": r["rows"], "error": r["error"]}
+            r["state"]: {"source": r["source"], "rows": r["rows"], "error": r["error"],
+                         **({"districts": r["districts"]} if "districts" in r else {})}
             for r in results
         },
     }
@@ -669,9 +671,10 @@ def main():
                 print(f"  {state}: could not save to Firestore — {error}")
         if rows and state in open_states:
             try:
-                save_district_prices(db, state, rows)
+                result["districts"] = save_district_prices(db, state, rows)
             except Exception as error:
                 print(f"  {state}: could not save district archives — {error}")
+                result["districts"] = -1
 
         if mode == "refresh":
             return result
