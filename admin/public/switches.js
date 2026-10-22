@@ -147,6 +147,7 @@ export const SWITCH_WORDS = {
     f_login: 'Mobile OTP login', f_login_d: '"My account" and an OTP before selling. Every SMS costs money (about ₹6) — before turning it on, finish part D of the admin README (Blaze, Phone sign-in, SHA).',
     f_feedback: 'Suggestions', f_feedback_d: '"सुझाव दें" in Profile and Services.',
     f_home_sky: 'Living sky on Home', f_home_sky_d: 'Home\'s header shows the farm\'s own sky — dawn, day, dusk, night, clouds, rain — with the temperature. Off = the plain navy header.',
+    f_advice: 'Farming advice', f_advice_d: 'The "Farming Advice" card on Home and on the weather page, and its page: spraying, irrigation, harvest, the next 3 days. Off = no advice card.',
   },
   hi: {
     tab_features: 'स्विच',
@@ -273,6 +274,7 @@ export const SWITCH_WORDS = {
     f_login: 'मोबाइल OTP लॉग इन', f_login_d: '"मेरा खाता" और बेचने से पहले OTP। हर SMS का पैसा लगता है (लगभग ₹6) — चालू करने से पहले admin README का भाग D पूरा करें (Blaze, Phone sign-in, SHA)।',
     f_feedback: 'सुझाव', f_feedback_d: 'Profile और Services में "सुझाव दें"।',
     f_home_sky: 'Home पर जीता-जागता आसमान', f_home_sky_d: 'Home के हेडर पर खेत का अपना आसमान — सुबह, दिन, शाम, रात, बादल, बारिश — तापमान के साथ। बंद = सादा नेवी हेडर।',
+    f_advice: 'खेती की सलाह', f_advice_d: 'Home और मौसम पेज पर "खेती की सलाह" कार्ड और उसका पेज: छिड़काव, सिंचाई, कटाई, अगले 3 दिन। बंद = सलाह कार्ड नहीं दिखेगा।',
   },
 };
 SWITCH_WORDS.en.f_kendra = KENDRA_WORDS.en.feat_kendra;
@@ -295,6 +297,7 @@ export const FEATURE_INFO = {
   login: { def: false, since: '1.0.3' },
   feedback: { def: true, since: '1.0.4' },
   home_sky: { def: true, since: '1.0.4' },
+  advice: { def: true, since: '1.0.4' },
 };
 
 /** The sections, in order. `kind` picks a special settings panel. */
@@ -303,7 +306,7 @@ const SECTIONS = [
   { id: 'notice', icon: '📣', kind: 'notice' },
   { id: 'festival', icon: '🪔', kind: 'festival' },
   { id: 'prices', icon: '📈', master: null, kids: ['price_map', 'hold_sell', 'day_voice', 'share_picture', 'alerts', 'brief'] },
-  { id: 'weather', icon: '🌦️', master: 'weather', kids: ['home_sky'] },
+  { id: 'weather', icon: '🌦️', master: 'weather', kids: ['home_sky', 'advice'] },
   { id: 'calendar', icon: '🌱', master: 'calendar', kids: [] },
   { id: 'services', icon: '🏛️', master: 'services', kids: ['schemes'] },
   { id: 'kendra', icon: '🏪', master: 'kendra', kind: 'kendra' },
