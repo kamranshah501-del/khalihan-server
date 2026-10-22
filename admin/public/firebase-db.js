@@ -141,13 +141,18 @@ export async function connect() {
     async appConfig() {
       const snap = await getDoc(doc(db, 'config', 'app'));
       const data = snap.data() || {};
-      return { features: data.features || {}, launch_states: data.launch_states || [], sell_districts: data.sell_districts || {}, notice: data.notice || null };
+      return { features: data.features || {}, launch_states: data.launch_states || [], sell_districts: data.sell_districts || {}, notice: data.notice || null, festival: data.festival || null };
     },
     // The notice on the app's Home (app v1.0.4+). The whole map is replaced,
     // so an old notice's words never mix into a new one; null takes it down.
     async setNotice(notice) {
       await updateDoc(doc(db, 'config', 'app'), { notice: notice || deleteField() });
       log('notice', notice ? { kind: notice.kind, from: notice.from, until: notice.until, states: (notice.states || []).join(', ') || 'all' } : { removed: true });
+    },
+    // The festival look on the app's Home header (app v1.0.4+); null takes it down.
+    async setFestival(festival) {
+      await updateDoc(doc(db, 'config', 'app'), { festival: festival || deleteField() });
+      log('festival', festival ? { kind: festival.kind, from: festival.from, until: festival.until } : { removed: true });
     },
     // "My state isn't in the list": how many phones wait for each state.
     async waitingCounts(states) {

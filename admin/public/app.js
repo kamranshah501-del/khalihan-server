@@ -14,7 +14,7 @@ import { dealNumbers, monthSummary, offerPlan } from './money.js';
 import { KENDRA_WORDS, createKendra } from './kendra.js';
 import { SWITCH_WORDS, createSwitches } from './switches.js';
 
-const ADMIN_VERSION = '1.9.1 · 20 Oct 2026';
+const ADMIN_VERSION = '1.10 · 22 Oct 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

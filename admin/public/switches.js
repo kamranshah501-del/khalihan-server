@@ -12,6 +12,7 @@
 //   kendra/info → districts, km, lat, lon, address   who sees the Kendra
 //   kendra/home_card → on                the square card on Home
 //   config/app → notice                  a strip on the app's Home (v1.0.4+)
+//   config/app → festival                lights on Home's header for some days (v1.0.4+)
 //   waiting/{id} → s                     "my state isn't in the list" (counted)
 //
 // In the app (v1.0.4+) Schemes and the Kendra sit inside the Services tab
@@ -79,6 +80,20 @@ export const SWITCH_WORDS = {
     sw_n_bad_closed: 'Give the day the mandis close.',
     sw_n_bad_words: 'Write the notice in at least one language.',
     sw_n_old: 'Phones on app v1.0.3 or older don\'t show notices.',
+    sw_fest: 'Festival look',
+    sw_fest_d: 'Lights on Home\'s header for the days you choose — behind the words, never over them. App v1.0.4+.',
+    sw_fest_none: 'None',
+    sw_fest_kind: 'Festival',
+    sw_fest_diwali: 'Diwali — strings of lights',
+    sw_fest_from: 'From',
+    sw_fest_until: 'Until',
+    sw_fest_save: 'Put it up',
+    sw_fest_remove: 'Take it down',
+    sw_fest_remove_q: 'Take the festival look down from every phone?',
+    sw_fest_saved: 'Festival look saved — open phones show it within seconds',
+    sw_fest_removed: 'Festival look taken down',
+    sw_fest_bad: 'Check the dates: "Until" must be on or after "From".',
+    sw_fest_more: 'More festivals (Bail Pola, Gudi Padwa, Eid, Holi…) come with app updates.',
     sw_state_confirm: 'Open {s}? The app has only its prices so far — no mandi distances, district map or state schemes yet. Farmers there will see prices, weather and the calendar.',
     sw_state_close: 'Close {s}? Farmers who already picked it keep it, but new farmers can\'t pick it.',
     sw_server: '🖥️ Server\'s last run: {t}',
@@ -131,6 +146,7 @@ export const SWITCH_WORDS = {
     f_sell: 'Sell to Khalihan', f_sell_d: 'The offer card and sell requests.',
     f_login: 'Mobile OTP login', f_login_d: '"My account" and an OTP before selling. Every SMS costs money (about ₹6) — before turning it on, finish part D of the admin README (Blaze, Phone sign-in, SHA).',
     f_feedback: 'Suggestions', f_feedback_d: '"सुझाव दें" in Profile and Services.',
+    f_home_sky: 'Living sky on Home', f_home_sky_d: 'Home\'s header shows the farm\'s own sky — dawn, day, dusk, night, clouds, rain — with the temperature. Off = the plain navy header.',
   },
   hi: {
     tab_features: 'स्विच',
@@ -189,6 +205,20 @@ export const SWITCH_WORDS = {
     sw_n_bad_closed: 'मंडी बंद होने का दिन डालें।',
     sw_n_bad_words: 'कम से कम एक भाषा में सूचना लिखें।',
     sw_n_old: 'ऐप v1.0.3 या पुराने वाले फ़ोन पर सूचना नहीं दिखती।',
+    sw_fest: 'त्योहार की सजावट',
+    sw_fest_d: 'आपके चुने दिनों में Home के हेडर पर रोशनी — शब्दों के पीछे, ऊपर कभी नहीं। ऐप v1.0.4+।',
+    sw_fest_none: 'कोई नहीं',
+    sw_fest_kind: 'त्योहार',
+    sw_fest_diwali: 'दिवाली — रोशनी की लड़ियाँ',
+    sw_fest_from: 'कब से',
+    sw_fest_until: 'कब तक',
+    sw_fest_save: 'सजावट लगाएँ',
+    sw_fest_remove: 'सजावट हटाएँ',
+    sw_fest_remove_q: 'सभी फ़ोन से सजावट हटाएँ?',
+    sw_fest_saved: 'सजावट लग गई — खुले फ़ोन पर कुछ सेकंड में दिखेगी',
+    sw_fest_removed: 'सजावट हटा दी',
+    sw_fest_bad: 'तारीख़ देखें: "कब तक" "कब से" के बाद होनी चाहिए।',
+    sw_fest_more: 'और त्योहार (बैल पोळा, गुढी पाडवा, ईद, होली…) ऐप अपडेट के साथ आएँगे।',
     sw_app_basic: 'ऐप: सिर्फ़ भाव',
     sw_state_confirm: '{s} खोलें? ऐप में अभी इसके सिर्फ़ भाव हैं — मंडी की दूरी, ज़िलों का नक्शा और राज्य की योजनाएँ नहीं। वहाँ के किसानों को भाव, मौसम और कैलेंडर दिखेंगे।',
     sw_state_close: '{s} बंद करें? जिन किसानों ने चुन लिया है उनके पास रहेगा, नए किसान नहीं चुन पाएँगे।',
@@ -242,6 +272,7 @@ export const SWITCH_WORDS = {
     f_sell: 'Khalihan को बेचें', f_sell_d: 'ऑफ़र कार्ड और बेचने की रिक्वेस्ट।',
     f_login: 'मोबाइल OTP लॉग इन', f_login_d: '"मेरा खाता" और बेचने से पहले OTP। हर SMS का पैसा लगता है (लगभग ₹6) — चालू करने से पहले admin README का भाग D पूरा करें (Blaze, Phone sign-in, SHA)।',
     f_feedback: 'सुझाव', f_feedback_d: 'Profile और Services में "सुझाव दें"।',
+    f_home_sky: 'Home पर जीता-जागता आसमान', f_home_sky_d: 'Home के हेडर पर खेत का अपना आसमान — सुबह, दिन, शाम, रात, बादल, बारिश — तापमान के साथ। बंद = सादा नेवी हेडर।',
   },
 };
 SWITCH_WORDS.en.f_kendra = KENDRA_WORDS.en.feat_kendra;
@@ -263,14 +294,16 @@ export const FEATURE_INFO = {
   sell: { def: false, since: '1.0.3' },
   login: { def: false, since: '1.0.3' },
   feedback: { def: true, since: '1.0.4' },
+  home_sky: { def: true, since: '1.0.4' },
 };
 
 /** The sections, in order. `kind` picks a special settings panel. */
 const SECTIONS = [
   { id: 'states', icon: '📍', kind: 'states' },
   { id: 'notice', icon: '📣', kind: 'notice' },
+  { id: 'festival', icon: '🪔', kind: 'festival' },
   { id: 'prices', icon: '📈', master: null, kids: ['price_map', 'hold_sell', 'day_voice', 'share_picture', 'alerts', 'brief'] },
-  { id: 'weather', icon: '🌦️', master: 'weather', kids: [] },
+  { id: 'weather', icon: '🌦️', master: 'weather', kids: ['home_sky'] },
   { id: 'calendar', icon: '🌱', master: 'calendar', kids: [] },
   { id: 'services', icon: '🏛️', master: 'services', kids: ['schemes'] },
   { id: 'kendra', icon: '🏪', master: 'kendra', kind: 'kendra' },
@@ -395,6 +428,7 @@ export function createSwitches(c) {
   function sectionTitle(s) {
     if (s.kind === 'states') return tr('sw_states');
     if (s.kind === 'notice') return tr('sw_notice');
+    if (s.kind === 'festival') return tr('sw_fest');
     return s.master ? tr('f_' + s.master) : tr('sw_prices');
   }
 
@@ -406,6 +440,12 @@ export function createSwitches(c) {
     return n.from > today ? 'sched' : 'live';
   }
   function summary(s) {
+    if (s.kind === 'festival') {
+      const f = data.festival;
+      const st = noticeState(f);
+      if (!st || st === 'ended') return esc(tr('sw_fest_none'));
+      return esc(`${tr('sw_fest_' + f.kind)} · ${noticeDays(f.from, f.until)}`);
+    }
     if (s.kind === 'notice') {
       const n = data.notice;
       const st = noticeState(n);
@@ -435,6 +475,12 @@ export function createSwitches(c) {
 
   function statePill(s) {
     if (s.kind === 'states') return `<span class="pill info">${openStates().length}</span>`;
+    if (s.kind === 'festival') {
+      const st = noticeState(data.festival);
+      if (st === 'live') return `<span class="pill on">${tr('sw_notice_live')}</span>`;
+      if (st === 'sched') return `<span class="pill info">${esc(tr('sw_notice_sched', { d: noticeDays(data.festival.from) }))}</span>`;
+      return `<span class="pill off">${tr('sw_off')}</span>`;
+    }
     if (s.kind === 'notice') {
       const st = noticeState(data.notice);
       if (st === 'live') return `<span class="pill on">${tr('sw_notice_live')}</span>`;
@@ -464,7 +510,7 @@ export function createSwitches(c) {
     return `<div class="swdh">
       <span class="swicon big" aria-hidden="true">${s.icon}</span>
       <div class="grow"><h2>${esc(sectionTitle(s))} ${s.master ? sinceChip(s.master) : ''}</h2><p class="sub">${esc(desc)}</p></div>
-      ${s.kind === 'states' || s.kind === 'notice' ? '' : master}
+      ${s.kind === 'states' || s.kind === 'notice' || s.kind === 'festival' ? '' : master}
     </div>`;
   }
 
@@ -676,9 +722,37 @@ export function createSwitches(c) {
       </div>`;
   }
 
+  // ── Festival look ──
+  function festivalDetail(s) {
+    const f = data.festival;
+    const st = noticeState(f);
+    const today = todayIst();
+    const plus6 = new Date(Date.now() + 6 * 86400e3).toLocaleDateString('en-CA', { timeZone: 'Asia/Kolkata' });
+    const d = st && st !== 'ended' ? f : { kind: 'diwali', from: today, until: plus6 };
+    const now = st && st !== 'ended'
+      ? `<div class="swblock"><h3>${tr('sw_n_now')} · <span class="pill ${st === 'live' ? 'on' : 'info'}">${st === 'live' ? tr('sw_notice_live') : esc(tr('sw_notice_sched', { d: noticeDays(f.from) }))}</span></h3>
+          <p class="small">${esc(tr('sw_fest_' + f.kind))} · ${esc(noticeDays(f.from, f.until))}</p>
+          <div class="actions"><button class="danger" id="f-remove">${tr('sw_fest_remove')}</button></div></div>`
+      : '';
+    return `${head(s, tr('sw_fest_d'))}
+      ${now}
+      <div class="swblock">
+        <div class="form">
+          <div class="wide"><label for="f-kind">${tr('sw_fest_kind')}</label><select id="f-kind">
+            <option value="diwali" ${d.kind === 'diwali' ? 'selected' : ''}>${esc(tr('sw_fest_diwali'))}</option>
+          </select></div>
+          <div><label for="f-from">${tr('sw_fest_from')}</label><input type="date" id="f-from" value="${esc(d.from)}"></div>
+          <div><label for="f-until">${tr('sw_fest_until')}</label><input type="date" id="f-until" value="${esc(d.until)}"></div>
+        </div>
+        <p class="small muted">${tr('sw_fest_more')}</p>
+        <p class="small muted">${tr('sw_n_old')}</p>
+        <div class="actions"><button class="main" id="f-save">${tr('sw_fest_save')}</button></div>
+      </div>`;
+  }
+
   function detailHtml() {
     const s = SECTIONS.find((x) => x.id === memo.sel) || SECTIONS[0];
-    const body = s.kind === 'states' ? statesDetail(s) : s.kind === 'notice' ? noticeDetail(s) : s.kind === 'kendra' ? kendraDetail(s) : s.kind === 'sell' ? sellDetail(s) : featureDetail(s);
+    const body = s.kind === 'states' ? statesDetail(s) : s.kind === 'notice' ? noticeDetail(s) : s.kind === 'festival' ? festivalDetail(s) : s.kind === 'kendra' ? kendraDetail(s) : s.kind === 'sell' ? sellDetail(s) : featureDetail(s);
     return `<section class="card swdetail">${wide() ? '' : `<button class="plain small swback" id="sw-back">${tr('sw_back')}</button>`}${body}</section>`;
   }
 
@@ -719,7 +793,7 @@ export function createSwitches(c) {
       c.db().kendraCard().catch(() => ({ on: false, secs: 4, slides: [] })),
       loadStatus(false),
     ]);
-    data = { features: cfg.features || {}, launch: cfg.launch_states || [], sell: cfg.sell_districts || {}, notice: cfg.notice || null, kinfo: kinfo || {}, kcard };
+    data = { features: cfg.features || {}, launch: cfg.launch_states || [], sell: cfg.sell_districts || {}, notice: cfg.notice || null, festival: cfg.festival || null, kinfo: kinfo || {}, kcard };
   }
 
   function render() {
@@ -917,6 +991,23 @@ export function createSwitches(c) {
       if (!confirm(tr('sw_n_remove_q'))) return;
       nr.disabled = true;
       try { await c.db().setNotice(null); memo.nf = null; toast(tr('sw_n_removed')); await refresh(); } catch (e) { nr.disabled = false; fail(e); }
+    };
+
+    // ── festival form ──
+    const fs = document.getElementById('f-save');
+    if (fs) fs.onclick = async () => {
+      const kind = document.getElementById('f-kind').value;
+      const from = document.getElementById('f-from').value;
+      const until = document.getElementById('f-until').value;
+      if (!from || !until || until < from) { toast(tr('sw_fest_bad')); return; }
+      fs.disabled = true;
+      try { await c.db().setFestival({ kind, from, until }); toast(tr('sw_fest_saved')); await refresh(); } catch (e) { fs.disabled = false; fail(e); }
+    };
+    const fr = document.getElementById('f-remove');
+    if (fr) fr.onclick = async () => {
+      if (!confirm(tr('sw_fest_remove_q'))) return;
+      fr.disabled = true;
+      try { await c.db().setFestival(null); toast(tr('sw_fest_removed')); await refresh(); } catch (e) { fr.disabled = false; fail(e); }
     };
 
     const more = document.querySelector('.swmore');
