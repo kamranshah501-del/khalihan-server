@@ -1,0 +1,110 @@
+name: Deploy Khalihan Admin + Firestore rules
+
+# Publishes the Admin panel (khalihan-admin.web.app, and the project's first
+# address that only forwards there) and the Firestore rules — the same as
+# `bash admin/deploy.sh` on the Mac, without anyone at a computer.
+#
+# Runs by itself when the panel, the rules or firebase.json change on main,
+# or by hand (Actions → this workflow → Run workflow).
+#
+# Uses the FIREBASE_SERVICE_ACCOUNT secret (the daily job's key). That
+# account needs, in Google Cloud → IAM (Firebase project): Firebase Hosting
+# Admin, Firebase Rules Admin, Service Usage Consumer (added 23 Oct 2026).
+# The key never leaves GitHub's secret store and is never printed.
+
+on:
+  workflow_dispatch:
+    inputs:
+      what:
+        description: "all = panel + rules · hosting = only the panel · rules = only the rules"
+        required: true
+        default: all
+        type: choice
+        options: [all, hosting, rules]
+  push:
+    branches: [main]
+    paths:
+      - "admin/public/**"
+      - "firestore.rules"
+      - "firebase.json"
+
+# One deploy at a time; a newer push waits for the running one.
+concurrency:
+  group: deploy-admin
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - name: Deploy
+        env:
+          SA: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          WHAT: ${{ github.event.inputs.what || 'all' }}
+          # The panel's own site (made by admin/deploy.sh on 12 Oct 2026).
+          ADMIN_SITE: khalihan-admin
+        run: |
+          set -euo pipefail
+          umask 077
+          KEY="$RUNNER_TEMP/sa.json"
+          printf '%s' "$SA" > "$KEY"
+          trap 'rm -f "$KEY"' EXIT
+          export GOOGLE_APPLICATION_CREDENTIALS="$KEY"
+          PROJECT=$(python3 -c "import json,os; print(json.load(open(os.environ['GOOGLE_APPLICATION_CREDENTIALS']))['project_id'])")
+          echo "::add-mask::$PROJECT"
+
+          # What admin/deploy.sh keeps in .firebaserc on the Mac (not in git):
+          # the project and which site each hosting target goes to.
+          cat > .firebaserc <<EOF
+          {
+            "projects": { "default": "$PROJECT" },
+            "targets": {
+              "$PROJECT": {
+                "hosting": {
+                  "admin": ["$ADMIN_SITE"],
+                  "moved": ["$PROJECT"]
+                }
+              }
+            }
+          }
+          EOF
+
+          # The project's first address: a one-line page sending everyone to
+          # the panel's own address (same page admin/deploy.sh writes).
+          mkdir -p admin/moved
+          cat > admin/moved/index.html <<EOF
+          <!doctype html>
+          <html lang="hi">
+          <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <meta name="robots" content="noindex, nofollow">
+          <title>Khalihan Admin</title>
+          <script>location.replace('https://$ADMIN_SITE.web.app/' + location.search + location.hash);</script>
+          <meta http-equiv="refresh" content="1; url=https://$ADMIN_SITE.web.app/">
+          </head>
+          <body style="font-family:system-ui,sans-serif;padding:32px;color:#16222c">
+          <p>Khalihan Admin ab naye pate pe hai:</p>
+          <p><a href="https://$ADMIN_SITE.web.app/" style="font-size:20px;font-weight:700;color:#20405E">$ADMIN_SITE.web.app</a></p>
+          </body>
+          </html>
+          EOF
+
+          case "$WHAT" in
+            hosting) ONLY="hosting" ;;
+            rules)   ONLY="firestore:rules" ;;
+            *)       ONLY="hosting,firestore:rules" ;;
+          esac
+          VERSION=$(sed -n "s/^const ADMIN_VERSION = '\([^']*\)'.*/\1/p" admin/public/app.js)
+          echo "Deploying: $ONLY · Admin $VERSION"
+          npx --yes firebase-tools@14 deploy --only "$ONLY" --project "$PROJECT" --non-interactive \
+            --message "Admin $VERSION · ${GITHUB_SHA::7}"
+          echo "✅ Done: https://$ADMIN_SITE.web.app"
