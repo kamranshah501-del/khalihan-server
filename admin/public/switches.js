@@ -147,7 +147,7 @@ export const SWITCH_WORDS = {
     f_sell: 'Sell to Khalihan', f_sell_d: 'The offer card and sell requests.',
     f_login: 'Mobile OTP login', f_login_d: '"My account" and an OTP before selling. Every SMS costs money (about ₹6) — before turning it on, finish part D of the admin README (Blaze, Phone sign-in, SHA).',
     f_feedback: 'Suggestions', f_feedback_d: '"सुझाव दें" in Profile and Services.',
-    f_home_sky: 'Living sky on Home', f_home_sky_d: 'Home\'s header shows the farm\'s own sky — dawn, day, dusk, night, clouds, rain — with the temperature. Off = the plain navy header.',
+    f_home_sky: 'Living sky in headers', f_home_sky_d: 'The headers of Home, My Crops and Services show the farm\'s own sky — dawn, day, dusk, night, clouds, rain — with the temperature (app v1.0.4: My Crops and Services from build v5.44). Off = plain navy headers. The small weather pill on inner pages follows the Weather switch.',
     f_advice: 'Farming advice', f_advice_d: 'The "Farming Advice" card on Home and on the weather page, and its page: spraying, irrigation, harvest, the next 3 days. Off = no advice card.',
   },
   hi: {
@@ -275,7 +275,7 @@ export const SWITCH_WORDS = {
     f_sell: 'Khalihan को बेचें', f_sell_d: 'ऑफ़र कार्ड और बेचने की रिक्वेस्ट।',
     f_login: 'मोबाइल OTP लॉग इन', f_login_d: '"मेरा खाता" और बेचने से पहले OTP। हर SMS का पैसा लगता है (लगभग ₹6) — चालू करने से पहले admin README का भाग D पूरा करें (Blaze, Phone sign-in, SHA)।',
     f_feedback: 'सुझाव', f_feedback_d: 'Profile और Services में "सुझाव दें"।',
-    f_home_sky: 'Home पर जीता-जागता आसमान', f_home_sky_d: 'Home के हेडर पर खेत का अपना आसमान — सुबह, दिन, शाम, रात, बादल, बारिश — तापमान के साथ। बंद = सादा नेवी हेडर।',
+    f_home_sky: 'हेडर में जीता-जागता आसमान', f_home_sky_d: 'Home, My Crops और Services के हेडर में खेत का अपना आसमान — सुबह, दिन, शाम, रात, बादल, बारिश — तापमान के साथ। बंद = सादे नेवी हेडर। अंदर के पेजों पर छोटा मौसम चिप Weather स्विच से चलता है।',
     f_advice: 'खेती की सलाह', f_advice_d: 'Home और मौसम पेज पर "खेती की सलाह" कार्ड और उसका पेज: छिड़काव, सिंचाई, कटाई, अगले 3 दिन। बंद = सलाह कार्ड नहीं दिखेगा।',
   },
 };
