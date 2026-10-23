@@ -102,6 +102,7 @@ export const SWITCH_WORDS = {
     sw_server_none: '🖥️ The server hasn\'t reported yet.',
     sw_phone: '🖥️ Mumbai collector: prices for {n} states ✅',
     sw_gov_abroad: 'Government price API from GitHub (USA): blocked — normal, it answers only Indian computers. The Mumbai collector brings the prices.',
+    sw_feed_quiet: '❌ Mumbai collector silent since {t} — other states get no prices. Google Cloud → VM instances → SSH → type  ~/bin/khalihan  and send Claude what it shows.',
     sw_via: 'via {s}',
     sw_last_err: 'Last run: {e}',
     sw_all_on: 'All ON',
@@ -229,6 +230,7 @@ export const SWITCH_WORDS = {
     sw_server_none: '🖥️ सर्वर ने अभी रिपोर्ट नहीं दी।',
     sw_phone: '🖥️ मुंबई कलेक्टर: {n} राज्यों के भाव ✅',
     sw_gov_abroad: 'GitHub (अमेरिका) से सरकारी भाव API: बंद — यह सामान्य है, यह सिर्फ़ भारत के कंप्यूटर को जवाब देता है। भाव मुंबई कलेक्टर लाता है।',
+    sw_feed_quiet: '❌ मुंबई कलेक्टर {t} से चुप है — बाकी राज्यों के भाव नहीं आ रहे। Google Cloud → VM instances → SSH → लिखें  ~/bin/khalihan  और जो दिखे Claude को भेजें।',
     sw_via: '{s} से',
     sw_last_err: 'पिछली बार: {e}',
     sw_all_on: 'सब चालू',
@@ -562,12 +564,20 @@ export function createSwitches(c) {
   function serverLine() {
     const sv = memo.server;
     if (!sv) return `<p class="small muted">${tr('sw_server_none')}</p>`;
-    const t = sv.at instanceof Date ? sv.at.toLocaleString(c.lang() === 'hi' ? 'hi-IN' : 'en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' }) : '—';
+    const fmtWhen = (d) => d.toLocaleString(c.lang() === 'hi' ? 'hi-IN' : 'en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' });
+    const t = sv.at instanceof Date ? fmtWhen(sv.at) : '—';
     const phone = sv.phone_states > 0 ? `<br>${esc(tr('sw_phone', { n: sv.phone_states }))}` : '';
+    // The collector uploads 5 times a day; over 12 hours without a new
+    // upload means its schedule stopped (23 Oct 2026: cron was never set).
+    const feedAt = sv.feed_at ? new Date(sv.feed_at) : null;
+    const quiet = sv.gov_api_down && (!feedAt || isNaN(feedAt) || Date.now() - feedAt.getTime() > 12 * 3600e3);
+    const quietLine = quiet
+      ? `<br><b>${esc(tr('sw_feed_quiet', { t: feedAt && !isNaN(feedAt) ? fmtWhen(feedAt) : '—' }))}</b>`
+      : '';
     // With the Mumbai collector working, GitHub being refused by data.gov.in
     // is expected (it answers only Indian IPs) — say so instead of a red cross.
-    const gov = !sv.gov_api_down ? 'sw_gov_ok' : phone ? 'sw_gov_abroad' : 'sw_gov_down';
-    return `<div class="swserver ${sv.gov_api_down && !phone ? 'down' : 'up'}"><b>${esc(tr('sw_server', { t }))}</b><br>${esc(tr(gov))}${phone}</div>`;
+    const gov = !sv.gov_api_down ? 'sw_gov_ok' : phone && !quiet ? 'sw_gov_abroad' : 'sw_gov_down';
+    return `<div class="swserver ${sv.gov_api_down && (!phone || quiet) ? 'down' : 'up'}"><b>${esc(tr('sw_server', { t }))}</b><br>${esc(tr(gov))}${phone}${quietLine}</div>`;
   }
   function waitChip(state) {
     const n = memo.waiting && memo.waiting[state];

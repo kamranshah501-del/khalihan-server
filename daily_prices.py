@@ -476,6 +476,9 @@ def save_status(db, mode, took, api_down, results, phone=0):
         "took_s": took,
         "gov_api_down": bool(api_down),
         "phone_states": phone,  # states that came from the collector's feed
+        # When the Mumbai collector last uploaded (None = no feed read).
+        # Admin turns red when it's older than 12 hours.
+        "feed_at": feed.last_made,
         "states": {
             r["state"]: {"source": r["source"], "rows": r["rows"], "error": r["error"],
                          **({"districts": r["districts"]} if "districts" in r else {})}

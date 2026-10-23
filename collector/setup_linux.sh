@@ -49,8 +49,17 @@ chmod 600 ~/.khalihan/token
 if ! command -v crontab >/dev/null 2>&1; then
   sudo apt-get update -qq && sudo apt-get install -y -qq cron
 fi
+sudo systemctl enable --now cron >/dev/null 2>&1 || true
 LINE="10 0,5,9,13,18 * * * python3 \$HOME/.khalihan/collect.py >> \$HOME/.khalihan/cron.log 2>&1"
-( crontab -l 2>/dev/null | grep -v 'khalihan/collect.py' ; echo "$LINE" ) | crontab -
+# `|| true`: with no crontab yet, grep finds nothing and fails — under
+# `set -e` that used to end the group before the echo, leaving an EMPTY
+# schedule (the Mumbai VM ran once on 19 Oct and never again; found 23 Oct).
+{ crontab -l 2>/dev/null | grep -v 'khalihan/collect.py' || true; echo "$LINE"; } | crontab -
+if ! crontab -l 2>/dev/null | grep -q 'khalihan/collect.py'; then
+  echo "❌ Schedule nahi laga (crontab khaali). Ye screen Claude ko bhejo."
+  exit 1
+fi
+echo "🕒 Schedule laga: $(crontab -l | grep 'khalihan/collect.py')"
 
 mkdir -p ~/bin
 cat > ~/bin/khalihan <<EOS

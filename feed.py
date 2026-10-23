@@ -20,6 +20,10 @@ FEED_URL = os.environ.get(
 )
 MAX_AGE = timedelta(hours=30)
 
+# When the collector last uploaded (its "at"), read by load() — for the
+# status, so Admin can say "collector silent since …".
+last_made = None
+
 
 def _when(text):
     try:
@@ -71,6 +75,8 @@ def load(log=print):
             return {}
         response.raise_for_status()
         states, made = parse(response.content)
+        global last_made
+        last_made = made
     except Exception as error:
         message = str(error).replace(token, "***") if token else str(error)
         log(f"Feed: not read — {message}")

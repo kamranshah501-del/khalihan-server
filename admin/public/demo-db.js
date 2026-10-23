@@ -130,6 +130,7 @@ export async function connect() {
     async serverStatus() {
       return {
         at: new Date(Date.now() - 2 * 3600e3), mode: 'refresh', took_s: 287, gov_api_down: true,
+        phone_states: 28, feed_at: new Date(Date.now() - 3 * 3600e3).toISOString(),
         states: {
           Maharashtra: { source: 'msamb', rows: 4210, error: 'data.gov.in: 503 Server Error: Service Unavailable' },
           'Madhya Pradesh': { source: '', rows: 0, error: 'data.gov.in: skipped — the government API is down this run · second source: eNAM trade data: HTTP 500' },
