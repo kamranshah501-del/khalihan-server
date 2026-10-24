@@ -1,0 +1,156 @@
+{
+ "at": "2026-10-24T14:16:03+00:00",
+ "mode": "evening",
+ "took_s": 280,
+ "gov_api_down": true,
+ "phone_states": 23,
+ "feed_at": "2026-10-24T13:10:01+00:00",
+ "states": {
+  "Andhra Pradesh": {
+   "source": "phone",
+   "rows": 298,
+   "error": ""
+  },
+  "Assam": {
+   "source": "phone",
+   "rows": 75,
+   "error": ""
+  },
+  "Bihar": {
+   "source": "phone",
+   "rows": 97,
+   "error": ""
+  },
+  "Chhattisgarh": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Chhattisgarh (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7fc6"
+  },
+  "Goa": {
+   "source": "phone",
+   "rows": 6,
+   "error": ""
+  },
+  "Gujarat": {
+   "source": "phone",
+   "rows": 797,
+   "error": ""
+  },
+  "Haryana": {
+   "source": "phone",
+   "rows": 493,
+   "error": ""
+  },
+  "Himachal Pradesh": {
+   "source": "phone",
+   "rows": 387,
+   "error": ""
+  },
+  "Jammu and Kashmir": {
+   "source": "phone",
+   "rows": 156,
+   "error": ""
+  },
+  "Jharkhand": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Jharkhand (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7fc63b3"
+  },
+  "Karnataka": {
+   "source": "phone",
+   "rows": 125,
+   "error": ""
+  },
+  "Kerala": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Kerala (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7fc63b4427"
+  },
+  "Madhya Pradesh": {
+   "source": "phone",
+   "rows": 719,
+   "error": ""
+  },
+  "Maharashtra": {
+   "source": "msamb",
+   "rows": 4548,
+   "error": "",
+   "districts": 34
+  },
+  "Manipur": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Manipur (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7fc63aa7e"
+  },
+  "Meghalaya": {
+   "source": "phone",
+   "rows": 2,
+   "error": ""
+  },
+  "Mizoram": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Mizoram (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7fc63b12b"
+  },
+  "Nagaland": {
+   "source": "phone",
+   "rows": 3,
+   "error": ""
+  },
+  "NCT of Delhi": {
+   "source": "phone",
+   "rows": 120,
+   "error": ""
+  },
+  "Odisha": {
+   "source": "phone",
+   "rows": 117,
+   "error": ""
+  },
+  "Punjab": {
+   "source": "phone",
+   "rows": 487,
+   "error": ""
+  },
+  "Rajasthan": {
+   "source": "phone",
+   "rows": 292,
+   "error": ""
+  },
+  "Sikkim": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Sikkim (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7fc63b12b7"
+  },
+  "Tamil Nadu": {
+   "source": "phone",
+   "rows": 6732,
+   "error": ""
+  },
+  "Telangana": {
+   "source": "phone",
+   "rows": 494,
+   "error": ""
+  },
+  "Tripura": {
+   "source": "phone",
+   "rows": 34,
+   "error": ""
+  },
+  "Uttar Pradesh": {
+   "source": "phone",
+   "rows": 154,
+   "error": ""
+  },
+  "Uttarakhand": {
+   "source": "phone",
+   "rows": 204,
+   "error": ""
+  },
+  "West Bengal": {
+   "source": "phone",
+   "rows": 117,
+   "error": ""
+  }
+ }
+}
