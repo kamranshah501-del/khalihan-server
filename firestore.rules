@@ -261,6 +261,26 @@ service cloud.firestore {
       allow delete: if isOwner();
     }
 
+    // ── Business Plan v2 (25 Oct 2026): owner only ─────────────────────
+    // Processors (their rate formula, quality cuts, payment days), their
+    // daily quotes and what they owe us; the licence / renewal calendar;
+    // the plan's step tracker. Business secrets — no phone ever reads them.
+    match /processors/{id} {
+      allow read, write: if isOwner();
+    }
+    match /proc_quotes/{id} {
+      allow read, write: if isOwner();
+    }
+    match /proc_pay/{id} {
+      allow read, write: if isOwner();
+    }
+    match /compliance/{id} {
+      allow read, write: if isOwner();
+    }
+    match /business/{doc} {
+      allow read, write: if isOwner();
+    }
+
     // ── Khalihan Admin ─────────────────────────────────────────────────
     match /staff/{email} {
       // Everyone on the team can see the team; only the owner changes it.

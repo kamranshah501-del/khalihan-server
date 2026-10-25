@@ -358,6 +358,67 @@ export async function connect() {
       log('kendra_complaint_done', { id, done });
     },
 
+    // ── Business Plan v2 (owner only: rules) ──
+    async processors() {
+      const snap = await getDocs(query(collection(db, 'processors'), limit(300)));
+      return rows(snap);
+    },
+    async saveProcessor(id, data) {
+      const ref = id ? doc(db, 'processors', id) : doc(collection(db, 'processors'));
+      await setDoc(ref, { ...data, updated: serverTimestamp(), by: me.email }, { merge: true });
+      log('processor', { id: ref.id, name: data.name || '' });
+      return ref.id;
+    },
+    async deleteProcessor(id) {
+      await deleteDoc(doc(db, 'processors', id));
+      log('processor_delete', { id });
+    },
+    async procQuotes() {
+      const snap = await getDocs(query(collection(db, 'proc_quotes'), orderBy('day', 'desc'), limit(3000)));
+      return rows(snap);
+    },
+    async addProcQuote(data) {
+      const ref = await addDoc(collection(db, 'proc_quotes'), { ...data, at: serverTimestamp(), by: me.email });
+      log('proc_quote', { id: ref.id, proc: data.proc, crop: data.crop, rate: data.rate });
+      return ref.id;
+    },
+    async deleteProcQuote(id) {
+      await deleteDoc(doc(db, 'proc_quotes', id));
+      log('proc_quote_delete', { id });
+    },
+    async procPayments() {
+      const snap = await getDocs(query(collection(db, 'proc_pay'), limit(2000)));
+      return rows(snap);
+    },
+    async saveProcPayment(id, data) {
+      const ref = id ? doc(db, 'proc_pay', id) : doc(collection(db, 'proc_pay'));
+      await setDoc(ref, { ...data, updated: serverTimestamp(), by: me.email }, { merge: true });
+      log('proc_pay', { id: ref.id, proc: data.proc || '', paid: data.paid || '' });
+      return ref.id;
+    },
+    async compliance() {
+      const snap = await getDocs(query(collection(db, 'compliance'), limit(300)));
+      return rows(snap);
+    },
+    async saveCompliance(id, data) {
+      const ref = id ? doc(db, 'compliance', id) : doc(collection(db, 'compliance'));
+      await setDoc(ref, { ...data, updated: serverTimestamp(), by: me.email }, { merge: true });
+      log('compliance', { id: ref.id, name: data.name || '', due: data.due || '' });
+      return ref.id;
+    },
+    async deleteCompliance(id) {
+      await deleteDoc(doc(db, 'compliance', id));
+      log('compliance_delete', { id });
+    },
+    async planState() {
+      const snap = await getDoc(doc(db, 'business', 'plan'));
+      return snap.exists() ? snap.data() : {};
+    },
+    async savePlanState(data) {
+      await setDoc(doc(db, 'business', 'plan'), { ...data, updated: serverTimestamp(), by: me.email }, { merge: true });
+      log('plan', { kadam: data.kadam });
+    },
+
     // ── record (owner) ──
     async audit() {
       const snap = await getDocs(query(collection(db, 'audit'), orderBy('at', 'desc'), limit(300)));

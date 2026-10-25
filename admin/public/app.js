@@ -13,8 +13,9 @@ import { chime, askDesktop, desktopAllowed, desktopNotify } from './live.js';
 import { dealNumbers, monthSummary, offerPlan } from './money.js';
 import { KENDRA_WORDS, createKendra } from './kendra.js';
 import { SWITCH_WORDS, createSwitches } from './switches.js';
+import { BIZ_WORDS, createBusiness } from './business.js';
 
-const ADMIN_VERSION = '1.11.2 · 23 Oct 2026';
+const ADMIN_VERSION = '1.12 · 25 Oct 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -582,6 +583,8 @@ Object.assign(I18N.en, KENDRA_WORDS.en);
 Object.assign(I18N.hi, KENDRA_WORDS.hi);
 Object.assign(I18N.en, SWITCH_WORDS.en);
 Object.assign(I18N.hi, SWITCH_WORDS.hi);
+Object.assign(I18N.en, BIZ_WORDS.en);
+Object.assign(I18N.hi, BIZ_WORDS.hi);
 
 let lang = store.get('lang', 'en');
 if (!I18N[lang]) lang = 'en';
@@ -650,6 +653,42 @@ const cropLabel = (c) => (lang === 'hi' ? `${c.hi} (${c.en})` : `${c.en} (${c.hi
 let db = null;
 let me = null;
 let kendraPages = null;
+let bizPages = null;
+/** Business Plan v2 pages (owner only): plan, processors, compliance. */
+function biz() {
+  bizPages = bizPages || createBusiness({
+    tr, esc, rs, toast, fail, setMain, openPanel, closePanel, signedRs,
+    db: () => db, lang: () => lang, today: () => istToday(),
+    // Every paid deal so far: the margin per quintal for the plan's step 1.
+    tradeAll: async () => {
+      const [list, money] = await Promise.all([db.sellRequests(), db.allDealMoney().catch(() => ({}))]);
+      return monthSummary(list, money, new Date(0));
+    },
+    // This month's and last month's margin: trade and Kendra.
+    sourceMonths: async () => {
+      const thisStart = monthStart();
+      const lastStart = new Date(thisStart); lastStart.setMonth(lastStart.getMonth() - 1);
+      const [list, money, orders, products, costs] = await Promise.all([
+        db.sellRequests(), db.allDealMoney().catch(() => ({})),
+        db.kendraOrders ? db.kendraOrders().catch(() => []) : [],
+        db.kendraProducts ? db.kendraProducts().catch(() => []) : [],
+        db.kendraCosts ? db.kendraCosts().catch(() => ({})) : {},
+      ]);
+      const tThis = monthSummary(list, money, thisStart).margin;
+      const tLast = monthSummary(list, money, lastStart).margin - tThis;
+      const kMargin = (from, to) => {
+        let m = 0;
+        orders.filter((o) => o.status === 'done' && o.at instanceof Date && o.at >= from && (!to || o.at < to)).forEach((o) => (o.items || []).forEach((i) => {
+          const cost = ((costs[i.pid] || {}).costs || {})[i.s];
+          if (typeof cost === 'number') m += ((Number(i.p) || 0) - cost) * (Number(i.q) || 0);
+        }));
+        return m;
+      };
+      return { tradeThis: tThis, tradeLast: tLast, kThis: kMargin(thisStart), kLast: kMargin(lastStart, thisStart) };
+    },
+  });
+  return bizPages;
+}
 let switchPages = null;
 let page = 'home';
 let cache = {};
@@ -774,6 +813,9 @@ const ICON_PATHS = {
   features: 'M8 7h8a5 5 0 0 1 0 10H8A5 5 0 0 1 8 7zM16 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6',
   team: 'M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8M4 21a8 8 0 0 1 16 0',
   audit: 'M12 8v4l3 2M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18',
+  plan: 'M4 20V10M10 20V4M16 20v-7M22 20H2',
+  processors: 'M3 21V10l6 3V9l6 3V5l6 3v13zM7 17h2M12 17h2M17 17h2',
+  compliance: 'M7 3v3M17 3v3M4 7h16v13H4zM8 12h3M8 16h6',
   settings: 'M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6M19 12a7 7 0 0 0-.1-1.2l2-1.6-2-3.4-2.4 1a7 7 0 0 0-2-1.2L14 3h-4l-.5 2.6a7 7 0 0 0-2 1.2l-2.4-1-2 3.4 2 1.6A7 7 0 0 0 5 12a7 7 0 0 0 .1 1.2l-2 1.6 2 3.4 2.4-1a7 7 0 0 0 2 1.2L10 21h4l.5-2.6a7 7 0 0 0 2-1.2l2.4 1 2-3.4-2-1.6A7 7 0 0 0 19 12z',
 };
 const icon = (k) => `<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ICON_PATHS[k] || ''}"/></svg>`;
@@ -787,6 +829,8 @@ function tabs() {
     feedback: cache.fbOpen ? [cache.fbOpen, 'amber'] : null,
     deletions: cache.delOpen ? [cache.delOpen, 'amber'] : null,
     offers: cache.liveOffers ? [tr('n_live', { n: cache.liveOffers }), 'grey'] : null,
+    processors: owner && cache.biz && cache.biz.processors ? [cache.biz.processors, 'red'] : null,
+    compliance: owner && cache.biz && cache.biz.compliance ? [cache.biz.compliance, 'amber'] : null,
   };
   const item = (k, label) => `<button data-tab="${k}" class="${k === page ? 'on' : ''}" ${k === page ? 'aria-current="page"' : ''}>
       ${icon(k)}<span class="lbl">${label}</span>${counts[k] ? `<span class="badge ${counts[k][1]}">${counts[k][0]}</span>` : ''}</button>`;
@@ -800,7 +844,7 @@ function tabs() {
     ${item('feedback', tr('tab_feedback'))}
     ${item('farmers', tr('tab_farmers'))}
     ${item('deletions', tr('tab_deletions'))}
-    ${owner ? `<div class="navh">${tr('nav_owner')}</div>${item('features', tr('tab_features'))}${item('team', tr('tab_team'))}${item('audit', tr('tab_audit'))}` : ''}
+    ${owner ? `<div class="navh">${tr('nav_owner')}</div>${item('plan', tr('tab_plan'))}${item('processors', tr('tab_processors'))}${item('compliance', tr('tab_compliance'))}${item('features', tr('tab_features'))}${item('team', tr('tab_team'))}${item('audit', tr('tab_audit'))}` : ''}
     <div class="navgap"></div>
     ${item('settings', tr('tab_settings'))}
     <div class="navfoot">Khalihan Admin ${ADMIN_VERSION.split(' ')[0]}</div>`;
@@ -998,6 +1042,9 @@ const PAGES = {
     const avgWait = waits.length ? waits.reduce((x, y) => x + y, 0) / waits.length : null;
 
     const sum = owner ? monthSummary(requests, money, monthStart()) : null;
+    // Business Plan v2 (owner): dates coming up, processor payments late, the step.
+    const bizData = owner ? await biz().homeData().catch(() => null) : null;
+    if (bizData) { cache.biz = biz().badges(bizData); tabs(); }
     const firstVisit = !cache.dashSeen;
     cache.dashSeen = true;
     const n = waiting.length;
@@ -1021,6 +1068,7 @@ const PAGES = {
       const left = first ? Math.max(0, 30 - Math.floor((now - first.at) / day)) : null;
       tasks.push({ icon: '🗑️', tone: 'red', title: tr('t_deletions', { n: openDel.length }), sub: left == null ? tr('t_del_d') : tr('t_del_left', { d: left }), actions: `<button class="btn sec" data-go="deletions">${tr('open')}</button>` });
     }
+    if (bizData) tasks.push(...biz().homeTasks(bizData));
     const ending = liveOffers.filter((o) => { const u = String(o.until || ''); return u && u <= new Date(now + 2 * day + 5.5 * 3600e3).toISOString().slice(0, 10); });
     if (ending.length) tasks.push({ icon: '🏷️', tone: 'sky', title: tr('t_offers_end', { n: ending.length }), sub: ending.map((o) => esc(o.crop || '')).join(', '), actions: `<button class="btn sec" data-go="offers">${tr('open')}</button>` });
 
@@ -1102,6 +1150,7 @@ const PAGES = {
           </details>
         </section>
         ${sum ? moneyCard(sum) : ''}
+        ${bizData ? biz().homeCard(bizData, monthSummary(requests, money, new Date(0))) : ''}
       </div>`);
     document.querySelectorAll('[data-go]').forEach((el) => { if (el.dataset.go) el.onclick = () => go(el.dataset.go); });
     document.querySelectorAll('.pipe-row').forEach((el) => {
@@ -1217,6 +1266,11 @@ const PAGES = {
     });
     await kendraPages.page();
   },
+
+  // Owner: Business Plan v2 — steps and money, processors, licences & dates.
+  async plan() { if (me.role !== 'owner') return PAGES.home(); await biz().plan(); },
+  async processors() { if (me.role !== 'owner') return PAGES.home(); await biz().processors(); },
+  async compliance() { if (me.role !== 'owner') return PAGES.home(); await biz().compliance(); },
 
   // Owner: every feature, state and district switch, in sections.
   async features() {

@@ -38,6 +38,30 @@ export async function connect() {
   const sellDistricts = { Maharashtra: ['jalgaon'] };
   let notice = null;
   let festival = null;
+  // Business Plan v2 — made-up businesses, only for trying the screens.
+  const iso = (n) => day(n).toISOString().slice(0, 10);
+  let procs = [
+    { id: 'p1', name: 'Demo Starch Mill', place: 'Chalisgaon', crops: ['Maize'], contact: 'Purchase desk', phone: '9800000001', gstin: '27AAAAA0000A1Z5', gstActive: true, mcaActive: true, checkedOn: iso(5), written: true, formula: 'Gate rate − ₹15; nami 14% se upar har 1% pe 1% kat', moistureMax: 14, cuts: 'Kachra 2% se upar 1:1 kat', payDays: 7, payWay: 'RTGS', notes: '' },
+    { id: 'p2', name: 'Demo Ginning', place: 'Jamner', crops: ['Cotton'], contact: 'Malik', phone: '9800000002', gstin: '', gstActive: false, mcaActive: false, checkedOn: '', written: false, formula: '', moistureMax: 8, cuts: '', payDays: 15, payWay: 'NEFT', notes: 'Formula likhit me maangna hai' },
+    { id: 'p3', name: 'Demo Dal Mill', place: 'Jalgaon', crops: ['Bengal Gram', 'Tur'], contact: 'Office', phone: '9800000003', gstin: '27BBBBB0000B1Z5', gstActive: true, mcaActive: false, checkedOn: iso(20), written: true, formula: 'FAQ rate − transport ₹40', moistureMax: 12, cuts: '', payDays: 10, payWay: 'RTGS', notes: '' },
+  ];
+  let quotes = [];
+  for (let n = 0; n < 14; n++) {
+    quotes.push({ id: 'qa' + n, proc: 'p1', day: iso(n), crop: 'Maize', rate: 2140 + ((n * 37) % 90) - 40, basis: 'gate', note: '' });
+    if (n % 2 === 0) quotes.push({ id: 'qb' + n, proc: 'p3', day: iso(n), crop: 'Bengal Gram', rate: 5450 + ((n * 23) % 120), basis: 'gate', note: '' });
+  }
+  quotes.push({ id: 'qc1', proc: 'p2', day: iso(2), crop: 'Cotton', rate: 7720, basis: 'gate', note: 'Phone pe' });
+  let payments = [
+    { id: 'pp1', proc: 'p1', ref: 'Gaadi #1 · 118 qtl', amount: 252520, due: iso(3), paid: '', utr: '' },
+    { id: 'pp2', proc: 'p3', ref: 'Gaadi #2 · 96 qtl', amount: 521000, due: iso(-4), paid: '', utr: '' },
+    { id: 'pp3', proc: 'p1', ref: 'Trial lot', amount: 42800, due: iso(12), paid: iso(11), utr: 'UTR123' },
+  ];
+  let compliance = [
+    { id: 'c1', name: 'GST return (GSTR-3B)', kind: 'filing', due: iso(-6), every: 1, remind: 7, notes: '' },
+    { id: 'c2', name: 'DML licence (MSAMB)', kind: 'licence', due: iso(-40), every: 12, remind: 30, notes: 'Bank guarantee ₹5 lakh' },
+    { id: 'c3', name: 'Trademark — Khalihan (class 31)', kind: 'trademark', due: iso(3), every: 0, remind: 15, notes: 'Hearing ki tareekh' },
+  ];
+  let plan = { kadam: 0, values: { partner: false, survey: 9, path: false } };
   const feedback = [
     { id: 'f1', text: 'Kapas ka bhav Pachora ka bhi dikhao', state: 'Maharashtra', district: 'Jalgaon', lang: 'hi', app: '1.0.2', at: day(0, 8) },
     { id: 'f2', text: 'खताची किंमत पाहिजे', state: 'Maharashtra', district: 'Jalgaon', lang: 'mr', app: '1.0.2', at: day(3), done: true },
@@ -184,6 +208,34 @@ export async function connect() {
       }, 12000);
       return () => clearTimeout(t);
     },
+    // ── Business Plan v2 (made-up demo businesses) ──
+    async processors() { return JSON.parse(JSON.stringify(procs)); },
+    async saveProcessor(id, data) {
+      const pid = id || 'p' + Date.now();
+      procs = [...procs.filter((p) => p.id !== pid), { ...(procs.find((p) => p.id === pid) || {}), id: pid, ...JSON.parse(JSON.stringify(data)) }];
+      log('processor', { id: pid });
+      return pid;
+    },
+    async deleteProcessor(id) { procs = procs.filter((p) => p.id !== id); },
+    async procQuotes() { return JSON.parse(JSON.stringify(quotes)).sort((a, b) => (a.day < b.day ? 1 : -1)); },
+    async addProcQuote(data) { const id = 'q' + Date.now(); quotes = [...quotes, { id, ...data }]; return id; },
+    async deleteProcQuote(id) { quotes = quotes.filter((q) => q.id !== id); },
+    async procPayments() { return JSON.parse(JSON.stringify(payments)); },
+    async saveProcPayment(id, data) {
+      const pid = id || 'pp' + Date.now();
+      payments = [...payments.filter((x) => x.id !== pid), { ...(payments.find((x) => x.id === pid) || {}), id: pid, ...data }];
+      return pid;
+    },
+    async compliance() { return JSON.parse(JSON.stringify(compliance)); },
+    async saveCompliance(id, data) {
+      const cid = id || 'c' + Date.now();
+      compliance = [...compliance.filter((x) => x.id !== cid), { ...(compliance.find((x) => x.id === cid) || {}), id: cid, ...data }];
+      return cid;
+    },
+    async deleteCompliance(id) { compliance = compliance.filter((x) => x.id !== id); },
+    async planState() { return JSON.parse(JSON.stringify(plan)); },
+    async savePlanState(data) { plan = { ...plan, ...JSON.parse(JSON.stringify(data)) }; },
+
     async kendraComplaints() { return kComplaints.map((x) => ({ ...x })); },
     async kendraComplaintDone(id, done) { const x = kComplaints.find((k) => k.id === id); if (x) x.done = done; },
   };
