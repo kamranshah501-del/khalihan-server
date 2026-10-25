@@ -15,7 +15,7 @@ import { KENDRA_WORDS, createKendra } from './kendra.js';
 import { SWITCH_WORDS, createSwitches } from './switches.js';
 import { BIZ_WORDS, createBusiness } from './business.js';
 
-const ADMIN_VERSION = '1.12 · 25 Oct 2026';
+const ADMIN_VERSION = '1.12.1 · 25 Oct 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
