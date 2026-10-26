@@ -177,6 +177,44 @@ def upload(token, repo, payload, message):
     return commit["sha"]
 
 
+def _iso(text):
+    parts = str(text or "").split("/")
+    return f"{parts[2]}-{parts[1].zfill(2)}-{parts[0].zfill(2)}" if len(parts) == 3 else ""
+
+
+def _mandi_crop(row):
+    def k(text):
+        return "".join(ch for ch in str(text or "").lower() if ch.isalnum())
+    return (k(row.get("district")), k(row.get("market")), k(row.get("commodity")))
+
+
+KEEP_DAYS = 2
+
+
+def keep_fuller(rows, old_rows):
+    """data.gov.in holds only today's rows and fills up during the day: an
+    early run sees a handful (26 Oct 2026, 5:40 am: most states empty). Keep
+    each mandi's crop from the last copy (up to KEEP_DAYS old) until today's
+    row for it arrives, so a thin run never wipes a full day."""
+    if not old_rows:
+        return rows
+    days = [_iso(r.get("arrival_date")) for r in rows if _iso(r.get("arrival_date"))]
+    newest = max(days) if days else max((_iso(r.get("arrival_date")) for r in old_rows), default="")
+    if not newest:
+        return rows
+    y, m, d = (int(x) for x in newest.split("-"))
+    from datetime import date, timedelta
+    cutoff = (date(y, m, d) - timedelta(days=KEEP_DAYS)).isoformat()
+    have = {_mandi_crop(r) for r in rows}
+    kept = []
+    for row in old_rows:
+        day = _iso(row.get("arrival_date"))
+        if day and cutoff <= day <= newest and _mandi_crop(row) not in have:
+            kept.append(row)
+            have.add(_mandi_crop(row))
+    return rows + kept
+
+
 def load_previous():
     try:
         with gzip.open(os.path.join(HOME, "latest.json.gz"), "rt", encoding="utf-8") as fh:
@@ -211,6 +249,7 @@ def main():
     for state in STATES:
         try:
             rows, total = fetch_state(key, state)
+            rows = keep_fuller(rows, (previous.get(state) or {}).get("rows") or [])
             states[state] = {"at": now, "total": total, "rows": rows}
             got += 1
         except Exception as error:

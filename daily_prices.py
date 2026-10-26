@@ -29,6 +29,7 @@ from datetime import datetime, timedelta, timezone
 import requests
 import firebase_admin
 
+import crops
 import enam
 import feed
 import msamb
@@ -330,8 +331,10 @@ def save_district_prices(db, state, rows):
             by_district[district].append(row)
     saved = 0
     for district, district_rows in sorted(by_district.items()):
-        prices = summarise(district_rows)
         day = newest_day(district_rows)
+        # Only that day's rows: rows kept from earlier days (keep_fuller)
+        # must not be filed as today's prices.
+        prices = summarise([r for r in district_rows if iso_date(r.get("arrival_date")) == day])
         if not prices or not day:
             continue
         save_prices(db, state, prices, day, scope=f"{slug(state)}__{slug(district)}", label=f"{state} / {district}")
@@ -382,6 +385,83 @@ def backfill(db, state, rows, newest):
             save_prices(db, state, prices, day)
         except Exception as error:
             print(f"  {state}: could not backfill {day} — {error}")
+
+
+def previous_rows(db, state):
+    """What phones read before this run (live/{state}), back in the
+    government API's row format."""
+    ref = db.collection("live").document(slug(state))
+    meta = ref.get().to_dict() or {}
+    out = []
+    for index in range(int(meta.get("parts") or 0)):
+        part = ref.collection("parts").document(str(index)).get().to_dict() or {}
+        for item in part.get("r") or []:
+            date = str(item.get("dt") or "")
+            if not isinstance(item, dict) or len(date) != 10:
+                continue
+            row = {
+                "state": state,
+                "commodity": item.get("c"),
+                "market": item.get("m"),
+                "district": item.get("d"),
+                "variety": item.get("v"),
+                "min_price": item.get("mn"),
+                "max_price": item.get("mx"),
+                "modal_price": item.get("mo"),
+                "arrival_date": f"{date[8:10]}/{date[5:7]}/{date[0:4]}",
+            }
+            if item.get("a"):
+                row["arrivals"] = item["a"]
+            out.append(row)
+    return out
+
+
+KEEP_DAYS = 3  # a mandi's last price stays on phones this long if a run misses it
+
+
+def _mandi_crop(row):
+    return (crops.key(row.get("district")), crops.key(row.get("market")), crops.key(row.get("commodity")))
+
+
+def keep_fuller(db, state, rows):
+    """A thin run must never wipe a full day. data.gov.in only holds today's
+    rows and fills up during the day, so an early run sees a handful; before
+    this, that handful replaced yesterday's full list and phones fell back to
+    old prices (26 Oct 2026: every state but Maharashtra had 0 rows at 6 am).
+    Now each mandi's crop keeps its last row (up to KEEP_DAYS old) until a
+    newer one comes. Each row keeps its own date."""
+    try:
+        old = crops.canon_rows(previous_rows(db, state))
+    except Exception as error:
+        print(f"  {state}: could not read the previous copy — {error}")
+        return rows
+    newest = newest_day(rows)
+    if not old or not newest:
+        return rows
+    cutoff = (datetime.strptime(newest, "%Y-%m-%d") - timedelta(days=KEEP_DAYS)).strftime("%Y-%m-%d")
+    have = {_mandi_crop(r) for r in rows}
+    kept = []
+    for row in old:
+        day = iso_date(row.get("arrival_date"))
+        if day and cutoff <= day <= newest and _mandi_crop(row) not in have:
+            kept.append(row)
+            have.add(_mandi_crop(row))
+    if kept:
+        print(f"  {state}: kept {len(kept)} earlier rows (mandi crops not in this run)")
+    return rows + kept
+
+
+def merge_sources(main_rows, extra_rows):
+    """The richer source first; the other adds only the crops it has that
+    the first doesn't, district by district and day by day — so a mandi is
+    never counted twice under two spellings of its name."""
+    if not main_rows:
+        return extra_rows or []
+    have = {(crops.key(r.get("district")), crops.key(r.get("commodity")), iso_date(r.get("arrival_date")))
+            for r in main_rows}
+    added = [r for r in (extra_rows or [])
+             if (crops.key(r.get("district")), crops.key(r.get("commodity")), iso_date(r.get("arrival_date"))) not in have]
+    return main_rows + added
 
 
 # States where a second source can check the national feed, mandi by mandi.
@@ -463,6 +543,44 @@ def notify(state, day, kind, hour=None):
         android=messaging.AndroidConfig(priority="high"),
     ))
     print(f"  {state}: {kind} push sent to {topic}")
+
+
+POPULAR_DAYS = 30
+
+
+def save_popular(db, state):
+    """Which crops each district really trades — popular/{state}: for every
+    district (archive slug), crops by how many of the last 30 days a mandi
+    reported them. Phones read it once a day and put the farmer's own
+    district's crops first (owner, 26 Oct 2026). Public prices only."""
+    base = slug(state)
+    since = (datetime.now(timezone.utc) - timedelta(days=POPULAR_DAYS)).strftime("%Y-%m-%d")
+
+    def ranked(scope):
+        seen = defaultdict(set)
+        for doc in db.collection("prices").document(scope).collection("days").where("d", ">=", since).stream():
+            data = doc.to_dict() or {}
+            day = data.get("d") or doc.id
+            for item in data.get("c") or []:
+                name = crops.canon(item.get("n"))
+                if name:
+                    seen[name].add(day)
+        return sorted(([n, len(d)] for n, d in seen.items()), key=lambda x: (-x[1], x[0]))
+
+    districts = {}
+    for ref in db.collection("prices").list_documents():
+        if ref.id.startswith(base + "__"):
+            crop_days = ranked(ref.id)
+            if crop_days:
+                districts[ref.id[len(base) + 2:]] = crop_days
+    whole = ranked(base)
+    db.collection("popular").document(base).set({
+        "at": firestore.SERVER_TIMESTAMP,
+        "days": POPULAR_DAYS,
+        "state": whole,
+        "districts": districts,
+    })
+    print(f"  {state}: popular crops saved ({len(whole)} state-wide, {len(districts)} districts)")
 
 
 def save_status(db, mode, took, api_down, results, phone=0):
@@ -592,36 +710,41 @@ def main():
         prices = {}
         state_day = day
         try:
-            phone_rows = only_state(from_phone.get(state) or [], state)
-            # Maharashtra's own board (MSAMB) lists about four times the
-            # mandis data.gov.in does: when it answers with more, use it.
+            phone_rows = crops.canon_rows(only_state(from_phone.get(state) or [], state))
+            # Both sources where there are two (owner, 26 Oct 2026: "app dono
+            # srot se price le"): Maharashtra's board (MSAMB, about four times
+            # the mandis) first, data.gov.in adding the crops the board
+            # doesn't have; Madhya Pradesh's eNAM adds to data.gov.in.
             board = None
-            if phone_rows and state in RICHER_SECOND:
+            if phone_rows and state in SECOND_SOURCES:
                 try:
-                    board = SECOND_SOURCES[state](log=print)
+                    board = crops.canon_rows(SECOND_SOURCES[state](log=print) or [])
                 except Exception as board_error:
-                    print(f"  {state}: {RICHER_SECOND[state]} failed — {board_error}; using the phone's rows")
-                if not board or len(board) <= len(phone_rows):
-                    board = None
-            if board:
-                rows = board
-                source = RICHER_SECOND[state]
+                    print(f"  {state}: second source failed — {board_error}; using the phone's rows")
+            if board and state in RICHER_SECOND:
+                rows = merge_sources(board, phone_rows)
+                source = RICHER_SECOND[state] + "+gov"
+            elif board:
+                rows = merge_sources(phone_rows, board)
+                source = "phone+" + ("msamb" if state == "Maharashtra" else "enam")
+                board = None  # data.gov.in leads: still cross-checked below
             elif phone_rows:
                 rows = phone_rows
                 source = "phone"
             else:
                 if api["down"]:
                     raise RuntimeError("skipped — the government API is down this run")
-                rows = only_state(fetch_state(api_key, state), state)
+                rows = crops.canon_rows(only_state(fetch_state(api_key, state), state))
                 source = "data.gov.in"
                 with api_lock:
                     api["ok"] += 1
-            state_day = newest_day(rows) or day
-            prices = summarise(rows)
-            print(f"{state}: {len(rows)} rows, {len(prices)} crops ({source})")
-            result.update(source=source, rows=len(rows))
             if not board:  # the board's own rows need no check against the board
                 cross_check(state, rows, log=print)
+            rows = keep_fuller(db, state, rows)
+            state_day = newest_day(rows) or day
+            prices = summarise([r for r in rows if iso_date(r.get("arrival_date")) == state_day])
+            print(f"{state}: {len(rows)} rows, {len(prices)} crops on {state_day} ({source})")
+            result.update(source=source, rows=len(rows))
             try:
                 save_live(db, state, rows)
             except Exception as error:
@@ -630,8 +753,9 @@ def main():
                 save_mandi_days(db, state, rows)
             except Exception as error:
                 print(f"  {state}: could not save mandi days — {error}")
-            if board:
-                backfill(db, state, rows, state_day)
+            # Earlier days in the rows (the board keeps a few; kept rows)
+            # are filed under their own date.
+            backfill(db, state, rows, state_day)
         except Exception as error:
             rows = []
             with api_lock:
@@ -645,13 +769,14 @@ def main():
             # A second, independent source where we have one.
             if state in SECOND_SOURCES:
                 try:
-                    rows = SECOND_SOURCES[state](log=print)
+                    rows = crops.canon_rows(SECOND_SOURCES[state](log=print) or [])
                 except Exception as second_error:
                     print(f"  {state}: second source failed too — {second_error}")
                     result["error"] += " · second source: " + scrub(second_error, api_key)
             if rows:
+                rows = keep_fuller(db, state, rows)
                 state_day = newest_day(rows) or day
-                prices = summarise(rows)
+                prices = summarise([r for r in rows if iso_date(r.get("arrival_date")) == state_day])
                 print(f"  {state}: {len(rows)} rows, {len(prices)} crops from the second source")
                 result.update(source="msamb" if state == "Maharashtra" else "enam", rows=len(rows))
                 try:
@@ -698,6 +823,14 @@ def main():
     print(f"Done. {fetch_failures} state(s) without fresh data, "
           f"{push_failures} push failure(s).")
     save_status(db, mode, int(time.time() - started), api["down"], results, phone=len(from_phone))
+    # Once a day (and on the first run after this was added): which crops
+    # each district trades, for the app's crop list.
+    for state in sorted(open_states & set(states)):
+        try:
+            if mode == "morning" or not db.collection("popular").document(slug(state)).get().exists:
+                save_popular(db, state)
+        except Exception as error:
+            print(f"  {state}: could not save popular crops — {error}")
     if mode != "refresh" and push_failures == len(states):
         sys.exit("No push could be sent — check the Firebase service account.")
 

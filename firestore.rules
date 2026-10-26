@@ -43,6 +43,12 @@ service cloud.firestore {
     }
 
     // ── prices: the server writes; phones read, and keep a backup copy ─
+    // Which crops each district trades (last 30 days), server-written,
+    // public prices only (26 Oct 2026).
+    match /popular/{scope} {
+      allow read: if true;
+      allow write: if false;
+    }
     match /live/{scope} {
       allow read: if true;
       allow write: if false;
