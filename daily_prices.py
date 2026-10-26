@@ -551,22 +551,25 @@ POPULAR_DAYS = 30
 def save_popular(db, state):
     """Which crops each district really trades — popular/{state}: for every
     district (archive slug), crops by how many of the last 30 days a mandi
-    reported them: [{"n": crop, "d": days}], most first. Phones read it once a day and put the farmer's own
+    reported them: [{"n": crop, "d": days, "m": mandi-days}], most first. Phones read it once a day and put the farmer's own
     district's crops first (owner, 26 Oct 2026). Public prices only."""
     base = slug(state)
     since = (datetime.now(timezone.utc) - timedelta(days=POPULAR_DAYS)).strftime("%Y-%m-%d")
 
     def ranked(scope):
-        seen = defaultdict(set)
+        seen = defaultdict(dict)  # crop -> {day: mandis}
         for doc in db.collection("prices").document(scope).collection("days").where("d", ">=", since).stream():
             data = doc.to_dict() or {}
             day = data.get("d") or doc.id
             for item in data.get("c") or []:
                 name = crops.canon(item.get("n"))
                 if name:
-                    seen[name].add(day)
-        # A list of maps: Firestore takes no list inside a list.
-        return [{"n": n, "d": len(d)} for n, d in sorted(seen.items(), key=lambda x: (-len(x[1]), x[0]))]
+                    seen[name][day] = max(seen[name].get(day, 0), int(item.get("k") or 1))
+        # d = days reported, m = mandi-days (a crop four mandis trade daily
+        # ranks above one a single fruit market lists daily). A list of maps:
+        # Firestore takes no list inside a list.
+        rows = [{"n": n, "d": len(days), "m": sum(days.values())} for n, days in seen.items()]
+        return sorted(rows, key=lambda r: (-r["m"], -r["d"], r["n"]))
 
     districts = {}
     for ref in db.collection("prices").list_documents():
