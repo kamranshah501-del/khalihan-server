@@ -106,6 +106,9 @@ def main():
     except Exception as error:
         live = {"error": str(error)}
     report["live"] = live
+    pop = db.collection("popular").document(base).get().to_dict() or {}
+    report["popular"] = {"state_top": (pop.get("state") or [])[:15], "districts": len(pop.get("districts") or {}),
+                         "jalgaon": (pop.get("districts") or {}).get("jalgaon", [])[:20]}
     old_day = os.environ.get("REPORT_OLD_DAY", "2026-10-19")
     try:
         snap = db.collection("prices").document(base).collection("days").document(old_day).get()
