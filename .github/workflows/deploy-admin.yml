@@ -4,7 +4,8 @@ name: Deploy Khalihan Admin + Firestore rules
 # address that only forwards there) and the Firestore rules — the same as
 # `bash admin/deploy.sh` on the Mac, without anyone at a computer.
 #
-# Runs by itself when the panel, the rules or firebase.json change on main,
+# Runs by itself when the panel, the rules, firebase.json or the privacy
+# policy (docs/privacy.html) change on main,
 # or by hand (Actions → this workflow → Run workflow).
 #
 # Uses the FIREBASE_SERVICE_ACCOUNT secret (the daily job's key). That
@@ -25,6 +26,7 @@ on:
     branches: [main]
     paths:
       - "admin/public/**"
+      - "docs/privacy.html"
       - "firestore.rules"
       - "firebase.json"
 
@@ -97,6 +99,10 @@ jobs:
           </body>
           </html>
           EOF
+
+          # The privacy policy the app links to (khalihan-admin.web.app/privacy.html
+          # from v1.0.5): one source, docs/privacy.html, copied in at every deploy.
+          cp docs/privacy.html admin/public/privacy.html
 
           case "$WHAT" in
             hosting) ONLY="hosting" ;;
