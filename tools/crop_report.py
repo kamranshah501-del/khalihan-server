@@ -85,6 +85,36 @@ def main():
             districts[ref.id[len(base) + 2:]] = {"days": len(days), "crops": rank(days)}
     report["districts"] = districts
 
+    # What phones read right now (live/{state}): crop names and districts —
+    # to compare names across sources (stale "Last price" rows on phones).
+    live = {}
+    try:
+        ref = db.collection("live").document(base)
+        meta = (ref.get().to_dict() or {})
+        names = defaultdict(set)
+        for i in range(int(meta.get("parts") or 0)):
+            part = ref.collection("parts").document(str(i)).get().to_dict() or {}
+            for row in part.get("r") or []:
+                if isinstance(row, dict):
+                    names[str(row.get("c") or row.get("commodity") or "?")].add(str(row.get("d") or row.get("district") or "?"))
+                elif isinstance(row, list) and row:
+                    names[str(row[0])].add(str(row[2]) if len(row) > 2 else "?")
+        live = {"rows": meta.get("rows"), "crops": {k: sorted(v)[:60] for k, v in sorted(names.items())}}
+        if not names:
+            sample = (ref.collection("parts").document("0").get().to_dict() or {}).get("r") or []
+            live["sample"] = sample[:3]
+    except Exception as error:
+        live = {"error": str(error)}
+    report["live"] = live
+    old_day = os.environ.get("REPORT_OLD_DAY", "2026-10-19")
+    try:
+        snap = db.collection("prices").document(base).collection("days").document(old_day).get()
+        report["old_day"] = {"day": old_day, "crops": [c.get("n") for c in (snap.to_dict() or {}).get("c") or []]}
+        snap = db.collection("prices").document(base + "__jalgaon").collection("days").document(old_day).get()
+        report["old_day_jalgaon"] = [c.get("n") for c in (snap.to_dict() or {}).get("c") or []]
+    except Exception as error:
+        report["old_day"] = {"error": str(error)}
+
     os.makedirs("report", exist_ok=True)
     with open(f"report/{base}.json", "w", encoding="utf-8") as fh:
         json.dump(report, fh, ensure_ascii=False, indent=1)
