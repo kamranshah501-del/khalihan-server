@@ -551,7 +551,7 @@ POPULAR_DAYS = 30
 def save_popular(db, state):
     """Which crops each district really trades — popular/{state}: for every
     district (archive slug), crops by how many of the last 30 days a mandi
-    reported them. Phones read it once a day and put the farmer's own
+    reported them: [{"n": crop, "d": days}], most first. Phones read it once a day and put the farmer's own
     district's crops first (owner, 26 Oct 2026). Public prices only."""
     base = slug(state)
     since = (datetime.now(timezone.utc) - timedelta(days=POPULAR_DAYS)).strftime("%Y-%m-%d")
@@ -565,7 +565,8 @@ def save_popular(db, state):
                 name = crops.canon(item.get("n"))
                 if name:
                     seen[name].add(day)
-        return sorted(([n, len(d)] for n, d in seen.items()), key=lambda x: (-x[1], x[0]))
+        # A list of maps: Firestore takes no list inside a list.
+        return [{"n": n, "d": len(d)} for n, d in sorted(seen.items(), key=lambda x: (-len(x[1]), x[0]))]
 
     districts = {}
     for ref in db.collection("prices").list_documents():
