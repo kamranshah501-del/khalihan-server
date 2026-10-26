@@ -1,0 +1,9709 @@
+{
+ "state": {
+  "days": 31,
+  "crops": [
+   {
+    "crop": "Soyabean",
+    "days": 31,
+    "mandis_per_day": 10.9,
+    "score": 102.2,
+    "last_day": "2026-10-26",
+    "last_price": 6800.0
+   },
+   {
+    "crop": "Jowar(Sorghum)",
+    "days": 31,
+    "mandis_per_day": 10.7,
+    "score": 101.4,
+    "last_day": "2026-10-26",
+    "last_price": 6500.5
+   },
+   {
+    "crop": "Wheat",
+    "days": 31,
+    "mandis_per_day": 10.3,
+    "score": 99.3,
+    "last_day": "2026-10-26",
+    "last_price": 3600.0
+   },
+   {
+    "crop": "Bengal Gram(Gram)(Whole)",
+    "days": 31,
+    "mandis_per_day": 9.6,
+    "score": 96.3,
+    "last_day": "2026-10-26",
+    "last_price": 6716.83
+   },
+   {
+    "crop": "Green Gram (Moong)(Whole)",
+    "days": 30,
+    "mandis_per_day": 10.0,
+    "score": 95.0,
+    "last_day": "2026-10-26",
+    "last_price": 9490.0
+   },
+   {
+    "crop": "Arhar (Tur/Red Gram)(Whole)",
+    "days": 30,
+    "mandis_per_day": 9.0,
+    "score": 90.0,
+    "last_day": "2026-10-26",
+    "last_price": 9600.0
+   },
+   {
+    "crop": "Bhindi(Ladies Finger)",
+    "days": 31,
+    "mandis_per_day": 7.2,
+    "score": 83.0,
+    "last_day": "2026-10-26",
+    "last_price": 4462.5
+   },
+   {
+    "crop": "Tomato",
+    "days": 31,
+    "mandis_per_day": 7.1,
+    "score": 82.8,
+    "last_day": "2026-10-26",
+    "last_price": 887.5
+   },
+   {
+    "crop": "Maize",
+    "days": 31,
+    "mandis_per_day": 6.8,
+    "score": 80.7,
+    "last_day": "2026-10-26",
+    "last_price": 2700.0
+   },
+   {
+    "crop": "Green Chilli",
+    "days": 31,
+    "mandis_per_day": 6.7,
+    "score": 80.3,
+    "last_day": "2026-10-26",
+    "last_price": 5750.0
+   },
+   {
+    "crop": "Onion",
+    "days": 31,
+    "mandis_per_day": 6.7,
+    "score": 80.1,
+    "last_day": "2026-10-26",
+    "last_price": 3650.0
+   },
+   {
+    "crop": "Brinjal",
+    "days": 31,
+    "mandis_per_day": 6.6,
+    "score": 79.7,
+    "last_day": "2026-10-26",
+    "last_price": 2775.0
+   },
+   {
+    "crop": "Cucumbar(Kheera)",
+    "days": 31,
+    "mandis_per_day": 5.9,
+    "score": 75.5,
+    "last_day": "2026-10-26",
+    "last_price": 2208.33
+   },
+   {
+    "crop": "Black Gram (Urd Beans)(Whole)",
+    "days": 30,
+    "mandis_per_day": 6.2,
+    "score": 74.9,
+    "last_day": "2026-10-26",
+    "last_price": 9225.25
+   },
+   {
+    "crop": "Cabbage",
+    "days": 31,
+    "mandis_per_day": 5.8,
+    "score": 74.9,
+    "last_day": "2026-10-26",
+    "last_price": 887.5
+   },
+   {
+    "crop": "Potato",
+    "days": 31,
+    "mandis_per_day": 5.7,
+    "score": 74.3,
+    "last_day": "2026-10-26",
+    "last_price": 1100.0
+   },
+   {
+    "crop": "Cauliflower",
+    "days": 31,
+    "mandis_per_day": 5.6,
+    "score": 73.2,
+    "last_day": "2026-10-26",
+    "last_price": 2775.0
+   },
+   {
+    "crop": "Bitter gourd",
+    "days": 31,
+    "mandis_per_day": 5.5,
+    "score": 72.6,
+    "last_day": "2026-10-26",
+    "last_price": 2750.0
+   },
+   {
+    "crop": "Guava",
+    "days": 31,
+    "mandis_per_day": 5.2,
+    "score": 70.4,
+    "last_day": "2026-10-26",
+    "last_price": 4370.0
+   },
+   {
+    "crop": "Bajra(Pearl Millet/Cumbu)",
+    "days": 31,
+    "mandis_per_day": 5.1,
+    "score": 70.0,
+    "last_day": "2026-10-26",
+    "last_price": 3025.5
+   },
+   {
+    "crop": "Ginger(Green)",
+    "days": 31,
+    "mandis_per_day": 5.1,
+    "score": 70.0,
+    "last_day": "2026-10-26",
+    "last_price": 7500.0
+   },
+   {
+    "crop": "Sesamum(Sesame,Gingelly,Til)",
+    "days": 31,
+    "mandis_per_day": 4.6,
+    "score": 66.3,
+    "last_day": "2026-10-26",
+    "last_price": 10200.0
+   },
+   {
+    "crop": "Pomegranate",
+    "days": 31,
+    "mandis_per_day": 4.4,
+    "score": 65.2,
+    "last_day": "2026-10-26",
+    "last_price": 9000.0
+   },
+   {
+    "crop": "Ridgeguard(Tori)",
+    "days": 31,
+    "mandis_per_day": 4.4,
+    "score": 64.9,
+    "last_day": "2026-10-26",
+    "last_price": 3250.0
+   },
+   {
+    "crop": "Carrot",
+    "days": 31,
+    "mandis_per_day": 4.3,
+    "score": 64.0,
+    "last_day": "2026-10-26",
+    "last_price": 3300.0
+   },
+   {
+    "crop": "Cluster beans",
+    "days": 30,
+    "mandis_per_day": 4.5,
+    "score": 63.4,
+    "last_day": "2026-10-26",
+    "last_price": 4550.0
+   },
+   {
+    "crop": "Rice",
+    "days": 31,
+    "mandis_per_day": 4.1,
+    "score": 63.0,
+    "last_day": "2026-10-26",
+    "last_price": 4082.0
+   },
+   {
+    "crop": "Papaya",
+    "days": 31,
+    "mandis_per_day": 3.9,
+    "score": 61.5,
+    "last_day": "2026-10-26",
+    "last_price": 3250.0
+   },
+   {
+    "crop": "Bottle gourd",
+    "days": 31,
+    "mandis_per_day": 3.9,
+    "score": 61.0,
+    "last_day": "2026-10-26",
+    "last_price": 2125.0
+   },
+   {
+    "crop": "Mousambi(Sweet Lime)",
+    "days": 31,
+    "mandis_per_day": 3.9,
+    "score": 61.0,
+    "last_day": "2026-10-26",
+    "last_price": 4000.0
+   },
+   {
+    "crop": "Methi(Leaves)",
+    "days": 31,
+    "mandis_per_day": 3.8,
+    "score": 60.7,
+    "last_day": "2026-10-26",
+    "last_price": 4879.33
+   },
+   {
+    "crop": "Capsicum",
+    "days": 30,
+    "mandis_per_day": 4.0,
+    "score": 60.2,
+    "last_day": "2026-10-26",
+    "last_price": 4250.0
+   },
+   {
+    "crop": "Apple",
+    "days": 31,
+    "mandis_per_day": 3.7,
+    "score": 59.4,
+    "last_day": "2026-10-26",
+    "last_price": 15000.0
+   },
+   {
+    "crop": "Garlic",
+    "days": 31,
+    "mandis_per_day": 3.6,
+    "score": 59.2,
+    "last_day": "2026-10-26",
+    "last_price": 8500.0
+   },
+   {
+    "crop": "Groundnut",
+    "days": 31,
+    "mandis_per_day": 3.6,
+    "score": 58.9,
+    "last_day": "2026-10-26",
+    "last_price": 9500.0
+   },
+   {
+    "crop": "Lemon",
+    "days": 30,
+    "mandis_per_day": 3.7,
+    "score": 57.7,
+    "last_day": "2026-10-26",
+    "last_price": 7000.0
+   },
+   {
+    "crop": "Turmeric",
+    "days": 31,
+    "mandis_per_day": 3.5,
+    "score": 57.6,
+    "last_day": "2026-10-26",
+    "last_price": 21166.67
+   },
+   {
+    "crop": "Drumstick",
+    "days": 31,
+    "mandis_per_day": 3.4,
+    "score": 57.3,
+    "last_day": "2026-10-26",
+    "last_price": 4750.0
+   },
+   {
+    "crop": "Gur(Jaggery)",
+    "days": 31,
+    "mandis_per_day": 3.4,
+    "score": 57.3,
+    "last_day": "2026-10-26",
+    "last_price": 4684.71
+   },
+   {
+    "crop": "Cowpea(Veg)",
+    "days": 30,
+    "mandis_per_day": 3.4,
+    "score": 55.6,
+    "last_day": "2026-10-26",
+    "last_price": 2725.0
+   },
+   {
+    "crop": "Beetroot",
+    "days": 31,
+    "mandis_per_day": 3.2,
+    "score": 55.4,
+    "last_day": "2026-10-26",
+    "last_price": 2125.0
+   },
+   {
+    "crop": "Chikoos(Sapota)",
+    "days": 31,
+    "mandis_per_day": 3.2,
+    "score": 55.1,
+    "last_day": "2026-10-26",
+    "last_price": 6000.0
+   },
+   {
+    "crop": "Coriander(Leaves)",
+    "days": 31,
+    "mandis_per_day": 3.2,
+    "score": 55.1,
+    "last_day": "2026-10-26",
+    "last_price": 6740.0
+   },
+   {
+    "crop": "Custard Apple (Sharifa)",
+    "days": 30,
+    "mandis_per_day": 3.4,
+    "score": 55.0,
+    "last_day": "2026-10-26",
+    "last_price": 6000.0
+   },
+   {
+    "crop": "Orange",
+    "days": 31,
+    "mandis_per_day": 2.9,
+    "score": 53.1,
+    "last_day": "2026-10-26",
+    "last_price": 4500.0
+   },
+   {
+    "crop": "Little gourd (Kundru)",
+    "days": 30,
+    "mandis_per_day": 3.1,
+    "score": 52.5,
+    "last_day": "2026-10-26",
+    "last_price": 2250.0
+   },
+   {
+    "crop": "Pumpkin",
+    "days": 31,
+    "mandis_per_day": 2.8,
+    "score": 51.6,
+    "last_day": "2026-10-26",
+    "last_price": 1025.0
+   },
+   {
+    "crop": "Amla(Nelli Kai)",
+    "days": 31,
+    "mandis_per_day": 2.6,
+    "score": 50.4,
+    "last_day": "2026-10-26",
+    "last_price": 4500.0
+   },
+   {
+    "crop": "Beans",
+    "days": 31,
+    "mandis_per_day": 2.6,
+    "score": 50.1,
+    "last_day": "2026-10-26",
+    "last_price": 4500.0
+   },
+   {
+    "crop": "Cotton",
+    "days": 30,
+    "mandis_per_day": 2.7,
+    "score": 49.0,
+    "last_day": "2026-10-26",
+    "last_price": 9200.0
+   },
+   {
+    "crop": "Raddish",
+    "days": 31,
+    "mandis_per_day": 2.5,
+    "score": 48.9,
+    "last_day": "2026-10-26",
+    "last_price": 1683.33
+   },
+   {
+    "crop": "Water Melon",
+    "days": 31,
+    "mandis_per_day": 2.5,
+    "score": 48.9,
+    "last_day": "2026-10-26",
+    "last_price": 1100.0
+   },
+   {
+    "crop": "Tinda",
+    "days": 30,
+    "mandis_per_day": 2.6,
+    "score": 48.7,
+    "last_day": "2026-10-26",
+    "last_price": 2300.0
+   },
+   {
+    "crop": "Peas(Dry)",
+    "days": 30,
+    "mandis_per_day": 2.5,
+    "score": 47.1,
+    "last_day": "2026-10-26",
+    "last_price": 10500.0
+   },
+   {
+    "crop": "Banana",
+    "days": 31,
+    "mandis_per_day": 2.3,
+    "score": 46.6,
+    "last_day": "2026-10-26",
+    "last_price": 5000.0
+   },
+   {
+    "crop": "Peas Wet",
+    "days": 31,
+    "mandis_per_day": 2.3,
+    "score": 46.6,
+    "last_day": "2026-10-26",
+    "last_price": 8500.0
+   },
+   {
+    "crop": "Pineapple",
+    "days": 31,
+    "mandis_per_day": 2.3,
+    "score": 46.6,
+    "last_day": "2026-10-26",
+    "last_price": 5000.0
+   },
+   {
+    "crop": "Spinach",
+    "days": 31,
+    "mandis_per_day": 2.3,
+    "score": 46.6,
+    "last_day": "2026-10-26",
+    "last_price": 1850.0
+   },
+   {
+    "crop": "Paddy(Dhan)(Common)",
+    "days": 30,
+    "mandis_per_day": 2.3,
+    "score": 45.2,
+    "last_day": "2026-10-26",
+    "last_price": 4182.0
+   },
+   {
+    "crop": "Snakeguard",
+    "days": 31,
+    "mandis_per_day": 2.0,
+    "score": 44.2,
+    "last_day": "2026-10-26",
+    "last_price": 2250.0
+   },
+   {
+    "crop": "Dry Chillies",
+    "days": 30,
+    "mandis_per_day": 2.1,
+    "score": 43.8,
+    "last_day": "2026-10-26",
+    "last_price": 22500.0
+   },
+   {
+    "crop": "Safflower",
+    "days": 31,
+    "mandis_per_day": 2.0,
+    "score": 43.8,
+    "last_day": "2026-10-26",
+    "last_price": 6480.0
+   },
+   {
+    "crop": "Karbuja(Musk Melon)",
+    "days": 31,
+    "mandis_per_day": 2.0,
+    "score": 43.5,
+    "last_day": "2026-10-26",
+    "last_price": 2500.0
+   },
+   {
+    "crop": "Sweet Potato",
+    "days": 31,
+    "mandis_per_day": 2.0,
+    "score": 43.5,
+    "last_day": "2026-10-26",
+    "last_price": 3250.0
+   },
+   {
+    "crop": "Mustard",
+    "days": 30,
+    "mandis_per_day": 2.1,
+    "score": 43.1,
+    "last_day": "2026-10-26",
+    "last_price": 9750.0
+   },
+   {
+    "crop": "Ashgourd",
+    "days": 30,
+    "mandis_per_day": 1.9,
+    "score": 41.7,
+    "last_day": "2026-10-26",
+    "last_price": 1750.0
+   },
+   {
+    "crop": "Cowpea (Lobia/Karamani)",
+    "days": 30,
+    "mandis_per_day": 1.7,
+    "score": 39.5,
+    "last_day": "2026-10-26",
+    "last_price": 6150.0
+   },
+   {
+    "crop": "Lentil (Masur)(Whole)",
+    "days": 30,
+    "mandis_per_day": 1.6,
+    "score": 38.3,
+    "last_day": "2026-10-26",
+    "last_price": 7575.0
+   },
+   {
+    "crop": "Grapes",
+    "days": 30,
+    "mandis_per_day": 1.6,
+    "score": 37.5,
+    "last_day": "2026-10-26",
+    "last_price": 10000.0
+   },
+   {
+    "crop": "Ber(Zizyphus/Borehannu)",
+    "days": 29,
+    "mandis_per_day": 1.6,
+    "score": 36.9,
+    "last_day": "2026-10-26",
+    "last_price": 2200.0
+   },
+   {
+    "crop": "Tender Coconut",
+    "days": 31,
+    "mandis_per_day": 1.4,
+    "score": 36.5,
+    "last_day": "2026-10-26",
+    "last_price": 3300.0
+   },
+   {
+    "crop": "Elephant Yam (Suran)",
+    "days": 29,
+    "mandis_per_day": 1.5,
+    "score": 35.7,
+    "last_day": "2026-10-26",
+    "last_price": 3000.0
+   },
+   {
+    "crop": "Mango (Raw-Ripe)",
+    "days": 30,
+    "mandis_per_day": 1.3,
+    "score": 34.6,
+    "last_day": "2026-10-26",
+    "last_price": 6000.0
+   },
+   {
+    "crop": "Mint(Pudina)",
+    "days": 31,
+    "mandis_per_day": 1.1,
+    "score": 32.0,
+    "last_day": "2026-10-26",
+    "last_price": 750.0
+   },
+   {
+    "crop": "Sunflower",
+    "days": 30,
+    "mandis_per_day": 1.1,
+    "score": 31.9,
+    "last_day": "2026-10-26",
+    "last_price": 7432.0
+   },
+   {
+    "crop": "Coconut",
+    "days": 31,
+    "mandis_per_day": 1.0,
+    "score": 31.5,
+    "last_day": "2026-10-26",
+    "last_price": 4000.0
+   },
+   {
+    "crop": "Castor Seed",
+    "days": 26,
+    "mandis_per_day": 1.5,
+    "score": 31.4,
+    "last_day": "2026-10-26",
+    "last_price": 6500.0
+   },
+   {
+    "crop": "Sugar",
+    "days": 31,
+    "mandis_per_day": 1.0,
+    "score": 31.0,
+    "last_day": "2026-10-26",
+    "last_price": 5025.0
+   },
+   {
+    "crop": "Cardamoms",
+    "days": 30,
+    "mandis_per_day": 1.0,
+    "score": 30.0,
+    "last_day": "2026-10-26",
+    "last_price": 312500.0
+   },
+   {
+    "crop": "Cummin Seed(Jeera)",
+    "days": 30,
+    "mandis_per_day": 1.0,
+    "score": 30.0,
+    "last_day": "2026-10-26",
+    "last_price": 26000.0
+   },
+   {
+    "crop": "Masur Dal",
+    "days": 30,
+    "mandis_per_day": 1.0,
+    "score": 30.0,
+    "last_day": "2026-10-26",
+    "last_price": 7800.0
+   },
+   {
+    "crop": "Ragi (Finger Millet)",
+    "days": 30,
+    "mandis_per_day": 1.0,
+    "score": 30.0,
+    "last_day": "2026-10-26",
+    "last_price": 5550.0
+   },
+   {
+    "crop": "Arecanut(Betelnut/Supari)",
+    "days": 29,
+    "mandis_per_day": 1.0,
+    "score": 29.0,
+    "last_day": "2026-10-26",
+    "last_price": 64000.0
+   },
+   {
+    "crop": "Arhar Dal(Tur Dal)",
+    "days": 29,
+    "mandis_per_day": 1.0,
+    "score": 29.0,
+    "last_day": "2026-10-26",
+    "last_price": 11400.0
+   },
+   {
+    "crop": "Bengal Gram Dal (Chana Dal)",
+    "days": 29,
+    "mandis_per_day": 1.0,
+    "score": 29.0,
+    "last_day": "2026-10-26",
+    "last_price": 9800.0
+   },
+   {
+    "crop": "Black Gram Dal (Urd Dal)",
+    "days": 29,
+    "mandis_per_day": 1.0,
+    "score": 29.0,
+    "last_day": "2026-10-26",
+    "last_price": 13000.0
+   },
+   {
+    "crop": "Green Gram Dal (Moong Dal)",
+    "days": 29,
+    "mandis_per_day": 1.0,
+    "score": 29.0,
+    "last_day": "2026-10-26",
+    "last_price": 12000.0
+   },
+   {
+    "crop": "Tamarind Fruit",
+    "days": 29,
+    "mandis_per_day": 1.0,
+    "score": 29.0,
+    "last_day": "2026-10-26",
+    "last_price": 13750.0
+   },
+   {
+    "crop": "Black Gram(Urd Beans)(Whole)",
+    "days": 1,
+    "mandis_per_day": 30.0,
+    "score": 5.5,
+    "last_day": "2026-10-19",
+    "last_price": 8959.08
+   },
+   {
+    "crop": "Red gram/Arhar/Tur(whole)",
+    "days": 1,
+    "mandis_per_day": 27.0,
+    "score": 5.2,
+    "last_day": "2026-10-19",
+    "last_price": 9213.73
+   },
+   {
+    "crop": "Green Gram(Moong)(Whole)",
+    "days": 1,
+    "mandis_per_day": 24.0,
+    "score": 4.9,
+    "last_day": "2026-10-19",
+    "last_price": 8954.59
+   },
+   {
+    "crop": "Guar",
+    "days": 1,
+    "mandis_per_day": 22.0,
+    "score": 4.7,
+    "last_day": "2026-10-19",
+    "last_price": 5063.59
+   },
+   {
+    "crop": "Chilly Capsicum",
+    "days": 1,
+    "mandis_per_day": 20.0,
+    "score": 4.5,
+    "last_day": "2026-10-19",
+    "last_price": 3129.25
+   },
+   {
+    "crop": "Lime",
+    "days": 1,
+    "mandis_per_day": 14.0,
+    "score": 3.7,
+    "last_day": "2026-10-19",
+    "last_price": 7338.07
+   },
+   {
+    "crop": "Paddy(Common)",
+    "days": 1,
+    "mandis_per_day": 10.0,
+    "score": 3.2,
+    "last_day": "2026-10-19",
+    "last_price": 3389.18
+   },
+   {
+    "crop": "Seetapal",
+    "days": 1,
+    "mandis_per_day": 9.0,
+    "score": 3.0,
+    "last_day": "2026-10-19",
+    "last_price": 5055.56
+   },
+   {
+    "crop": "Little gourd(Kundru)",
+    "days": 1,
+    "mandis_per_day": 7.0,
+    "score": 2.6,
+    "last_day": "2026-10-19",
+    "last_price": 2685.71
+   },
+   {
+    "crop": "Sweet Pumpkin",
+    "days": 1,
+    "mandis_per_day": 6.0,
+    "score": 2.4,
+    "last_day": "2026-10-19",
+    "last_price": 983.33
+   },
+   {
+    "crop": "French Beans(Frasbean)",
+    "days": 1,
+    "mandis_per_day": 4.0,
+    "score": 2.0,
+    "last_day": "2026-10-19",
+    "last_price": 4912.5
+   },
+   {
+    "crop": "Green Peas",
+    "days": 1,
+    "mandis_per_day": 4.0,
+    "score": 2.0,
+    "last_day": "2026-10-19",
+    "last_price": 6740.0
+   },
+   {
+    "crop": "Marigold(Calcutta)",
+    "days": 1,
+    "mandis_per_day": 4.0,
+    "score": 2.0,
+    "last_day": "2026-10-19",
+    "last_price": 2479.0
+   },
+   {
+    "crop": "Corriander seed",
+    "days": 1,
+    "mandis_per_day": 3.0,
+    "score": 1.7,
+    "last_day": "2026-10-19",
+    "last_price": 12750.0
+   },
+   {
+    "crop": "Elephant Yam(Suran)/Amorphophallus",
+    "days": 1,
+    "mandis_per_day": 3.0,
+    "score": 1.7,
+    "last_day": "2026-10-19",
+    "last_price": 3016.67
+   },
+   {
+    "crop": "Ground Nut Seed",
+    "days": 1,
+    "mandis_per_day": 3.0,
+    "score": 1.7,
+    "last_day": "2026-10-19",
+    "last_price": 13500.0
+   },
+   {
+    "crop": "Chili Red",
+    "days": 1,
+    "mandis_per_day": 2.0,
+    "score": 1.4,
+    "last_day": "2026-10-19",
+    "last_price": 16000.0
+   },
+   {
+    "crop": "Cowpea(Lobia/Karamani)",
+    "days": 1,
+    "mandis_per_day": 2.0,
+    "score": 1.4,
+    "last_day": "2026-10-19",
+    "last_price": 8250.0
+   },
+   {
+    "crop": "Lentil(Masur)(Whole)",
+    "days": 1,
+    "mandis_per_day": 2.0,
+    "score": 1.4,
+    "last_day": "2026-10-19",
+    "last_price": 7575.0
+   },
+   {
+    "crop": "Mango(Raw-Ripe)",
+    "days": 1,
+    "mandis_per_day": 2.0,
+    "score": 1.4,
+    "last_day": "2026-10-19",
+    "last_price": 4750.0
+   },
+   {
+    "crop": "Onion Green",
+    "days": 1,
+    "mandis_per_day": 2.0,
+    "score": 1.4,
+    "last_day": "2026-10-19",
+    "last_price": 825.0
+   },
+   {
+    "crop": "Pointed gourd(Parval)",
+    "days": 1,
+    "mandis_per_day": 2.0,
+    "score": 1.4,
+    "last_day": "2026-10-19",
+    "last_price": 3250.0
+   },
+   {
+    "crop": "Almond(Badam)",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 102500.0
+   },
+   {
+    "crop": "Banana - Green",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 2900.0
+   },
+   {
+    "crop": "Bengal Gram Dal(Chana Dal)",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 9800.0
+   },
+   {
+    "crop": "Black Gram Dal(Urd Dal)",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 13000.0
+   },
+   {
+    "crop": "Cardamom",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 315000.0
+   },
+   {
+    "crop": "Cashewnuts",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 120000.0
+   },
+   {
+    "crop": "Chow Chow",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 1125.0
+   },
+   {
+    "crop": "Cow",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 60000.0
+   },
+   {
+    "crop": "Dry Grapes",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 15700.0
+   },
+   {
+    "crop": "Ghee",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 70500.0
+   },
+   {
+    "crop": "Green Gram Dal(Moong Dal)",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 12000.0
+   },
+   {
+    "crop": "Kulthi(Horse Gram)",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 4005.0
+   },
+   {
+    "crop": "Mataki",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 9650.0
+   },
+   {
+    "crop": "Ox",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 20000.0
+   },
+   {
+    "crop": "Pear(Marasebu)",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 6700.0
+   },
+   {
+    "crop": "Plum",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 7000.0
+   },
+   {
+    "crop": "Ragi(Finger Millet)",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 5650.0
+   },
+   {
+    "crop": "Red gram split/Arhar dal/Tur dal",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 11400.0
+   },
+   {
+    "crop": "Sabu Dan",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 6200.0
+   },
+   {
+    "crop": "She Buffalo",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 100000.0
+   },
+   {
+    "crop": "Soanf",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 23750.0
+   },
+   {
+    "crop": "Sunflower/Sunflower Seed",
+    "days": 1,
+    "mandis_per_day": 1.0,
+    "score": 1.0,
+    "last_day": "2026-10-19",
+    "last_price": 5511.0
+   }
+  ]
+ },
+ "since": "2026-09-26",
+ "made": "2026-10-26T06:36:32+00:00",
+ "days_in_archive": 31,
+ "districts": {
+  "ahilyanagar": {
+   "days": 1,
+   "crops": [
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-26",
+     "last_price": 1500.0
+    },
+    {
+     "crop": "Maize",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-26",
+     "last_price": 2500.0
+    }
+   ]
+  },
+  "ahmednagar": {
+   "days": 7,
+   "crops": [
+    {
+     "crop": "Amla(Nelli Kai)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Apple",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 7000.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Banana",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1300.0
+    },
+    {
+     "crop": "Beans",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Beetroot",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 5200.0
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 9750.0
+    },
+    {
+     "crop": "Bottle gourd",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 400.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2250.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 600.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2250.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 500.0
+    },
+    {
+     "crop": "Chikoos(Sapota)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 4750.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3750.0
+    },
+    {
+     "crop": "Coriander(Leaves)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 4950.0
+    },
+    {
+     "crop": "Cowpea(Veg)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1500.0
+    },
+    {
+     "crop": "Custard Apple (Sharifa)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3550.0
+    },
+    {
+     "crop": "Drumstick",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Garlic",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 10500.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 5750.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3250.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 9150.0
+    },
+    {
+     "crop": "Guava",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 7500.0
+    },
+    {
+     "crop": "Lemon",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 5950.0
+    },
+    {
+     "crop": "Little gourd (Kundru)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1500.0
+    },
+    {
+     "crop": "Maize",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2700.0
+    },
+    {
+     "crop": "Methi(Leaves)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Mint(Pudina)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Mousambi(Sweet Lime)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2625.0
+    },
+    {
+     "crop": "Onion",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3601.33
+    },
+    {
+     "crop": "Orange",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Papaya",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1750.0
+    },
+    {
+     "crop": "Peas Wet",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 9100.0
+    },
+    {
+     "crop": "Pineapple",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3750.0
+    },
+    {
+     "crop": "Pomegranate",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Potato",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1250.0
+    },
+    {
+     "crop": "Ridgeguard(Tori)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 6775.0
+    },
+    {
+     "crop": "Spinach",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2700.0
+    },
+    {
+     "crop": "Tinda",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 750.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3300.0
+    },
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 9101.0
+    },
+    {
+     "crop": "Castor Seed",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 6500.0
+    },
+    {
+     "crop": "Dry Chillies",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 16000.0
+    },
+    {
+     "crop": "Cotton",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 9250.0
+    },
+    {
+     "crop": "Gur(Jaggery)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 4850.0
+    },
+    {
+     "crop": "Mango (Raw-Ripe)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 8000.0
+    },
+    {
+     "crop": "Safflower",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 4300.0
+    },
+    {
+     "crop": "Coconut",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Water Melon",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1000.0
+    },
+    {
+     "crop": "Grapes",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-22",
+     "last_price": 6500.0
+    },
+    {
+     "crop": "Groundnut",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-23",
+     "last_price": 8700.0
+    },
+    {
+     "crop": "Sweet Potato",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-22",
+     "last_price": 1750.0
+    },
+    {
+     "crop": "Karbuja(Musk Melon)",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-22",
+     "last_price": 2250.0
+    },
+    {
+     "crop": "Pumpkin",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-21",
+     "last_price": 800.0
+    },
+    {
+     "crop": "Peas(Dry)",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-15",
+     "last_price": 10000.0
+    }
+   ]
+  },
+  "akola": {
+   "days": 11,
+   "crops": [
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 11,
+     "mandis_per_day": 1.0,
+     "score": 11.0,
+     "last_day": "2026-10-24",
+     "last_price": 10100.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 11,
+     "mandis_per_day": 1.0,
+     "score": 11.0,
+     "last_day": "2026-10-24",
+     "last_price": 7065.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 11,
+     "mandis_per_day": 1.0,
+     "score": 11.0,
+     "last_day": "2026-10-24",
+     "last_price": 8595.0
+    },
+    {
+     "crop": "Garlic",
+     "days": 11,
+     "mandis_per_day": 1.0,
+     "score": 11.0,
+     "last_day": "2026-10-24",
+     "last_price": 14000.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 11,
+     "mandis_per_day": 1.0,
+     "score": 11.0,
+     "last_day": "2026-10-24",
+     "last_price": 5500.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 11,
+     "mandis_per_day": 1.0,
+     "score": 11.0,
+     "last_day": "2026-10-24",
+     "last_price": 9200.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 11,
+     "mandis_per_day": 1.0,
+     "score": 11.0,
+     "last_day": "2026-10-24",
+     "last_price": 2735.0
+    },
+    {
+     "crop": "Maize",
+     "days": 11,
+     "mandis_per_day": 1.0,
+     "score": 11.0,
+     "last_day": "2026-10-24",
+     "last_price": 1875.0
+    },
+    {
+     "crop": "Onion",
+     "days": 11,
+     "mandis_per_day": 1.0,
+     "score": 11.0,
+     "last_day": "2026-10-24",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Potato",
+     "days": 11,
+     "mandis_per_day": 1.0,
+     "score": 11.0,
+     "last_day": "2026-10-24",
+     "last_price": 800.0
+    },
+    {
+     "crop": "Sesamum(Sesame,Gingelly,Til)",
+     "days": 11,
+     "mandis_per_day": 1.0,
+     "score": 11.0,
+     "last_day": "2026-10-24",
+     "last_price": 14000.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 11,
+     "mandis_per_day": 1.0,
+     "score": 11.0,
+     "last_day": "2026-10-24",
+     "last_price": 6813.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 11,
+     "mandis_per_day": 1.0,
+     "score": 11.0,
+     "last_day": "2026-10-24",
+     "last_price": 3275.0
+    },
+    {
+     "crop": "Dry Chillies",
+     "days": 8,
+     "mandis_per_day": 1.0,
+     "score": 8.0,
+     "last_day": "2026-10-24",
+     "last_price": 20000.0
+    },
+    {
+     "crop": "Safflower",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-15",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Mustard",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-21",
+     "last_price": 7650.0
+    },
+    {
+     "crop": "Peas(Dry)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-22",
+     "last_price": 3400.0
+    },
+    {
+     "crop": "Turmeric",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-24",
+     "last_price": 3000.0
+    }
+   ]
+  },
+  "amravati": {
+   "days": 5,
+   "crops": [
+    {
+     "crop": "Amla(Nelli Kai)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Apple",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 13000.0
+    },
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 8300.0
+    },
+    {
+     "crop": "Ashgourd",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1250.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2450.0
+    },
+    {
+     "crop": "Beetroot",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 5800.0
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2900.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 8100.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1250.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 900.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2400.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2100.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1400.0
+    },
+    {
+     "crop": "Chikoos(Sapota)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 7000.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 5250.0
+    },
+    {
+     "crop": "Coriander(Leaves)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Cotton",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 9500.0
+    },
+    {
+     "crop": "Cowpea(Veg)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1700.0
+    },
+    {
+     "crop": "Custard Apple (Sharifa)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Garlic",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 16000.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 11000.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 8025.0
+    },
+    {
+     "crop": "Groundnut",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 10750.0
+    },
+    {
+     "crop": "Guava",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3400.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2375.0
+    },
+    {
+     "crop": "Lemon",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 7000.0
+    },
+    {
+     "crop": "Maize",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2242.5
+    },
+    {
+     "crop": "Methi(Leaves)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Mousambi(Sweet Lime)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Onion",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3700.0
+    },
+    {
+     "crop": "Orange",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Papaya",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2900.0
+    },
+    {
+     "crop": "Pomegranate",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 14000.0
+    },
+    {
+     "crop": "Potato",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1100.0
+    },
+    {
+     "crop": "Sesamum(Sesame,Gingelly,Til)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 10200.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 5600.0
+    },
+    {
+     "crop": "Spinach",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2200.0
+    },
+    {
+     "crop": "Tinda",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1500.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2585.67
+    },
+    {
+     "crop": "Banana",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-23",
+     "last_price": 900.0
+    },
+    {
+     "crop": "Dry Chillies",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-23",
+     "last_price": 15000.0
+    }
+   ]
+  },
+  "aurangabad": {
+   "days": 6,
+   "crops": [
+    {
+     "crop": "Amla(Nelli Kai)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Apple",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 10500.0
+    },
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 9100.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 3251.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 6725.5
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 8791.0
+    },
+    {
+     "crop": "Bottle gourd",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 600.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2600.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 450.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 550.0
+    },
+    {
+     "crop": "Chikoos(Sapota)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 7250.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2250.0
+    },
+    {
+     "crop": "Cowpea(Veg)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2600.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 1050.0
+    },
+    {
+     "crop": "Custard Apple (Sharifa)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 5100.0
+    },
+    {
+     "crop": "Drumstick",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Garlic",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 11000.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 9000.0
+    },
+    {
+     "crop": "Guava",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2850.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 5400.0
+    },
+    {
+     "crop": "Lemon",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 9250.0
+    },
+    {
+     "crop": "Maize",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2405.0
+    },
+    {
+     "crop": "Mousambi(Sweet Lime)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Onion",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 3450.0
+    },
+    {
+     "crop": "Orange",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2250.0
+    },
+    {
+     "crop": "Papaya",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2850.0
+    },
+    {
+     "crop": "Pomegranate",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Potato",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 1050.0
+    },
+    {
+     "crop": "Ridgeguard(Tori)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 6855.5
+    },
+    {
+     "crop": "Tomato",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 600.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 3089.0
+    },
+    {
+     "crop": "Karbuja(Musk Melon)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1750.0
+    },
+    {
+     "crop": "Sesamum(Sesame,Gingelly,Til)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 15000.0
+    },
+    {
+     "crop": "Safflower",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-23",
+     "last_price": 7400.0
+    },
+    {
+     "crop": "Sweet Potato",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-23",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Tinda",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-25",
+     "last_price": 2600.0
+    },
+    {
+     "crop": "Cotton",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-25",
+     "last_price": 9000.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-21",
+     "last_price": 1400.0
+    },
+    {
+     "crop": "Castor Seed",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-08",
+     "last_price": 5300.0
+    },
+    {
+     "crop": "Groundnut",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-08",
+     "last_price": 6800.0
+    },
+    {
+     "crop": "Mustard",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-08",
+     "last_price": 6855.0
+    }
+   ]
+  },
+  "beed": {
+   "days": 5,
+   "crops": [
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 9201.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 3100.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 6906.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 9100.0
+    },
+    {
+     "crop": "Cotton",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 9666.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 9500.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 5242.0
+    },
+    {
+     "crop": "Mustard",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 8051.0
+    },
+    {
+     "crop": "Onion",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Sesamum(Sesame,Gingelly,Til)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 10500.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 6893.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 3633.0
+    },
+    {
+     "crop": "Groundnut",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 6700.0
+    },
+    {
+     "crop": "Maize",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-24",
+     "last_price": 2600.0
+    }
+   ]
+  },
+  "bhandara": {
+   "days": 5,
+   "crops": [
+    {
+     "crop": "Paddy(Dhan)(Common)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 3388.33
+    },
+    {
+     "crop": "Peas(Dry)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 3850.0
+    },
+    {
+     "crop": "Rice",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 5200.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 2611.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-23",
+     "last_price": 7000.0
+    },
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-24",
+     "last_price": 7651.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-08",
+     "last_price": 7921.0
+    },
+    {
+     "crop": "Gur(Jaggery)",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-08",
+     "last_price": 4811.0
+    },
+    {
+     "crop": "Mustard",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-08",
+     "last_price": 6500.0
+    }
+   ]
+  },
+  "buldhana": {
+   "days": 9,
+   "crops": [
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 9,
+     "mandis_per_day": 1.0,
+     "score": 9.0,
+     "last_day": "2026-10-25",
+     "last_price": 9853.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 9,
+     "mandis_per_day": 1.0,
+     "score": 9.0,
+     "last_day": "2026-10-25",
+     "last_price": 2470.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 9,
+     "mandis_per_day": 1.0,
+     "score": 9.0,
+     "last_day": "2026-10-25",
+     "last_price": 8250.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 9,
+     "mandis_per_day": 1.0,
+     "score": 9.0,
+     "last_day": "2026-10-25",
+     "last_price": 8931.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 9,
+     "mandis_per_day": 1.0,
+     "score": 9.0,
+     "last_day": "2026-10-25",
+     "last_price": 8350.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 9,
+     "mandis_per_day": 1.0,
+     "score": 9.0,
+     "last_day": "2026-10-25",
+     "last_price": 2655.67
+    },
+    {
+     "crop": "Maize",
+     "days": 9,
+     "mandis_per_day": 1.0,
+     "score": 9.0,
+     "last_day": "2026-10-25",
+     "last_price": 2436.5
+    },
+    {
+     "crop": "Sesamum(Sesame,Gingelly,Til)",
+     "days": 9,
+     "mandis_per_day": 1.0,
+     "score": 9.0,
+     "last_day": "2026-10-25",
+     "last_price": 13250.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 9,
+     "mandis_per_day": 1.0,
+     "score": 9.0,
+     "last_day": "2026-10-25",
+     "last_price": 6850.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 9,
+     "mandis_per_day": 1.0,
+     "score": 9.0,
+     "last_day": "2026-10-25",
+     "last_price": 2765.0
+    },
+    {
+     "crop": "Groundnut",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 8250.0
+    },
+    {
+     "crop": "Turmeric",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 22500.0
+    },
+    {
+     "crop": "Cotton",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-21",
+     "last_price": 9600.0
+    },
+    {
+     "crop": "Mustard",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-08",
+     "last_price": 7600.0
+    },
+    {
+     "crop": "Onion",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-06",
+     "last_price": 3600.0
+    }
+   ]
+  },
+  "chandrapur": {
+   "days": 5,
+   "crops": [
+    {
+     "crop": "Ashgourd",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1500.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1500.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1000.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 800.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1200.0
+    },
+    {
+     "crop": "Coriander(Leaves)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Cotton",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 9200.0
+    },
+    {
+     "crop": "Cowpea(Veg)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Garlic",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 17000.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 8400.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Methi(Leaves)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Onion",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Paddy(Dhan)(Common)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3900.0
+    },
+    {
+     "crop": "Potato",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1400.0
+    },
+    {
+     "crop": "Raddish",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1500.0
+    },
+    {
+     "crop": "Ridgeguard(Tori)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 6850.0
+    },
+    {
+     "crop": "Spinach",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1200.0
+    },
+    {
+     "crop": "Bottle gourd",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-25",
+     "last_price": 1500.0
+    },
+    {
+     "crop": "Tinda",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Little gourd (Kundru)",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    }
+   ]
+  },
+  "dhule": {
+   "days": 4,
+   "crops": [
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 8101.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2946.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 6850.5
+    },
+    {
+     "crop": "Cowpea (Lobia/Karamani)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 5500.0
+    },
+    {
+     "crop": "Dry Chillies",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 8800.33
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 8812.0
+    },
+    {
+     "crop": "Groundnut",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 8900.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 3810.33
+    },
+    {
+     "crop": "Maize",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2525.0
+    },
+    {
+     "crop": "Onion",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 4250.0
+    },
+    {
+     "crop": "Sesamum(Sesame,Gingelly,Til)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 8000.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 6887.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2987.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-21",
+     "last_price": 6811.0
+    }
+   ]
+  },
+  "gadchiroli": {
+   "days": 6,
+   "crops": [
+    {
+     "crop": "Paddy(Dhan)(Common)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4182.0
+    }
+   ]
+  },
+  "gondia": {
+   "days": 5,
+   "crops": [
+    {
+     "crop": "Paddy(Dhan)(Common)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 3460.5
+    }
+   ]
+  },
+  "hingoli": {
+   "days": 4,
+   "crops": [
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 9220.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 6732.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 6862.5
+    },
+    {
+     "crop": "Turmeric",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 20400.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 3900.0
+    }
+   ]
+  },
+  "jalgaon": {
+   "days": 26,
+   "crops": [
+    {
+     "crop": "Wheat",
+     "days": 26,
+     "mandis_per_day": 3.9,
+     "score": 51.2,
+     "last_day": "2026-10-26",
+     "last_price": 3255.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 26,
+     "mandis_per_day": 3.8,
+     "score": 50.7,
+     "last_day": "2026-10-26",
+     "last_price": 6930.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 26,
+     "mandis_per_day": 3.8,
+     "score": 50.5,
+     "last_day": "2026-10-26",
+     "last_price": 4850.0
+    },
+    {
+     "crop": "Maize",
+     "days": 26,
+     "mandis_per_day": 3.5,
+     "score": 48.9,
+     "last_day": "2026-10-26",
+     "last_price": 2575.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 25,
+     "mandis_per_day": 3.3,
+     "score": 45.6,
+     "last_day": "2026-10-25",
+     "last_price": 3108.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 25,
+     "mandis_per_day": 2.9,
+     "score": 42.4,
+     "last_day": "2026-10-25",
+     "last_price": 8750.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 25,
+     "mandis_per_day": 2.8,
+     "score": 42.1,
+     "last_day": "2026-10-25",
+     "last_price": 9700.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 26,
+     "mandis_per_day": 2.4,
+     "score": 40.1,
+     "last_day": "2026-10-26",
+     "last_price": 7500.0
+    },
+    {
+     "crop": "Onion",
+     "days": 25,
+     "mandis_per_day": 2.0,
+     "score": 35.4,
+     "last_day": "2026-10-25",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Pumpkin",
+     "days": 25,
+     "mandis_per_day": 1.4,
+     "score": 29.6,
+     "last_day": "2026-10-25",
+     "last_price": 1000.0
+    },
+    {
+     "crop": "Potato",
+     "days": 25,
+     "mandis_per_day": 1.3,
+     "score": 28.7,
+     "last_day": "2026-10-25",
+     "last_price": 1200.0
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 25,
+     "mandis_per_day": 1.3,
+     "score": 28.3,
+     "last_day": "2026-10-25",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 25,
+     "mandis_per_day": 1.3,
+     "score": 28.3,
+     "last_day": "2026-10-25",
+     "last_price": 2200.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 25,
+     "mandis_per_day": 1.3,
+     "score": 28.3,
+     "last_day": "2026-10-25",
+     "last_price": 2200.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 25,
+     "mandis_per_day": 1.3,
+     "score": 28.3,
+     "last_day": "2026-10-25",
+     "last_price": 1000.0
+    },
+    {
+     "crop": "Coriander(Leaves)",
+     "days": 25,
+     "mandis_per_day": 1.3,
+     "score": 28.3,
+     "last_day": "2026-10-25",
+     "last_price": 6500.0
+    },
+    {
+     "crop": "Cowpea(Veg)",
+     "days": 25,
+     "mandis_per_day": 1.3,
+     "score": 28.3,
+     "last_day": "2026-10-25",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 25,
+     "mandis_per_day": 1.3,
+     "score": 28.3,
+     "last_day": "2026-10-25",
+     "last_price": 1500.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 25,
+     "mandis_per_day": 1.3,
+     "score": 28.3,
+     "last_day": "2026-10-25",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Lemon",
+     "days": 25,
+     "mandis_per_day": 1.3,
+     "score": 28.3,
+     "last_day": "2026-10-25",
+     "last_price": 8500.0
+    },
+    {
+     "crop": "Methi(Leaves)",
+     "days": 25,
+     "mandis_per_day": 1.3,
+     "score": 28.3,
+     "last_day": "2026-10-25",
+     "last_price": 5500.0
+    },
+    {
+     "crop": "Spinach",
+     "days": 25,
+     "mandis_per_day": 1.3,
+     "score": 28.3,
+     "last_day": "2026-10-25",
+     "last_price": 1500.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 25,
+     "mandis_per_day": 1.3,
+     "score": 28.3,
+     "last_day": "2026-10-25",
+     "last_price": 1000.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 25,
+     "mandis_per_day": 1.2,
+     "score": 27.8,
+     "last_day": "2026-10-25",
+     "last_price": 1200.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 25,
+     "mandis_per_day": 1.2,
+     "score": 27.8,
+     "last_day": "2026-10-25",
+     "last_price": 7000.0
+    },
+    {
+     "crop": "Little gourd (Kundru)",
+     "days": 25,
+     "mandis_per_day": 1.2,
+     "score": 27.8,
+     "last_day": "2026-10-25",
+     "last_price": 1200.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 25,
+     "mandis_per_day": 1.2,
+     "score": 27.4,
+     "last_day": "2026-10-25",
+     "last_price": 1800.0
+    },
+    {
+     "crop": "Raddish",
+     "days": 25,
+     "mandis_per_day": 1.2,
+     "score": 27.4,
+     "last_day": "2026-10-25",
+     "last_price": 800.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 25,
+     "mandis_per_day": 1.2,
+     "score": 26.9,
+     "last_day": "2026-10-25",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Banana",
+     "days": 25,
+     "mandis_per_day": 1.1,
+     "score": 26.5,
+     "last_day": "2026-10-25",
+     "last_price": 1310.0
+    },
+    {
+     "crop": "Beetroot",
+     "days": 25,
+     "mandis_per_day": 1.1,
+     "score": 26.0,
+     "last_day": "2026-10-25",
+     "last_price": 1200.0
+    },
+    {
+     "crop": "Papaya",
+     "days": 25,
+     "mandis_per_day": 1.1,
+     "score": 26.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 23,
+     "mandis_per_day": 1.3,
+     "score": 25.8,
+     "last_day": "2026-10-23",
+     "last_price": 8700.0
+    },
+    {
+     "crop": "Amla(Nelli Kai)",
+     "days": 25,
+     "mandis_per_day": 1.0,
+     "score": 25.0,
+     "last_day": "2026-10-25",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Apple",
+     "days": 25,
+     "mandis_per_day": 1.0,
+     "score": 25.0,
+     "last_day": "2026-10-25",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Mousambi(Sweet Lime)",
+     "days": 25,
+     "mandis_per_day": 1.0,
+     "score": 25.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Pomegranate",
+     "days": 25,
+     "mandis_per_day": 1.0,
+     "score": 25.0,
+     "last_day": "2026-10-25",
+     "last_price": 18000.0
+    },
+    {
+     "crop": "Ridgeguard(Tori)",
+     "days": 25,
+     "mandis_per_day": 1.0,
+     "score": 25.0,
+     "last_day": "2026-10-25",
+     "last_price": 1800.0
+    },
+    {
+     "crop": "Garlic",
+     "days": 24,
+     "mandis_per_day": 1.0,
+     "score": 24.0,
+     "last_day": "2026-10-25",
+     "last_price": 8000.0
+    },
+    {
+     "crop": "Drumstick",
+     "days": 23,
+     "mandis_per_day": 1.0,
+     "score": 23.5,
+     "last_day": "2026-10-25",
+     "last_price": 8000.0
+    },
+    {
+     "crop": "Tinda",
+     "days": 23,
+     "mandis_per_day": 1.0,
+     "score": 23.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 22,
+     "mandis_per_day": 1.0,
+     "score": 22.0,
+     "last_day": "2026-10-25",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Peas Wet",
+     "days": 22,
+     "mandis_per_day": 1.0,
+     "score": 22.0,
+     "last_day": "2026-10-25",
+     "last_price": 8000.0
+    },
+    {
+     "crop": "Sweet Potato",
+     "days": 18,
+     "mandis_per_day": 1.2,
+     "score": 19.9,
+     "last_day": "2026-10-23",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Custard Apple (Sharifa)",
+     "days": 18,
+     "mandis_per_day": 1.0,
+     "score": 18.0,
+     "last_day": "2026-10-25",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Orange",
+     "days": 18,
+     "mandis_per_day": 1.0,
+     "score": 18.0,
+     "last_day": "2026-10-24",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Guava",
+     "days": 16,
+     "mandis_per_day": 1.0,
+     "score": 16.0,
+     "last_day": "2026-10-25",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Sesamum(Sesame,Gingelly,Til)",
+     "days": 11,
+     "mandis_per_day": 1.0,
+     "score": 11.0,
+     "last_day": "2026-10-12",
+     "last_price": 10200.0
+    },
+    {
+     "crop": "Chikoos(Sapota)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-03",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Water Melon",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-25",
+     "last_price": 400.0
+    },
+    {
+     "crop": "Groundnut",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-12",
+     "last_price": 1991.0
+    },
+    {
+     "crop": "Sunflower",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-25",
+     "last_price": 6700.0
+    }
+   ]
+  },
+  "jalna": {
+   "days": 5,
+   "crops": [
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 9680.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 2210.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 6800.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 9000.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 8800.0
+    },
+    {
+     "crop": "Gur(Jaggery)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 4021.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 2200.0
+    },
+    {
+     "crop": "Maize",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 2150.0
+    },
+    {
+     "crop": "Mousambi(Sweet Lime)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 1050.0
+    },
+    {
+     "crop": "Mustard",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 9500.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 6650.5
+    },
+    {
+     "crop": "Wheat",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Cowpea (Lobia/Karamani)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-23",
+     "last_price": 10000.0
+    },
+    {
+     "crop": "Cotton",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-21",
+     "last_price": 9700.0
+    }
+   ]
+  },
+  "kolhapur": {
+   "days": 6,
+   "crops": [
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 5450.0
+    },
+    {
+     "crop": "Rice",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 6600.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3800.0
+    },
+    {
+     "crop": "Apple",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 600.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1000.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Coriander(Leaves)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 7500.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Dry Chillies",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 75000.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Lemon",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 20000.0
+    },
+    {
+     "crop": "Mousambi(Sweet Lime)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 4800.0
+    },
+    {
+     "crop": "Onion",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Ridgeguard(Tori)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 800.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-25",
+     "last_price": 1200.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Methi(Leaves)",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-25",
+     "last_price": 7500.0
+    },
+    {
+     "crop": "Sweet Potato",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-21",
+     "last_price": 2000.0
+    }
+   ]
+  },
+  "latur": {
+   "days": 6,
+   "crops": [
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 10600.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 6832.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 9950.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 9490.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 3781.0
+    },
+    {
+     "crop": "Safflower",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 6420.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 7175.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2700.0
+    }
+   ]
+  },
+  "mumbai": {
+   "days": 7,
+   "crops": [
+    {
+     "crop": "Amla(Nelli Kai)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Apple",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 11500.0
+    },
+    {
+     "crop": "Arecanut(Betelnut/Supari)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 64000.0
+    },
+    {
+     "crop": "Arhar Dal(Tur Dal)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 11400.0
+    },
+    {
+     "crop": "Ashgourd",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1200.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3800.0
+    },
+    {
+     "crop": "Banana",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Beans",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Beetroot",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1800.0
+    },
+    {
+     "crop": "Bengal Gram Dal (Chana Dal)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 9800.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 9300.0
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2700.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1900.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 12000.0
+    },
+    {
+     "crop": "Black Gram Dal (Urd Dal)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 13000.0
+    },
+    {
+     "crop": "Bottle gourd",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1300.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2100.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 600.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3296.0
+    },
+    {
+     "crop": "Cardamoms",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 312500.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2700.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 600.0
+    },
+    {
+     "crop": "Chikoos(Sapota)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Coconut",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Coriander(Leaves)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1750.0
+    },
+    {
+     "crop": "Cowpea (Lobia/Karamani)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 11000.0
+    },
+    {
+     "crop": "Cowpea(Veg)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2496.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2800.0
+    },
+    {
+     "crop": "Cummin Seed(Jeera)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 26000.0
+    },
+    {
+     "crop": "Custard Apple (Sharifa)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 7000.0
+    },
+    {
+     "crop": "Drumstick",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 9500.0
+    },
+    {
+     "crop": "Dry Chillies",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 28000.0
+    },
+    {
+     "crop": "Elephant Yam (Suran)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2300.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 10500.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 6500.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 11900.0
+    },
+    {
+     "crop": "Green Gram Dal (Moong Dal)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 12000.0
+    },
+    {
+     "crop": "Guava",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 8500.0
+    },
+    {
+     "crop": "Gur(Jaggery)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 6400.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Karbuja(Musk Melon)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3250.0
+    },
+    {
+     "crop": "Lemon",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Lentil (Masur)(Whole)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 7600.0
+    },
+    {
+     "crop": "Little gourd (Kundru)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1900.0
+    },
+    {
+     "crop": "Maize",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 4100.0
+    },
+    {
+     "crop": "Mango (Raw-Ripe)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 6500.0
+    },
+    {
+     "crop": "Masur Dal",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 7800.0
+    },
+    {
+     "crop": "Methi(Leaves)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1900.0
+    },
+    {
+     "crop": "Mint(Pudina)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 750.0
+    },
+    {
+     "crop": "Mousambi(Sweet Lime)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Mustard",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 9750.0
+    },
+    {
+     "crop": "Onion",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3600.0
+    },
+    {
+     "crop": "Orange",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 7000.0
+    },
+    {
+     "crop": "Papaya",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2350.0
+    },
+    {
+     "crop": "Peas Wet",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 10500.0
+    },
+    {
+     "crop": "Peas(Dry)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 5250.0
+    },
+    {
+     "crop": "Pineapple",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Pomegranate",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 13500.0
+    },
+    {
+     "crop": "Potato",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 900.0
+    },
+    {
+     "crop": "Pumpkin",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 800.0
+    },
+    {
+     "crop": "Raddish",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Rice",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 8250.0
+    },
+    {
+     "crop": "Ridgeguard(Tori)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Sesamum(Sesame,Gingelly,Til)",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 21000.0
+    },
+    {
+     "crop": "Snakeguard",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1800.0
+    },
+    {
+     "crop": "Spinach",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1200.0
+    },
+    {
+     "crop": "Sugar",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 5025.0
+    },
+    {
+     "crop": "Sweet Potato",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 2300.0
+    },
+    {
+     "crop": "Tamarind Fruit",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 13750.0
+    },
+    {
+     "crop": "Tinda",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1100.0
+    },
+    {
+     "crop": "Turmeric",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 24000.0
+    },
+    {
+     "crop": "Water Melon",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 1900.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 7,
+     "mandis_per_day": 1.0,
+     "score": 7.0,
+     "last_day": "2026-10-26",
+     "last_price": 4750.0
+    },
+    {
+     "crop": "Ber(Zizyphus/Borehannu)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Grapes",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-26",
+     "last_price": 17500.0
+    }
+   ]
+  },
+  "nagpur": {
+   "days": 6,
+   "crops": [
+    {
+     "crop": "Apple",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 9625.0
+    },
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 9750.0
+    },
+    {
+     "crop": "Banana",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 525.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 7099.0
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2350.0
+    },
+    {
+     "crop": "Bottle gourd",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 1350.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 1250.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4350.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2350.0
+    },
+    {
+     "crop": "Chikoos(Sapota)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3350.0
+    },
+    {
+     "crop": "Coriander(Leaves)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 7650.0
+    },
+    {
+     "crop": "Cowpea(Veg)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2350.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3350.0
+    },
+    {
+     "crop": "Dry Chillies",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 17000.0
+    },
+    {
+     "crop": "Garlic",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 20500.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 7650.0
+    },
+    {
+     "crop": "Grapes",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 5500.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4350.0
+    },
+    {
+     "crop": "Maize",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2300.0
+    },
+    {
+     "crop": "Methi(Leaves)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 5650.0
+    },
+    {
+     "crop": "Mousambi(Sweet Lime)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 1875.0
+    },
+    {
+     "crop": "Onion",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 5650.0
+    },
+    {
+     "crop": "Orange",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3350.0
+    },
+    {
+     "crop": "Pineapple",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Pomegranate",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Potato",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2350.0
+    },
+    {
+     "crop": "Raddish",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 1750.0
+    },
+    {
+     "crop": "Rice",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 5650.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 6956.0
+    },
+    {
+     "crop": "Spinach",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2350.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 1750.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3188.5
+    },
+    {
+     "crop": "Ashgourd",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1295.5
+    },
+    {
+     "crop": "Beetroot",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2575.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 8350.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 4350.0
+    },
+    {
+     "crop": "Cotton",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 8800.0
+    },
+    {
+     "crop": "Custard Apple (Sharifa)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Drumstick",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 7125.0
+    },
+    {
+     "crop": "Groundnut",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 9000.0
+    },
+    {
+     "crop": "Guava",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 4750.0
+    },
+    {
+     "crop": "Lemon",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 6333.0
+    },
+    {
+     "crop": "Little gourd (Kundru)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2625.0
+    },
+    {
+     "crop": "Mustard",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 6450.0
+    },
+    {
+     "crop": "Papaya",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Peas Wet",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 11000.0
+    },
+    {
+     "crop": "Ridgeguard(Tori)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2300.0
+    },
+    {
+     "crop": "Tinda",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2510.0
+    },
+    {
+     "crop": "Amla(Nelli Kai)",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-25",
+     "last_price": 3750.0
+    },
+    {
+     "crop": "Peas(Dry)",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-25",
+     "last_price": 3250.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-26",
+     "last_price": 6950.0
+    }
+   ]
+  },
+  "nanded": {
+   "days": 4,
+   "crops": [
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 8700.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 5425.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 9300.0
+    },
+    {
+     "crop": "Cotton",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 8950.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 8500.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 4325.0
+    },
+    {
+     "crop": "Maize",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2200.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 6794.0
+    },
+    {
+     "crop": "Turmeric",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 18700.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 3375.0
+    },
+    {
+     "crop": "Sesamum(Sesame,Gingelly,Til)",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-23",
+     "last_price": 12300.0
+    }
+   ]
+  },
+  "nandurbar": {
+   "days": 4,
+   "crops": [
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1790.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 3800.0
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2300.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 6325.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 854.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 517.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 808.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 5500.0
+    },
+    {
+     "crop": "Coriander(Leaves)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Cotton",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 9000.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1750.0
+    },
+    {
+     "crop": "Dry Chillies",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 6750.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 4538.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 8501.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 4575.0
+    },
+    {
+     "crop": "Maize",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1950.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 6700.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1010.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2776.0
+    },
+    {
+     "crop": "Sesamum(Sesame,Gingelly,Til)",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-24",
+     "last_price": 17902.0
+    }
+   ]
+  },
+  "nashik": {
+   "days": 6,
+   "crops": [
+    {
+     "crop": "Onion",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3900.0
+    },
+    {
+     "crop": "Pomegranate",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 10750.0
+    },
+    {
+     "crop": "Apple",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 10000.0
+    },
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 8411.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Banana",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1000.0
+    },
+    {
+     "crop": "Beans",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 7270.0
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2415.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1250.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 8302.0
+    },
+    {
+     "crop": "Bottle gourd",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 835.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 375.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 4690.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2425.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 715.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Coriander(Leaves)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3075.0
+    },
+    {
+     "crop": "Cowpea (Lobia/Karamani)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1300.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2350.0
+    },
+    {
+     "crop": "Custard Apple (Sharifa)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Garlic",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 9500.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 5350.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 8625.0
+    },
+    {
+     "crop": "Guava",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 5500.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2700.0
+    },
+    {
+     "crop": "Karbuja(Musk Melon)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Lemon",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 8000.0
+    },
+    {
+     "crop": "Maize",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2669.67
+    },
+    {
+     "crop": "Methi(Leaves)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2788.0
+    },
+    {
+     "crop": "Mousambi(Sweet Lime)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Orange",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Papaya",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Peas Wet",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 11600.0
+    },
+    {
+     "crop": "Peas(Dry)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 11000.0
+    },
+    {
+     "crop": "Potato",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1100.0
+    },
+    {
+     "crop": "Pumpkin",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1200.0
+    },
+    {
+     "crop": "Raddish",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1900.0
+    },
+    {
+     "crop": "Ridgeguard(Tori)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2290.0
+    },
+    {
+     "crop": "Sesamum(Sesame,Gingelly,Til)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 9001.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 6904.33
+    },
+    {
+     "crop": "Spinach",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 700.0
+    },
+    {
+     "crop": "Tender Coconut",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 777.5
+    },
+    {
+     "crop": "Water Melon",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1000.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3020.5
+    },
+    {
+     "crop": "Groundnut",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-23",
+     "last_price": 5400.0
+    },
+    {
+     "crop": "Rice",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-23",
+     "last_price": 2845.0
+    },
+    {
+     "crop": "Sunflower",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-23",
+     "last_price": 5511.0
+    },
+    {
+     "crop": "Castor Seed",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-21",
+     "last_price": 5350.0
+    },
+    {
+     "crop": "Chikoos(Sapota)",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-25",
+     "last_price": 3500.0
+    }
+   ]
+  },
+  "osmanabad": {
+   "days": 4,
+   "crops": [
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 10000.0
+    },
+    {
+     "crop": "Beetroot",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 6500.0
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1700.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 9400.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2550.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1050.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2350.0
+    },
+    {
+     "crop": "Drumstick",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 5750.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 7401.0
+    },
+    {
+     "crop": "Groundnut",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 6250.0
+    },
+    {
+     "crop": "Guava",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2250.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 7500.0
+    },
+    {
+     "crop": "Lemon",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 11300.0
+    },
+    {
+     "crop": "Maize",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2700.0
+    },
+    {
+     "crop": "Mustard",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 8551.0
+    },
+    {
+     "crop": "Onion",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 3600.0
+    },
+    {
+     "crop": "Pumpkin",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1000.0
+    },
+    {
+     "crop": "Ridgeguard(Tori)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 3400.0
+    },
+    {
+     "crop": "Sesamum(Sesame,Gingelly,Til)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 19100.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 6961.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 750.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2650.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-24",
+     "last_price": 3501.0
+    },
+    {
+     "crop": "Karbuja(Musk Melon)",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-24",
+     "last_price": 2250.0
+    },
+    {
+     "crop": "Safflower",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-24",
+     "last_price": 6600.0
+    },
+    {
+     "crop": "Beans",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-22",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-22",
+     "last_price": 3750.0
+    },
+    {
+     "crop": "Mousambi(Sweet Lime)",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-22",
+     "last_price": 2650.0
+    },
+    {
+     "crop": "Pomegranate",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-22",
+     "last_price": 6100.0
+    },
+    {
+     "crop": "Sweet Potato",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-22",
+     "last_price": 1650.0
+    },
+    {
+     "crop": "Coriander(Leaves)",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-21",
+     "last_price": 1300.0
+    }
+   ]
+  },
+  "palghar": {
+   "days": 5,
+   "crops": [
+    {
+     "crop": "Rice",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 4196.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 3600.0
+    }
+   ]
+  },
+  "parbhani": {
+   "days": 6,
+   "crops": [
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 9000.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 5600.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 5100.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 6935.0
+    },
+    {
+     "crop": "Turmeric",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 21300.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2700.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2900.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 8600.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-23",
+     "last_price": 6675.0
+    },
+    {
+     "crop": "Safflower",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-21",
+     "last_price": 5500.0
+    }
+   ]
+  },
+  "pune": {
+   "days": 6,
+   "crops": [
+    {
+     "crop": "Amla(Nelli Kai)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 6750.0
+    },
+    {
+     "crop": "Apple",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 15000.0
+    },
+    {
+     "crop": "Ashgourd",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 1750.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3600.0
+    },
+    {
+     "crop": "Banana",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Beans",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Beetroot",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2125.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 7800.0
+    },
+    {
+     "crop": "Ber(Zizyphus/Borehannu)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2200.0
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3625.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 10200.0
+    },
+    {
+     "crop": "Bottle gourd",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2125.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 775.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 1050.0
+    },
+    {
+     "crop": "Chikoos(Sapota)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Coriander(Leaves)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 1656.0
+    },
+    {
+     "crop": "Cowpea(Veg)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2600.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2125.0
+    },
+    {
+     "crop": "Custard Apple (Sharifa)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Drumstick",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4750.0
+    },
+    {
+     "crop": "Elephant Yam (Suran)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Garlic",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 8500.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 5500.0
+    },
+    {
+     "crop": "Grapes",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 10000.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 9600.0
+    },
+    {
+     "crop": "Guava",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4666.67
+    },
+    {
+     "crop": "Gur(Jaggery)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4779.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 6600.0
+    },
+    {
+     "crop": "Lemon",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 10000.0
+    },
+    {
+     "crop": "Lentil (Masur)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 7550.0
+    },
+    {
+     "crop": "Little gourd (Kundru)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2250.0
+    },
+    {
+     "crop": "Maize",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2850.0
+    },
+    {
+     "crop": "Mango (Raw-Ripe)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Methi(Leaves)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3001.0
+    },
+    {
+     "crop": "Mousambi(Sweet Lime)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Onion",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3650.0
+    },
+    {
+     "crop": "Orange",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Papaya",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3250.0
+    },
+    {
+     "crop": "Peas Wet",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 8500.0
+    },
+    {
+     "crop": "Peas(Dry)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 10500.0
+    },
+    {
+     "crop": "Pineapple",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Pomegranate",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 9000.0
+    },
+    {
+     "crop": "Potato",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 1100.0
+    },
+    {
+     "crop": "Pumpkin",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 937.5
+    },
+    {
+     "crop": "Ragi (Finger Millet)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 5550.0
+    },
+    {
+     "crop": "Rice",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 7083.33
+    },
+    {
+     "crop": "Ridgeguard(Tori)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3250.0
+    },
+    {
+     "crop": "Snakeguard",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2250.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 7080.0
+    },
+    {
+     "crop": "Sweet Potato",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3250.0
+    },
+    {
+     "crop": "Tender Coconut",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 1600.0
+    },
+    {
+     "crop": "Tinda",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 975.0
+    },
+    {
+     "crop": "Water Melon",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 1100.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 8850.0
+    },
+    {
+     "crop": "Groundnut",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Sunflower",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 8850.0
+    },
+    {
+     "crop": "Karbuja(Musk Melon)",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-26",
+     "last_price": 3000.0
+    }
+   ]
+  },
+  "raigad": {
+   "days": 6,
+   "crops": [
+    {
+     "crop": "Beans",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 7750.0
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 5700.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Bottle gourd",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3750.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3600.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 5500.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 9500.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4750.0
+    },
+    {
+     "crop": "Little gourd (Kundru)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Paddy(Dhan)(Common)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2475.0
+    },
+    {
+     "crop": "Rice",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4025.0
+    },
+    {
+     "crop": "Ridgeguard(Tori)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Snakeguard",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 3750.0
+    }
+   ]
+  },
+  "ratnagiri": {
+   "days": 5,
+   "crops": [
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 5300.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 2800.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 1000.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 5500.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 4100.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 4500.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 4600.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 6500.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 7000.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 800.0
+    },
+    {
+     "crop": "Chilly Capsicum",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-26",
+     "last_price": 5500.0
+    },
+    {
+     "crop": "French Beans(Frasbean)",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-26",
+     "last_price": 7200.0
+    }
+   ]
+  },
+  "sangli": {
+   "days": 6,
+   "crops": [
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3200.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Onion",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 1300.0
+    },
+    {
+     "crop": "Apple",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 15000.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3400.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 6088.0
+    },
+    {
+     "crop": "Ber(Zizyphus/Borehannu)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1500.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Chikoos(Sapota)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 5500.0
+    },
+    {
+     "crop": "Custard Apple (Sharifa)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Garlic",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 11000.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 11000.0
+    },
+    {
+     "crop": "Guava",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Gur(Jaggery)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 4385.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 7000.0
+    },
+    {
+     "crop": "Maize",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2962.5
+    },
+    {
+     "crop": "Mousambi(Sweet Lime)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3750.0
+    },
+    {
+     "crop": "Orange",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Papaya",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Pineapple",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 7000.0
+    },
+    {
+     "crop": "Pomegranate",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 15000.0
+    },
+    {
+     "crop": "Potato",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1475.0
+    },
+    {
+     "crop": "Rice",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 7500.0
+    },
+    {
+     "crop": "Ridgeguard(Tori)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 6750.0
+    },
+    {
+     "crop": "Turmeric",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 19750.0
+    },
+    {
+     "crop": "Water Melon",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1750.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 4400.0
+    },
+    {
+     "crop": "Beetroot",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1500.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-25",
+     "last_price": 800.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1800.0
+    },
+    {
+     "crop": "Dry Chillies",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-25",
+     "last_price": 16500.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-25",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Peas(Dry)",
+     "days": 1,
+     "mandis_per_day": 1.0,
+     "score": 1.0,
+     "last_day": "2026-10-21",
+     "last_price": 4750.0
+    }
+   ]
+  },
+  "satara": {
+   "days": 6,
+   "crops": [
+    {
+     "crop": "Ridgeguard(Tori)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-26",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Beans",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 5500.0
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3650.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Bottle gourd",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1250.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3900.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 750.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1775.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1500.0
+    },
+    {
+     "crop": "Drumstick",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 5500.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 7500.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 4316.67
+    },
+    {
+     "crop": "Gur(Jaggery)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 4750.0
+    },
+    {
+     "crop": "Onion",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3100.0
+    },
+    {
+     "crop": "Peas Wet",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 11500.0
+    },
+    {
+     "crop": "Potato",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 1500.0
+    },
+    {
+     "crop": "Snakeguard",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 850.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-25",
+     "last_price": 7000.0
+    },
+    {
+     "crop": "Maize",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-25",
+     "last_price": 2900.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-25",
+     "last_price": 2900.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-25",
+     "last_price": 9000.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-25",
+     "last_price": 7150.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-22",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-22",
+     "last_price": 7000.0
+    },
+    {
+     "crop": "Sweet Potato",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-22",
+     "last_price": 2500.0
+    }
+   ]
+  },
+  "solapur": {
+   "days": 6,
+   "crops": [
+    {
+     "crop": "Apple",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 10300.0
+    },
+    {
+     "crop": "Beans",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Beetroot",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2400.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 7025.0
+    },
+    {
+     "crop": "Ber(Zizyphus/Borehannu)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2800.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 9544.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 700.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2650.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 3100.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Chikoos(Sapota)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2733.0
+    },
+    {
+     "crop": "Custard Apple (Sharifa)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Drumstick",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 6000.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 4100.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 8800.0
+    },
+    {
+     "crop": "Guava",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2000.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 5995.67
+    },
+    {
+     "crop": "Karbuja(Musk Melon)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 3000.0
+    },
+    {
+     "crop": "Lemon",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 7000.0
+    },
+    {
+     "crop": "Maize",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 3081.0
+    },
+    {
+     "crop": "Mousambi(Sweet Lime)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 3500.0
+    },
+    {
+     "crop": "Onion",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 3800.0
+    },
+    {
+     "crop": "Papaya",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 1500.0
+    },
+    {
+     "crop": "Pineapple",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2200.0
+    },
+    {
+     "crop": "Pomegranate",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 7866.67
+    },
+    {
+     "crop": "Potato",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 1600.0
+    },
+    {
+     "crop": "Rice",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 4355.0
+    },
+    {
+     "crop": "Ridgeguard(Tori)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2700.0
+    },
+    {
+     "crop": "Safflower",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 5600.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 7035.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 1100.0
+    },
+    {
+     "crop": "Water Melon",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 500.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 3380.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-25",
+     "last_price": 3510.0
+    },
+    {
+     "crop": "Turmeric",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 17700.0
+    },
+    {
+     "crop": "Sunflower",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-25",
+     "last_price": 7432.0
+    },
+    {
+     "crop": "Gur(Jaggery)",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-25",
+     "last_price": 4850.0
+    }
+   ]
+  },
+  "thane": {
+   "days": 5,
+   "crops": [
+    {
+     "crop": "Rice",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 3400.0
+    },
+    {
+     "crop": "Bajra(Pearl Millet/Cumbu)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 3650.0
+    },
+    {
+     "crop": "Beans",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 8500.0
+    },
+    {
+     "crop": "Bhindi(Ladies Finger)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 3650.0
+    },
+    {
+     "crop": "Bitter gourd",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2100.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 14000.0
+    },
+    {
+     "crop": "Bottle gourd",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1050.0
+    },
+    {
+     "crop": "Brinjal",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1850.0
+    },
+    {
+     "crop": "Cabbage",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1150.0
+    },
+    {
+     "crop": "Capsicum",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Carrot",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Cauliflower",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1400.0
+    },
+    {
+     "crop": "Cluster beans",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 5250.0
+    },
+    {
+     "crop": "Cucumbar(Kheera)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2500.0
+    },
+    {
+     "crop": "Drumstick",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 5000.0
+    },
+    {
+     "crop": "Elephant Yam (Suran)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 4000.0
+    },
+    {
+     "crop": "Garlic",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 16000.0
+    },
+    {
+     "crop": "Ginger(Green)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 6500.0
+    },
+    {
+     "crop": "Green Chilli",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 4100.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 13000.0
+    },
+    {
+     "crop": "Gur(Jaggery)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 14500.0
+    },
+    {
+     "crop": "Lemon",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 8500.0
+    },
+    {
+     "crop": "Little gourd (Kundru)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 2250.0
+    },
+    {
+     "crop": "Onion",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 3750.0
+    },
+    {
+     "crop": "Peas Wet",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 9000.0
+    },
+    {
+     "crop": "Peas(Dry)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 13000.0
+    },
+    {
+     "crop": "Potato",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1100.0
+    },
+    {
+     "crop": "Pumpkin",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 850.0
+    },
+    {
+     "crop": "Ridgeguard(Tori)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 1200.0
+    },
+    {
+     "crop": "Tomato",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-24",
+     "last_price": 600.0
+    },
+    {
+     "crop": "Apple",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-22",
+     "last_price": 19000.0
+    }
+   ]
+  },
+  "wardha": {
+   "days": 6,
+   "crops": [
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 8983.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 6900.0
+    },
+    {
+     "crop": "Cotton",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 9300.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 6805.0
+    },
+    {
+     "crop": "Sesamum(Sesame,Gingelly,Til)",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 11005.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 6900.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 6,
+     "mandis_per_day": 1.0,
+     "score": 6.0,
+     "last_day": "2026-10-25",
+     "last_price": 2750.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 2,
+     "mandis_per_day": 1.0,
+     "score": 2.0,
+     "last_day": "2026-10-25",
+     "last_price": 2700.0
+    }
+   ]
+  },
+  "washim": {
+   "days": 5,
+   "crops": [
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 9800.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 6605.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 8305.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 6675.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 2275.0
+    },
+    {
+     "crop": "Sesamum(Sesame,Gingelly,Til)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 14000.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 6960.0
+    },
+    {
+     "crop": "Turmeric",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 21450.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-24",
+     "last_price": 2860.0
+    },
+    {
+     "crop": "Safflower",
+     "days": 3,
+     "mandis_per_day": 1.0,
+     "score": 3.0,
+     "last_day": "2026-10-24",
+     "last_price": 2800.0
+    }
+   ]
+  },
+  "yavatmal": {
+   "days": 5,
+   "crops": [
+    {
+     "crop": "Arhar (Tur/Red Gram)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 9840.0
+    },
+    {
+     "crop": "Bengal Gram(Gram)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 6200.0
+    },
+    {
+     "crop": "Black Gram (Urd Beans)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 9300.0
+    },
+    {
+     "crop": "Green Gram (Moong)(Whole)",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 8400.0
+    },
+    {
+     "crop": "Soyabean",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 6800.0
+    },
+    {
+     "crop": "Wheat",
+     "days": 5,
+     "mandis_per_day": 1.0,
+     "score": 5.0,
+     "last_day": "2026-10-26",
+     "last_price": 3555.0
+    },
+    {
+     "crop": "Cotton",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-26",
+     "last_price": 9500.0
+    },
+    {
+     "crop": "Jowar(Sorghum)",
+     "days": 4,
+     "mandis_per_day": 1.0,
+     "score": 4.0,
+     "last_day": "2026-10-26",
+     "last_price": 2835.0
+    }
+   ]
+  }
+ },
+ "live": {
+  "rows": 4105,
+  "crops": {
+   "Amla(Nelli Kai)": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Pune"
+   ],
+   "Apple": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Pune",
+    "Sangli",
+    "Solapur"
+   ],
+   "Arecanut(Betelnut/Supari)": [
+    "Mumbai"
+   ],
+   "Arhar (Tur/Red Gram)(Whole)": [
+    "Ahmednagar",
+    "Akola",
+    "Amravati",
+    "Aurangabad",
+    "Beed",
+    "Bhandara",
+    "Buldhana",
+    "Dhule",
+    "Hingoli",
+    "Jalna",
+    "Latur",
+    "Nagpur",
+    "Nanded",
+    "Nashik",
+    "Osmanabad",
+    "Parbhani",
+    "Solapur",
+    "Wardha",
+    "Washim",
+    "Yavatmal"
+   ],
+   "Arhar Dal(Tur Dal)": [
+    "Mumbai"
+   ],
+   "Ashgourd": [
+    "Amravati",
+    "Chandrapur",
+    "Mumbai",
+    "Nagpur",
+    "Pune"
+   ],
+   "Bajra(Pearl Millet/Cumbu)": [
+    "Ahmednagar",
+    "Akola",
+    "Amravati",
+    "Aurangabad",
+    "Beed",
+    "Buldhana",
+    "Dhule",
+    "Jalgaon",
+    "Jalna",
+    "Mumbai",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Parbhani",
+    "Pune",
+    "Sangli",
+    "Solapur",
+    "Thane"
+   ],
+   "Banana": [
+    "Ahmednagar",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Pune"
+   ],
+   "Beans": [
+    "Ahmednagar",
+    "Mumbai",
+    "Nashik",
+    "Pune",
+    "Raigad",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Beetroot": [
+    "Ahmednagar",
+    "Amravati",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Osmanabad",
+    "Pune",
+    "Solapur"
+   ],
+   "Bengal Gram Dal (Chana Dal)": [
+    "Mumbai"
+   ],
+   "Bengal Gram(Gram)(Whole)": [
+    "Ahmednagar",
+    "Akola",
+    "Amravati",
+    "Aurangabad",
+    "Beed",
+    "Buldhana",
+    "Dhule",
+    "Hingoli",
+    "Jalgaon",
+    "Jalna",
+    "Latur",
+    "Mumbai",
+    "Nagpur",
+    "Nanded",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Parbhani",
+    "Pune",
+    "Sangli",
+    "Solapur",
+    "Thane",
+    "Wardha",
+    "Washim",
+    "Yavatmal"
+   ],
+   "Ber(Zizyphus/Borehannu)": [
+    "Mumbai",
+    "Pune",
+    "Sangli",
+    "Solapur"
+   ],
+   "Bhindi(Ladies Finger)": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Chandrapur",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Raigad",
+    "Ratnagiri",
+    "Sangli",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Bitter gourd": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Chandrapur",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Raigad",
+    "Ratnagiri",
+    "Sangli",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Black Gram (Urd Beans)(Whole)": [
+    "Ahmednagar",
+    "Akola",
+    "Amravati",
+    "Aurangabad",
+    "Beed",
+    "Buldhana",
+    "Jalgaon",
+    "Jalna",
+    "Latur",
+    "Mumbai",
+    "Nagpur",
+    "Nanded",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Satara",
+    "Solapur",
+    "Thane",
+    "Washim",
+    "Yavatmal"
+   ],
+   "Black Gram Dal (Urd Dal)": [
+    "Mumbai"
+   ],
+   "Bottle gourd": [
+    "Ahmednagar",
+    "Aurangabad",
+    "Chandrapur",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Pune",
+    "Raigad",
+    "Satara",
+    "Thane"
+   ],
+   "Brinjal": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Chandrapur",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Raigad",
+    "Ratnagiri",
+    "Sangli",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Cabbage": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Chandrapur",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Raigad",
+    "Ratnagiri",
+    "Sangli",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Capsicum": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Chandrapur",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Ratnagiri",
+    "Sangli",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Cardamoms": [
+    "Mumbai"
+   ],
+   "Carrot": [
+    "Ahmednagar",
+    "Amravati",
+    "Chandrapur",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Raigad",
+    "Ratnagiri",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Castor Seed": [
+    "Ahmednagar"
+   ],
+   "Cauliflower": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Chandrapur",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Raigad",
+    "Ratnagiri",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Chikoos(Sapota)": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Pune",
+    "Sangli",
+    "Solapur"
+   ],
+   "Chilly Capsicum": [
+    "Pune",
+    "Ratnagiri"
+   ],
+   "Cluster beans": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Raigad",
+    "Ratnagiri",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Coconut": [
+    "Mumbai"
+   ],
+   "Coriander(Leaves)": [
+    "Ahmednagar",
+    "Amravati",
+    "Chandrapur",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nandurbar",
+    "Nashik",
+    "Pune"
+   ],
+   "Cotton": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Beed",
+    "Chandrapur",
+    "Nagpur",
+    "Nanded",
+    "Nandurbar",
+    "Wardha",
+    "Yavatmal"
+   ],
+   "Cowpea (Lobia/Karamani)": [
+    "Dhule",
+    "Mumbai",
+    "Nashik"
+   ],
+   "Cowpea(Veg)": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Chandrapur",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Pune"
+   ],
+   "Cucumbar(Kheera)": [
+    "Ahilyanagar",
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Chandrapur",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Raigad",
+    "Ratnagiri",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Cummin Seed(Jeera)": [
+    "Mumbai"
+   ],
+   "Custard Apple (Sharifa)": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Pune",
+    "Sangli",
+    "Solapur"
+   ],
+   "Drumstick": [
+    "Ahmednagar",
+    "Aurangabad",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Osmanabad",
+    "Pune",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Dry Chillies": [
+    "Ahmednagar",
+    "Akola",
+    "Dhule",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nandurbar",
+    "Sangli"
+   ],
+   "Elephant Yam (Suran)": [
+    "Mumbai",
+    "Pune",
+    "Thane"
+   ],
+   "French Beans(Frasbean)": [
+    "Ratnagiri"
+   ],
+   "Garlic": [
+    "Ahmednagar",
+    "Akola",
+    "Amravati",
+    "Aurangabad",
+    "Chandrapur",
+    "Jalgaon",
+    "Nagpur",
+    "Nashik",
+    "Pune",
+    "Sangli",
+    "Thane"
+   ],
+   "Ginger(Green)": [
+    "Ahmednagar",
+    "Akola",
+    "Amravati",
+    "Aurangabad",
+    "Chandrapur",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Pune",
+    "Ratnagiri",
+    "Sangli",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Grapes": [
+    "Mumbai",
+    "Nagpur",
+    "Pune"
+   ],
+   "Green Chilli": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Chandrapur",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Ratnagiri",
+    "Sangli",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Green Gram (Moong)(Whole)": [
+    "Ahmednagar",
+    "Akola",
+    "Amravati",
+    "Aurangabad",
+    "Beed",
+    "Buldhana",
+    "Dhule",
+    "Jalgaon",
+    "Jalna",
+    "Latur",
+    "Mumbai",
+    "Nagpur",
+    "Nanded",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Parbhani",
+    "Pune",
+    "Solapur",
+    "Thane",
+    "Wardha",
+    "Washim",
+    "Yavatmal"
+   ],
+   "Green Gram Dal (Moong Dal)": [
+    "Mumbai"
+   ],
+   "Groundnut": [
+    "Amravati",
+    "Beed",
+    "Buldhana",
+    "Dhule",
+    "Nagpur",
+    "Osmanabad",
+    "Pune"
+   ],
+   "Guava": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Sangli",
+    "Solapur"
+   ],
+   "Gur(Jaggery)": [
+    "Jalna",
+    "Mumbai",
+    "Pune",
+    "Sangli",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Jowar(Sorghum)": [
+    "Ahmednagar",
+    "Akola",
+    "Amravati",
+    "Aurangabad",
+    "Beed",
+    "Buldhana",
+    "Dhule",
+    "Jalgaon",
+    "Jalna",
+    "Kolhapur",
+    "Latur",
+    "Mumbai",
+    "Nanded",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Parbhani",
+    "Pune",
+    "Sangli",
+    "Satara",
+    "Solapur",
+    "Wardha",
+    "Washim",
+    "Yavatmal"
+   ],
+   "Karbuja(Musk Melon)": [
+    "Aurangabad",
+    "Mumbai",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Solapur"
+   ],
+   "Lemon": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Solapur",
+    "Thane"
+   ],
+   "Lentil (Masur)(Whole)": [
+    "Mumbai",
+    "Pune"
+   ],
+   "Little gourd (Kundru)": [
+    "Ahmednagar",
+    "Chandrapur",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Pune",
+    "Raigad",
+    "Thane"
+   ],
+   "Maize": [
+    "Ahilyanagar",
+    "Ahmednagar",
+    "Akola",
+    "Amravati",
+    "Aurangabad",
+    "Beed",
+    "Buldhana",
+    "Dhule",
+    "Jalgaon",
+    "Jalna",
+    "Mumbai",
+    "Nagpur",
+    "Nanded",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Sangli",
+    "Satara",
+    "Solapur"
+   ],
+   "Mango (Raw-Ripe)": [
+    "Ahmednagar",
+    "Mumbai",
+    "Pune"
+   ],
+   "Masur Dal": [
+    "Mumbai"
+   ],
+   "Methi(Leaves)": [
+    "Ahmednagar",
+    "Amravati",
+    "Chandrapur",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Pune"
+   ],
+   "Mint(Pudina)": [
+    "Ahmednagar",
+    "Mumbai"
+   ],
+   "Mousambi(Sweet Lime)": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Jalgaon",
+    "Jalna",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Pune",
+    "Sangli",
+    "Solapur"
+   ],
+   "Mustard": [
+    "Beed",
+    "Jalna",
+    "Mumbai",
+    "Osmanabad"
+   ],
+   "Onion": [
+    "Ahmednagar",
+    "Akola",
+    "Amravati",
+    "Aurangabad",
+    "Beed",
+    "Chandrapur",
+    "Dhule",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Sangli",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Orange": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Pune",
+    "Sangli"
+   ],
+   "Paddy(Dhan)(Common)": [
+    "Bhandara",
+    "Chandrapur",
+    "Gadchiroli",
+    "Gondia",
+    "Raigad"
+   ],
+   "Papaya": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Pune",
+    "Sangli",
+    "Solapur"
+   ],
+   "Peas Wet": [
+    "Ahmednagar",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Pune",
+    "Satara",
+    "Thane"
+   ],
+   "Peas(Dry)": [
+    "Ahmednagar",
+    "Bhandara",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Pune",
+    "Thane"
+   ],
+   "Pineapple": [
+    "Ahmednagar",
+    "Mumbai",
+    "Nagpur",
+    "Pune",
+    "Sangli",
+    "Solapur"
+   ],
+   "Pointed gourd(Parval)": [
+    "Pune"
+   ],
+   "Pomegranate": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Pune",
+    "Sangli",
+    "Solapur"
+   ],
+   "Potato": [
+    "Ahmednagar",
+    "Akola",
+    "Amravati",
+    "Aurangabad",
+    "Chandrapur",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Pune",
+    "Sangli",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Pumpkin": [
+    "Jalgaon",
+    "Mumbai",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Thane"
+   ],
+   "Raddish": [
+    "Chandrapur",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Nashik"
+   ],
+   "Ragi (Finger Millet)": [
+    "Pune"
+   ],
+   "Rice": [
+    "Bhandara",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Palghar",
+    "Pune",
+    "Raigad",
+    "Sangli",
+    "Solapur",
+    "Thane"
+   ],
+   "Ridgeguard(Tori)": [
+    "Ahmednagar",
+    "Aurangabad",
+    "Chandrapur",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Raigad",
+    "Sangli",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Safflower": [
+    "Latur",
+    "Osmanabad",
+    "Solapur",
+    "Washim"
+   ],
+   "Sesamum(Sesame,Gingelly,Til)": [
+    "Akola",
+    "Amravati",
+    "Aurangabad",
+    "Beed",
+    "Buldhana",
+    "Dhule",
+    "Mumbai",
+    "Nandurbar",
+    "Osmanabad",
+    "Wardha",
+    "Washim"
+   ],
+   "Snakeguard": [
+    "Mumbai",
+    "Pune",
+    "Raigad",
+    "Satara"
+   ],
+   "Soyabean": [
+    "Ahmednagar",
+    "Akola",
+    "Amravati",
+    "Aurangabad",
+    "Beed",
+    "Buldhana",
+    "Chandrapur",
+    "Dhule",
+    "Hingoli",
+    "Jalgaon",
+    "Jalna",
+    "Latur",
+    "Nagpur",
+    "Nanded",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Parbhani",
+    "Pune",
+    "Sangli",
+    "Satara",
+    "Solapur",
+    "Wardha",
+    "Washim",
+    "Yavatmal"
+   ],
+   "Spinach": [
+    "Ahmednagar",
+    "Amravati",
+    "Chandrapur",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Nashik"
+   ],
+   "Sugar": [
+    "Mumbai"
+   ],
+   "Sunflower": [
+    "Jalgaon",
+    "Pune",
+    "Solapur"
+   ],
+   "Sweet Potato": [
+    "Kolhapur",
+    "Mumbai",
+    "Pune"
+   ],
+   "Tamarind Fruit": [
+    "Mumbai"
+   ],
+   "Tender Coconut": [
+    "Nashik",
+    "Pune"
+   ],
+   "Tinda": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Chandrapur",
+    "Jalgaon",
+    "Mumbai",
+    "Nagpur",
+    "Pune"
+   ],
+   "Tomato": [
+    "Ahmednagar",
+    "Amravati",
+    "Aurangabad",
+    "Chandrapur",
+    "Jalgaon",
+    "Kolhapur",
+    "Mumbai",
+    "Nagpur",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Pune",
+    "Raigad",
+    "Ratnagiri",
+    "Sangli",
+    "Satara",
+    "Solapur",
+    "Thane"
+   ],
+   "Turmeric": [
+    "Akola",
+    "Buldhana",
+    "Hingoli",
+    "Mumbai",
+    "Nanded",
+    "Parbhani",
+    "Sangli",
+    "Washim"
+   ],
+   "Water Melon": [
+    "Jalgaon",
+    "Mumbai",
+    "Nashik",
+    "Pune",
+    "Sangli",
+    "Solapur"
+   ],
+   "Wheat": [
+    "Ahmednagar",
+    "Akola",
+    "Amravati",
+    "Aurangabad",
+    "Beed",
+    "Bhandara",
+    "Buldhana",
+    "Dhule",
+    "Hingoli",
+    "Jalgaon",
+    "Jalna",
+    "Kolhapur",
+    "Latur",
+    "Mumbai",
+    "Nagpur",
+    "Nanded",
+    "Nandurbar",
+    "Nashik",
+    "Osmanabad",
+    "Palghar",
+    "Parbhani",
+    "Pune",
+    "Sangli",
+    "Satara",
+    "Solapur",
+    "Thane",
+    "Wardha",
+    "Washim",
+    "Yavatmal"
+   ]
+  }
+ },
+ "popular": {
+  "state_top": [
+   {
+    "d": 31,
+    "m": 337,
+    "n": "Soyabean"
+   },
+   {
+    "d": 31,
+    "m": 332,
+    "n": "Jowar(Sorghum)"
+   },
+   {
+    "d": 31,
+    "m": 325,
+    "n": "Green Gram (Moong)(Whole)"
+   },
+   {
+    "d": 31,
+    "m": 318,
+    "n": "Wheat"
+   },
+   {
+    "d": 31,
+    "m": 299,
+    "n": "Bengal Gram(Gram)(Whole)"
+   },
+   {
+    "d": 31,
+    "m": 297,
+    "n": "Arhar (Tur/Red Gram)(Whole)"
+   },
+   {
+    "d": 31,
+    "m": 222,
+    "n": "Bhindi(Ladies Finger)"
+   },
+   {
+    "d": 31,
+    "m": 221,
+    "n": "Tomato"
+   },
+   {
+    "d": 31,
+    "m": 217,
+    "n": "Black Gram (Urd Beans)(Whole)"
+   },
+   {
+    "d": 31,
+    "m": 210,
+    "n": "Maize"
+   },
+   {
+    "d": 31,
+    "m": 208,
+    "n": "Green Chilli"
+   },
+   {
+    "d": 31,
+    "m": 207,
+    "n": "Onion"
+   },
+   {
+    "d": 31,
+    "m": 205,
+    "n": "Brinjal"
+   },
+   {
+    "d": 31,
+    "m": 184,
+    "n": "Cucumbar(Kheera)"
+   },
+   {
+    "d": 31,
+    "m": 181,
+    "n": "Cabbage"
+   }
+  ],
+  "districts": 35,
+  "jalgaon": [
+   {
+    "d": 26,
+    "m": 101,
+    "n": "Wheat"
+   },
+   {
+    "d": 26,
+    "m": 99,
+    "n": "Soyabean"
+   },
+   {
+    "d": 26,
+    "m": 98,
+    "n": "Jowar(Sorghum)"
+   },
+   {
+    "d": 26,
+    "m": 92,
+    "n": "Maize"
+   },
+   {
+    "d": 25,
+    "m": 83,
+    "n": "Bajra(Pearl Millet/Cumbu)"
+   },
+   {
+    "d": 25,
+    "m": 72,
+    "n": "Green Gram (Moong)(Whole)"
+   },
+   {
+    "d": 25,
+    "m": 71,
+    "n": "Black Gram (Urd Beans)(Whole)"
+   },
+   {
+    "d": 26,
+    "m": 62,
+    "n": "Bengal Gram(Gram)(Whole)"
+   },
+   {
+    "d": 25,
+    "m": 50,
+    "n": "Onion"
+   },
+   {
+    "d": 25,
+    "m": 35,
+    "n": "Pumpkin"
+   },
+   {
+    "d": 25,
+    "m": 33,
+    "n": "Potato"
+   },
+   {
+    "d": 25,
+    "m": 32,
+    "n": "Bhindi(Ladies Finger)"
+   },
+   {
+    "d": 25,
+    "m": 32,
+    "n": "Bitter gourd"
+   },
+   {
+    "d": 25,
+    "m": 32,
+    "n": "Brinjal"
+   },
+   {
+    "d": 25,
+    "m": 32,
+    "n": "Cauliflower"
+   },
+   {
+    "d": 25,
+    "m": 32,
+    "n": "Coriander(Leaves)"
+   },
+   {
+    "d": 25,
+    "m": 32,
+    "n": "Cowpea(Veg)"
+   },
+   {
+    "d": 25,
+    "m": 32,
+    "n": "Cucumbar(Kheera)"
+   },
+   {
+    "d": 25,
+    "m": 32,
+    "n": "Green Chilli"
+   },
+   {
+    "d": 25,
+    "m": 32,
+    "n": "Lemon"
+   }
+  ]
+ },
+ "old_day": {
+  "day": "2026-10-19",
+  "crops": [
+   "Almond(Badam)",
+   "Amla(Nelli Kai)",
+   "Apple",
+   "Bajra(Pearl Millet/Cumbu)",
+   "Banana",
+   "Banana - Green",
+   "Beans",
+   "Beetroot",
+   "Bengal Gram Dal(Chana Dal)",
+   "Bengal Gram(Gram)(Whole)",
+   "Bhindi(Ladies Finger)",
+   "Bitter gourd",
+   "Black Gram Dal(Urd Dal)",
+   "Black Gram(Urd Beans)(Whole)",
+   "Bottle gourd",
+   "Brinjal",
+   "Cabbage",
+   "Cardamom",
+   "Carrot",
+   "Cashewnuts",
+   "Cauliflower",
+   "Chikoos(Sapota)",
+   "Chili Red",
+   "Chilly Capsicum",
+   "Chow Chow",
+   "Coconut",
+   "Coriander(Leaves)",
+   "Corriander seed",
+   "Cotton",
+   "Cow",
+   "Cowpea(Lobia/Karamani)",
+   "Cucumbar(Kheera)",
+   "Drumstick",
+   "Dry Grapes",
+   "Elephant Yam(Suran)/Amorphophallus",
+   "French Beans(Frasbean)",
+   "Garlic",
+   "Ghee",
+   "Ginger(Green)",
+   "Grapes",
+   "Green Chilli",
+   "Green Gram Dal(Moong Dal)",
+   "Green Gram(Moong)(Whole)",
+   "Green Peas",
+   "Ground Nut Seed",
+   "Groundnut",
+   "Guar",
+   "Guava",
+   "Gur(Jaggery)",
+   "Jowar(Sorghum)",
+   "Karbuja(Musk Melon)",
+   "Kulthi(Horse Gram)",
+   "Lentil(Masur)(Whole)",
+   "Lime",
+   "Little gourd(Kundru)",
+   "Maize",
+   "Mango(Raw-Ripe)",
+   "Marigold(Calcutta)",
+   "Masur Dal",
+   "Mataki",
+   "Methi(Leaves)",
+   "Mint(Pudina)",
+   "Mousambi(Sweet Lime)",
+   "Mustard",
+   "Onion",
+   "Onion Green",
+   "Orange",
+   "Ox",
+   "Paddy(Common)",
+   "Papaya",
+   "Pear(Marasebu)",
+   "Peas Wet",
+   "Pineapple",
+   "Plum",
+   "Pointed gourd(Parval)",
+   "Pomegranate",
+   "Potato",
+   "Pumpkin",
+   "Raddish",
+   "Ragi(Finger Millet)",
+   "Red gram split/Arhar dal/Tur dal",
+   "Red gram/Arhar/Tur(whole)",
+   "Rice",
+   "Ridgeguard(Tori)",
+   "Sabu Dan",
+   "Safflower",
+   "Seetapal",
+   "Sesamum(Sesame,Gingelly,Til)",
+   "She Buffalo",
+   "Snakeguard",
+   "Soanf",
+   "Soyabean",
+   "Spinach",
+   "Sugar",
+   "Sunflower/Sunflower Seed",
+   "Sweet Potato",
+   "Sweet Pumpkin",
+   "Tender Coconut",
+   "Tomato",
+   "Turmeric",
+   "Water Melon",
+   "Wheat"
+  ]
+ },
+ "old_day_jalgaon": [
+  "Jowar(Sorghum)",
+  "Maize",
+  "Soyabean",
+  "Bengal Gram(Gram)(Whole)",
+  "Bajra(Pearl Millet/Cumbu)",
+  "Wheat",
+  "Onion",
+  "Brinjal",
+  "Green Chilli",
+  "Green Gram (Moong)(Whole)",
+  "Black Gram (Urd Beans)(Whole)",
+  "Tomato",
+  "Cabbage",
+  "Carrot",
+  "Cauliflower",
+  "Coriander(Leaves)",
+  "Cucumbar(Kheera)",
+  "Spinach",
+  "Methi(Leaves)",
+  "Cowpea(Veg)",
+  "Lemon",
+  "Bhindi(Ladies Finger)",
+  "Pumpkin",
+  "Bitter gourd",
+  "Cluster beans",
+  "Raddish",
+  "Potato",
+  "Little gourd (Kundru)",
+  "Banana",
+  "Beetroot",
+  "Drumstick",
+  "Ginger(Green)",
+  "Papaya",
+  "Tinda",
+  "Custard Apple (Sharifa)",
+  "Sweet Potato",
+  "Capsicum",
+  "Ridgeguard(Tori)",
+  "Amla(Nelli Kai)",
+  "Guava",
+  "Pomegranate",
+  "Arhar (Tur/Red Gram)(Whole)",
+  "Mousambi(Sweet Lime)",
+  "Orange",
+  "Garlic",
+  "Apple",
+  "Peas Wet"
+ ]
+}
