@@ -831,7 +831,10 @@ def main():
     # each district trades, for the app's crop list.
     for state in sorted(open_states & set(states)):
         try:
-            if mode == "morning" or not db.collection("popular").document(slug(state)).get().exists:
+            snap = db.collection("popular").document(slug(state)).get()
+            first = ((snap.to_dict() or {}).get("state") or [{}])[0] if snap.exists else {}
+            # Morning, or missing, or still in the older shape (no mandi-days).
+            if mode == "morning" or not snap.exists or "m" not in first:
                 save_popular(db, state)
         except Exception as error:
             print(f"  {state}: could not save popular crops — {error}")
