@@ -1,0 +1,45 @@
+name: Crop report (which crops each district trades)
+
+# By hand only (Actions → Run workflow). Reads the server's own price
+# archive and saves report/<state>.json + .md on branch "reports".
+# Public government prices only.
+
+on:
+  workflow_dispatch:
+    inputs:
+      state:
+        description: "State"
+        required: true
+        default: Maharashtra
+      days:
+        description: "How many days back"
+        required: true
+        default: "30"
+
+permissions:
+  contents: write  # only to save the report on branch "reports"
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python tools/crop_report.py
+        env:
+          PYTHONUNBUFFERED: "1"
+          REPORT_STATE: ${{ github.event.inputs.state }}
+          REPORT_DAYS: ${{ github.event.inputs.days }}
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+      - name: Save the report
+        run: |
+          mkdir -p /tmp/out && cp -r report/. /tmp/out/
+          cd /tmp/out && git init -q && git checkout -q -b reports
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com add -A
+          git -c user.name=ci -c user.email=ci@users.noreply.github.com commit -qm "crop report"
+          git push -qf "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" reports
