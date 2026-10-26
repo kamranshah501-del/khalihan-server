@@ -423,7 +423,7 @@ def _mandi_crop(row):
     return (crops.key(row.get("district")), crops.key(row.get("market")), crops.key(row.get("commodity")))
 
 
-def keep_fuller(db, state, rows):
+def keep_fuller(db, state, rows, keep_previous=False):
     """A thin run must never wipe a full day. data.gov.in only holds today's
     rows and fills up during the day, so an early run sees a handful; before
     this, that handful replaced yesterday's full list and phones fell back to
@@ -446,9 +446,33 @@ def keep_fuller(db, state, rows):
         if day and cutoff <= day <= newest and _mandi_crop(row) not in have:
             kept.append(row)
             have.add(_mandi_crop(row))
-    if kept:
-        print(f"  {state}: kept {len(kept)} earlier rows (mandi crops not in this run)")
-    return rows + kept
+    previous = []
+    if keep_previous:
+        # Open states: each mandi's crop also keeps its day before, so the
+        # app can compare a mandi with itself ("क्या चढ़ा, क्या गिरा" — the
+        # same mandis on both days, owner 26 Oct 2026).
+        days_now = defaultdict(set)
+        for r in rows:
+            days_now[_mandi_crop(r)].add(iso_date(r.get("arrival_date")))
+        best = {}
+        for row in old:
+            day = iso_date(row.get("arrival_date"))
+            key = _mandi_crop(row)
+            # Only where this run has a single day for it (data.gov.in); the
+            # board already sends several days.
+            if not day or day < cutoff or key not in days_now or day in days_now[key] or len(days_now[key]) != 1:
+                continue
+            if day < max(d for d in days_now[key] if d):
+                if key not in best or day > best[key][0]:
+                    best[key] = (day, [row])
+                elif day == best[key][0]:
+                    best[key][1].append(row)
+        for _, group in best.values():
+            previous.extend(group)
+    if kept or previous:
+        print(f"  {state}: kept {len(kept)} earlier rows (mandi crops not in this run)"
+              f"{f', {len(previous)} day-before rows' if previous else ''}")
+    return rows + kept + previous
 
 
 def merge_sources(main_rows, extra_rows):
@@ -744,7 +768,7 @@ def main():
                     api["ok"] += 1
             if not board:  # the board's own rows need no check against the board
                 cross_check(state, rows, log=print)
-            rows = keep_fuller(db, state, rows)
+            rows = keep_fuller(db, state, rows, keep_previous=state in open_states)
             state_day = newest_day(rows) or day
             prices = summarise([r for r in rows if iso_date(r.get("arrival_date")) == state_day])
             print(f"{state}: {len(rows)} rows, {len(prices)} crops on {state_day} ({source})")
@@ -778,7 +802,7 @@ def main():
                     print(f"  {state}: second source failed too — {second_error}")
                     result["error"] += " · second source: " + scrub(second_error, api_key)
             if rows:
-                rows = keep_fuller(db, state, rows)
+                rows = keep_fuller(db, state, rows, keep_previous=state in open_states)
                 state_day = newest_day(rows) or day
                 prices = summarise([r for r in rows if iso_date(r.get("arrival_date")) == state_day])
                 print(f"  {state}: {len(rows)} rows, {len(prices)} crops from the second source")
