@@ -725,7 +725,8 @@ def save_status(db, mode, took, api_down, results, phone=0):
         "feed_at": feed.last_made,
         "states": {
             r["state"]: {"source": r["source"], "rows": r["rows"], "error": r["error"],
-                         **({"districts": r["districts"]} if "districts" in r else {})}
+                         **({"districts": r["districts"]} if "districts" in r else {}),
+                         **({"moves": r["moves"]} if "moves" in r else {})}
             for r in results
         },
     }
