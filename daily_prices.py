@@ -466,9 +466,12 @@ def scrub(error, api_key=""):
     return text[:300]
 
 
-def backfill(db, state, rows, newest):
+def backfill(db, state, rows, newest, result=None):
     """The second source keeps a few days; file the earlier ones too, so the
-    history a phone reads has no hole where the national API was down."""
+    history a phone reads has no hole where the national API was down. Each
+    earlier day also gets its fair moves (against the day before it): a
+    midday run's newest day is still thin, and the morning message reads
+    yesterday's full day."""
     by_day = defaultdict(list)
     for row in rows:
         day = iso_date(row.get("arrival_date"))
@@ -480,7 +483,10 @@ def backfill(db, state, rows, newest):
             print(f"  {state}: skipped {day} — only {len(prices)} crops reported")
             continue
         try:
-            save_prices(db, state, prices, day)
+            moves = fair_moves(rows, day, min_mandis=3)
+            if result is not None:
+                result.setdefault("back_moves", {})[day] = len(moves)
+            save_prices(db, state, prices, day, moves=moves)
         except Exception as error:
             print(f"  {state}: could not backfill {day} — {error}")
 
@@ -726,7 +732,7 @@ def save_status(db, mode, took, api_down, results, phone=0):
         "states": {
             r["state"]: {"source": r["source"], "rows": r["rows"], "error": r["error"],
                          **({"districts": r["districts"]} if "districts" in r else {}),
-                         **({"moves": r["moves"]} if "moves" in r else {})}
+                         **{k: r[k] for k in ("moves", "day", "day_crops", "back_moves") if k in r}}
             for r in results
         },
     }
@@ -882,7 +888,7 @@ def main():
                 print(f"  {state}: could not save mandi days — {error}")
             # Earlier days in the rows (the board keeps a few; kept rows)
             # are filed under their own date.
-            backfill(db, state, rows, state_day)
+            backfill(db, state, rows, state_day, result)
         except Exception as error:
             rows = []
             with api_lock:
@@ -914,7 +920,7 @@ def main():
                     save_mandi_days(db, state, rows)
                 except Exception as days_error:
                     print(f"  {state}: could not save mandi days — {days_error}")
-                backfill(db, state, rows, state_day)
+                backfill(db, state, rows, state_day, result)
             else:
                 result["fetch"] = 1
                 print(f"  {state}: carrying on with whatever the phones saved")
@@ -922,7 +928,9 @@ def main():
         if prices:
             try:
                 moves = fair_moves(rows, state_day, min_mandis=3)
-                result["moves"] = len(moves)  # in status.json: crops with a fair move today
+                result["moves"] = len(moves)  # in status.json: crops with a fair move on `day`
+                result["day"] = state_day
+                result["day_crops"] = len(prices)
                 save_prices(db, state, prices, state_day, moves=moves)
             except Exception as error:
                 print(f"  {state}: could not save to Firestore — {error}")
