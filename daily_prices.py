@@ -292,29 +292,126 @@ def sane(pairs):
     return kept or pairs
 
 
-def save_prices(db, state, prices, day, scope=None, label=None):
+MOVE_MAX_GAP_DAYS = 7  # a mandi's "previous day" is at most a week back
+MOVE_WILD_PCT = 60.0  # one mandi moving more than this is likely a typing slip
+
+
+def fair_moves(rows, day, min_mandis=3):
+    """How each crop's price moved on `day`, told fairly (owner, 28 Oct
+    2026) — the same rule as the app's PriceCompare: every mandi (and
+    variety) is compared only with its own previous market day (within a
+    week), odd prices and district averages left out, and the crop's move
+    is the middle of those mandi moves. Comparing today's average with
+    yesterday's would show a change in WHICH mandis reported as a price move.
+    Crop -> (percent, mandis compared, previous day 'YYYY-MM-DD'), only for
+    crops with at least `min_mandis` mandis on both days."""
+    from datetime import date as _date
+
+    def to_date(text):
+        try:
+            y, m, d = (int(x) for x in text.split("-"))
+            return _date(y, m, d)
+        except (ValueError, AttributeError):
+            return None
+
+    # crop -> day -> [(price, key)]
+    by_crop_day = defaultdict(lambda: defaultdict(list))
+    for row in rows:
+        crop = (row.get("commodity") or "").strip()
+        market = (row.get("market") or "").strip()
+        when = iso_date(row.get("arrival_date"))
+        try:
+            price = float(row.get("modal_price") or 0)
+        except (TypeError, ValueError):
+            continue
+        if not crop or not market or not when or price < MIN_PRICE or market.endswith("(district)"):
+            continue
+        key = ((row.get("district") or "").strip(), market, (row.get("variety") or "").strip())
+        by_crop_day[crop][when].append((price, key))
+
+    target = to_date(day)
+    if target is None:
+        return {}
+    out = {}
+    for crop, days in by_crop_day.items():
+        if day not in days:
+            continue
+        # Each day's odd prices out (the same `sane` rule as the averages).
+        per_key = defaultdict(dict)  # key -> day -> [prices]
+        for when, pairs in days.items():
+            for price, key in sane(pairs):
+                per_key[key].setdefault(when, []).append(price)
+        moves = []
+        befores = defaultdict(int)
+        for key, by_day in per_key.items():
+            now_prices = by_day.get(day)
+            if not now_prices:
+                continue
+            earlier = []
+            for when in by_day:
+                d = to_date(when)
+                if d is not None and d < target and (target - d).days <= MOVE_MAX_GAP_DAYS:
+                    earlier.append(when)
+            if not earlier:
+                continue
+            prev_day = max(earlier)
+            before = sum(by_day[prev_day]) / len(by_day[prev_day])
+            now = sum(now_prices) / len(now_prices)
+            if before <= 0:
+                continue
+            pct = (now - before) / before * 100
+            if abs(pct) > MOVE_WILD_PCT:
+                continue
+            moves.append(pct)
+            befores[prev_day] += 1
+        if len(moves) < min_mandis:
+            continue
+        moves.sort()
+        n = len(moves)
+        middle = moves[n // 2] if n % 2 else (moves[n // 2 - 1] + moves[n // 2]) / 2
+        usual = max(befores.items(), key=lambda kv: (kv[1], kv[0]))[0]
+        out[crop] = (round(middle, 2), n, usual)
+    return out
+
+
+def save_prices(db, state, prices, day, scope=None, label=None, moves=None):
     """Write the day's prices, keeping whichever copy is richer. `scope` is
     the archive's document ("maharashtra", or "maharashtra__jalgaon" for a
-    district); the state's own by default."""
+    district); the state's own by default. `moves` (fair_moves) go on each
+    crop as f = percent, fk = mandis compared, fb = the previous day."""
     scope = scope or slug(state)
     state = label or state
+    moves = moves or {}
     doc = db.collection("prices").document(scope).collection("days").document(day)
+
+    def with_move(name, item):
+        move = moves.get(name)
+        if move:
+            item = dict(item, f=move[0], fk=move[1], fb=move[2])
+        return item
+
     payload = {
         "d": day,
         "at": firestore.SERVER_TIMESTAMP,
-        "c": [dict({"n": name, "p": price, "k": mandis}, **({"kd": districts} if districts else {}))
+        "c": [with_move(name, dict({"n": name, "p": price, "k": mandis}, **({"kd": districts} if districts else {})))
               for name, (price, mandis, districts) in sorted(prices.items())],
     }
 
     existing = doc.get()
     if existing.exists:
         old = existing.to_dict() or {}
-        stored = len(old.get("c") or [])
-        if stored >= len(payload["c"]):
-            print(f"  {state}: phones already saved a fuller copy ({stored} crops)")
+        stored = old.get("c") or []
+        if len(stored) > len(payload["c"]):
+            # A fuller copy is already filed: keep it, only add the moves.
+            if moves:
+                patched = [with_move(item.get("n"), item) if isinstance(item, dict) else item for item in stored]
+                doc.update({"c": patched})
+                print(f"  {state}: kept the fuller copy ({len(stored)} crops), added {len(moves)} fair moves")
+            else:
+                print(f"  {state}: phones already saved a fuller copy ({len(stored)} crops)")
             return
     doc.set(payload)
-    print(f"  {state}: saved {len(payload['c'])} crops for {day}")
+    print(f"  {state}: saved {len(payload['c'])} crops for {day} ({len(moves)} fair moves)")
 
 
 def save_district_prices(db, state, rows):
@@ -337,7 +434,8 @@ def save_district_prices(db, state, rows):
         prices = summarise([r for r in district_rows if iso_date(r.get("arrival_date")) == day])
         if not prices or not day:
             continue
-        save_prices(db, state, prices, day, scope=f"{slug(state)}__{slug(district)}", label=f"{state} / {district}")
+        save_prices(db, state, prices, day, scope=f"{slug(state)}__{slug(district)}", label=f"{state} / {district}",
+                    moves=fair_moves(district_rows, day, min_mandis=2))
         saved += 1
     print(f"  {state}: district archives checked ({saved} districts)")
     return saved
@@ -822,7 +920,7 @@ def main():
 
         if prices:
             try:
-                save_prices(db, state, prices, state_day)
+                save_prices(db, state, prices, state_day, moves=fair_moves(rows, state_day, min_mandis=3))
             except Exception as error:
                 print(f"  {state}: could not save to Firestore — {error}")
         if rows and state in open_states:
