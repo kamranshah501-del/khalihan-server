@@ -920,7 +920,9 @@ def main():
 
         if prices:
             try:
-                save_prices(db, state, prices, state_day, moves=fair_moves(rows, state_day, min_mandis=3))
+                moves = fair_moves(rows, state_day, min_mandis=3)
+                result["moves"] = len(moves)  # in status.json: crops with a fair move today
+                save_prices(db, state, prices, state_day, moves=moves)
             except Exception as error:
                 print(f"  {state}: could not save to Firestore — {error}")
         if rows and state in open_states:
