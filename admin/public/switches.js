@@ -324,8 +324,6 @@ export const FEATURE_INFO = {
   where_sell: { def: true, since: '1.0.6' },
   sell_interest: { def: true, since: '1.0.6' },
   target: { def: true, since: '1.0.6' },
-  plus: { def: false, since: '1.0.6' },
-  plus_target: { def: true, since: '1.0.6' },
   update_prompt: { def: true, since: '1.0.6' },
 };
 
@@ -341,7 +339,6 @@ const SECTIONS = [
   { id: 'services', icon: '🏛️', master: 'services', kids: ['schemes'] },
   { id: 'kendra', icon: '🏪', master: 'kendra', kind: 'kendra' },
   { id: 'sell', icon: '🤝', master: 'sell', kind: 'sell' },
-  { id: 'plus', icon: '⭐', master: 'plus', kids: ['plus_target'] },
   { id: 'login', icon: '👤', master: 'login', kids: [] },
   { id: 'feedback', icon: '💬', master: 'feedback', kids: [] },
   { id: 'dark', icon: '🌙', master: 'dark', kids: [] },

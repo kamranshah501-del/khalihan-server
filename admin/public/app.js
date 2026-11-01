@@ -14,8 +14,9 @@ import { dealNumbers, monthSummary, offerPlan } from './money.js';
 import { KENDRA_WORDS, createKendra } from './kendra.js';
 import { SWITCH_WORDS, createSwitches } from './switches.js';
 import { BIZ_WORDS, createBusiness } from './business.js';
+import { plusPage } from './plus.js';
 
-const ADMIN_VERSION = '1.14 · 1 Nov 2026';
+const ADMIN_VERSION = '1.15 · 1 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -50,6 +51,7 @@ const I18N = {
     tab_farmers: 'Farmers',
     tab_deletions: 'Account deletions',
     tab_features: 'Feature switches',
+    tab_plus: 'Khalihan Plus',
     tab_team: 'Team',
     tab_audit: 'Change log',
     tab_settings: 'Settings',
@@ -320,6 +322,7 @@ const I18N = {
     tab_farmers: 'किसान',
     tab_deletions: 'खाता हटाना',
     tab_features: 'फ़ीचर स्विच',
+    tab_plus: 'Khalihan Plus',
     tab_team: 'टीम',
     tab_audit: 'रिकॉर्ड',
     tab_settings: 'सेटिंग्स',
@@ -811,6 +814,7 @@ const ICON_PATHS = {
   farmers: 'M9 4.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7M2.5 20a6.5 6.5 0 0 1 13 0M16 4a3.5 3.5 0 0 1 0 7M18 14a6 6 0 0 1 3.5 6',
   deletions: 'M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3',
   features: 'M8 7h8a5 5 0 0 1 0 10H8A5 5 0 0 1 8 7zM16 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6',
+  plus: 'M12 3l2.6 5.6 6.1.7-4.5 4.2 1.2 6L12 16.6 6.6 19.5l1.2-6-4.5-4.2 6.1-.7z',
   team: 'M12 4a4 4 0 1 0 0 8 4 4 0 0 0 0-8M4 21a8 8 0 0 1 16 0',
   audit: 'M12 8v4l3 2M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18',
   plan: 'M4 20V10M10 20V4M16 20v-7M22 20H2',
@@ -844,7 +848,7 @@ function tabs() {
     ${item('feedback', tr('tab_feedback'))}
     ${item('farmers', tr('tab_farmers'))}
     ${item('deletions', tr('tab_deletions'))}
-    ${owner ? `<div class="navh">${tr('nav_owner')}</div>${item('plan', tr('tab_plan'))}${item('processors', tr('tab_processors'))}${item('compliance', tr('tab_compliance'))}${item('features', tr('tab_features'))}${item('team', tr('tab_team'))}${item('audit', tr('tab_audit'))}` : ''}
+    ${owner ? `<div class="navh">${tr('nav_owner')}</div>${item('plan', tr('tab_plan'))}${item('processors', tr('tab_processors'))}${item('compliance', tr('tab_compliance'))}${item('features', tr('tab_features'))}${item('plus', tr('tab_plus'))}${item('team', tr('tab_team'))}${item('audit', tr('tab_audit'))}` : ''}
     <div class="navgap"></div>
     ${item('settings', tr('tab_settings'))}
     <div class="navfoot">Khalihan Admin ${ADMIN_VERSION.split(' ')[0]}</div>`;
@@ -1276,6 +1280,12 @@ const PAGES = {
   async features() {
     switchPages = switchPages || createSwitches({ tr, esc, toast, fail, setMain, db: () => db, lang: () => lang });
     await switchPages.page();
+  },
+
+  // Owner: Khalihan Plus — runs by itself; how it works and how we help.
+  async plus() {
+    if (me.role !== 'owner') return PAGES.home();
+    plusPage({ esc, setMain, lang: () => lang });
   },
 
   async feedback() {
