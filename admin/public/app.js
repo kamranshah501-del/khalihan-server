@@ -16,7 +16,7 @@ import { SWITCH_WORDS, createSwitches } from './switches.js';
 import { BIZ_WORDS, createBusiness } from './business.js';
 import { plusPage } from './plus.js';
 
-const ADMIN_VERSION = '1.15 · 1 Nov 2026';
+const ADMIN_VERSION = '1.16 · 1 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -1282,10 +1282,11 @@ const PAGES = {
     await switchPages.page();
   },
 
-  // Owner: Khalihan Plus — runs by itself; how it works and how we help.
+  // Owner: Khalihan Plus — runs by itself; how it works, how we help, and
+  // free Plus by gift code (Admin 1.16).
   async plus() {
     if (me.role !== 'owner') return PAGES.home();
-    plusPage({ esc, setMain, lang: () => lang });
+    await plusPage({ esc, setMain, lang: () => lang, db: () => db, toast, fail });
   },
 
   async feedback() {

@@ -4,13 +4,20 @@
 // says how it turns on by itself, what's in it, and how we help a farmer
 // when something goes wrong. The member lookup and "check again with
 // Google" come with Play Billing (server + Firestore rules, asked first).
+//
+// Admin 1.16 (1 Nov 2026): free Plus by gift code, owner only (owner: "10
+// logon ko free dena chahun to — section banao, sirf owner ke liye"). A
+// code in plus_gifts/{CODE}; the person types it in the app (Profile →
+// गिफ़्ट कोड) and Plus opens on that phone — no login, no payment. One code,
+// one phone; "Free for a new phone" lets it move. The owner's own test
+// phones also see the switched-off features (Sell, Kendra, Login).
 
 const T = {
   en: {
     title: '⭐ Khalihan Plus',
     sub: 'The one paid plan. It runs by itself — no switches, nothing to turn on for any farmer.',
     st_off: 'Off for now',
-    st_off_d: 'Plus turns on by itself once the khalihan_plus subscription is on Google Play and the app has Play Billing. Until then every Plus feature stays hidden in the app — nobody uses one free and loses it later.',
+    st_off_d: 'Plus turns on by itself once the khalihan_plus subscription is on Google Play and the app has Play Billing. Until then every Plus feature stays hidden in the app — nobody uses one free and loses it later. Gift codes (below) work already.',
     how: 'How it works',
     how1: 'The farmer buys Plus in the app (Google Play payment — UPI, card, Play balance).',
     how2: 'Our server checks the payment with Google.',
@@ -30,6 +37,33 @@ const T = {
     f3: 'Advanced crop calendar and reminders', s3: 'To build',
     f4: 'Lower fee in "Sell to Khalihan", Kendra discount', s4: 'When trading starts',
     f5: 'Theft alarm, field camera, fence and motor control', s5: 'Later',
+    gifts: 'Free Plus — gift codes',
+    gifts_d: 'Give Plus free, without a subscription, to up to 10 people. Make a code and tell it to the person; they type it in the app under Profile → गिफ़्ट कोड. Plus opens on that phone at once — no login, no payment. One code works on one phone.',
+    g_count: '{n} of 10 given',
+    g_tests: '{n} test phone(s) of yours',
+    g_name: 'Who is it for', g_name_ph: 'Name, village',
+    g_note: 'Note (optional)', g_note_ph: 'e.g. tester, KVK, family',
+    g_until: 'Free till (blank = always)',
+    g_test: 'My own test phone — on that phone the switched-off features (Sell, Kendra, Login) show too, so I can check the whole app. Not counted in the 10.',
+    g_make: 'Make code',
+    g_need_name: 'Write who the code is for.',
+    g_full: 'All 10 gifts are given. Remove one to give another.',
+    g_tests_full: 'Three test phones are the most.',
+    g_new: 'New code for {name}',
+    g_tell: 'Tell them: Khalihan app → Profile → गिफ़्ट कोड → type the code → चालू करें.',
+    g_copy: 'Copy', g_copied: 'Copied',
+    th_for: 'For', th_code: 'Code', th_till: 'Free till', th_phone: 'Phone',
+    g_always: 'Always', g_ended: 'Ended {d}',
+    g_waiting: 'Not used yet',
+    g_on_phone: 'On a phone since {d} · app {v}',
+    g_test_tag: 'Test phone',
+    g_free: 'Free for a new phone',
+    g_free_q: 'Free the code for {name} for a new phone? The old phone loses Plus at its next start.',
+    g_free_done: 'Done — the code now works on the next phone that types it.',
+    g_rm: 'Remove',
+    g_rm_q: 'Remove the code for {name}? Plus closes on their phone at its next start.',
+    g_none: 'No codes yet.',
+    g_failed: 'Could not load the codes — check the internet and open the page again.',
     help: 'Helping a farmer',
     help_d: 'With Play Billing: type the farmer\'s mobile number → their Plus (plan, valid till, payment state, order number) and a "Check again with Google" button that fixes a paid-but-not-open Plus in one click.',
     help_ph: 'Mobile number — after Play Billing',
@@ -46,7 +80,7 @@ const T = {
     title: '⭐ Khalihan Plus',
     sub: 'एक ही पैसे वाला प्लान। अपने आप चलता है — कोई स्विच नहीं, किसी किसान के लिए हाथ से कुछ चालू नहीं करना।',
     st_off: 'अभी बंद',
-    st_off_d: 'जैसे ही Google Play पर khalihan_plus सब्सक्रिप्शन बनेगा और ऐप में Play Billing आएगी, Plus अपने आप चालू हो जाएगा। तब तक ऐप में Plus के सारे फ़ीचर छिपे रहेंगे — कोई उन्हें मुफ़्त में चलाकर बाद में खोएगा नहीं।',
+    st_off_d: 'जैसे ही Google Play पर khalihan_plus सब्सक्रिप्शन बनेगा और ऐप में Play Billing आएगी, Plus अपने आप चालू हो जाएगा। तब तक ऐप में Plus के सारे फ़ीचर छिपे रहेंगे — कोई उन्हें मुफ़्त में चलाकर बाद में खोएगा नहीं। गिफ़्ट कोड (नीचे) अभी से चलते हैं।',
     how: 'कैसे चलता है',
     how1: 'किसान ऐप में Plus ख़रीदता है (Google Play से पेमेंट — UPI, कार्ड, Play बैलेंस)।',
     how2: 'हमारा सर्वर Google से पेमेंट पक्का करता है।',
@@ -66,6 +100,33 @@ const T = {
     f3: 'एडवांस फ़सल कैलेंडर और याद', s3: 'बनाना है',
     f4: '"Khalihan को बेचें" में कम फ़ीस, केंद्र पर छूट', s4: 'व्यापार शुरू होने पर',
     f5: 'चोरी का अलार्म, खेत का कैमरा, झटका मशीन, मोटर कंट्रोल', s5: 'बाद में',
+    gifts: 'मुफ़्त Plus — गिफ़्ट कोड',
+    gifts_d: 'बिना सब्सक्रिप्शन के 10 लोगों तक को Plus मुफ़्त दें। कोड बनाइए और उस इंसान को बताइए; वो ऐप में प्रोफ़ाइल → गिफ़्ट कोड में डालेगा। उसी फ़ोन पर Plus तुरंत चालू — न लॉग-इन, न पेमेंट। एक कोड एक फ़ोन पर चलता है।',
+    g_count: '10 में से {n} दिए',
+    g_tests: 'आपके {n} टेस्ट फ़ोन',
+    g_name: 'किसके लिए', g_name_ph: 'नाम, गाँव',
+    g_note: 'नोट (चाहें तो)', g_note_ph: 'जैसे टेस्टर, KVK, घरवाले',
+    g_until: 'कब तक मुफ़्त (ख़ाली = हमेशा)',
+    g_test: 'मेरा अपना टेस्ट फ़ोन — उस फ़ोन पर बंद स्विच वाले फ़ीचर (बेचें, केंद्र, लॉग-इन) भी दिखेंगे, ताकि पूरा ऐप जाँच सकूँ। 10 में नहीं गिना जाएगा।',
+    g_make: 'कोड बनाओ',
+    g_need_name: 'लिखिए कि कोड किसके लिए है।',
+    g_full: '10 के 10 गिफ़्ट दिए जा चुके। नया देने के लिए एक हटाइए।',
+    g_tests_full: 'तीन टेस्ट फ़ोन से ज़्यादा नहीं।',
+    g_new: '{name} का नया कोड',
+    g_tell: 'उन्हें बताइए: Khalihan ऐप → प्रोफ़ाइल → गिफ़्ट कोड → कोड लिखें → चालू करें।',
+    g_copy: 'कॉपी', g_copied: 'कॉपी हो गया',
+    th_for: 'किसके लिए', th_code: 'कोड', th_till: 'कब तक', th_phone: 'फ़ोन',
+    g_always: 'हमेशा', g_ended: '{d} को ख़त्म',
+    g_waiting: 'अभी इस्तेमाल नहीं हुआ',
+    g_on_phone: '{d} से एक फ़ोन पर · ऐप {v}',
+    g_test_tag: 'टेस्ट फ़ोन',
+    g_free: 'नए फ़ोन के लिए खोलो',
+    g_free_q: '{name} का कोड नए फ़ोन के लिए खोलें? पुराने फ़ोन पर Plus अगली बार ऐप खुलने पर बंद हो जाएगा।',
+    g_free_done: 'हो गया — अब जो फ़ोन ये कोड डालेगा, उस पर चलेगा।',
+    g_rm: 'हटाओ',
+    g_rm_q: '{name} का कोड हटाएँ? उनके फ़ोन पर Plus अगली बार ऐप खुलने पर बंद हो जाएगा।',
+    g_none: 'अभी कोई कोड नहीं।',
+    g_failed: 'कोड नहीं खुले — इंटरनेट देखकर पेज दोबारा खोलिए।',
     help: 'किसान की मदद',
     help_d: 'Play Billing आने के बाद: किसान का मोबाइल नंबर डालो → उसका Plus (प्लान, कब तक, पेमेंट की हालत, ऑर्डर नंबर) और "Google से दोबारा जाँच" बटन — पैसे कटे पर Plus न खुला हो तो एक क्लिक में ठीक।',
     help_ph: 'मोबाइल नंबर — Play Billing के बाद',
@@ -80,13 +141,55 @@ const T = {
   },
 };
 
-/** The page. [deps]: { esc, setMain, lang: () => 'en' | 'hi' }. */
-export function plusPage({ esc, setMain, lang }) {
-  const t = (k) => (T[lang()] || T.en)[k] || T.en[k] || k;
+// Codes: 8 letters/digits, no look-alikes (no I, O, 0, 1) — easy to read
+// out on a call. 32 symbols, so a random byte & 31 is fair.
+const ALPHA = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+const MAX_GIFTS = 10;
+const MAX_TESTS = 3;
+const newCode = () => [...crypto.getRandomValues(new Uint8Array(8))].map((b) => ALPHA[b & 31]).join('');
+const shown = (code) => `${code.slice(0, 4)}-${code.slice(4)}`;
+const ymd = (d) => (d ? d.toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' }) : '');
+
+/** The page. [deps]: { esc, setMain, lang: () => 'en' | 'hi', db: () => db, toast, fail }. */
+export async function plusPage(deps) {
+  const { esc, setMain, lang, db, toast, fail } = deps;
+  const t = (k, v) => {
+    let s = (T[lang()] || T.en)[k] || T.en[k] || k;
+    if (v) Object.entries(v).forEach(([a, b]) => { s = s.split(`{${a}}`).join(b); });
+    return s;
+  };
+  let gifts = null;
+  try { gifts = await db().plusGifts(); } catch (e) { console.warn(e); }
+  const now = new Date();
+  const people = (gifts || []).filter((g) => !g.test);
+  const tests = (gifts || []).filter((g) => g.test);
+  const sorted = [...tests, ...people.sort((a, b) => (b.at || 0) - (a.at || 0))];
+  const fresh = deps.fresh; // the code just made: shown big once
+
   const steps = ['how1', 'how2', 'how3', 'how4'];
   const needs = ['need1', 'need2', 'need3', 'need4', 'need5', 'need6'];
   const feats = [1, 2, 3, 4, 5];
   const probs = [1, 2, 3, 4, 5, 6];
+
+  const till = (g) => {
+    if (!g.until) return esc(t('g_always'));
+    return g.until < now ? `<span class="pill warn">${esc(t('g_ended', { d: ymd(g.until) }))}</span>` : esc(ymd(g.until));
+  };
+  const phone = (g) => (g.device
+    ? esc(t('g_on_phone', { d: ymd(g.claimed), v: g.app || '?' }))
+    : `<span class="muted">${esc(t('g_waiting'))}</span>`);
+  const giftRows = sorted.map((g) => `
+    <tr>
+      <td><b>${esc(g.name)}</b>${g.test ? ` <span class="pill info">${esc(t('g_test_tag'))}</span>` : ''}${g.note ? `<div class="small muted">${esc(g.note)}</div>` : ''}</td>
+      <td style="font-family:ui-monospace,monospace;font-weight:800;letter-spacing:1px;white-space:nowrap">${esc(shown(g.id))}</td>
+      <td class="small">${till(g)}</td>
+      <td class="small">${phone(g)}</td>
+      <td style="white-space:nowrap;text-align:right">
+        ${g.device ? `<button class="plain small" data-gfree="${esc(g.id)}">${esc(t('g_free'))}</button>` : ''}
+        <button class="danger small" data-grm="${esc(g.id)}">${esc(t('g_rm'))}</button>
+      </td>
+    </tr>`).join('');
+
   setMain(`
     <h1>${esc(t('title'))}</h1>
     <p class="muted" style="margin-top:-6px">${esc(t('sub'))}</p>
@@ -94,6 +197,34 @@ export function plusPage({ esc, setMain, lang }) {
       <div class="row between"><div class="title">${esc(t('how'))}</div><span class="pill">${esc(t('st_off'))}</span></div>
       <div class="sub" style="line-height:1.5">${esc(t('st_off_d'))}</div>
       <ol style="margin:10px 0 0 18px;padding:0;line-height:1.6">${steps.map((k) => `<li>${esc(t(k))}</li>`).join('')}</ol>
+    </div>
+    <div class="card" id="gifts">
+      <div class="row between"><div class="title">🎁 ${esc(t('gifts'))}</div>
+        <span class="pill ${people.length >= MAX_GIFTS ? 'warn' : 'on'}">${esc(t('g_count', { n: people.length }))}</span></div>
+      <div class="sub" style="line-height:1.5">${esc(t('gifts_d'))}</div>
+      ${fresh ? `
+        <div style="margin:14px 0 4px;padding:14px 16px;border-radius:14px;background:var(--green-tint)">
+          <div class="small" style="font-weight:800">${esc(t('g_new', { name: fresh.name }))}</div>
+          <div class="row between" style="margin-top:6px;gap:12px;flex-wrap:wrap">
+            <div style="font-family:ui-monospace,monospace;font-size:30px;font-weight:900;letter-spacing:3px">${esc(shown(fresh.code))}</div>
+            <button class="plain" id="g-copy">${esc(t('g_copy'))}</button>
+          </div>
+          <div class="small" style="margin-top:6px;line-height:1.5">${esc(t('g_tell'))}</div>
+        </div>` : ''}
+      ${gifts === null ? `<p class="muted">${esc(t('g_failed'))}</p>` : sorted.length ? `
+        <div style="overflow-x:auto;margin-top:10px"><table>
+          <tr><th>${esc(t('th_for'))}</th><th>${esc(t('th_code'))}</th><th>${esc(t('th_till'))}</th><th>${esc(t('th_phone'))}</th><th></th></tr>
+          ${giftRows}
+        </table></div>
+        ${tests.length ? `<div class="small muted" style="margin-top:6px">${esc(t('g_tests', { n: tests.length }))}</div>` : ''}`
+      : `<p class="muted">${esc(t('g_none'))}</p>`}
+      <div class="form" style="margin-top:6px">
+        <div><label>${esc(t('g_name'))}</label><input id="g-name" maxlength="60" placeholder="${esc(t('g_name_ph'))}"></div>
+        <div><label>${esc(t('g_note'))}</label><input id="g-note" maxlength="120" placeholder="${esc(t('g_note_ph'))}"></div>
+        <div><label>${esc(t('g_until'))}</label><input id="g-until" type="date"></div>
+        <div class="wide"><label class="check"><input type="checkbox" id="g-test"> ${esc(t('g_test'))}</label></div>
+      </div>
+      <div class="actions"><button class="main" id="g-make" ${gifts === null ? 'disabled' : ''}>${esc(t('g_make'))}</button></div>
     </div>
     <div class="card">
       <div class="title">${esc(t('need'))}</div>
@@ -116,4 +247,49 @@ export function plusPage({ esc, setMain, lang }) {
         ${probs.map((n) => `<tr><td>${esc(t('q' + n))}</td><td class="small">${esc(t('a' + n))}</td></tr>`).join('')}
       </table>
     </div>`);
+
+  const again = (extra) => plusPage({ ...deps, fresh: undefined, ...extra });
+  const byId = (code) => (gifts || []).find((g) => g.id === code) || { name: code };
+  const $ = (sel) => document.querySelector(sel);
+
+  const copy = $('#g-copy');
+  if (copy && fresh) {
+    copy.onclick = async () => {
+      try { await navigator.clipboard.writeText(shown(fresh.code)); toast(t('g_copied')); } catch (_) { /* old browser: they read it off */ }
+    };
+  }
+  document.querySelectorAll('[data-gfree]').forEach((b) => {
+    b.onclick = async () => {
+      if (!confirm(t('g_free_q', { name: byId(b.dataset.gfree).name }))) return;
+      try { await db().freePlusGift(b.dataset.gfree); toast(t('g_free_done')); again(); } catch (e) { fail(e); }
+    };
+  });
+  document.querySelectorAll('[data-grm]').forEach((b) => {
+    b.onclick = async () => {
+      if (!confirm(t('g_rm_q', { name: byId(b.dataset.grm).name }))) return;
+      try { await db().removePlusGift(b.dataset.grm); again(); } catch (e) { fail(e); }
+    };
+  });
+  $('#g-make').onclick = async () => {
+    const name = $('#g-name').value.trim();
+    const test = $('#g-test').checked;
+    if (!name) return toast(t('g_need_name'));
+    if (!test && people.length >= MAX_GIFTS) return toast(t('g_full'));
+    if (test && tests.length >= MAX_TESTS) return toast(t('g_tests_full'));
+    const u = $('#g-until').value; // YYYY-MM-DD: free through the end of that day
+    const until = u ? new Date(+u.slice(0, 4), +u.slice(5, 7) - 1, +u.slice(8, 10), 23, 59, 59) : null;
+    const btn = $('#g-make');
+    btn.disabled = true;
+    try {
+      let code = newCode();
+      try {
+        await db().addPlusGift(code, { name, note: $('#g-note').value.trim(), until, test });
+      } catch (e) {
+        if (String(e && e.message) !== 'code-taken') throw e;
+        code = newCode(); // one in a trillion: just draw again
+        await db().addPlusGift(code, { name, note: $('#g-note').value.trim(), until, test });
+      }
+      again({ fresh: { code, name } });
+    } catch (e) { btn.disabled = false; fail(e); }
+  };
 }

@@ -1,6 +1,6 @@
 rules_version = '2';
 
-// Khalihan — Firestore rules (8 Oct 2026; Kendra 12 Oct; price history server-only 19 Oct 2026).
+// Khalihan — Firestore rules (8 Oct 2026; Kendra 12 Oct; price history server-only 19 Oct; free Plus gift codes 1 Nov 2026).
 //
 // Who is who:
 //   • Farmers: the app. Prices, schemes, calendar and offers are open to
@@ -285,6 +285,37 @@ service cloud.firestore {
     }
     match /business/{doc} {
       allow read, write: if isOwner();
+    }
+
+    // ── Free Khalihan Plus, given by the owner (1 Nov 2026) ─────────────
+    // A gift code: the owner makes it in Khalihan Admin (at most 10 for
+    // people, plus the owner's own test phones) and tells the person; they
+    // type it in the app (Profile → गिफ़्ट कोड) and Plus opens on that phone.
+    // The phone reads only the code typed into it (nobody but the owner can
+    // list the codes) and ties it to itself once: the first phone to use a
+    // code keeps it, until the owner frees it for a new phone. No mobile
+    // number is kept here — the owner's name for the person, a random id
+    // the phone made, the app version and when.
+    match /plus_gifts/{code} {
+      allow get: if true;
+      allow list, delete: if isOwner();
+      allow create: if isOwner()
+        && code.matches('^[A-Z2-9]{8}$')
+        && request.resource.data.keys().hasOnly(['name', 'note', 'until', 'test', 'by', 'at'])
+        && request.resource.data.name is string
+        && request.resource.data.name.size() > 0
+        && request.resource.data.name.size() <= 60
+        && request.resource.data.test is bool;
+      allow update: if (isOwner()
+          && request.resource.data.keys().hasOnly(['name', 'note', 'until', 'test', 'by', 'at', 'device', 'claimed', 'app']))
+        // The phone's one write: claiming a code no phone holds yet.
+        || (resource.data.get('device', '') == ''
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['device', 'claimed', 'app'])
+          && request.resource.data.device is string
+          && request.resource.data.device.matches('^[a-z0-9]{20}$')
+          && request.resource.data.claimed == request.time
+          && request.resource.data.app is string
+          && request.resource.data.app.size() <= 20);
     }
 
     // ── Khalihan Admin ─────────────────────────────────────────────────

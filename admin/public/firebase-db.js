@@ -256,6 +256,31 @@ export async function connect() {
     },
 
     // ── team (owner) ──
+    // ── free Plus gift codes (owner only; plus_gifts/{CODE}) ──
+    async plusGifts() {
+      const snap = await getDocs(query(collection(db, 'plus_gifts'), limit(50)));
+      return rows(snap).map((g) => ({ ...g, at: toDate(g.at), until: toDate(g.until), claimed: toDate(g.claimed) }));
+    },
+    async addPlusGift(code, data) {
+      const ref = doc(db, 'plus_gifts', code);
+      if ((await getDoc(ref)).exists()) throw new Error('code-taken');
+      await setDoc(ref, {
+        name: data.name, note: data.note || '', test: !!data.test,
+        until: data.until ? Timestamp.fromDate(data.until) : null,
+        by: me.email, at: serverTimestamp(),
+      });
+      log('plus_gift_add', { code, name: data.name, test: !!data.test });
+    },
+    /** The phone that holds it lets go; the next phone to type it gets it. */
+    async freePlusGift(code) {
+      await updateDoc(doc(db, 'plus_gifts', code), { device: deleteField(), claimed: deleteField(), app: deleteField() });
+      log('plus_gift_free', { code });
+    },
+    async removePlusGift(code) {
+      await deleteDoc(doc(db, 'plus_gifts', code));
+      log('plus_gift_remove', { code });
+    },
+
     async staff() {
       return rows(await getDocs(collection(db, 'staff')));
     },

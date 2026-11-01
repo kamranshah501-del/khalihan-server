@@ -523,7 +523,7 @@ button:focus-visible, a:focus-visible, .mini:focus-visible { outline: 3px solid 
 .dchip:hover { border-color: #b9c6d2; }
 .dchip.on { background: var(--green-dark); border-color: var(--green-dark); color: #fff; }
 .dchip:disabled { opacity: .6; }
-button.plain.small { padding: 4px 10px; font-size: 13px; }
+button.plain.small, button.danger.small { padding: 4px 10px; font-size: 13px; }
 @media (max-width: 899px) {
   .swlayout { grid-template-columns: 1fr; }
   .swlist { position: static; }
