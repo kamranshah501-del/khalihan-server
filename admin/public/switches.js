@@ -156,6 +156,7 @@ export const SWITCH_WORDS = {
     f_home_sky: 'Living sky in headers', f_home_sky_d: 'The headers of Home, My Crops and Services show the farm\'s own sky — dawn, day, dusk, night, clouds, rain — with the temperature (app v1.0.4: My Crops and Services from build v5.44). Off = plain navy headers. The small weather pill on inner pages follows the Weather switch.',
     f_advice: 'Farming advice', f_advice_d: 'The "Farming Advice" card on Home and on the weather page, and its page: spraying, irrigation, harvest, the next 3 days. Off = no advice card.',
     f_widget_weather: 'Weather on the big widget', f_widget_weather_d: 'The home-screen widget at 4x3 and bigger shows today\'s weather and the spraying / rain line on top (app v1.0.5). Off = only the crops.',
+    f_update_prompt: 'Update reminder', f_update_prompt_d: 'When a newer Khalihan is on Google Play, the app says so once a day and updates itself inside the app (Play\'s own in-app update; app v1.0.6). Off = no reminder.',
     f_dark: 'Dark mode', f_dark_d: 'The app turns dark after sunset and light at sunrise (at the farm), or the farmer fixes it in Profile → App Colour (app v1.0.5). Off = always light for everyone, and the Profile row hides.',
   },
   hi: {
@@ -292,6 +293,7 @@ export const SWITCH_WORDS = {
     f_home_sky: 'हेडर में जीता-जागता आसमान', f_home_sky_d: 'Home, My Crops और Services के हेडर में खेत का अपना आसमान — सुबह, दिन, शाम, रात, बादल, बारिश — तापमान के साथ। बंद = सादे नेवी हेडर। अंदर के पेजों पर छोटा मौसम चिप Weather स्विच से चलता है।',
     f_advice: 'खेती की सलाह', f_advice_d: 'Home और मौसम पेज पर "खेती की सलाह" कार्ड और उसका पेज: छिड़काव, सिंचाई, कटाई, अगले 3 दिन। बंद = सलाह कार्ड नहीं दिखेगा।',
     f_widget_weather: 'बड़े विजेट पर मौसम', f_widget_weather_d: 'होम-स्क्रीन विजेट 4x3 या बड़ा हो तो ऊपर आज का मौसम और छिड़काव / बारिश की लाइन (ऐप v1.0.5)। बंद = सिर्फ़ फसलें।',
+    f_update_prompt: 'अपडेट की याद', f_update_prompt_d: 'Google Play पर Khalihan का नया वर्ज़न आते ही ऐप दिन में एक बार बताता है और ऐप के अंदर ही अपडेट हो जाता है (Play का अपना इन-ऐप अपडेट; ऐप v1.0.6)। बंद = कोई याद नहीं।',
     f_dark: 'डार्क मोड', f_dark_d: 'सूर्यास्त के बाद ऐप अपने आप डार्क, सूर्योदय पर लाइट (खेत के हिसाब से); या किसान Profile → ऐप का रंग में तय करे (ऐप v1.0.5)। बंद = सबके लिए हमेशा लाइट, Profile की लाइन छिप जाती है।',
   },
 };
@@ -324,6 +326,7 @@ export const FEATURE_INFO = {
   target: { def: true, since: '1.0.6' },
   plus: { def: false, since: '1.0.6' },
   plus_target: { def: true, since: '1.0.6' },
+  update_prompt: { def: true, since: '1.0.6' },
 };
 
 /** The sections, in order. `kind` picks a special settings panel. */
@@ -342,6 +345,7 @@ const SECTIONS = [
   { id: 'login', icon: '👤', master: 'login', kids: [] },
   { id: 'feedback', icon: '💬', master: 'feedback', kids: [] },
   { id: 'dark', icon: '🌙', master: 'dark', kids: [] },
+  { id: 'update', icon: '⬆️', master: 'update_prompt', kids: [] },
 ];
 
 /** States as the government price data names them (same list as the app). */
