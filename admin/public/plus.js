@@ -8,7 +8,7 @@
 // Admin 1.16 (1 Nov 2026): free Plus by gift code, owner only (owner: "10
 // logon ko free dena chahun to — section banao, sirf owner ke liye"). A
 // code in plus_gifts/{CODE}; the person types it in the app (Profile →
-// गिफ़्ट कोड) and Plus opens on that phone — no login, no payment. One code,
+// मदद और जानकारी → गिफ़्ट कोड) and Plus opens on that phone — no login, no payment. One code,
 // one phone; "Free for a new phone" lets it move. The owner's own test
 // phones also see the switched-off features (Sell, Kendra, Login).
 
@@ -38,7 +38,7 @@ const T = {
     f4: 'Lower fee in "Sell to Khalihan", Kendra discount', s4: 'When trading starts',
     f5: 'Theft alarm, field camera, fence and motor control', s5: 'Later',
     gifts: 'Free Plus — gift codes',
-    gifts_d: 'Give Plus free, without a subscription, to up to 10 people. Make a code and tell it to the person; they type it in the app under Profile → गिफ़्ट कोड. Plus opens on that phone at once — no login, no payment. One code works on one phone.',
+    gifts_d: 'Give Plus free, without a subscription, to up to 10 people. Make a code and tell it to the person; they type it in the app under Profile → Help (मदद और जानकारी) → गिफ़्ट कोड. Plus opens on that phone at once — no login, no payment. One code works on one phone.',
     g_count: '{n} of 10 given',
     g_tests: '{n} test phone(s) of yours',
     g_name: 'Who is it for', g_name_ph: 'Name, village',
@@ -50,7 +50,7 @@ const T = {
     g_full: 'All 10 gifts are given. Remove one to give another.',
     g_tests_full: 'Three test phones are the most.',
     g_new: 'New code for {name}',
-    g_tell: 'Tell them: Khalihan app → Profile → गिफ़्ट कोड → type the code → चालू करें.',
+    g_tell: 'Tell them: Khalihan app → Profile → मदद और जानकारी → गिफ़्ट कोड → type the code → चालू करें.',
     g_copy: 'Copy', g_copied: 'Copied',
     th_for: 'For', th_code: 'Code', th_till: 'Free till', th_phone: 'Phone',
     g_always: 'Always', g_ended: 'Ended {d}',
@@ -101,7 +101,7 @@ const T = {
     f4: '"Khalihan को बेचें" में कम फ़ीस, केंद्र पर छूट', s4: 'व्यापार शुरू होने पर',
     f5: 'चोरी का अलार्म, खेत का कैमरा, झटका मशीन, मोटर कंट्रोल', s5: 'बाद में',
     gifts: 'मुफ़्त Plus — गिफ़्ट कोड',
-    gifts_d: 'बिना सब्सक्रिप्शन के 10 लोगों तक को Plus मुफ़्त दें। कोड बनाइए और उस इंसान को बताइए; वो ऐप में प्रोफ़ाइल → गिफ़्ट कोड में डालेगा। उसी फ़ोन पर Plus तुरंत चालू — न लॉग-इन, न पेमेंट। एक कोड एक फ़ोन पर चलता है।',
+    gifts_d: 'बिना सब्सक्रिप्शन के 10 लोगों तक को Plus मुफ़्त दें। कोड बनाइए और उस इंसान को बताइए; वो ऐप में प्रोफ़ाइल → मदद और जानकारी → गिफ़्ट कोड में डालेगा। उसी फ़ोन पर Plus तुरंत चालू — न लॉग-इन, न पेमेंट। एक कोड एक फ़ोन पर चलता है।',
     g_count: '10 में से {n} दिए',
     g_tests: 'आपके {n} टेस्ट फ़ोन',
     g_name: 'किसके लिए', g_name_ph: 'नाम, गाँव',
@@ -113,7 +113,7 @@ const T = {
     g_full: '10 के 10 गिफ़्ट दिए जा चुके। नया देने के लिए एक हटाइए।',
     g_tests_full: 'तीन टेस्ट फ़ोन से ज़्यादा नहीं।',
     g_new: '{name} का नया कोड',
-    g_tell: 'उन्हें बताइए: Khalihan ऐप → प्रोफ़ाइल → गिफ़्ट कोड → कोड लिखें → चालू करें।',
+    g_tell: 'उन्हें बताइए: Khalihan ऐप → प्रोफ़ाइल → मदद और जानकारी → गिफ़्ट कोड → कोड लिखें → चालू करें।',
     g_copy: 'कॉपी', g_copied: 'कॉपी हो गया',
     th_for: 'किसके लिए', th_code: 'कोड', th_till: 'कब तक', th_phone: 'फ़ोन',
     g_always: 'हमेशा', g_ended: '{d} को ख़त्म',

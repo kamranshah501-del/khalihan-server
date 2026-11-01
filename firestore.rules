@@ -290,7 +290,7 @@ service cloud.firestore {
     // ── Free Khalihan Plus, given by the owner (1 Nov 2026) ─────────────
     // A gift code: the owner makes it in Khalihan Admin (at most 10 for
     // people, plus the owner's own test phones) and tells the person; they
-    // type it in the app (Profile → गिफ़्ट कोड) and Plus opens on that phone.
+    // type it in the app (Profile → मदद → गिफ़्ट कोड) and Plus opens there.
     // The phone reads only the code typed into it (nobody but the owner can
     // list the codes) and ties it to itself once: the first phone to use a
     // code keeps it, until the owner frees it for a new phone. No mobile
