@@ -1,0 +1,27 @@
+name: Launch check
+
+# By hand only (Actions → Run workflow): prints what every phone sees right
+# now — the Admin switches against the launch plan. Reads only; prints no
+# names or numbers. See tools/launch_check.py.
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python tools/launch_check.py
+        env:
+          PYTHONUNBUFFERED: "1"
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
