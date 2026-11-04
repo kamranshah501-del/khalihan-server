@@ -68,10 +68,16 @@ export async function connect() {
     { id: 'c3', name: 'Trademark — Khalihan (class 31)', kind: 'trademark', due: iso(3), every: 0, remind: 15, notes: 'Hearing ki tareekh' },
   ];
   let plan = { kadam: 0, values: { partner: false, survey: 9, path: false } };
-  const feedback = [
-    { id: 'f1', text: 'Kapas ka bhav Pachora ka bhi dikhao', state: 'Maharashtra', district: 'Jalgaon', lang: 'hi', app: '1.0.2', at: day(0, 8) },
-    { id: 'f2', text: 'खताची किंमत पाहिजे', state: 'Maharashtra', district: 'Jalgaon', lang: 'mr', app: '1.0.2', at: day(3), done: true },
+  // Made-up suggestions (no name or phone, like the real ones).
+  let feedback = [
+    { id: 'f1', text: 'Kapas ka bhav Pachora ka bhi dikhao', state: 'Maharashtra', district: 'Jalgaon', lang: 'hi', app: '1.0.6', at: day(0, 8) },
+    { id: 'f2', text: 'खताची किंमत पाहिजे', state: 'Maharashtra', district: 'Jalgaon', lang: 'mr', app: '1.0.5', at: day(3), done: true, note: 'MRP list v1.0.7 mein', by: 'owner@example.com' },
+    { id: 'f3', text: 'कांद्याचा भाव कालचा दिसतो, आजचा कधी येतो?', state: 'Maharashtra', district: 'Nashik', lang: 'mr', app: '1.0.6', at: day(1, 19) },
+    { id: 'f4', text: 'Please add soybean price alert at night also', state: 'Maharashtra', district: 'Latur', lang: 'en', app: '1.0.6', at: day(2, 7) },
+    { id: 'f5', text: 'मौसम बहुत अच्छा बताता है, धन्यवाद', state: 'Maharashtra', district: 'Jalgaon', lang: 'hi', app: '1.0.5', at: day(5), done: true, by: 'staff@example.com' },
+    { id: 'f6', text: 'जामनेर मंडीचा भाव रोज यावा', state: 'Maharashtra', district: 'Jalgaon', lang: 'mr', app: '1.0.6', at: day(9, 18) },
   ];
+  const FB_PAGE = 4; // small in the demo, so "older" can be tried
   const users = [
     { id: 'u1', phone: '+919876543210', name: 'Ramesh Patil', state: 'Maharashtra', district: 'Jalgaon', lang: 'mr', app: '1.0.2', crops: ['Maize', 'Cotton'], seen: day(0, 9), created: day(5) },
     { id: 'u2', phone: '+919812345678', name: '', state: 'Maharashtra', district: 'Jalgaon', lang: 'hi', app: '1.0.2', crops: ['Cotton'], seen: day(1), created: day(1) },
@@ -176,7 +182,18 @@ export async function connect() {
       return lists[slug] || [];
     },
     async feedback() { return feedback.map((f) => ({ ...f })); },
-    async feedbackDone(id, done) { const f = feedback.find((x) => x.id === id); if (f) f.done = done; },
+    async feedbackPage(after) {
+      const from = after || 0;
+      const page = feedback.slice(from, from + FB_PAGE).map((f) => ({ ...f }));
+      return { rows: page, next: from + FB_PAGE < feedback.length ? from + FB_PAGE : null };
+    },
+    async feedbackCounts() {
+      const done = feedback.filter((f) => f.done).length;
+      return { total: feedback.length, done, open: feedback.length - done };
+    },
+    async feedbackDone(id, done) { const f = feedback.find((x) => x.id === id); if (f) { f.done = done; f.by = me.email; } log('feedback_done', { id, done }); },
+    async feedbackNote(id, note) { const f = feedback.find((x) => x.id === id); if (f) { f.note = note; f.by = me.email; } log('feedback_note', { id }); },
+    async feedbackDelete(id) { feedback = feedback.filter((x) => x.id !== id); log('feedback_delete', { id }); },
     async usersCount() { return users.length; },
     async users() { return users.map((u) => ({ ...u })); },
     async userByPhone(phone) { return users.filter((u) => u.phone === phone); },

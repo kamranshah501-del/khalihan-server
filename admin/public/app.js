@@ -16,7 +16,7 @@ import { SWITCH_WORDS, createSwitches } from './switches.js';
 import { BIZ_WORDS, createBusiness } from './business.js';
 import { plusPage } from './plus.js';
 
-const ADMIN_VERSION = '1.16 · 1 Nov 2026';
+const ADMIN_VERSION = '1.17 · 4 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -139,6 +139,37 @@ const I18N = {
     fb_reopen: 'Reopen',
     fb_done: 'Done ✓',
     fb_none: 'No new suggestions.',
+    fb_total: 'All suggestions',
+    fb_f_new: 'New',
+    fb_f_done: 'Done',
+    fb_f_all: 'All',
+    fb_week: 'Last 7 days (loaded)',
+    fb_from: 'From:',
+    fb_search: 'Search the words, district or team note…',
+    fb_any_lang: 'Every language',
+    fb_any_dist: 'Every district',
+    fb_any_ver: 'Every app version',
+    fb_clear: 'Clear',
+    fb_showing: 'Showing {a} of {b} loaded',
+    fb_more: 'Show older suggestions',
+    fb_all_loaded: 'Every suggestion is loaded.',
+    fb_none_filter: 'No suggestion matches these filters.',
+    fb_note: 'Team note',
+    fb_note_label: 'Team note',
+    fb_note_ph: 'Private note for the team — farmers never see it (max 500 letters)',
+    fb_save: 'Save note',
+    fb_cancel: 'Cancel',
+    fb_note_saved: 'Note saved',
+    fb_copy: 'Copy text',
+    fb_copied: 'Copied',
+    fb_delete: 'Delete',
+    fb_delete_q: 'Delete this suggestion for good? It cannot be brought back. Do this when the farmer asked for it (privacy policy: within 30 days).',
+    fb_deleted: 'Suggestion deleted',
+    fb_last: 'Last change by {e}',
+    fb_csv: 'Download CSV',
+    fb_age_today: 'today',
+    fb_age_yday: 'yesterday',
+    fb_age_days: '{n} days ago',
     farmers_sub: '(with accounts, last 200)',
     find_ph: 'Find by mobile number (10 digits)',
     find: 'Find',
@@ -300,7 +331,7 @@ const I18N = {
     help_requests: 'Farmers who want to sell to Khalihan. Call the farmer, then move the request on: New → Called → Deal agreed → Picked up → Paid (or Cancelled). Every step keeps your name.',
     help_offers: 'The price Khalihan pays for a crop, and where. Start, change or end an offer here; the app shows it at its next start — only where "Sell to Khalihan" is on.',
     help_kendra: 'The Khalihan Kendra shop: orders (mark Ready, then Picked up), products and stock, the square card on Home, the shop\'s details, and complaints.',
-    help_feedback: 'Suggestions farmers send from the app. Read them, then tick Done. Good ideas go to the next update.',
+    help_feedback: 'Suggestions farmers send from the app — no name, no phone. Search and filter them, add a team note, then tick Done. Owner: delete one only when a farmer asks (privacy policy: within 30 days).',
     help_farmers: 'Farmers who made an account (mobile login). Find one by mobile number.',
     help_deletions: 'Farmers who deleted their account. Remove their sell requests and WhatsApp chat within 30 days, then mark Done.',
     help_features: 'Owner only. One section per feature: click it to switch it on or off and change its settings — states, where Khalihan buys, the Kendra\'s districts and location.',
@@ -410,6 +441,37 @@ const I18N = {
     fb_reopen: 'वापस खोलें',
     fb_done: 'हो गया ✓',
     fb_none: 'कोई नया सुझाव नहीं।',
+    fb_total: 'कुल सुझाव',
+    fb_f_new: 'नए',
+    fb_f_done: 'हो गए',
+    fb_f_all: 'सब',
+    fb_week: 'पिछले 7 दिन (लोड हुए)',
+    fb_from: 'कहाँ से:',
+    fb_search: 'शब्द, ज़िला या टीम नोट से ढूँढें…',
+    fb_any_lang: 'हर भाषा',
+    fb_any_dist: 'हर ज़िला',
+    fb_any_ver: 'हर ऐप वर्ज़न',
+    fb_clear: 'साफ़ करें',
+    fb_showing: 'लोड हुए {b} में से {a} दिख रहे हैं',
+    fb_more: 'पुराने सुझाव दिखाएँ',
+    fb_all_loaded: 'सारे सुझाव लोड हो गए।',
+    fb_none_filter: 'इन फ़िल्टर से कोई सुझाव नहीं मिला।',
+    fb_note: 'टीम नोट',
+    fb_note_label: 'टीम नोट',
+    fb_note_ph: 'टीम के लिए निजी नोट — किसान को कभी नहीं दिखता (ज़्यादा से ज़्यादा 500 अक्षर)',
+    fb_save: 'नोट सेव करें',
+    fb_cancel: 'रद्द करें',
+    fb_note_saved: 'नोट सेव हो गया',
+    fb_copy: 'टेक्स्ट कॉपी करें',
+    fb_copied: 'कॉपी हो गया',
+    fb_delete: 'हटाएँ',
+    fb_delete_q: 'ये सुझाव हमेशा के लिए हटाएँ? वापस नहीं आएगा। तभी हटाएँ जब किसान ने कहा हो (प्राइवेसी पॉलिसी: 30 दिन के अंदर)।',
+    fb_deleted: 'सुझाव हटा दिया',
+    fb_last: 'आख़िरी बदलाव: {e}',
+    fb_csv: 'CSV डाउनलोड करें',
+    fb_age_today: 'आज',
+    fb_age_yday: 'कल',
+    fb_age_days: '{n} दिन पहले',
     farmers_sub: '(खाते वाले, आख़िरी 200)',
     find_ph: 'मोबाइल नंबर से ढूँढें (10 अंक)',
     find: 'ढूँढें',
@@ -571,7 +633,7 @@ const I18N = {
     help_requests: 'जो किसान Khalihan को बेचना चाहते हैं। किसान को फ़ोन करें, फिर रिक्वेस्ट आगे बढ़ाएँ: नई → फ़ोन किया → सौदा पक्का → माल उठाया → पैसा दिया (या रद्द)। हर कदम पर आपका नाम सेव होता है।',
     help_offers: 'Khalihan किसी फ़सल का क्या भाव देगा, और कहाँ। यहाँ ऑफ़र शुरू करें, बदलें या बंद करें; ऐप अगली बार खुलने पर दिखाएगा — सिर्फ़ वहाँ जहाँ "Khalihan को बेचें" चालू है।',
     help_kendra: 'Khalihan Kendra दुकान: ऑर्डर (पहले "तैयार", फिर "उठा लिया"), माल और स्टॉक, Home का square card, दुकान की जानकारी और शिकायतें।',
-    help_feedback: 'किसानों के ऐप से भेजे सुझाव। पढ़ें, फिर "हो गया" पर टिक करें। अच्छे आइडिया अगले अपडेट में जाते हैं।',
+    help_feedback: 'किसानों के ऐप से भेजे सुझाव — नाम या फ़ोन नहीं। ढूँढें, फ़िल्टर करें, टीम नोट लिखें, फिर "हो गया" दबाएँ। Owner: सिर्फ़ तभी हटाएँ जब किसान कहे (प्राइवेसी पॉलिसी: 30 दिन के अंदर)।',
     help_farmers: 'जिन किसानों ने खाता बनाया (मोबाइल लॉग इन)। मोबाइल नंबर से ढूँढें।',
     help_deletions: 'जिन किसानों ने खाता हटाया। उनकी बिक्री रिक्वेस्ट और WhatsApp चैट 30 दिन में हटाएँ, फिर "हो गया" करें।',
     help_features: 'सिर्फ़ मालिक। हर फ़ीचर का अपना हिस्सा: उस पर क्लिक करके चालू/बंद करें और सेटिंग बदलें — राज्य, Khalihan कहाँ ख़रीदे, Kendra के ज़िले और जगह।',
@@ -981,6 +1043,253 @@ async function go(next) {
   }
 }
 
+// ── suggestions (Admin 1.17) ───────────────────────────────────────────
+// The app sends text, state, district, language and app version — no name,
+// no phone. Any other field a later app version sends shows as a small tag,
+// so nothing new is hidden from the team.
+const FB_KNOWN = new Set(['id', 'text', 'state', 'district', 'lang', 'app', 'at', 'done', 'note', 'by']);
+const FB_LANGS = { en: 'English', hi: 'हिंदी', mr: 'मराठी', gu: 'ગુજરાતી', pa: 'ਪੰਜਾਬੀ', te: 'తెలుగు', kn: 'ಕನ್ನಡ', ta: 'தமிழ்', bn: 'বাংলা', ml: 'മലയാളം' };
+const fbLang = (c) => FB_LANGS[c] || c || '—';
+const fbPlace = (f) => f.district || f.state || '—';
+
+function fbAge(d) {
+  if (!(d instanceof Date)) return '';
+  const now = new Date();
+  if (sameDay(d, now)) return tr('fb_age_today');
+  if (sameDay(d, new Date(now.getTime() - 86400000))) return tr('fb_age_yday');
+  return tr('fb_age_days', { n: Math.max(2, Math.round((now.getTime() - d.getTime()) / 86400000)) });
+}
+
+function fbMatches(f, flt) {
+  if (flt.status === 'open' && f.done) return false;
+  if (flt.status === 'done' && !f.done) return false;
+  if (flt.lang && f.lang !== flt.lang) return false;
+  if (flt.place && fbPlace(f) !== flt.place) return false;
+  if (flt.app && String(f.app || '') !== flt.app) return false;
+  if (flt.q) {
+    const hay = [f.text, f.district, f.state, f.note].join(' ').toLowerCase();
+    if (!hay.includes(flt.q.toLowerCase())) return false;
+  }
+  return true;
+}
+
+/** [[value, count], …], most first. */
+function fbTally(list, key) {
+  const m = new Map();
+  list.forEach((f) => { const v = key(f); if (v && v !== '—') m.set(v, (m.get(v) || 0) + 1); });
+  return [...m.entries()].sort((a, b) => b[1] - a[1] || String(a[0]).localeCompare(String(b[0])));
+}
+
+/** The shown suggestions as a CSV for Excel (owner). Cells that start with
+ *  = + - @ get a ' in front, so Excel never runs a farmer's text as a formula. */
+function fbCsv(list) {
+  const cell = (v) => {
+    let s = String(v ?? '');
+    if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;
+    return `"${s.replace(/"/g, '""')}"`;
+  };
+  const head = ['date', 'status', 'state', 'district', 'language', 'app_version', 'text', 'team_note', 'last_change_by'];
+  const lines = list.map((f) => [when(f.at), f.done ? 'done' : 'new', f.state, f.district, f.lang, f.app, f.text, f.note, f.by].map(cell).join(','));
+  const blob = new Blob(['﻿' + [head.join(','), ...lines].join('\r\n')], { type: 'text/csv;charset=utf-8' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `khalihan_suggestions_${new Date().toISOString().slice(0, 10)}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+}
+
+function fbCard(f, owner) {
+  const id = esc(f.id);
+  const extras = Object.entries(f)
+    .filter(([k, v]) => !FB_KNOWN.has(k) && v !== '' && v != null)
+    .map(([k, v]) => `<span class="pill info">${esc(k)}: ${esc(String(typeof v === 'object' ? JSON.stringify(v) : v).slice(0, 60))}</span>`)
+    .join(' ');
+  return `<div class="card" data-fb="${id}">
+    <div class="row between">
+      <div class="sub">${when(f.at)} · ${esc(fbAge(f.at))} · ${esc(fbPlace(f))} · ${esc(fbLang(f.lang))} · v${esc(f.app || '—')}</div>
+      <span class="pill ${f.done ? 'on' : 'warn'}">${f.done ? tr('fb_f_done') : tr('fb_f_new')}</span>
+    </div>
+    ${extras ? `<div class="row" style="margin-top:6px">${extras}</div>` : ''}
+    <div style="margin-top:8px;white-space:pre-wrap;overflow-wrap:anywhere">${esc(f.text)}</div>
+    ${f.note ? `<div class="note small" style="margin-top:8px"><strong>${tr('fb_note_label')}:</strong> <span style="white-space:pre-wrap">${esc(f.note)}</span></div>` : ''}
+    ${f.by ? `<div class="muted small" style="margin-top:6px">${tr('fb_last', { e: esc(f.by) })}</div>` : ''}
+    <div class="actions row">
+      <button class="plain" data-fb-done="${id}">${f.done ? tr('fb_reopen') : tr('fb_done')}</button>
+      <button class="plain" data-fb-note="${id}" aria-expanded="false">${tr('fb_note')}</button>
+      <button class="plain" data-fb-copy="${id}">${tr('fb_copy')}</button>
+      ${owner ? `<button class="danger" data-fb-del="${id}">${tr('fb_delete')}</button>` : ''}
+    </div>
+    <div data-fb-box="${id}" hidden style="margin-top:10px">
+      <label class="small muted" for="fbn-${id}">${tr('fb_note_ph')}</label>
+      <textarea id="fbn-${id}" maxlength="500" style="width:100%;box-sizing:border-box;margin-top:4px">${esc(f.note || '')}</textarea>
+      <div class="row" style="margin-top:6px">
+        <button class="main" data-fb-save="${id}">${tr('fb_save')}</button>
+        <button class="plain" data-fb-cancel="${id}">${tr('fb_cancel')}</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+const fbFilter = () => cache.fbFilter || (cache.fbFilter = { status: 'open', q: '', lang: '', place: '', app: '' });
+
+/** Only the list part — typing in the search box keeps its focus. */
+function fbList() {
+  const st = cache.fb;
+  const flt = fbFilter();
+  const shown = st.rows.filter((f) => fbMatches(f, flt));
+  const list = $('#fb-list');
+  if (!list) return;
+  list.innerHTML = shown.length
+    ? shown.map((f) => fbCard(f, me.role === 'owner')).join('')
+    : `<div class="empty">${st.rows.length ? tr('fb_none_filter') : tr('fb_none')}</div>`;
+  const showing = $('#fb-showing');
+  if (showing) showing.textContent = tr('fb_showing', { a: shown.length, b: st.rows.length });
+  fbWire();
+}
+
+function fbDraw() {
+  const st = cache.fb;
+  const owner = me.role === 'owner';
+  const flt = fbFilter();
+  const all = st.rows;
+  const c = st.counts || {
+    total: all.length, done: all.filter((f) => f.done).length, open: all.filter((f) => !f.done).length,
+  };
+  const weekAgo = Date.now() - 7 * 86400000;
+  const week = all.filter((f) => f.at instanceof Date && f.at.getTime() >= weekAgo).length;
+  const places = fbTally(all, fbPlace);
+  const langs = fbTally(all, (f) => f.lang);
+  const apps = fbTally(all, (f) => (f.app ? String(f.app) : ''));
+  const opt = (list, cur, label, fmt) => `<option value="">${esc(label)}</option>`
+    + list.map(([v, n]) => `<option value="${esc(v)}"${v === cur ? ' selected' : ''}>${esc(fmt ? fmt(v) : v)} (${n})</option>`).join('');
+  const sbtn = (k, l) => `<button data-fb-st="${k}" class="${flt.status === k ? 'on' : ''}" aria-pressed="${flt.status === k}">${l}</button>`;
+  const stat = (n, l, cls = '') => `<div class="stat ${cls}"><div class="n">${n}</div><div class="l">${l}</div></div>`;
+  setMain(`
+    <div class="row between"><h1>${tr('tab_feedback')}</h1>
+      ${owner ? `<button class="plain" id="fb-csv">${tr('fb_csv')}</button>` : ''}</div>
+    <div class="kpis">
+      ${stat(c.total, tr('fb_total'))}${stat(c.open, tr('fb_f_new'), c.open ? 'warn' : '')}${stat(c.done, tr('fb_f_done'), 'good')}${stat(week, tr('fb_week'))}
+    </div>
+    ${places.length ? `<div class="filters"><span class="small muted" style="align-self:center">${tr('fb_from')}</span>${places.slice(0, 6).map(([v, n]) => `<button data-fb-place="${esc(v)}" class="${flt.place === v ? 'on' : ''}" aria-pressed="${flt.place === v}">${esc(v)} · ${n}</button>`).join('')}</div>` : ''}
+    <div class="filters">${sbtn('open', tr('fb_f_new'))}${sbtn('done', tr('fb_f_done'))}${sbtn('all', tr('fb_f_all'))}</div>
+    <div class="row" style="margin-bottom:12px">
+      <input id="fb-q" type="search" style="flex:2 1 260px;width:auto" value="${esc(flt.q)}" placeholder="${esc(tr('fb_search'))}" aria-label="${esc(tr('fb_search'))}">
+      <select id="fb-lang" style="flex:1 1 150px;width:auto" aria-label="${esc(tr('fb_any_lang'))}">${opt(langs, flt.lang, tr('fb_any_lang'), fbLang)}</select>
+      <select id="fb-place" style="flex:1 1 150px;width:auto" aria-label="${esc(tr('fb_any_dist'))}">${opt(places, flt.place, tr('fb_any_dist'))}</select>
+      <select id="fb-app" style="flex:1 1 150px;width:auto" aria-label="${esc(tr('fb_any_ver'))}">${opt(apps, flt.app, tr('fb_any_ver'), (v) => 'v' + v)}</select>
+      <button class="plain" id="fb-clear">${tr('fb_clear')}</button>
+    </div>
+    <p class="muted small" id="fb-showing"></p>
+    <div id="fb-list"></div>
+    ${st.next ? `<button class="plain" id="fb-more">${tr('fb_more')}</button>` : (all.length ? `<p class="muted small">${tr('fb_all_loaded')}</p>` : '')}`);
+  document.querySelectorAll('[data-fb-st]').forEach((b) => { b.onclick = () => { flt.status = b.dataset.fbSt; fbDraw(); }; });
+  document.querySelectorAll('[data-fb-place]').forEach((b) => {
+    b.onclick = () => { flt.place = flt.place === b.dataset.fbPlace ? '' : b.dataset.fbPlace; fbDraw(); };
+  });
+  $('#fb-lang').onchange = (e) => { flt.lang = e.target.value; fbDraw(); };
+  $('#fb-place').onchange = (e) => { flt.place = e.target.value; fbDraw(); };
+  $('#fb-app').onchange = (e) => { flt.app = e.target.value; fbDraw(); };
+  $('#fb-clear').onclick = () => { Object.assign(flt, { q: '', lang: '', place: '', app: '' }); fbDraw(); };
+  let typing;
+  $('#fb-q').oninput = (e) => {
+    clearTimeout(typing);
+    typing = setTimeout(() => { flt.q = e.target.value.trim(); fbList(); }, 150);
+  };
+  if ($('#fb-more')) {
+    $('#fb-more').onclick = async (e) => {
+      e.target.disabled = true;
+      try {
+        const p = await db.feedbackPage(st.next);
+        st.rows = st.rows.concat(p.rows);
+        st.next = p.next;
+        fbDraw();
+      } catch (err) { e.target.disabled = false; fail(err); }
+    };
+  }
+  if ($('#fb-csv')) $('#fb-csv').onclick = () => fbCsv(st.rows.filter((f) => fbMatches(f, flt)));
+  fbList();
+}
+
+/** The buttons on each card. Changes are kept in the loaded list, so the
+ *  page doesn't read everything again after each click. */
+function fbWire() {
+  const st = cache.fb;
+  const find = (id) => st.rows.find((f) => f.id === id);
+  const boxOf = (id) => document.querySelector(`[data-fb-box="${CSS.escape(id)}"]`);
+  const recount = () => { if (st.counts) { cache.fbOpen = st.counts.open; tabs(); } };
+  document.querySelectorAll('[data-fb-done]').forEach((b) => {
+    b.onclick = async () => {
+      const f = find(b.dataset.fbDone);
+      if (!f) return;
+      b.disabled = true;
+      try {
+        const to = !f.done;
+        await db.feedbackDone(f.id, to);
+        f.done = to;
+        f.by = me.email;
+        if (st.counts) { st.counts.done += to ? 1 : -1; st.counts.open -= to ? 1 : -1; }
+        recount();
+        fbDraw();
+      } catch (e) { b.disabled = false; fail(e); }
+    };
+  });
+  document.querySelectorAll('[data-fb-note]').forEach((b) => {
+    b.onclick = () => {
+      const box = boxOf(b.dataset.fbNote);
+      if (!box) return;
+      box.hidden = !box.hidden;
+      b.setAttribute('aria-expanded', String(!box.hidden));
+      if (!box.hidden) box.querySelector('textarea').focus();
+    };
+  });
+  document.querySelectorAll('[data-fb-cancel]').forEach((b) => {
+    b.onclick = () => { const box = boxOf(b.dataset.fbCancel); if (box) box.hidden = true; };
+  });
+  document.querySelectorAll('[data-fb-save]').forEach((b) => {
+    b.onclick = async () => {
+      const f = find(b.dataset.fbSave);
+      const box = boxOf(b.dataset.fbSave);
+      if (!f || !box) return;
+      const text = box.querySelector('textarea').value.trim().slice(0, 500);
+      b.disabled = true;
+      try {
+        await db.feedbackNote(f.id, text);
+        f.note = text;
+        f.by = me.email;
+        toast(tr('fb_note_saved'));
+        fbDraw();
+      } catch (e) { b.disabled = false; fail(e); }
+    };
+  });
+  document.querySelectorAll('[data-fb-copy]').forEach((b) => {
+    b.onclick = () => {
+      const f = find(b.dataset.fbCopy);
+      if (!f) return;
+      navigator.clipboard.writeText(String(f.text || '')).then(() => toast(tr('fb_copied')), (e) => fail(e));
+    };
+  });
+  document.querySelectorAll('[data-fb-del]').forEach((b) => {
+    b.onclick = async () => {
+      const f = find(b.dataset.fbDel);
+      if (!f || !confirm(tr('fb_delete_q'))) return;
+      b.disabled = true;
+      try {
+        await db.feedbackDelete(f.id);
+        st.rows = st.rows.filter((x) => x.id !== f.id);
+        if (st.counts) {
+          st.counts.total -= 1;
+          if (f.done) st.counts.done -= 1; else st.counts.open -= 1;
+        }
+        recount();
+        toast(tr('fb_deleted'));
+        fbDraw();
+      } catch (e) { b.disabled = false; fail(e); }
+    };
+  });
+}
+
 // ── pages ──────────────────────────────────────────────────────────────
 const PAGES = {
   async home() {
@@ -1289,24 +1598,16 @@ const PAGES = {
     await plusPage({ esc, setMain, lang: () => lang, db: () => db, toast, fail });
   },
 
+  // Admin 1.17: every page, real totals, search, filters, team note, who
+  // changed it last, owner-only delete and CSV (see fbDraw above).
   async feedback() {
-    const list = await db.feedback();
-    const show = cache.fbAll ? list : list.filter((f) => !f.done);
-    setMain(`
-      <div class="row between"><h1>${tr('tab_feedback')}</h1>
-        <button class="plain" id="fb-toggle">${cache.fbAll ? tr('fb_only_new') : tr('fb_all')}</button></div>
-      ${show.length ? show.map((f) => `
-        <div class="card">
-          <div class="row between"><div class="sub">${when(f.at)} · ${esc(f.district || f.state || '')} · ${esc(f.lang || '')} · v${esc(f.app || '')}</div>
-            <button class="plain" data-done="${f.id}" data-v="${f.done ? '0' : '1'}">${f.done ? tr('fb_reopen') : tr('fb_done')}</button></div>
-          <div style="margin-top:6px;white-space:pre-wrap">${esc(f.text)}</div>
-        </div>`).join('') : `<div class="empty">${tr('fb_none')}</div>`}`);
-    $('#fb-toggle').onclick = () => { cache.fbAll = !cache.fbAll; PAGES.feedback(); };
-    document.querySelectorAll('[data-done]').forEach((b) => {
-      b.onclick = async () => {
-        try { await db.feedbackDone(b.dataset.done, b.dataset.v === '1'); PAGES.feedback(); } catch (e) { fail(e); }
-      };
-    });
+    const [first, counts] = await Promise.all([
+      db.feedbackPage(null),
+      db.feedbackCounts().catch(() => null),
+    ]);
+    cache.fb = { rows: first.rows, next: first.next, counts };
+    if (counts) { cache.fbOpen = counts.open; tabs(); }
+    fbDraw();
   },
 
   async farmers() {

@@ -7,12 +7,13 @@ import {
 import {
   getFirestore, collection, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, addDoc,
   query, where, orderBy, limit, serverTimestamp, arrayUnion, Timestamp, runTransaction,
-  getCountFromServer, writeBatch, onSnapshot, deleteField,
+  getCountFromServer, writeBatch, onSnapshot, deleteField, startAfter,
 } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 import { initializeAppCheck, ReCaptchaV3Provider } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app-check.js';
 
 const toDate = (v) => (v && typeof v.toDate === 'function' ? v.toDate() : null);
 const rows = (snap) => snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+const FB_PAGE = 200; // suggestions read per page (Admin 1.17)
 
 export async function connect() {
   // Firebase Hosting serves this project's web config here — nothing secret
@@ -215,9 +216,42 @@ export async function connect() {
       const snap = await getDocs(query(collection(db, 'feedback'), orderBy('at', 'desc'), limit(200)));
       return rows(snap).map((r) => ({ ...r, at: toDate(r.at) }));
     },
+    // One page, newest first. `after` = the previous page's `next`; `next`
+    // is null when nothing older is left (Admin 1.17: no more 200 limit).
+    async feedbackPage(after) {
+      const steps = [orderBy('at', 'desc')];
+      if (after) steps.push(startAfter(after));
+      steps.push(limit(FB_PAGE));
+      const snap = await getDocs(query(collection(db, 'feedback'), ...steps));
+      return {
+        rows: rows(snap).map((r) => ({ ...r, at: toDate(r.at) })),
+        next: snap.docs.length === FB_PAGE ? snap.docs[snap.docs.length - 1] : null,
+      };
+    },
+    // Real totals from the server, however many pages are loaded.
+    async feedbackCounts() {
+      const all = collection(db, 'feedback');
+      const [total, done] = await Promise.all([
+        getCountFromServer(all),
+        getCountFromServer(query(all, where('done', '==', true))),
+      ]);
+      const t = total.data().count;
+      const d = done.data().count;
+      return { total: t, done: d, open: Math.max(0, t - d) };
+    },
     async feedbackDone(id, done) {
       await updateDoc(doc(db, 'feedback', id), { done, by: me.email });
       log('feedback_done', { id, done });
+    },
+    // The team's private note (rules: staff may change only done, note, by).
+    async feedbackNote(id, note) {
+      await updateDoc(doc(db, 'feedback', id), { note, by: me.email });
+      log('feedback_note', { id });
+    },
+    // Owner only (rules) — when a farmer asks for their suggestion to go.
+    async feedbackDelete(id) {
+      await deleteDoc(doc(db, 'feedback', id));
+      log('feedback_delete', { id });
     },
 
     // ── farmers ──
