@@ -1,0 +1,303 @@
+{
+ "at": "2026-11-07T15:56:18+00:00",
+ "mode": "refresh",
+ "took_s": 277,
+ "gov_api_down": true,
+ "phone_states": 24,
+ "feed_at": "2026-11-07T13:10:01+00:00",
+ "states": {
+  "Andhra Pradesh": {
+   "source": "phone",
+   "rows": 333,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 40
+  },
+  "Assam": {
+   "source": "phone",
+   "rows": 148,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 47
+  },
+  "Bihar": {
+   "source": "phone",
+   "rows": 217,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 16
+  },
+  "Chhattisgarh": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Chhattisgarh (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7fa7"
+  },
+  "Goa": {
+   "source": "phone",
+   "rows": 16,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 14
+  },
+  "Gujarat": {
+   "source": "phone",
+   "rows": 1042,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 75,
+   "back_moves": {
+    "2026-11-04": 0,
+    "2026-11-05": 0,
+    "2026-11-06": 0
+   }
+  },
+  "Haryana": {
+   "source": "phone",
+   "rows": 733,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 55,
+   "back_moves": {
+    "2026-11-04": 0,
+    "2026-11-05": 0,
+    "2026-11-06": 0
+   }
+  },
+  "Himachal Pradesh": {
+   "source": "phone",
+   "rows": 746,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 47,
+   "back_moves": {
+    "2026-11-04": 0,
+    "2026-11-05": 0,
+    "2026-11-06": 0
+   }
+  },
+  "Jammu and Kashmir": {
+   "source": "phone",
+   "rows": 136,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 46
+  },
+  "Jharkhand": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Jharkhand (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7fa7934"
+  },
+  "Karnataka": {
+   "source": "phone",
+   "rows": 840,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 90,
+   "back_moves": {
+    "2026-11-04": 0,
+    "2026-11-05": 0,
+    "2026-11-06": 0
+   }
+  },
+  "Kerala": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Kerala (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7fa7934a4e"
+  },
+  "Madhya Pradesh": {
+   "source": "phone",
+   "rows": 2107,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 65,
+   "back_moves": {
+    "2026-11-04": 0,
+    "2026-11-05": 0,
+    "2026-11-06": 0
+   }
+  },
+  "Maharashtra": {
+   "source": "msamb+gov",
+   "rows": 5170,
+   "error": "",
+   "districts": 39,
+   "moves": 27,
+   "day": "2026-11-07",
+   "day_crops": 102,
+   "back_moves": {
+    "2026-11-02": 2,
+    "2026-11-03": 4,
+    "2026-11-04": 8,
+    "2026-11-05": 10,
+    "2026-11-06": 14
+   }
+  },
+  "Manipur": {
+   "source": "phone",
+   "rows": 62,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-06",
+   "day_crops": 12
+  },
+  "Meghalaya": {
+   "source": "phone",
+   "rows": 41,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 1,
+   "back_moves": {
+    "2026-11-06": 0
+   }
+  },
+  "Mizoram": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Mizoram (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7fa792f5a"
+  },
+  "Nagaland": {
+   "source": "phone",
+   "rows": 67,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 15
+  },
+  "NCT of Delhi": {
+   "source": "phone",
+   "rows": 87,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 54,
+   "back_moves": {
+    "2026-11-06": 0
+   }
+  },
+  "Odisha": {
+   "source": "phone",
+   "rows": 615,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 38,
+   "back_moves": {
+    "2026-11-05": 0,
+    "2026-11-06": 0
+   }
+  },
+  "Punjab": {
+   "source": "phone",
+   "rows": 1154,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 58,
+   "back_moves": {
+    "2026-11-04": 0,
+    "2026-11-05": 0,
+    "2026-11-06": 0
+   }
+  },
+  "Rajasthan": {
+   "source": "phone",
+   "rows": 567,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 52,
+   "back_moves": {
+    "2026-11-04": 0,
+    "2026-11-05": 0,
+    "2026-11-06": 0
+   }
+  },
+  "Sikkim": {
+   "source": "",
+   "rows": 0,
+   "error": "data.gov.in: HTTPSConnectionPool(host='api.data.gov.in', port=443): Max retries exceeded with url: /resource/9ef84268-d588-465a-a308-a864a43d0070?api-key=***&format=json&limit=1000&offset=0&filters%5Bstate%5D=Sikkim (Caused by ConnectTimeoutError(<HTTPSConnection(host='api.data.gov.in', port=443) at 0x7fa793491b"
+  },
+  "Tamil Nadu": {
+   "source": "phone",
+   "rows": 7321,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 78,
+   "back_moves": {
+    "2026-11-04": 0,
+    "2026-11-05": 0,
+    "2026-11-06": 0
+   }
+  },
+  "Telangana": {
+   "source": "phone",
+   "rows": 638,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 74,
+   "back_moves": {
+    "2026-11-04": 0,
+    "2026-11-06": 0
+   }
+  },
+  "Tripura": {
+   "source": "phone",
+   "rows": 235,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 20,
+   "back_moves": {
+    "2026-11-06": 0
+   }
+  },
+  "Uttar Pradesh": {
+   "source": "phone",
+   "rows": 1084,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 51,
+   "back_moves": {
+    "2026-11-04": 0,
+    "2026-11-05": 0,
+    "2026-11-06": 0
+   }
+  },
+  "Uttarakhand": {
+   "source": "phone",
+   "rows": 292,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 30,
+   "back_moves": {
+    "2026-11-06": 0
+   }
+  },
+  "West Bengal": {
+   "source": "phone",
+   "rows": 494,
+   "error": "",
+   "moves": 0,
+   "day": "2026-11-07",
+   "day_crops": 29,
+   "back_moves": {
+    "2026-11-06": 0
+   }
+  }
+ }
+}
