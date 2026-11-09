@@ -12,7 +12,7 @@ import os
 import firebase_admin
 from firebase_admin import credentials, firestore
 
-# The app's built-in defaults (lib/state/app_config.dart, v1.0.6).
+# The app's built-in defaults (lib/state/app_config.dart, v1.0.7).
 DEFAULTS = {
     "login": False, "sell": False, "calendar": True, "schemes": True, "price_map": True,
     "hold_sell": True, "day_voice": True, "share_picture": True, "kendra": False,
@@ -20,6 +20,7 @@ DEFAULTS = {
     "home_sky": True, "advice": True, "dark": True, "widget_weather": True,
     "sell_menu": True, "where_sell": True, "sell_interest": True, "target": True,
     "update_prompt": True,
+    "voice_search": False,  # v1.0.7 "बोलकर खोजें": starts OFF like every new feature
 }
 PARENT = {
     "schemes": "services", "kendra": "services", "home_sky": "weather", "advice": "weather",

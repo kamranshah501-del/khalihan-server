@@ -143,6 +143,7 @@ export const SWITCH_WORDS = {
     f_plus: 'Khalihan Plus', f_plus_d: 'The paid plan. Off = nothing locked, everything free as before. ⚠️ Keep OFF until Plus can be bought (Google Play Billing, next app update) — on now = the features below lock for everyone and nobody can unlock them.',
     f_plus_target: 'Target price in Plus', f_plus_target_d: 'With Plus on: farmers without Plus see the target rings locked (🔒 Plus) and get no target alert.',
     f_day_voice: 'Hear today\'s prices', f_day_voice_d: 'The Home button and the "Listen" button on the morning message.',
+    f_voice_search: 'Speak to search', f_voice_search_d: 'A mic in My Crops\' search box: the farmer says a crop ("कापसाचा भाव") and it shows. The phone\'s own voice typing listens; Khalihan gets only the words, never the voice (app v1.0.7).',
     f_share_picture: 'Send prices as a picture', f_share_picture_d: 'Off = Share sends a plain WhatsApp message.',
     f_alerts: 'Price alerts', f_alerts_d: 'The bell on a crop page and the "price moved / target reached" alert. Off = no bell, no alerts.',
     f_brief: 'Morning message', f_brief_d: 'The 6–8 am message with the farmer\'s crops and the weather. Off = no message, and its switch in Profile hides.',
@@ -280,6 +281,7 @@ export const SWITCH_WORDS = {
     f_plus: 'Khalihan Plus', f_plus_d: 'पैसे वाला प्लान। बंद = कुछ भी लॉक नहीं, सब पहले जैसा मुफ़्त। ⚠️ जब तक Plus ख़रीदा न जा सके (Google Play Billing, अगला ऐप अपडेट) तब तक बंद रखें — अभी चालू = नीचे के फ़ीचर सबके लिए लॉक हो जाएँगे और कोई खोल नहीं पाएगा।',
     f_plus_target: 'टारगेट भाव Plus में', f_plus_target_d: 'Plus चालू हो तो: बिना Plus वाले किसान को टारगेट रिंग लॉक (🔒 Plus) दिखेंगे और टारगेट अलर्ट नहीं आएगा।',
     f_day_voice: 'आज का भाव सुनें', f_day_voice_d: 'Home का बटन और सुबह के मैसेज का "सुनें" बटन।',
+    f_voice_search: 'बोलकर खोजें', f_voice_search_d: 'मेरी फसलें के सर्च बॉक्स में माइक: किसान फसल का नाम बोले ("कापसाचा भाव") और फसल दिख जाए। फ़ोन की अपनी वॉइस टाइपिंग सुनती है; Khalihan को सिर्फ़ शब्द मिलते हैं, आवाज़ कभी नहीं (ऐप v1.0.7)।',
     f_share_picture: 'भाव की फ़ोटो भेजें', f_share_picture_d: 'बंद = Share सीधे WhatsApp मैसेज भेजेगा।',
     f_alerts: 'भाव अलर्ट', f_alerts_d: 'फ़सल पेज की घंटी और "भाव बदला / टारगेट पूरा" अलर्ट। बंद = न घंटी, न अलर्ट।',
     f_brief: 'सुबह का मैसेज', f_brief_d: 'सुबह 6–8 बजे किसान की फ़सलों और मौसम वाला मैसेज। बंद = मैसेज नहीं, और Profile में उसका स्विच भी छिप जाएगा।',
@@ -325,6 +327,7 @@ export const FEATURE_INFO = {
   sell_interest: { def: true, since: '1.0.6' },
   target: { def: true, since: '1.0.6' },
   update_prompt: { def: true, since: '1.0.6' },
+  voice_search: { def: false, since: '1.0.7' },
 };
 
 /** The sections, in order. `kind` picks a special settings panel. */
@@ -332,7 +335,7 @@ const SECTIONS = [
   { id: 'states', icon: '📍', kind: 'states' },
   { id: 'notice', icon: '📣', kind: 'notice' },
   { id: 'festival', icon: '🪔', kind: 'festival' },
-  { id: 'prices', icon: '📈', master: null, kids: ['day_voice', 'share_picture', 'alerts', 'target', 'brief'] },
+  { id: 'prices', icon: '📈', master: null, kids: ['day_voice', 'voice_search', 'share_picture', 'alerts', 'target', 'brief'] },
   { id: 'sellmenu', icon: '🛒', master: 'sell_menu', kids: ['where_sell', 'price_map', 'hold_sell', 'sell_interest'] },
   { id: 'weather', icon: '🌦️', master: 'weather', kids: ['home_sky', 'advice', 'widget_weather'] },
   { id: 'calendar', icon: '🌱', master: 'calendar', kids: [] },
