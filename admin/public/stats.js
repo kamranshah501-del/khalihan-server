@@ -54,6 +54,8 @@ const T = {
     why_h: 'Why prices didn\'t download',
     where_h: 'In which state',
     why_old: 'Reasons are recorded from app 1.0.7 on.',
+    fail_where: 'Country', fail_ver: 'App version', fail_day: 'Day',
+    fail_note: 'Prices don\'t need location — they come by the chosen state. Failures outside India are you, the testers or Google\'s test phones.',
     langs_h: 'App language',
     ver_h: 'App versions',
     ver_app: 'People by version (app data)',
@@ -132,6 +134,8 @@ const T = {
     why_h: 'भाव डाउनलोड क्यों नहीं हुए',
     where_h: 'किस राज्य में',
     why_old: 'वजह ऐप 1.0.7 से गिनी जाएगी।',
+    fail_where: 'देश', fail_ver: 'ऐप वर्शन', fail_day: 'दिन',
+    fail_note: 'भाव के लिए लोकेशन नहीं चाहिए — भाव चुने हुए राज्य से आते हैं। भारत के बाहर वाले fail आप, टेस्टर या Google के जाँच वाले फ़ोन हैं।',
     langs_h: 'ऐप की भाषा',
     ver_h: 'ऐप वर्शन',
     ver_app: 'वर्शन के हिसाब से लोग (ऐप डेटा)',
@@ -480,6 +484,10 @@ export async function statsPage(deps) {
       ${ev('prices_failed') ? `<details class="small"><summary>${esc(t('why_h'))}</summary>
         ${(ga.fail_why || []).length ? bars(ga.fail_why.map((x) => ({ label: label(WHY, x.k), v: x.n, extra: t('times'), title: x.k }))) : `<p class="muted small">${esc(t('why_old'))}</p>`}
         ${(ga.fail_state || []).length ? `<div class="small muted" style="font-weight:700;margin:8px 0 4px">${esc(t('where_h'))}</div>${bars(ga.fail_state.map((x) => ({ label: x.k, v: x.n, extra: t('times') })))}` : ''}
+        ${(ga.fail_country || []).length ? `<div class="small muted" style="font-weight:700;margin:8px 0 4px">${esc(t('fail_where'))}</div>${bars(ga.fail_country.map((x) => ({ label: x.k, v: x.n, extra: `${n(x.u)} ${t('people')}` })))}` : ''}
+        ${(ga.fail_version || []).length ? `<div class="small muted" style="font-weight:700;margin:8px 0 4px">${esc(t('fail_ver'))}</div>${bars(ga.fail_version.map((x) => ({ label: x.k, v: x.n, extra: `${n(x.u)} ${t('people')}` })))}` : ''}
+        ${(ga.fail_days || []).length ? `<div class="small muted" style="font-weight:700;margin:8px 0 4px">${esc(t('fail_day'))}</div>${table([t('fail_day'), t('times'), t('people')], ga.fail_days.slice().reverse().map((x) => [day(`${x.k.slice(0, 4)}-${x.k.slice(4, 6)}-${x.k.slice(6)}`), n(x.n), n(x.u)]))}` : ''}
+        <p class="muted small" style="margin:8px 0 0">${esc(t('fail_note'))}</p>
       </details>` : ''}
     </section>`;
 

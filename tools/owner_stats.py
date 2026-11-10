@@ -328,6 +328,14 @@ def analytics(s):
     regions = ga_report(s, prop, ["country", "region"], ["activeUsers"], limit=40, order="activeUsers")
     countries = ga_report(s, prop, ["country"], ["activeUsers"], limit=20, order="activeUsers")
 
+    # Where "prices didn't download" happened — built-in fields, so the past
+    # 28 days count too (owner, 10 Nov: 17 failures, why?).
+    def failed_by(dim, n=10, start="28daysAgo"):
+        rows = ga_report(s, prop, [dim], ["eventCount", "totalUsers"], start=start, limit=n + 5,
+                         filt=("eventName", "prices_failed"), order="eventCount")
+        out = [{"k": r[dim][:40], "n": r["eventCount"], "u": r["totalUsers"]} for r in rows if r[dim] not in BLANK]
+        return out[:n]
+
     def custom(dim, metric, filt=None, n=15):
         try:
             return top(ga_report(s, prop, [dim], [metric], limit=n + 5, filt=filt, order=metric), dim, metric, n)
@@ -354,6 +362,9 @@ def analytics(s):
         "states": custom("customUser:state", "activeUsers") if "state" in ready else [],
         "districts": custom("customUser:district", "activeUsers") if "district" in ready else [],
         "langs": custom("customUser:language", "activeUsers", n=10) if "language" in ready else [],
+        "fail_country": failed_by("country"),
+        "fail_version": failed_by("appVersion"),
+        "fail_days": sorted(failed_by("date", n=30), key=lambda x: x["k"]),
         "fail_why": custom("customEvent:code", "eventCount", ("eventName", "prices_failed"), n=8) if "code" in ready else [],
         "fail_state": custom("customUser:state", "eventCount", ("eventName", "prices_failed"), n=8) if "state" in ready else [],
         "dims": sorted(ready), "dims_note": dim_note,
