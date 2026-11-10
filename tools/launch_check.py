@@ -21,6 +21,7 @@ DEFAULTS = {
     "sell_menu": True, "where_sell": True, "sell_interest": True, "target": True,
     "update_prompt": True,
     "voice_search": False,  # v1.0.7 "बोलकर खोजें": starts OFF like every new feature
+    "setup_guide": False,  # v1.0.7 "ऐप तैयार करें": starts OFF too
 }
 PARENT = {
     "schemes": "services", "kendra": "services", "home_sky": "weather", "advice": "weather",
