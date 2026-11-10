@@ -48,6 +48,11 @@ CUSTOM_DIMENSIONS = {
     "district": ("USER", "District", "The farmer's chosen district (app)"),
     "language": ("USER", "App language", "The language chosen in the app (app)"),
     "code": ("EVENT", "Why prices failed", "prices_failed reason from v1.0.7: no_feed, fs_unavailable… (app)"),
+    # v1.0.7 "ऐप तैयार करें" — created ahead, since Analytics never counts backwards.
+    "step": ("EVENT", "Guide step", "Setup guide step: prices, district, location, notifications (app)"),
+    "result": ("EVENT", "Guide result", "Setup guide result: done, denied, skipped, settings, retry, gps, manual (app)"),
+    "loc": ("USER", "Location allowed", "Phone location for Khalihan: on, off, denied, denied_forever (app)"),
+    "notif": ("USER", "Notifications allowed", "Notifications for Khalihan: on, off (app)"),
 }
 
 BLANK = ("", "(not set)", "(other)")
@@ -336,6 +341,18 @@ def analytics(s):
         out = [{"k": r[dim][:40], "n": r["eventCount"], "u": r["totalUsers"]} for r in rows if r[dim] not in BLANK]
         return out[:n]
 
+    def guide_steps():
+        """Each guide button pressed: step × result (v1.0.7)."""
+        if not {"step", "result"} <= ready:
+            return []
+        try:
+            rows = ga_report(s, prop, ["customEvent:step", "customEvent:result"], ["eventCount"], limit=40,
+                             filt=("eventName", "guide_step"), order="eventCount")
+        except Problem:
+            return []
+        return [{"s": r["customEvent:step"][:20], "r": r["customEvent:result"][:20], "n": r["eventCount"]}
+                for r in rows if r["customEvent:step"] not in BLANK and r["customEvent:result"] not in BLANK]
+
     def custom(dim, metric, filt=None, n=15):
         try:
             return top(ga_report(s, prop, [dim], [metric], limit=n + 5, filt=filt, order=metric), dim, metric, n)
@@ -365,6 +382,9 @@ def analytics(s):
         "fail_country": failed_by("country"),
         "fail_version": failed_by("appVersion"),
         "fail_days": sorted(failed_by("date", n=30), key=lambda x: x["k"]),
+        "guide_steps": guide_steps(),
+        "perm_loc": custom("customUser:loc", "activeUsers", n=6) if "loc" in ready else [],
+        "perm_notif": custom("customUser:notif", "activeUsers", n=4) if "notif" in ready else [],
         "fail_why": custom("customEvent:code", "eventCount", ("eventName", "prices_failed"), n=8) if "code" in ready else [],
         "fail_state": custom("customUser:state", "eventCount", ("eventName", "prices_failed"), n=8) if "state" in ready else [],
         "dims": sorted(ready), "dims_note": dim_note,

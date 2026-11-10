@@ -55,6 +55,12 @@ const T = {
     where_h: 'In which state',
     why_old: 'Reasons are recorded from app 1.0.7 on.',
     fail_where: 'Country', fail_ver: 'App version', fail_day: 'Day',
+    guide_h: '🧭 Get-ready guide (28 days)',
+    guide_soon: 'Counted from app 1.0.7, once the "Get-ready guide" switch is on.',
+    g_shown: 'Saw the guide', g_done: 'Guide finished', g_steps: 'Buttons pressed in the guide',
+    perm_h: 'Phones with location / notifications',
+    perm_loc: 'Location', perm_notif: 'Notifications',
+    th_step: 'Step', th_result: 'What happened',
     fail_note: 'Prices don\'t need location — they come by the chosen state. Failures outside India are you, the testers or Google\'s test phones.',
     langs_h: 'App language',
     ver_h: 'App versions',
@@ -135,6 +141,12 @@ const T = {
     where_h: 'किस राज्य में',
     why_old: 'वजह ऐप 1.0.7 से गिनी जाएगी।',
     fail_where: 'देश', fail_ver: 'ऐप वर्शन', fail_day: 'दिन',
+    guide_h: '🧭 ऐप तैयार करें — गाइड (28 दिन)',
+    guide_soon: 'ऐप 1.0.7 से गिना जाएगा, जब "ऐप तैयार करें" स्विच चालू हो।',
+    g_shown: 'गाइड देखी', g_done: 'गाइड पूरी हुई', g_steps: 'गाइड में दबाए गए बटन',
+    perm_h: 'फ़ोन में लोकेशन / सूचनाएँ',
+    perm_loc: 'लोकेशन', perm_notif: 'सूचनाएँ',
+    th_step: 'स्टेप', th_result: 'क्या हुआ',
     fail_note: 'भाव के लिए लोकेशन नहीं चाहिए — भाव चुने हुए राज्य से आते हैं। भारत के बाहर वाले fail आप, टेस्टर या Google के जाँच वाले फ़ोन हैं।',
     langs_h: 'ऐप की भाषा',
     ver_h: 'ऐप वर्शन',
@@ -248,6 +260,9 @@ const EVENTS = {
   notification_foreground: ['Notification while in the app', 'ऐप खुले में सूचना'],
   app_exception: ['App error', 'ऐप में गड़बड़ी'],
   alert_sent: ['Alert sent (by the app)', 'अलर्ट भेजा (ऐप ने)'],
+  guide_shown: ['Saw the get-ready guide', 'गाइड देखी'],
+  guide_step: ['Pressed a guide button', 'गाइड का बटन दबाया'],
+  guide_done: ['Guide finished', 'गाइड पूरी हुई'],
   prices_loaded: ['Prices downloaded', 'भाव डाउनलोड हुए'],
   prices_failed: ['Prices failed to download', 'भाव डाउनलोड नहीं हुए'],
   where_to_sell_from: ['(where "Where to sell" was opened from)', '("कहाँ बेचें" कहाँ से खुला)'],
@@ -257,7 +272,8 @@ const EVENTS = {
 const TECH = new Set(['first_open', 'session_start', 'screen_view', 'user_engagement', 'app_update', 'app_remove',
   'app_clear_data', 'os_update', 'notification_receive', 'notification_dismiss', 'notification_foreground',
   'app_exception', 'alert_sent', 'prices_loaded', 'prices_failed', 'where_to_sell_from', 'login_error',
-  'firebase_campaign', 'firebase_in_app_message_impression', 'dynamic_link_first_open']);
+  'firebase_campaign', 'firebase_in_app_message_impression', 'dynamic_link_first_open',
+  'guide_shown', 'guide_step', 'guide_done']);
 
 // Tabs and pages (route names in the app, v1.0.7).
 const SCREENS = {
@@ -303,6 +319,21 @@ const WHY = {
   bad_meta: ['Our server\'s copy was incomplete', 'सर्वर की कॉपी अधूरी थी'],
   error: ['Other error', 'दूसरी गड़बड़ी'],
   err_generic: ['Older app (no reason sent)', 'पुराना ऐप (वजह नहीं भेजता)'],
+};
+// The guide (v1.0.7): steps, what happened, and the phone's switches.
+const G_STEP = {
+  prices: ['Today\'s prices', 'आज के भाव'], district: ['District', 'ज़िला'],
+  location: ['Location', 'लोकेशन'], notifications: ['Notifications', 'सूचनाएँ'],
+};
+const G_RESULT = {
+  done: ['✓ Turned on', '✓ चालू किया'], denied: ['✗ Refused', '✗ मना किया'], skipped: ['Skipped', 'छोड़ा'],
+  settings: ['Sent to phone settings', 'फ़ोन की सेटिंग खोली'], retry: ['Tried prices again', 'भाव फिर से माँगे'],
+  gps: ['Filled from location', 'लोकेशन से भरा'], gps_failed: ['Location didn\'t work', 'लोकेशन से नहीं हुआ'],
+  manual: ['Chose it themselves', 'खुद चुना'],
+};
+const PERM = {
+  on: ['On', 'चालू'], off: ['Off', 'बंद'], denied: ['Refused', 'मना किया'],
+  denied_forever: ['Refused for good', 'हमेशा के लिए मना'],
 };
 // First start and settings: shown apart from what farmers use day to day.
 const SETUP_EV = new Set(['language_chosen', 'state_chosen', 'district_chosen', 'theme_chosen', 'text_size', 'voice_speed',
@@ -491,6 +522,27 @@ export async function statsPage(deps) {
       </details>` : ''}
     </section>`;
 
+  // ── the get-ready guide (v1.0.7) ──
+  const evU = (k) => { const e = events.find((x) => x.k === k); return e ? e.u : 0; };
+  const steps = ga.guide_steps || [];
+  const permLoc = ga.perm_loc || [];
+  const permNotif = ga.perm_notif || [];
+  const guideAny = evU('guide_shown') || evU('guide_done') || steps.length || permLoc.length || permNotif.length;
+  const guideCard = `
+    <section class="card">
+      <div class="ch"><h2>${esc(t('guide_h'))}</h2></div>
+      ${!guideAny ? `<p class="muted small">${esc(t('guide_soon'))}</p>` : `
+        <div class="tiles">
+          <div class="tile" style="background:var(--page)"><div class="tile-n" style="font-size:22px">${n(evU('guide_shown'))}</div><div class="tile-l">${esc(t('g_shown'))}</div></div>
+          <div class="tile" style="background:var(--page)"><div class="tile-n" style="font-size:22px">${n(evU('guide_done'))}</div><div class="tile-l">${esc(t('g_done'))}</div></div>
+        </div>
+        ${steps.length ? `<div class="small muted" style="font-weight:700;margin:6px 0 4px">${esc(t('g_steps'))}</div>
+          ${table([t('th_step'), t('th_result'), t('times')], steps.map((x) => [label(G_STEP, x.s), label(G_RESULT, x.r), n(x.n)]))}` : ''}
+        ${permLoc.length || permNotif.length ? `<div class="small muted" style="font-weight:700;margin:12px 0 4px">${esc(t('perm_h'))}</div>
+          ${permLoc.length ? `<div class="small" style="font-weight:700;margin:4px 0">${esc(t('perm_loc'))}</div>${bars(permLoc.map((x) => ({ label: label(PERM, x.k), v: x.n, extra: t('people') })))}` : ''}
+          ${permNotif.length ? `<div class="small" style="font-weight:700;margin:8px 0 4px">${esc(t('perm_notif'))}</div>${bars(permNotif.map((x) => ({ label: label(PERM, x.k), v: x.n, extra: t('people') })))}` : ''}` : ''}`}
+    </section>`;
+
   // ── charts: last 14 days ──
   const gaDays = (ga.daily || []).slice(-14);
   const playDays = (play.daily || []).slice(-14);
@@ -531,6 +583,7 @@ export async function statsPage(deps) {
       ${langsCard}
       ${verCard}
       ${healthCard}
+      ${guideCard}
     </div>
     <p class="muted small" style="margin-top:14px">🔒 ${esc(t('privacy'))}</p>`);
   wireTips(document.querySelector('#main'));

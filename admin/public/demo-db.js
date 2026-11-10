@@ -131,7 +131,7 @@ export async function connect() {
           { k: 'hold_or_sell', c: 15, u: 8 }, { k: 'scheme_open', c: 22, u: 10 }, { k: 'calendar_open', c: 12, u: 7 },
           { k: 'price_map', c: 9, u: 5 }, { k: 'compare_opened', c: 8, u: 4 }, { k: 'feedback_sent', c: 3, u: 3 },
           { k: 'widget_opened', c: 11, u: 3 }, { k: 'app_remove', c: 6, u: 6 }, { k: 'prices_failed', c: 17, u: 9 },
-          { k: 'notification_open', c: 25, u: 11 }, { k: 'app_update', c: 30, u: 30 },
+          { k: 'notification_open', c: 25, u: 11 }, { k: 'guide_shown', c: 30, u: 24 }, { k: 'guide_done', c: 18, u: 18 }, { k: 'guide_step', c: 51, u: 20 }, { k: 'app_update', c: 30, u: 30 },
         ],
         screens: [
           { k: 'tab_home', v: 520, u: 52 }, { k: 'crop', v: 233, u: 38 }, { k: 'tab_prices', v: 190, u: 35 },
@@ -147,6 +147,9 @@ export async function connect() {
         fail_country: [{ k: 'Kuwait', n: 9, u: 4 }, { k: 'India', n: 6, u: 4 }, { k: 'United States', n: 2, u: 1 }],
         fail_version: [{ k: '1.0.3', n: 8, u: 3 }, { k: '1.0.6', n: 9, u: 6 }],
         fail_days: [{ k: '20261102', n: 5, u: 2 }, { k: '20261108', n: 12, u: 7 }],
+        guide_steps: [{ s: 'location', r: 'denied', n: 9 }, { s: 'location', r: 'done', n: 14 }, { s: 'notifications', r: 'done', n: 11 }, { s: 'notifications', r: 'skipped', n: 6 }, { s: 'district', r: 'gps', n: 8 }, { s: 'prices', r: 'retry', n: 3 }],
+        perm_loc: [{ k: 'on', n: 19 }, { k: 'denied', n: 7 }, { k: 'off', n: 4 }, { k: 'denied_forever', n: 2 }],
+        perm_notif: [{ k: 'on', n: 22 }, { k: 'off', n: 9 }],
         crops: [{ k: 'Cotton', n: 61 }, { k: 'Soyabean', n: 44 }, { k: 'Maize', n: 31 }, { k: 'Onion', n: 24 }, { k: 'Bengal Gram(Gram)(Whole)', n: 19 }, { k: 'Wheat', n: 15 }, { k: 'Tur', n: 12 }],
         states: [{ k: 'Maharashtra', n: 47 }, { k: 'Madhya Pradesh', n: 5 }],
         districts: [{ k: 'Jalgaon', n: 26 }, { k: 'Buldhana', n: 7 }, { k: 'Aurangabad', n: 5 }, { k: 'Jalna', n: 4 }, { k: 'Dhule', n: 3 }, { k: 'Burhanpur', n: 3 }],
