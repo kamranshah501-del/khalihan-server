@@ -361,14 +361,30 @@ def analytics(s):
     return out
 
 
+DENIED_HINT = "Play Console → Users and permissions → the service account → Account permissions → " \
+              "'View app information and download bulk reports' (it can take up to a day to start working)"
+
+
+def gcs_list(s, bucket, prefix):
+    """The report files' names, or None when Google won't list them."""
+    r = s.get(f"https://storage.googleapis.com/storage/v1/b/{bucket}/o",
+              params={"prefix": prefix, "fields": "items(name),nextPageToken", "maxResults": 1000})
+    if r.status_code != 200:
+        return None
+    return {it.get("name", "") for it in r.json().get("items", []) or []}
+
+
 def gcs_get(s, bucket, name):
+    """A report's rows; None when it isn't there. Google answers 403, not
+    404, for a file that doesn't exist yet when it won't list the bucket —
+    so a 403 here is only 'not readable', and play() decides."""
     r = s.get(f"https://storage.googleapis.com/storage/v1/b/{bucket}/o/{quote(name, safe='')}", params={"alt": "media"})
     if r.status_code == 404:
         return None
+    if r.status_code in (401, 403):
+        return False
     if r.status_code != 200:
-        code = explain(r)[0]
-        raise Problem("denied" if code in ("denied", "missing") else code,
-                      "invite the service account in Play Console (it can take up to a day to start working)")
+        raise Problem(explain(r)[0], f"HTTP {r.status_code}")
     return decode_csv(r.content)
 
 
@@ -379,10 +395,20 @@ def play(s):
     months = months_back(dt.date.today(), 3)
     since = (dt.date.today() - dt.timedelta(days=28)).isoformat()
 
+    # Which files exist (None: Google won't list — then just try each).
+    names = gcs_list(s, bucket, f"stats/installs/installs_{PACKAGE}_")
+    refused = []
+
     def read(folder, kind, dim, all_months=True):
         rows = []
         for m in (months if all_months else months[:2]):
-            got = gcs_get(s, bucket, f"stats/{folder}/{kind}_{PACKAGE}_{m}_{dim}.csv")
+            name = f"stats/{folder}/{kind}_{PACKAGE}_{m}_{dim}.csv"
+            if names is not None and folder == "installs" and name not in names:
+                continue
+            got = gcs_get(s, bucket, name)
+            if got is False:
+                refused.append(m)
+                continue
             if got:
                 rows.extend(got)
             if not all_months and got:
@@ -391,7 +417,10 @@ def play(s):
 
     installs = play_installs(read("installs", "installs", "overview"), since)
     if not installs:
-        raise Problem("no_files", "Play has not posted a report yet — they come 3–7 days late")
+        if names is None and refused:
+            raise Problem("denied", DENIED_HINT)
+        listed = "none listed" if names is not None and not names else f"{len(names)} listed" if names is not None else "not listed"
+        raise Problem("no_files", f"Play has not posted a report yet — they come 3–7 days late ({listed})")
     ratings = read("ratings", "ratings", "overview")
     crashes = read("crashes", "crashes", "overview")
     rating = play_last(ratings, "total average rating")
