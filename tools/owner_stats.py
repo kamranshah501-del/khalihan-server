@@ -405,7 +405,12 @@ def main():
     for name, fn in (("ga", analytics), ("play", play)):
         try:
             doc[name] = fn(s)
-            print(f"{name}: OK")
+            extra = ""
+            if name == "ga":  # which named fields exist — no numbers
+                ready = len(doc[name].get("dims") or [])
+                note = doc[name].get("dims_note") or ""
+                extra = f" (fields {ready}/{len(CUSTOM_DIMENSIONS)}{', ' + note if note else ''})"
+            print(f"{name}: OK{extra}")
         except Problem as p:
             bad += 1
             kept = {k: v for k, v in (old.get(name) or {}).items() if k not in ("ok", "msg", "hint", "tried")}
