@@ -143,6 +143,7 @@ export const SWITCH_WORDS = {
     f_plus: 'Khalihan Plus', f_plus_d: 'The paid plan. Off = nothing locked, everything free as before. ⚠️ Keep OFF until Plus can be bought (Google Play Billing, next app update) — on now = the features below lock for everyone and nobody can unlock them.',
     f_plus_target: 'Target price in Plus', f_plus_target_d: 'With Plus on: farmers without Plus see the target rings locked (🔒 Plus) and get no target alert.',
     f_day_voice: 'Hear today\'s prices', f_day_voice_d: 'The Home button and the "Listen" button on the morning message.',
+    f_voice_search: 'Speak to search', f_voice_search_d: 'A mic in My Crops\' search box: the farmer says a crop ("कापसाचा भाव") and it shows. The phone\'s own voice typing listens; Khalihan gets only the words, never the voice (app v1.0.7).',
     f_share_picture: 'Send prices as a picture', f_share_picture_d: 'Off = Share sends a plain WhatsApp message.',
     f_alerts: 'Price alerts', f_alerts_d: 'The bell on a crop page and the "price moved / target reached" alert. Off = no bell, no alerts.',
     f_brief: 'Morning message', f_brief_d: 'The 6–8 am message with the farmer\'s crops and the weather. Off = no message, and its switch in Profile hides.',
@@ -156,6 +157,8 @@ export const SWITCH_WORDS = {
     f_home_sky: 'Living sky in headers', f_home_sky_d: 'The headers of Home, My Crops and Services show the farm\'s own sky — dawn, day, dusk, night, clouds, rain — with the temperature (app v1.0.4: My Crops and Services from build v5.44). Off = plain navy headers. The small weather pill on inner pages follows the Weather switch.',
     f_advice: 'Farming advice', f_advice_d: 'The "Farming Advice" card on Home and on the weather page, and its page: spraying, irrigation, harvest, the next 3 days. Off = no advice card.',
     f_widget_weather: 'Weather on the big widget', f_widget_weather_d: 'The home-screen widget at 4x3 and bigger shows today\'s weather and the spraying / rain line on top (app v1.0.5). Off = only the crops.',
+    f_farm_weather: 'Weather of my farm', f_farm_weather_d: 'The weather for the farmer\'s own field: "यहीं मेरा खेत है" on the weather page saves it once; else the phone\'s place, else the village from the profile. The district only as a last, labelled guess ("… ज़िले का मौसम (अंदाज़ा) — गाँव चुनें"). Choosing a district for its prices no longer moves the weather (app v1.0.7).',
+    f_setup_guide: 'Get-ready guide', f_setup_guide_d: 'A card on Home — "ऐप तैयार करें": today\'s prices, district, location, notifications — until the app fully works on that phone, then never again. Asks for location and notifications only from the card, after saying why (no popups when the app opens). Admin → 📊 shows where farmers get stuck (app v1.0.7).',
     f_update_prompt: 'Update reminder', f_update_prompt_d: 'When a newer Khalihan is on Google Play, the app says so once a day and updates itself inside the app (Play\'s own in-app update; app v1.0.6). Off = no reminder.',
     f_dark: 'Dark mode', f_dark_d: 'The app turns dark after sunset and light at sunrise (at the farm), or the farmer fixes it in Profile → App Colour (app v1.0.5). Off = always light for everyone, and the Profile row hides.',
   },
@@ -280,6 +283,7 @@ export const SWITCH_WORDS = {
     f_plus: 'Khalihan Plus', f_plus_d: 'पैसे वाला प्लान। बंद = कुछ भी लॉक नहीं, सब पहले जैसा मुफ़्त। ⚠️ जब तक Plus ख़रीदा न जा सके (Google Play Billing, अगला ऐप अपडेट) तब तक बंद रखें — अभी चालू = नीचे के फ़ीचर सबके लिए लॉक हो जाएँगे और कोई खोल नहीं पाएगा।',
     f_plus_target: 'टारगेट भाव Plus में', f_plus_target_d: 'Plus चालू हो तो: बिना Plus वाले किसान को टारगेट रिंग लॉक (🔒 Plus) दिखेंगे और टारगेट अलर्ट नहीं आएगा।',
     f_day_voice: 'आज का भाव सुनें', f_day_voice_d: 'Home का बटन और सुबह के मैसेज का "सुनें" बटन।',
+    f_voice_search: 'बोलकर खोजें', f_voice_search_d: 'मेरी फसलें के सर्च बॉक्स में माइक: किसान फसल का नाम बोले ("कापसाचा भाव") और फसल दिख जाए। फ़ोन की अपनी वॉइस टाइपिंग सुनती है; Khalihan को सिर्फ़ शब्द मिलते हैं, आवाज़ कभी नहीं (ऐप v1.0.7)।',
     f_share_picture: 'भाव की फ़ोटो भेजें', f_share_picture_d: 'बंद = Share सीधे WhatsApp मैसेज भेजेगा।',
     f_alerts: 'भाव अलर्ट', f_alerts_d: 'फ़सल पेज की घंटी और "भाव बदला / टारगेट पूरा" अलर्ट। बंद = न घंटी, न अलर्ट।',
     f_brief: 'सुबह का मैसेज', f_brief_d: 'सुबह 6–8 बजे किसान की फ़सलों और मौसम वाला मैसेज। बंद = मैसेज नहीं, और Profile में उसका स्विच भी छिप जाएगा।',
@@ -293,6 +297,8 @@ export const SWITCH_WORDS = {
     f_home_sky: 'हेडर में जीता-जागता आसमान', f_home_sky_d: 'Home, My Crops और Services के हेडर में खेत का अपना आसमान — सुबह, दिन, शाम, रात, बादल, बारिश — तापमान के साथ। बंद = सादे नेवी हेडर। अंदर के पेजों पर छोटा मौसम चिप Weather स्विच से चलता है।',
     f_advice: 'खेती की सलाह', f_advice_d: 'Home और मौसम पेज पर "खेती की सलाह" कार्ड और उसका पेज: छिड़काव, सिंचाई, कटाई, अगले 3 दिन। बंद = सलाह कार्ड नहीं दिखेगा।',
     f_widget_weather: 'बड़े विजेट पर मौसम', f_widget_weather_d: 'होम-स्क्रीन विजेट 4x3 या बड़ा हो तो ऊपर आज का मौसम और छिड़काव / बारिश की लाइन (ऐप v1.0.5)। बंद = सिर्फ़ फसलें।',
+    f_farm_weather: 'मेरे खेत का मौसम', f_farm_weather_d: 'किसान के अपने खेत का मौसम: मौसम पेज पर "यहीं मेरा खेत है" एक बार दबाकर खेत सेव; नहीं तो फ़ोन की जगह, नहीं तो प्रोफ़ाइल का गाँव। ज़िला सिर्फ़ आख़िरी अंदाज़ा, साफ़ लिखा हुआ ("… ज़िले का मौसम (अंदाज़ा) — गाँव चुनें")। भाव के लिए ज़िला बदलने से अब मौसम नहीं बदलता (ऐप v1.0.7)।',
+    f_setup_guide: 'ऐप तैयार करें (गाइड)', f_setup_guide_d: 'होम पर एक कार्ड — आज के भाव, ज़िला, लोकेशन, सूचनाएँ — जब तक उस फ़ोन पर ऐप पूरा काम न करने लगे, फिर कभी नहीं। लोकेशन और सूचना की अनुमति सिर्फ़ कार्ड से, वजह बताकर माँगता है (ऐप खुलते ही पॉप-अप नहीं)। Admin → 📊 में दिखता है किसान कहाँ अटकते हैं (ऐप v1.0.7)।',
     f_update_prompt: 'अपडेट की याद', f_update_prompt_d: 'Google Play पर Khalihan का नया वर्ज़न आते ही ऐप दिन में एक बार बताता है और ऐप के अंदर ही अपडेट हो जाता है (Play का अपना इन-ऐप अपडेट; ऐप v1.0.6)। बंद = कोई याद नहीं।',
     f_dark: 'डार्क मोड', f_dark_d: 'सूर्यास्त के बाद ऐप अपने आप डार्क, सूर्योदय पर लाइट (खेत के हिसाब से); या किसान Profile → ऐप का रंग में तय करे (ऐप v1.0.5)। बंद = सबके लिए हमेशा लाइट, Profile की लाइन छिप जाती है।',
   },
@@ -325,6 +331,9 @@ export const FEATURE_INFO = {
   sell_interest: { def: true, since: '1.0.6' },
   target: { def: true, since: '1.0.6' },
   update_prompt: { def: true, since: '1.0.6' },
+  voice_search: { def: false, since: '1.0.7' },
+  setup_guide: { def: false, since: '1.0.7' },
+  farm_weather: { def: false, since: '1.0.7' },
 };
 
 /** The sections, in order. `kind` picks a special settings panel. */
@@ -332,9 +341,9 @@ const SECTIONS = [
   { id: 'states', icon: '📍', kind: 'states' },
   { id: 'notice', icon: '📣', kind: 'notice' },
   { id: 'festival', icon: '🪔', kind: 'festival' },
-  { id: 'prices', icon: '📈', master: null, kids: ['day_voice', 'share_picture', 'alerts', 'target', 'brief'] },
+  { id: 'prices', icon: '📈', master: null, kids: ['day_voice', 'voice_search', 'share_picture', 'alerts', 'target', 'brief'] },
   { id: 'sellmenu', icon: '🛒', master: 'sell_menu', kids: ['where_sell', 'price_map', 'hold_sell', 'sell_interest'] },
-  { id: 'weather', icon: '🌦️', master: 'weather', kids: ['home_sky', 'advice', 'widget_weather'] },
+  { id: 'weather', icon: '🌦️', master: 'weather', kids: ['home_sky', 'advice', 'widget_weather', 'farm_weather'] },
   { id: 'calendar', icon: '🌱', master: 'calendar', kids: [] },
   { id: 'services', icon: '🏛️', master: 'services', kids: ['schemes'] },
   { id: 'kendra', icon: '🏪', master: 'kendra', kind: 'kendra' },
@@ -343,6 +352,7 @@ const SECTIONS = [
   { id: 'feedback', icon: '💬', master: 'feedback', kids: [] },
   { id: 'dark', icon: '🌙', master: 'dark', kids: [] },
   { id: 'update', icon: '⬆️', master: 'update_prompt', kids: [] },
+  { id: 'guide', icon: '🧭', master: 'setup_guide', kids: [] },
 ];
 
 /** States as the government price data names them (same list as the app). */
