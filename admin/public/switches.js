@@ -159,6 +159,7 @@ export const SWITCH_WORDS = {
     f_widget_weather: 'Weather on the big widget', f_widget_weather_d: 'The home-screen widget at 4x3 and bigger shows today\'s weather and the spraying / rain line on top (app v1.0.5). Off = only the crops.',
     f_farm_weather: 'Weather of my farm', f_farm_weather_d: 'The weather for the farmer\'s own field: "यहीं मेरा खेत है" on the weather page saves it once; else the phone\'s place, else the village from the profile. The district only as a last, labelled guess ("… ज़िले का मौसम (अंदाज़ा) — गाँव चुनें"). Choosing a district for its prices no longer moves the weather (app v1.0.7).',
     f_setup_guide: 'Get-ready guide', f_setup_guide_d: 'A card on Home — "ऐप तैयार करें": today\'s prices, district, location, notifications — until the app fully works on that phone, then never again. Asks for location and notifications only from the card, after saying why (no popups when the app opens). Admin → 📊 shows where farmers get stuck (app v1.0.7).',
+    f_whats_new: 'New in Khalihan (after an update)', f_whats_new_d: 'Once after an update: a short moving tour of the new features that are ON for that farmer — "Skip", "Next", "Let\'s start". A feature switched on later gets its own page then (no app update). Not after a fresh install. Profile → "What\'s new" plays it again (app v1.0.7).',
     f_update_prompt: 'Update reminder', f_update_prompt_d: 'When a newer Khalihan is on Google Play, the app says so once a day and updates itself inside the app (Play\'s own in-app update; app v1.0.6). Off = no reminder.',
     f_dark: 'Dark mode', f_dark_d: 'The app turns dark after sunset and light at sunrise (at the farm), or the farmer fixes it in Profile → App Colour (app v1.0.5). Off = always light for everyone, and the Profile row hides.',
   },
@@ -299,6 +300,7 @@ export const SWITCH_WORDS = {
     f_widget_weather: 'बड़े विजेट पर मौसम', f_widget_weather_d: 'होम-स्क्रीन विजेट 4x3 या बड़ा हो तो ऊपर आज का मौसम और छिड़काव / बारिश की लाइन (ऐप v1.0.5)। बंद = सिर्फ़ फसलें।',
     f_farm_weather: 'मेरे खेत का मौसम', f_farm_weather_d: 'किसान के अपने खेत का मौसम: मौसम पेज पर "यहीं मेरा खेत है" एक बार दबाकर खेत सेव; नहीं तो फ़ोन की जगह, नहीं तो प्रोफ़ाइल का गाँव। ज़िला सिर्फ़ आख़िरी अंदाज़ा, साफ़ लिखा हुआ ("… ज़िले का मौसम (अंदाज़ा) — गाँव चुनें")। भाव के लिए ज़िला बदलने से अब मौसम नहीं बदलता (ऐप v1.0.7)।',
     f_setup_guide: 'ऐप तैयार करें (गाइड)', f_setup_guide_d: 'होम पर एक कार्ड — आज के भाव, ज़िला, लोकेशन, सूचनाएँ — जब तक उस फ़ोन पर ऐप पूरा काम न करने लगे, फिर कभी नहीं। लोकेशन और सूचना की अनुमति सिर्फ़ कार्ड से, वजह बताकर माँगता है (ऐप खुलते ही पॉप-अप नहीं)। Admin → 📊 में दिखता है किसान कहाँ अटकते हैं (ऐप v1.0.7)।',
+    f_whats_new: 'Khalihan में नया (अपडेट के बाद)', f_whats_new_d: 'अपडेट के बाद एक बार: उस किसान के लिए चालू नए फ़ीचर का छोटा, चलता-फिरता टूर — "छोड़ें", "आगे", "चलिए, शुरू करें"। कोई फ़ीचर बाद में चालू करें तो उसका पेज तभी दिखेगा (ऐप अपडेट की ज़रूरत नहीं)। नया इंस्टॉल करने वालों को नहीं। प्रोफ़ाइल → "नया क्या है" से फिर देख सकते हैं (ऐप v1.0.7)।',
     f_update_prompt: 'अपडेट की याद', f_update_prompt_d: 'Google Play पर Khalihan का नया वर्ज़न आते ही ऐप दिन में एक बार बताता है और ऐप के अंदर ही अपडेट हो जाता है (Play का अपना इन-ऐप अपडेट; ऐप v1.0.6)। बंद = कोई याद नहीं।',
     f_dark: 'डार्क मोड', f_dark_d: 'सूर्यास्त के बाद ऐप अपने आप डार्क, सूर्योदय पर लाइट (खेत के हिसाब से); या किसान Profile → ऐप का रंग में तय करे (ऐप v1.0.5)। बंद = सबके लिए हमेशा लाइट, Profile की लाइन छिप जाती है।',
   },
@@ -334,6 +336,7 @@ export const FEATURE_INFO = {
   voice_search: { def: false, since: '1.0.7' },
   setup_guide: { def: false, since: '1.0.7' },
   farm_weather: { def: false, since: '1.0.7' },
+  whats_new: { def: false, since: '1.0.7' },
 };
 
 /** The sections, in order. `kind` picks a special settings panel. */
@@ -353,6 +356,7 @@ const SECTIONS = [
   { id: 'dark', icon: '🌙', master: 'dark', kids: [] },
   { id: 'update', icon: '⬆️', master: 'update_prompt', kids: [] },
   { id: 'guide', icon: '🧭', master: 'setup_guide', kids: [] },
+  { id: 'whatsnew', icon: '✨', master: 'whats_new', kids: [] },
 ];
 
 /** States as the government price data names them (same list as the app). */
