@@ -17,7 +17,7 @@ import { BIZ_WORDS, createBusiness } from './business.js';
 import { plusPage } from './plus.js';
 import { statsPage } from './stats.js';
 
-const ADMIN_VERSION = '1.18.1 · 10 Nov 2026';
+const ADMIN_VERSION = '1.19 · 10 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
