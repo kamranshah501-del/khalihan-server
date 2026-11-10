@@ -16,8 +16,9 @@ import { SWITCH_WORDS, createSwitches } from './switches.js';
 import { BIZ_WORDS, createBusiness } from './business.js';
 import { plusPage } from './plus.js';
 import { statsPage } from './stats.js';
+import { budgetPage } from './budget.js';
 
-const ADMIN_VERSION = '1.19.1 · 10 Nov 2026';
+const ADMIN_VERSION = '1.20 · 10 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -53,6 +54,7 @@ const I18N = {
     tab_deletions: 'Account deletions',
     tab_features: 'Feature switches',
     tab_stats: 'App numbers',
+    tab_budget: 'Budget & targets',
     tab_plus: 'Khalihan Plus',
     tab_team: 'Team',
     tab_audit: 'Change log',
@@ -337,6 +339,7 @@ const I18N = {
     help_farmers: 'Farmers who made an account (mobile login). Find one by mobile number.',
     help_deletions: 'Farmers who deleted their account. Remove their sell requests and WhatsApp chat within 30 days, then mark Done.',
     help_stats: 'Owner only. Downloads from Google Play and what farmers do in the app, from Google Analytics for Firebase — updated twice a day, counts only.',
+    help_budget: 'Owner only. The month\'s plan against what was really spent, your loss limit, and how far the targets are — farmers using the app, Plus members. The amounts are kept only in your owner account.',
     help_features: 'Owner only. One section per feature: click it to switch it on or off and change its settings — states, where Khalihan buys, the Kendra\'s districts and location.',
     help_team: 'Who can open this panel. Add a Gmail as staff (daily work) or owner (everything, including switches and money).',
     help_audit: 'Every change made in this panel — who, what and when.',
@@ -357,6 +360,7 @@ const I18N = {
     tab_deletions: 'खाता हटाना',
     tab_features: 'फ़ीचर स्विच',
     tab_stats: 'आँकड़े',
+    tab_budget: 'बजट और लक्ष्य',
     tab_plus: 'Khalihan Plus',
     tab_team: 'टीम',
     tab_audit: 'रिकॉर्ड',
@@ -641,6 +645,7 @@ const I18N = {
     help_farmers: 'जिन किसानों ने खाता बनाया (मोबाइल लॉग इन)। मोबाइल नंबर से ढूँढें।',
     help_deletions: 'जिन किसानों ने खाता हटाया। उनकी बिक्री रिक्वेस्ट और WhatsApp चैट 30 दिन में हटाएँ, फिर "हो गया" करें।',
     help_stats: 'सिर्फ़ मालिक। Google Play से डाउनलोड, और Google Analytics for Firebase से किसान ऐप में क्या करते हैं — दिन में दो बार अपडेट, सिर्फ़ गिनती।',
+    help_budget: 'सिर्फ़ मालिक। महीने का प्लान और असली खर्च, घाटे की सीमा, और लक्ष्य कितना पूरा हुआ — ऐप चलाने वाले किसान, Plus मेंबर। रकम सिर्फ़ आपके मालिक वाले खाते में रहती है।',
     help_features: 'सिर्फ़ मालिक। हर फ़ीचर का अपना हिस्सा: उस पर क्लिक करके चालू/बंद करें और सेटिंग बदलें — राज्य, Khalihan कहाँ ख़रीदे, Kendra के ज़िले और जगह।',
     help_team: 'ये पैनल कौन खोल सकता है। Gmail को staff (रोज़ का काम) या owner (सब कुछ, स्विच और पैसा भी) बनाकर जोड़ें।',
     help_audit: 'इस पैनल में हुआ हर बदलाव — किसने, क्या, कब।',
@@ -874,6 +879,7 @@ function applyLanguage() {
 // ── the side menu ──────────────────────────────────────────────────────
 const ICON_PATHS = {
   stats: 'M4 20h16M7 16v-5M12 16V6M17 16v-8',
+  budget: 'M4 7h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4zM4 7V5a1 1 0 0 1 1-1h11v3M15.5 13.5h1.5',
   home: 'M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z',
   requests: 'M4 7h16M4 12h16M4 17h10',
   offers: 'M3 12V5a2 2 0 0 1 2-2h7l9 9-9 9zM8 6.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3',
@@ -916,7 +922,7 @@ function tabs() {
     ${item('feedback', tr('tab_feedback'))}
     ${item('farmers', tr('tab_farmers'))}
     ${item('deletions', tr('tab_deletions'))}
-    ${owner ? `<div class="navh">${tr('nav_owner')}</div>${item('stats', tr('tab_stats'))}${item('plan', tr('tab_plan'))}${item('processors', tr('tab_processors'))}${item('compliance', tr('tab_compliance'))}${item('features', tr('tab_features'))}${item('plus', tr('tab_plus'))}${item('team', tr('tab_team'))}${item('audit', tr('tab_audit'))}` : ''}
+    ${owner ? `<div class="navh">${tr('nav_owner')}</div>${item('stats', tr('tab_stats'))}${item('budget', tr('tab_budget'))}${item('plan', tr('tab_plan'))}${item('processors', tr('tab_processors'))}${item('compliance', tr('tab_compliance'))}${item('features', tr('tab_features'))}${item('plus', tr('tab_plus'))}${item('team', tr('tab_team'))}${item('audit', tr('tab_audit'))}` : ''}
     <div class="navgap"></div>
     ${item('settings', tr('tab_settings'))}
     <div class="navfoot">Khalihan Admin ${ADMIN_VERSION.split(' ')[0]}</div>`;
@@ -1595,6 +1601,13 @@ const PAGES = {
   async stats() {
     if (me.role !== 'owner') return PAGES.home();
     await statsPage({ esc, setMain, lang: () => lang, db: () => db, fail, crops: CROPS });
+  },
+
+  // Owner: the month's budget, the loss limit and the targets (Admin 1.20,
+  // see budget.js — amounts live only in Firestore business/budget).
+  async budget() {
+    if (me.role !== 'owner') return PAGES.home();
+    await budgetPage({ esc, setMain, lang: () => lang, db: () => db, fail, toast });
   },
 
   // Owner: every feature, state and district switch, in sections.

@@ -68,6 +68,20 @@ export async function connect() {
     { id: 'c3', name: 'Trademark — Khalihan (class 31)', kind: 'trademark', due: iso(3), every: 0, remind: 15, notes: 'Hearing ki tareekh' },
   ];
   let plan = { kadam: 0, values: { partner: false, survey: 9, path: false } };
+  // 💰 Budget & targets — made-up amounts, only for trying the page.
+  const thisMonth = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`;
+  let budget = new URLSearchParams(location.search).has('setup') ? null : {
+    limit: 20000,
+    lines: [
+      { id: 'l1', name: 'Google Ads', plan: 9000, daily: true },
+      { id: 'l2', name: 'Meta ads (Instagram)', plan: 5000, daily: true },
+      { id: 'l3', name: 'Claude', plan: 2500, daily: false },
+      { id: 'l4', name: 'Google AI Pro', plan: 1800, daily: false },
+      { id: 'l5', name: 'Firebase', plan: 0, daily: false },
+    ],
+    months: { [thisMonth]: { spent: { l1: 3100, l2: 1700, l3: 2500, l4: 1800 }, income: 0 } },
+    activeTarget: 2000, plusTarget: 200, plusNow: 0,
+  };
   // Made-up suggestions (no name or phone, like the real ones).
   let feedback = [
     { id: 'f1', text: 'Kapas ka bhav Pachora ka bhi dikhao', state: 'Maharashtra', district: 'Jalgaon', lang: 'hi', app: '1.0.6', at: day(0, 8) },
@@ -319,6 +333,8 @@ export async function connect() {
     async deleteCompliance(id) { compliance = compliance.filter((x) => x.id !== id); },
     async planState() { return JSON.parse(JSON.stringify(plan)); },
     async savePlanState(data) { plan = { ...plan, ...JSON.parse(JSON.stringify(data)) }; },
+    async budget() { return budget ? JSON.parse(JSON.stringify(budget)) : null; },
+    async saveBudget(data) { budget = JSON.parse(JSON.stringify(data)); log('budget', {}); },
 
     async kendraComplaints() { return kComplaints.map((x) => ({ ...x })); },
     async kendraComplaintDone(id, done) { const x = kComplaints.find((k) => k.id === id); if (x) x.done = done; },

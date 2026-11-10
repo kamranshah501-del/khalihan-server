@@ -486,6 +486,17 @@ export async function connect() {
       await setDoc(doc(db, 'business', 'plan'), { ...data, updated: serverTimestamp(), by: me.email }, { merge: true });
       log('plan', { kadam: data.kadam });
     },
+    // ── budget & targets (owner only; business/budget — see budget.js) ──
+    async budget() {
+      const snap = await getDoc(doc(db, 'business', 'budget'));
+      return snap.exists() ? snap.data() : null;
+    },
+    async saveBudget(data) {
+      // The whole document, as the page holds it. The record says only
+      // that it changed — never an amount.
+      await setDoc(doc(db, 'business', 'budget'), { ...data, updated: serverTimestamp(), by: me.email });
+      log('budget', {});
+    },
 
     // ── record (owner) ──
     async audit() {
