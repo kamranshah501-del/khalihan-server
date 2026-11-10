@@ -412,6 +412,10 @@ def analytics(s):
         "guide_steps": guide_steps(),
         # v1.0.7: whose weather the farmer saw (farm, gps, village, district).
         "weather_src": custom("customEvent:from", "eventCount", ("eventName", "weather_from"), n=4) if "from" in ready else [],
+        # v1.0.7 "Khalihan में नया": opened by itself or from Profile, and how
+        # it ended (start = saw it all, skip, back).
+        "wn_from": custom("customEvent:from", "eventCount", ("eventName", "whats_new"), n=3) if "from" in ready else [],
+        "wn_end": custom("customEvent:result", "eventCount", ("eventName", "whats_new_end"), n=4) if "result" in ready else [],
         "perm_loc": custom("customUser:loc", "activeUsers", n=6) if "loc" in ready else [],
         "perm_notif": custom("customUser:notif", "activeUsers", n=4) if "notif" in ready else [],
         "fail_why": custom("customEvent:code", "eventCount", ("eventName", "prices_failed"), n=8) if "code" in ready else [],

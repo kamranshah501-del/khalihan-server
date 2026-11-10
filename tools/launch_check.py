@@ -23,6 +23,7 @@ DEFAULTS = {
     "voice_search": False,  # v1.0.7 "बोलकर खोजें": starts OFF like every new feature
     "setup_guide": False,  # v1.0.7 "ऐप तैयार करें": starts OFF too
     "farm_weather": False,  # v1.0.7 "मेरे खेत का मौसम": starts OFF too
+    "whats_new": False,  # v1.0.7 "Khalihan में नया": the tour after an update, OFF too
 }
 PARENT = {
     "schemes": "services", "kendra": "services", "home_sky": "weather", "advice": "weather",
