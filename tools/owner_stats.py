@@ -287,6 +287,32 @@ def ga_dimensions(s, prop):
     return ready, note
 
 
+# Google Ads optimises the App campaign for these (owner, 10 Nov 2026: pay
+# for people who open the app and look at prices, not for bare installs).
+KEY_EVENTS = ("first_open", "crop_opened")
+
+
+def ga_key_events(s, prop):
+    """Makes sure KEY_EVENTS are 'key events' in Analytics (what Google Ads
+    imports as conversions). Returns (have, note)."""
+    url = f"https://analyticsadmin.googleapis.com/v1beta/{prop}/keyEvents"
+    r = s.get(url, params={"pageSize": 200})
+    if r.status_code != 200:
+        return [], explain(r)[0]
+    have = {k.get("eventName") for k in r.json().get("keyEvents", []) or []}
+    note = ""
+    for name in KEY_EVENTS:
+        if name in have:
+            continue
+        c = s.post(url, json={"eventName": name, "countingMethod": "ONCE_PER_EVENT"})
+        if c.status_code == 200:
+            have.add(name)
+            note = "added"
+        else:
+            note = "need_editor" if c.status_code == 403 else explain(c)[0]
+    return sorted(n for n in have if n in KEY_EVENTS), note
+
+
 def ga_report(s, prop, dims, mets, start="28daysAgo", end="yesterday", limit=50, filt=None, order=None):
     body = {
         "dateRanges": [{"startDate": start, "endDate": end}],
@@ -307,6 +333,7 @@ def ga_report(s, prop, dims, mets, start="28daysAgo", end="yesterday", limit=50,
 def analytics(s):
     prop = ga_property(s)
     ready, dim_note = ga_dimensions(s, prop)
+    keys, key_note = ga_key_events(s, prop)
 
     def active(start, end):
         rows = ga_report(s, prop, [], ["activeUsers", "newUsers"], start=start, end=end)
@@ -390,6 +417,7 @@ def analytics(s):
         "fail_why": custom("customEvent:code", "eventCount", ("eventName", "prices_failed"), n=8) if "code" in ready else [],
         "fail_state": custom("customUser:state", "eventCount", ("eventName", "prices_failed"), n=8) if "state" in ready else [],
         "dims": sorted(ready), "dims_note": dim_note,
+        "key_events": keys, "key_note": key_note,
     }
     return out
 
@@ -489,7 +517,9 @@ def main():
             if name == "ga":  # which named fields exist — no numbers
                 ready = len(doc[name].get("dims") or [])
                 note = doc[name].get("dims_note") or ""
-                extra = f" (fields {ready}/{len(CUSTOM_DIMENSIONS)}{', ' + note if note else ''})"
+                extra = f" (fields {ready}/{len(CUSTOM_DIMENSIONS)}{', ' + note if note else ''}"
+                extra += f"; key events: {', '.join(doc[name].get('key_events') or []) or 'none'}"
+                extra += f"{' ' + doc[name]['key_note'] if doc[name].get('key_note') else ''})"
             print(f"{name}: OK{extra}")
         except Problem as p:
             bad += 1
