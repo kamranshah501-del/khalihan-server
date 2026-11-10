@@ -29,5 +29,8 @@ jobs:
         env:
           PYTHONUNBUFFERED: "1"
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
-          PLAY_BUCKET: ${{ vars.PLAY_BUCKET }}
+          # Play's report bucket (Play Console → Download reports → Statistics →
+          # Copy Cloud Storage URI). Not a secret: reading it needs the Play
+          # permission given to the service account.
+          PLAY_BUCKET: ${{ vars.PLAY_BUCKET || 'pubsite_prod_7411632791429289916' }}
           GA_PROPERTY: ${{ vars.GA_PROPERTY }}
