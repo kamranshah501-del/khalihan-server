@@ -47,7 +47,10 @@ CUSTOM_DIMENSIONS = {
     "state": ("USER", "State", "The farmer's chosen state (app)"),
     "district": ("USER", "District", "The farmer's chosen district (app)"),
     "language": ("USER", "App language", "The language chosen in the app (app)"),
+    "code": ("EVENT", "Why prices failed", "prices_failed reason from v1.0.7: no_feed, fs_unavailable… (app)"),
 }
+
+BLANK = ("", "(not set)", "(other)")
 
 SCOPES = [
     "https://www.googleapis.com/auth/analytics.readonly",
@@ -306,6 +309,14 @@ def analytics(s):
 
     a1, a7, a28 = active("yesterday", "yesterday"), active("7daysAgo", "yesterday"), active("28daysAgo", "yesterday")
     today = active("today", "today")
+
+    # Farmers are in India: the owner, testers (Kuwait) and Google's own
+    # test phones (pre-launch reports, USA / Europe) are counted apart.
+    def india(start, end):
+        rows = ga_report(s, prop, [], ["activeUsers", "newUsers"], start=start, end=end, filt=("country", "India"))
+        return rows[0] if rows else {"activeUsers": 0, "newUsers": 0}
+
+    i1, i7, i28 = india("yesterday", "yesterday"), india("7daysAgo", "yesterday"), india("28daysAgo", "yesterday")
     daily = ga_report(s, prop, ["date"], ["activeUsers", "newUsers"], start=f"{DAYS}daysAgo", end="today", limit=DAYS + 2)
     daily = sorted(
         ({"d": f"{x['date'][:4]}-{x['date'][4:6]}-{x['date'][6:]}", "a": x["activeUsers"], "n": x["newUsers"]} for x in daily),
@@ -314,7 +325,8 @@ def analytics(s):
     events = ga_report(s, prop, ["eventName"], ["eventCount", "totalUsers"], limit=60, order="eventCount")
     screens = ga_report(s, prop, ["unifiedScreenName"], ["screenPageViews", "activeUsers"], limit=40, order="screenPageViews")
     versions = ga_report(s, prop, ["appVersion"], ["activeUsers"], limit=10, order="activeUsers")
-    regions = ga_report(s, prop, ["region"], ["activeUsers"], limit=20, order="activeUsers")
+    regions = ga_report(s, prop, ["country", "region"], ["activeUsers"], limit=40, order="activeUsers")
+    countries = ga_report(s, prop, ["country"], ["activeUsers"], limit=20, order="activeUsers")
 
     def custom(dim, metric, filt=None, n=15):
         try:
@@ -328,16 +340,22 @@ def analytics(s):
         "a1": a1["activeUsers"], "a7": a7["activeUsers"], "a28": a28["activeUsers"],
         "n1": a1["newUsers"], "n7": a7["newUsers"], "n28": a28["newUsers"],
         "today": today["activeUsers"],
+        "in1": i1["activeUsers"], "in7": i7["activeUsers"], "in28": i28["activeUsers"], "inn28": i28["newUsers"],
         "daily": daily[-DAYS:],
-        "events": [{"k": e["eventName"], "c": e["eventCount"], "u": e["totalUsers"]} for e in events],
+        "events": [{"k": e["eventName"], "c": e["eventCount"], "u": e["totalUsers"]}
+                   for e in events if e["eventName"] not in BLANK and e["eventCount"]],
         "screens": [{"k": x["unifiedScreenName"][:60], "v": x["screenPageViews"], "u": x["activeUsers"]}
                     for x in screens if x["unifiedScreenName"] not in ("", "(not set)")],
         "versions": top(versions, "appVersion", "activeUsers", 8),
-        "regions": top(regions, "region", "activeUsers", 15),
+        "regions": [{"k": r["region"][:60], "c": r["country"][:40], "n": r["activeUsers"]}
+                    for r in regions if r["region"] not in BLANK and r["country"] == "India"][:15],
+        "countries": top(countries, "country", "activeUsers", 10),
         "crops": custom("customEvent:crop", "eventCount", ("eventName", "crop_opened")) if "crop" in ready else [],
         "states": custom("customUser:state", "activeUsers") if "state" in ready else [],
         "districts": custom("customUser:district", "activeUsers") if "district" in ready else [],
         "langs": custom("customUser:language", "activeUsers", n=10) if "language" in ready else [],
+        "fail_why": custom("customEvent:code", "eventCount", ("eventName", "prices_failed"), n=8) if "code" in ready else [],
+        "fail_state": custom("customUser:state", "eventCount", ("eventName", "prices_failed"), n=8) if "state" in ready else [],
         "dims": sorted(ready), "dims_note": dim_note,
     }
     return out

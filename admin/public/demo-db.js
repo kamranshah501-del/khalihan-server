@@ -121,16 +121,16 @@ export async function connect() {
     : {
       at: new Date(Date.now() - 2 * 3600e3),
       ga: {
-        ok: true, through: ymd(day(1)), a1: 14, a7: 31, a28: 52, n1: 3, n7: 17, n28: 41, today: 6,
+        ok: true, through: ymd(day(1)), a1: 14, a7: 31, a28: 52, n1: 3, n7: 17, n28: 41, today: 6, in1: 9, in7: 22, in28: 31, inn28: 27,
         daily: series(30, (b) => ({ d: ymd(day(b)), a: Math.max(2, Math.round(4 + (30 - b) * 0.45 + ((b * 7) % 5))), n: Math.max(0, Math.round((30 - b) / 6 + ((b * 3) % 3) - 1)) })),
         events: [
-          { k: 'session_start', c: 412, u: 52 }, { k: 'screen_view', c: 1630, u: 52 }, { k: 'user_engagement', c: 980, u: 52 },
+          { k: '(not set)', c: 0, u: 39 }, { k: 'language_chosen', c: 47, u: 24 }, { k: 'district_chosen', c: 44, u: 19 }, { k: 'theme_chosen', c: 14, u: 9 }, { k: 'session_start', c: 412, u: 52 }, { k: 'screen_view', c: 1630, u: 52 }, { k: 'user_engagement', c: 980, u: 52 },
           { k: 'crop_opened', c: 233, u: 38 }, { k: 'weather_opened', c: 141, u: 33 }, { k: 'first_open', c: 41, u: 41 },
           { k: 'day_voice', c: 62, u: 19 }, { k: 'where_to_sell', c: 48, u: 17 }, { k: 'market_opened', c: 40, u: 15 },
           { k: 'shared', c: 27, u: 12 }, { k: 'crop_pinned', c: 35, u: 14 }, { k: 'alert_toggled', c: 18, u: 9 },
           { k: 'hold_or_sell', c: 15, u: 8 }, { k: 'scheme_open', c: 22, u: 10 }, { k: 'calendar_open', c: 12, u: 7 },
           { k: 'price_map', c: 9, u: 5 }, { k: 'compare_opened', c: 8, u: 4 }, { k: 'feedback_sent', c: 3, u: 3 },
-          { k: 'widget_opened', c: 11, u: 3 }, { k: 'app_remove', c: 6, u: 6 }, { k: 'prices_failed', c: 2, u: 2 },
+          { k: 'widget_opened', c: 11, u: 3 }, { k: 'app_remove', c: 6, u: 6 }, { k: 'prices_failed', c: 17, u: 9 },
           { k: 'notification_open', c: 25, u: 11 }, { k: 'app_update', c: 30, u: 30 },
         ],
         screens: [
@@ -140,7 +140,10 @@ export async function connect() {
           { k: 'mandi', v: 19, u: 9 }, { k: 'hold_sell', v: 15, u: 8 }, { k: 'price_graph', v: 14, u: 7 },
         ],
         versions: [{ k: '1.0.6', n: 49 }, { k: '1.0.5', n: 3 }],
-        regions: [{ k: 'Maharashtra', n: 44 }, { k: 'Madhya Pradesh', n: 4 }, { k: 'Gujarat', n: 2 }],
+        regions: [{ k: 'Maharashtra', c: 'India', n: 27 }, { k: 'Madhya Pradesh', c: 'India', n: 2 }, { k: 'Goa', c: 'India', n: 1 }, { k: 'Telangana', c: 'India', n: 1 }],
+        countries: [{ k: 'India', n: 31 }, { k: 'Kuwait', n: 13 }, { k: 'United States', n: 7 }, { k: 'Spain', n: 1 }],
+        fail_why: [{ k: 'fs_unavailable', n: 9 }, { k: 'no_feed', n: 5 }, { k: 'err_generic', n: 3 }],
+        fail_state: [{ k: 'Maharashtra', n: 8 }, { k: 'Kerala', n: 5 }],
         crops: [{ k: 'Cotton', n: 61 }, { k: 'Soyabean', n: 44 }, { k: 'Maize', n: 31 }, { k: 'Onion', n: 24 }, { k: 'Bengal Gram(Gram)(Whole)', n: 19 }, { k: 'Wheat', n: 15 }, { k: 'Tur', n: 12 }],
         states: [{ k: 'Maharashtra', n: 47 }, { k: 'Madhya Pradesh', n: 5 }],
         districts: [{ k: 'Jalgaon', n: 26 }, { k: 'Buldhana', n: 7 }, { k: 'Aurangabad', n: 5 }, { k: 'Jalna', n: 4 }, { k: 'Dhule', n: 3 }, { k: 'Burhanpur', n: 3 }],

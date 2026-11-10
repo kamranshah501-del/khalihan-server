@@ -28,8 +28,12 @@ const T = {
     k_now_sub: '{n} removed it in 28 days',
     k_active: 'People using it (28 days)',
     k_active_sub: 'Yesterday {a} · 7 days {b}',
+    k_active_in: 'People in India using it (28 days)',
+    k_active_in_sub: 'Yesterday {a} · 7 days {b} · all countries {c}',
     k_new: 'New people (28 days)',
+    k_new_in: 'New people in India (28 days)',
     k_new_sub: '{n} came back again',
+    k_wait_play: 'Waiting for Google Play',
     today: 'Today so far: {n}',
     daily_h: 'People using the app each day',
     daily_tip: '{d}: {a} people, {n} new',
@@ -44,7 +48,12 @@ const T = {
     views: 'opens',
     crops_h: 'Crops opened most (28 days)',
     places_h: 'Where people are (28 days)',
-    places_from_ip: 'By Google\'s guess from the internet connection — districts chosen in the app show here from setup day on.',
+    places_from_ip: 'In India, by Google\'s guess from the internet connection — districts chosen in the app show here from setup day on.',
+    outside: 'Outside India: {list}. Mostly you and the testers (Kuwait) and Google\'s own test phones that check every new version (USA, Europe) — not farmers.',
+    setup_ev: 'First start and settings (language, state, look…)',
+    why_h: 'Why prices didn\'t download',
+    where_h: 'In which state',
+    why_old: 'Reasons are recorded from app 1.0.7 on.',
     langs_h: 'App language',
     ver_h: 'App versions',
     ver_app: 'People by version (app data)',
@@ -97,8 +106,12 @@ const T = {
     k_now_sub: '28 दिन में {n} ने हटाया',
     k_active: 'ऐप चलाने वाले (28 दिन)',
     k_active_sub: 'कल {a} · 7 दिन {b}',
+    k_active_in: 'भारत में ऐप चलाने वाले (28 दिन)',
+    k_active_in_sub: 'कल {a} · 7 दिन {b} · सब देश {c}',
     k_new: 'नए लोग (28 दिन)',
+    k_new_in: 'भारत में नए लोग (28 दिन)',
     k_new_sub: '{n} लोग दोबारा आए',
+    k_wait_play: 'Google Play से आना बाकी',
     today: 'आज अब तक: {n}',
     daily_h: 'रोज़ कितने लोगों ने ऐप चलाया',
     daily_tip: '{d}: {a} लोग, {n} नए',
@@ -113,7 +126,12 @@ const T = {
     views: 'बार खुला',
     crops_h: 'सबसे ज़्यादा देखी गई फ़सल (28 दिन)',
     places_h: 'लोग कहाँ से (28 दिन)',
-    places_from_ip: 'ये Google का अंदाज़ा है (इंटरनेट कनेक्शन से) — ऐप में चुने गए ज़िले setup के दिन से यहाँ दिखेंगे।',
+    places_from_ip: 'भारत में, Google के अंदाज़े से (इंटरनेट कनेक्शन से) — ऐप में चुने गए ज़िले setup के दिन से यहाँ दिखेंगे।',
+    outside: 'भारत के बाहर: {list}। ये ज़्यादातर आप और टेस्टर (कुवैत) और Google के अपने जाँच वाले फ़ोन हैं जो हर नया वर्शन चलाकर देखते हैं (अमेरिका, यूरोप) — किसान नहीं।',
+    setup_ev: 'पहली शुरुआत और सेटिंग (भाषा, राज्य, रंग…)',
+    why_h: 'भाव डाउनलोड क्यों नहीं हुए',
+    where_h: 'किस राज्य में',
+    why_old: 'वजह ऐप 1.0.7 से गिनी जाएगी।',
     langs_h: 'ऐप की भाषा',
     ver_h: 'ऐप वर्शन',
     ver_app: 'वर्शन के हिसाब से लोग (ऐप डेटा)',
@@ -271,6 +289,21 @@ const SCREENS = {
   kendra_done: ['Kendra: order placed', 'केंद्र: ऑर्डर हुआ'],
   kendra_orders: ['Kendra: my orders', 'केंद्र: मेरे ऑर्डर'],
 };
+// Why prices didn't download (LiveFeed.lastMiss in the app, v1.0.7).
+const WHY = {
+  no_feed: ['No prices for that state on our server', 'उस राज्य के भाव हमारे सर्वर पर नहीं'],
+  'fs_unavailable': ['No internet', 'इंटरनेट नहीं था'],
+  'fs_deadline-exceeded': ['Internet too slow', 'इंटरनेट बहुत धीमा'],
+  'fs_permission-denied': ['Refused by Firebase (App Check?)', 'Firebase ने मना किया (App Check?)'],
+  empty: ['Our server\'s copy was empty', 'सर्वर की कॉपी खाली थी'],
+  bad_meta: ['Our server\'s copy was incomplete', 'सर्वर की कॉपी अधूरी थी'],
+  error: ['Other error', 'दूसरी गड़बड़ी'],
+  err_generic: ['Older app (no reason sent)', 'पुराना ऐप (वजह नहीं भेजता)'],
+};
+// First start and settings: shown apart from what farmers use day to day.
+const SETUP_EV = new Set(['language_chosen', 'state_chosen', 'district_chosen', 'theme_chosen', 'text_size', 'voice_speed',
+  'photo', 'village_set', 'privacy_open', 'update_prompt', 'plus_gift', 'plus_gift_removed', 'login_open', 'login',
+  'logout', 'account_restored', 'account_deleted', 'brief_hour']);
 const LANGS = { en: 'English', hi: 'हिंदी', mr: 'मराठी', gu: 'ગુજરાતી', pa: 'ਪੰਜਾਬੀ', te: 'తెలుగు', kn: 'ಕನ್ನಡ', ta: 'தமிழ்', bn: 'বাংলা', ml: 'മലയാളം' };
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
@@ -337,12 +370,19 @@ export async function statsPage(deps) {
   // ── tiles ──
   const kpi = (label, value, sub, cls = '') => `<div class="kpi" style="cursor:default">
       <span class="kl">${esc(label)}</span><span class="kv">${value}</span><span class="kd ${cls}" style="max-width:100%">${sub || '&nbsp;'}</span></div>`;
-  const back = gaHas ? Math.max(0, (ga.a28 || 0) - (ga.n28 || 0)) : null;
+  // Farmers are in India; the owner, testers and Google's test phones are not.
+  const hasIn = gaHas && ga.in28 != null;
+  const act = hasIn ? ga.in28 : ga.a28;
+  const neu = hasIn ? ga.inn28 : ga.n28;
+  const back = gaHas ? Math.max(0, (act || 0) - (neu || 0)) : null;
+  const waitPlay = playHas ? null : esc(t('k_wait_play'));
   const tiles = `<section class="kpis">
-      ${kpi(t('k_total'), n(play.total), playHas ? esc(t('k_total_sub', { n: n(play.i28) })) : '', 'up')}
-      ${kpi(t('k_now'), n(play.now), playHas ? esc(t('k_now_sub', { n: n(play.u28) })) : '', play.u28 ? 'warnt' : '')}
-      ${kpi(t('k_active'), n(ga.a28), gaHas ? esc(t('k_active_sub', { a: n(ga.a1), b: n(ga.a7) })) : '')}
-      ${kpi(t('k_new'), n(ga.n28), gaHas ? esc(t('k_new_sub', { n: n(back) })) : '', 'up')}
+      ${kpi(t('k_total'), n(play.total), playHas ? esc(t('k_total_sub', { n: n(play.i28) })) : waitPlay, playHas ? 'up' : '')}
+      ${kpi(t('k_now'), n(play.now), playHas ? esc(t('k_now_sub', { n: n(play.u28) })) : waitPlay, play.u28 ? 'warnt' : '')}
+      ${kpi(t(hasIn ? 'k_active_in' : 'k_active'), n(act), gaHas ? esc(hasIn
+        ? t('k_active_in_sub', { a: n(ga.in1), b: n(ga.in7), c: n(ga.a28) })
+        : t('k_active_sub', { a: n(ga.a1), b: n(ga.a7) })) : '')}
+      ${kpi(t(hasIn ? 'k_new_in' : 'k_new'), n(neu), gaHas ? esc(t('k_new_sub', { n: n(back) })) : '', 'up')}
     </section>`;
 
   // ── bar lists ──
@@ -358,13 +398,18 @@ export async function statsPage(deps) {
   };
   const label = (map, k) => (map[k] ? map[k][L] : k);
 
-  const events = ga.events || [];
-  const used = events.filter((e) => !TECH.has(e.k)).sort((a, b) => (b.u || 0) - (a.u || 0) || (b.c || 0) - (a.c || 0));
+  const BLANK = new Set(['', '(not set)', '(other)']);
+  const events = (ga.events || []).filter((e) => !BLANK.has(e.k) && e.c);
+  const byUse = (a, b) => (b.u || 0) - (a.u || 0) || (b.c || 0) - (a.c || 0);
+  const used = events.filter((e) => !TECH.has(e.k) && !SETUP_EV.has(e.k)).sort(byUse);
+  const setupUsed = events.filter((e) => SETUP_EV.has(e.k)).sort(byUse);
   const featCard = `
     <section class="card">
       <div class="ch"><h2>${esc(t('feat_h'))}</h2></div>
       <p class="muted small" style="margin:0 0 8px">${esc(t('feat_d'))}</p>
       ${bars(used.slice(0, 14).map((e) => ({ label: label(EVENTS, e.k), v: e.u || 0, extra: `${n(e.c)} ${t('times')}`, title: e.k })))}
+      ${setupUsed.length ? `<details class="small" style="margin-bottom:6px"><summary>${esc(t('setup_ev'))}</summary>
+        ${bars(setupUsed.map((e) => ({ label: label(EVENTS, e.k), v: e.u || 0, extra: `${n(e.c)} ${t('times')}`, title: e.k })))}</details>` : ''}
       ${events.length ? `<details class="small"><summary>${esc(t('all_events'))}</summary>
         ${table([L ? 'क्या' : 'What', t('people'), t('times'), L ? 'नाम' : 'Name'],
           events.map((e) => [label(EVENTS, e.k), n(e.u), n(e.c), e.k]))}</details>` : ''}
@@ -392,6 +437,7 @@ export async function statsPage(deps) {
     </section>`;
 
   const districts = ga.districts || [];
+  const abroad = (ga.countries || []).filter((c) => c.k !== 'India');
   const placesCard = `
     <section class="card">
       <div class="ch"><h2>${esc(t('places_h'))}</h2></div>
@@ -399,6 +445,7 @@ export async function statsPage(deps) {
         ? bars(districts.slice(0, 10).map((d) => ({ label: d.k, v: d.n, extra: t('people') })))
         : `${bars((ga.regions || []).slice(0, 10).map((d) => ({ label: d.k, v: d.n, extra: t('people') })))}
            <p class="muted small" style="margin:6px 0 0">${esc(t('places_from_ip'))}</p>`}
+      ${abroad.length ? `<p class="note small" style="margin:10px 0 0">${esc(t('outside', { list: abroad.map((c) => `${c.k} ${c.n}`).join(', ') }))}</p>` : ''}
       ${(ga.states || []).length > 1 ? `<details class="small"><summary>${L ? 'राज्य' : 'States'}</summary>
         ${table([L ? 'राज्य' : 'State', t('people')], ga.states.map((x) => [x.k, n(x.n)]))}</details>` : ''}
     </section>`;
@@ -430,6 +477,10 @@ export async function statsPage(deps) {
     <section class="card">
       <div class="ch"><h2>${esc(t('health_h'))}</h2></div>
       <div class="tiles">${health.map(([l, v]) => `<div class="tile" style="background:var(--page)"><div class="tile-n" style="font-size:22px">${esc(v)}</div><div class="tile-l">${esc(l)}</div></div>`).join('')}</div>
+      ${ev('prices_failed') ? `<details class="small"><summary>${esc(t('why_h'))}</summary>
+        ${(ga.fail_why || []).length ? bars(ga.fail_why.map((x) => ({ label: label(WHY, x.k), v: x.n, extra: t('times'), title: x.k }))) : `<p class="muted small">${esc(t('why_old'))}</p>`}
+        ${(ga.fail_state || []).length ? `<div class="small muted" style="font-weight:700;margin:8px 0 4px">${esc(t('where_h'))}</div>${bars(ga.fail_state.map((x) => ({ label: x.k, v: x.n, extra: t('times') })))}` : ''}
+      </details>` : ''}
     </section>`;
 
   // ── charts: last 14 days ──
@@ -462,7 +513,7 @@ export async function statsPage(deps) {
     <p class="muted small" style="margin:-4px 0 12px">${stamp}<br>${esc(t('play_late'))}</p>
     ${setupCard}
     ${tiles}
-    <div class="dash">
+    <div class="dash" style="align-items:start">
       ${dailyCard}
       ${dlCard}
       ${featCard}
