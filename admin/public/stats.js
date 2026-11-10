@@ -283,6 +283,11 @@ const EVENTS = {
   whats_new: ['Saw "New in Khalihan"', '"Khalihan में नया" देखा'],
   whats_new_end: ['Closed "New in Khalihan"', '"Khalihan में नया" बंद किया'],
   rate_prompt: ['⭐ Asked for a Play rating', '⭐ Play रेटिंग माँगी'],
+  ai_pill: ['Opened the Khalihan AI pill (V2 tab)', 'Khalihan AI का बार खोला (V2 टैब)'],
+  ai_pill_close: ['Closed the Khalihan AI pill', 'Khalihan AI का बार बंद किया'],
+  ai_open: ['Opened Khalihan AI', 'Khalihan AI खोला'],
+  ai_ask: ['🤖 Asked Khalihan AI', '🤖 Khalihan AI से पूछा'],
+  ai_action: ['Followed an AI answer\'s link', 'AI जवाब का बटन दबाया'],
   prices_loaded: ['Prices downloaded', 'भाव डाउनलोड हुए'],
   prices_failed: ['Prices failed to download', 'भाव डाउनलोड नहीं हुए'],
   where_to_sell_from: ['(where "Where to sell" was opened from)', '("कहाँ बेचें" कहाँ से खुला)'],
@@ -329,6 +334,7 @@ const SCREENS = {
   kendra_done: ['Kendra: order placed', 'केंद्र: ऑर्डर हुआ'],
   kendra_orders: ['Kendra: my orders', 'केंद्र: मेरे ऑर्डर'],
   whats_new: ['"New in Khalihan" (the tour)', '"Khalihan में नया" (टूर)'],
+  ai_ask: ['Khalihan AI (question sheet)', 'Khalihan AI (सवाल-जवाब)'],
 };
 // Why prices didn't download (LiveFeed.lastMiss in the app, v1.0.7).
 const WHY = {

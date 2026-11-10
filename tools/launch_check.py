@@ -26,11 +26,13 @@ DEFAULTS = {
     "whats_new": False,  # v1.0.7 "Khalihan में नया": the tour after an update, OFF too
     "share_link": False,  # v1.0.8 the app's Play link in every share, OFF
     "rate_prompt": False,  # v1.0.8 Play's "rate Khalihan" card, OFF
+    "ai": False,  # v1.0.9 Khalihan AI section, OFF (the test phone sees it)
+    "ai_ask": False,  # v1.0.9 "Khalihan AI से पूछें" (V2), inside "ai"
 }
 PARENT = {
     "schemes": "services", "kendra": "services", "home_sky": "weather", "advice": "weather",
     "widget_weather": "weather", "farm_weather": "weather", "where_sell": "sell_menu", "price_map": "sell_menu",
-    "hold_sell": "sell_menu", "sell_interest": "sell_menu",
+    "hold_sell": "sell_menu", "sell_interest": "sell_menu", "ai_ask": "ai",
 }
 # The launch plan (owner, 1 Nov 2026). Anything not listed: either is fine.
 PLAN = {
