@@ -1,0 +1,37 @@
+name: Publish schemes
+
+# content/schemes.json → Firestore config/schemes (the app takes it when its
+# version is higher than the list inside the app). Runs when that file changes
+# on main, and by hand (Actions → Run workflow). See tools/publish_schemes.py.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - content/schemes.json
+      - tools/publish_schemes.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: schemes
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python tools/publish_schemes.py --check
+      - run: python tools/publish_schemes.py
+        env:
+          PYTHONUNBUFFERED: "1"
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}

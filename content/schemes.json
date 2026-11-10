@@ -1,0 +1,1503 @@
+{
+ "version": 6,
+ "note": "Copied from khalihan-app lib/data/schemes_content.dart (tool/schemes_content.py). The app takes this list when version is higher than its own.",
+ "schemes": [
+  {
+   "id": "farmer_id",
+   "icon": "badge",
+   "group": "id",
+   "states": [
+    "Maharashtra"
+   ],
+   "priority": 1,
+   "apply": "https://mhfr.agristack.gov.in/farmer-registry-mh/",
+   "info": "https://mhfr.agristack.gov.in/farmer-registry-mh/",
+   "source": "AgriStack · Govt of Maharashtra",
+   "t": {
+    "en": {
+     "title": "Farmer ID (AgriStack)",
+     "benefit": "Free · needed for many schemes",
+     "summary": "A digital Farmer ID linked to your land records. Maharashtra has issued over 1.3 crore of them, and schemes such as PM-KISAN now ask for it — so get this one first.",
+     "who": [
+      "Farmers with land in Maharashtra (7/12 in their name)"
+     ],
+     "docs": [
+      "Aadhaar card",
+      "Mobile number linked to Aadhaar",
+      "7/12 land record"
+     ],
+     "how": [
+      "Go to the nearest CSC / Aaple Sarkar Seva Kendra, or register yourself on the official Farmer Registry site",
+      "Verify with the Aadhaar OTP and select your land",
+      "Write down your Farmer ID number and keep it safe"
+     ]
+    },
+    "hi": {
+     "title": "फ़ार्मर आईडी (एग्रीस्टैक)",
+     "benefit": "मुफ़्त · कई योजनाओं के लिए ज़रूरी",
+     "summary": "आपके ज़मीन के रिकॉर्ड से जुड़ी डिजिटल किसान पहचान। महाराष्ट्र में 1.3 करोड़ से ज़्यादा फ़ार्मर आईडी बन चुकी हैं, और PM-KISAN जैसी योजनाओं में अब यह माँगी जा रही है — इसलिए सबसे पहले यही बनवाएँ।",
+     "who": [
+      "महाराष्ट्र में ज़मीन वाले किसान (7/12 उनके नाम पर)"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "आधार से जुड़ा मोबाइल नंबर",
+      "7/12 उतारा"
+     ],
+     "how": [
+      "नज़दीकी CSC / आपले सरकार सेवा केंद्र जाएँ, या सरकारी Farmer Registry साइट पर ख़ुद पंजीकरण करें",
+      "आधार OTP से पुष्टि करें और अपनी ज़मीन चुनें",
+      "अपना फ़ार्मर आईडी नंबर लिखकर सँभालकर रखें"
+     ]
+    },
+    "mr": {
+     "title": "शेतकरी ओळख क्रमांक (ॲग्रीस्टॅक)",
+     "benefit": "मोफत · अनेक योजनांसाठी आवश्यक",
+     "summary": "तुमच्या जमिनीच्या नोंदीशी जोडलेली डिजिटल शेतकरी ओळख. महाराष्ट्रात 1.3 कोटींहून अधिक ओळख क्रमांक दिले गेले आहेत, आणि PM-KISAN सारख्या योजनांमध्ये आता तो मागितला जातो — म्हणून आधी हाच काढा.",
+     "who": [
+      "महाराष्ट्रात जमीन असलेले शेतकरी (7/12 त्यांच्या नावावर)"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "आधारशी जोडलेला मोबाईल नंबर",
+      "7/12 उतारा"
+     ],
+     "how": [
+      "जवळच्या CSC / आपले सरकार सेवा केंद्रात जा, किंवा अधिकृत Farmer Registry साइटवर स्वतः नोंदणी करा",
+      "आधार OTP ने खात्री करा आणि तुमची जमीन निवडा",
+      "तुमचा शेतकरी ओळख क्रमांक लिहून ठेवा"
+     ]
+    }
+   },
+   "checked": "2026-10-07"
+  },
+  {
+   "id": "pm_kisan",
+   "icon": "payments",
+   "group": "income",
+   "states": [],
+   "priority": 2,
+   "apply": "https://pmkisan.gov.in/",
+   "info": "https://pmkisan.gov.in/",
+   "source": "PM-KISAN · Govt of India",
+   "t": {
+    "en": {
+     "title": "PM-KISAN",
+     "benefit": "₹6,000 a year (3 × ₹2,000)",
+     "summary": "Money straight into the Aadhaar-linked bank account of landholding farmer families, in three instalments of ₹2,000 a year.",
+     "who": [
+      "Families who own farm land",
+      "Not for: income-tax payers, government employees, pensioners getting ₹10,000+ a month, practising doctors, engineers, lawyers and CAs, MPs and MLAs"
+     ],
+     "docs": [
+      "Aadhaar card",
+      "Bank account linked to Aadhaar",
+      "Land record (7/12 · in MP: khasra / B-1)",
+      "Mobile number"
+     ],
+     "how": [
+      "Register on pmkisan.gov.in (New Farmer Registration) or at a CSC",
+      "Complete e-KYC — Aadhaar OTP, face or fingerprint",
+      "Check 'Know your status' before each instalment"
+     ]
+    },
+    "hi": {
+     "title": "पीएम-किसान",
+     "benefit": "₹6,000 सालाना (3 × ₹2,000)",
+     "summary": "ज़मीन वाले किसान परिवारों के आधार से जुड़े बैंक खाते में सीधा पैसा — साल में ₹2,000 की तीन किस्तें।",
+     "who": [
+      "जिन परिवारों के नाम खेती की ज़मीन है",
+      "इन्हें नहीं: आयकर भरने वाले, सरकारी कर्मचारी, ₹10,000+ मासिक पेंशन वाले, प्रैक्टिस करने वाले डॉक्टर-इंजीनियर-वकील-CA, सांसद-विधायक"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "आधार से जुड़ा बैंक खाता",
+      "ज़मीन का रिकॉर्ड (7/12 उतारा · मध्य प्रदेश में खसरा / B-1)",
+      "मोबाइल नंबर"
+     ],
+     "how": [
+      "pmkisan.gov.in पर (New Farmer Registration) या CSC पर पंजीकरण करें",
+      "e-KYC पूरा करें — आधार OTP, चेहरा या अंगूठा",
+      "हर किस्त से पहले 'Know your status' देखें"
+     ]
+    },
+    "mr": {
+     "title": "पीएम-किसान",
+     "benefit": "वर्षाला ₹6,000 (3 × ₹2,000)",
+     "summary": "जमीनधारक शेतकरी कुटुंबांच्या आधार-जोडलेल्या बँक खात्यात थेट पैसे — वर्षाला ₹2,000 चे तीन हप्ते.",
+     "who": [
+      "ज्या कुटुंबांच्या नावावर शेतजमीन आहे",
+      "यांना नाही: आयकर भरणारे, सरकारी कर्मचारी, ₹10,000+ मासिक पेन्शनधारक, व्यवसाय करणारे डॉक्टर-इंजिनिअर-वकील-CA, खासदार-आमदार"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "आधारशी जोडलेले बँक खाते",
+      "7/12 उतारा",
+      "मोबाईल नंबर"
+     ],
+     "how": [
+      "pmkisan.gov.in वर (New Farmer Registration) किंवा CSC वर नोंदणी करा",
+      "e-KYC पूर्ण करा — आधार OTP, चेहरा किंवा अंगठा",
+      "प्रत्येक हप्त्याआधी 'Know your status' तपासा"
+     ]
+    }
+   },
+   "checked": "2026-10-07"
+  },
+  {
+   "id": "namo_shetkari",
+   "icon": "savings",
+   "group": "income",
+   "states": [
+    "Maharashtra"
+   ],
+   "priority": 3,
+   "apply": null,
+   "info": "https://nsmny.mahait.org/",
+   "source": "Namo Shetkari · Govt of Maharashtra",
+   "t": {
+    "en": {
+     "title": "Namo Shetkari Mahasanman Nidhi",
+     "benefit": "₹6,000 a year — on top of PM-KISAN",
+     "summary": "Maharashtra adds ₹6,000 a year (₹2,000 per instalment) for farmers who get PM-KISAN — there is no separate form. An increase to ₹9,000 was announced in February 2025; check the current amount on the official site.",
+     "who": [
+      "Maharashtra farmers who receive PM-KISAN"
+     ],
+     "docs": [
+      "Same as PM-KISAN: e-KYC done, bank account seeded with Aadhaar (DBT on)"
+     ],
+     "how": [
+      "Keep your PM-KISAN e-KYC complete",
+      "Make sure your bank account is linked to Aadhaar for DBT",
+      "Check your payment status on the Namo Shetkari site with your Aadhaar or registration number"
+     ]
+    },
+    "hi": {
+     "title": "नमो शेतकरी महासम्मान निधि",
+     "benefit": "₹6,000 सालाना — PM-KISAN के ऊपर से",
+     "summary": "PM-KISAN पाने वाले किसानों को महाराष्ट्र सरकार साल में ₹6,000 (₹2,000 प्रति किस्त) और देती है — अलग फ़ॉर्म नहीं भरना। फ़रवरी 2025 में इसे ₹9,000 करने की घोषणा हुई थी; ताज़ा राशि सरकारी साइट पर देखें।",
+     "who": [
+      "PM-KISAN पाने वाले महाराष्ट्र के किसान"
+     ],
+     "docs": [
+      "PM-KISAN जैसा ही: e-KYC पूरा, बैंक खाता आधार से जुड़ा (DBT चालू)"
+     ],
+     "how": [
+      "PM-KISAN का e-KYC पूरा रखें",
+      "बैंक खाता आधार से जुड़ा हो, DBT के लिए",
+      "नमो शेतकरी साइट पर आधार या पंजीकरण नंबर से भुगतान की स्थिति देखें"
+     ]
+    },
+    "mr": {
+     "title": "नमो शेतकरी महासन्मान निधी",
+     "benefit": "वर्षाला ₹6,000 — PM-KISAN च्या वर",
+     "summary": "PM-KISAN मिळणाऱ्या शेतकऱ्यांना महाराष्ट्र सरकार वर्षाला आणखी ₹6,000 (₹2,000 प्रति हप्ता) देते — वेगळा अर्ज नाही. फेब्रुवारी 2025 मध्ये ही रक्कम ₹9,000 करण्याची घोषणा झाली होती; सध्याची रक्कम अधिकृत साइटवर तपासा.",
+     "who": [
+      "PM-KISAN मिळणारे महाराष्ट्रातील शेतकरी"
+     ],
+     "docs": [
+      "PM-KISAN प्रमाणेच: e-KYC पूर्ण, बँक खाते आधारशी जोडलेले (DBT सुरू)"
+     ],
+     "how": [
+      "PM-KISAN चे e-KYC पूर्ण ठेवा",
+      "DBT साठी बँक खाते आधारशी जोडलेले असू द्या",
+      "नमो शेतकरी साइटवर आधार किंवा नोंदणी क्रमांकाने हप्त्याची स्थिती तपासा"
+     ]
+    }
+   },
+   "checked": "2026-10-07"
+  },
+  {
+   "id": "pmfby",
+   "icon": "umbrella",
+   "group": "insurance",
+   "states": [],
+   "priority": 2,
+   "cropsAny": true,
+   "months": [
+    6,
+    7,
+    10,
+    11,
+    12
+   ],
+   "apply": "https://pmfby.gov.in/",
+   "info": "https://pmfby.gov.in/",
+   "source": "PMFBY · Govt of India",
+   "t": {
+    "en": {
+     "title": "Crop insurance (PMFBY)",
+     "benefit": "You pay 2% kharif · 1.5% rabi · 5% cash/fruit crops",
+     "summary": "Covers crop loss from drought, flood, pests, hail and more. In Maharashtra the ₹1 crop insurance has ended — farmers now pay the normal PMFBY share and the government pays the rest.",
+     "who": [
+      "Every farmer growing a notified crop — owners, tenants and sharecroppers"
+     ],
+     "docs": [
+      "Land record (7/12 and 8-A · in MP: khasra / B-1)",
+      "Aadhaar card",
+      "Bank passbook (Aadhaar-linked)",
+      "Sowing declaration or certificate (pik pera in Maharashtra)"
+     ],
+     "how": [
+      "Apply before the last date — at your bank, a CSC, or on pmfby.gov.in",
+      "Rabi usually closes mid-to-end December, kharif in July; dates differ by district — check on the site",
+      "Report crop loss within 72 hours on the crop insurance app or helpline 14447"
+     ]
+    },
+    "hi": {
+     "title": "फसल बीमा (PMFBY)",
+     "benefit": "आपका हिस्सा: खरीफ 2% · रबी 1.5% · नकदी/फल फसलें 5%",
+     "summary": "सूखा, बाढ़, कीट, ओले जैसी आपदाओं से फसल के नुकसान का बीमा। महाराष्ट्र में ₹1 वाली फसल बीमा बंद हो गई है — अब किसान सामान्य PMFBY हिस्सा देते हैं, बाकी सरकार देती है।",
+     "who": [
+      "अधिसूचित फसल उगाने वाले सभी किसान — मालिक, बटाईदार, किरायेदार"
+     ],
+     "docs": [
+      "ज़मीन का रिकॉर्ड (7/12 और 8-अ · मध्य प्रदेश में खसरा / B-1)",
+      "आधार कार्ड",
+      "बैंक पासबुक (आधार से जुड़ी)",
+      "बुवाई का घोषणापत्र या प्रमाण पत्र (महाराष्ट्र में पीक पेरा)"
+     ],
+     "how": [
+      "आख़िरी तारीख से पहले आवेदन करें — बैंक, CSC या pmfby.gov.in पर",
+      "रबी आम तौर पर दिसंबर के मध्य-अंत तक, खरीफ जुलाई तक; तारीख ज़िले के हिसाब से अलग — साइट पर देखें",
+      "नुकसान होने पर 72 घंटे में फसल बीमा ऐप या हेल्पलाइन 14447 पर बताएँ"
+     ]
+    },
+    "mr": {
+     "title": "पीक विमा (PMFBY)",
+     "benefit": "तुमचा हिस्सा: खरीप 2% · रब्बी 1.5% · नगदी/फळपिके 5%",
+     "summary": "दुष्काळ, पूर, कीड, गारपीट अशा आपत्तींमुळे होणाऱ्या पीक नुकसानीचा विमा. महाराष्ट्रातील ₹1 पीक विमा बंद झाला आहे — आता शेतकरी नेहमीचा PMFBY हिस्सा भरतात, उरलेला सरकार भरते.",
+     "who": [
+      "अधिसूचित पीक घेणारे सर्व शेतकरी — मालक, कुळ, बटाईदार"
+     ],
+     "docs": [
+      "7/12 व 8-अ उतारा",
+      "आधार कार्ड",
+      "बँक पासबुक (आधार-जोडलेले)",
+      "पीक पेरा घोषणापत्र"
+     ],
+     "how": [
+      "शेवटच्या तारखेपूर्वी अर्ज करा — बँक, CSC किंवा pmfby.gov.in वर",
+      "रब्बी साधारण डिसेंबरच्या मध्य-अखेरपर्यंत, खरीप जुलैपर्यंत; तारीख जिल्ह्यानुसार वेगळी — साइटवर पाहा",
+      "नुकसान झाल्यास 72 तासांत पीक विमा ॲप किंवा हेल्पलाइन 14447 वर कळवा"
+     ]
+    }
+   },
+   "checked": "2026-10-07"
+  },
+  {
+   "id": "kcc",
+   "icon": "credit_card",
+   "group": "credit",
+   "states": [],
+   "priority": 3,
+   "apply": null,
+   "info": "https://pmkisan.gov.in/",
+   "source": "Kisan Credit Card · Govt of India",
+   "t": {
+    "en": {
+     "title": "Kisan Credit Card (KCC)",
+     "benefit": "Crop loan up to ₹5 lakh · 4% if repaid on time",
+     "summary": "A cheap short-term loan for seeds, fertiliser and farm costs. Loans up to ₹3 lakh carry 7% interest, and timely repayment brings it down to 4%. Up to ₹2 lakh needs no collateral.",
+     "who": [
+      "Owner farmers, tenant farmers, sharecroppers and oral lessees",
+      "Self-help and joint liability groups"
+     ],
+     "docs": [
+      "Aadhaar card",
+      "Land record — 7/12 and 8-A, or khasra / B-1 in MP (or tenancy proof)",
+      "Photo",
+      "Bank account"
+     ],
+     "how": [
+      "Ask for a KCC at your bank branch — nationalised, rural or district cooperative bank",
+      "PM-KISAN farmers get a shorter form (on pmkisan.gov.in)",
+      "Repay on time to keep the 4% rate"
+     ]
+    },
+    "hi": {
+     "title": "किसान क्रेडिट कार्ड (KCC)",
+     "benefit": "₹5 लाख तक फसल कर्ज़ · समय पर चुकाने पर 4%",
+     "summary": "बीज, खाद और खेती के खर्च के लिए सस्ता अल्पकालिक कर्ज़। ₹3 लाख तक के कर्ज़ पर 7% ब्याज, समय पर चुकाने पर सिर्फ़ 4%। ₹2 लाख तक बिना गिरवी।",
+     "who": [
+      "ज़मीन मालिक, किरायेदार, बटाईदार और मौखिक पट्टेदार किसान",
+      "स्वयं सहायता समूह और संयुक्त देयता समूह"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "ज़मीन का रिकॉर्ड — 7/12 और 8-अ, मध्य प्रदेश में खसरा / B-1 (या किरायेदारी का सबूत)",
+      "फ़ोटो",
+      "बैंक खाता"
+     ],
+     "how": [
+      "अपनी बैंक शाखा में KCC माँगें — राष्ट्रीयकृत, ग्रामीण या ज़िला सहकारी बैंक",
+      "PM-KISAN वाले किसानों का फ़ॉर्म छोटा है (pmkisan.gov.in पर)",
+      "4% दर बनाए रखने के लिए समय पर चुकाएँ"
+     ]
+    },
+    "mr": {
+     "title": "किसान क्रेडिट कार्ड (KCC)",
+     "benefit": "₹5 लाखांपर्यंत पीक कर्ज · वेळेत फेडल्यास 4%",
+     "summary": "बियाणे, खते आणि शेती खर्चासाठी स्वस्त अल्पमुदतीचे कर्ज. ₹3 लाखांपर्यंतच्या कर्जावर 7% व्याज, वेळेत फेडल्यास फक्त 4%. ₹2 लाखांपर्यंत तारणाशिवाय.",
+     "who": [
+      "जमीनमालक, कुळ, बटाईदार आणि तोंडी भाडेपट्टेदार शेतकरी",
+      "स्वयं सहायता गट आणि संयुक्त दायित्व गट"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "7/12 व 8-अ (किंवा कुळाचा पुरावा)",
+      "फोटो",
+      "बँक खाते"
+     ],
+     "how": [
+      "तुमच्या बँक शाखेत KCC मागा — राष्ट्रीयीकृत, ग्रामीण किंवा जिल्हा सहकारी बँक",
+      "PM-KISAN शेतकऱ्यांचा अर्ज लहान आहे (pmkisan.gov.in वर)",
+      "4% दर टिकवण्यासाठी वेळेत परतफेड करा"
+     ]
+    }
+   },
+   "checked": "2026-10-07"
+  },
+  {
+   "id": "karjmukti_2026",
+   "icon": "handshake",
+   "group": "credit",
+   "states": [
+    "Maharashtra"
+   ],
+   "priority": 2,
+   "apply": null,
+   "info": "https://sarkarnama.esakal.com/maharashtra/maharashtra-farmer-loan-waiver-scheme-2026-ahilyadevi-holkar-shetkari-karjmukti-yojana-pp82",
+   "source": "Govt of Maharashtra (reported by Sakal, 29 Jun 2026)",
+   "t": {
+    "en": {
+     "title": "Loan waiver 2026 (Ahilyadevi Holkar Karjmukti)",
+     "benefit": "Crop loan waiver up to ₹2 lakh",
+     "summary": "Maharashtra's 2026 loan waiver — Punyashlok Ahilyadevi Holkar Shetkari Karjmukti Yojana: up to ₹2 lakh of crop loan for about 56 lakh farmers, and an incentive of up to ₹50,000 for those who repaid on time. It is being rolled out in phases — confirm at your bank.",
+     "who": [
+      "Farmers with a short-term crop loan; as reported, loans taken from April 2019 to March 2025 that were unpaid on 30 September 2025",
+      "Aadhaar must be linked to the loan account"
+     ],
+     "docs": [
+      "Aadhaar card",
+      "7/12 and 8-A extracts",
+      "Crop loan passbook"
+     ],
+     "how": [
+      "Go to the bank branch that gave your crop loan",
+      "Complete Aadhaar authentication (OTP or fingerprint)",
+      "Check the beneficiary list at the bank or gram panchayat"
+     ]
+    },
+    "hi": {
+     "title": "कर्ज़ माफ़ी 2026 (अहिल्यादेवी होलकर कर्जमुक्ति)",
+     "benefit": "₹2 लाख तक फसल कर्ज़ माफ़",
+     "summary": "महाराष्ट्र की 2026 कर्ज़ माफ़ी — पुण्यश्लोक अहिल्यादेवी होलकर शेतकरी कर्जमुक्ति योजना: लगभग 56 लाख किसानों का ₹2 लाख तक फसल कर्ज़ माफ़, और समय पर चुकाने वालों को ₹50,000 तक प्रोत्साहन। यह चरणों में लागू हो रही है — अपने बैंक में पुष्टि करें।",
+     "who": [
+      "अल्पकालिक फसल कर्ज़ वाले किसान; जानकारी के मुताबिक अप्रैल 2019 से मार्च 2025 के बीच लिए, 30 सितंबर 2025 तक बकाया कर्ज़",
+      "कर्ज़ खाते से आधार जुड़ा होना चाहिए"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "7/12 और 8-अ उतारा",
+      "फसल कर्ज़ की पासबुक"
+     ],
+     "how": [
+      "जिस बैंक शाखा से फसल कर्ज़ लिया, वहाँ जाएँ",
+      "आधार प्रमाणीकरण पूरा करें (OTP या अंगूठा)",
+      "बैंक या ग्राम पंचायत में लाभार्थी सूची देखें"
+     ]
+    },
+    "mr": {
+     "title": "कर्जमाफी 2026 (अहिल्यादेवी होळकर कर्जमुक्ती)",
+     "benefit": "₹2 लाखांपर्यंत पीक कर्ज माफ",
+     "summary": "महाराष्ट्राची 2026 कर्जमाफी — पुण्यश्लोक अहिल्यादेवी होळकर शेतकरी कर्जमुक्ती योजना: सुमारे 56 लाख शेतकऱ्यांचे ₹2 लाखांपर्यंत पीक कर्ज माफ, आणि नियमित परतफेड करणाऱ्यांना ₹50,000 पर्यंत प्रोत्साहन. ही टप्प्याटप्प्याने लागू होत आहे — तुमच्या बँकेत खात्री करा.",
+     "who": [
+      "अल्पमुदत पीक कर्ज असलेले शेतकरी; माहितीनुसार एप्रिल 2019 ते मार्च 2025 दरम्यान घेतलेले, 30 सप्टेंबर 2025 रोजी थकीत कर्ज",
+      "कर्ज खात्याशी आधार जोडलेले असावे"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "7/12 व 8-अ उतारा",
+      "पीक कर्जाचे पासबुक"
+     ],
+     "how": [
+      "ज्या बँक शाखेतून पीक कर्ज घेतले तिथे जा",
+      "आधार प्रमाणीकरण पूर्ण करा (OTP किंवा अंगठा)",
+      "बँकेत किंवा ग्रामपंचायतीत लाभार्थी यादी पाहा"
+     ]
+    }
+   },
+   "checked": "2026-10-07"
+  },
+  {
+   "id": "free_power",
+   "icon": "bolt",
+   "group": "power",
+   "states": [
+    "Maharashtra"
+   ],
+   "priority": 4,
+   "apply": null,
+   "info": "https://www.mahadiscom.in/",
+   "source": "Mahavitaran (MSEDCL) · Govt of Maharashtra",
+   "t": {
+    "en": {
+     "title": "Free power for farm pumps (Baliraja)",
+     "benefit": "No electricity bill for pumps up to 7.5 HP",
+     "summary": "Under the Mukhyamantri Baliraja Mofat Veej Yojana, farm pumps up to 7.5 HP get free electricity. In July 2026 the state also announced a ₹48,000 crore waiver of old pump bill dues.",
+     "who": [
+      "Farmers with an MSEDCL farm-pump connection up to 7.5 HP"
+     ],
+     "docs": [
+      "Nothing to submit — it applies to your connection",
+      "Keep your consumer number handy"
+     ],
+     "how": [
+      "No form to fill",
+      "If a bill still comes, take it to your MSEDCL sub-division office"
+     ]
+    },
+    "hi": {
+     "title": "खेती के पंप को मुफ़्त बिजली (बलीराजा)",
+     "benefit": "7.5 HP तक के पंप का बिजली बिल नहीं",
+     "summary": "मुख्यमंत्री बलीराजा मुफ़्त बिजली योजना में 7.5 HP तक के खेती पंपों को मुफ़्त बिजली मिलती है। जुलाई 2026 में राज्य ने पंपों के पुराने बकाया बिलों में ₹48,000 करोड़ की माफ़ी की भी घोषणा की।",
+     "who": [
+      "महावितरण (MSEDCL) के 7.5 HP तक के खेती पंप कनेक्शन वाले किसान"
+     ],
+     "docs": [
+      "कुछ जमा नहीं करना — यह आपके कनेक्शन पर अपने आप लागू है",
+      "अपना ग्राहक क्रमांक पास रखें"
+     ],
+     "how": [
+      "कोई फ़ॉर्म नहीं भरना",
+      "फिर भी बिल आए तो उसे महावितरण उपविभाग कार्यालय ले जाएँ"
+     ]
+    },
+    "mr": {
+     "title": "शेतीपंपांना मोफत वीज (बळीराजा)",
+     "benefit": "7.5 HP पर्यंतच्या पंपाला वीजबिल नाही",
+     "summary": "मुख्यमंत्री बळीराजा मोफत वीज योजनेत 7.5 HP पर्यंतच्या शेतीपंपांना मोफत वीज मिळते. जुलै 2026 मध्ये राज्याने पंपांच्या जुन्या थकीत बिलांमध्ये ₹48,000 कोटींच्या माफीचीही घोषणा केली.",
+     "who": [
+      "महावितरणचे 7.5 HP पर्यंतचे शेतीपंप कनेक्शन असलेले शेतकरी"
+     ],
+     "docs": [
+      "काहीही जमा करायचे नाही — तुमच्या कनेक्शनला आपोआप लागू",
+      "तुमचा ग्राहक क्रमांक जवळ ठेवा"
+     ],
+     "how": [
+      "कोणताही अर्ज नाही",
+      "तरीही बिल आल्यास ते महावितरण उपविभाग कार्यालयात न्या"
+     ]
+    }
+   },
+   "checked": "2026-10-07"
+  },
+  {
+   "id": "solar_pump",
+   "icon": "solar_power",
+   "group": "power",
+   "states": [
+    "Maharashtra"
+   ],
+   "priority": 4,
+   "apply": "https://www.mahadiscom.in/solar_MTSKPY/",
+   "info": "https://www.mahadiscom.in/solar_MTSKPY/scheme_info.php",
+   "source": "Magel Tyala Saur Krushi Pump · MSEDCL",
+   "t": {
+    "en": {
+     "title": "Solar pump on demand (Magel Tyala)",
+     "benefit": "Solar pump for 10% of the cost (5% for SC/ST)",
+     "summary": "Water in the daytime with no power bill or load-shedding. 3 HP for up to 2.5 acres, 5 HP up to 5 acres, 7.5 HP above that. Comes with a 5-year repair guarantee and insurance.",
+     "who": [
+      "Farmers with a sure water source — well, borewell, farm pond or river",
+      "Not for those who already got a solar pump under an earlier scheme"
+     ],
+     "docs": [
+      "7/12 land record",
+      "Aadhaar card",
+      "Bank details",
+      "Caste certificate (SC/ST)"
+     ],
+     "how": [
+      "Apply on MSEDCL's solar pump portal",
+      "Pay your share when asked",
+      "An approved company installs the pump"
+     ]
+    },
+    "hi": {
+     "title": "मागेल त्याला सौर कृषि पंप",
+     "benefit": "लागत का 10% देकर सौर पंप (SC/ST 5%)",
+     "summary": "दिन में पानी, न बिजली बिल न कटौती। 2.5 एकड़ तक 3 HP, 5 एकड़ तक 5 HP, उससे ज़्यादा पर 7.5 HP। 5 साल की मरम्मत गारंटी और बीमा के साथ।",
+     "who": [
+      "पक्का पानी का स्रोत वाले किसान — कुआँ, बोरवेल, खेत तालाब या नदी",
+      "जिन्हें पहले किसी योजना में सौर पंप मिल चुका है, उन्हें नहीं"
+     ],
+     "docs": [
+      "7/12 उतारा",
+      "आधार कार्ड",
+      "बैंक विवरण",
+      "जाति प्रमाणपत्र (SC/ST)"
+     ],
+     "how": [
+      "महावितरण के सौर पंप पोर्टल पर आवेदन करें",
+      "कहे जाने पर अपना हिस्सा भरें",
+      "मंज़ूर कंपनी पंप लगाती है"
+     ]
+    },
+    "mr": {
+     "title": "मागेल त्याला सौर कृषी पंप",
+     "benefit": "खर्चाच्या 10% मध्ये सौर पंप (SC/ST 5%)",
+     "summary": "दिवसा पाणी, ना वीजबिल ना भारनियमन. 2.5 एकरापर्यंत 3 HP, 5 एकरापर्यंत 5 HP, त्याहून जास्त असल्यास 7.5 HP. 5 वर्षांची दुरुस्ती हमी आणि विम्यासह.",
+     "who": [
+      "निश्चित पाण्याचा स्रोत असलेले शेतकरी — विहीर, बोअरवेल, शेततळे किंवा नदी",
+      "आधीच्या योजनेत सौर पंप मिळालेल्यांना नाही"
+     ],
+     "docs": [
+      "7/12 उतारा",
+      "आधार कार्ड",
+      "बँक तपशील",
+      "जात प्रमाणपत्र (SC/ST)"
+     ],
+     "how": [
+      "महावितरणच्या सौर पंप पोर्टलवर अर्ज करा",
+      "सांगितल्यावर तुमचा हिस्सा भरा",
+      "मान्यताप्राप्त कंपनी पंप बसवते"
+     ]
+    }
+   },
+   "checked": "2026-10-07"
+  },
+  {
+   "id": "drip",
+   "icon": "water_drop",
+   "group": "water",
+   "states": [
+    "Maharashtra"
+   ],
+   "priority": 4,
+   "cropGroups": [
+    "fruits",
+    "vegetables",
+    "cash"
+   ],
+   "apply": "https://mahadbt.maharashtra.gov.in/",
+   "info": "https://mahadbt.maharashtra.gov.in/",
+   "source": "MahaDBT · Govt of Maharashtra",
+   "t": {
+    "en": {
+     "title": "Drip & sprinkler subsidy",
+     "benefit": "About 80% subsidy (small farmers), 75% others",
+     "summary": "The central PMKSY share (55% for small and marginal farmers, 45% for others) plus Maharashtra's top-up comes to about 80% and 75%. Saves water and fertiliser — especially for sugarcane, cotton, banana and vegetables. Check the current rate on MahaDBT.",
+     "who": [
+      "Farmers with land and a water source",
+      "Not if the same land got this subsidy in recent years"
+     ],
+     "docs": [
+      "7/12 and 8-A extracts",
+      "Aadhaar card",
+      "Bank account",
+      "Quotation from an approved supplier"
+     ],
+     "how": [
+      "Apply on MahaDBT (farmer login)",
+      "Wait for selection in the draw",
+      "Buy from an approved company; the subsidy comes to your bank"
+     ]
+    },
+    "hi": {
+     "title": "ड्रिप और स्प्रिंकलर अनुदान",
+     "benefit": "लगभग 80% अनुदान (छोटे किसान), बाकी 75%",
+     "summary": "केंद्र की PMKSY (छोटे और सीमांत किसानों को 55%, बाकी को 45%) और महाराष्ट्र का पूरक अनुदान मिलाकर लगभग 80% और 75%। पानी और खाद बचती है — ख़ासकर गन्ना, कपास, केला और सब्ज़ियों में। ताज़ा दर MahaDBT पर देखें।",
+     "who": [
+      "ज़मीन और पानी के स्रोत वाले किसान",
+      "जिस ज़मीन पर हाल के सालों में यह अनुदान मिला हो, उस पर नहीं"
+     ],
+     "docs": [
+      "7/12 और 8-अ उतारा",
+      "आधार कार्ड",
+      "बैंक खाता",
+      "मंज़ूर विक्रेता का कोटेशन"
+     ],
+     "how": [
+      "MahaDBT पर (किसान लॉगिन) आवेदन करें",
+      "लॉटरी में चयन का इंतज़ार करें",
+      "मंज़ूर कंपनी से ख़रीदें; अनुदान बैंक में आता है"
+     ]
+    },
+    "mr": {
+     "title": "ठिबक व तुषार सिंचन अनुदान",
+     "benefit": "सुमारे 80% अनुदान (अल्प-अत्यल्प भूधारक), इतरांना 75%",
+     "summary": "केंद्राची PMKSY (अल्प व अत्यल्प भूधारकांना 55%, इतरांना 45%) आणि महाराष्ट्राचे पूरक अनुदान मिळून सुमारे 80% आणि 75%. पाणी आणि खत वाचते — विशेषतः ऊस, कापूस, केळी आणि भाजीपाल्यात. सध्याचा दर MahaDBT वर पाहा.",
+     "who": [
+      "जमीन आणि पाण्याचा स्रोत असलेले शेतकरी",
+      "ज्या जमिनीवर अलीकडे हे अनुदान मिळाले, तिच्यावर नाही"
+     ],
+     "docs": [
+      "7/12 व 8-अ उतारा",
+      "आधार कार्ड",
+      "बँक खाते",
+      "मान्यताप्राप्त पुरवठादाराचे कोटेशन"
+     ],
+     "how": [
+      "MahaDBT वर (शेतकरी लॉगिन) अर्ज करा",
+      "सोडतीत निवडीची वाट पाहा",
+      "मान्यताप्राप्त कंपनीकडून खरेदी करा; अनुदान बँकेत येते"
+     ]
+    }
+   },
+   "checked": "2026-10-07"
+  },
+  {
+   "id": "accident_cover",
+   "icon": "health_and_safety",
+   "group": "safety",
+   "states": [
+    "Maharashtra"
+   ],
+   "priority": 5,
+   "apply": "https://mahadbt.maharashtra.gov.in/",
+   "info": "https://www.myscheme.gov.in/schemes/gopinath-munde-shetkari-apghat-suraksha-sanugrah-audhan-yojana",
+   "source": "Govt of Maharashtra · myScheme",
+   "t": {
+    "en": {
+     "title": "Farmer accident cover (Gopinath Munde)",
+     "benefit": "Up to ₹2 lakh on accidental death or disability",
+     "summary": "Help for the family after a road accident, lightning, snakebite, heatstroke, animal attack and similar. Now also covers landless farm workers and family members aged 18–75. Runs until March 2031.",
+     "who": [
+      "Farmers, landless farm workers and their family members, age 18–75, in Maharashtra"
+     ],
+     "docs": [
+      "Aadhaar card",
+      "Death or disability certificate",
+      "FIR / panchnama",
+      "7/12, or a gram panchayat certificate for the landless",
+      "Bank passbook"
+     ],
+     "how": [
+      "Apply through the taluka agriculture officer or MahaDBT",
+      "Free help desks in villages can fill the form",
+      "The government aims to settle claims within 30 days"
+     ]
+    },
+    "hi": {
+     "title": "किसान दुर्घटना सुरक्षा (गोपीनाथ मुंडे)",
+     "benefit": "दुर्घटना में मृत्यु या विकलांगता पर ₹2 लाख तक",
+     "summary": "सड़क दुर्घटना, बिजली गिरना, साँप का काटना, लू, जानवर के हमले जैसी घटनाओं के बाद परिवार को मदद। अब भूमिहीन खेत मज़दूर और 18–75 साल के परिवार के सदस्य भी शामिल। मार्च 2031 तक चालू।",
+     "who": [
+      "महाराष्ट्र के किसान, भूमिहीन खेत मज़दूर और उनके परिवार के सदस्य, उम्र 18–75"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "मृत्यु या विकलांगता प्रमाणपत्र",
+      "FIR / पंचनामा",
+      "7/12, या भूमिहीन के लिए ग्राम पंचायत का प्रमाणपत्र",
+      "बैंक पासबुक"
+     ],
+     "how": [
+      "तालुका कृषि अधिकारी या MahaDBT के ज़रिए आवेदन करें",
+      "गाँव के मुफ़्त सहायता केंद्र फ़ॉर्म भरने में मदद करते हैं",
+      "सरकार का लक्ष्य 30 दिन में दावा निपटाना है"
+     ]
+    },
+    "mr": {
+     "title": "शेतकरी अपघात सुरक्षा (गोपीनाथ मुंडे)",
+     "benefit": "अपघाती मृत्यू किंवा अपंगत्वास ₹2 लाखांपर्यंत",
+     "summary": "रस्ते अपघात, वीज पडणे, सर्पदंश, उष्माघात, जनावरांचा हल्ला अशा घटनांनंतर कुटुंबाला मदत. आता भूमिहीन शेतमजूर आणि 18–75 वयोगटातील कुटुंबातील सदस्यही समाविष्ट. मार्च 2031 पर्यंत सुरू.",
+     "who": [
+      "महाराष्ट्रातील शेतकरी, भूमिहीन शेतमजूर आणि त्यांच्या कुटुंबातील सदस्य, वय 18–75"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "मृत्यू किंवा अपंगत्व प्रमाणपत्र",
+      "FIR / पंचनामा",
+      "7/12, किंवा भूमिहीनांसाठी ग्रामपंचायतीचा दाखला",
+      "बँक पासबुक"
+     ],
+     "how": [
+      "तालुका कृषी अधिकारी किंवा MahaDBT मार्फत अर्ज करा",
+      "गावातील मोफत मदत केंद्रे अर्ज भरण्यास मदत करतात",
+      "30 दिवसांत दावा निकाली काढण्याचे सरकारचे उद्दिष्ट आहे"
+     ]
+    }
+   },
+   "checked": "2026-10-07"
+  },
+  {
+   "id": "pm_kmy",
+   "icon": "elderly",
+   "group": "pension",
+   "states": [],
+   "priority": 6,
+   "apply": "https://maandhan.in/",
+   "info": "https://maandhan.in/",
+   "source": "PM Kisan Maandhan · Govt of India",
+   "t": {
+    "en": {
+     "title": "Farmer pension (PM Kisan Maandhan)",
+     "benefit": "₹3,000 a month after age 60",
+     "summary": "Pay ₹55 to ₹200 a month depending on your age, the government adds the same amount, and from 60 you get a pension of ₹3,000 every month.",
+     "who": [
+      "Small and marginal farmers aged 18–40 with up to 2 hectares (about 5 acres)",
+      "Not if already in EPFO, NPS or ESIC, or an income-tax payer"
+     ],
+     "docs": [
+      "Aadhaar card",
+      "Bank account with IFSC",
+      "Land record"
+     ],
+     "how": [
+      "Register free at a CSC, or on maandhan.in",
+      "Your monthly share is auto-debited from your bank account",
+      "The pension starts at 60"
+     ]
+    },
+    "hi": {
+     "title": "किसान पेंशन (पीएम किसान मानधन)",
+     "benefit": "60 साल के बाद ₹3,000 हर महीने",
+     "summary": "उम्र के हिसाब से हर महीने ₹55 से ₹200 जमा करें, सरकार उतना ही और जोड़ती है, और 60 साल से हर महीने ₹3,000 पेंशन।",
+     "who": [
+      "18–40 साल के छोटे और सीमांत किसान, 2 हेक्टेयर (लगभग 5 एकड़) तक ज़मीन",
+      "EPFO, NPS या ESIC में पहले से हों, या आयकर भरते हों, तो नहीं"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "IFSC वाला बैंक खाता",
+      "ज़मीन का रिकॉर्ड"
+     ],
+     "how": [
+      "CSC पर मुफ़्त पंजीकरण करें, या maandhan.in पर",
+      "आपका मासिक हिस्सा बैंक खाते से अपने आप कटता है",
+      "पेंशन 60 साल पर शुरू होती है"
+     ]
+    },
+    "mr": {
+     "title": "शेतकरी पेन्शन (पीएम किसान मानधन)",
+     "benefit": "60 वर्षांनंतर दरमहा ₹3,000",
+     "summary": "वयानुसार दरमहा ₹55 ते ₹200 भरा, सरकार तेवढीच रक्कम जोडते, आणि 60 वर्षांपासून दरमहा ₹3,000 पेन्शन.",
+     "who": [
+      "18–40 वयाचे अल्प व अत्यल्प भूधारक, 2 हेक्टरपर्यंत (सुमारे 5 एकर) जमीन",
+      "आधीच EPFO, NPS किंवा ESIC मध्ये असल्यास, किंवा आयकर भरत असल्यास नाही"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "IFSC असलेले बँक खाते",
+      "जमिनीची नोंद"
+     ],
+     "how": [
+      "CSC वर मोफत नोंदणी करा, किंवा maandhan.in वर",
+      "तुमचा मासिक हिस्सा बँक खात्यातून आपोआप कापला जातो",
+      "पेन्शन 60 व्या वर्षी सुरू होते"
+     ]
+    }
+   },
+   "checked": "2026-10-07"
+  },
+  {
+   "id": "soil_card",
+   "icon": "science",
+   "group": "soil",
+   "states": [],
+   "priority": 5,
+   "cropsAny": true,
+   "apply": null,
+   "info": "https://soilhealth.dac.gov.in/",
+   "source": "Soil Health Card · Govt of India",
+   "t": {
+    "en": {
+     "title": "Soil Health Card",
+     "benefit": "Free soil test and fertiliser advice",
+     "summary": "A free test tells you which nutrients your soil has and how much fertiliser it really needs — so you spend less and grow more.",
+     "who": [
+      "Every farmer"
+     ],
+     "docs": [
+      "Aadhaar card",
+      "Land record (7/12 · in MP: khasra / B-1)"
+     ],
+     "how": [
+      "Tell your village agriculture assistant (krishi sahayak; in MP the rural agriculture extension officer) or the taluka / block agriculture office",
+      "They take a soil sample from your field",
+      "Download your card from soilhealth.dac.gov.in"
+     ]
+    },
+    "hi": {
+     "title": "मृदा स्वास्थ्य कार्ड",
+     "benefit": "मुफ़्त मिट्टी जाँच और खाद की सलाह",
+     "summary": "मुफ़्त जाँच से पता चलता है कि आपकी मिट्टी में कौन-से पोषक तत्व हैं और उसे सच में कितनी खाद चाहिए — खर्च कम, पैदावार ज़्यादा।",
+     "who": [
+      "सभी किसान"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "ज़मीन का रिकॉर्ड (7/12 उतारा · मध्य प्रदेश में खसरा / B-1)"
+     ],
+     "how": [
+      "गाँव के कृषि सहायक (मध्य प्रदेश में ग्रामीण कृषि विस्तार अधिकारी) या तालुका / ब्लॉक कृषि कार्यालय को बताएँ",
+      "वे आपके खेत से मिट्टी का नमूना लेते हैं",
+      "soilhealth.dac.gov.in से अपना कार्ड डाउनलोड करें"
+     ]
+    },
+    "mr": {
+     "title": "मृदा आरोग्य पत्रिका",
+     "benefit": "मोफत माती परीक्षण आणि खत सल्ला",
+     "summary": "मोफत परीक्षणातून कळते की तुमच्या मातीत कोणती अन्नद्रव्ये आहेत आणि तिला खरोखर किती खत हवे — खर्च कमी, उत्पादन जास्त.",
+     "who": [
+      "सर्व शेतकरी"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "7/12 उतारा"
+     ],
+     "how": [
+      "गावातील कृषी सहाय्यक किंवा तालुका कृषी कार्यालयाला सांगा",
+      "ते तुमच्या शेतातील मातीचा नमुना घेतात",
+      "soilhealth.dac.gov.in वरून तुमची पत्रिका डाउनलोड करा"
+     ]
+    }
+   },
+   "checked": "2026-10-07"
+  },
+  {
+   "id": "cotton_cci",
+   "icon": "storefront",
+   "group": "selling",
+   "states": [],
+   "priority": 2,
+   "crops": [
+    "cotton",
+    "kapas"
+   ],
+   "months": [
+    9,
+    10,
+    11,
+    12,
+    1,
+    2,
+    3
+   ],
+   "apply": null,
+   "info": null,
+   "source": "Cotton Corporation of India (CCI) · reports of Sep 2026",
+   "checked": "2026-11-10",
+   "t": {
+    "en": {
+     "title": "Sell cotton at MSP (CCI)",
+     "benefit": "MSP 2026-27: ₹8,267 medium · ₹8,667 long staple (per quintal)",
+     "summary": "The Cotton Corporation of India (CCI) buys kapas at the MSP. First you must register on CCI's Kapas Kisan app — for this season registration was announced from 1 September to 31 October 2026. Then you book a 7-day slot and sell at a CCI centre; the money goes straight to your Aadhaar-linked bank account. In Maharashtra buying usually starts in mid-October.",
+     "who": [
+      "Farmers whose cotton is recorded in their land record this season (in Maharashtra: 7/12 through e-Pik Pahani, the e-crop survey)",
+      "CCI buys only up to a limit per acre, set by your district's yield — the app shows yours"
+     ],
+     "docs": [
+      "Land record with this season's cotton entry (in Maharashtra: 7/12 through e-Pik Pahani)",
+      "Aadhaar card",
+      "Mobile number linked to Aadhaar",
+      "Bank account linked to Aadhaar (for the payment)"
+     ],
+     "how": [
+      "Registration was announced till 31 October 2026 — not registered yet? Ask your APMC office whether it is still open (they help for free); registration is on CCI's Kapas Kisan app with the Aadhaar OTP",
+      "Book a slot in the app — you can sell on any day of your 7-day slot at the CCI centre it shows",
+      "Bring dry, clean cotton: full MSP up to 8% moisture; above 8% the price is cut (about 1% for each extra 1%), and above 12% CCI does not buy",
+      "Keep the weighbridge slip; the payment comes to your Aadhaar-linked bank account with an SMS",
+      "CCI centres in Jalgaon district in 2024-25: Jalgaon, Jamner, Pahur, Shendurni, Pachora, Chalisgaon, Bhusawal, Bodwad, Chopda — this season's list is in the app"
+     ]
+    },
+    "hi": {
+     "title": "कपास MSP पर बेचें (CCI)",
+     "benefit": "MSP 2026-27: ₹8,267 मध्यम · ₹8,667 लंबा रेशा (प्रति क्विंटल)",
+     "summary": "भारतीय कपास निगम (CCI) कपास MSP पर ख़रीदता है। इसके लिए पहले CCI के 'कपास किसान' ऐप पर पंजीकरण ज़रूरी है — इस सीज़न पंजीकरण 1 सितंबर से 31 अक्टूबर 2026 तक घोषित हुआ था। फिर 7 दिन का स्लॉट बुक करके CCI केंद्र पर बेचें; पैसा सीधे आधार से जुड़े बैंक खाते में आता है। महाराष्ट्र में ख़रीद आम तौर पर अक्टूबर के मध्य से शुरू होती है।",
+     "who": [
+      "जिन किसानों की कपास इस सीज़न ज़मीन के रिकॉर्ड में दर्ज है (महाराष्ट्र में: ई-पीक पाहणी से 7/12 पर)",
+      "CCI प्रति एकड़ एक सीमा तक ही ख़रीदता है, जो आपके ज़िले की उपज से तय होती है — ऐप में आपकी सीमा दिखती है"
+     ],
+     "docs": [
+      "ज़मीन का रिकॉर्ड, जिसमें इस सीज़न की कपास दर्ज हो (महाराष्ट्र में: ई-पीक पाहणी वाला 7/12 उतारा)",
+      "आधार कार्ड",
+      "आधार से जुड़ा मोबाइल नंबर",
+      "आधार से जुड़ा बैंक खाता (भुगतान के लिए)"
+     ],
+     "how": [
+      "पंजीकरण 31 अक्टूबर 2026 तक घोषित था — अभी तक नहीं कराया? APMC कार्यालय में पूछें कि पंजीकरण अभी खुला है या नहीं (वहाँ मुफ़्त मदद मिलती है); पंजीकरण CCI के 'कपास किसान' ऐप पर आधार OTP से होता है",
+      "ऐप में स्लॉट बुक करें — 7 दिन के स्लॉट में किसी भी दिन, ऐप में दिखाए गए CCI केंद्र पर बेच सकते हैं",
+      "सूखी, साफ़ कपास लाएँ: 8% नमी तक पूरा MSP; 8% से ऊपर भाव कटता है (हर 1% ज़्यादा नमी पर लगभग 1%), और 12% से ज़्यादा नमी पर CCI नहीं ख़रीदता",
+      "काँटे की पर्ची सँभालकर रखें; पैसा आधार से जुड़े बैंक खाते में आता है और SMS मिलता है",
+      "2024-25 में जलगाँव ज़िले के CCI केंद्र: जलगाँव, जामनेर, पहूर, शेंदुर्णी, पाचोरा, चालीसगाँव, भुसावल, बोदवड, चोपड़ा — इस सीज़न की सूची ऐप में"
+     ]
+    },
+    "mr": {
+     "title": "कापूस हमीभावाने विका (CCI)",
+     "benefit": "हमीभाव 2026-27: ₹8,267 मध्यम · ₹8,667 लांब धागा (प्रति क्विंटल)",
+     "summary": "भारतीय कापूस महामंडळ (CCI) कापूस हमीभावाने खरेदी करते. त्यासाठी आधी CCI च्या 'कपास किसान' ॲपवर नोंदणी आवश्यक आहे — या हंगामात नोंदणी 1 सप्टेंबर ते 31 ऑक्टोबर 2026 जाहीर झाली होती. नंतर 7 दिवसांचा स्लॉट बुक करून CCI केंद्रावर विका; पैसे थेट आधारशी जोडलेल्या बँक खात्यात येतात. महाराष्ट्रात खरेदी साधारण ऑक्टोबरच्या मध्यापासून सुरू होते.",
+     "who": [
+      "ज्यांच्या कापसाची या हंगामात जमिनीच्या नोंदीत नोंद आहे असे शेतकरी (महाराष्ट्रात: ई-पीक पाहणीद्वारे 7/12 वर)",
+      "CCI एकरी ठराविक मर्यादेपर्यंतच खरेदी करते, ती तुमच्या जिल्ह्याच्या उत्पादकतेवरून ठरते — ॲपमध्ये तुमची मर्यादा दिसते"
+     ],
+     "docs": [
+      "या हंगामातील कापसाची नोंद असलेला जमिनीचा उतारा (महाराष्ट्रात: ई-पीक पाहणीसह 7/12)",
+      "आधार कार्ड",
+      "आधारशी जोडलेला मोबाईल नंबर",
+      "आधारशी जोडलेले बँक खाते (पैशांसाठी)"
+     ],
+     "how": [
+      "नोंदणी 31 ऑक्टोबर 2026 पर्यंत जाहीर होती — अजून केली नाही? नोंदणी अजून सुरू आहे का ते बाजार समिती कार्यालयात विचारा (तिथे मोफत मदत मिळते); नोंदणी CCI च्या 'कपास किसान' ॲपवर आधार OTP ने होते",
+      "ॲपमध्ये स्लॉट बुक करा — 7 दिवसांच्या स्लॉटमध्ये कोणत्याही दिवशी, ॲपने दाखवलेल्या CCI केंद्रावर विकू शकता",
+      "कोरडा, स्वच्छ कापूस आणा: 8% ओलाव्यापर्यंत पूर्ण हमीभाव; 8% पेक्षा जास्त असल्यास भाव कापला जातो (प्रत्येक 1% जास्त ओलाव्यामागे सुमारे 1%), आणि 12% पेक्षा जास्त ओलावा असल्यास CCI खरेदी करत नाही",
+      "काट्याची पावती जपून ठेवा; पैसे आधार-जोडलेल्या बँक खात्यात येतात आणि SMS मिळतो",
+      "2024-25 मध्ये जळगाव जिल्ह्यातील CCI केंद्रे: जळगाव, जामनेर, पहूर, शेंदुर्णी, पाचोरा, चाळीसगाव, भुसावळ, बोदवड, चोपडा — या हंगामाची यादी ॲपमध्ये"
+     ]
+    }
+   }
+  },
+  {
+   "id": "farmer_id_mp",
+   "icon": "badge",
+   "group": "id",
+   "states": [
+    "Madhya Pradesh"
+   ],
+   "priority": 1,
+   "checked": "2026-10-19",
+   "apply": "https://mpfr.agristack.gov.in/farmer-registry-mp/",
+   "info": "https://mpfr.agristack.gov.in/farmer-registry-mp/",
+   "source": "AgriStack · Govt of Madhya Pradesh",
+   "t": {
+    "en": {
+     "title": "Farmer ID (AgriStack)",
+     "benefit": "Free · needed for many schemes",
+     "summary": "An 11-digit digital Farmer ID linked to your land record. Madhya Pradesh was the first state to meet the full Farmer Registry standard, and schemes such as PM-KISAN now ask for it — so get this one first.",
+     "who": [
+      "Farmers with land in Madhya Pradesh (khasra / B-1 in their name)"
+     ],
+     "docs": [
+      "Aadhaar card",
+      "Mobile number linked to Aadhaar",
+      "Khasra / B-1 land record"
+     ],
+     "how": [
+      "Go to the nearest CSC, Lok Seva Kendra or MP Online kiosk, or register yourself on the official Farmer Registry site",
+      "Verify with the Aadhaar OTP and select your land (khasra)",
+      "The patwari checks it — then write down your Farmer ID number and keep it safe"
+     ]
+    },
+    "hi": {
+     "title": "फ़ार्मर आईडी (एग्रीस्टैक)",
+     "benefit": "मुफ़्त · कई योजनाओं के लिए ज़रूरी",
+     "summary": "आपके ज़मीन के रिकॉर्ड से जुड़ी 11 अंकों की डिजिटल किसान पहचान। फ़ार्मर रजिस्ट्री का पूरा मानक पूरा करने वाला मध्य प्रदेश पहला राज्य है, और PM-KISAN जैसी योजनाओं में अब यह माँगी जा रही है — इसलिए सबसे पहले यही बनवाएँ।",
+     "who": [
+      "मध्य प्रदेश में ज़मीन वाले किसान (खसरा / B-1 उनके नाम पर)"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "आधार से जुड़ा मोबाइल नंबर",
+      "खसरा / B-1 की नकल"
+     ],
+     "how": [
+      "नज़दीकी CSC, लोक सेवा केंद्र या MP Online कियोस्क जाएँ, या सरकारी Farmer Registry साइट पर ख़ुद पंजीकरण करें",
+      "आधार OTP से पुष्टि करें और अपनी ज़मीन (खसरा) चुनें",
+      "पटवारी जाँच करते हैं — फिर अपना फ़ार्मर आईडी नंबर लिखकर सँभालकर रखें"
+     ]
+    },
+    "mr": {
+     "title": "शेतकरी ओळख क्रमांक (ॲग्रीस्टॅक)",
+     "benefit": "मोफत · अनेक योजनांसाठी आवश्यक",
+     "summary": "तुमच्या जमिनीच्या नोंदीशी जोडलेली 11 अंकी डिजिटल शेतकरी ओळख. शेतकरी नोंदणीचे पूर्ण मानक गाठणारे मध्य प्रदेश हे पहिले राज्य आहे, आणि PM-KISAN सारख्या योजनांमध्ये आता ती मागितली जाते — म्हणून आधी हीच काढा.",
+     "who": [
+      "मध्य प्रदेशात जमीन असलेले शेतकरी (खसरा / B-1 त्यांच्या नावावर)"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "आधारशी जोडलेला मोबाईल नंबर",
+      "खसरा / B-1 उतारा"
+     ],
+     "how": [
+      "जवळच्या CSC, लोक सेवा केंद्र किंवा MP Online कियॉस्कवर जा, किंवा अधिकृत Farmer Registry साइटवर स्वतः नोंदणी करा",
+      "आधार OTP ने खात्री करा आणि तुमची जमीन (खसरा) निवडा",
+      "पटवारी तपासणी करतात — मग तुमचा शेतकरी ओळख क्रमांक लिहून ठेवा"
+     ]
+    }
+   }
+  },
+  {
+   "id": "kisan_kalyan_mp",
+   "icon": "savings",
+   "group": "income",
+   "states": [
+    "Madhya Pradesh"
+   ],
+   "priority": 3,
+   "checked": "2026-10-19",
+   "apply": null,
+   "info": "https://saara.mp.gov.in/",
+   "source": "CM Kisan Kalyan Yojana · Govt of Madhya Pradesh",
+   "t": {
+    "en": {
+     "title": "Mukhyamantri Kisan Kalyan Yojana",
+     "benefit": "₹6,000 a year — on top of PM-KISAN",
+     "summary": "Madhya Pradesh adds ₹6,000 a year (three instalments of ₹2,000) for farmers who get PM-KISAN — there is no separate form. In July 2026 over 82 lakh farmers got ₹4,000 at once (two instalments together).",
+     "who": [
+      "Madhya Pradesh farmers who receive PM-KISAN",
+      "Not for: income-tax payers, government employees, elected representatives"
+     ],
+     "docs": [
+      "Same as PM-KISAN: e-KYC done, bank account linked to Aadhaar (DBT on)"
+     ],
+     "how": [
+      "Keep your PM-KISAN e-KYC complete",
+      "Make sure your bank account is linked to Aadhaar for DBT",
+      "Check your payment on the state's SAARA portal (CM Kisan Kalyan Yojana → beneficiary status)"
+     ]
+    },
+    "hi": {
+     "title": "मुख्यमंत्री किसान कल्याण योजना",
+     "benefit": "₹6,000 सालाना — PM-KISAN के ऊपर से",
+     "summary": "PM-KISAN पाने वाले किसानों को मध्य प्रदेश सरकार साल में ₹6,000 (₹2,000 की तीन किस्तें) और देती है — अलग फ़ॉर्म नहीं भरना। जुलाई 2026 में 82 लाख से ज़्यादा किसानों को एक साथ ₹4,000 (दो किस्तें) मिले।",
+     "who": [
+      "PM-KISAN पाने वाले मध्य प्रदेश के किसान",
+      "इन्हें नहीं: आयकर भरने वाले, सरकारी कर्मचारी, जनप्रतिनिधि"
+     ],
+     "docs": [
+      "PM-KISAN जैसा ही: e-KYC पूरा, बैंक खाता आधार से जुड़ा (DBT चालू)"
+     ],
+     "how": [
+      "PM-KISAN का e-KYC पूरा रखें",
+      "बैंक खाता आधार से जुड़ा हो, DBT के लिए",
+      "राज्य के SAARA पोर्टल पर भुगतान देखें (मुख्यमंत्री किसान कल्याण योजना → हितग्राही की स्थिति)"
+     ]
+    },
+    "mr": {
+     "title": "मुख्यमंत्री किसान कल्याण योजना (मध्य प्रदेश)",
+     "benefit": "वर्षाला ₹6,000 — PM-KISAN च्या वर",
+     "summary": "PM-KISAN मिळणाऱ्या शेतकऱ्यांना मध्य प्रदेश सरकार वर्षाला आणखी ₹6,000 (₹2,000 चे तीन हप्ते) देते — वेगळा अर्ज नाही. जुलै 2026 मध्ये 82 लाखांहून अधिक शेतकऱ्यांना एकदम ₹4,000 (दोन हप्ते) मिळाले.",
+     "who": [
+      "PM-KISAN मिळणारे मध्य प्रदेशातील शेतकरी",
+      "यांना नाही: आयकर भरणारे, सरकारी कर्मचारी, लोकप्रतिनिधी"
+     ],
+     "docs": [
+      "PM-KISAN प्रमाणेच: e-KYC पूर्ण, बँक खाते आधारशी जोडलेले (DBT सुरू)"
+     ],
+     "how": [
+      "PM-KISAN चे e-KYC पूर्ण ठेवा",
+      "DBT साठी बँक खाते आधारशी जोडलेले असल्याची खात्री करा",
+      "राज्याच्या SAARA पोर्टलवर पैशांची स्थिती पाहा (मुख्यमंत्री किसान कल्याण योजना → लाभार्थी स्थिती)"
+     ]
+    }
+   }
+  },
+  {
+   "id": "bhavantar_soybean",
+   "icon": "storefront",
+   "group": "selling",
+   "states": [
+    "Madhya Pradesh"
+   ],
+   "priority": 2,
+   "checked": "2026-10-19",
+   "crops": [
+    "soyabean",
+    "soybean"
+   ],
+   "months": [
+    9,
+    10,
+    11,
+    12,
+    1
+   ],
+   "apply": null,
+   "info": null,
+   "source": "Bhavantar Yojana · Govt of Madhya Pradesh · reports of Sep–Oct 2026",
+   "t": {
+    "en": {
+     "title": "Bhavantar — soybean price gap",
+     "benefit": "If soybean sells below the MSP (₹5,708 for 2026-27), the state pays the gap",
+     "summary": "Under the Bhavantar scheme you sell soybean to traders in the state's notified mandis as usual, and if the price is below the MSP the state pays the gap straight into your bank account. The gap is worked out with a 'model rate': the weighted average of soybean prices in the state's mandis over 14 days. Registration for kharif 2026 began on 3 October and was extended to 24 October 2026.",
+     "who": [
+      "Soybean farmers of Madhya Pradesh registered on e-Uparjan for this season",
+      "Tenants, sharecroppers, kotwars and forest patta holders register only at cooperative centres"
+     ],
+     "docs": [
+      "Land record (khasra / B-1) — the name must match Aadhaar",
+      "Aadhaar card and one more photo ID",
+      "Bank account in your own name, linked to Aadhaar (not joint or inactive; Fino, Airtel and Paytm payments bank accounts are not accepted)",
+      "Mobile number linked to Aadhaar"
+     ],
+     "how": [
+      "Register in time — free at the gram panchayat, janpad panchayat, tehsil office or cooperative society; MP Online, CSC and Lok Seva Kendra kiosks charge up to ₹50",
+      "Sell in a notified mandi of Madhya Pradesh within the sale period (in 2025-26: 24 October to 15 January); Aadhaar is checked again when you sell, by OTP or fingerprint",
+      "Last season's rule: sold at or above the model rate — you get the MSP minus your price; sold below it — the MSP minus the model rate. So a sale far below the going rate is not fully made up",
+      "Keep the mandi sale slip; the money comes by DBT to your Aadhaar-linked bank account"
+     ]
+    },
+    "hi": {
+     "title": "भावांतर — सोयाबीन के भाव का अंतर",
+     "benefit": "सोयाबीन MSP (2026-27: ₹5,708) से कम बिके तो अंतर राज्य सरकार देती है",
+     "summary": "भावांतर योजना में आप सोयाबीन हमेशा की तरह राज्य की अधिसूचित मंडियों में व्यापारियों को बेचते हैं, और भाव MSP से कम रहे तो अंतर की राशि राज्य सरकार सीधे बैंक खाते में देती है। अंतर 'मॉडल रेट' से तय होता है — राज्य की मंडियों में 14 दिन के सोयाबीन भाव का भारित औसत। खरीफ 2026 का पंजीयन 3 अक्टूबर से शुरू हुआ और 24 अक्टूबर 2026 तक बढ़ाया गया।",
+     "who": [
+      "ई-उपार्जन पर इस सीज़न के लिए पंजीकृत मध्य प्रदेश के सोयाबीन किसान",
+      "सिकमी, बटाईदार, कोटवार और वन पट्टाधारी सिर्फ़ सहकारी केंद्रों पर पंजीयन करा सकते हैं"
+     ],
+     "docs": [
+      "ज़मीन का रिकॉर्ड (खसरा / B-1) — नाम आधार से मेल खाए",
+      "आधार कार्ड और एक और फ़ोटो पहचान पत्र",
+      "अपने नाम का, आधार से जुड़ा बैंक खाता (संयुक्त या बंद खाता नहीं; Fino, Airtel, Paytm पेमेंट्स बैंक के खाते मान्य नहीं)",
+      "आधार से जुड़ा मोबाइल नंबर"
+     ],
+     "how": [
+      "समय पर पंजीयन कराएँ — ग्राम पंचायत, जनपद पंचायत, तहसील कार्यालय या सहकारी समिति में मुफ़्त; MP Online, CSC, लोक सेवा केंद्र पर अधिकतम ₹50",
+      "विक्रय अवधि में मध्य प्रदेश की अधिसूचित मंडी में बेचें (2025-26 में: 24 अक्टूबर से 15 जनवरी); बेचते समय आधार की फिर जाँच होती है — OTP या अंगूठे से",
+      "पिछले सीज़न का नियम: मॉडल रेट या उससे ऊपर बेचा — MSP और आपके भाव का अंतर मिलता है; मॉडल रेट से नीचे बेचा — MSP और मॉडल रेट का अंतर। यानी चलते भाव से बहुत सस्ता बेचने का घाटा पूरा नहीं होता",
+      "मंडी की बिक्री पर्ची सँभालकर रखें; पैसा DBT से आधार से जुड़े बैंक खाते में आता है"
+     ]
+    },
+    "mr": {
+     "title": "भावांतर — सोयाबीन भावातील फरक (मध्य प्रदेश)",
+     "benefit": "सोयाबीन हमीभावापेक्षा (2026-27: ₹5,708) कमी दराने विकले तर फरक राज्य सरकार देते",
+     "summary": "भावांतर योजनेत तुम्ही सोयाबीन नेहमीप्रमाणे राज्याच्या अधिसूचित बाजार समित्यांमध्ये व्यापाऱ्यांना विकता, आणि भाव हमीभावापेक्षा कमी असल्यास फरकाची रक्कम राज्य सरकार थेट बँक खात्यात देते. फरक 'मॉडेल रेट' वरून ठरतो — राज्यातील बाजारांमधील 14 दिवसांच्या सोयाबीन भावांची भारित सरासरी. खरीप 2026 ची नोंदणी 3 ऑक्टोबरला सुरू झाली आणि 24 ऑक्टोबर 2026 पर्यंत वाढवली गेली.",
+     "who": [
+      "ई-उपार्जनवर या हंगामासाठी नोंदणी केलेले मध्य प्रदेशातील सोयाबीन उत्पादक",
+      "कुळ, बटाईदार, कोतवाल आणि वन पट्टेधारक फक्त सहकारी केंद्रांवर नोंदणी करू शकतात"
+     ],
+     "docs": [
+      "जमिनीची नोंद (खसरा / B-1) — नाव आधारशी जुळले पाहिजे",
+      "आधार कार्ड आणि आणखी एक फोटो ओळखपत्र",
+      "स्वतःच्या नावाचे, आधारशी जोडलेले बँक खाते (संयुक्त किंवा बंद खाते नाही; Fino, Airtel, Paytm पेमेंट्स बँक खाती चालत नाहीत)",
+      "आधारशी जोडलेला मोबाईल नंबर"
+     ],
+     "how": [
+      "वेळेत नोंदणी करा — ग्रामपंचायत, जनपद पंचायत, तहसील कार्यालय किंवा सहकारी संस्थेत मोफत; MP Online, CSC, लोक सेवा केंद्रावर जास्तीत जास्त ₹50",
+      "विक्री कालावधीत मध्य प्रदेशातील अधिसूचित बाजार समितीत विका (2025-26 मध्ये: 24 ऑक्टोबर ते 15 जानेवारी); विक्रीच्या वेळी आधारची पुन्हा तपासणी होते — OTP किंवा अंगठ्याने",
+      "मागील हंगामाचा नियम: मॉडेल रेट किंवा त्यापेक्षा जास्त दराने विकले — हमीभाव आणि तुमच्या दरातील फरक मिळतो; मॉडेल रेटपेक्षा कमी दराने विकले — हमीभाव आणि मॉडेल रेटमधील फरक. म्हणजे चालू भावापेक्षा खूप स्वस्त विकण्याचा तोटा पूर्ण भरून निघत नाही",
+      "बाजाराची विक्री पावती जपून ठेवा; पैसे DBT ने आधारशी जोडलेल्या बँक खात्यात येतात"
+     ]
+    }
+   }
+  },
+  {
+   "id": "wheat_msp_mp",
+   "icon": "storefront",
+   "group": "selling",
+   "states": [
+    "Madhya Pradesh"
+   ],
+   "priority": 2,
+   "checked": "2026-10-19",
+   "crops": [
+    "wheat"
+   ],
+   "months": [
+    1,
+    2,
+    3,
+    4,
+    5
+   ],
+   "apply": null,
+   "info": null,
+   "source": "MP wheat procurement (e-Uparjan) · reports of Jan–Mar 2026 · Rabi MSP of 30 Sep 2026",
+   "t": {
+    "en": {
+     "title": "Sell wheat at MSP (MP)",
+     "benefit": "MSP for 2027: ₹2,610 a quintal · in 2026 MP paid ₹2,625 with its bonus",
+     "summary": "The state buys wheat at the MSP at its procurement centres from farmers who register first. For the 2027 season the Centre's MSP is ₹2,610 a quintal (announced on 30 September 2026). In 2026 Madhya Pradesh added a ₹40 bonus (₹2,625 in all); whether there is a bonus in 2027 is announced before the season.",
+     "who": [
+      "Wheat farmers of Madhya Pradesh who register for this season",
+      "Tenants, sharecroppers, kotwars and forest patta holders register only at cooperative centres"
+     ],
+     "docs": [
+      "Land record (khasra / B-1) — the name must match Aadhaar",
+      "Aadhaar card and one more photo ID",
+      "Bank account in your own name, linked to Aadhaar (not joint or inactive; Fino, Airtel and Paytm payments bank accounts are not accepted)",
+      "Mobile number linked to Aadhaar"
+     ],
+     "how": [
+      "Register in February–March (in 2026: 7 February to 10 March) — free at the gram panchayat, janpad panchayat, tehsil facilitation centre or cooperative society; kiosks charge up to ₹50",
+      "Buying runs from mid-March to mid-May — in 2026: 16 March to 5 May in the Indore, Ujjain, Bhopal and Narmadapuram divisions, 23 March to 12 May in the rest",
+      "Bring clean, dry wheat to your centre on your date; Aadhaar is checked by OTP or fingerprint",
+      "The money comes to your Aadhaar-linked bank account"
+     ]
+    },
+    "hi": {
+     "title": "गेहूं MSP पर बेचें (मध्य प्रदेश)",
+     "benefit": "2027 का MSP: ₹2,610 प्रति क्विंटल · 2026 में बोनस मिलाकर ₹2,625 मिले",
+     "summary": "पहले पंजीयन कराने वाले किसानों से राज्य सरकार उपार्जन केंद्रों पर MSP पर गेहूं ख़रीदती है। 2027 के सीज़न के लिए केंद्र का MSP ₹2,610 प्रति क्विंटल है (30 सितंबर 2026 को घोषित)। 2026 में मध्य प्रदेश ने ₹40 बोनस जोड़ा था (कुल ₹2,625); 2027 में बोनस मिलेगा या नहीं, यह सीज़न से पहले घोषित होता है।",
+     "who": [
+      "इस सीज़न के लिए पंजीयन कराने वाले मध्य प्रदेश के गेहूं किसान",
+      "सिकमी, बटाईदार, कोटवार और वन पट्टाधारी सिर्फ़ सहकारी केंद्रों पर पंजीयन करा सकते हैं"
+     ],
+     "docs": [
+      "ज़मीन का रिकॉर्ड (खसरा / B-1) — नाम आधार से मेल खाए",
+      "आधार कार्ड और एक और फ़ोटो पहचान पत्र",
+      "अपने नाम का, आधार से जुड़ा बैंक खाता (संयुक्त या बंद खाता नहीं; Fino, Airtel, Paytm पेमेंट्स बैंक के खाते मान्य नहीं)",
+      "आधार से जुड़ा मोबाइल नंबर"
+     ],
+     "how": [
+      "फ़रवरी–मार्च में पंजीयन कराएँ (2026 में: 7 फ़रवरी से 10 मार्च) — ग्राम पंचायत, जनपद पंचायत, तहसील सुविधा केंद्र या सहकारी समिति में मुफ़्त; कियोस्क पर अधिकतम ₹50",
+      "ख़रीदी मार्च के मध्य से मई के मध्य तक — 2026 में: इंदौर, उज्जैन, भोपाल और नर्मदापुरम संभाग में 16 मार्च से 5 मई, बाकी संभागों में 23 मार्च से 12 मई",
+      "अपनी तारीख़ पर साफ़, सूखा गेहूं केंद्र पर लाएँ; आधार की जाँच OTP या अंगूठे से होती है",
+      "पैसा आधार से जुड़े बैंक खाते में आता है"
+     ]
+    },
+    "mr": {
+     "title": "गहू हमीभावाने विका (मध्य प्रदेश)",
+     "benefit": "2027 चा हमीभाव: ₹2,610 प्रति क्विंटल · 2026 मध्ये बोनससह ₹2,625 मिळाले",
+     "summary": "आधी नोंदणी केलेल्या शेतकऱ्यांकडून राज्य सरकार खरेदी केंद्रांवर हमीभावाने गहू खरेदी करते. 2027 च्या हंगामासाठी केंद्राचा हमीभाव ₹2,610 प्रति क्विंटल आहे (30 सप्टेंबर 2026 रोजी जाहीर). 2026 मध्ये मध्य प्रदेशने ₹40 बोनस दिला होता (एकूण ₹2,625); 2027 मध्ये बोनस मिळेल की नाही हे हंगामापूर्वी जाहीर होते.",
+     "who": [
+      "या हंगामासाठी नोंदणी करणारे मध्य प्रदेशातील गहू उत्पादक",
+      "कुळ, बटाईदार, कोतवाल आणि वन पट्टेधारक फक्त सहकारी केंद्रांवर नोंदणी करू शकतात"
+     ],
+     "docs": [
+      "जमिनीची नोंद (खसरा / B-1) — नाव आधारशी जुळले पाहिजे",
+      "आधार कार्ड आणि आणखी एक फोटो ओळखपत्र",
+      "स्वतःच्या नावाचे, आधारशी जोडलेले बँक खाते (संयुक्त किंवा बंद खाते नाही; Fino, Airtel, Paytm पेमेंट्स बँक खाती चालत नाहीत)",
+      "आधारशी जोडलेला मोबाईल नंबर"
+     ],
+     "how": [
+      "फेब्रुवारी–मार्चमध्ये नोंदणी करा (2026 मध्ये: 7 फेब्रुवारी ते 10 मार्च) — ग्रामपंचायत, जनपद पंचायत, तहसील सुविधा केंद्र किंवा सहकारी संस्थेत मोफत; कियॉस्कवर जास्तीत जास्त ₹50",
+      "खरेदी मार्चच्या मध्यापासून मेच्या मध्यापर्यंत — 2026 मध्ये: इंदूर, उज्जैन, भोपाळ आणि नर्मदापुरम विभागात 16 मार्च ते 5 मे, इतर विभागांत 23 मार्च ते 12 मे",
+      "तुमच्या तारखेला स्वच्छ, कोरडा गहू केंद्रावर आणा; आधारची तपासणी OTP किंवा अंगठ्याने होते",
+      "पैसे आधारशी जोडलेल्या बँक खात्यात येतात"
+     ]
+    }
+   }
+  },
+  {
+   "id": "solar_pump_mp",
+   "icon": "solar_power",
+   "group": "power",
+   "states": [
+    "Madhya Pradesh"
+   ],
+   "priority": 4,
+   "checked": "2026-10-19",
+   "apply": "https://cmsolarpump.mp.gov.in/",
+   "info": "https://cmsolarpump.mp.gov.in/",
+   "source": "PM Krishak Mitra Surya Yojana · MP Urja Vikas Nigam",
+   "t": {
+    "en": {
+     "title": "Solar pump (PM Krishak Mitra Surya Yojana)",
+     "benefit": "Up to 90% subsidy · 1 to 7.5 HP",
+     "summary": "Madhya Pradesh's solar pump scheme (PM-KUSUM in the state): the government pays most of the cost of a 1 to 7.5 HP solar pump and you pay roughly a tenth. The company that installs it looks after the pump for 5 years.",
+     "who": [
+      "Farmers of Madhya Pradesh without a permanent electricity connection for irrigation (a temporary connection or none)",
+      "No electric pump may be running on that field, and the field gets no electric-pump subsidy later"
+     ],
+     "docs": [
+      "Aadhaar card",
+      "Khasra / B-1 land record",
+      "Temporary connection receipt, if you have one",
+      "Bank passbook, mobile number and a photo"
+     ],
+     "how": [
+      "Apply on the official solar pump portal (MP Urja Vikas Nigam) when applications are open, or ask at your electricity company office",
+      "Give your land (khasra), water source and where the pump will stand",
+      "The department inspects the field; once approved you pay your share — the portal shows it for each pump size — and the pump is installed"
+     ]
+    },
+    "hi": {
+     "title": "सोलर पंप (प्रधानमंत्री कृषक मित्र सूर्य योजना)",
+     "benefit": "90% तक अनुदान · 1 से 7.5 HP",
+     "summary": "मध्य प्रदेश की सोलर पंप योजना (राज्य में PM-KUSUM): 1 से 7.5 HP के सोलर पंप का ज़्यादातर ख़र्च सरकार देती है और आप लगभग दसवाँ हिस्सा देते हैं। पंप लगाने वाली कंपनी 5 साल तक उसका रखरखाव करती है।",
+     "who": [
+      "मध्य प्रदेश के वे किसान जिनके पास सिंचाई के लिए स्थायी बिजली कनेक्शन नहीं है (अस्थायी कनेक्शन है या कोई नहीं)",
+      "उस खेत पर कोई बिजली पंप न चलता हो, और बाद में उस खेत को बिजली पंप का अनुदान नहीं मिलेगा"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "खसरा / B-1 की नकल",
+      "अस्थायी कनेक्शन की रसीद, अगर हो",
+      "बैंक पासबुक, मोबाइल नंबर और फ़ोटो"
+     ],
+     "how": [
+      "आवेदन खुले हों तब सरकारी सोलर पंप पोर्टल (म.प्र. ऊर्जा विकास निगम) पर आवेदन करें, या बिजली कंपनी के दफ़्तर में पूछें",
+      "अपनी ज़मीन (खसरा), पानी का स्रोत और पंप लगने की जगह बताएँ",
+      "विभाग खेत की जाँच करता है; मंज़ूरी के बाद अपना हिस्सा जमा करें — हर पंप का हिस्सा पोर्टल पर दिखता है — और पंप लग जाता है"
+     ]
+    },
+    "mr": {
+     "title": "सौर पंप (प्रधानमंत्री कृषक मित्र सूर्य योजना, मध्य प्रदेश)",
+     "benefit": "90% पर्यंत अनुदान · 1 ते 7.5 HP",
+     "summary": "मध्य प्रदेशची सौर पंप योजना (राज्यातील PM-KUSUM): 1 ते 7.5 HP सौर पंपाचा बहुतेक खर्च सरकार देते आणि तुम्ही साधारण दहावा भाग देता. पंप बसवणारी कंपनी 5 वर्षे त्याची देखभाल करते.",
+     "who": [
+      "सिंचनासाठी कायमस्वरूपी वीज जोडणी नसलेले मध्य प्रदेशातील शेतकरी (तात्पुरती जोडणी किंवा काहीच नाही)",
+      "त्या शेतात वीज पंप चालू नसावा, आणि नंतर त्या शेताला वीज पंपाचे अनुदान मिळणार नाही"
+     ],
+     "docs": [
+      "आधार कार्ड",
+      "खसरा / B-1 उतारा",
+      "तात्पुरत्या जोडणीची पावती, असल्यास",
+      "बँक पासबुक, मोबाईल नंबर आणि फोटो"
+     ],
+     "how": [
+      "अर्ज सुरू असताना अधिकृत सौर पंप पोर्टलवर (म.प्र. ऊर्जा विकास निगम) अर्ज करा, किंवा वीज कंपनीच्या कार्यालयात विचारा",
+      "तुमची जमीन (खसरा), पाण्याचा स्रोत आणि पंप कुठे बसेल ते सांगा",
+      "विभाग शेताची पाहणी करतो; मंजुरीनंतर तुमचा हिस्सा भरा — प्रत्येक पंपाचा हिस्सा पोर्टलवर दिसतो — आणि पंप बसवला जातो"
+     ]
+    }
+   }
+  },
+  {
+   "id": "crop_loss",
+   "icon": "report",
+   "group": "insurance",
+   "states": [],
+   "priority": 2,
+   "cropsAny": true,
+   "checked": "2026-10-21",
+   "apply": null,
+   "info": null,
+   "source": "PMFBY · Govt of India (Lok Sabha answer of 21 Dec 2021; wild-animal cover from kharif 2026)",
+   "t": {
+    "en": {
+     "title": "Crop loss? Report within 72 hours",
+     "benefit": "For crops insured under PMFBY — a late report can lose the claim",
+     "summary": "If your insured crop is hit by hail, a landslide, water standing in the field, a cloud burst or a fire from lightning — or a cut crop drying in the field is spoilt by hail, a cyclone or unseasonal rain within 14 days of harvest — report it within 72 hours. From kharif 2026, damage by wild animals is covered the same way where your state has notified it. Widespread loss of the standing crop (drought, a long dry spell) is paid on the area's crop-cutting results and needs no report of your own.",
+     "who": [
+      "Farmers whose crop is insured under PMFBY this season — with a crop loan or without"
+     ],
+     "docs": [
+      "Your PMFBY policy or application number (on the receipt)",
+      "Aadhaar card and mobile number",
+      "Land record: survey / gat number and village (7/12 · in MP: khasra)",
+      "Crop, cause of damage, date, and how much area was hit",
+      "Photos of the damage taken with your phone's camera"
+     ],
+     "how": [
+      "Within 72 hours: report it on the government's Crop Insurance app, or on helpline 14447, or at your insurance company's office, your bank branch or the agriculture office",
+      "Write down the complaint (docket) number you get",
+      "Take clear photos of the damaged field — for wild-animal damage the app needs geo-tagged photos",
+      "Leave the damaged crop as it is until the survey team has seen it",
+      "Follow your claim with the docket number on the app or the helpline"
+     ]
+    },
+    "hi": {
+     "title": "फसल नुकसान? 72 घंटे में बताएँ",
+     "benefit": "PMFBY में बीमित फसल के लिए — देर से बताया तो दावा जा सकता है",
+     "summary": "अगर आपकी बीमित फसल पर ओले पड़ें, भूस्खलन हो, खेत में पानी भर जाए, बादल फटे या बिजली से आग लगे — या कटाई के 14 दिन के अंदर खेत में सूख रही कटी फसल ओले, चक्रवात या बेमौसम बारिश से ख़राब हो — तो 72 घंटे के अंदर बताएँ। ख़रीफ 2026 से जंगली जानवरों से हुआ नुकसान भी इसी तरह शामिल है, जहाँ आपके राज्य ने उसे अधिसूचित किया है। खड़ी फसल का बड़े इलाक़े में नुकसान (सूखा, लंबा सूखा दौर) इलाक़े की फसल कटाई जाँच से मिलता है — उसके लिए आपको अलग से नहीं बताना।",
+     "who": [
+      "जिन किसानों की फसल इस सीज़न PMFBY में बीमित है — फसल कर्ज़ के साथ या बिना"
+     ],
+     "docs": [
+      "आपकी PMFBY पॉलिसी या आवेदन नंबर (रसीद पर)",
+      "आधार कार्ड और मोबाइल नंबर",
+      "ज़मीन का रिकॉर्ड: सर्वे / गट नंबर और गाँव (7/12 · मध्य प्रदेश में खसरा)",
+      "फसल, नुकसान का कारण, तारीख़, और कितना रकबा प्रभावित",
+      "नुकसान की फ़ोटो, अपने फ़ोन के कैमरे से"
+     ],
+     "how": [
+      "72 घंटे के अंदर: सरकार के Crop Insurance ऐप पर, या हेल्पलाइन 14447 पर, या बीमा कंपनी के दफ़्तर, अपनी बैंक शाखा या कृषि कार्यालय में बताएँ",
+      "जो शिकायत (डॉकेट) नंबर मिले, उसे लिख लें",
+      "ख़राब खेत की साफ़ फ़ोटो लें — जंगली जानवरों के नुकसान के लिए ऐप में जगह-टैग वाली (geo-tagged) फ़ोटो चाहिए",
+      "सर्वे टीम के देखने तक ख़राब फसल को वैसे ही रहने दें",
+      "डॉकेट नंबर से ऐप या हेल्पलाइन पर अपना दावा देखते रहें"
+     ]
+    },
+    "mr": {
+     "title": "पीक नुकसान? 72 तासांत कळवा",
+     "benefit": "PMFBY मध्ये विमा असलेल्या पिकासाठी — उशिरा कळवल्यास दावा जाऊ शकतो",
+     "summary": "तुमच्या विमा असलेल्या पिकावर गारपीट, भूस्खलन, शेतात पाणी साचणे, ढगफुटी किंवा वीज पडून आग लागल्यास — किंवा काढणीनंतर 14 दिवसांत शेतात वाळत असलेले कापलेले पीक गारपीट, चक्रीवादळ किंवा अवकाळी पावसाने खराब झाल्यास — 72 तासांत कळवा. खरीप 2026 पासून वन्य प्राण्यांमुळे झालेले नुकसानही याच पद्धतीने समाविष्ट आहे, जिथे तुमच्या राज्याने ते अधिसूचित केले आहे. उभ्या पिकाचे मोठ्या भागातील नुकसान (दुष्काळ, पावसाचा मोठा खंड) त्या भागाच्या पीक कापणी प्रयोगांवरून मिळते — त्यासाठी तुम्हाला वेगळे कळवावे लागत नाही.",
+     "who": [
+      "ज्यांचे पीक या हंगामात PMFBY मध्ये विमा उतरवलेले आहे असे शेतकरी — पीक कर्जासह किंवा कर्जाशिवाय"
+     ],
+     "docs": [
+      "तुमचा PMFBY पॉलिसी किंवा अर्ज क्रमांक (पावतीवर)",
+      "आधार कार्ड आणि मोबाईल नंबर",
+      "जमिनीची नोंद: सर्वे / गट नंबर आणि गाव (7/12)",
+      "पीक, नुकसानाचे कारण, तारीख, आणि किती क्षेत्र बाधित",
+      "नुकसानाचे फोटो, तुमच्या फोनच्या कॅमेऱ्याने"
+     ],
+     "how": [
+      "72 तासांत: सरकारच्या Crop Insurance ॲपवर, किंवा हेल्पलाइन 14447 वर, किंवा विमा कंपनीच्या कार्यालयात, तुमच्या बँक शाखेत किंवा कृषी कार्यालयात कळवा",
+      "मिळालेला तक्रार (डॉकेट) क्रमांक लिहून ठेवा",
+      "खराब शेताचे स्पष्ट फोटो काढा — वन्य प्राण्यांच्या नुकसानासाठी ॲपमध्ये ठिकाण-टॅग असलेले (geo-tagged) फोटो लागतात",
+      "सर्वे पथक पाहणी करेपर्यंत खराब पीक तसेच राहू द्या",
+      "डॉकेट क्रमांकाने ॲप किंवा हेल्पलाइनवर तुमचा दावा पाहत राहा"
+     ]
+    }
+   }
+  },
+  {
+   "id": "e_pik_pahani",
+   "icon": "grass",
+   "group": "id",
+   "states": [
+    "Maharashtra"
+   ],
+   "priority": 2,
+   "months": [
+    8,
+    9,
+    10,
+    11,
+    12,
+    1,
+    2,
+    3
+   ],
+   "checked": "2026-11-10",
+   "apply": null,
+   "info": null,
+   "source": "e-Pik Pahani (DCS MH) · Govt of Maharashtra · reports of Sep–Oct 2026",
+   "t": {
+    "en": {
+     "title": "e-Pik Pahani (crop record on your 7/12)",
+     "benefit": "Free · every season, kharif and rabi",
+     "summary": "Your crop gets written on your 7/12 through e-Pik Pahani, the digital crop survey on the DCS MH app. If it isn't done, the crop column can stay blank — and crop insurance, MSP buying (CCI cotton too), loss compensation and other schemes can get stuck. The kharif 2026 survey ran from 11 August to 10 November; the rabi dates are announced each season — your talathi or the DCS MH app has the current last date.",
+     "who": [
+      "Every farmer with land in Maharashtra — each plot, each season (kharif and rabi)"
+     ],
+     "docs": [
+      "Farmer ID (or the mobile number linked to it)",
+      "Mobile number linked to Aadhaar (for the OTP)",
+      "Your phone, in the field"
+     ],
+     "how": [
+      "Install or update the DCS MH app, choose your language and sign in as a farmer with your Farmer ID and the OTP",
+      "Open the crop survey and pick a plot marked Pending; confirm with the Aadhaar OTP and the face check",
+      "Stand in that field (within about 20 metres of the plot) and record the crop with its photo — no network? The photo is sent later by itself",
+      "Can't do it yourself? Your village's crop survey assistant (पीक पाहणी सहाय्यक) or the talathi can do it — before the last date"
+     ]
+    },
+    "hi": {
+     "title": "ई-पीक पाहणी (7/12 पर फसल की नोंद)",
+     "benefit": "मुफ़्त · हर सीज़न — ख़रीफ और रबी",
+     "summary": "आपकी फसल 7/12 पर ई-पीक पाहणी से ही दर्ज होती है — DCS MH ऐप पर डिजिटल फसल सर्वे। यह न हुआ तो फसल का कॉलम ख़ाली रह सकता है — और फसल बीमा, MSP पर ख़रीद (CCI कपास भी), नुकसान की भरपाई और दूसरी योजनाएँ अटक सकती हैं। ख़रीफ 2026 का सर्वे 11 अगस्त से 10 नवंबर तक था; रबी की तारीख़ें हर सीज़न घोषित होती हैं — आख़िरी तारीख़ तलाठी या DCS MH ऐप से पता करें।",
+     "who": [
+      "महाराष्ट्र में ज़मीन वाले सभी किसान — हर प्लॉट, हर सीज़न (ख़रीफ और रबी)"
+     ],
+     "docs": [
+      "फ़ार्मर आईडी (या उससे जुड़ा मोबाइल नंबर)",
+      "आधार से जुड़ा मोबाइल नंबर (OTP के लिए)",
+      "आपका फ़ोन, खेत में"
+     ],
+     "how": [
+      "DCS MH ऐप डालें या अपडेट करें, भाषा चुनें और फ़ार्मर आईडी व OTP से किसान के रूप में लॉग-इन करें",
+      "फसल सर्वे खोलें और 'Pending' वाला प्लॉट चुनें; आधार OTP और चेहरे की जाँच से पुष्टि करें",
+      "उसी खेत में खड़े होकर (प्लॉट से लगभग 20 मीटर के अंदर) फ़ोटो के साथ फसल दर्ज करें — नेटवर्क नहीं? फ़ोटो बाद में अपने आप चली जाती है",
+      "ख़ुद नहीं कर पा रहे? गाँव के पीक पाहणी सहायक या तलाठी आखिरी तारीख़ से पहले कर सकते हैं"
+     ]
+    },
+    "mr": {
+     "title": "ई-पीक पाहणी (7/12 वर पिकाची नोंद)",
+     "benefit": "मोफत · प्रत्येक हंगाम — खरीप आणि रब्बी",
+     "summary": "तुमचे पीक 7/12 वर ई-पीक पाहणीतूनच नोंदवले जाते — DCS MH ॲपवरील डिजिटल पीक सर्वेक्षण. ती झाली नाही तर पिकाचा रकाना कोरा राहू शकतो — आणि पीक विमा, हमीभाव खरेदी (CCI कापूसही), नुकसान भरपाई व इतर योजना अडकू शकतात. खरीप 2026 चे सर्वेक्षण 11 ऑगस्ट ते 10 नोव्हेंबरपर्यंत होते; रब्बीच्या तारखा दर हंगामात जाहीर होतात — शेवटची तारीख तलाठी किंवा DCS MH ॲपवरून जाणून घ्या.",
+     "who": [
+      "महाराष्ट्रात जमीन असलेले सर्व शेतकरी — प्रत्येक प्लॉट, प्रत्येक हंगाम (खरीप आणि रब्बी)"
+     ],
+     "docs": [
+      "शेतकरी ओळख क्रमांक (किंवा त्याला जोडलेला मोबाईल नंबर)",
+      "आधारशी जोडलेला मोबाईल नंबर (OTP साठी)",
+      "तुमचा फोन, शेतात"
+     ],
+     "how": [
+      "DCS MH ॲप टाका किंवा अपडेट करा, भाषा निवडा आणि शेतकरी ओळख क्रमांक व OTP ने शेतकरी म्हणून लॉग-इन करा",
+      "पीक पाहणी उघडा आणि 'Pending' असलेला प्लॉट निवडा; आधार OTP आणि चेहरा तपासणीने खात्री करा",
+      "त्याच शेतात उभे राहून (प्लॉटपासून सुमारे 20 मीटरच्या आत) फोटोसह पिकाची नोंद करा — नेटवर्क नाही? फोटो नंतर आपोआप जातो",
+      "स्वतः जमत नाही? गावातील पीक पाहणी सहाय्यक किंवा तलाठी शेवटच्या तारखेपूर्वी करू शकतात"
+     ]
+    }
+   }
+  }
+ ]
+}
