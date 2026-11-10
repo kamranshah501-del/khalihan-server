@@ -55,6 +55,9 @@ const T = {
     where_h: 'In which state',
     why_old: 'Reasons are recorded from app 1.0.7 on.',
     fail_where: 'Country', fail_ver: 'App version', fail_day: 'Day',
+    wsrc_h: '🌦️ Whose weather people saw (28 days)',
+    wsrc_soon: 'Counted from app 1.0.7, once "Weather of my farm" is on.',
+    wsrc_d: '"District" means a rough guess — the farmer should choose a village or save the farm.',
     guide_h: '🧭 Get-ready guide (28 days)',
     guide_soon: 'Counted from app 1.0.7, once the "Get-ready guide" switch is on.',
     g_shown: 'Saw the guide', g_done: 'Guide finished', g_steps: 'Buttons pressed in the guide',
@@ -141,6 +144,9 @@ const T = {
     where_h: 'किस राज्य में',
     why_old: 'वजह ऐप 1.0.7 से गिनी जाएगी।',
     fail_where: 'देश', fail_ver: 'ऐप वर्शन', fail_day: 'दिन',
+    wsrc_h: '🌦️ लोगों ने किस जगह का मौसम देखा (28 दिन)',
+    wsrc_soon: 'ऐप 1.0.7 से गिना जाएगा, जब "मेरे खेत का मौसम" चालू हो।',
+    wsrc_d: '"ज़िला" मतलब सिर्फ़ अंदाज़ा — किसान को गाँव चुनना या खेत सेव करना चाहिए।',
     guide_h: '🧭 ऐप तैयार करें — गाइड (28 दिन)',
     guide_soon: 'ऐप 1.0.7 से गिना जाएगा, जब "ऐप तैयार करें" स्विच चालू हो।',
     g_shown: 'गाइड देखी', g_done: 'गाइड पूरी हुई', g_steps: 'गाइड में दबाए गए बटन',
@@ -261,6 +267,9 @@ const EVENTS = {
   app_exception: ['App error', 'ऐप में गड़बड़ी'],
   alert_sent: ['Alert sent (by the app)', 'अलर्ट भेजा (ऐप ने)'],
   guide_shown: ['Saw the get-ready guide', 'गाइड देखी'],
+  farm_set: ['Saved their farm for the weather', 'मौसम के लिए खेत सेव किया'],
+  farm_removed: ['Removed their farm', 'खेत हटाया'],
+  weather_from: ['(whose weather was shown)', '(किसका मौसम दिखा)'],
   guide_step: ['Pressed a guide button', 'गाइड का बटन दबाया'],
   guide_done: ['Guide finished', 'गाइड पूरी हुई'],
   prices_loaded: ['Prices downloaded', 'भाव डाउनलोड हुए'],
@@ -273,7 +282,7 @@ const TECH = new Set(['first_open', 'session_start', 'screen_view', 'user_engage
   'app_clear_data', 'os_update', 'notification_receive', 'notification_dismiss', 'notification_foreground',
   'app_exception', 'alert_sent', 'prices_loaded', 'prices_failed', 'where_to_sell_from', 'login_error',
   'firebase_campaign', 'firebase_in_app_message_impression', 'dynamic_link_first_open',
-  'guide_shown', 'guide_step', 'guide_done']);
+  'guide_shown', 'guide_step', 'guide_done', 'weather_from']);
 
 // Tabs and pages (route names in the app, v1.0.7).
 const SCREENS = {
@@ -330,6 +339,10 @@ const G_RESULT = {
   settings: ['Sent to phone settings', 'फ़ोन की सेटिंग खोली'], retry: ['Tried prices again', 'भाव फिर से माँगे'],
   gps: ['Filled from location', 'लोकेशन से भरा'], gps_failed: ['Location didn\'t work', 'लोकेशन से नहीं हुआ'],
   manual: ['Chose it themselves', 'खुद चुना'],
+};
+const WSRC = {
+  farm: ['The farm they saved', 'सेव किया हुआ खेत'], gps: ['Where the phone was', 'फ़ोन की जगह'],
+  village: ['Their village', 'उनका गाँव'], district: ['District (rough guess)', 'ज़िला (अंदाज़ा)'],
 };
 const PERM = {
   on: ['On', 'चालू'], off: ['Off', 'बंद'], denied: ['Refused', 'मना किया'],
@@ -543,6 +556,14 @@ export async function statsPage(deps) {
           ${permNotif.length ? `<div class="small" style="font-weight:700;margin:8px 0 4px">${esc(t('perm_notif'))}</div>${bars(permNotif.map((x) => ({ label: label(PERM, x.k), v: x.n, extra: t('people') })))}` : ''}` : ''}`}
     </section>`;
 
+  const wsrc = ga.weather_src || [];
+  const wsrcCard = `
+    <section class="card">
+      <div class="ch"><h2>${esc(t('wsrc_h'))}</h2></div>
+      ${wsrc.length ? `${bars(wsrc.map((x) => ({ label: label(WSRC, x.k), v: x.n, extra: t('times') })))}
+        <p class="muted small" style="margin:6px 0 0">${esc(t('wsrc_d'))}</p>` : `<p class="muted small">${esc(t('wsrc_soon'))}</p>`}
+    </section>`;
+
   // ── charts: last 14 days ──
   const gaDays = (ga.daily || []).slice(-14);
   const playDays = (play.daily || []).slice(-14);
@@ -584,6 +605,7 @@ export async function statsPage(deps) {
       ${verCard}
       ${healthCard}
       ${guideCard}
+      ${wsrcCard}
     </div>
     <p class="muted small" style="margin-top:14px">🔒 ${esc(t('privacy'))}</p>`);
   wireTips(document.querySelector('#main'));

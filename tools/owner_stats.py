@@ -383,6 +383,8 @@ def analytics(s):
         "fail_version": failed_by("appVersion"),
         "fail_days": sorted(failed_by("date", n=30), key=lambda x: x["k"]),
         "guide_steps": guide_steps(),
+        # v1.0.7: whose weather the farmer saw (farm, gps, village, district).
+        "weather_src": custom("customEvent:from", "eventCount", ("eventName", "weather_from"), n=4) if "from" in ready else [],
         "perm_loc": custom("customUser:loc", "activeUsers", n=6) if "loc" in ready else [],
         "perm_notif": custom("customUser:notif", "activeUsers", n=4) if "notif" in ready else [],
         "fail_why": custom("customEvent:code", "eventCount", ("eventName", "prices_failed"), n=8) if "code" in ready else [],

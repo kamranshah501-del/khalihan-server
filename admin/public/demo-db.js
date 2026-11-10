@@ -150,6 +150,7 @@ export async function connect() {
         guide_steps: [{ s: 'location', r: 'denied', n: 9 }, { s: 'location', r: 'done', n: 14 }, { s: 'notifications', r: 'done', n: 11 }, { s: 'notifications', r: 'skipped', n: 6 }, { s: 'district', r: 'gps', n: 8 }, { s: 'prices', r: 'retry', n: 3 }],
         perm_loc: [{ k: 'on', n: 19 }, { k: 'denied', n: 7 }, { k: 'off', n: 4 }, { k: 'denied_forever', n: 2 }],
         perm_notif: [{ k: 'on', n: 22 }, { k: 'off', n: 9 }],
+        weather_src: [{ k: 'gps', n: 41 }, { k: 'farm', n: 18 }, { k: 'village', n: 9 }, { k: 'district', n: 6 }],
         crops: [{ k: 'Cotton', n: 61 }, { k: 'Soyabean', n: 44 }, { k: 'Maize', n: 31 }, { k: 'Onion', n: 24 }, { k: 'Bengal Gram(Gram)(Whole)', n: 19 }, { k: 'Wheat', n: 15 }, { k: 'Tur', n: 12 }],
         states: [{ k: 'Maharashtra', n: 47 }, { k: 'Madhya Pradesh', n: 5 }],
         districts: [{ k: 'Jalgaon', n: 26 }, { k: 'Buldhana', n: 7 }, { k: 'Aurangabad', n: 5 }, { k: 'Jalna', n: 4 }, { k: 'Dhule', n: 3 }, { k: 'Burhanpur', n: 3 }],
