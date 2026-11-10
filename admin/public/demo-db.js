@@ -110,6 +110,50 @@ export async function connect() {
   ];
   const kComplaints = [{ id: 'kc1', order: 'ko3', code: 'KJ-Q8N1A', text: 'Ek bori fati hui thi', phone: '9822001122', at: day(1, 12) }];
 
+  // 📊 App numbers (Admin 1.18): sample numbers. "?demo&setup" shows the
+  // page before the owner's one-time setup.
+  const ymd = (d) => d.toISOString().slice(0, 10);
+  const series = (len, f) => Array.from({ length: len }, (_, i) => f(len - 1 - i));
+  const ownerStats = new URLSearchParams(location.search).has('setup')
+    ? { at: new Date(Date.now() - 2 * 3600e3), sa: 'firebase-adminsdk-demo@khalihan-demo.iam.gserviceaccount.com', project: 'khalihan-demo',
+        ga: { ok: false, msg: 'no_property', hint: '' },
+        play: { ok: false, msg: 'no_bucket', hint: '' } }
+    : {
+      at: new Date(Date.now() - 2 * 3600e3),
+      ga: {
+        ok: true, through: ymd(day(1)), a1: 14, a7: 31, a28: 52, n1: 3, n7: 17, n28: 41, today: 6,
+        daily: series(30, (b) => ({ d: ymd(day(b)), a: Math.max(2, Math.round(4 + (30 - b) * 0.45 + ((b * 7) % 5))), n: Math.max(0, Math.round((30 - b) / 6 + ((b * 3) % 3) - 1)) })),
+        events: [
+          { k: 'session_start', c: 412, u: 52 }, { k: 'screen_view', c: 1630, u: 52 }, { k: 'user_engagement', c: 980, u: 52 },
+          { k: 'crop_opened', c: 233, u: 38 }, { k: 'weather_opened', c: 141, u: 33 }, { k: 'first_open', c: 41, u: 41 },
+          { k: 'day_voice', c: 62, u: 19 }, { k: 'where_to_sell', c: 48, u: 17 }, { k: 'market_opened', c: 40, u: 15 },
+          { k: 'shared', c: 27, u: 12 }, { k: 'crop_pinned', c: 35, u: 14 }, { k: 'alert_toggled', c: 18, u: 9 },
+          { k: 'hold_or_sell', c: 15, u: 8 }, { k: 'scheme_open', c: 22, u: 10 }, { k: 'calendar_open', c: 12, u: 7 },
+          { k: 'price_map', c: 9, u: 5 }, { k: 'compare_opened', c: 8, u: 4 }, { k: 'feedback_sent', c: 3, u: 3 },
+          { k: 'widget_opened', c: 11, u: 3 }, { k: 'app_remove', c: 6, u: 6 }, { k: 'prices_failed', c: 2, u: 2 },
+          { k: 'notification_open', c: 25, u: 11 }, { k: 'app_update', c: 30, u: 30 },
+        ],
+        screens: [
+          { k: 'tab_home', v: 520, u: 52 }, { k: 'crop', v: 233, u: 38 }, { k: 'tab_prices', v: 190, u: 35 },
+          { k: 'weather', v: 141, u: 33 }, { k: 'where_sell', v: 48, u: 17 }, { k: 'market_locator', v: 40, u: 15 },
+          { k: 'tab_services', v: 37, u: 16 }, { k: 'schemes', v: 22, u: 10 }, { k: 'tab_profile', v: 30, u: 14 },
+          { k: 'mandi', v: 19, u: 9 }, { k: 'hold_sell', v: 15, u: 8 }, { k: 'price_graph', v: 14, u: 7 },
+        ],
+        versions: [{ k: '1.0.6', n: 49 }, { k: '1.0.5', n: 3 }],
+        regions: [{ k: 'Maharashtra', n: 44 }, { k: 'Madhya Pradesh', n: 4 }, { k: 'Gujarat', n: 2 }],
+        crops: [{ k: 'Cotton', n: 61 }, { k: 'Soyabean', n: 44 }, { k: 'Maize', n: 31 }, { k: 'Onion', n: 24 }, { k: 'Bengal Gram(Gram)(Whole)', n: 19 }, { k: 'Wheat', n: 15 }, { k: 'Tur', n: 12 }],
+        states: [{ k: 'Maharashtra', n: 47 }, { k: 'Madhya Pradesh', n: 5 }],
+        districts: [{ k: 'Jalgaon', n: 26 }, { k: 'Buldhana', n: 7 }, { k: 'Aurangabad', n: 5 }, { k: 'Jalna', n: 4 }, { k: 'Dhule', n: 3 }, { k: 'Burhanpur', n: 3 }],
+        langs: [{ k: 'mr', n: 30 }, { k: 'hi', n: 18 }, { k: 'en', n: 4 }],
+        dims: ['crop', 'district', 'from', 'language', 'state', 'what'], dims_note: '',
+      },
+      play: {
+        ok: true, through: ymd(day(4)), total: 96, now: 88, active: 84, i28: 59, u28: 6, rating: 4.8, crash28: 0, anr28: 1,
+        daily: series(26, (b) => ({ d: ymd(day(b + 4)), i: Math.max(0, Math.round((26 - b) / 5 + ((b * 5) % 4) - 1)), u: b % 9 === 0 ? 1 : 0, up: b < 6 ? 8 : 0 })),
+        versions: [{ k: '11', n: 79 }, { k: '9', n: 5 }],
+      },
+    };
+
   return {
     demo: true,
     project: 'demo',
@@ -200,6 +244,7 @@ export async function connect() {
     async requestsOf(uid) { return requests.filter((r) => r.uid === uid); },
     async deletions() { return deletions.map((d) => ({ ...d })); },
     async wipeFarmer(uid) { const d = deletions.find((x) => x.id === uid); if (d) d.done = true; return 0; },
+    async ownerStats() { return JSON.parse(JSON.stringify(ownerStats), (k, v) => (k === 'at' || k === 'tried' ? new Date(v) : v)); },
     async plusGifts() { return gifts.map((g) => ({ ...g })); },
     async addPlusGift(code, data) { gifts.push({ id: code, ...data, at: new Date() }); log('plus_gift_add', { code, name: data.name, test: !!data.test }); },
     async freePlusGift(code) { const g = gifts.find((x) => x.id === code); if (g) { delete g.device; delete g.claimed; delete g.app; } log('plus_gift_free', { code }); },

@@ -1,6 +1,6 @@
 rules_version = '2';
 
-// Khalihan — Firestore rules (8 Oct 2026; Kendra 12 Oct; price history server-only 19 Oct; free Plus gift codes 1 Nov 2026).
+// Khalihan — Firestore rules (8 Oct 2026; Kendra 12 Oct; price history server-only 19 Oct; free Plus gift codes 1 Nov 2026; owner stats 10 Nov 2026).
 //
 // Who is who:
 //   • Farmers: the app. Prices, schemes, calendar and offers are open to
@@ -332,6 +332,14 @@ service cloud.firestore {
         && request.resource.data.at == request.time;
       allow read: if isOwner();
       allow update, delete: if false;
+    }
+
+    match /owner_stats/{doc} {
+      // The app's numbers (downloads, active users, features used) — counts
+      // only, written twice a day by the server (tools/owner_stats.py).
+      // Only the owner reads them; staff and farmers never (10 Nov 2026).
+      allow read: if isOwner();
+      allow write: if false;
     }
   }
 }

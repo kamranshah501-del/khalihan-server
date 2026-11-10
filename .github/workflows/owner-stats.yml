@@ -1,0 +1,33 @@
+name: Owner stats
+
+# Twice a day (and by hand: Actions → Run workflow): Google Play's reports +
+# Google Analytics for Firebase → owner_stats/latest, which only the owner
+# sees in Khalihan Admin → 📊 आँकड़े. This repository is public: the job
+# prints no numbers, only whether each part worked. See tools/owner_stats.py.
+
+on:
+  schedule:
+    - cron: "17 3,15 * * *" # 06:17 and 18:17 Kuwait (08:47 / 20:47 IST)
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  stats:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python tools/test_owner_stats.py
+      - run: python tools/owner_stats.py
+        env:
+          PYTHONUNBUFFERED: "1"
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+          PLAY_BUCKET: ${{ vars.PLAY_BUCKET }}
+          GA_PROPERTY: ${{ vars.GA_PROPERTY }}

@@ -289,6 +289,15 @@ export async function connect() {
       return snap.size;
     },
 
+    // ── app numbers (owner only; owner_stats/latest, written by the server) ──
+    async ownerStats() {
+      const snap = await getDoc(doc(db, 'owner_stats', 'latest'));
+      if (!snap.exists()) return null;
+      const d = snap.data();
+      const part = (p) => (p ? { ...p, tried: toDate(p.tried) } : {});
+      return { ...d, at: toDate(d.at), ga: part(d.ga), play: part(d.play) };
+    },
+
     // ── team (owner) ──
     // ── free Plus gift codes (owner only; plus_gifts/{CODE}) ──
     async plusGifts() {
