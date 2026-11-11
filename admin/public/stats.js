@@ -288,6 +288,7 @@ const EVENTS = {
   ai_open: ['Opened Khalihan AI', 'Khalihan AI खोला'],
   ai_ask: ['🤖 Asked Khalihan AI', '🤖 Khalihan AI से पूछा'],
   ai_action: ['Followed an AI answer\'s link', 'AI जवाब का बटन दबाया'],
+  ai_wrong: ['🤖 "Looks wrong?" on an AI answer', '🤖 AI जवाब पर "गलत लगा?"'],
   prices_loaded: ['Prices downloaded', 'भाव डाउनलोड हुए'],
   prices_failed: ['Prices failed to download', 'भाव डाउनलोड नहीं हुए'],
   where_to_sell_from: ['(where "Where to sell" was opened from)', '("कहाँ बेचें" कहाँ से खुला)'],
