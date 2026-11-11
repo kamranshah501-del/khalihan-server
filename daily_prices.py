@@ -374,6 +374,59 @@ def fair_moves(rows, day, min_mandis=3):
     return out
 
 
+# Every kept day of one scope in ONE document (owner, 11 Nov 2026): phones
+# read prices/{scope}/days/_history — one read — instead of the 90 day
+# documents (~180 reads per app start for state + district, which would
+# have used up Spark's 50,000 free reads a day at ~250 farmers a day). It
+# sits in the days collection, so the existing read rule covers it, and it
+# has no "d" field, so every query ordered or filtered by "d" (old apps,
+# save_popular) never sees it.
+HISTORY_DOC = "_history"
+HISTORY_DAYS = 90
+
+
+def merge_history(days, table, day, prices, keep=HISTORY_DAYS):
+    """The history with one day's prices put in (replacing that day).
+    days: ["2026-08-14", …] ascending · table: {crop: [price per day, 0 =
+    none]} · prices: {crop: price}. Returns (days, [{"n": crop, "p": […]}]),
+    the newest `keep` days, crops A–Z — a list of maps, since Firestore takes
+    no list inside a list."""
+    by_day = {d: {} for d in days}
+    for name, row in table.items():
+        for d, p in zip(days, row):
+            if p:
+                by_day[d][name] = p
+    by_day[day] = {n: p for n, p in prices.items() if p}
+    kept = sorted(by_day)[-keep:]
+    names = sorted({n for d in kept for n in by_day[d]})
+    return kept, [{"n": n, "p": [by_day[d].get(n, 0) for d in kept]} for n in names]
+
+
+def update_history(db, scope, day, items):
+    """Puts one filed day (its "c" items) into prices/{scope}/days/_history:
+    one read and one write per scope per run. The first time, it is built
+    from the day documents already filed (up to 90 reads, once)."""
+    days_ref = db.collection("prices").document(scope).collection("days")
+    ref = days_ref.document(HISTORY_DOC)
+    snap = ref.get()
+    days, table = [], {}
+    if snap.exists:
+        data = snap.to_dict() or {}
+        days = list(data.get("days") or [])
+        table = {c["n"]: list(c.get("p") or []) for c in data.get("c") or [] if isinstance(c, dict) and c.get("n")}
+    else:
+        for doc in days_ref.order_by("d", direction=firestore.Query.DESCENDING).limit(HISTORY_DAYS).stream():
+            d = (doc.to_dict() or {})
+            if not d.get("d"):
+                continue
+            prices = {i.get("n"): i.get("p") for i in d.get("c") or [] if isinstance(i, dict) and i.get("n")}
+            days, rows = merge_history(days, table, d["d"], prices)
+            table = {r["n"]: r["p"] for r in rows}
+    prices = {i.get("n"): i.get("p") for i in items if isinstance(i, dict) and i.get("n") and i.get("p")}
+    days, rows = merge_history(days, table, day, prices)
+    ref.set({"v": 1, "at": firestore.SERVER_TIMESTAMP, "from": days[0], "to": days[-1], "days": days, "c": rows})
+
+
 def save_prices(db, state, prices, day, scope=None, label=None, moves=None):
     """Write the day's prices, keeping whichever copy is richer. `scope` is
     the archive's document ("maharashtra", or "maharashtra__jalgaon" for a
@@ -409,9 +462,20 @@ def save_prices(db, state, prices, day, scope=None, label=None, moves=None):
                 print(f"  {state}: kept the fuller copy ({len(stored)} crops), added {len(moves)} fair moves")
             else:
                 print(f"  {state}: phones already saved a fuller copy ({len(stored)} crops)")
+            _history(db, scope, day, stored, state)
             return
     doc.set(payload)
     print(f"  {state}: saved {len(payload['c'])} crops for {day} ({len(moves)} fair moves)")
+    _history(db, scope, day, payload["c"], state)
+
+
+def _history(db, scope, day, items, label):
+    """update_history, never stopping the run if it fails (phones then read
+    the day documents, as before)."""
+    try:
+        update_history(db, scope, day, items)
+    except Exception as e:  # noqa: BLE001
+        print(f"  {label}: history document not updated ({type(e).__name__}: {str(e)[:120]})")
 
 
 def save_district_prices(db, state, rows):

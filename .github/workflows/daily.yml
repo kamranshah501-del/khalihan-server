@@ -32,6 +32,10 @@ jobs:
           python-version: "3.11"
           cache: pip   # keep downloads between runs
       - run: pip install -r requirements.txt
+      # The one-document history's sum (owner, 11 Nov 2026). Never blocks
+      # the prices: a failure only shows in this step's log.
+      - run: python tools/test_history.py
+        continue-on-error: true
       - run: python daily_prices.py
         env:
           # Print each line the moment it happens, so a running job's log isn't empty.
