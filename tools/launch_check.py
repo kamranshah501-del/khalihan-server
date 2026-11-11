@@ -28,7 +28,8 @@ DEFAULTS = {
     "rate_prompt": False,  # v1.0.8 Play's "rate Khalihan" card, OFF
     "ai": False,  # v1.0.9 Khalihan AI section, OFF (the test phone sees it)
     "ai_ask": False,  # v1.0.9 "Khalihan AI से पूछें" (V2), inside "ai"
-    "ai_cloud": False,  # v1.0.9 Gemini reads hard questions (free tier: test phone only)
+    "ai_cloud": False,  # v1.0.9 Gemini reads hard questions (test phone only)
+    "ai_vertex": True,  # v1.0.9+18 the cloud part through Vertex AI (paid tier); OFF = Gemini Developer API
 }
 PARENT = {
     "schemes": "services", "kendra": "services", "home_sky": "weather", "advice": "weather",
