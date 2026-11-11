@@ -1,5 +1,6 @@
 // Khalihan Admin — the real data, from the same Firebase project as the app.
 // Every write also leaves a line in `audit` (who, what, when).
+import { runSummary } from './aitest.js';
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import {
   getAuth, GoogleAuthProvider, signInWithPopup, onAuthStateChanged, signOut,
@@ -496,6 +497,29 @@ export async function connect() {
       // that it changed — never an amount.
       await setDoc(doc(db, 'business', 'budget'), { ...data, updated: serverTimestamp(), by: me.email });
       log('budget', {});
+    },
+
+    // ── Khalihan AI test (owner only; business/ai_tests + business/ai_test_<id> — see aitest.js) ──
+    async aiTests() {
+      const snap = await getDoc(doc(db, 'business', 'ai_tests'));
+      return snap.exists() ? snap.data() : { runs: [] };
+    },
+    async aiTest(id) {
+      const snap = await getDoc(doc(db, 'business', `ai_test_${id}`));
+      return snap.exists() ? snap.data() : null;
+    },
+    async saveAiTest(run) {
+      await setDoc(doc(db, 'business', `ai_test_${run.id}`), { ...run, updated: serverTimestamp(), by: me.email });
+      const idx = await this.aiTests();
+      const runs = [runSummary(run), ...(idx.runs || []).filter((r) => r.id !== run.id)];
+      await setDoc(doc(db, 'business', 'ai_tests'), { runs, updated: serverTimestamp() });
+      log('ai_test', { run: run.id });
+    },
+    async deleteAiTest(id) {
+      await deleteDoc(doc(db, 'business', `ai_test_${id}`));
+      const idx = await this.aiTests();
+      await setDoc(doc(db, 'business', 'ai_tests'), { runs: (idx.runs || []).filter((r) => r.id !== id), updated: serverTimestamp() });
+      log('ai_test_delete', { run: id });
     },
 
     // ── record (owner) ──

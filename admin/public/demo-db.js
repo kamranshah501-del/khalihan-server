@@ -1,3 +1,4 @@
+import { runSummary } from './aitest.js';
 // Khalihan Admin — demo data (open the panel with ?demo). Nothing is saved;
 // it is only for trying the screens without touching the real database.
 const day = (n, h = 10) => { const d = new Date(); d.setDate(d.getDate() - n); d.setHours(h, 15, 0, 0); return d; };
@@ -70,6 +71,15 @@ export async function connect() {
   let plan = { kadam: 0, values: { partner: false, survey: 9, path: false } };
   // 💰 Budget & targets — made-up amounts, only for trying the page.
   const thisMonth = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`;
+  // 🧪 Khalihan AI test — one sample run (made-up questions and answers).
+  let aiTests = [{
+    id: 'rdemo', name: 'जामनेर — नमूना', created: '2026-11-11', grader: '',
+    items: [
+      { n: 1, lang: 'mr', q: 'कापसाचा आज काय भाव आहे?', ai: { via: 'phone', understood: 'कपास का आज का भाव', kind: 'price', answer: 'कपास: जलगांव ज़िले में औसत ₹7,4xx / क्विंटल (नमूना)', source: 'स्रोत: MSAMB · नमूना' }, grade: 'ok' },
+      { n: 2, lang: 'ahi', q: 'उनाळी मा काय पेराउ?', ai: { via: 'cloud', understood: 'गर्मी में कौन सी फ़सल बोऊँ?', kind: 'unknown', answer: 'ये सवाल अभी Khalihan AI नहीं समझता — भाव, मौसम, छिड़काव पूछें।', source: '' }, grade: 'part', note: 'नमूना' },
+      { n: 3, lang: 'hi', q: 'कल छिड़काव कर सकते हैं?', ai: { via: 'phone', understood: 'कल छिड़काव ठीक है?', kind: 'spray', answer: 'कल सुबह हवा कम (नमूना) — छिड़काव ठीक।', source: 'स्रोत: Open-Meteo · नमूना' } },
+    ],
+  }];
   let budget = new URLSearchParams(location.search).has('setup') ? null : {
     limit: 20000,
     lines: [
@@ -335,6 +345,11 @@ export async function connect() {
     async savePlanState(data) { plan = { ...plan, ...JSON.parse(JSON.stringify(data)) }; },
     async budget() { return budget ? JSON.parse(JSON.stringify(budget)) : null; },
     async saveBudget(data) { budget = JSON.parse(JSON.stringify(data)); log('budget', {}); },
+
+    async aiTests() { return { runs: aiTests.map(runSummary) }; },
+    async aiTest(id) { const r = aiTests.find((x) => x.id === id); return r ? JSON.parse(JSON.stringify(r)) : null; },
+    async saveAiTest(run) { aiTests = [JSON.parse(JSON.stringify(run)), ...aiTests.filter((x) => x.id !== run.id)]; log('ai_test', { run: run.id }); },
+    async deleteAiTest(id) { aiTests = aiTests.filter((x) => x.id !== id); },
 
     async kendraComplaints() { return kComplaints.map((x) => ({ ...x })); },
     async kendraComplaintDone(id, done) { const x = kComplaints.find((k) => k.id === id); if (x) x.done = done; },
