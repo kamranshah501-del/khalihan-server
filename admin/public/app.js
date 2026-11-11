@@ -18,7 +18,7 @@ import { plusPage } from './plus.js';
 import { statsPage } from './stats.js';
 import { budgetPage } from './budget.js';
 
-const ADMIN_VERSION = '1.20 · 10 Nov 2026';
+const ADMIN_VERSION = '1.21 · 11 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

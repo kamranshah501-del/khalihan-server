@@ -160,6 +160,8 @@ export const SWITCH_WORDS = {
     f_farm_weather: 'Weather of my farm', f_farm_weather_d: 'The weather for the farmer\'s own field: "यहीं मेरा खेत है" on the weather page saves it once; else the phone\'s place, else the village from the profile. The district only as a last, labelled guess ("… ज़िले का मौसम (अंदाज़ा) — गाँव चुनें"). Choosing a district for its prices no longer moves the weather (app v1.0.7).',
     f_setup_guide: 'Get-ready guide', f_setup_guide_d: 'A card on Home — "ऐप तैयार करें": today\'s prices, district, location, notifications — until the app fully works on that phone, then never again. Asks for location and notifications only from the card, after saying why (no popups when the app opens). Admin → 📊 shows where farmers get stuck (app v1.0.7).',
     f_whats_new: 'New in Khalihan (after an update)', f_whats_new_d: 'Once after an update: a short moving tour of the new features that are ON for that farmer — "Skip", "Next", "Let\'s start". A feature switched on later gets its own page then (no app update). Not after a fresh install. Profile → "What\'s new" plays it again (app v1.0.7).',
+    f_share_link: 'App link in every share', f_share_link_d: 'Every price, list, "Where to sell?" or scheme shared to WhatsApp ends with Khalihan\'s Google Play link, and the price picture says "Free on Google Play — search Khalihan". A farmer who gets a price installs the app in one tap; Admin → 📊 and Play see installs that came from shares (utm_source=whatsapp). Off = shares as before (app v1.0.8).',
+    f_rate_prompt: 'Ask for a Play rating', f_rate_prompt_d: 'Play\'s own "rate Khalihan" card, once, a few seconds after fresh prices load — only after the farmer has seen prices on 4 different days, and never again for 120 days. Play itself may skip it; the farmer can always close it. Only the Play Store build shows it (app v1.0.8).',
     f_update_prompt: 'Update reminder', f_update_prompt_d: 'When a newer Khalihan is on Google Play, the app says so once a day and updates itself inside the app (Play\'s own in-app update; app v1.0.6). Off = no reminder.',
     f_dark: 'Dark mode', f_dark_d: 'The app turns dark after sunset and light at sunrise (at the farm), or the farmer fixes it in Profile → App Colour (app v1.0.5). Off = always light for everyone, and the Profile row hides.',
   },
@@ -301,6 +303,8 @@ export const SWITCH_WORDS = {
     f_farm_weather: 'मेरे खेत का मौसम', f_farm_weather_d: 'किसान के अपने खेत का मौसम: मौसम पेज पर "यहीं मेरा खेत है" एक बार दबाकर खेत सेव; नहीं तो फ़ोन की जगह, नहीं तो प्रोफ़ाइल का गाँव। ज़िला सिर्फ़ आख़िरी अंदाज़ा, साफ़ लिखा हुआ ("… ज़िले का मौसम (अंदाज़ा) — गाँव चुनें")। भाव के लिए ज़िला बदलने से अब मौसम नहीं बदलता (ऐप v1.0.7)।',
     f_setup_guide: 'ऐप तैयार करें (गाइड)', f_setup_guide_d: 'होम पर एक कार्ड — आज के भाव, ज़िला, लोकेशन, सूचनाएँ — जब तक उस फ़ोन पर ऐप पूरा काम न करने लगे, फिर कभी नहीं। लोकेशन और सूचना की अनुमति सिर्फ़ कार्ड से, वजह बताकर माँगता है (ऐप खुलते ही पॉप-अप नहीं)। Admin → 📊 में दिखता है किसान कहाँ अटकते हैं (ऐप v1.0.7)।',
     f_whats_new: 'Khalihan में नया (अपडेट के बाद)', f_whats_new_d: 'अपडेट के बाद एक बार: उस किसान के लिए चालू नए फ़ीचर का छोटा, चलता-फिरता टूर — "छोड़ें", "आगे", "चलिए, शुरू करें"। कोई फ़ीचर बाद में चालू करें तो उसका पेज तभी दिखेगा (ऐप अपडेट की ज़रूरत नहीं)। नया इंस्टॉल करने वालों को नहीं। प्रोफ़ाइल → "नया क्या है" से फिर देख सकते हैं (ऐप v1.0.7)।',
+    f_share_link: 'हर शेयर में ऐप का लिंक', f_share_link_d: 'WhatsApp पर भेजा हर भाव, सूची, "कहाँ बेचें?" या योजना आख़िर में Khalihan का Google Play लिंक जोड़ता है, और भाव की फ़ोटो पर लिखा आता है "Google Play पर मुफ़्त — Khalihan खोजें"। भाव पाने वाला किसान एक टैप में ऐप लगा लेता है; Admin → 📊 और Play में शेयर से आए इंस्टॉल दिखते हैं (utm_source=whatsapp)। बंद = पहले जैसा शेयर (ऐप v1.0.8)।',
+    f_rate_prompt: 'Play रेटिंग माँगें', f_rate_prompt_d: 'Play का अपना "Khalihan को रेट करें" कार्ड, एक बार, ताज़ा भाव आने के कुछ सेकंड बाद — तभी जब किसान 4 अलग दिन भाव देख चुका हो, और फिर 120 दिन तक नहीं। Play ख़ुद भी छोड़ सकता है; किसान हमेशा बंद कर सकता है। सिर्फ़ Play Store वाले ऐप में दिखता है (ऐप v1.0.8)।',
     f_update_prompt: 'अपडेट की याद', f_update_prompt_d: 'Google Play पर Khalihan का नया वर्ज़न आते ही ऐप दिन में एक बार बताता है और ऐप के अंदर ही अपडेट हो जाता है (Play का अपना इन-ऐप अपडेट; ऐप v1.0.6)। बंद = कोई याद नहीं।',
     f_dark: 'डार्क मोड', f_dark_d: 'सूर्यास्त के बाद ऐप अपने आप डार्क, सूर्योदय पर लाइट (खेत के हिसाब से); या किसान Profile → ऐप का रंग में तय करे (ऐप v1.0.5)। बंद = सबके लिए हमेशा लाइट, Profile की लाइन छिप जाती है।',
   },
@@ -337,6 +341,8 @@ export const FEATURE_INFO = {
   setup_guide: { def: false, since: '1.0.7' },
   farm_weather: { def: false, since: '1.0.7' },
   whats_new: { def: false, since: '1.0.7' },
+  share_link: { def: false, since: '1.0.8' },
+  rate_prompt: { def: false, since: '1.0.8' },
 };
 
 /** The sections, in order. `kind` picks a special settings panel. */
@@ -344,7 +350,7 @@ const SECTIONS = [
   { id: 'states', icon: '📍', kind: 'states' },
   { id: 'notice', icon: '📣', kind: 'notice' },
   { id: 'festival', icon: '🪔', kind: 'festival' },
-  { id: 'prices', icon: '📈', master: null, kids: ['day_voice', 'voice_search', 'share_picture', 'alerts', 'target', 'brief'] },
+  { id: 'prices', icon: '📈', master: null, kids: ['day_voice', 'voice_search', 'share_picture', 'share_link', 'alerts', 'target', 'brief'] },
   { id: 'sellmenu', icon: '🛒', master: 'sell_menu', kids: ['where_sell', 'price_map', 'hold_sell', 'sell_interest'] },
   { id: 'weather', icon: '🌦️', master: 'weather', kids: ['home_sky', 'advice', 'widget_weather', 'farm_weather'] },
   { id: 'calendar', icon: '🌱', master: 'calendar', kids: [] },
@@ -355,6 +361,7 @@ const SECTIONS = [
   { id: 'feedback', icon: '💬', master: 'feedback', kids: [] },
   { id: 'dark', icon: '🌙', master: 'dark', kids: [] },
   { id: 'update', icon: '⬆️', master: 'update_prompt', kids: [] },
+  { id: 'rate', icon: '⭐', master: 'rate_prompt', kids: [] },
   { id: 'guide', icon: '🧭', master: 'setup_guide', kids: [] },
   { id: 'whatsnew', icon: '✨', master: 'whats_new', kids: [] },
 ];

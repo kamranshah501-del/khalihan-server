@@ -282,6 +282,7 @@ const EVENTS = {
   guide_done: ['Guide finished', 'गाइड पूरी हुई'],
   whats_new: ['Saw "New in Khalihan"', '"Khalihan में नया" देखा'],
   whats_new_end: ['Closed "New in Khalihan"', '"Khalihan में नया" बंद किया'],
+  rate_prompt: ['⭐ Asked for a Play rating', '⭐ Play रेटिंग माँगी'],
   prices_loaded: ['Prices downloaded', 'भाव डाउनलोड हुए'],
   prices_failed: ['Prices failed to download', 'भाव डाउनलोड नहीं हुए'],
   where_to_sell_from: ['(where "Where to sell" was opened from)', '("कहाँ बेचें" कहाँ से खुला)'],
