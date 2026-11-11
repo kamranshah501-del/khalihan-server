@@ -1,0 +1,39 @@
+name: Collector feed watch
+
+# The Mumbai collector (Google Cloud VM "khalihan-collector", e2-micro,
+# asia-south1-c) uploads data.gov.in prices for every state to
+# khalihan-feed at 00:10, 05:10, 09:10, 13:10 and 18:10 UTC. Without it
+# every state except Maharashtra (MSAMB) goes stale. This job looks every
+# 3 hours and FAILS when the newest upload is older than 8 hours — GitHub
+# then emails the owner ("Run failed: Collector feed watch"), so a stopped
+# VM is noticed the same day (owner, 11 Nov 2026).
+
+on:
+  schedule:
+    - cron: "40 */3 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  watch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: How old is the collector's last upload?
+        env:
+          FEED_TOKEN: ${{ secrets.FEED_TOKEN }}
+        run: |
+          auth=()
+          [ -n "$FEED_TOKEN" ] && auth=(-H "Authorization: Bearer $FEED_TOKEN")
+          at=$(curl -fsS "${auth[@]}" -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/kamranshah501-del/khalihan-feed/commits?per_page=1" \
+            | python3 -c "import json,sys; print(json.load(sys.stdin)[0]['commit']['committer']['date'])")
+          age=$(( ( $(date -u +%s) - $(date -u -d "$at" +%s) ) / 3600 ))
+          echo "Last upload: $at UTC ($age hours ago)"
+          if [ "$age" -ge 8 ]; then
+            echo "::error::Khalihan collector: no upload for $age hours. Check the VM (Cloud console → khalihan-collector → VM instances) — Claude can help."
+            exit 1
+          fi
+          echo "✅ Collector OK"
