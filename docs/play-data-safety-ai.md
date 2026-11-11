@@ -3,7 +3,7 @@
 Branch `ai-privacy`, 11 Nov 2026. Not sent to Play. Fill these in Play Console →
 App content → Data safety **on the day Khalihan AI is switched on for farmers**
 (H5 in "Khalihan AI — saare hisse (3-3)"), together with the privacy page in
-this branch (`admin/public/privacy.html`).
+this branch (`docs/privacy.html` — the one source, copied into the Admin site at deploy).
 
 ## What changes
 
@@ -22,7 +22,7 @@ this branch (`admin/public/privacy.html`).
 
 - **AI-generated content policy:** the in-app report button exists ("गलत लगा?" under every AI answer → Admin → Suggestions). Every answer shows "AI से बना" and its source.
 - **Plus / login:** if Khalihan AI is only for logged-in Plus members, the login and purchase rows (already "Login (optional)" in the privacy page) stay as they are; add Play Billing's purchase history only if Play asks (Google handles the payment).
-- **Voice line now?** The privacy page has no line about voice search yet, though "बोलकर खोजें" is live since v1.0.7. The voice sentences in this draft can go live on their own before the AI release, with the owner's OK.
+- **Voice:** the live page (10 Nov) already says voice search uses the phone's own voice typing and Khalihan never gets the voice; the draft only adds "or asking".
 
 ## Sources
 
