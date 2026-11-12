@@ -166,6 +166,9 @@ export const SWITCH_WORDS = {
     f_ai_ask: 'Ask Khalihan AI (V2)', f_ai_ask_d: 'The V2 design: a tab peeks out of the bottom bar\'s right edge; a swipe or tap shows the logo pill, which opens the question sheet (the orb, the answer in amber, its source). Understands price, where to sell, money in hand, weather and spraying — Hindi, Marathi, English, spoken or typed. Never names a pesticide or a dose. Nothing leaves the phone (app v1.0.9).',
     f_ai_cloud: 'Cloud AI reads hard questions (Gemini)', f_ai_cloud_d: 'When the phone can\'t follow a question (a dialect, odd spelling), Gemini (Firebase AI Logic) turns it into our own fields; the answer still comes from Khalihan\'s data. Shows "AI understood …" and "Looks wrong?" (→ Suggestions). Keep OFF for farmers until the 200-question test and Plus — your test phone sees it (app v1.0.9).',
     f_ai_vertex: 'Cloud AI through Vertex AI (paid)', f_ai_vertex_d: 'ON: Gemini through Vertex AI — the paid tier on Blaze, billed to the Cloud billing account (the free-trial credit pays until 18 Jan 2027); Google doesn\'t train on these questions. OFF: the Gemini Developer API (on Blaze it needs AI Studio billing, ≥ $5 prepay). Leave ON (app v1.0.9+18).',
+    f_ai_k: 'Khalihan AI button on Home (K)', f_ai_k_d: 'The everyday way in: a round K button with the turning colour edge, floating above the bottom bar on Home ("Khalihan AI · tap to ask"). The V2 tab stays only for the first 7 days, or until the farmer has opened it 3 times — then the K button takes over. OFF: the V2 tab stays (app v1.0.9).',
+    f_ai_seva: 'Khalihan AI services page', f_ai_seva_d: 'One page with what Khalihan AI can do (Services tab → "Khalihan AI सेवा"): ask a question, today\'s price, where to sell, when to spray, the week\'s weather, reminders — only the parts that work; more tiles come as each part is built (app v1.0.9).',
+    f_ai_yaad: 'Voice reminders (बोलकर याद)', f_ai_yaad_d: 'The farmer says a task and a time — "परसों सुबह खाद डालने की याद दिलाना" — and the phone reminds them then, even with the app closed (Android may hold it a few minutes). Spraying and watering reminders carry that hour\'s rain and wind. Also works from the question sheet. All on the phone — nothing goes to the cloud (app v1.0.9).',
     f_update_prompt: 'Update reminder', f_update_prompt_d: 'When a newer Khalihan is on Google Play, the app says so once a day and updates itself inside the app (Play\'s own in-app update; app v1.0.6). Off = no reminder.',
     f_dark: 'Dark mode', f_dark_d: 'The app turns dark after sunset and light at sunrise (at the farm), or the farmer fixes it in Profile → App Colour (app v1.0.5). Off = always light for everyone, and the Profile row hides.',
   },
@@ -313,6 +316,9 @@ export const SWITCH_WORDS = {
     f_ai_ask: 'Khalihan AI से पूछें (V2)', f_ai_ask_d: 'V2 डिज़ाइन: नीचे की पट्टी के दाएँ किनारे से टैब झाँकता है; खिसकाने या दबाने पर लोगो वाला बार, उसे दबाने पर सवाल-जवाब शीट (गोला, नारंगी जवाब, स्रोत)। भाव, कहाँ बेचें, हाथ में कितना, मौसम और छिड़काव समझता है — हिंदी, मराठी, अंग्रेज़ी, बोलकर या लिखकर। दवा या मात्रा का नाम कभी नहीं बताता। फ़ोन से कुछ बाहर नहीं जाता (ऐप v1.0.9)।',
     f_ai_cloud: 'मुश्किल सवाल Cloud AI पढ़े (Gemini)', f_ai_cloud_d: 'जब फ़ोन सवाल न समझ पाए (बोली, अलग लिखावट), Gemini (Firebase AI Logic) उसे हमारे खानों में बदलता है; जवाब फिर भी Khalihan के अपने आँकड़ों से। "AI ने समझा …" और "गलत लगा?" (→ सुझाव) दिखते हैं। 200 सवाल की जाँच और Plus तक किसानों के लिए बंद रखें — आपका टेस्ट फ़ोन देखेगा (ऐप v1.0.9)।',
     f_ai_vertex: 'Cloud AI, Vertex AI से (पेड)', f_ai_vertex_d: 'चालू: Gemini, Vertex AI से — Blaze पर पेड वाला, ख़र्च Cloud बिलिंग खाते में (18 Jan 2027 तक फ़्री-ट्रायल क्रेडिट से); इन सवालों से Google अपना मॉडल नहीं सिखाता। बंद: Gemini Developer API (Blaze पर AI Studio में बिलिंग, कम से कम $5 पहले)। चालू ही रखें (ऐप v1.0.9+18)।',
+    f_ai_k: 'होम पर Khalihan AI बटन (K)', f_ai_k_d: 'रोज़ का रास्ता: होम पर नीचे की पट्टी के ऊपर तैरता गोल K बटन, किनारे पर घूमते रंग ("Khalihan AI · दबाकर पूछिए")। V2 टैब सिर्फ़ पहले 7 दिन, या किसान के 3 बार खोलने तक — फिर K बटन। बंद: V2 टैब ही रहेगा (ऐप v1.0.9)।',
+    f_ai_seva: 'Khalihan AI सेवा पेज', f_ai_seva_d: 'एक पेज जिसमें Khalihan AI के सारे काम (सेवाएँ टैब → "Khalihan AI सेवा"): सवाल पूछें, आज का भाव, कहाँ बेचूँ, छिड़काव कब, हफ़्ते का मौसम, याद दिलाओ — सिर्फ़ वही जो काम करते हैं; हर नया भाग बनने पर नई टाइल (ऐप v1.0.9)।',
+    f_ai_yaad: 'बोलकर याद', f_ai_yaad_d: 'किसान काम और समय बोले — "परसों सुबह खाद डालने की याद दिलाना" — फ़ोन उस समय याद दिलाएगा, ऐप बंद हो तब भी (Android कुछ मिनट आगे-पीछे कर सकता है)। छिड़काव और पानी की याद में उस घंटे की बारिश और हवा। सवाल-जवाब शीट से भी बनती है। सब फ़ोन पर — क्लाउड में कुछ नहीं जाता (ऐप v1.0.9)।',
     f_update_prompt: 'अपडेट की याद', f_update_prompt_d: 'Google Play पर Khalihan का नया वर्ज़न आते ही ऐप दिन में एक बार बताता है और ऐप के अंदर ही अपडेट हो जाता है (Play का अपना इन-ऐप अपडेट; ऐप v1.0.6)। बंद = कोई याद नहीं।',
     f_dark: 'डार्क मोड', f_dark_d: 'सूर्यास्त के बाद ऐप अपने आप डार्क, सूर्योदय पर लाइट (खेत के हिसाब से); या किसान Profile → ऐप का रंग में तय करे (ऐप v1.0.5)। बंद = सबके लिए हमेशा लाइट, Profile की लाइन छिप जाती है।',
   },
@@ -355,6 +361,9 @@ export const FEATURE_INFO = {
   ai_ask: { def: false, since: '1.0.9' },
   ai_cloud: { def: false, since: '1.0.9' },
   ai_vertex: { def: true, since: '1.0.9' },
+  ai_k: { def: false, since: '1.0.9' },
+  ai_seva: { def: false, since: '1.0.9' },
+  ai_yaad: { def: false, since: '1.0.9' },
 };
 
 /** The sections, in order. `kind` picks a special settings panel. */
@@ -376,7 +385,7 @@ const SECTIONS = [
   { id: 'rate', icon: '⭐', master: 'rate_prompt', kids: [] },
   { id: 'guide', icon: '🧭', master: 'setup_guide', kids: [] },
   { id: 'whatsnew', icon: '✨', master: 'whats_new', kids: [] },
-  { id: 'ai', icon: '🤖', master: 'ai', kids: ['ai_ask', 'ai_cloud', 'ai_vertex'] },
+  { id: 'ai', icon: '🤖', master: 'ai', kids: ['ai_ask', 'ai_k', 'ai_seva', 'ai_yaad', 'ai_cloud', 'ai_vertex'] },
 ];
 
 /** States as the government price data names them (same list as the app). */

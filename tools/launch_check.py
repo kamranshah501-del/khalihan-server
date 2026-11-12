@@ -30,11 +30,15 @@ DEFAULTS = {
     "ai_ask": False,  # v1.0.9 "Khalihan AI से पूछें" (V2), inside "ai"
     "ai_cloud": False,  # v1.0.9 Gemini reads hard questions (test phone only)
     "ai_vertex": True,  # v1.0.9+18 the cloud part through Vertex AI (paid tier); OFF = Gemini Developer API
+    "ai_k": False,  # v1.0.9 H4 the K button on Home (after the V2 days)
+    "ai_seva": False,  # v1.0.9 H4 "Khalihan AI सेवा" page
+    "ai_yaad": False,  # v1.0.9 H4 "बोलकर याद" reminders (on the phone)
 }
 PARENT = {
     "schemes": "services", "kendra": "services", "home_sky": "weather", "advice": "weather",
     "widget_weather": "weather", "farm_weather": "weather", "where_sell": "sell_menu", "price_map": "sell_menu",
     "hold_sell": "sell_menu", "sell_interest": "sell_menu", "ai_ask": "ai", "ai_cloud": "ai",
+    "ai_k": "ai", "ai_seva": "ai", "ai_yaad": "ai",
 }
 # The launch plan (owner, 1 Nov 2026). Anything not listed: either is fine.
 PLAN = {
