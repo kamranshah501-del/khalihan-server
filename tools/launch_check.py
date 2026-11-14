@@ -40,7 +40,7 @@ DEFAULTS = {
     "ai_paper": False,  # v1.0.9 H7.1 a paper explained in plain words by Gemini
     "ai_kvk": False,  # v1.0.9 H7.2 the week's agromet advice (config/kvk)
     "ai_suno": False,  # v1.0.9 H7.3 answers read aloud
-    "ai_voice_cloud": False,  # v1.0.9 H7.3 the natural voice (Gemini speech; costs per second)
+    "ai_voice_cloud": False,  # v1.0.9 H7.3 the natural voice (Gemini speech; costs per second; Plus members only)
 }
 PARENT = {
     "schemes": "services", "kendra": "services", "home_sky": "weather", "advice": "weather",
