@@ -37,12 +37,16 @@ DEFAULTS = {
     "ai_hisaab": False,  # v1.0.9 H6.1 "बोलकर हिसाब" (on the phone only)
     "ai_bill": False,  # v1.0.9 H6.2 a bill photo read by Gemini → accounts
     "ai_soil": False,  # v1.0.9 H6.3 a Soil Health Card photo read by Gemini
+    "ai_paper": False,  # v1.0.9 H7.1 a paper explained in plain words by Gemini
+    "ai_kvk": False,  # v1.0.9 H7.2 the week's agromet advice (config/kvk)
+    "ai_suno": False,  # v1.0.9 H7.3 answers read aloud
+    "ai_voice_cloud": False,  # v1.0.9 H7.3 the natural voice (Gemini speech; costs per second)
 }
 PARENT = {
     "schemes": "services", "kendra": "services", "home_sky": "weather", "advice": "weather",
     "widget_weather": "weather", "farm_weather": "weather", "where_sell": "sell_menu", "price_map": "sell_menu",
     "hold_sell": "sell_menu", "sell_interest": "sell_menu", "ai_ask": "ai", "ai_cloud": "ai",
-    "ai_k": "ai", "ai_seva": "ai", "ai_yaad": "ai", "ai_voice": "ai", "ai_hisaab": "ai", "ai_bill": "ai", "ai_soil": "ai",
+    "ai_k": "ai", "ai_seva": "ai", "ai_yaad": "ai", "ai_voice": "ai", "ai_hisaab": "ai", "ai_bill": "ai", "ai_soil": "ai", "ai_paper": "ai", "ai_kvk": "ai", "ai_suno": "ai", "ai_voice_cloud": "ai",
 }
 # The launch plan (owner, 1 Nov 2026). Anything not listed: either is fine.
 PLAN = {

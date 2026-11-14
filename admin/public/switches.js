@@ -173,6 +173,10 @@ export const SWITCH_WORDS = {
     f_ai_hisaab: 'Spoken accounts (बोलकर हिसाब)', f_ai_hisaab_d: 'The farmer says what was spent or earned — "आज दो मज़दूर, चार-चार सौ", "20 क्विंटल कपास 7,000 के भाव से बेचा" — and it is written down: this season\'s spending and income, every line with its day; a line can be corrected or removed. Understood on the phone; the account stays on the phone only (app v1.0.9).',
     f_ai_bill: 'Accounts from a bill photo (बिल से हिसाब)', f_ai_bill_d: 'The farmer photographs a shop\'s bill; Gemini reads each thing, how much and its price, the app adds them up and says whether that matches the bill\'s own total. The farmer corrects any line and presses "हिसाब में जोड़ें" — nothing is written before that. The photo goes to Google Cloud to be read and is not kept; an Aadhaar or bank paper is refused. Needs "Spoken accounts" ON. Before farmers get it, the privacy page must say that photos are sent for reading (app v1.0.9).',
     f_ai_soil: 'Soil card from a photo (मिट्टी का कार्ड)', f_ai_soil_d: 'The farmer photographs the Soil Health Card; Gemini reads what the soil has (nitrogen, phosphorus, potash, carbon, pH…) with the card\'s own low / fine / high, and the fertiliser the card itself prints for a crop — copied as printed, never made up by AI, with "check it against the card". Our own amounts per crop and acre wait for the checked list (MPKV / PDKV). The photo goes to Google Cloud and is not kept (app v1.0.9).',
+    f_ai_paper: 'Explain a paper from a photo (कागज़ समझाएँ)', f_ai_paper_d: 'The farmer photographs a notice, a letter, a 7/12, a receipt or a weighbridge slip; Gemini says in plain words what it is and the three things that matter, the app adds its own caution and reads it aloud. A bank\'s notice or letter is read; an Aadhaar, PAN, passbook, cheque or card is refused, and an account, Aadhaar or phone number is never repeated. The photo goes to Google Cloud and is not kept — the privacy page must say so before this is turned on.',
+    f_ai_kvk: 'This week\'s government advice (इस हफ़्ते की सरकारी सलाह)', f_ai_kvk_d: 'The district\'s agromet advisory bulletin (Jalgaon: Gramin Krishi Mausam Sewa, AMFU Pune — Tuesdays and Fridays) in plain Hindi, Marathi and English, card by card, read aloud. Written by Claude from each bulletin and published only after the owner has read it; a medicine and its amount stand as the bulletin prints them. Free for the farmer, costs nothing to run. Other districts see “not started yet”.',
+    f_ai_suno: 'Listen to answers (सुनें)', f_ai_suno_d: 'A “सुनें” chip under every AI answer reads it aloud, and AI सेवा gets “आज का भाव सुनें”. In the phone\'s own voice unless the natural voice below is on.',
+    f_ai_voice_cloud: 'Khalihan AI\'s own natural voice (costs money)', f_ai_voice_cloud_d: 'Everything the AI says is spoken by Gemini\'s speech model instead of the phone\'s robot voice: about ₹0.8 for a minute of speech until 31 Dec 2026, about ₹1.6 from 1 Jan 2027. A phone gets 4 minutes of new speech a day; what was said once is kept on the phone and is free to hear again; the weekly advice is always read by the phone\'s voice. When it is off, over the limit or offline, the phone\'s voice speaks. The text spoken goes to Google Cloud — the privacy page must say so first.',
     f_update_prompt: 'Update reminder', f_update_prompt_d: 'When a newer Khalihan is on Google Play, the app says so once a day and updates itself inside the app (Play\'s own in-app update; app v1.0.6). Off = no reminder.',
     f_dark: 'Dark mode', f_dark_d: 'The app turns dark after sunset and light at sunrise (at the farm), or the farmer fixes it in Profile → App Colour (app v1.0.5). Off = always light for everyone, and the Profile row hides.',
   },
@@ -327,6 +331,10 @@ export const SWITCH_WORDS = {
     f_ai_hisaab: 'बोलकर हिसाब', f_ai_hisaab_d: 'किसान बोले कि क्या खर्च हुआ या क्या कमाया — "आज दो मज़दूर, चार-चार सौ", "20 क्विंटल कपास 7,000 के भाव से बेचा" — और वह लिख जाता है: इस मौसम का खर्च और कमाई, हर लाइन अपने दिन के साथ; लाइन ठीक या हटाई जा सकती है। फ़ोन पर ही समझा जाता है; हिसाब सिर्फ़ फ़ोन में रहता है (ऐप v1.0.9)।',
     f_ai_bill: 'बिल की फ़ोटो से हिसाब', f_ai_bill_d: 'किसान दुकान के बिल की फ़ोटो ले; Gemini हर चीज़, मात्रा और दाम पढ़ता है, ऐप जोड़कर बताता है कि बिल के कुल से मिलता है या नहीं। किसान कोई भी लाइन ठीक करके "हिसाब में जोड़ें" दबाए — उससे पहले कुछ नहीं लिखा जाता। फ़ोटो पढ़ने के लिए Google Cloud जाती है और रखी नहीं जाती; आधार या बैंक का कागज़ मना। "बोलकर हिसाब" चालू होना ज़रूरी। किसानों को देने से पहले privacy पेज में लिखना होगा कि फ़ोटो पढ़ने के लिए भेजी जाती है (ऐप v1.0.9)।',
     f_ai_soil: 'मिट्टी का कार्ड (फ़ोटो से)', f_ai_soil_d: 'किसान सॉइल हेल्थ कार्ड की फ़ोटो ले; Gemini पढ़ता है कि मिट्टी में क्या कितना है (नाइट्रोजन, फ़ॉस्फ़रस, पोटाश, कार्बन, pH…), कार्ड की अपनी रेटिंग (कम / ठीक / ज़्यादा) के साथ, और कार्ड पर छपी खाद की सिफ़ारिश — जैसी छपी है वैसी, AI ख़ुद नहीं बनाता, "कार्ड से मिलाकर देखें" के साथ। फ़सल और एकड़ के हिसाब से हमारी अपनी मात्रा जाँची हुई सूची (MPKV / PDKV) बनने पर। फ़ोटो Google Cloud जाती है, रखी नहीं जाती (ऐप v1.0.9)।',
+    f_ai_paper: 'कागज़ समझाएँ (फ़ोटो से)', f_ai_paper_d: 'किसान नोटिस, चिट्ठी, 7/12, रसीद या काटा पर्ची की फ़ोटो ले; Gemini आसान भाषा में बताता है कि ये क्या है और तीन ज़रूरी बातें, ऐप अपनी सावधानी जोड़ता है और पढ़कर सुनाता है। बैंक का नोटिस या चिट्ठी पढ़ी जाती है; आधार, पैन, पासबुक, चेक या कार्ड मना, और खाता, आधार या फ़ोन नंबर कभी दोहराया नहीं जाता। फ़ोटो Google Cloud को जाती है और रखी नहीं जाती — चालू करने से पहले प्राइवेसी पेज पर ये लिखना ज़रूरी है।',
+    f_ai_kvk: 'इस हफ़्ते की सरकारी सलाह', f_ai_kvk_d: 'ज़िले की कृषि मौसम सलाह बुलेटिन (जलगाँव: ग्रामीण कृषि मौसम सेवा, AMFU पुणे — मंगलवार और शुक्रवार) आसान हिंदी, मराठी और अंग्रेज़ी में, कार्ड-कार्ड करके, पढ़कर सुनाई जाती है। हर बुलेटिन से Claude लिखता है और मालिक के पढ़ने के बाद ही छपती है; दवा और उसकी मात्रा वही जो बुलेटिन में छपी है। किसान के लिए मुफ़्त, चलाने में कोई ख़र्च नहीं। बाकी ज़िलों में “अभी शुरू नहीं हुई” दिखता है।',
+    f_ai_suno: 'जवाब सुनें (सुनें)', f_ai_suno_d: 'हर AI जवाब के नीचे “सुनें” — दबाने पर जवाब पढ़कर सुनाया जाता है, और AI सेवा में “आज का भाव सुनें”। फ़ोन की अपनी आवाज़ में, जब तक नीचे वाली नैचुरल आवाज़ चालू न हो।',
+    f_ai_voice_cloud: 'Khalihan AI की अपनी नैचुरल आवाज़ (पैसे लगते हैं)', f_ai_voice_cloud_d: 'AI जो भी बोलता है वह फ़ोन की मशीनी आवाज़ की जगह Gemini की आवाज़ में: एक मिनट बोलने का लगभग ₹0.8 (31 दिसंबर 2026 तक), 1 जनवरी 2027 से लगभग ₹1.6। एक फ़ोन को रोज़ 4 मिनट नई आवाज़; जो एक बार बोला गया वह फ़ोन में रहता है और दोबारा सुनना मुफ़्त; हफ़्ते की सलाह हमेशा फ़ोन की आवाज़ में। बंद हो, सीमा पूरी हो या इंटरनेट न हो तो फ़ोन की आवाज़ बोलती है। जो बोला जाता है वह Google Cloud को जाता है — पहले प्राइवेसी पेज पर लिखना ज़रूरी है।',
     f_update_prompt: 'अपडेट की याद', f_update_prompt_d: 'Google Play पर Khalihan का नया वर्ज़न आते ही ऐप दिन में एक बार बताता है और ऐप के अंदर ही अपडेट हो जाता है (Play का अपना इन-ऐप अपडेट; ऐप v1.0.6)। बंद = कोई याद नहीं।',
     f_dark: 'डार्क मोड', f_dark_d: 'सूर्यास्त के बाद ऐप अपने आप डार्क, सूर्योदय पर लाइट (खेत के हिसाब से); या किसान Profile → ऐप का रंग में तय करे (ऐप v1.0.5)। बंद = सबके लिए हमेशा लाइट, Profile की लाइन छिप जाती है।',
   },
@@ -376,6 +384,10 @@ export const FEATURE_INFO = {
   ai_hisaab: { def: false, since: '1.0.9' },
   ai_bill: { def: false, since: '1.0.9' },
   ai_soil: { def: false, since: '1.0.9' },
+  ai_paper: { def: false, since: '1.0.9' },
+  ai_kvk: { def: false, since: '1.0.9' },
+  ai_suno: { def: false, since: '1.0.9' },
+  ai_voice_cloud: { def: false, since: '1.0.9' },
 };
 
 /** The sections, in order. `kind` picks a special settings panel. */
@@ -397,7 +409,7 @@ const SECTIONS = [
   { id: 'rate', icon: '⭐', master: 'rate_prompt', kids: [] },
   { id: 'guide', icon: '🧭', master: 'setup_guide', kids: [] },
   { id: 'whatsnew', icon: '✨', master: 'whats_new', kids: [] },
-  { id: 'ai', icon: '🤖', master: 'ai', kids: ['ai_ask', 'ai_k', 'ai_seva', 'ai_yaad', 'ai_hisaab', 'ai_bill', 'ai_soil', 'ai_voice', 'ai_cloud', 'ai_vertex'] },
+  { id: 'ai', icon: '🤖', master: 'ai', kids: ['ai_ask', 'ai_k', 'ai_seva', 'ai_yaad', 'ai_hisaab', 'ai_bill', 'ai_soil', 'ai_paper', 'ai_kvk', 'ai_suno', 'ai_voice', 'ai_voice_cloud', 'ai_cloud', 'ai_vertex'] },
 ];
 
 /** States as the government price data names them (same list as the app). */
