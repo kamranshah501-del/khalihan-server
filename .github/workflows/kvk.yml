@@ -1,0 +1,40 @@
+name: "KVK advice: publish"
+
+# content/kvk.json → Firestore config/kvk (Khalihan AI's "इस हफ़्ते की सरकारी
+# सलाह"; the app takes it when its version is higher than the copy on the
+# phone). Runs when that file changes on main — which happens only after
+# the owner has read the plain-language version and said "ठीक" — and by
+# hand. The tool first checks every number and medicine name against the
+# bulletin's own text (content/kvk_source/). See tools/publish_kvk.py.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - content/kvk.json
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kvk
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python tools/test_kvk.py
+      - run: python tools/publish_kvk.py --check
+      - run: python tools/publish_kvk.py
+        env:
+          PYTHONUNBUFFERED: "1"
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}

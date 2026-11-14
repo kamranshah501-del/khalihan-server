@@ -1,0 +1,49 @@
+name: "KVK bulletin: fetch"
+
+# Brings Jalgaon's newest agromet advisory bulletin (Gramin Krishi Mausam
+# Sewa — issued every Tuesday and Friday) from IMD's public site and keeps
+# the PDF and its text as this run's artifact, for Khalihan AI's "इस हफ़्ते
+# की सरकारी सलाह". Nothing is published from here and no secret is used:
+# the plain-language version is written from this text, the owner reads it,
+# and only then does it go to the app (tools/publish_kvk.py).
+#
+# Tuesday and Friday 19:00 India time (13:30 UTC), and by hand
+# (Actions → this workflow → Run workflow). See tools/kvk_fetch.py.
+
+on:
+  schedule:
+    - cron: "30 13 * * 2,5"
+  workflow_dispatch:
+    inputs:
+      district:
+        description: "District, in English letters"
+        required: true
+        default: Jalgaon
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kvk-fetch
+  cancel-in-progress: false
+
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: sudo apt-get install -y --no-install-recommends poppler-utils
+      - run: python tools/kvk_fetch.py "$DISTRICT" --out "$RUNNER_TEMP/kvk_bulletin"
+        env:
+          PYTHONUNBUFFERED: "1"
+          DISTRICT: ${{ inputs.district || 'Jalgaon' }}
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: kvk-bulletin
+          path: ${{ runner.temp }}/kvk_bulletin
+          retention-days: 30
