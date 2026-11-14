@@ -38,7 +38,7 @@ CONTENT = os.path.join(HERE, "..", "content")
 FILE = os.path.join(CONTENT, "kvk.json")
 LANGS = ("en", "hi", "mr")
 MAX_CARDS = 8
-MAX_TEXT = 380  # characters a card's advice may run to
+MAX_TEXT = 420  # characters a card's advice may run to
 MAX_AGE = 8  # days; the app's own limit (KvkAdvice.fresh)
 
 _DEVA = str.maketrans("०१२३४५६७८९", "0123456789")
@@ -48,6 +48,11 @@ _NUM = re.compile(r"\d+(?:\.\d+)?")
 def numbers(text):
     """Every number in a text, as written ("2", "0.5", "80"), sorted — Devanagari digits read as ours."""
     return sorted(_NUM.findall(text.translate(_DEVA).replace(",", "")))
+
+
+def _flat(text):
+    """Small letters, one space between words — a name printed across two lines still matches."""
+    return re.sub(r"\s+", " ", text.lower()).strip()
 
 
 def check_card(area, i, card, source_numbers, source_lower):
@@ -73,11 +78,11 @@ def check_card(area, i, card, source_numbers, source_lower):
     if not isinstance(names, list) or any(not isinstance(n, str) or not n.strip() for n in names):
         raise ValueError(f"{where}: 'names' is a list of the medicines and fertilisers the card names")
     for name in names:
-        low = name.strip().lower()
+        low = _flat(name)
         if low not in source_lower:
             raise ValueError(f"{where}: '{name}' is not in the bulletin's text")
         for lang in LANGS:
-            if low not in card["t"][lang].lower():
+            if low not in _flat(card["t"][lang]):
                 raise ValueError(f"{where} ({lang}): '{name}' must stand in the text as the bulletin prints it")
 
 
@@ -125,7 +130,7 @@ def load(path=FILE, today=None):
         if not isinstance(cards, list) or not 1 <= len(cards) <= MAX_CARDS:
             raise ValueError(f"{area}: 1 to {MAX_CARDS} cards")
         for i, card in enumerate(cards):
-            check_card(area, i, card, source_numbers, source_text.lower())
+            check_card(area, i, card, source_numbers, _flat(source_text))
         out[area] = {
             "issued": issued.isoformat(),
             "from": {l: frm[l].strip() for l in LANGS},
