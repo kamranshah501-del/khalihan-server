@@ -41,12 +41,17 @@ DEFAULTS = {
     "ai_kvk": False,  # v1.0.9 H7.2 the week's agromet advice (config/kvk)
     "ai_suno": False,  # v1.0.9 H7.3 answers read aloud
     "ai_voice_cloud": False,  # v1.0.9 H7.3 the natural voice (Gemini speech; costs per second; Plus members only)
+    "ai_pest": False,  # v1.0.9 H8.2 pest / disease from a photo (Gemini names it; steps and medicine from the checked table)
+    "ai_dawai": False,  # v1.0.9 H8.3 "kya daalu" from the checked table
+    "ai_gov": False,  # v1.0.9 H9 a government site inside the app, filled together (on the phone)
+    "crop_photos": False,  # v1.0.9 real crop photos (55 of 106 on 14 Nov 2026)
 }
 PARENT = {
     "schemes": "services", "kendra": "services", "home_sky": "weather", "advice": "weather",
     "widget_weather": "weather", "farm_weather": "weather", "where_sell": "sell_menu", "price_map": "sell_menu",
     "hold_sell": "sell_menu", "sell_interest": "sell_menu", "ai_ask": "ai", "ai_cloud": "ai",
     "ai_k": "ai", "ai_seva": "ai", "ai_yaad": "ai", "ai_voice": "ai", "ai_hisaab": "ai", "ai_bill": "ai", "ai_soil": "ai", "ai_paper": "ai", "ai_kvk": "ai", "ai_suno": "ai", "ai_voice_cloud": "ai",
+    "ai_pest": "ai", "ai_dawai": "ai", "ai_gov": "ai",
 }
 # The launch plan (owner, 1 Nov 2026). Anything not listed: either is fine.
 PLAN = {

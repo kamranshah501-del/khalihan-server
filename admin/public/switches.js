@@ -177,6 +177,10 @@ export const SWITCH_WORDS = {
     f_ai_kvk: 'This week\'s government advice (इस हफ़्ते की सरकारी सलाह)', f_ai_kvk_d: 'The district\'s agromet advisory bulletin (Jalgaon: Gramin Krishi Mausam Sewa, AMFU Pune — Tuesdays and Fridays) in plain Hindi, Marathi and English, card by card, read aloud. Written by Claude from each bulletin and published only after the owner has read it; a medicine and its amount stand as the bulletin prints them. Free for the farmer, costs nothing to run. Other districts see “not started yet”.',
     f_ai_suno: 'Listen to answers (सुनें)', f_ai_suno_d: 'A “सुनें” chip under every AI answer reads it aloud, and AI सेवा gets “आज का भाव सुनें”. In the phone\'s own voice unless the natural voice below is on.',
     f_ai_voice_cloud: 'Natural voice for the whole app — Plus members only (costs money)', f_ai_voice_cloud_d: 'For Khalihan Plus members (a gift code today, the subscription later) everything the app says aloud — prices on Home and a crop\'s page, schemes, the crop calendar, AI answers, a paper, the weekly advice — is spoken by Gemini\'s speech model, in the voice “Kore”, instead of the phone\'s robot voice, at the farmer\'s own Speaking Speed; everyone else keeps the phone\'s voice. Cost: about ₹0.8 for a minute of speech until 31 Dec 2026, about ₹1.6 from 1 Jan 2027. A phone gets 4 minutes of new speech a day; what was said once is kept on the phone for 10 days and is free to hear again. When it is off, over the limit or offline, the phone\'s voice speaks. The text spoken goes to Google Cloud — the privacy page must say so first.',
+    f_crop_photos: 'Real crop photos', f_crop_photos_d: 'The heap under a crop\'s card and the square icon in lists are real photos on white, for the crops that have one (55 of 106 on 14 Nov 2026); the others keep the drawn heap and the emoji. Off = everything as before.',
+    f_ai_pest: 'Pest / disease check from a photo (costs per photo)', f_ai_pest_d: 'A photo of the leaf or the insect is read by Gemini, which only NAMES the problem and says how sure it is (below 70 %: "take it again / show it to the KVK"). What to try first and every medicine\'s name and amount come from the checked list inside the app — lines a government paper printed — never from AI. The photo goes to Google Cloud (privacy page first). Even when ON, farmers see nothing until an agriculture graduate has checked that list: until then it shows on test builds only.',
+    f_ai_dawai: '"What should I apply?" answered from the checked list', f_ai_dawai_d: 'A question such as "whitefly on cotton — what should I apply?" is answered from the same checked list: steps first, then the medicines exactly as the government paper prints them, with the caution and "the decision is the farmer\'s". Off = the old answer ("ask your agriculture assistant"). Same lock as the photo check: nothing for farmers until an agriculture graduate has checked the list.',
+    f_ai_gov: 'Fill a government form (site inside the app)', f_ai_gov_d: 'A government site (gov.in / nic.in only) opens inside the app. Khalihan AI reads the page\'s boxes on the phone (labels only — nothing leaves the phone, ₹0), fills name, state and district from the profile and the village from My farm, lets the farmer speak or type the rest, and reads the form back. It never reads or fills Aadhaar, bank, IFSC, OTP, password or captcha, and never presses "Submit".',
     f_update_prompt: 'Update reminder', f_update_prompt_d: 'When a newer Khalihan is on Google Play, the app says so once a day and updates itself inside the app (Play\'s own in-app update; app v1.0.6). Off = no reminder.',
     f_dark: 'Dark mode', f_dark_d: 'The app turns dark after sunset and light at sunrise (at the farm), or the farmer fixes it in Profile → App Colour (app v1.0.5). Off = always light for everyone, and the Profile row hides.',
   },
@@ -335,6 +339,10 @@ export const SWITCH_WORDS = {
     f_ai_kvk: 'इस हफ़्ते की सरकारी सलाह', f_ai_kvk_d: 'ज़िले की कृषि मौसम सलाह बुलेटिन (जलगाँव: ग्रामीण कृषि मौसम सेवा, AMFU पुणे — मंगलवार और शुक्रवार) आसान हिंदी, मराठी और अंग्रेज़ी में, कार्ड-कार्ड करके, पढ़कर सुनाई जाती है। हर बुलेटिन से Claude लिखता है और मालिक के पढ़ने के बाद ही छपती है; दवा और उसकी मात्रा वही जो बुलेटिन में छपी है। किसान के लिए मुफ़्त, चलाने में कोई ख़र्च नहीं। बाकी ज़िलों में “अभी शुरू नहीं हुई” दिखता है।',
     f_ai_suno: 'जवाब सुनें (सुनें)', f_ai_suno_d: 'हर AI जवाब के नीचे “सुनें” — दबाने पर जवाब पढ़कर सुनाया जाता है, और AI सेवा में “आज का भाव सुनें”। फ़ोन की अपनी आवाज़ में, जब तक नीचे वाली नैचुरल आवाज़ चालू न हो।',
     f_ai_voice_cloud: 'पूरी ऐप की नैचुरल आवाज़ — सिर्फ़ Plus में (पैसे लगते हैं)', f_ai_voice_cloud_d: 'Khalihan Plus के सदस्यों के लिए (आज गिफ़्ट कोड, आगे सदस्यता) ऐप जो भी बोलती है — होम और फ़सल के पेज के भाव, योजनाएँ, फ़सल कैलेंडर, AI के जवाब, कागज़, हफ़्ते की सलाह — वह फ़ोन की मशीनी आवाज़ की जगह Gemini की “Kore” आवाज़ में, किसान की चुनी बोलने की रफ़्तार पर; बाकी सबके लिए फ़ोन की आवाज़ ही रहती है। ख़र्च: एक मिनट बोलने का लगभग ₹0.8 (31 दिसंबर 2026 तक), 1 जनवरी 2027 से लगभग ₹1.6। एक फ़ोन को रोज़ 4 मिनट नई आवाज़; जो एक बार बोला गया वह 10 दिन फ़ोन में रहता है और दोबारा सुनना मुफ़्त। बंद हो, सीमा पूरी हो या इंटरनेट न हो तो फ़ोन की आवाज़ बोलती है। जो बोला जाता है वह Google Cloud को जाता है — पहले प्राइवेसी पेज पर लिखना ज़रूरी है।',
+    f_crop_photos: 'फ़सलों की असली फ़ोटो', f_crop_photos_d: 'फ़सल के कार्ड के नीचे का ढेर और सूची का चौकोर आइकन असली फ़ोटो (सफ़ेद पर) — जिन फ़सलों की फ़ोटो बनी है (14 नवंबर 2026 को 106 में से 55); बाकी पर पहले जैसा चित्र और इमोजी। बंद = सब पहले जैसा।',
+    f_ai_pest: 'फ़ोटो से कीट / रोग पहचान (हर फ़ोटो के पैसे)', f_ai_pest_d: 'पत्ते या कीड़े की फ़ोटो Gemini देखता है और सिर्फ़ कीट/रोग का नाम और भरोसा बताता है (70 % से कम: "फ़ोटो दोबारा लें / KVK को दिखाएँ")। पहले के उपाय और हर दवा का नाम व मात्रा ऐप के अंदर की जाँची हुई सूची से — जो सरकारी कागज़ में छपा है — AI से कभी नहीं। फ़ोटो Google Cloud को जाती है (पहले प्राइवेसी पेज)। ON होने पर भी, जब तक कृषि स्नातक सूची न जाँचे, किसानों को कुछ नहीं दिखता: तब तक सिर्फ़ टेस्ट बिल्ड पर।',
+    f_ai_dawai: '"क्या डालूँ?" का जवाब जाँची हुई सूची से', f_ai_dawai_d: '"कपास में सफ़ेद मक्खी है, क्या डालूँ?" जैसे सवाल का जवाब उसी जाँची हुई सूची से: पहले उपाय, फिर दवाएँ ठीक वैसी जैसी सरकारी कागज़ में छपी हैं, सावधानी और "इस्तेमाल का फ़ैसला किसान का" के साथ। बंद = पुराना जवाब ("कृषि सहायक से पूछें")। फ़ोटो पहचान वाला ही ताला: कृषि स्नातक की जाँच से पहले किसानों को कुछ नहीं।',
+    f_ai_gov: 'सरकारी फ़ॉर्म भरना (साइट ऐप के अंदर)', f_ai_gov_d: 'सरकारी साइट (सिर्फ़ gov.in / nic.in) ऐप के अंदर खुलती है। Khalihan AI पेज के खाने फ़ोन पर ही पढ़ता है (सिर्फ़ लेबल — कुछ भी फ़ोन से बाहर नहीं जाता, ₹0), नाम, राज्य, ज़िला प्रोफ़ाइल से और गाँव "मेरा खेत" से भरता है, बाकी किसान बोलकर या लिखकर भरता है, और फ़ॉर्म पढ़कर सुनाता है। Aadhaar, बैंक, IFSC, OTP, पासवर्ड, कैप्चा न पढ़ता है न भरता है, और "जमा करें" कभी नहीं दबाता।',
     f_update_prompt: 'अपडेट की याद', f_update_prompt_d: 'Google Play पर Khalihan का नया वर्ज़न आते ही ऐप दिन में एक बार बताता है और ऐप के अंदर ही अपडेट हो जाता है (Play का अपना इन-ऐप अपडेट; ऐप v1.0.6)। बंद = कोई याद नहीं।',
     f_dark: 'डार्क मोड', f_dark_d: 'सूर्यास्त के बाद ऐप अपने आप डार्क, सूर्योदय पर लाइट (खेत के हिसाब से); या किसान Profile → ऐप का रंग में तय करे (ऐप v1.0.5)। बंद = सबके लिए हमेशा लाइट, Profile की लाइन छिप जाती है।',
   },
@@ -388,6 +396,10 @@ export const FEATURE_INFO = {
   ai_kvk: { def: false, since: '1.0.9' },
   ai_suno: { def: false, since: '1.0.9' },
   ai_voice_cloud: { def: false, since: '1.0.9' },
+  ai_pest: { def: false, since: '1.0.9' },
+  ai_dawai: { def: false, since: '1.0.9' },
+  ai_gov: { def: false, since: '1.0.9' },
+  crop_photos: { def: false, since: '1.0.9' },
 };
 
 /** The sections, in order. `kind` picks a special settings panel. */
@@ -395,7 +407,7 @@ const SECTIONS = [
   { id: 'states', icon: '📍', kind: 'states' },
   { id: 'notice', icon: '📣', kind: 'notice' },
   { id: 'festival', icon: '🪔', kind: 'festival' },
-  { id: 'prices', icon: '📈', master: null, kids: ['day_voice', 'voice_search', 'share_picture', 'share_link', 'alerts', 'target', 'brief'] },
+  { id: 'prices', icon: '📈', master: null, kids: ['day_voice', 'voice_search', 'share_picture', 'share_link', 'alerts', 'target', 'brief', 'crop_photos'] },
   { id: 'sellmenu', icon: '🛒', master: 'sell_menu', kids: ['where_sell', 'price_map', 'hold_sell', 'sell_interest'] },
   { id: 'weather', icon: '🌦️', master: 'weather', kids: ['home_sky', 'advice', 'widget_weather', 'farm_weather'] },
   { id: 'calendar', icon: '🌱', master: 'calendar', kids: [] },
@@ -409,7 +421,7 @@ const SECTIONS = [
   { id: 'rate', icon: '⭐', master: 'rate_prompt', kids: [] },
   { id: 'guide', icon: '🧭', master: 'setup_guide', kids: [] },
   { id: 'whatsnew', icon: '✨', master: 'whats_new', kids: [] },
-  { id: 'ai', icon: '🤖', master: 'ai', kids: ['ai_ask', 'ai_k', 'ai_seva', 'ai_yaad', 'ai_hisaab', 'ai_bill', 'ai_soil', 'ai_paper', 'ai_kvk', 'ai_suno', 'ai_voice', 'ai_voice_cloud', 'ai_cloud', 'ai_vertex'] },
+  { id: 'ai', icon: '🤖', master: 'ai', kids: ['ai_ask', 'ai_k', 'ai_seva', 'ai_yaad', 'ai_hisaab', 'ai_bill', 'ai_soil', 'ai_paper', 'ai_kvk', 'ai_pest', 'ai_dawai', 'ai_gov', 'ai_suno', 'ai_voice', 'ai_voice_cloud', 'ai_cloud', 'ai_vertex'] },
 ];
 
 /** States as the government price data names them (same list as the app). */
