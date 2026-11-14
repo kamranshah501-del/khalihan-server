@@ -317,6 +317,7 @@ const EVENTS = {
   ai_gov_self: ['Farmer said "I\'ll fill it myself"', 'किसान ने "मैं ख़ुद भरूँगा" कहा'],
   ai_gov_filled: ['A form was filled (boxes / filled from the profile) — never what was filled', 'फ़ॉर्म भरा गया (खाने / प्रोफ़ाइल से भरे) — क्या भरा, ये कभी नहीं'],
   ai_gov_read: ['🔊 The filled form was read aloud', '🔊 भरा हुआ फ़ॉर्म सुनाया'],
+  ai_gov_browser: ['Opened the government page in the phone\'s browser instead', 'सरकारी पेज फ़ोन के ब्राउज़र में खोला'],
   ai_suno: ['🔊 Pressed "सुनें" on an answer', '🔊 जवाब पर "सुनें" दबाया'],
   ai_voice_cloud: ['🗣 Natural voice (ok / kept = from the phone, free / limit / failed)', '🗣 नैचुरल आवाज़ (ok / kept = फ़ोन से, मुफ़्त / limit / नहीं हुआ)'],
   ai_seva: ['Opened "Khalihan AI सेवा"', '"Khalihan AI सेवा" खोला'],
