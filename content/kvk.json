@@ -1,0 +1,151 @@
+{
+ "version": 2026111301,
+ "areas": {
+  "jalgaon": {
+   "issued": "2026-11-13",
+   "source": "kvk_source/jalgaon_2026-11-13_en.txt",
+   "from": {
+    "en": "Gramin Krishi Mausam Sewa, AMFU Pune · Jalgaon district",
+    "hi": "ग्रामीण कृषि मौसम सेवा, AMFU पुणे · ज़िला जलगाँव",
+    "mr": "ग्रामीण कृषि मौसम सेवा, AMFU पुणे · जळगाव जिल्हा"
+   },
+   "cards": [
+    {
+     "k": "weather",
+     "name": {
+      "en": "Weather",
+      "hi": "मौसम",
+      "mr": "हवामान"
+     },
+     "t": {
+      "en": "The weather is likely to stay dry from 13 to 17 November — no rain is forecast. Days around 33 to 34 degrees, nights 13 to 15 degrees. From 18 to 24 November rain is likely to stay below normal.",
+      "hi": "13 से 17 नवंबर तक मौसम सूखा रहने की संभावना है — बारिश का अनुमान नहीं। दिन का तापमान 33 से 34 डिग्री, रात का 13 से 15 डिग्री। 18 से 24 नवंबर में बारिश सामान्य से कम रह सकती है।",
+      "mr": "13 ते 17 नोव्हेंबरपर्यंत हवामान कोरडे राहण्याची शक्यता आहे — पावसाचा अंदाज नाही. दिवसाचे तापमान 33 ते 34 अंश, रात्रीचे 13 ते 15 अंश. 18 ते 24 नोव्हेंबरमध्ये पाऊस सरासरीपेक्षा कमी राहू शकतो."
+     }
+    },
+    {
+     "k": "cotton",
+     "name": {
+      "en": "Cotton — picking",
+      "hi": "कपास — चुनाई",
+      "mr": "कापूस — वेचणी"
+     },
+     "t": {
+      "en": "Start the first picking when 30–35% of the bolls have burst; the next pickings at intervals of 15–20 days. Dry the picked cotton in the sun for 3–4 days before storing it. Rain-fed cotton: give a protective irrigation at the boll-formation stage (90–100 days). After the last picking, mix the stalks into the soil with a cotton shredder.",
+      "hi": "जब 30–35% बोंड फूट जाएँ तब पहली चुनाई शुरू करें; अगली चुनाई 15–20 दिन के अंतर पर। चुना हुआ कपास 3–4 दिन धूप में सुखाकर ही रखें। बारानी कपास में बोंड बनते समय (90–100 दिन पर) एक बचाव-सिंचाई दें। आख़िरी चुनाई के बाद डंठल कॉटन श्रेडर से मिट्टी में मिला दें।",
+      "mr": "30–35% बोंडे फुटली की पहिली वेचणी सुरू करा; पुढच्या वेचण्या 15–20 दिवसांच्या अंतराने. वेचलेला कापूस 3–4 दिवस उन्हात वाळवूनच साठवा. जिरायती कापसाला बोंडे धरण्याच्या अवस्थेत (90–100 दिवस) संरक्षित पाणी द्या. शेवटच्या वेचणीनंतर पऱ्हाट्या कॉटन श्रेडरने जमिनीत मिसळा."
+     }
+    },
+    {
+     "k": "cotton",
+     "name": {
+      "en": "Cotton — pink bollworm",
+      "hi": "कपास — गुलाबी सुंडी",
+      "mr": "कापूस — गुलाबी बोंड अळी"
+     },
+     "names": [
+      "lambda-cyhalothrin 5% EC",
+      "spinosad 45 SC",
+      "profenofos 50 EC",
+      "emamectin benzoate 5 SG",
+      "indoxacarb 14.5 SC",
+      "chlorantraniliprole 18.5 SC"
+     ],
+     "t": {
+      "en": "Put up three trichocards per acre. If the pest crosses the damage level, spray one of these in 10 litres of water: lambda-cyhalothrin 5% EC 8 ml, or spinosad 45 SC 3.5 ml, or profenofos 50 EC 30 ml, or emamectin benzoate 5 SG 4.4 gm, or indoxacarb 14.5 SC 10 ml, or chlorantraniliprole 18.5 SC 3 ml. Collect and destroy diseased leaves, bolls and flowers.",
+      "hi": "एक एकड़ में तीन ट्राइकोकार्ड लगाएँ। कीट नुक़सान के स्तर से ऊपर जाए तो इनमें से कोई एक दवा 10 लीटर पानी में छिड़कें: lambda-cyhalothrin 5% EC 8 मिली, या spinosad 45 SC 3.5 मिली, या profenofos 50 EC 30 मिली, या emamectin benzoate 5 SG 4.4 ग्राम, या indoxacarb 14.5 SC 10 मिली, या chlorantraniliprole 18.5 SC 3 मिली। रोगी पत्ते, बोंड और फूल इकट्ठा करके नष्ट करें।",
+      "mr": "एकरी तीन ट्रायकोकार्ड लावा. किडीने नुकसानीची पातळी ओलांडली तर यांपैकी एकच औषध 10 लिटर पाण्यात फवारा: lambda-cyhalothrin 5% EC 8 मिली, किंवा spinosad 45 SC 3.5 मिली, किंवा profenofos 50 EC 30 मिली, किंवा emamectin benzoate 5 SG 4.4 ग्रॅम, किंवा indoxacarb 14.5 SC 10 मिली, किंवा chlorantraniliprole 18.5 SC 3 मिली. रोगट पाने, बोंडे आणि फुले गोळा करून नष्ट करा."
+     }
+    },
+    {
+     "k": "banana",
+     "name": {
+      "en": "Banana — leaf spot (sigatoka)",
+      "hi": "केला — करपा (सिगाटोका)",
+      "mr": "केळी — करपा"
+     },
+     "names": [
+      "Metiram + Pyraclostrobin",
+      "Azoxystrobin + Difenconazole",
+      "Tebuconazole + Trifloxystrobin",
+      "Tilt (Propiconazole)",
+      "Banole"
+     ],
+     "t": {
+      "en": "Cut off and destroy the affected leaves. Then spray one of these, per litre of water: Metiram + Pyraclostrobin 3 grams with mineral oil (Banole) 10 ml; or Azoxystrobin + Difenconazole 2 ml; or Tebuconazole + Trifloxystrobin 0.5 ml; or Tilt (Propiconazole) 0.5 ml with mineral oil 10 ml. Irrigate by drip, at night or early in the morning.",
+      "hi": "रोगी पत्ते काटकर नष्ट करें। फिर इनमें से कोई एक, प्रति लीटर पानी, छिड़कें: Metiram + Pyraclostrobin 3 ग्राम और मिनरल ऑयल (Banole) 10 मिली; या Azoxystrobin + Difenconazole 2 मिली; या Tebuconazole + Trifloxystrobin 0.5 मिली; या Tilt (Propiconazole) 0.5 मिली और मिनरल ऑयल 10 मिली। सिंचाई ड्रिप से, रात में या सुबह जल्दी करें।",
+      "mr": "करपाग्रस्त पाने कापून नष्ट करा. नंतर यांपैकी एकाची, प्रति लिटर पाण्यात, फवारणी करा: Metiram + Pyraclostrobin 3 ग्रॅम आणि मिनरल ऑइल (Banole) 10 मिली; किंवा Azoxystrobin + Difenconazole 2 मिली; किंवा Tebuconazole + Trifloxystrobin 0.5 मिली; किंवा Tilt (Propiconazole) 0.5 मिली आणि मिनरल ऑइल 10 मिली. पाणी ठिबकने, रात्री किंवा पहाटे द्या."
+     }
+    },
+    {
+     "k": "gram",
+     "name": {
+      "en": "Gram (chana) — sowing",
+      "hi": "चना — बुवाई",
+      "mr": "हरभरा — पेरणी"
+     },
+     "names": [
+      "Trichoderma harzianum 1% WP",
+      "pendimethalin",
+      "Phule Bio Mix"
+     ],
+     "t": {
+      "en": "Sow dryland gram only when the soil has enough moisture; irrigated gram as soon as possible. Seed treatment: Trichoderma harzianum 1% WP 6 grams per kg of seed, then Rhizobium and PSB 25 grams per kg, or ‘Phule Bio Mix’ 10 ml per kg of seed. Sow at 30 × 10 cm. After sowing and before the crop comes up, while the soil is moist: the herbicide pendimethalin 2.5 to 3 litres in 500 litres of water per hectare.",
+      "hi": "बारानी चना तभी बोएँ जब मिट्टी में पूरी नमी हो; सिंचित चना जल्द से जल्द। बीज उपचार: Trichoderma harzianum 1% WP 6 ग्राम प्रति किलो बीज, फिर राइज़ोबियम और PSB 25 ग्राम प्रति किलो, या ‘Phule Bio Mix’ 10 मिली प्रति किलो बीज। बुवाई 30 × 10 सेमी पर। बुवाई के बाद, उगने से पहले, नमी रहते: खरपतवारनाशक pendimethalin 2.5 से 3 लीटर, 500 लीटर पानी में, प्रति हेक्टेयर।",
+      "mr": "कोरडवाहू हरभरा जमिनीत पुरेसा ओलावा असतानाच पेरा; बागायती हरभरा लवकरात लवकर. बीजप्रक्रिया: Trichoderma harzianum 1% WP 6 ग्रॅम प्रति किलो बियाणे, नंतर रायझोबियम आणि PSB 25 ग्रॅम प्रति किलो, किंवा ‘Phule Bio Mix’ 10 मिली प्रति किलो बियाणे. पेरणी 30 × 10 सेमी अंतरावर. पेरणीनंतर, उगवणीपूर्वी, ओलावा असताना: तणनाशक pendimethalin 2.5 ते 3 लिटर, 500 लिटर पाण्यात, प्रति हेक्टर."
+     }
+    },
+    {
+     "k": "wheat",
+     "name": {
+      "en": "Wheat — sowing",
+      "hi": "गेहूँ — बुवाई",
+      "mr": "गहू — पेरणी"
+     },
+     "names": [
+      "thiram",
+      "thiamethoxam 70 WP",
+      "azotobacter",
+      "Phule Bio Mix"
+     ],
+     "t": {
+      "en": "Sow irrigated wheat as soon as possible: about 100–125 kg of seed per hectare, rows 20–22.5 cm apart. Seed treatment, in this order: thiram 3 grams per kg of seed; then thiamethoxam 70 WP 17.5 ml per 10 kg of seed; then azotobacter 25 grams per kg, or ‘Phule Bio Mix’ 10 ml per kg of seed.",
+      "hi": "सिंचित गेहूँ जल्द से जल्द बोएँ: लगभग 100–125 किलो बीज प्रति हेक्टेयर, क़तारों में 20–22.5 सेमी का अंतर। बीज उपचार इसी क्रम में: thiram 3 ग्राम प्रति किलो बीज; फिर thiamethoxam 70 WP 17.5 मिली प्रति 10 किलो बीज; फिर azotobacter 25 ग्राम प्रति किलो, या ‘Phule Bio Mix’ 10 मिली प्रति किलो बीज।",
+      "mr": "बागायती गहू लवकरात लवकर पेरा: साधारण 100–125 किलो बियाणे प्रति हेक्टर, ओळींत 20–22.5 सेमी अंतर. बीजप्रक्रिया याच क्रमाने: thiram 3 ग्रॅम प्रति किलो बियाणे; नंतर thiamethoxam 70 WP 17.5 मिली प्रति 10 किलो बियाणे; नंतर azotobacter 25 ग्रॅम प्रति किलो, किंवा ‘Phule Bio Mix’ 10 मिली प्रति किलो बियाणे."
+     }
+    },
+    {
+     "k": "maize",
+     "name": {
+      "en": "Rabi maize — sowing",
+      "hi": "रबी मक्का — बुवाई",
+      "mr": "रब्बी मका — पेरणी"
+     },
+     "names": [
+      "thiram",
+      "azotobacter",
+      "Phule Bio Mix"
+     ],
+     "t": {
+      "en": "Sow as soon as possible: 15–20 kg of seed per hectare. Spacing 75 × 20 cm for medium and late varieties, 60 × 20 cm for early ones. Treat the seed with thiram first (its amount is not printed clearly in the bulletin — ask your agriculture assistant), then azotobacter 25 grams per kg of seed, or ‘Phule Bio Mix’ 10 ml per kg of seed.",
+      "hi": "जल्द से जल्द बोएँ: 15–20 किलो बीज प्रति हेक्टेयर। मध्यम और देर की किस्मों के लिए अंतर 75 × 20 सेमी, जल्दी की किस्मों के लिए 60 × 20 सेमी। बीज को पहले thiram से उपचारित करें (इसकी मात्रा बुलेटिन में साफ़ नहीं छपी — कृषि सहायक से पूछें), फिर azotobacter 25 ग्राम प्रति किलो बीज, या ‘Phule Bio Mix’ 10 मिली प्रति किलो बीज।",
+      "mr": "लवकरात लवकर पेरा: 15–20 किलो बियाणे प्रति हेक्टर. मध्यम व उशिरा वाणांसाठी अंतर 75 × 20 सेमी, लवकर वाणांसाठी 60 × 20 सेमी. बियाण्याला आधी thiram ची प्रक्रिया करा (त्याचे प्रमाण पत्रिकेत स्पष्ट छापलेले नाही — कृषी सहाय्यकांना विचारा), नंतर azotobacter 25 ग्रॅम प्रति किलो बियाणे, किंवा ‘Phule Bio Mix’ 10 मिली प्रति किलो बियाणे."
+     }
+    },
+    {
+     "k": "sorghum",
+     "name": {
+      "en": "Rabi jowar",
+      "hi": "रबी ज्वार",
+      "mr": "रब्बी ज्वारी"
+     },
+     "t": {
+      "en": "Where jowar was sown early: for stem borer, put up 5 to 6 trichocards per hectare, once a week. Give a protective irrigation if you have water. Weed as needed every 10 to 12 days, hoe at three, five and eight weeks after sowing, and keep the crop free of weeds for the first 30 to 40 days.",
+      "hi": "जहाँ ज्वार जल्दी बोई गई है: तना छेदक के लिए प्रति हेक्टेयर 5 से 6 ट्राइकोकार्ड, हफ़्ते में एक बार लगाएँ। पानी हो तो एक बचाव-सिंचाई दें। ज़रूरत के अनुसार 10 से 12 दिन पर निराई करें, बुवाई के तीन, पाँच और आठ हफ़्ते बाद गुड़ाई करें, और पहले 30 से 40 दिन फ़सल को खरपतवार से मुक्त रखें।",
+      "mr": "जिथे ज्वारी लवकर पेरली आहे: खोडकिडीसाठी प्रति हेक्टर 5 ते 6 ट्रायकोकार्ड, आठवड्यातून एकदा लावा. पाणी असल्यास संरक्षित पाणी द्या. गरजेनुसार 10 ते 12 दिवसांनी खुरपणी करा, पेरणीनंतर तीन, पाच आणि आठ आठवड्यांनी कोळपणी करा, आणि पहिले 30 ते 40 दिवस पीक तणमुक्त ठेवा."
+     }
+    }
+   ]
+  }
+ }
+}
