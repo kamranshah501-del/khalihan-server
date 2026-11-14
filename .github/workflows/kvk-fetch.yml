@@ -7,12 +7,13 @@ name: "KVK bulletin: fetch"
 # the plain-language version is written from this text, the owner reads it,
 # and only then does it go to the app (tools/publish_kvk.py).
 #
-# Tuesday and Friday 19:00 India time (13:30 UTC), and by hand
-# (Actions → this workflow → Run workflow). See tools/kvk_fetch.py.
+# By hand for now (Actions → this workflow → Run workflow). Owner, 14 Nov
+# 2026: the twice-weekly routine starts when the advice page is turned on
+# for farmers — until then a bulletin is fetched only when a draft is
+# wanted. Then: add  schedule: - cron: "30 13 * * 2,5"  (Tuesday and Friday
+# 19:00 India time). See tools/kvk_fetch.py.
 
 on:
-  schedule:
-    - cron: "30 13 * * 2,5"
   workflow_dispatch:
     inputs:
       district:
