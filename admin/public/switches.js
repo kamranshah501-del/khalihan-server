@@ -169,6 +169,7 @@ export const SWITCH_WORDS = {
     f_ai_k: 'Khalihan AI button on Home (K)', f_ai_k_d: 'The everyday way in: a round K button with the turning colour edge, floating above the bottom bar on Home ("Khalihan AI · tap to ask"). The V2 tab stays only for the first 7 days, or until the farmer has opened it 3 times — then the K button takes over. OFF: the V2 tab stays (app v1.0.9).',
     f_ai_seva: 'Khalihan AI services page', f_ai_seva_d: 'One page with what Khalihan AI can do (Services tab → "Khalihan AI सेवा"): ask a question, today\'s price, where to sell, when to spray, the week\'s weather, reminders — only the parts that work; more tiles come as each part is built (app v1.0.9).',
     f_ai_yaad: 'Voice reminders (बोलकर याद)', f_ai_yaad_d: 'The farmer says a task and a time — "परसों सुबह खाद डालने की याद दिलाना" — and the phone reminds them then, even with the app closed (Android may hold it a few minutes). Spraying and watering reminders carry that hour\'s rain and wind. Also works from the question sheet. All on the phone — nothing goes to the cloud (app v1.0.9).',
+    f_ai_voice: 'The orb listens and speaks (no Google voice box)', f_ai_voice_d: 'ON: the orb hears the farmer itself — it moves with the voice, shows the words as they come, and says the answer aloud in the phone\'s own voice (tap the orb to stop). For this the app holds the microphone permission; Android asks the farmer once. Only the words reach the app, never the voice. OFF: the phone\'s voice typing screen (Google\'s) listens and answers are only written. Before turning this ON for farmers, the privacy page and Play\'s Data safety must name the microphone (app v1.0.9).',
     f_update_prompt: 'Update reminder', f_update_prompt_d: 'When a newer Khalihan is on Google Play, the app says so once a day and updates itself inside the app (Play\'s own in-app update; app v1.0.6). Off = no reminder.',
     f_dark: 'Dark mode', f_dark_d: 'The app turns dark after sunset and light at sunrise (at the farm), or the farmer fixes it in Profile → App Colour (app v1.0.5). Off = always light for everyone, and the Profile row hides.',
   },
@@ -319,6 +320,7 @@ export const SWITCH_WORDS = {
     f_ai_k: 'होम पर Khalihan AI बटन (K)', f_ai_k_d: 'रोज़ का रास्ता: होम पर नीचे की पट्टी के ऊपर तैरता गोल K बटन, किनारे पर घूमते रंग ("Khalihan AI · दबाकर पूछिए")। V2 टैब सिर्फ़ पहले 7 दिन, या किसान के 3 बार खोलने तक — फिर K बटन। बंद: V2 टैब ही रहेगा (ऐप v1.0.9)।',
     f_ai_seva: 'Khalihan AI सेवा पेज', f_ai_seva_d: 'एक पेज जिसमें Khalihan AI के सारे काम (सेवाएँ टैब → "Khalihan AI सेवा"): सवाल पूछें, आज का भाव, कहाँ बेचूँ, छिड़काव कब, हफ़्ते का मौसम, याद दिलाओ — सिर्फ़ वही जो काम करते हैं; हर नया भाग बनने पर नई टाइल (ऐप v1.0.9)।',
     f_ai_yaad: 'बोलकर याद', f_ai_yaad_d: 'किसान काम और समय बोले — "परसों सुबह खाद डालने की याद दिलाना" — फ़ोन उस समय याद दिलाएगा, ऐप बंद हो तब भी (Android कुछ मिनट आगे-पीछे कर सकता है)। छिड़काव और पानी की याद में उस घंटे की बारिश और हवा। सवाल-जवाब शीट से भी बनती है। सब फ़ोन पर — क्लाउड में कुछ नहीं जाता (ऐप v1.0.9)।',
+    f_ai_voice: 'गोला सुने और बोले (Google का बॉक्स नहीं)', f_ai_voice_d: 'चालू: गोला किसान की आवाज़ ख़ुद सुनता है — आवाज़ के साथ हिलता है, शब्द आते-आते दिखाता है और जवाब फ़ोन की आवाज़ में बोलकर देता है (गोला दबाने पर चुप)। इसके लिए ऐप को माइक की इजाज़त चाहिए; Android किसान से एक बार पूछता है। ऐप तक सिर्फ़ शब्द पहुँचते हैं, आवाज़ नहीं। बंद: फ़ोन की बोलकर-लिखने वाली स्क्रीन (Google की) सुनती है और जवाब सिर्फ़ लिखा आता है। किसानों के लिए चालू करने से पहले privacy पेज और Play के Data safety में माइक लिखना ज़रूरी है (ऐप v1.0.9)।',
     f_update_prompt: 'अपडेट की याद', f_update_prompt_d: 'Google Play पर Khalihan का नया वर्ज़न आते ही ऐप दिन में एक बार बताता है और ऐप के अंदर ही अपडेट हो जाता है (Play का अपना इन-ऐप अपडेट; ऐप v1.0.6)। बंद = कोई याद नहीं।',
     f_dark: 'डार्क मोड', f_dark_d: 'सूर्यास्त के बाद ऐप अपने आप डार्क, सूर्योदय पर लाइट (खेत के हिसाब से); या किसान Profile → ऐप का रंग में तय करे (ऐप v1.0.5)। बंद = सबके लिए हमेशा लाइट, Profile की लाइन छिप जाती है।',
   },
@@ -364,6 +366,7 @@ export const FEATURE_INFO = {
   ai_k: { def: false, since: '1.0.9' },
   ai_seva: { def: false, since: '1.0.9' },
   ai_yaad: { def: false, since: '1.0.9' },
+  ai_voice: { def: false, since: '1.0.9' },
 };
 
 /** The sections, in order. `kind` picks a special settings panel. */
@@ -385,7 +388,7 @@ const SECTIONS = [
   { id: 'rate', icon: '⭐', master: 'rate_prompt', kids: [] },
   { id: 'guide', icon: '🧭', master: 'setup_guide', kids: [] },
   { id: 'whatsnew', icon: '✨', master: 'whats_new', kids: [] },
-  { id: 'ai', icon: '🤖', master: 'ai', kids: ['ai_ask', 'ai_k', 'ai_seva', 'ai_yaad', 'ai_cloud', 'ai_vertex'] },
+  { id: 'ai', icon: '🤖', master: 'ai', kids: ['ai_ask', 'ai_k', 'ai_seva', 'ai_yaad', 'ai_voice', 'ai_cloud', 'ai_vertex'] },
 ];
 
 /** States as the government price data names them (same list as the app). */

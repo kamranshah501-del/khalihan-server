@@ -289,6 +289,7 @@ const EVENTS = {
   ai_ask: ['🤖 Asked Khalihan AI', '🤖 Khalihan AI से पूछा'],
   ai_action: ['Followed an AI answer\'s link', 'AI जवाब का बटन दबाया'],
   ai_wrong: ['🤖 "Looks wrong?" on an AI answer', '🤖 AI जवाब पर "गलत लगा?"'],
+  ai_hear: ['🎙️ The orb listened (ok / nothing heard / no microphone)', '🎙️ गोले ने सुना (ठीक / सुनाई नहीं दिया / माइक नहीं)'],
   ai_seva: ['Opened "Khalihan AI सेवा"', '"Khalihan AI सेवा" खोला'],
   ai_yaad_page: ['Opened voice reminders', '"बोलकर याद" खोला'],
   ai_yaad: ['🔔 Made a voice reminder', '🔔 बोलकर याद बनाई'],
