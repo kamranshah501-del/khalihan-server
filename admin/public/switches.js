@@ -171,6 +171,8 @@ export const SWITCH_WORDS = {
     f_ai_yaad: 'Voice reminders (बोलकर याद)', f_ai_yaad_d: 'The farmer says a task and a time — "परसों सुबह खाद डालने की याद दिलाना" — and the phone reminds them then, even with the app closed (Android may hold it a few minutes). Spraying and watering reminders carry that hour\'s rain and wind. Also works from the question sheet. All on the phone — nothing goes to the cloud (app v1.0.9).',
     f_ai_voice: 'The orb listens and speaks (no Google voice box)', f_ai_voice_d: 'ON: the orb hears the farmer itself — it moves with the voice, shows the words as they come, and says the answer aloud in the phone\'s own voice (tap the orb to stop). For this the app holds the microphone permission; Android asks the farmer once. Only the words reach the app, never the voice. OFF: the phone\'s voice typing screen (Google\'s) listens and answers are only written. Before turning this ON for farmers, the privacy page and Play\'s Data safety must name the microphone (app v1.0.9).',
     f_ai_hisaab: 'Spoken accounts (बोलकर हिसाब)', f_ai_hisaab_d: 'The farmer says what was spent or earned — "आज दो मज़दूर, चार-चार सौ", "20 क्विंटल कपास 7,000 के भाव से बेचा" — and it is written down: this season\'s spending and income, every line with its day; a line can be corrected or removed. Understood on the phone; the account stays on the phone only (app v1.0.9).',
+    f_ai_bill: 'Accounts from a bill photo (बिल से हिसाब)', f_ai_bill_d: 'The farmer photographs a shop\'s bill; Gemini reads each thing, how much and its price, the app adds them up and says whether that matches the bill\'s own total. The farmer corrects any line and presses "हिसाब में जोड़ें" — nothing is written before that. The photo goes to Google Cloud to be read and is not kept; an Aadhaar or bank paper is refused. Needs "Spoken accounts" ON. Before farmers get it, the privacy page must say that photos are sent for reading (app v1.0.9).',
+    f_ai_soil: 'Soil card from a photo (मिट्टी का कार्ड)', f_ai_soil_d: 'The farmer photographs the Soil Health Card; Gemini reads what the soil has (nitrogen, phosphorus, potash, carbon, pH…) with the card\'s own low / fine / high, and the fertiliser the card itself prints for a crop — copied as printed, never made up by AI, with "check it against the card". Our own amounts per crop and acre wait for the checked list (MPKV / PDKV). The photo goes to Google Cloud and is not kept (app v1.0.9).',
     f_update_prompt: 'Update reminder', f_update_prompt_d: 'When a newer Khalihan is on Google Play, the app says so once a day and updates itself inside the app (Play\'s own in-app update; app v1.0.6). Off = no reminder.',
     f_dark: 'Dark mode', f_dark_d: 'The app turns dark after sunset and light at sunrise (at the farm), or the farmer fixes it in Profile → App Colour (app v1.0.5). Off = always light for everyone, and the Profile row hides.',
   },
@@ -323,6 +325,8 @@ export const SWITCH_WORDS = {
     f_ai_yaad: 'बोलकर याद', f_ai_yaad_d: 'किसान काम और समय बोले — "परसों सुबह खाद डालने की याद दिलाना" — फ़ोन उस समय याद दिलाएगा, ऐप बंद हो तब भी (Android कुछ मिनट आगे-पीछे कर सकता है)। छिड़काव और पानी की याद में उस घंटे की बारिश और हवा। सवाल-जवाब शीट से भी बनती है। सब फ़ोन पर — क्लाउड में कुछ नहीं जाता (ऐप v1.0.9)।',
     f_ai_voice: 'गोला सुने और बोले (Google का बॉक्स नहीं)', f_ai_voice_d: 'चालू: गोला किसान की आवाज़ ख़ुद सुनता है — आवाज़ के साथ हिलता है, शब्द आते-आते दिखाता है और जवाब फ़ोन की आवाज़ में बोलकर देता है (गोला दबाने पर चुप)। इसके लिए ऐप को माइक की इजाज़त चाहिए; Android किसान से एक बार पूछता है। ऐप तक सिर्फ़ शब्द पहुँचते हैं, आवाज़ नहीं। बंद: फ़ोन की बोलकर-लिखने वाली स्क्रीन (Google की) सुनती है और जवाब सिर्फ़ लिखा आता है। किसानों के लिए चालू करने से पहले privacy पेज और Play के Data safety में माइक लिखना ज़रूरी है (ऐप v1.0.9)।',
     f_ai_hisaab: 'बोलकर हिसाब', f_ai_hisaab_d: 'किसान बोले कि क्या खर्च हुआ या क्या कमाया — "आज दो मज़दूर, चार-चार सौ", "20 क्विंटल कपास 7,000 के भाव से बेचा" — और वह लिख जाता है: इस मौसम का खर्च और कमाई, हर लाइन अपने दिन के साथ; लाइन ठीक या हटाई जा सकती है। फ़ोन पर ही समझा जाता है; हिसाब सिर्फ़ फ़ोन में रहता है (ऐप v1.0.9)।',
+    f_ai_bill: 'बिल की फ़ोटो से हिसाब', f_ai_bill_d: 'किसान दुकान के बिल की फ़ोटो ले; Gemini हर चीज़, मात्रा और दाम पढ़ता है, ऐप जोड़कर बताता है कि बिल के कुल से मिलता है या नहीं। किसान कोई भी लाइन ठीक करके "हिसाब में जोड़ें" दबाए — उससे पहले कुछ नहीं लिखा जाता। फ़ोटो पढ़ने के लिए Google Cloud जाती है और रखी नहीं जाती; आधार या बैंक का कागज़ मना। "बोलकर हिसाब" चालू होना ज़रूरी। किसानों को देने से पहले privacy पेज में लिखना होगा कि फ़ोटो पढ़ने के लिए भेजी जाती है (ऐप v1.0.9)।',
+    f_ai_soil: 'मिट्टी का कार्ड (फ़ोटो से)', f_ai_soil_d: 'किसान सॉइल हेल्थ कार्ड की फ़ोटो ले; Gemini पढ़ता है कि मिट्टी में क्या कितना है (नाइट्रोजन, फ़ॉस्फ़रस, पोटाश, कार्बन, pH…), कार्ड की अपनी रेटिंग (कम / ठीक / ज़्यादा) के साथ, और कार्ड पर छपी खाद की सिफ़ारिश — जैसी छपी है वैसी, AI ख़ुद नहीं बनाता, "कार्ड से मिलाकर देखें" के साथ। फ़सल और एकड़ के हिसाब से हमारी अपनी मात्रा जाँची हुई सूची (MPKV / PDKV) बनने पर। फ़ोटो Google Cloud जाती है, रखी नहीं जाती (ऐप v1.0.9)।',
     f_update_prompt: 'अपडेट की याद', f_update_prompt_d: 'Google Play पर Khalihan का नया वर्ज़न आते ही ऐप दिन में एक बार बताता है और ऐप के अंदर ही अपडेट हो जाता है (Play का अपना इन-ऐप अपडेट; ऐप v1.0.6)। बंद = कोई याद नहीं।',
     f_dark: 'डार्क मोड', f_dark_d: 'सूर्यास्त के बाद ऐप अपने आप डार्क, सूर्योदय पर लाइट (खेत के हिसाब से); या किसान Profile → ऐप का रंग में तय करे (ऐप v1.0.5)। बंद = सबके लिए हमेशा लाइट, Profile की लाइन छिप जाती है।',
   },
@@ -370,6 +374,8 @@ export const FEATURE_INFO = {
   ai_yaad: { def: false, since: '1.0.9' },
   ai_voice: { def: false, since: '1.0.9' },
   ai_hisaab: { def: false, since: '1.0.9' },
+  ai_bill: { def: false, since: '1.0.9' },
+  ai_soil: { def: false, since: '1.0.9' },
 };
 
 /** The sections, in order. `kind` picks a special settings panel. */
@@ -391,7 +397,7 @@ const SECTIONS = [
   { id: 'rate', icon: '⭐', master: 'rate_prompt', kids: [] },
   { id: 'guide', icon: '🧭', master: 'setup_guide', kids: [] },
   { id: 'whatsnew', icon: '✨', master: 'whats_new', kids: [] },
-  { id: 'ai', icon: '🤖', master: 'ai', kids: ['ai_ask', 'ai_k', 'ai_seva', 'ai_yaad', 'ai_hisaab', 'ai_voice', 'ai_cloud', 'ai_vertex'] },
+  { id: 'ai', icon: '🤖', master: 'ai', kids: ['ai_ask', 'ai_k', 'ai_seva', 'ai_yaad', 'ai_hisaab', 'ai_bill', 'ai_soil', 'ai_voice', 'ai_cloud', 'ai_vertex'] },
 ];
 
 /** States as the government price data names them (same list as the app). */
