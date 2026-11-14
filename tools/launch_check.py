@@ -34,12 +34,13 @@ DEFAULTS = {
     "ai_seva": False,  # v1.0.9 H4 "Khalihan AI सेवा" page
     "ai_yaad": False,  # v1.0.9 H4 "बोलकर याद" reminders (on the phone)
     "ai_voice": False,  # v1.0.9 the orb listens and speaks itself (microphone permission)
+    "ai_hisaab": False,  # v1.0.9 H6.1 "बोलकर हिसाब" (on the phone only)
 }
 PARENT = {
     "schemes": "services", "kendra": "services", "home_sky": "weather", "advice": "weather",
     "widget_weather": "weather", "farm_weather": "weather", "where_sell": "sell_menu", "price_map": "sell_menu",
     "hold_sell": "sell_menu", "sell_interest": "sell_menu", "ai_ask": "ai", "ai_cloud": "ai",
-    "ai_k": "ai", "ai_seva": "ai", "ai_yaad": "ai", "ai_voice": "ai",
+    "ai_k": "ai", "ai_seva": "ai", "ai_yaad": "ai", "ai_voice": "ai", "ai_hisaab": "ai",
 }
 # The launch plan (owner, 1 Nov 2026). Anything not listed: either is fine.
 PLAN = {
