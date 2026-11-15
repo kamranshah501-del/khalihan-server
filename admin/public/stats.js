@@ -311,6 +311,8 @@ const EVENTS = {
   ai_pest_hear: ['Heard the pest result again', 'कीट का नतीजा फिर सुना'],
   ai_pest_wrong: ['👎 "Looks wrong?" on a pest result (only which problem is sent)', '👎 कीट के नतीजे पर "गलत लगा?" (सिर्फ़ कौन सा कीट, जाता है)'],
   ai_gov_page: ['Opened government forms', '"सरकारी फ़ॉर्म" खोला'],
+  ai_docs_page: ['Opened "Get documents"', '"दस्तावेज़ निकालें" खोला'],
+  ai_docs_open: ['Opened a paper\'s government page inside the app (which one)', 'कागज़ का सरकारी पेज ऐप के अंदर खोला (कौन सा)'],
   ai_gov_open: ['Opened a government site inside the app (which one)', 'सरकारी साइट ऐप के अंदर खोली (कौन सी)'],
   ai_gov_offer: ['AI offered to fill a form (boxes found / boxes it can fill)', 'AI ने फ़ॉर्म भरने को पूछा (कितने खाने मिले / कितने भर सकता है)'],
   ai_gov_fill: ['Farmer said "Yes, fill it"', 'किसान ने "हाँ, भर दो" कहा'],
