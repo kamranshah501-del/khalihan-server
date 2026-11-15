@@ -163,6 +163,24 @@ service cloud.firestore {
       allow delete: if isSelf(uid) || isOwner();
     }
 
+    // Khalihan AI's records in the farmer's account (v1.0.9 Step 3, switch
+    // ai_account): My chats, Applied forms, My documents — one document
+    // each, the list as text. Only that farmer reads or writes them; staff
+    // do not (private papers). Their photos and papers are in Cloud Storage
+    // (storage.rules), likewise.
+    match /users/{uid}/ai/{part} {
+      allow read, delete: if isSelf(uid);
+      allow create, update: if isSelf(uid)
+        && part in ['chats', 'applied', 'docs']
+        && request.resource.data.keys().hasOnly(['items', 'gone', 'n', 'at'])
+        && request.resource.data.items is string
+        && request.resource.data.items.size() <= 1000000
+        && request.resource.data.gone is string
+        && request.resource.data.gone.size() <= 40000
+        && request.resource.data.n is int
+        && request.resource.data.at == request.time;
+    }
+
     match /deletion_requests/{uid} {
       allow create, update: if isSelf(uid)
         && request.resource.data.keys().hasOnly(['phone', 'at', 'done', 'by'])

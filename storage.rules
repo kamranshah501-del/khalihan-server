@@ -1,0 +1,23 @@
+rules_version = '2';
+
+// Khalihan — Cloud Storage rules (v1.0.9 Step 3, switch ai_account).
+//
+// Only one thing is kept here: a logged-in farmer's Khalihan AI photos and
+// papers (My chats' small pictures, My documents' PDFs and photos), under
+// ai/{their uid}/. Only that farmer reads, writes or deletes them — not
+// staff, not anyone else. Everything else is closed.
+//
+// Deploy (after the owner's yes, and after the default bucket is made in
+// Firebase → Storage): `firebase deploy --only storage`.
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /ai/{uid}/{kind}/{file} {
+      allow read, delete: if request.auth != null && request.auth.uid == uid;
+      allow create, update: if request.auth != null && request.auth.uid == uid
+        && kind in ['chats', 'docs']
+        && request.resource.size < 26 * 1024 * 1024
+        && request.resource.contentType.matches('application/pdf|image/(jpeg|png)');
+    }
+  }
+}

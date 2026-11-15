@@ -329,6 +329,8 @@ const EVENTS = {
   ai_doc_open: ['Opened a kept paper', 'रखा कागज़ खोला'],
   ai_doc_share: ['Opened or sent a kept paper', 'रखा कागज़ खोला या भेजा'],
   ai_doc_delete: ['Deleted a kept paper', 'रखा कागज़ हटाया'],
+  ai_account_join: ['Khalihan AI records joined with the account at login (how many came back)', 'लॉगिन पर Khalihan AI का रिकॉर्ड अकाउंट से जुड़ा (कितने वापस आए)'],
+  ai_account_login: ['Tapped "Log in" to keep AI records in the account (from which page)', 'AI रिकॉर्ड अकाउंट में रखने के लिए "लॉगिन" दबाया (किस पेज से)'],
   ai_form_ask: ['📝 "Fill a form": which form was asked (its id / refused = another state / none = not found)', '📝 "फ़ॉर्म भरें": कौन सा फ़ॉर्म माँगा (id / refused = दूसरा राज्य / none = नहीं मिला)'],
   ai_door: ['📷 What a sent photo was (bill / soil / paper / plant / private / other / failed)', '📷 भेजी फ़ोटो क्या थी (bill / soil / paper / plant / private / other / failed)'],
   ai_docs_open: ['Opened a paper\'s government page inside the app (which one)', 'कागज़ का सरकारी पेज ऐप के अंदर खोला (कौन सा)'],
