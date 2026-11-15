@@ -51,6 +51,8 @@ DEFAULTS = {
     "ai_docs": False,  # v1.0.9 "Get documents": official pages of papers inside the app (needs ai_gov)
     "ai_open": False,  # v1.0.9 Step 2 "ask anything": Gemini answers questions outside the app (Plus; costs per question)
     "ai_chats": False,  # v1.0.9 Step 2 "My chats": questions and photo readings kept on the phone
+    "ai_applied": False,  # v1.0.9 Step 3 "Applied forms": draft / submitted / status, on the phone (needs ai_gov)
+    "ai_mydocs": False,  # v1.0.9 Step 3 "My documents": site PDFs and photographed papers kept on the phone
 }
 PARENT = {
     "schemes": "services", "kendra": "services", "home_sky": "weather", "advice": "weather",
@@ -58,7 +60,7 @@ PARENT = {
     "hold_sell": "sell_menu", "sell_interest": "sell_menu", "ai_ask": "ai", "ai_cloud": "ai",
     "ai_k": "ai", "ai_seva": "ai", "ai_yaad": "ai", "ai_voice": "ai", "ai_hisaab": "ai", "ai_bill": "ai", "ai_soil": "ai", "ai_paper": "ai", "ai_kvk": "ai", "ai_suno": "ai", "ai_voice_cloud": "ai",
     "ai_pest": "ai", "ai_dawai": "ai", "ai_gov": "ai", "ai_sound": "ai", "ai_docs": "ai",
-    "ai_open": "ai", "ai_chats": "ai",
+    "ai_open": "ai", "ai_chats": "ai", "ai_applied": "ai", "ai_mydocs": "ai",
 }
 # The launch plan (owner, 1 Nov 2026). Anything not listed: either is fine.
 PLAN = {
