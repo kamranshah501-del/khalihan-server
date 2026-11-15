@@ -313,6 +313,7 @@ const EVENTS = {
   ai_gov_page: ['Opened government forms', '"सरकारी फ़ॉर्म" खोला'],
   ai_docs_page: ['Opened "Get documents"', '"दस्तावेज़ निकालें" खोला'],
   ai_door_page: ['Opened "Just send the photo"', '"बस फ़ोटो भेजें" खोला'],
+  ai_close: ['Closed Khalihan AI by pulling its handle down', 'Khalihan AI को हैंडल नीचे खींचकर बंद किया'],
   ai_door: ['📷 What a sent photo was (bill / soil / paper / plant / private / other / failed)', '📷 भेजी फ़ोटो क्या थी (bill / soil / paper / plant / private / other / failed)'],
   ai_docs_open: ['Opened a paper\'s government page inside the app (which one)', 'कागज़ का सरकारी पेज ऐप के अंदर खोला (कौन सा)'],
   ai_gov_open: ['Opened a government site inside the app (which one)', 'सरकारी साइट ऐप के अंदर खोली (कौन सी)'],
