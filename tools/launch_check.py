@@ -25,6 +25,7 @@ DEFAULTS = {
     "farm_weather": False,  # v1.0.7 "मेरे खेत का मौसम": starts OFF too
     "whats_new": False,  # v1.0.7 "Khalihan में नया": the tour after an update, OFF too
     "share_link": False,  # v1.0.8 the app's Play link in every share, OFF
+    "share_short": False,  # v1.0.9 the short form of that link (needs the redirect site), OFF
     "rate_prompt": False,  # v1.0.8 Play's "rate Khalihan" card, OFF
     "ai": False,  # v1.0.9 Khalihan AI section, OFF (the test phone sees it)
     "ai_ask": False,  # v1.0.9 "Khalihan AI से पूछें" (V2), inside "ai"
