@@ -45,7 +45,7 @@ DEFAULTS = {
     "ai_dawai": False,  # v1.0.9 H8.3 "kya daalu" from the checked table
     "ai_gov": False,  # v1.0.9 H9 a government site inside the app, filled together (on the phone)
     "ai_sound": False,  # v1.0.9 Khalihan AI's own two sounds; the phone's listening beep silenced
-    "crop_photos": False,  # v1.0.9 real crop photos (55 of 106 on 14 Nov 2026)
+    "crop_photos": False,  # v1.0.9 real crop photos (all 106 since 15 Nov 2026)
 }
 PARENT = {
     "schemes": "services", "kendra": "services", "home_sky": "weather", "advice": "weather",
