@@ -1,5 +1,5 @@
 {
- "version": 6,
+ "version": 7,
  "note": "Copied from khalihan-app lib/data/schemes_content.dart (tool/schemes_content.py). The app takes this list when version is higher than its own.",
  "schemes": [
   {
@@ -353,78 +353,6 @@
       "तुमच्या बँक शाखेत KCC मागा — राष्ट्रीयीकृत, ग्रामीण किंवा जिल्हा सहकारी बँक",
       "PM-KISAN शेतकऱ्यांचा अर्ज लहान आहे (pmkisan.gov.in वर)",
       "4% दर टिकवण्यासाठी वेळेत परतफेड करा"
-     ]
-    }
-   },
-   "checked": "2026-10-07"
-  },
-  {
-   "id": "karjmukti_2026",
-   "icon": "handshake",
-   "group": "credit",
-   "states": [
-    "Maharashtra"
-   ],
-   "priority": 2,
-   "apply": null,
-   "info": "https://sarkarnama.esakal.com/maharashtra/maharashtra-farmer-loan-waiver-scheme-2026-ahilyadevi-holkar-shetkari-karjmukti-yojana-pp82",
-   "source": "Govt of Maharashtra (reported by Sakal, 29 Jun 2026)",
-   "t": {
-    "en": {
-     "title": "Loan waiver 2026 (Ahilyadevi Holkar Karjmukti)",
-     "benefit": "Crop loan waiver up to ₹2 lakh",
-     "summary": "Maharashtra's 2026 loan waiver — Punyashlok Ahilyadevi Holkar Shetkari Karjmukti Yojana: up to ₹2 lakh of crop loan for about 56 lakh farmers, and an incentive of up to ₹50,000 for those who repaid on time. It is being rolled out in phases — confirm at your bank.",
-     "who": [
-      "Farmers with a short-term crop loan; as reported, loans taken from April 2019 to March 2025 that were unpaid on 30 September 2025",
-      "Aadhaar must be linked to the loan account"
-     ],
-     "docs": [
-      "Aadhaar card",
-      "7/12 and 8-A extracts",
-      "Crop loan passbook"
-     ],
-     "how": [
-      "Go to the bank branch that gave your crop loan",
-      "Complete Aadhaar authentication (OTP or fingerprint)",
-      "Check the beneficiary list at the bank or gram panchayat"
-     ]
-    },
-    "hi": {
-     "title": "कर्ज़ माफ़ी 2026 (अहिल्यादेवी होलकर कर्जमुक्ति)",
-     "benefit": "₹2 लाख तक फसल कर्ज़ माफ़",
-     "summary": "महाराष्ट्र की 2026 कर्ज़ माफ़ी — पुण्यश्लोक अहिल्यादेवी होलकर शेतकरी कर्जमुक्ति योजना: लगभग 56 लाख किसानों का ₹2 लाख तक फसल कर्ज़ माफ़, और समय पर चुकाने वालों को ₹50,000 तक प्रोत्साहन। यह चरणों में लागू हो रही है — अपने बैंक में पुष्टि करें।",
-     "who": [
-      "अल्पकालिक फसल कर्ज़ वाले किसान; जानकारी के मुताबिक अप्रैल 2019 से मार्च 2025 के बीच लिए, 30 सितंबर 2025 तक बकाया कर्ज़",
-      "कर्ज़ खाते से आधार जुड़ा होना चाहिए"
-     ],
-     "docs": [
-      "आधार कार्ड",
-      "7/12 और 8-अ उतारा",
-      "फसल कर्ज़ की पासबुक"
-     ],
-     "how": [
-      "जिस बैंक शाखा से फसल कर्ज़ लिया, वहाँ जाएँ",
-      "आधार प्रमाणीकरण पूरा करें (OTP या अंगूठा)",
-      "बैंक या ग्राम पंचायत में लाभार्थी सूची देखें"
-     ]
-    },
-    "mr": {
-     "title": "कर्जमाफी 2026 (अहिल्यादेवी होळकर कर्जमुक्ती)",
-     "benefit": "₹2 लाखांपर्यंत पीक कर्ज माफ",
-     "summary": "महाराष्ट्राची 2026 कर्जमाफी — पुण्यश्लोक अहिल्यादेवी होळकर शेतकरी कर्जमुक्ती योजना: सुमारे 56 लाख शेतकऱ्यांचे ₹2 लाखांपर्यंत पीक कर्ज माफ, आणि नियमित परतफेड करणाऱ्यांना ₹50,000 पर्यंत प्रोत्साहन. ही टप्प्याटप्प्याने लागू होत आहे — तुमच्या बँकेत खात्री करा.",
-     "who": [
-      "अल्पमुदत पीक कर्ज असलेले शेतकरी; माहितीनुसार एप्रिल 2019 ते मार्च 2025 दरम्यान घेतलेले, 30 सप्टेंबर 2025 रोजी थकीत कर्ज",
-      "कर्ज खात्याशी आधार जोडलेले असावे"
-     ],
-     "docs": [
-      "आधार कार्ड",
-      "7/12 व 8-अ उतारा",
-      "पीक कर्जाचे पासबुक"
-     ],
-     "how": [
-      "ज्या बँक शाखेतून पीक कर्ज घेतले तिथे जा",
-      "आधार प्रमाणीकरण पूर्ण करा (OTP किंवा अंगठा)",
-      "बँकेत किंवा ग्रामपंचायतीत लाभार्थी यादी पाहा"
      ]
     }
    },
@@ -878,8 +806,8 @@
     3
    ],
    "apply": null,
-   "info": null,
-   "source": "Cotton Corporation of India (CCI) · reports of Sep 2026",
+   "info": "https://cotcorp.org.in/",
+   "source": "Cotton Corporation of India (CCI), cotcorp.org.in · reports of Sep 2026",
    "checked": "2026-11-10",
    "t": {
     "en": {
@@ -1346,8 +1274,8 @@
    "cropsAny": true,
    "checked": "2026-10-21",
    "apply": null,
-   "info": null,
-   "source": "PMFBY · Govt of India (Lok Sabha answer of 21 Dec 2021; wild-animal cover from kharif 2026)",
+   "info": "https://pmfby.gov.in/",
+   "source": "PMFBY, pmfby.gov.in · Govt of India (Lok Sabha answer of 21 Dec 2021; wild-animal cover from kharif 2026)",
    "t": {
     "en": {
      "title": "Crop loss? Report within 72 hours",
@@ -1437,8 +1365,8 @@
    ],
    "checked": "2026-11-10",
    "apply": null,
-   "info": null,
-   "source": "e-Pik Pahani (DCS MH) · Govt of Maharashtra · reports of Sep–Oct 2026",
+   "info": "https://bhulekh.mahabhumi.gov.in/",
+   "source": "e-Pik Pahani (DCS MH), Maharashtra land records — bhulekh.mahabhumi.gov.in · Govt of Maharashtra · reports of Sep–Oct 2026",
    "t": {
     "en": {
      "title": "e-Pik Pahani (crop record on your 7/12)",
