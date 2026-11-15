@@ -130,9 +130,9 @@ EOF
 fi
 
 case "$MODE" in
-  hosting) firebase deploy --only hosting ;;
+  hosting) firebase deploy --only hosting:admin,hosting:moved ;;
   rules)   firebase deploy --only firestore:rules ;;
-  *)       firebase deploy --only hosting,firestore:rules ;;
+  *)       firebase deploy --only hosting:admin,hosting:moved,firestore:rules ;;
 esac
 
 echo ""

@@ -17,11 +17,11 @@ on:
   workflow_dispatch:
     inputs:
       what:
-        description: "all = panel + rules · hosting = only the panel · rules = only the rules"
+        description: "all = panel + rules · hosting = only the panel · rules = only the rules · link = only the short share link (khalihan.web.app)"
         required: true
         default: all
         type: choice
-        options: [all, hosting, rules]
+        options: [all, hosting, rules, link]
   push:
     branches: [main]
     paths:
@@ -53,6 +53,10 @@ jobs:
           WHAT: ${{ github.event.inputs.what || 'all' }}
           # The panel's own site (made by admin/deploy.sh on 12 Oct 2026).
           ADMIN_SITE: khalihan-admin
+          # The short address shared prices end with (15 Nov 2026): it holds
+          # no page, only redirects to Khalihan on Google Play (firebase.json,
+          # target "link"). Deployed only by hand: what = link.
+          LINK_SITE: khalihan
         run: |
           set -euo pipefail
           umask 077
@@ -72,7 +76,8 @@ jobs:
               "$PROJECT": {
                 "hosting": {
                   "admin": ["$ADMIN_SITE"],
-                  "moved": ["$PROJECT"]
+                  "moved": ["$PROJECT"],
+                  "link": ["$LINK_SITE"]
                 }
               }
             }
@@ -104,13 +109,42 @@ jobs:
           # from v1.0.5): one source, docs/privacy.html, copied in at every deploy.
           cp docs/privacy.html admin/public/privacy.html
 
+          # The short link's site has no page of its own: every address is
+          # redirected (firebase.json). Hosting still wants one file.
+          mkdir -p admin/link
+          cat > admin/link/index.html <<EOF
+          <!doctype html>
+          <html lang="en">
+          <head>
+          <meta charset="utf-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1">
+          <title>Khalihan</title>
+          <meta http-equiv="refresh" content="0; url=https://play.google.com/store/apps/details?id=in.khalihan.app">
+          </head>
+          <body style="font-family:system-ui,sans-serif;padding:32px;color:#16222c">
+          <p><a href="https://play.google.com/store/apps/details?id=in.khalihan.app" style="font-size:20px;font-weight:700;color:#20405E">Khalihan — Google Play</a></p>
+          </body>
+          </html>
+          EOF
+
+          # The panel and the short link are deployed apart: a change to the
+          # panel never touches the link, and the other way round.
           case "$WHAT" in
-            hosting) ONLY="hosting" ;;
+            hosting) ONLY="hosting:admin,hosting:moved" ;;
             rules)   ONLY="firestore:rules" ;;
-            *)       ONLY="hosting,firestore:rules" ;;
+            link)    ONLY="hosting:link" ;;
+            *)       ONLY="hosting:admin,hosting:moved,firestore:rules" ;;
           esac
+          if [ "$WHAT" = "link" ]; then
+            # First time: make the site (the name is free or already ours;
+            # if someone else has it, this stops here and nothing is deployed).
+            if ! npx --yes firebase-tools@14 hosting:sites:get "$LINK_SITE" --project "$PROJECT" >/dev/null 2>&1; then
+              npx --yes firebase-tools@14 hosting:sites:create "$LINK_SITE" --project "$PROJECT" --non-interactive >/dev/null
+              echo "Made the site $LINK_SITE.web.app"
+            fi
+          fi
           VERSION=$(sed -n "s/^const ADMIN_VERSION = '\([^']*\)'.*/\1/p" admin/public/app.js)
           echo "Deploying: $ONLY · Admin $VERSION"
           npx --yes firebase-tools@14 deploy --only "$ONLY" --project "$PROJECT" --non-interactive \
             --message "Admin $VERSION · ${GITHUB_SHA::7}"
-          echo "✅ Done: https://$ADMIN_SITE.web.app"
+          if [ "$WHAT" = "link" ]; then echo "✅ Done: https://$LINK_SITE.web.app"; else echo "✅ Done: https://$ADMIN_SITE.web.app"; fi

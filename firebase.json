@@ -31,6 +31,21 @@
           ]
         }
       ]
+    },
+    {
+      "target": "link",
+      "public": "admin/link",
+      "redirects": [
+        { "source": "/crop", "destination": "https://play.google.com/store/apps/details?id=in.khalihan.app&referrer=utm_source%3Dwhatsapp%26utm_medium%3Dshare%26utm_campaign%3Dcrop", "type": 302 },
+        { "source": "/day", "destination": "https://play.google.com/store/apps/details?id=in.khalihan.app&referrer=utm_source%3Dwhatsapp%26utm_medium%3Dshare%26utm_campaign%3Dday", "type": 302 },
+        { "source": "/sell", "destination": "https://play.google.com/store/apps/details?id=in.khalihan.app&referrer=utm_source%3Dwhatsapp%26utm_medium%3Dshare%26utm_campaign%3Dwhere_to_sell", "type": 302 },
+        { "source": "/scheme", "destination": "https://play.google.com/store/apps/details?id=in.khalihan.app&referrer=utm_source%3Dwhatsapp%26utm_medium%3Dshare%26utm_campaign%3Dscheme", "type": 302 },
+        { "source": "/bill", "destination": "https://play.google.com/store/apps/details?id=in.khalihan.app&referrer=utm_source%3Dwhatsapp%26utm_medium%3Dshare%26utm_campaign%3Dbill", "type": 302 },
+        { "source": "/paper", "destination": "https://play.google.com/store/apps/details?id=in.khalihan.app&referrer=utm_source%3Dwhatsapp%26utm_medium%3Dshare%26utm_campaign%3Dpaper", "type": 302 },
+        { "source": "/pest", "destination": "https://play.google.com/store/apps/details?id=in.khalihan.app&referrer=utm_source%3Dwhatsapp%26utm_medium%3Dshare%26utm_campaign%3Dpest", "type": 302 },
+        { "source": "/soil", "destination": "https://play.google.com/store/apps/details?id=in.khalihan.app&referrer=utm_source%3Dwhatsapp%26utm_medium%3Dshare%26utm_campaign%3Dsoil", "type": 302 },
+        { "source": "**", "destination": "https://play.google.com/store/apps/details?id=in.khalihan.app&referrer=utm_source%3Dwhatsapp%26utm_medium%3Dshare%26utm_campaign%3Dlink", "type": 302 }
+      ]
     }
   ],
   "firestore": {
