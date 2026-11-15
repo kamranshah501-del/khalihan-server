@@ -312,6 +312,8 @@ const EVENTS = {
   ai_pest_wrong: ['👎 "Looks wrong?" on a pest result (only which problem is sent)', '👎 कीट के नतीजे पर "गलत लगा?" (सिर्फ़ कौन सा कीट, जाता है)'],
   ai_gov_page: ['Opened government forms', '"सरकारी फ़ॉर्म" खोला'],
   ai_docs_page: ['Opened "Get documents"', '"दस्तावेज़ निकालें" खोला'],
+  ai_door_page: ['Opened "Just send the photo"', '"बस फ़ोटो भेजें" खोला'],
+  ai_door: ['📷 What a sent photo was (bill / soil / paper / plant / private / other / failed)', '📷 भेजी फ़ोटो क्या थी (bill / soil / paper / plant / private / other / failed)'],
   ai_docs_open: ['Opened a paper\'s government page inside the app (which one)', 'कागज़ का सरकारी पेज ऐप के अंदर खोला (कौन सा)'],
   ai_gov_open: ['Opened a government site inside the app (which one)', 'सरकारी साइट ऐप के अंदर खोली (कौन सी)'],
   ai_gov_offer: ['AI offered to fill a form (boxes found / boxes it can fill)', 'AI ने फ़ॉर्म भरने को पूछा (कितने खाने मिले / कितने भर सकता है)'],
