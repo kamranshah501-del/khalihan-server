@@ -27,10 +27,14 @@ done
 
 # Pub/Sub signs its calls to the function as budget-stop: its own service
 # agent needs Token Creator on that one account (not on the project).
+# (Projects made after April 2021 already allow it; this only makes sure.)
+gcloud beta services identity create --service=pubsub.googleapis.com --project "$P" >/dev/null 2>&1 || true
+gcloud beta services identity create --service=eventarc.googleapis.com --project "$P" >/dev/null 2>&1 || true
 N=$(gcloud projects describe "$P" --format='value(projectNumber)')
 gcloud iam service-accounts add-iam-policy-binding "$SA" --project "$P" --quiet \
   --member="serviceAccount:service-$N@gcp-sa-pubsub.iam.gserviceaccount.com" \
-  --role=roles/iam.serviceAccountTokenCreator >/dev/null
+  --role=roles/iam.serviceAccountTokenCreator >/dev/null 2>&1 \
+  || echo "   (Pub/Sub's own account is not ready yet — fine for a new project)"
 
 # The trigger runs as budget-stop too (Eventarc: receive events only).
 gcloud projects add-iam-policy-binding "$P" --condition=None --member="serviceAccount:$SA" \
