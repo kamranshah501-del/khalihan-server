@@ -544,3 +544,5 @@ button.plain.small, button.danger.small { padding: 4px 10px; font-size: 13px; }
 .ailtable tbody th { font-weight: 600; min-width: 180px; }
 .ailtable input.ailim { width: 72px; padding: 6px 8px; font-size: 15px; }
 .tablewrap { overflow-x: auto; }
+.ailpool { display: inline-flex; align-items: center; gap: 6px; font-weight: 700; margin: 4px 0 8px; }
+.ailpool input { width: 130px; padding: 6px 8px; font-size: 15px; }

@@ -55,6 +55,7 @@ DEFAULTS = {
     "ai_mydocs": False,  # v1.0.9 Step 3 "My documents": site PDFs and photographed papers kept on the phone
     "ai_account": False,  # v1.0.9 Step 3: AI records also in the logged-in farmer's account (Firestore + Storage)
     "ai_deep": False,  # v1.0.9 Step 3 deep search: Google Search grounding on the farmer's tap (Plus; paid per search)
+    "ai_pool": False,  # v1.0.9 free farmers' monthly AI share, all phones together (ai_pool/{month}); Plus goes on to Google's cap
 }
 PARENT = {
     "schemes": "services", "kendra": "services", "home_sky": "weather", "advice": "weather",
@@ -62,7 +63,7 @@ PARENT = {
     "hold_sell": "sell_menu", "sell_interest": "sell_menu", "ai_ask": "ai", "ai_cloud": "ai",
     "ai_k": "ai", "ai_seva": "ai", "ai_yaad": "ai", "ai_voice": "ai", "ai_hisaab": "ai", "ai_bill": "ai", "ai_soil": "ai", "ai_paper": "ai", "ai_kvk": "ai", "ai_suno": "ai", "ai_voice_cloud": "ai",
     "ai_pest": "ai", "ai_dawai": "ai", "ai_gov": "ai", "ai_sound": "ai", "ai_docs": "ai",
-    "ai_open": "ai", "ai_chats": "ai", "ai_applied": "ai", "ai_mydocs": "ai", "ai_account": "ai", "ai_deep": "ai",
+    "ai_open": "ai", "ai_chats": "ai", "ai_applied": "ai", "ai_mydocs": "ai", "ai_account": "ai", "ai_deep": "ai", "ai_pool": "ai",
 }
 # The launch plan (owner, 1 Nov 2026). Anything not listed: either is fine.
 PLAN = {

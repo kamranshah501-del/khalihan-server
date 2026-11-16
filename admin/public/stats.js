@@ -334,6 +334,7 @@ const EVENTS = {
   ai_deep: ['🔎 Searched on Google from an answer (result kind; how many pages)', '🔎 जवाब से Google पर खोजा (नतीजा; कितने पेज)'],
   ai_deep_source: ['Opened a page a Google answer rests on', 'Google जवाब का पेज खोला'],
   ai_deep_suggest: ['Tapped Google\'s search suggestion', 'Google का search suggestion दबाया'],
+  ai_pool_out: ['⛔ Free farmers\' monthly AI share used up — a free phone was stopped (use)', '⛔ मुफ़्त किसानों का महीने का AI हिस्सा पूरा — एक मुफ़्त फ़ोन रुका (इस्तेमाल)'],
   ai_form_ask: ['📝 "Fill a form": which form was asked (its id / refused = another state / none = not found)', '📝 "फ़ॉर्म भरें": कौन सा फ़ॉर्म माँगा (id / refused = दूसरा राज्य / none = नहीं मिला)'],
   ai_door: ['📷 What a sent photo was (bill / soil / paper / plant / private / other / failed)', '📷 भेजी फ़ोटो क्या थी (bill / soil / paper / plant / private / other / failed)'],
   ai_docs_open: ['Opened a paper\'s government page inside the app (which one)', 'कागज़ का सरकारी पेज ऐप के अंदर खोला (कौन सा)'],

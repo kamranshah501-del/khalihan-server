@@ -143,13 +143,24 @@ export async function connect() {
     async appConfig() {
       const snap = await getDoc(doc(db, 'config', 'app'));
       const data = snap.data() || {};
-      return { features: data.features || {}, launch_states: data.launch_states || [], sell_districts: data.sell_districts || {}, notice: data.notice || null, festival: data.festival || null, ai_limits: data.ai_limits || null };
+      return { features: data.features || {}, launch_states: data.launch_states || [], sell_districts: data.sell_districts || {}, notice: data.notice || null, festival: data.festival || null, ai_limits: data.ai_limits || null, ai_pool_free: typeof data.ai_pool_free === 'number' ? data.ai_pool_free : null };
     },
     // Khalihan AI's limits per phone (app v1.0.9): {free: {photo_day: 2, …},
     // plus: {…}}; null = the app's own numbers.
     async setAiLimits(limits) {
       await updateDoc(doc(db, 'config', 'app'), { ai_limits: limits || deleteField() });
       log('ai_limits', limits ? { free: Object.keys(limits.free || {}).length, plus: Object.keys(limits.plus || {}).length } : { removed: true });
+    },
+    // The free farmers' AI for a month, all phones together, in rupees
+    // (app v1.0.9, switch ai_pool); null = the app's own share.
+    async setAiPoolFree(rupees) {
+      await updateDoc(doc(db, 'config', 'app'), { ai_pool_free: rupees == null ? deleteField() : rupees });
+      log('ai_pool_free', rupees == null ? { removed: true } : { rupees });
+    },
+    // This month's AI use, all phones together: {free, plus} in paise.
+    async aiPoolMonth(month) {
+      const d = (await getDoc(doc(db, 'ai_pool', month))).data() || {};
+      return { free: Number(d.free) || 0, plus: Number(d.plus) || 0 };
     },
     // The notice on the app's Home (app v1.0.4+). The whole map is replaced,
     // so an old notice's words never mix into a new one; null takes it down.
