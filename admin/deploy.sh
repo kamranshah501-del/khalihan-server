@@ -5,6 +5,9 @@
 #   bash admin/deploy.sh          → panel + rules
 #   bash admin/deploy.sh hosting  → only the panel
 #   bash admin/deploy.sh rules    → only the rules
+#   bash admin/deploy.sh storage  → only the Cloud Storage rules (Khalihan AI
+#                                   papers in the farmer's account; the bucket
+#                                   must be made first in Firebase → Storage)
 #
 # The panel lives at its own address, https://khalihan-admin.web.app (made
 # by this script the first time). The project's first address
@@ -69,7 +72,7 @@ admin_site() {
     | sed -n 's/^[[:space:]]*"\([a-z0-9-]*\)"[[:space:]]*,\{0,1\}[[:space:]]*$/\1/p' | head -n 1
 }
 
-if [ "$MODE" != "rules" ]; then
+if [ "$MODE" != "rules" ] && [ "$MODE" != "storage" ]; then
   # One-time: the panel's own address + the old address forwarding to it.
   if [ -z "$(admin_site)" ]; then
     echo ""
@@ -132,12 +135,15 @@ fi
 case "$MODE" in
   hosting) firebase deploy --only hosting ;;
   rules)   firebase deploy --only firestore:rules ;;
+  storage) firebase deploy --only storage ;;
   *)       firebase deploy --only hosting,firestore:rules ;;
 esac
 
 echo ""
 if [ "$MODE" = "rules" ]; then
   echo "✅ Ho gaya — naye Firestore rules lag gaye."
+elif [ "$MODE" = "storage" ]; then
+  echo "✅ Ho gaya — Cloud Storage rules lag gaye (Khalihan AI ke kagaz, sirf kisan ke apne)."
 else
   echo "✅ Ho gaya. Admin panel: https://$SITE.web.app"
   echo "   Purana …web.app link khud naye pe le jata hai (?demo bhi)."
