@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="hi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Khalihan Plus — gift</title>
+<!-- A gift of Khalihan Plus (owner, 16 Nov 2026: the owner alone decides
+     who gets one; he sends this link). On a phone with Khalihan, Android
+     opens the app straight from the link (App Link, assetlinks.json) and
+     this page is never seen. It shows when the link opens elsewhere (an
+     in-app browser, a computer, no Khalihan yet): one button to open the
+     app with the code, one to get it from Google Play. Nothing is read or
+     written here; the app checks the code. -->
+<style>
+  :root { --ink:#0A2E4A; --muted:#5B6B7A; --navy:#20405E; --gold:#C9962B; --bg:#F6F8FA; --card:#fff; --line:#E3E8ED; }
+  * { box-sizing:border-box; }
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center; padding:24px 16px;
+         font:17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", "Noto Sans Devanagari", sans-serif;
+         color:var(--ink); background:var(--bg); }
+  main { width:100%; max-width:420px; background:var(--card); border-radius:20px; padding:28px 22px; text-align:center;
+         box-shadow:0 6px 30px rgba(10,46,74,.08); }
+  .badge { display:inline-block; font-size:13px; letter-spacing:.06em; font-weight:700; color:var(--gold);
+           border:1.5px solid var(--gold); border-radius:999px; padding:3px 12px; }
+  h1 { font-size:24px; margin:14px 0 6px; color:var(--navy); }
+  p { margin:6px 0; color:var(--muted); }
+  .code { margin:18px auto; font:700 26px/1 ui-monospace, "SF Mono", Menlo, monospace; letter-spacing:.18em;
+          color:var(--navy); background:#EFF4FA; border-radius:12px; padding:14px 10px; }
+  a.btn { display:block; margin:12px 0 0; padding:15px 12px; border-radius:14px; font-weight:700; text-decoration:none; }
+  a.main { background:var(--navy); color:#fff; }
+  a.alt { background:#fff; color:var(--navy); border:1.5px solid var(--line); }
+  .bad { color:#A33A2A; }
+  .langs { margin-top:20px; font-size:14px; }
+  .langs a { color:var(--muted); margin:0 6px; }
+</style>
+</head>
+<body>
+<main>
+  <span class="badge">KHALIHAN PLUS</span>
+  <h1 id="t"></h1>
+  <p id="s"></p>
+  <div class="code" id="code"></div>
+  <a class="btn main" id="open"></a>
+  <a class="btn alt" id="play" href="https://play.google.com/store/apps/details?id=in.khalihan.app"></a>
+  <p id="h" style="margin-top:16px;font-size:15px"></p>
+  <div class="langs"><a href="#" data-l="hi">हिंदी</a>·<a href="#" data-l="mr">मराठी</a>·<a href="#" data-l="en">English</a></div>
+</main>
+<script>
+(function () {
+  var T = {
+    hi: { t: 'आपके लिए Khalihan Plus का तोहफ़ा', s: 'यह कोड Khalihan ऐप में खुलेगा।', open: 'Khalihan में खोलें',
+          play: 'Google Play से Khalihan लें', h: 'Khalihan पहले से है? ऊपर वाला बटन दबाएँ। नहीं है तो पहले Google Play से लें, फिर यही लिंक दोबारा खोलें।',
+          bad: 'यह लिंक अधूरा है — जिसने भेजा उनसे दोबारा माँगें।' },
+    mr: { t: 'तुमच्यासाठी Khalihan Plus ची भेट', s: 'हा कोड Khalihan ॲपमध्ये उघडेल.', open: 'Khalihan मध्ये उघडा',
+          play: 'Google Play वरून Khalihan घ्या', h: 'Khalihan आधीच आहे? वरचे बटण दाबा. नसेल तर आधी Google Play वरून घ्या, मग हीच लिंक पुन्हा उघडा.',
+          bad: 'ही लिंक अपूर्ण आहे — ज्यांनी पाठवली त्यांच्याकडे पुन्हा मागा.' },
+    en: { t: 'A gift of Khalihan Plus for you', s: 'This code opens in the Khalihan app.', open: 'Open in Khalihan',
+          play: 'Get Khalihan on Google Play', h: 'Have Khalihan already? Tap the button above. If not, get it from Google Play first, then open this link again.',
+          bad: 'This link is incomplete — ask the person who sent it for it again.' }
+  };
+  var m = location.pathname.match(/\/gift\/([A-Za-z2-9]{8})\/?$/);
+  var code = m ? m[1].toUpperCase() : '';
+  var nav = (navigator.language || 'hi').slice(0, 2);
+  var lang = T[nav] ? nav : 'hi';
+  function show(l) {
+    var x = T[l];
+    document.documentElement.lang = l;
+    document.getElementById('t').textContent = x.t;
+    document.getElementById('s').textContent = code ? x.s : '';
+    var c = document.getElementById('code');
+    c.textContent = code || x.bad;
+    c.className = code ? 'code' : 'code bad';
+    var o = document.getElementById('open');
+    o.textContent = x.open;
+    o.style.display = code ? 'block' : 'none';
+    document.getElementById('play').textContent = x.play;
+    document.getElementById('h').textContent = code ? x.h : '';
+  }
+  if (code) {
+    var play = 'https://play.google.com/store/apps/details?id=in.khalihan.app';
+    document.getElementById('open').href = /android/i.test(navigator.userAgent)
+      ? 'intent://gift?c=' + code + '#Intent;scheme=khalihan;package=in.khalihan.app;S.browser_fallback_url=' + encodeURIComponent(play) + ';end'
+      : 'khalihan://gift?c=' + code;
+  }
+  Array.prototype.forEach.call(document.querySelectorAll('.langs a'), function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); show(a.getAttribute('data-l')); });
+  });
+  show(lang);
+})();
+</script>
+</body>
+</html>

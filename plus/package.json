@@ -1,0 +1,13 @@
+{
+  "name": "khalihan-plus-verify",
+  "private": true,
+  "description": "Checks a Khalihan Plus purchase with Google Play and records it in the farmer's account.",
+  "main": "index.js",
+  "engines": { "node": ">=22" },
+  "scripts": { "test": "node test.js" },
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.4.0",
+    "firebase-admin": "^13.0.0",
+    "google-auth-library": "^9.15.0"
+  }
+}

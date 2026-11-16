@@ -1,0 +1,14 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "in.khalihan.app",
+      "sha256_cert_fingerprints": [
+        "2D:7F:3D:01:E0:3A:D4:99:BF:D7:C5:F7:8D:AF:37:2B:5F:83:B5:48:37:7A:88:45:69:05:67:6B:9F:CD:CB:7C",
+        "91:C9:34:C6:D1:09:25:25:E4:83:49:06:A6:FF:45:02:6A:4D:E3:65:BE:22:02:43:A6:B7:74:57:80:87:D9:9B",
+        "D9:6D:24:BB:09:8D:5C:51:57:81:EE:67:29:6F:82:96:91:69:0C:4F:06:1B:A3:84:83:DB:64:EB:2B:6C:06:F4"
+      ]
+    }
+  }
+]

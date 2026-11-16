@@ -4,6 +4,10 @@
       "target": "admin",
       "public": "admin/public",
       "ignore": ["**/.*", "**/README.md"],
+      "rewrites": [
+        { "source": "/.well-known/assetlinks.json", "destination": "/assetlinks.json" },
+        { "source": "/gift/**", "destination": "/gift.html" }
+      ],
       "headers": [
         {
           "source": "**",
@@ -15,6 +19,10 @@
         {
           "source": "/manifest.webmanifest",
           "headers": [{ "key": "Content-Type", "value": "application/manifest+json" }]
+        },
+        {
+          "source": "/assetlinks.json",
+          "headers": [{ "key": "Content-Type", "value": "application/json" }]
         }
       ]
     },

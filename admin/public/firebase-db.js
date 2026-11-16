@@ -8,7 +8,7 @@ import {
 import {
   getFirestore, collection, doc, getDoc, getDocs, setDoc, updateDoc, deleteDoc, addDoc,
   query, where, orderBy, limit, serverTimestamp, arrayUnion, Timestamp, runTransaction,
-  getCountFromServer, writeBatch, onSnapshot, deleteField, startAfter,
+  getCountFromServer, writeBatch, onSnapshot, deleteField, startAfter, collectionGroup,
 } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 import { initializeAppCheck, ReCaptchaV3Provider } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app-check.js';
 
@@ -149,7 +149,7 @@ export async function connect() {
     // plus: {…}}; null = the app's own numbers.
     async setAiLimits(limits) {
       await updateDoc(doc(db, 'config', 'app'), { ai_limits: limits || deleteField() });
-      log('ai_limits', limits ? { free: Object.keys(limits.free || {}).length, plus: Object.keys(limits.plus || {}).length } : { removed: true });
+      log('ai_limits', limits ? { free: Object.keys(limits.free || {}).length, plus: Object.keys(limits.plus || {}).length, pro: Object.keys(limits.pro || {}).length } : { removed: true });
     },
     // The notice on the app's Home (app v1.0.4+). The whole map is replaced,
     // so an old notice's words never mix into a new one; null takes it down.
@@ -315,11 +315,23 @@ export async function connect() {
       const ref = doc(db, 'plus_gifts', code);
       if ((await getDoc(ref)).exists()) throw new Error('code-taken');
       await setDoc(ref, {
-        name: data.name, note: data.note || '', test: !!data.test,
+        name: data.name, note: data.note || '', test: !!data.test, tier: data.tier === 'pro' ? 'pro' : 'plus',
         until: data.until ? Timestamp.fromDate(data.until) : null,
         by: me.email, at: serverTimestamp(),
       });
-      log('plus_gift_add', { code, name: data.name, test: !!data.test });
+      log('plus_gift_add', { code, name: data.name, test: !!data.test, tier: data.tier === 'pro' ? 'pro' : 'plus' });
+    },
+    /** Every farmer's Plus bought on Play (users/{uid}/plus/state, written by
+     *  our server) — the plan only: no purchase token, no phone number. */
+    async plusMembers() {
+      const snap = await getDocs(query(collectionGroup(db, 'plus'), limit(5000)));
+      return snap.docs.filter((d) => d.id === 'state').map((d) => {
+        const m = d.data();
+        return {
+          tier: m.tier, basePlan: m.basePlan || '', until: toDate(m.until), autoRenew: !!m.autoRenew, trial: !!m.trial,
+          prepaid: !!m.prepaid, price: typeof m.price === 'number' ? m.price : 0, test: !!m.test, at: toDate(m.at),
+        };
+      });
     },
     /** The phone that holds it lets go; the next phone to type it gets it. */
     async freePlusGift(code) {

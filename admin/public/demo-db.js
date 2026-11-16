@@ -42,9 +42,18 @@ export async function connect() {
   let aiLimits = null; // Khalihan AI limits per phone (null = the app's own)
   // Free Plus gift codes (Admin 1.16).
   let gifts = [
-    { id: 'R7KM4QXP', name: 'Mera phone', note: '', until: null, test: true, device: 'a1b2c3d4e5f6g7h8i9j0', claimed: day(0, 8), app: '1.0.6', at: day(0, 7) },
-    { id: 'HN3T8WCE', name: 'Ramesh Patil, Shendurni', note: 'Tester', until: null, test: false, device: 'z9y8x7w6v5u4t3s2r1q0', claimed: day(1, 18), app: '1.0.6', at: day(1, 17) },
+    { id: 'R7KM4QXP', name: 'Mera phone', note: '', until: null, test: true, tier: 'pro', device: 'a1b2c3d4e5f6g7h8i9j0', claimed: day(0, 8), app: '1.0.6', at: day(0, 7) },
+    { id: 'HN3T8WCE', name: 'Ramesh Patil, Shendurni', note: 'Tester', until: null, test: false, tier: 'plus', device: 'z9y8x7w6v5u4t3s2r1q0', claimed: day(1, 18), app: '1.0.6', at: day(1, 17) },
     { id: 'PQ6VB2KD', name: 'Sunil Mahajan, Jamner', note: 'KVK', until: day(-30, 23), test: false, at: day(0, 9) },
+  ];
+  // Plus bought on Play (Admin 1.25) — made-up members and prices, only for trying the screen.
+  const ahead = (n) => new Date(Date.now() + n * 86400e3);
+  const members = [
+    { tier: 'plus', basePlan: 'm1', until: ahead(20), autoRenew: true, trial: false, prepaid: false, price: 100, test: false },
+    { tier: 'plus', basePlan: 'm1', until: ahead(5), autoRenew: true, trial: true, prepaid: false, price: 100, test: false },
+    { tier: 'plus', basePlan: 'm12', until: ahead(300), autoRenew: false, trial: false, prepaid: false, price: 1000, test: false },
+    { tier: 'pro', basePlan: 'm3', until: ahead(70), autoRenew: true, trial: false, prepaid: false, price: 500, test: false },
+    { tier: 'pro', basePlan: 'm1', until: ahead(12), autoRenew: true, trial: false, prepaid: false, price: 200, test: true },
   ];
   // Business Plan v2 — made-up businesses, only for trying the screens.
   const iso = (n) => day(n).toISOString().slice(0, 10);
@@ -284,6 +293,7 @@ export async function connect() {
     async wipeFarmer(uid) { const d = deletions.find((x) => x.id === uid); if (d) d.done = true; return 0; },
     async ownerStats() { return JSON.parse(JSON.stringify(ownerStats), (k, v) => (k === 'at' || k === 'tried' ? new Date(v) : v)); },
     async plusGifts() { return gifts.map((g) => ({ ...g })); },
+    async plusMembers() { return members.map((m) => ({ ...m })); },
     async addPlusGift(code, data) { gifts.push({ id: code, ...data, at: new Date() }); log('plus_gift_add', { code, name: data.name, test: !!data.test }); },
     async freePlusGift(code) { const g = gifts.find((x) => x.id === code); if (g) { delete g.device; delete g.claimed; delete g.app; } log('plus_gift_free', { code }); },
     async removePlusGift(code) { gifts = gifts.filter((x) => x.id !== code); log('plus_gift_remove', { code }); },

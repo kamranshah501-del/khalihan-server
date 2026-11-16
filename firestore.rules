@@ -1,6 +1,6 @@
 rules_version = '2';
 
-// Khalihan — Firestore rules (8 Oct 2026; Kendra 12 Oct; price history server-only 19 Oct; free Plus gift codes 1 Nov 2026; owner stats 10 Nov 2026).
+// Khalihan — Firestore rules (8 Oct 2026; Kendra 12 Oct; price history server-only 19 Oct; free Plus gift codes 1 Nov 2026; owner stats 10 Nov 2026; Plus on Play 16 Nov 2026).
 //
 // Who is who:
 //   • Farmers: the app. Prices, schemes, calendar and offers are open to
@@ -181,6 +181,19 @@ service cloud.firestore {
         && request.resource.data.at == request.time;
     }
 
+    // Khalihan Plus bought on Google Play (v1.0.9, owner 16 Nov 2026).
+    // Only our server (plus-verify, after asking Google) writes the
+    // farmer's plan here; the phone reads its own, nobody can write it from
+    // a phone. The owner reads it for Admin's members count.
+    match /users/{uid}/plus/{doc} {
+      allow read: if isSelf(uid) || isOwner();
+      allow write: if false;
+    }
+    // Admin's members count: every farmer's plan at once (owner only).
+    match /{path=**}/plus/{doc} {
+      allow read: if isOwner();
+    }
+
     match /deletion_requests/{uid} {
       allow create, update: if isSelf(uid)
         && request.resource.data.keys().hasOnly(['phone', 'at', 'done', 'by'])
@@ -305,10 +318,18 @@ service cloud.firestore {
       allow read, write: if isOwner();
     }
 
+    // A Play purchase token already used, by its sha256: one purchase opens
+    // Plus for one login only. The server alone reads and writes it.
+    match /plus_tokens/{key} {
+      allow read, write: if false;
+    }
+
     // ── Free Khalihan Plus, given by the owner (1 Nov 2026) ─────────────
     // A gift code: the owner makes it in Khalihan Admin (at most 10 for
-    // people, plus the owner's own test phones) and tells the person; they
-    // type it in the app (Profile → मदद → गिफ़्ट कोड) and Plus opens there.
+    // people, plus the owner's own test phones) and sends the person its
+    // link (khalihan-admin.web.app/gift/CODE, 16 Nov 2026 — the code box is
+    // gone from the app: only those the owner picks get one); the link opens
+    // the app and Plus opens there. `tier`: 'plus' or 'pro' (none = Plus).
     // The phone reads only the code typed into it (nobody but the owner can
     // list the codes) and ties it to itself once: the first phone to use a
     // code keeps it, until the owner frees it for a new phone. No mobile
@@ -319,13 +340,15 @@ service cloud.firestore {
       allow list, delete: if isOwner();
       allow create: if isOwner()
         && code.matches('^[A-Z2-9]{8}$')
-        && request.resource.data.keys().hasOnly(['name', 'note', 'until', 'test', 'by', 'at'])
+        && request.resource.data.keys().hasOnly(['name', 'note', 'until', 'test', 'tier', 'by', 'at'])
+        && request.resource.data.get('tier', 'plus') in ['plus', 'pro']
         && request.resource.data.name is string
         && request.resource.data.name.size() > 0
         && request.resource.data.name.size() <= 60
         && request.resource.data.test is bool;
       allow update: if (isOwner()
-          && request.resource.data.keys().hasOnly(['name', 'note', 'until', 'test', 'by', 'at', 'device', 'claimed', 'app']))
+          && request.resource.data.keys().hasOnly(['name', 'note', 'until', 'test', 'tier', 'by', 'at', 'device', 'claimed', 'app'])
+          && request.resource.data.get('tier', 'plus') in ['plus', 'pro'])
         // The phone's one write: claiming a code no phone holds yet.
         || (resource.data.get('device', '') == ''
           && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['device', 'claimed', 'app'])
