@@ -9,4 +9,4 @@ gcloud pubsub topics publish budget-alerts --project "$P" \
 echo "Test message sent; waiting 40 s…"
 sleep 40
 gcloud functions logs read budget-stop --gen2 --region=asia-south1 --project "$P" --limit=6 \
-  --format='table(time_utc,level,log.slice(0:110).join(""))'
+  --format='value(time_utc,level,log)'
