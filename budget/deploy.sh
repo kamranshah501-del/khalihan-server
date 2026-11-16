@@ -25,6 +25,17 @@ for i in 1 2 3 4 5 6; do
   echo "   (waiting for the new account to appear…)"; sleep 10
 done
 
+# Pub/Sub signs its calls to the function as budget-stop: its own service
+# agent needs Token Creator on that one account (not on the project).
+N=$(gcloud projects describe "$P" --format='value(projectNumber)')
+gcloud iam service-accounts add-iam-policy-binding "$SA" --project "$P" --quiet \
+  --member="serviceAccount:service-$N@gcp-sa-pubsub.iam.gserviceaccount.com" \
+  --role=roles/iam.serviceAccountTokenCreator >/dev/null
+
+# The trigger runs as budget-stop too (Eventarc: receive events only).
+gcloud projects add-iam-policy-binding "$P" --condition=None --member="serviceAccount:$SA" \
+  --role=roles/eventarc.eventReceiver --quiet >/dev/null
+
 echo "== 4/6 The code (github.com/kamranshah501-del/khalihan-server, budget/)"
 D=$(mktemp -d)
 git clone -q --depth 1 https://github.com/kamranshah501-del/khalihan-server "$D/s"
@@ -32,11 +43,20 @@ cd "$D/s/budget"
 node test.js
 
 echo "== 5/6 Deploying budget-stop in $R (a few minutes)"
-gcloud functions deploy budget-stop --gen2 --region="$R" --runtime=nodejs22 \
-  --entry-point=budgetStop --source=. --trigger-topic=budget-alerts \
-  --service-account="$SA" --trigger-service-account="$SA" \
-  --memory=256Mi --max-instances=1 --no-allow-unauthenticated --project "$P" --quiet \
-  --format='value(state)'
+deploy() {
+  gcloud functions deploy budget-stop --gen2 --region="$R" --runtime=nodejs22 \
+    --entry-point=budgetStop --source=. --trigger-topic=budget-alerts \
+    --service-account="$SA" --trigger-service-account="$SA" \
+    --memory=256Mi --max-instances=1 --no-allow-unauthenticated --project "$P" --quiet \
+    --format='value(state)'
+}
+# The first trigger in a project can be refused while Eventarc's own
+# permissions spread (a few minutes): try again, up to three times.
+for i in 1 2 3; do
+  if deploy; then break; fi
+  [ "$i" = 3 ] && exit 1
+  echo "   (Google is still setting up — trying again in 90 s)"; sleep 90
+done
 gcloud run services add-iam-policy-binding budget-stop --region="$R" \
   --member="serviceAccount:$SA" --role=roles/run.invoker --project "$P" --quiet >/dev/null
 
