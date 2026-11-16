@@ -799,8 +799,14 @@ export function createSwitches(c) {
     const phone = sv.phone_states > 0 ? `<br>${esc(tr('sw_phone', { n: sv.phone_states }))}` : '';
     // The collector uploads 5 times a day; over 12 hours without a new
     // upload means its schedule stopped (23 Oct 2026: cron was never set).
+    // Measured at the daily job's own run, not now: feed_at is only what that
+    // run read, so between two runs (up to ~10 h apart) "now" made a working
+    // collector look silent (16 Nov 2026: "silent since 15 Nov 11:40 pm" while
+    // it had uploaded at 05:40 and 10:40 am). The feed-watch job still emails
+    // when no upload comes for 8 hours.
     const feedAt = sv.feed_at ? new Date(sv.feed_at) : null;
-    const quiet = sv.gov_api_down && (!feedAt || isNaN(feedAt) || Date.now() - feedAt.getTime() > 12 * 3600e3);
+    const ranAt = sv.at instanceof Date && !isNaN(sv.at) ? sv.at.getTime() : Date.now();
+    const quiet = sv.gov_api_down && (!feedAt || isNaN(feedAt) || ranAt - feedAt.getTime() > 12 * 3600e3);
     const quietLine = quiet
       ? `<br><b>${esc(tr('sw_feed_quiet', { t: feedAt && !isNaN(feedAt) ? fmtWhen(feedAt) : '—' }))}</b>`
       : '';
