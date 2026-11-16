@@ -16,21 +16,25 @@
 // and about how much reaches us a month (price from Google, less 18% GST
 // and Google's 15%). Gift codes go by link only (owner: "gift code sab ke
 // app me nahi rahega, sirf main decide karunga") and carry a plan.
+//
+// Same day, 17:25–17:41 (owner): one plan only — "Plus nikal do, sirf Pro";
+// ₹149 / ₹419 / ₹799 / ₹1,499 (set in Play Console, not here); and "Free
+// plan me form bharna nahi rahega". A gift is always Kisan Pro.
 
 const T = {
   en: {
     title: '⭐ Khalihan Plus',
-    sub: 'Two paid plans, Kisan Plus and Kisan Pro. They run by themselves — no switches, nothing to turn on for any farmer.',
+    sub: 'One paid plan, Kisan Pro (1, 3, 6 or 12 months). It runs by itself — no switches, nothing to turn on for any farmer.',
     st_off: 'Not started',
     st_on: 'Running',
-    st_off_d: 'Plus starts by itself once Kisan Plus and Kisan Pro are on Google Play (Play Console → Monetise → Subscriptions) and app 1.0.9 is out. Until then every Plus feature stays hidden in the app — nobody uses one free and loses it later. Gift codes (below) work already.',
+    st_off_d: 'Plus starts by itself once Kisan Pro is on Google Play (Play Console → Monetise → Subscriptions) and app 1.0.9 is out. Until then every Plus feature stays hidden in the app — nobody uses one free and loses it later. Gift codes (below) work already.',
     how: 'How it works',
     how1: 'The farmer logs in with his mobile number and buys a plan in the app (Google Play payment — UPI, UPI Autopay, card).',
     how2: 'A 7-day free trial is offered only with auto-pay on (UPI Autopay or a card) — Google\'s rule; Google shows it once per person.',
     how3: 'Our server checks the payment with Google; only then Plus opens — in his account, on every phone he logs in on.',
     how4: 'Renewals, cancellations and refunds: Google tells our server and the account follows by itself.',
     mem: 'Members',
-    m_plus: 'Kisan Plus', m_pro: 'Kisan Pro', m_trial: 'on the free trial', m_off: 'auto-renew turned off',
+    m_plus: 'Kisan Plus (old)', m_pro: 'Kisan Pro', m_trial: 'on the free trial', m_off: 'auto-renew turned off', m_paid: 'paying',
     m_money: '≈ ₹{r} a month reaches us',
     m_money_d: 'From the price Google gives for each paid member (not trials, not test purchases), spread over the plan\'s months, less 18% GST and Google\'s 15%. An estimate — Google\'s payout is in Play Console → Financial reports.',
     m_prepaid: '{n} on a one-time plan (Google gives no price for it — not in the sum)',
@@ -40,14 +44,13 @@ const T = {
     th_plan: 'Plan', th_len: 'Length', th_n: 'Members', th_price: 'Price', th_month: 'To us a month',
     len_m: '{n} month(s)',
     gifts: 'Free Plus — gift codes',
-    gifts_d: 'Give Plus free, without paying, to up to 10 people you choose. Make a code and send the person its link; the link opens Khalihan with the code filled in, and Plus opens on that phone at once — no login, no payment. One code works on one phone. The app has no code box any more: only people you send a link to can use one.',
+    gifts_d: 'Give Kisan Pro free, without paying, to up to 10 people you choose. Make a code and send the person its link; the link opens Khalihan with the code filled in, and Kisan Pro opens on that phone at once — no login, no payment. One code works on one phone. The app has no code box any more: only people you send a link to can use one.',
     g_count: '{n} of 10 given',
     g_tests: '{n} test phone(s) of yours',
     g_name: 'Who is it for', g_name_ph: 'Name, village',
     g_note: 'Note (optional)', g_note_ph: 'e.g. tester, KVK, family',
     g_until: 'Free till (blank = always)',
-    g_tier: 'Plan',
-    g_test: 'My own test phone — always Kisan Pro, and on that phone the switched-off features (Sell, Kendra, Login) show too, so I can check the whole app. Not counted in the 10.',
+    g_test: 'My own test phone — on that phone the switched-off features (Sell, Kendra, Login) show too, so I can check the whole app. Not counted in the 10.',
     g_make: 'Make code',
     g_need_name: 'Write who the code is for.',
     g_full: 'All 10 gifts are given. Remove one to give another.',
@@ -68,19 +71,19 @@ const T = {
     g_none: 'No codes yet.',
     g_failed: 'Could not load the codes — check the internet and open the page again.',
     need: 'Before Plus can start',
-    need1: 'Play Console payments profile — PAN, bank account (owner; Claude shows where)',
-    need2: 'Subscriptions khalihan_plus and khalihan_pro in Play Console, base plans m1 · m3 · m6 · m12 and a 7-day trial offer (owner decides the prices; Claude shows where)',
+    need1: 'Play Console payments profile and merchant account — done 16 Nov ✅; the BillDesk video KYC for cross-border sales (owner)',
+    need2: 'Subscription khalihan_pro (Kisan Pro) in Play Console: base plans m1 · m3 · m6 · m12 at the prices the owner chose, and a 7-day trial offer on m1 (Claude makes them with the owner\'s yes)',
     need3: 'Play Billing in the app + the payment check on our server — built for 1.0.9 (Claude) ✅',
-    need4: 'Google Play connects to our server: the service account plus-verify invited in Play Console → Users and permissions (owner)',
+    need4: 'Google Play connects to our server: the service account plus-verify invited in Play Console — done 16 Nov ✅',
     need5: 'Play Data safety "Purchase history" + privacy policy lines (Claude writes, owner submits)',
     need6: 'A test purchase with a license tester (no money taken) before farmers see it',
     inside: 'What\'s in each plan',
-    i_feat: 'Feature', i_free: 'Every farmer', i_plus: 'Kisan Plus', i_pro: 'Kisan Pro',
-    f1: 'Fill a government form with Khalihan AI', f1a: '2 a month', f1b: 'Unlimited',
+    i_feat: 'Feature', i_free: 'Every farmer', i_pro: 'Kisan Pro',
+    f1: 'Fill a government form with Khalihan AI', f1a: '— (fills the site himself)', f1b: 'Unlimited',
     f2: 'Papers and applied forms kept in the account', f2a: '✓ (with login)', f2b: '✓',
-    f3: 'Khalihan AI — questions, photo reads (Switches → AI limits)', f3a: 'small share', f3b: 'bigger share', f3c: 'biggest share',
+    f3: 'Khalihan AI — questions, photo reads (Switches → AI limits)', f3a: 'small share', f3b: 'bigger share',
     f4: '"Ask anything" and Google search', f4a: '—', f4b: '✓',
-    f5: 'Kaptan\'s voice — the AI speaks in its own voice', f5a: '—', f5b: '— (the phone\'s voice)', f5c: '✓',
+    f5: 'Kaptan\'s voice — the AI speaks in its own voice', f5a: '— (the phone\'s voice)', f5b: '✓',
     f6: 'Target price alert', f6a: '—', f6b: '✓',
     help: 'Helping a farmer',
     help_d: 'Coming next: type the farmer\'s mobile number → his plan, valid till, payment state, and a "Check again with Google" button that fixes a paid-but-not-open Plus in one click. Until then: he opens the Plus sheet and taps "Restore purchase".',
@@ -97,17 +100,17 @@ const T = {
   },
   hi: {
     title: '⭐ Khalihan Plus',
-    sub: 'दो पैसे वाले प्लान, Kisan Plus और Kisan Pro। अपने आप चलते हैं — कोई स्विच नहीं, किसी किसान के लिए हाथ से कुछ चालू नहीं करना।',
+    sub: 'एक ही पैसे वाला प्लान, Kisan Pro (1, 3, 6 या 12 महीने)। अपने आप चलता है — कोई स्विच नहीं, किसी किसान के लिए हाथ से कुछ चालू नहीं करना।',
     st_off: 'अभी शुरू नहीं',
     st_on: 'चल रहा है',
-    st_off_d: 'जैसे ही Google Play पर Kisan Plus और Kisan Pro बनेंगे (Play Console → Monetise → Subscriptions) और ऐप 1.0.9 आएगा, Plus अपने आप शुरू हो जाएगा। तब तक ऐप में Plus के सारे फ़ीचर छिपे रहेंगे — कोई उन्हें मुफ़्त में चलाकर बाद में खोएगा नहीं। गिफ़्ट कोड (नीचे) अभी से चलते हैं।',
+    st_off_d: 'जैसे ही Google Play पर Kisan Pro बनेगा (Play Console → Monetise → Subscriptions) और ऐप 1.0.9 आएगा, Plus अपने आप शुरू हो जाएगा। तब तक ऐप में Plus के सारे फ़ीचर छिपे रहेंगे — कोई उन्हें मुफ़्त में चलाकर बाद में खोएगा नहीं। गिफ़्ट कोड (नीचे) अभी से चलते हैं।',
     how: 'कैसे चलता है',
     how1: 'किसान मोबाइल नंबर से लॉग-इन करके ऐप में प्लान ख़रीदता है (Google Play से पेमेंट — UPI, UPI Autopay, कार्ड)।',
     how2: '7 दिन का मुफ़्त ट्रायल सिर्फ़ ऑटो-पे चालू करने पर (UPI Autopay या कार्ड) — Google का नियम; एक इंसान को एक बार।',
     how3: 'हमारा सर्वर Google से पेमेंट पक्का करता है; उसके बाद ही Plus खुलता है — उसके खाते में, जिस भी फ़ोन पर लॉग-इन करे।',
     how4: 'रिन्यू, कैंसल, रिफ़ंड: Google हमारे सर्वर को बताता है, खाता अपने आप बदल जाता है।',
     mem: 'सदस्य',
-    m_plus: 'Kisan Plus', m_pro: 'Kisan Pro', m_trial: 'मुफ़्त ट्रायल पर', m_off: 'ऑटो-रिन्यू बंद किया',
+    m_plus: 'Kisan Plus (पुराना)', m_pro: 'Kisan Pro', m_trial: 'मुफ़्त ट्रायल पर', m_off: 'ऑटो-रिन्यू बंद किया', m_paid: 'पैसे देने वाले',
     m_money: '≈ ₹{r} महीना हम तक पहुँचता है',
     m_money_d: 'हर पैसे देने वाले सदस्य (ट्रायल और टेस्ट ख़रीदारी नहीं) का Google वाला दाम, प्लान के महीनों में बाँटकर, 18% GST और Google के 15% घटाकर। अंदाज़ा है — Google का असली भुगतान Play Console → Financial reports में।',
     m_prepaid: '{n} एक बार वाले प्लान पर (Google उसका दाम नहीं बताता — जोड़ में नहीं)',
@@ -117,14 +120,13 @@ const T = {
     th_plan: 'प्लान', th_len: 'अवधि', th_n: 'सदस्य', th_price: 'दाम', th_month: 'हम तक महीना',
     len_m: '{n} महीने',
     gifts: 'मुफ़्त Plus — गिफ़्ट कोड',
-    gifts_d: 'बिना पैसे के, आपकी पसंद के 10 लोगों तक को Plus मुफ़्त दें। कोड बनाइए और उस इंसान को उसका लिंक भेजिए; लिंक Khalihan को कोड भरकर खोलता है और उसी फ़ोन पर Plus तुरंत चालू — न लॉग-इन, न पेमेंट। एक कोड एक फ़ोन पर चलता है। ऐप में अब कोड डालने की जगह नहीं: सिर्फ़ जिन्हें आप लिंक भेजें, वही इस्तेमाल कर सकते हैं।',
+    gifts_d: 'बिना पैसे के, आपकी पसंद के 10 लोगों तक को Kisan Pro मुफ़्त दें। कोड बनाइए और उस इंसान को उसका लिंक भेजिए; लिंक Khalihan को कोड भरकर खोलता है और उसी फ़ोन पर Kisan Pro तुरंत चालू — न लॉग-इन, न पेमेंट। एक कोड एक फ़ोन पर चलता है। ऐप में अब कोड डालने की जगह नहीं: सिर्फ़ जिन्हें आप लिंक भेजें, वही इस्तेमाल कर सकते हैं।',
     g_count: '10 में से {n} दिए',
     g_tests: 'आपके {n} टेस्ट फ़ोन',
     g_name: 'किसके लिए', g_name_ph: 'नाम, गाँव',
     g_note: 'नोट (चाहें तो)', g_note_ph: 'जैसे टेस्टर, KVK, घरवाले',
     g_until: 'कब तक मुफ़्त (ख़ाली = हमेशा)',
-    g_tier: 'प्लान',
-    g_test: 'मेरा अपना टेस्ट फ़ोन — हमेशा Kisan Pro, और उस फ़ोन पर बंद स्विच वाले फ़ीचर (बेचें, केंद्र, लॉग-इन) भी दिखेंगे, ताकि पूरा ऐप जाँच सकूँ। 10 में नहीं गिना जाएगा।',
+    g_test: 'मेरा अपना टेस्ट फ़ोन — उस फ़ोन पर बंद स्विच वाले फ़ीचर (बेचें, केंद्र, लॉग-इन) भी दिखेंगे, ताकि पूरा ऐप जाँच सकूँ। 10 में नहीं गिना जाएगा।',
     g_make: 'कोड बनाओ',
     g_need_name: 'लिखिए कि कोड किसके लिए है।',
     g_full: '10 के 10 गिफ़्ट दिए जा चुके। नया देने के लिए एक हटाइए।',
@@ -145,19 +147,19 @@ const T = {
     g_none: 'अभी कोई कोड नहीं।',
     g_failed: 'कोड नहीं खुले — इंटरनेट देखकर पेज दोबारा खोलिए।',
     need: 'Plus शुरू होने से पहले',
-    need1: 'Play Console पेमेंट्स प्रोफ़ाइल — PAN, बैंक खाता (मालिक; कहाँ भरना है Claude दिखाएगा)',
-    need2: 'Play Console में khalihan_plus और khalihan_pro सब्सक्रिप्शन, बेस प्लान m1 · m3 · m6 · m12 और 7 दिन का ट्रायल ऑफ़र (दाम मालिक तय करेंगे; कहाँ भरना है Claude दिखाएगा)',
+    need1: 'Play Console पेमेंट्स प्रोफ़ाइल और मर्चेंट अकाउंट — 16 नवंबर को हो गया ✅; विदेश की बिक्री के लिए BillDesk का वीडियो KYC (मालिक)',
+    need2: 'Play Console में khalihan_pro (Kisan Pro) सब्सक्रिप्शन: बेस प्लान m1 · m3 · m6 · m12 मालिक के तय दाम पर, और m1 पर 7 दिन का ट्रायल ऑफ़र (मालिक की हाँ पर Claude बनाएगा)',
     need3: 'ऐप में Play Billing + सर्वर पर पेमेंट की जाँच — 1.0.9 के लिए बना (Claude) ✅',
-    need4: 'Google Play हमारे सर्वर से जुड़े: Play Console → Users and permissions में plus-verify सर्विस अकाउंट बुलाना (मालिक)',
+    need4: 'Google Play हमारे सर्वर से जुड़े: plus-verify सर्विस अकाउंट Play Console में — 16 नवंबर को हो गया ✅',
     need5: 'Play Data safety में "Purchase history" + प्राइवेसी पॉलिसी (Claude लिखेगा, मालिक भेजेगा)',
     need6: 'किसानों से पहले लाइसेंस टेस्टर से एक टेस्ट ख़रीदारी (पैसे नहीं कटते)',
     inside: 'किस प्लान में क्या',
-    i_feat: 'फ़ीचर', i_free: 'हर किसान', i_plus: 'Kisan Plus', i_pro: 'Kisan Pro',
-    f1: 'Khalihan AI से सरकारी फ़ॉर्म भरना', f1a: 'महीने में 2', f1b: 'बेहिसाब',
+    i_feat: 'फ़ीचर', i_free: 'हर किसान', i_pro: 'Kisan Pro',
+    f1: 'Khalihan AI से सरकारी फ़ॉर्म भरना', f1a: '— (साइट ख़ुद भरता है)', f1b: 'बेहिसाब',
     f2: 'कागज़ और भरे फ़ॉर्म खाते में', f2a: '✓ (लॉग-इन से)', f2b: '✓',
-    f3: 'Khalihan AI — सवाल, फ़ोटो पढ़ना (स्विच → AI की हद)', f3a: 'छोटा हिस्सा', f3b: 'बड़ा हिस्सा', f3c: 'सबसे बड़ा हिस्सा',
+    f3: 'Khalihan AI — सवाल, फ़ोटो पढ़ना (स्विच → AI की हद)', f3a: 'छोटा हिस्सा', f3b: 'बड़ा हिस्सा',
     f4: '"कुछ भी पूछें" और Google खोज', f4a: '—', f4b: '✓',
-    f5: 'Kaptan की आवाज़ — AI अपनी आवाज़ में बोलता है', f5a: '—', f5b: '— (फ़ोन की आवाज़)', f5c: '✓',
+    f5: 'Kaptan की आवाज़ — AI अपनी आवाज़ में बोलता है', f5a: '— (फ़ोन की आवाज़)', f5b: '✓',
     f6: 'टारगेट भाव अलर्ट', f6a: '—', f6b: '✓',
     help: 'किसान की मदद',
     help_d: 'आगे आएगा: किसान का मोबाइल नंबर डालो → उसका प्लान, कब तक, पेमेंट की हालत, और "Google से दोबारा जाँच" बटन — पैसे कटे पर Plus न खुला हो तो एक क्लिक में ठीक। तब तक: किसान Plus वाली शीट खोलकर "Restore purchase" दबाए।',
@@ -258,7 +260,7 @@ export async function plusPage(deps) {
   const phone = (g) => (g.device
     ? esc(t('g_on_phone', { d: ymd(g.claimed), v: g.app || '?' }))
     : `<span class="muted">${esc(t('g_waiting'))}</span>`);
-  const giftTier = (g) => (g.test || g.tier === 'pro' ? 'pro' : 'plus');
+  const giftTier = () => 'pro'; // one plan (owner, 16 Nov 17:25)
   const giftRows = sorted.map((g) => `
     <tr>
       <td><b>${esc(g.name)}</b> <span class="pill ${giftTier(g) === 'pro' ? 'warn' : 'on'}">${esc(tierName(giftTier(g)))}</span>${g.test ? ` <span class="pill info">${esc(t('g_test_tag'))}</span>` : ''}${g.note ? `<div class="small muted">${esc(g.note)}</div>` : ''}</td>
@@ -274,7 +276,7 @@ export async function plusPage(deps) {
   const stat = (n, l, cls = '') => `<div class="stat ${cls}"><div class="n">${n}</div><div class="l">${esc(l)}</div></div>`;
   const memberCard = members === null ? `<p class="muted">${esc(t('m_failed'))}</p>` : `
       <div class="kpis" style="margin:12px 0 8px">
-        ${stat(sum.plus, t('m_plus'), sum.plus ? 'good' : '')}${stat(sum.pro, t('m_pro'), sum.pro ? 'good' : '')}${stat(sum.trial, t('m_trial'))}${stat(sum.off, t('m_off'), sum.off ? 'warn' : '')}
+        ${stat(sum.pro + sum.plus, t('m_pro'), running ? 'good' : '')}${stat(sum.pro + sum.plus - sum.trial, t('m_paid'))}${stat(sum.trial, t('m_trial'))}${stat(sum.off, t('m_off'), sum.off ? 'warn' : '')}
       </div>
       ${running ? `
         <div class="title" style="margin-top:6px">${esc(t('m_money', { r: rupees(sum.money) }))}</div>
@@ -322,7 +324,6 @@ export async function plusPage(deps) {
       <div class="form" style="margin-top:6px">
         <div><label for="g-name">${esc(t('g_name'))}</label><input id="g-name" maxlength="60" placeholder="${esc(t('g_name_ph'))}"></div>
         <div><label for="g-note">${esc(t('g_note'))}</label><input id="g-note" maxlength="120" placeholder="${esc(t('g_note_ph'))}"></div>
-        <div><label for="g-tier">${esc(t('g_tier'))}</label><select id="g-tier"><option value="plus">${esc(t('m_plus'))}</option><option value="pro">${esc(t('m_pro'))}</option></select></div>
         <div><label for="g-until">${esc(t('g_until'))}</label><input id="g-until" type="date"></div>
         <div class="wide"><label class="check"><input type="checkbox" id="g-test"> ${esc(t('g_test'))}</label></div>
       </div>
@@ -334,8 +335,8 @@ export async function plusPage(deps) {
     </div>
     <div class="card">
       <div class="title">${esc(t('inside'))}</div>
-      <div style="overflow-x:auto"><table><tr><th>${esc(t('i_feat'))}</th><th>${esc(t('i_free'))}</th><th>${esc(t('i_plus'))}</th><th>${esc(t('i_pro'))}</th></tr>
-        ${feats.map((n) => `<tr><td>${esc(t('f' + n))}</td><td class="small">${esc(t('f' + n + 'a'))}</td><td class="small">${esc(t('f' + n + 'b'))}</td><td class="small">${esc((T[lang()] || T.en)['f' + n + 'c'] || T.en['f' + n + 'c'] ? t('f' + n + 'c') : t('f' + n + 'b'))}</td></tr>`).join('')}
+      <div style="overflow-x:auto"><table><tr><th>${esc(t('i_feat'))}</th><th>${esc(t('i_free'))}</th><th>${esc(t('i_pro'))}</th></tr>
+        ${feats.map((n) => `<tr><td>${esc(t('f' + n))}</td><td class="small">${esc(t('f' + n + 'a'))}</td><td class="small">${esc(t('f' + n + 'b'))}</td></tr>`).join('')}
       </table></div>
     </div>
     <div class="card">
@@ -379,12 +380,10 @@ export async function plusPage(deps) {
     };
   });
   const testBox = $('#g-test');
-  const tierBox = $('#g-tier');
-  testBox.onchange = () => { if (testBox.checked) tierBox.value = 'pro'; tierBox.disabled = testBox.checked; };
   $('#g-make').onclick = async () => {
     const name = $('#g-name').value.trim();
     const test = testBox.checked;
-    const tier = test ? 'pro' : (tierBox.value === 'pro' ? 'pro' : 'plus');
+    const tier = 'pro';
     if (!name) return toast(t('g_need_name'));
     if (!test && people.length >= MAX_GIFTS) return toast(t('g_full'));
     if (test && tests.length >= MAX_TESTS) return toast(t('g_tests_full'));
