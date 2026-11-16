@@ -1,0 +1,12 @@
+{
+  "name": "khalihan-budget-stop",
+  "private": true,
+  "description": "Turns Khalihan AI off when the month's Google Cloud budget is used up.",
+  "main": "index.js",
+  "engines": { "node": ">=22" },
+  "scripts": { "test": "node test.js" },
+  "dependencies": {
+    "@google-cloud/firestore": "^7.11.0",
+    "@google-cloud/functions-framework": "^3.4.0"
+  }
+}
