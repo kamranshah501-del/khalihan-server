@@ -25,12 +25,44 @@ DEFAULTS = {
     "farm_weather": False,  # v1.0.7 "मेरे खेत का मौसम": starts OFF too
     "whats_new": False,  # v1.0.7 "Khalihan में नया": the tour after an update, OFF too
     "share_link": False,  # v1.0.8 the app's Play link in every share, OFF
+    "share_short": False,  # v1.0.9 the short form of that link (needs the redirect site), OFF
     "rate_prompt": False,  # v1.0.8 Play's "rate Khalihan" card, OFF
+    "ai": False,  # v1.0.9 Khalihan AI section, OFF (the test phone sees it)
+    "ai_ask": False,  # v1.0.9 "Khalihan AI से पूछें" (V2), inside "ai"
+    "ai_cloud": False,  # v1.0.9 Gemini reads hard questions (test phone only)
+    "ai_vertex": True,  # v1.0.9+18 the cloud part through Vertex AI (paid tier); OFF = Gemini Developer API
+    "ai_k": False,  # v1.0.9 H4 the K button on Home (after the V2 days)
+    "ai_seva": False,  # v1.0.9 H4 "Khalihan AI सेवा" page
+    "ai_yaad": False,  # v1.0.9 H4 "बोलकर याद" reminders (on the phone)
+    "ai_voice": False,  # v1.0.9 the orb listens and speaks itself (microphone permission)
+    "ai_hisaab": False,  # v1.0.9 H6.1 "बोलकर हिसाब" (on the phone only)
+    "ai_bill": False,  # v1.0.9 H6.2 a bill photo read by Gemini → accounts
+    "ai_soil": False,  # v1.0.9 H6.3 a Soil Health Card photo read by Gemini
+    "ai_paper": False,  # v1.0.9 H7.1 a paper explained in plain words by Gemini
+    "ai_kvk": False,  # v1.0.9 H7.2 the week's agromet advice (config/kvk)
+    "ai_suno": False,  # v1.0.9 H7.3 answers read aloud
+    "ai_voice_cloud": False,  # v1.0.9 H7.3 the natural voice (Gemini speech; costs per second; Plus members only)
+    "ai_pest": False,  # v1.0.9 H8.2 pest / disease from a photo (Gemini names it; steps and medicine from the checked table)
+    "ai_dawai": False,  # v1.0.9 H8.3 "kya daalu" from the checked table
+    "ai_gov": False,  # v1.0.9 H9 a government site inside the app, filled together (on the phone)
+    "ai_sound": False,  # v1.0.9 Khalihan AI's own two sounds; the phone's listening beep silenced
+    "crop_photos": False,  # v1.0.9 real crop photos (all 106 since 15 Nov 2026)
+    "price_border": False,  # v1.0.9 the crop picture's border follows the price (green up, red down)
+    "ai_docs": False,  # v1.0.9 "Get documents": official pages of papers inside the app (needs ai_gov)
+    "ai_open": False,  # v1.0.9 Step 2 "ask anything": Gemini answers questions outside the app (Plus; costs per question)
+    "ai_chats": False,  # v1.0.9 Step 2 "My chats": questions and photo readings kept on the phone
+    "ai_applied": False,  # v1.0.9 Step 3 "Applied forms": draft / submitted / status, on the phone (needs ai_gov)
+    "ai_mydocs": False,  # v1.0.9 Step 3 "My documents": site PDFs and photographed papers kept on the phone
+    "ai_account": False,  # v1.0.9 Step 3: AI records also in the logged-in farmer's account (Firestore + Storage)
+    "ai_deep": False,  # v1.0.9 Step 3 deep search: Google Search grounding on the farmer's tap (Plus; paid per search)
 }
 PARENT = {
     "schemes": "services", "kendra": "services", "home_sky": "weather", "advice": "weather",
     "widget_weather": "weather", "farm_weather": "weather", "where_sell": "sell_menu", "price_map": "sell_menu",
-    "hold_sell": "sell_menu", "sell_interest": "sell_menu",
+    "hold_sell": "sell_menu", "sell_interest": "sell_menu", "ai_ask": "ai", "ai_cloud": "ai",
+    "ai_k": "ai", "ai_seva": "ai", "ai_yaad": "ai", "ai_voice": "ai", "ai_hisaab": "ai", "ai_bill": "ai", "ai_soil": "ai", "ai_paper": "ai", "ai_kvk": "ai", "ai_suno": "ai", "ai_voice_cloud": "ai",
+    "ai_pest": "ai", "ai_dawai": "ai", "ai_gov": "ai", "ai_sound": "ai", "ai_docs": "ai",
+    "ai_open": "ai", "ai_chats": "ai", "ai_applied": "ai", "ai_mydocs": "ai", "ai_account": "ai", "ai_deep": "ai",
 }
 # The launch plan (owner, 1 Nov 2026). Anything not listed: either is fine.
 PLAN = {

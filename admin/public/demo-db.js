@@ -1,3 +1,4 @@
+import { runSummary } from './aitest.js';
 // Khalihan Admin — demo data (open the panel with ?demo). Nothing is saved;
 // it is only for trying the screens without touching the real database.
 const day = (n, h = 10) => { const d = new Date(); d.setDate(d.getDate() - n); d.setHours(h, 15, 0, 0); return d; };
@@ -38,6 +39,7 @@ export async function connect() {
   const sellDistricts = { Maharashtra: ['jalgaon'] };
   let notice = null;
   let festival = null;
+  let aiLimits = null; // Khalihan AI limits per phone (null = the app's own)
   // Free Plus gift codes (Admin 1.16).
   let gifts = [
     { id: 'R7KM4QXP', name: 'Mera phone', note: '', until: null, test: true, device: 'a1b2c3d4e5f6g7h8i9j0', claimed: day(0, 8), app: '1.0.6', at: day(0, 7) },
@@ -70,6 +72,15 @@ export async function connect() {
   let plan = { kadam: 0, values: { partner: false, survey: 9, path: false } };
   // 💰 Budget & targets — made-up amounts, only for trying the page.
   const thisMonth = `${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}`;
+  // 🧪 Khalihan AI test — one sample run (made-up questions and answers).
+  let aiTests = [{
+    id: 'rdemo', name: 'जामनेर — नमूना', created: '2026-11-11', grader: '',
+    items: [
+      { n: 1, lang: 'mr', q: 'कापसाचा आज काय भाव आहे?', ai: { via: 'phone', understood: 'कपास का आज का भाव', kind: 'price', answer: 'कपास: जलगांव ज़िले में औसत ₹7,4xx / क्विंटल (नमूना)', source: 'स्रोत: MSAMB · नमूना' }, grade: 'ok' },
+      { n: 2, lang: 'ahi', q: 'उनाळी मा काय पेराउ?', ai: { via: 'cloud', understood: 'गर्मी में कौन सी फ़सल बोऊँ?', kind: 'unknown', answer: 'ये सवाल अभी Khalihan AI नहीं समझता — भाव, मौसम, छिड़काव पूछें।', source: '' }, grade: 'part', note: 'नमूना' },
+      { n: 3, lang: 'hi', q: 'कल छिड़काव कर सकते हैं?', ai: { via: 'phone', understood: 'कल छिड़काव ठीक है?', kind: 'spray', answer: 'कल सुबह हवा कम (नमूना) — छिड़काव ठीक।', source: 'स्रोत: Open-Meteo · नमूना' } },
+    ],
+  }];
   let budget = new URLSearchParams(location.search).has('setup') ? null : {
     limit: 20000,
     lines: [
@@ -216,7 +227,8 @@ export async function connect() {
       log('offers', { version: offers.version });
       return offers;
     },
-    async appConfig() { return { features: { ...features }, launch_states: [...launchStates], sell_districts: JSON.parse(JSON.stringify(sellDistricts)), notice: notice ? JSON.parse(JSON.stringify(notice)) : null, festival: festival ? { ...festival } : null }; },
+    async appConfig() { return { features: { ...features }, launch_states: [...launchStates], sell_districts: JSON.parse(JSON.stringify(sellDistricts)), notice: notice ? JSON.parse(JSON.stringify(notice)) : null, festival: festival ? { ...festival } : null, ai_limits: aiLimits ? JSON.parse(JSON.stringify(aiLimits)) : null }; },
+    async setAiLimits(l) { aiLimits = l ? JSON.parse(JSON.stringify(l)) : null; log('ai_limits', l ? { saved: true } : { removed: true }); },
     async setFestival(f) { festival = f ? { ...f } : null; log('festival', f ? { kind: f.kind } : { removed: true }); },
     async setNotice(n) { notice = n ? JSON.parse(JSON.stringify(n)) : null; log('notice', n ? { kind: n.kind } : { removed: true }); },
     async waitingCounts() { return { _total: 737, 'Madhya Pradesh': 412, Gujarat: 230, 'Uttar Pradesh': 95 }; },
@@ -335,6 +347,11 @@ export async function connect() {
     async savePlanState(data) { plan = { ...plan, ...JSON.parse(JSON.stringify(data)) }; },
     async budget() { return budget ? JSON.parse(JSON.stringify(budget)) : null; },
     async saveBudget(data) { budget = JSON.parse(JSON.stringify(data)); log('budget', {}); },
+
+    async aiTests() { return { runs: aiTests.map(runSummary) }; },
+    async aiTest(id) { const r = aiTests.find((x) => x.id === id); return r ? JSON.parse(JSON.stringify(r)) : null; },
+    async saveAiTest(run) { aiTests = [JSON.parse(JSON.stringify(run)), ...aiTests.filter((x) => x.id !== run.id)]; log('ai_test', { run: run.id }); },
+    async deleteAiTest(id) { aiTests = aiTests.filter((x) => x.id !== id); },
 
     async kendraComplaints() { return kComplaints.map((x) => ({ ...x })); },
     async kendraComplaintDone(id, done) { const x = kComplaints.find((k) => k.id === id); if (x) x.done = done; },

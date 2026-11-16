@@ -92,6 +92,29 @@ export const SWITCH_WORDS = {
     sw_fest_remove_q: 'Take the festival look down from every phone?',
     sw_fest_saved: 'Festival look saved — open phones show it within seconds',
     sw_fest_removed: 'Festival look taken down',
+    sw_ail: 'AI limits (per phone)',
+    sw_ail_d: 'How much Khalihan AI one phone may use, per day and per month — a share for every farmer, a bigger one for Plus members. The app\'s own numbers hold until you save yours; a change reaches phones within seconds. The test phone has no limit. Prices: Google\'s bill, 16 Nov 2026.',
+    sw_ail_ask: 'Questions the phone could not read (AI reads them)',
+    sw_ail_open: '"Ask anything" answers (Plus)',
+    sw_ail_deep: 'Google searches (Plus)',
+    sw_ail_photo: 'Photo reads — bill, soil card, paper, sick leaf',
+    sw_ail_voice: 'Kaptan\'s voice — minutes of new speech (Plus)',
+    sw_ail_free: 'Every farmer',
+    sw_ail_plus: 'Plus member',
+    sw_ail_day: 'a day',
+    sw_ail_month: 'a month',
+    sw_ail_cost: '≈ ₹{r} each',
+    sw_ail_cost_min: '≈ ₹{r} a minute',
+    sw_ail_most: 'Most one phone can cost in a month: every farmer ≈ ₹{f} · Plus ≈ ₹{p}. Most phones use far less (≈ ₹3 and ≈ ₹30).',
+    sw_ail_own: 'The app\'s own numbers',
+    sw_ail_yours: 'Your numbers',
+    sw_ail_save: 'Save the limits',
+    sw_ail_saved: 'AI limits saved — phones follow within seconds',
+    sw_ail_reset: 'Back to the app\'s numbers',
+    sw_ail_reset_q: 'Go back to the app\'s own AI limits?',
+    sw_ail_reset_done: 'Back to the app\'s own numbers',
+    sw_ail_bad: 'Numbers only — 0 or more',
+    sw_ail_note: 'Deep search: the first 5,000 searches a month (whole app) are free, then ≈ ₹1.3 more each. Spoken lines said before cost nothing.',
     sw_fest_bad: 'Check the dates: "Until" must be on or after "From".',
     sw_fest_more: 'More festivals (Bail Pola, Gudi Padwa, Eid, Holi…) come with app updates.',
     sw_state_confirm: 'Open {s}? The app has only its prices so far — no mandi distances, district map or state schemes yet. Farmers there will see prices, weather and the calendar.',
@@ -161,7 +184,36 @@ export const SWITCH_WORDS = {
     f_setup_guide: 'Get-ready guide', f_setup_guide_d: 'A card on Home — "ऐप तैयार करें": today\'s prices, district, location, notifications — until the app fully works on that phone, then never again. Asks for location and notifications only from the card, after saying why (no popups when the app opens). Admin → 📊 shows where farmers get stuck (app v1.0.7).',
     f_whats_new: 'New in Khalihan (after an update)', f_whats_new_d: 'Once after an update: a short moving tour of the new features that are ON for that farmer — "Skip", "Next", "Let\'s start". A feature switched on later gets its own page then (no app update). Not after a fresh install. Profile → "What\'s new" plays it again (app v1.0.7).',
     f_share_link: 'App link in every share', f_share_link_d: 'Every price, list, "Where to sell?" or scheme shared to WhatsApp ends with Khalihan\'s Google Play link, and the price picture says "Free on Google Play — search Khalihan". A farmer who gets a price installs the app in one tap; Admin → 📊 and Play see installs that came from shares (utm_source=whatsapp). Off = shares as before (app v1.0.8).',
+    f_share_short: 'Short app link (khalihan.web.app)', f_share_short_d: 'The link at the end of a share becomes short — khalihan.web.app/crop instead of the long Google Play address. The short address only sends the phone on to the same Play page and still tells Play and Admin → 📊 that the install came from a share. Turn it on ONLY after the short link has been deployed (Deploy workflow → what = link) and opens Google Play when tapped; before that the link would lead nowhere. Works inside "App link in every share". Off = the long Play address.',
     f_rate_prompt: 'Ask for a Play rating', f_rate_prompt_d: 'Play\'s own "rate Khalihan" card, once, a few seconds after fresh prices load — only after the farmer has seen prices on 4 different days, and never again for 120 days. Play itself may skip it; the farmer can always close it. Only the Play Store build shows it (app v1.0.8).',
+    f_ai: 'Khalihan AI', f_ai_d: 'The whole AI section. First part (app v1.0.9): questions understood on the phone and answered from Khalihan\'s own prices, "Where to sell?" sums and weather — no cloud, no cost. Cloud AI (Blaze + App Check) comes later, each part with its own switch. Your test phone sees it even when OFF.',
+    f_ai_ask: 'Ask Khalihan AI (V2)', f_ai_ask_d: 'The V2 design: a tab peeks out of the bottom bar\'s right edge; a swipe or tap shows the logo pill, which opens the question sheet (the orb, the answer in amber, its source). Understands price, where to sell, money in hand, weather and spraying — Hindi, Marathi, English, spoken or typed. Never names a pesticide or a dose. Nothing leaves the phone (app v1.0.9).',
+    f_ai_cloud: 'Cloud AI reads hard questions (Gemini)', f_ai_cloud_d: 'When the phone can\'t follow a question (a dialect, odd spelling), Gemini (Firebase AI Logic) turns it into our own fields; the answer still comes from Khalihan\'s data. Shows "AI understood …" and "Looks wrong?" (→ Suggestions). Keep OFF for farmers until the 200-question test and Plus — your test phone sees it (app v1.0.9).',
+    f_ai_vertex: 'Cloud AI through Vertex AI (paid)', f_ai_vertex_d: 'ON: Gemini through Vertex AI — the paid tier on Blaze, billed to the Cloud billing account (the free-trial credit pays until 18 Jan 2027); Google doesn\'t train on these questions. OFF: the Gemini Developer API (on Blaze it needs AI Studio billing, ≥ $5 prepay). Leave ON (app v1.0.9+18).',
+    f_ai_k: 'Khalihan AI button on Home (K)', f_ai_k_d: 'The everyday way in: a round K button with the turning colour edge, floating above the bottom bar on Home ("Khalihan AI · tap to ask"). The V2 tab stays only for the first 7 days, or until the farmer has opened it 3 times — then the K button takes over. OFF: the V2 tab stays (app v1.0.9).',
+    f_ai_seva: 'Khalihan AI services page', f_ai_seva_d: 'One page with what Khalihan AI does (Services tab → "Khalihan AI सेवा"). Since 15 Nov 2026 three large buttons — Send a photo (the farmer may say what it is, or "Just send the photo": Khalihan AI looks at what it is — a cheap look, counted in the day\'s 12 photos — and the right page reads it; Aadhaar, bank and card papers are refused unread), Fill a form, Get documents (each shows only when its own switch is on) — two thin rows (this week\'s advice, My records = accounts and reminders) and the bar to write or speak in, with the orb as the microphone. Prices, where to sell, spraying, the week\'s weather and reminders are simply asked in the bar (app v1.0.9).',
+    f_ai_yaad: 'Voice reminders (बोलकर याद)', f_ai_yaad_d: 'The farmer says a task and a time — "परसों सुबह खाद डालने की याद दिलाना" — and the phone reminds them then, even with the app closed (Android may hold it a few minutes). Spraying and watering reminders carry that hour\'s rain and wind. Also works from the question sheet. All on the phone — nothing goes to the cloud (app v1.0.9).',
+    f_ai_voice: 'The orb listens and speaks (no Google voice box)', f_ai_voice_d: 'ON: the orb hears the farmer itself — it moves with the voice, shows the words as they come, and says the answer aloud in the phone\'s own voice (tap the orb to stop). For this the app holds the microphone permission; Android asks the farmer once. Only the words reach the app, never the voice. OFF: the phone\'s voice typing screen (Google\'s) listens and answers are only written. Before turning this ON for farmers, the privacy page and Play\'s Data safety must name the microphone (app v1.0.9).',
+    f_ai_hisaab: 'Spoken accounts (बोलकर हिसाब)', f_ai_hisaab_d: 'The farmer says what was spent or earned — "आज दो मज़दूर, चार-चार सौ", "20 क्विंटल कपास 7,000 के भाव से बेचा" — and it is written down: this season\'s spending and income, every line with its day; a line can be corrected or removed. Understood on the phone; the account stays on the phone only (app v1.0.9).',
+    f_ai_bill: 'Accounts from a bill photo (बिल से हिसाब)', f_ai_bill_d: 'The farmer photographs a shop\'s bill; Gemini reads each thing, how much and its price, the app adds them up and says whether that matches the bill\'s own total. The farmer corrects any line and presses "हिसाब में जोड़ें" — nothing is written before that. The photo goes to Google Cloud to be read and is not kept; an Aadhaar or bank paper is refused. Needs "Spoken accounts" ON. Before farmers get it, the privacy page must say that photos are sent for reading (app v1.0.9).',
+    f_ai_soil: 'Soil card from a photo (मिट्टी का कार्ड)', f_ai_soil_d: 'The farmer photographs the Soil Health Card; Gemini reads what the soil has (nitrogen, phosphorus, potash, carbon, pH…) with the card\'s own low / fine / high, and the fertiliser the card itself prints for a crop — copied as printed, never made up by AI, with "check it against the card". Our own amounts per crop and acre wait for the checked list (MPKV / PDKV). The photo goes to Google Cloud and is not kept (app v1.0.9).',
+    f_ai_paper: 'Explain a paper from a photo (कागज़ समझाएँ)', f_ai_paper_d: 'The farmer photographs a notice, a letter, a 7/12, a receipt or a weighbridge slip; Gemini says in plain words what it is and the three things that matter, the app adds its own caution and reads it aloud. A bank\'s notice or letter is read; an Aadhaar, PAN, passbook, cheque or card is refused, and an account, Aadhaar or phone number is never repeated. The photo goes to Google Cloud and is not kept — the privacy page must say so before this is turned on.',
+    f_ai_kvk: 'This week\'s government advice (इस हफ़्ते की सरकारी सलाह)', f_ai_kvk_d: 'The district\'s agromet advisory bulletin (Jalgaon: Gramin Krishi Mausam Sewa, AMFU Pune — Tuesdays and Fridays) in plain Hindi, Marathi and English, card by card, read aloud. Written by Claude from each bulletin and published only after the owner has read it; a medicine and its amount stand as the bulletin prints them. Free for the farmer, costs nothing to run. Other districts see “not started yet”.',
+    f_ai_suno: 'Listen to answers (सुनें)', f_ai_suno_d: 'A “सुनें” chip under every AI answer reads it aloud, and AI सेवा gets “आज का भाव सुनें”. In the phone\'s own voice unless the natural voice below is on.',
+    f_ai_voice_cloud: 'Natural voice for the whole app — Plus members only (costs money)', f_ai_voice_cloud_d: 'For Khalihan Plus members (a gift code today, the subscription later) everything the app says aloud — prices on Home and a crop\'s page, schemes, the crop calendar, AI answers, a paper, the weekly advice — is spoken by Gemini\'s speech model, in the voice “Kore”, instead of the phone\'s robot voice, at the farmer\'s own Speaking Speed; everyone else keeps the phone\'s voice. Cost: about ₹1.7 for a minute of speech (what Google\'s bill showed on 15 Nov 2026 — twice the price first read). A phone gets 4 minutes of new speech a day; what was said once is kept on the phone for 10 days and is free to hear again. When it is off, over the limit or offline, the phone\'s voice speaks. The text spoken goes to Google Cloud — the privacy page must say so first.',
+    f_price_border: 'Price colour on the crop picture', f_price_border_d: 'The box of a crop\'s picture beside its price gets a border in the price\'s colour: green with a small up arrow when the price rose since the report before, red with a down arrow when it fell, grey when it did not move or the price is not today\'s. In Home\'s list and the all-crops list. Off = no border, as before (app v1.0.9).',
+    f_ai_open: 'Ask anything (questions outside the app, Gemini) — Plus members only (costs money)', f_ai_open_d: 'When a question is not about prices, weather, selling or the farm\'s records — "how are you", caring for a cow in winter, a scheme in general — Gemini answers it in the farmer\'s language, in a few plain lines, remembering the sheet\'s last 3 questions. It never names a fertiliser or medicine or gives a dose (AI rule 1: those come only from the checked table — such a sentence is removed and the farmer is sent to "What to spray"). Aadhaar, bank and OTP are never sent. For Plus members (a gift code today); others are told it is in Plus. 20 questions a day per phone; each question costs a little (Gemini) — usage limits are yours to set later. Your test phone sees it (app v1.0.9).',
+    f_ai_chats: 'My chats (what was asked, kept on the phone)', f_ai_chats_d: 'Under "My records" on Khalihan AI\'s page: every question answered and every photo read (bill, soil card, paper, sick leaf) is kept on the farmer\'s phone with a one-line summary, the answer and a small copy of the photo — by day, newest first; one or all can be deleted. The last 200 are kept. Nothing leaves the phone; a question with Aadhaar, bank or OTP is never kept. (Keeping them in the farmer\'s account comes with login, later.)',
+    f_ai_applied: 'Applied forms (draft, submitted, status — on the phone)', f_ai_applied_d: 'Under "My records": every form filled with Khalihan AI is kept as a draft; when the site itself says "submitted successfully", it moves to Submitted with the application number the site shows (read on the phone, ₹0). "Check status" opens the site inside the app, fills the number, the farmer does CAPTCHA / OTP, and the status line the site shows is kept with its date (approved, under review, received, rejected). The farmer can also mark it himself. Nothing is checked in the background. An Aadhaar-like or mobile number is never kept. Kept on the phone only (the account comes with login). Needs "Fill a government form" (app v1.0.9).',
+    f_ai_mydocs: 'My documents (papers kept on the phone)', f_ai_mydocs_d: 'Under "My records": a PDF a government site gives inside the app (a 7/12 the farmer took, a policy, a receipt) is kept by itself, and a paper Khalihan AI read from a photo (a notice, a Soil Health Card) is kept on "Save to My documents" — with date, time, its name and one line. "Open or send" hands it to the phone\'s PDF app or WhatsApp. Kept only on the phone; nothing private (Aadhaar, bank, OTP) is kept. Taking a PDF from a site works only on a phone — check it there first (app v1.0.9).',
+    f_ai_account: 'Khalihan AI records in the farmer\'s account', f_ai_account_d: 'For a farmer logged in with their mobile number, My chats, Applied forms and My documents are also kept in their account, so a new phone (or a reinstall) gets them back at the next login. Lists in Firestore (users/{uid}/ai — only that farmer, not staff), photos and papers in Cloud Storage (ai/{uid}/ — likewise). Deleting the account deletes them. Needs "Mobile login" on, the new Firestore rules and the Storage rules deployed, and the Storage bucket made — and the privacy page / Play Data safety must say "files and docs" are kept (app v1.0.9).',
+    f_ai_deep: 'Deep search — Google Search for "ask anything" (Plus; costs per search)', f_ai_deep_d: 'Under an "ask anything" answer the farmer can tap "Search on Google": the same question goes to Gemini with Google Search (grounding), and the answer comes with the web pages it rests on and Google\'s own search suggestions (Google requires both to be shown with it). Only on the farmer\'s tap, never by itself. Rule 1 kept (no medicine or fertiliser named or measured; such a sentence is removed). For Plus members; 5 searches a day per phone for now. Cost: 5,000 searches a month free, then about $14 per 1,000, plus the model. Needs "Ask anything" on. Kept in My chats with its pages (app v1.0.9).',
+    f_ai_docs: 'Get documents (7/12 and other government papers)', f_ai_docs_d: 'A third button on Khalihan AI\'s page: the official page of a paper opens inside the app — 7/12 and 8A (free view, and the signed copy the site charges for; Maharashtra only), PM-KISAN status, crop insurance policy, Soil Health Card. Khalihan AI fills what the profile has; CAPTCHA, OTP and any payment stay the farmer\'s. Saving the paper inside the app is not built yet ("Open in the browser" for that). Needs "Fill a government form" to be on (app v1.0.9).',
+    f_crop_photos: 'Real crop photos', f_crop_photos_d: 'The heap under a crop\'s card and the square icon in lists are real photos on white — every crop the app knows has one (all 106 pictures since 15 Nov 2026). Off = everything as before: the drawn heap where there is one, and the emoji.',
+    f_ai_pest: 'Pest / disease check from a photo (costs per photo)', f_ai_pest_d: 'A photo of the leaf or the insect is read by Gemini, which only NAMES the problem and says how sure it is. The farmer says the crop first; only Gemini Flash is used (the lighter model failed our test of 15 Nov 2026); below 85 % sure: "take it again / show it to the KVK". What to try first and every medicine\'s name and amount come from the checked list inside the app — lines a government paper printed — never from AI. The photo goes to Google Cloud (privacy page first). Even when ON, farmers see nothing until an agriculture graduate has checked that list: until then it shows on test builds only.',
+    f_ai_dawai: '"What should I apply?" answered from the checked list', f_ai_dawai_d: 'A question such as "whitefly on cotton — what should I apply?" is answered from the same checked list: steps first, then the medicines exactly as the government paper prints them, with the caution and "the decision is the farmer\'s". Off = the old answer ("ask your agriculture assistant"). Same lock as the photo check: nothing for farmers until an agriculture graduate has checked the list.',
+    f_ai_gov: 'Fill a government form (site inside the app)', f_ai_gov_d: 'A government site (gov.in / nic.in only) opens inside the app. Khalihan AI reads the page\'s boxes on the phone (labels only — nothing leaves the phone, ₹0), fills name, state and district from the profile and the village from My farm, lets the farmer speak or type the rest, and reads the form back. It never reads or fills Aadhaar, bank, IFSC, OTP, password or captcha, and never presses "Submit". Since Step 2, "Fill a form" asks "which form?" and opens the one the farmer names — the forms of the farmer\'s own state only (Farmer ID, MahaDBT for Maharashtra; PM-KISAN, crop insurance, Soil Health Card, KCC for all); a form of another state is refused as not applicable (your rule, may change later).',
+    f_ai_sound: 'Khalihan AI\'s own sounds (no phone beep)', f_ai_sound_d: 'The phone\'s own listening beep is silenced and two soft rising notes say "speak now"; the same notes and a third come before Khalihan AI\'s voice says something (once, not before every sentence). Off = the phone\'s beep, and no sound before the voice.',
     f_update_prompt: 'Update reminder', f_update_prompt_d: 'When a newer Khalihan is on Google Play, the app says so once a day and updates itself inside the app (Play\'s own in-app update; app v1.0.6). Off = no reminder.',
     f_dark: 'Dark mode', f_dark_d: 'The app turns dark after sunset and light at sunrise (at the farm), or the farmer fixes it in Profile → App Colour (app v1.0.5). Off = always light for everyone, and the Profile row hides.',
   },
@@ -234,6 +286,29 @@ export const SWITCH_WORDS = {
     sw_fest_remove_q: 'सभी फ़ोन से सजावट हटाएँ?',
     sw_fest_saved: 'सजावट लग गई — खुले फ़ोन पर कुछ सेकंड में दिखेगी',
     sw_fest_removed: 'सजावट हटा दी',
+    sw_ail: 'AI की हद (हर फ़ोन)',
+    sw_ail_d: 'एक फ़ोन Khalihan AI कितना इस्तेमाल कर सकता है, रोज़ और महीने में — हर किसान का हिस्सा, और Plus सदस्यों का बड़ा। आपके नंबर रखने तक ऐप के अपने नंबर चलते हैं; बदलाव सेकंडों में फ़ोनों तक पहुँचता है। टेस्ट फ़ोन पर कोई हद नहीं। दाम: Google का बिल, 16 नवंबर 2026।',
+    sw_ail_ask: 'सवाल जो फ़ोन नहीं समझा (AI समझता है)',
+    sw_ail_open: '"कुछ भी पूछें" के जवाब (Plus)',
+    sw_ail_deep: 'Google खोज (Plus)',
+    sw_ail_photo: 'फ़ोटो पढ़ना — बिल, मिट्टी कार्ड, कागज़, बीमार पत्ता',
+    sw_ail_voice: 'Kaptan की आवाज़ — नई बोली के मिनट (Plus)',
+    sw_ail_free: 'हर किसान',
+    sw_ail_plus: 'Plus सदस्य',
+    sw_ail_day: 'रोज़',
+    sw_ail_month: 'महीना',
+    sw_ail_cost: '≈ ₹{r} एक बार',
+    sw_ail_cost_min: '≈ ₹{r} एक मिनट',
+    sw_ail_most: 'एक फ़ोन महीने में ज़्यादा से ज़्यादा: हर किसान ≈ ₹{f} · Plus ≈ ₹{p}। ज़्यादातर फ़ोन बहुत कम (≈ ₹3 और ≈ ₹30)।',
+    sw_ail_own: 'ऐप के अपने नंबर',
+    sw_ail_yours: 'आपके नंबर',
+    sw_ail_save: 'हद रखें',
+    sw_ail_saved: 'AI की हद रखी — फ़ोन सेकंडों में मानेंगे',
+    sw_ail_reset: 'ऐप के नंबर पर वापस',
+    sw_ail_reset_q: 'ऐप की अपनी AI हद पर वापस जाएँ?',
+    sw_ail_reset_done: 'ऐप के अपने नंबर पर वापस',
+    sw_ail_bad: 'सिर्फ़ नंबर — 0 या ज़्यादा',
+    sw_ail_note: 'Google खोज: पूरे ऐप की महीने की पहली 5,000 खोज मुफ़्त, फिर हर एक ≈ ₹1.3 और। पहले बोली गई लाइनें मुफ़्त।',
     sw_fest_bad: 'तारीख़ देखें: "कब तक" "कब से" के बाद होनी चाहिए।',
     sw_fest_more: 'और त्योहार (बैल पोळा, गुढी पाडवा, ईद, होली…) ऐप अपडेट के साथ आएँगे।',
     sw_app_basic: 'ऐप: सिर्फ़ भाव',
@@ -304,7 +379,36 @@ export const SWITCH_WORDS = {
     f_setup_guide: 'ऐप तैयार करें (गाइड)', f_setup_guide_d: 'होम पर एक कार्ड — आज के भाव, ज़िला, लोकेशन, सूचनाएँ — जब तक उस फ़ोन पर ऐप पूरा काम न करने लगे, फिर कभी नहीं। लोकेशन और सूचना की अनुमति सिर्फ़ कार्ड से, वजह बताकर माँगता है (ऐप खुलते ही पॉप-अप नहीं)। Admin → 📊 में दिखता है किसान कहाँ अटकते हैं (ऐप v1.0.7)।',
     f_whats_new: 'Khalihan में नया (अपडेट के बाद)', f_whats_new_d: 'अपडेट के बाद एक बार: उस किसान के लिए चालू नए फ़ीचर का छोटा, चलता-फिरता टूर — "छोड़ें", "आगे", "चलिए, शुरू करें"। कोई फ़ीचर बाद में चालू करें तो उसका पेज तभी दिखेगा (ऐप अपडेट की ज़रूरत नहीं)। नया इंस्टॉल करने वालों को नहीं। प्रोफ़ाइल → "नया क्या है" से फिर देख सकते हैं (ऐप v1.0.7)।',
     f_share_link: 'हर शेयर में ऐप का लिंक', f_share_link_d: 'WhatsApp पर भेजा हर भाव, सूची, "कहाँ बेचें?" या योजना आख़िर में Khalihan का Google Play लिंक जोड़ता है, और भाव की फ़ोटो पर लिखा आता है "Google Play पर मुफ़्त — Khalihan खोजें"। भाव पाने वाला किसान एक टैप में ऐप लगा लेता है; Admin → 📊 और Play में शेयर से आए इंस्टॉल दिखते हैं (utm_source=whatsapp)। बंद = पहले जैसा शेयर (ऐप v1.0.8)।',
+    f_share_short: 'ऐप का छोटा लिंक (khalihan.web.app)', f_share_short_d: 'शेयर के आख़िर का लिंक छोटा हो जाता है — लंबे Google Play पते की जगह khalihan.web.app/crop। छोटा पता फ़ोन को उसी Play पेज पर भेजता है और Play व Admin → 📊 को अब भी पता चलता है कि इंस्टॉल शेयर से आया। इसे तभी चालू करें जब छोटा लिंक डिप्लॉय हो चुका हो (Deploy workflow → what = link) और दबाने पर Google Play खुले; उससे पहले लिंक कहीं नहीं ले जाएगा। "हर शेयर में ऐप का लिंक" के अंदर काम करता है। बंद = लंबा Play पता।',
     f_rate_prompt: 'Play रेटिंग माँगें', f_rate_prompt_d: 'Play का अपना "Khalihan को रेट करें" कार्ड, एक बार, ताज़ा भाव आने के कुछ सेकंड बाद — तभी जब किसान 4 अलग दिन भाव देख चुका हो, और फिर 120 दिन तक नहीं। Play ख़ुद भी छोड़ सकता है; किसान हमेशा बंद कर सकता है। सिर्फ़ Play Store वाले ऐप में दिखता है (ऐप v1.0.8)।',
+    f_ai: 'Khalihan AI', f_ai_d: 'पूरा AI हिस्सा। पहला भाग (ऐप v1.0.9): सवाल फ़ोन पर ही समझा जाता है, जवाब Khalihan के अपने भाव, "कहाँ बेचें?" के हिसाब और मौसम से — न क्लाउड, न खर्च। क्लाउड AI (Blaze + App Check) बाद में, हर भाग का अलग स्विच। बंद होने पर भी आपके टेस्ट फ़ोन पर दिखेगा।',
+    f_ai_ask: 'Khalihan AI से पूछें (V2)', f_ai_ask_d: 'V2 डिज़ाइन: नीचे की पट्टी के दाएँ किनारे से टैब झाँकता है; खिसकाने या दबाने पर लोगो वाला बार, उसे दबाने पर सवाल-जवाब शीट (गोला, नारंगी जवाब, स्रोत)। भाव, कहाँ बेचें, हाथ में कितना, मौसम और छिड़काव समझता है — हिंदी, मराठी, अंग्रेज़ी, बोलकर या लिखकर। दवा या मात्रा का नाम कभी नहीं बताता। फ़ोन से कुछ बाहर नहीं जाता (ऐप v1.0.9)।',
+    f_ai_cloud: 'मुश्किल सवाल Cloud AI पढ़े (Gemini)', f_ai_cloud_d: 'जब फ़ोन सवाल न समझ पाए (बोली, अलग लिखावट), Gemini (Firebase AI Logic) उसे हमारे खानों में बदलता है; जवाब फिर भी Khalihan के अपने आँकड़ों से। "AI ने समझा …" और "गलत लगा?" (→ सुझाव) दिखते हैं। 200 सवाल की जाँच और Plus तक किसानों के लिए बंद रखें — आपका टेस्ट फ़ोन देखेगा (ऐप v1.0.9)।',
+    f_ai_vertex: 'Cloud AI, Vertex AI से (पेड)', f_ai_vertex_d: 'चालू: Gemini, Vertex AI से — Blaze पर पेड वाला, ख़र्च Cloud बिलिंग खाते में (18 Jan 2027 तक फ़्री-ट्रायल क्रेडिट से); इन सवालों से Google अपना मॉडल नहीं सिखाता। बंद: Gemini Developer API (Blaze पर AI Studio में बिलिंग, कम से कम $5 पहले)। चालू ही रखें (ऐप v1.0.9+18)।',
+    f_ai_k: 'होम पर Khalihan AI बटन (K)', f_ai_k_d: 'रोज़ का रास्ता: होम पर नीचे की पट्टी के ऊपर तैरता गोल K बटन, किनारे पर घूमते रंग ("Khalihan AI · दबाकर पूछिए")। V2 टैब सिर्फ़ पहले 7 दिन, या किसान के 3 बार खोलने तक — फिर K बटन। बंद: V2 टैब ही रहेगा (ऐप v1.0.9)।',
+    f_ai_seva: 'Khalihan AI सेवा पेज', f_ai_seva_d: 'एक पेज जिसमें Khalihan AI के काम (सेवाएँ टैब → "Khalihan AI सेवा")। 15 Nov 2026 से तीन बड़े बटन — फ़ोटो भेजें (किसान बताए कि क्या है, या "बस फ़ोटो भेजें": Khalihan AI देखकर पहचानता है और सही पेज पढ़ता है; आधार, बैंक और कार्ड के कागज़ बिना पढ़े लौटा दिए जाते हैं), फ़ॉर्म भरें, दस्तावेज़ निकालें (हर एक तभी दिखता है जब उसका अपना स्विच चालू हो) — दो पतली पंक्तियाँ (इस हफ़्ते की सलाह, मेरा रिकॉर्ड = हिसाब और याद) और नीचे लिखने या बोलने की पट्टी, जिसमें गोला ही माइक है। भाव, कहाँ बेचूँ, छिड़काव, हफ़्ते का मौसम और याद — सीधे पट्टी में पूछे जाते हैं (ऐप v1.0.9)।',
+    f_ai_yaad: 'बोलकर याद', f_ai_yaad_d: 'किसान काम और समय बोले — "परसों सुबह खाद डालने की याद दिलाना" — फ़ोन उस समय याद दिलाएगा, ऐप बंद हो तब भी (Android कुछ मिनट आगे-पीछे कर सकता है)। छिड़काव और पानी की याद में उस घंटे की बारिश और हवा। सवाल-जवाब शीट से भी बनती है। सब फ़ोन पर — क्लाउड में कुछ नहीं जाता (ऐप v1.0.9)।',
+    f_ai_voice: 'गोला सुने और बोले (Google का बॉक्स नहीं)', f_ai_voice_d: 'चालू: गोला किसान की आवाज़ ख़ुद सुनता है — आवाज़ के साथ हिलता है, शब्द आते-आते दिखाता है और जवाब फ़ोन की आवाज़ में बोलकर देता है (गोला दबाने पर चुप)। इसके लिए ऐप को माइक की इजाज़त चाहिए; Android किसान से एक बार पूछता है। ऐप तक सिर्फ़ शब्द पहुँचते हैं, आवाज़ नहीं। बंद: फ़ोन की बोलकर-लिखने वाली स्क्रीन (Google की) सुनती है और जवाब सिर्फ़ लिखा आता है। किसानों के लिए चालू करने से पहले privacy पेज और Play के Data safety में माइक लिखना ज़रूरी है (ऐप v1.0.9)।',
+    f_ai_hisaab: 'बोलकर हिसाब', f_ai_hisaab_d: 'किसान बोले कि क्या खर्च हुआ या क्या कमाया — "आज दो मज़दूर, चार-चार सौ", "20 क्विंटल कपास 7,000 के भाव से बेचा" — और वह लिख जाता है: इस मौसम का खर्च और कमाई, हर लाइन अपने दिन के साथ; लाइन ठीक या हटाई जा सकती है। फ़ोन पर ही समझा जाता है; हिसाब सिर्फ़ फ़ोन में रहता है (ऐप v1.0.9)।',
+    f_ai_bill: 'बिल की फ़ोटो से हिसाब', f_ai_bill_d: 'किसान दुकान के बिल की फ़ोटो ले; Gemini हर चीज़, मात्रा और दाम पढ़ता है, ऐप जोड़कर बताता है कि बिल के कुल से मिलता है या नहीं। किसान कोई भी लाइन ठीक करके "हिसाब में जोड़ें" दबाए — उससे पहले कुछ नहीं लिखा जाता। फ़ोटो पढ़ने के लिए Google Cloud जाती है और रखी नहीं जाती; आधार या बैंक का कागज़ मना। "बोलकर हिसाब" चालू होना ज़रूरी। किसानों को देने से पहले privacy पेज में लिखना होगा कि फ़ोटो पढ़ने के लिए भेजी जाती है (ऐप v1.0.9)।',
+    f_ai_soil: 'मिट्टी का कार्ड (फ़ोटो से)', f_ai_soil_d: 'किसान सॉइल हेल्थ कार्ड की फ़ोटो ले; Gemini पढ़ता है कि मिट्टी में क्या कितना है (नाइट्रोजन, फ़ॉस्फ़रस, पोटाश, कार्बन, pH…), कार्ड की अपनी रेटिंग (कम / ठीक / ज़्यादा) के साथ, और कार्ड पर छपी खाद की सिफ़ारिश — जैसी छपी है वैसी, AI ख़ुद नहीं बनाता, "कार्ड से मिलाकर देखें" के साथ। फ़सल और एकड़ के हिसाब से हमारी अपनी मात्रा जाँची हुई सूची (MPKV / PDKV) बनने पर। फ़ोटो Google Cloud जाती है, रखी नहीं जाती (ऐप v1.0.9)।',
+    f_ai_paper: 'कागज़ समझाएँ (फ़ोटो से)', f_ai_paper_d: 'किसान नोटिस, चिट्ठी, 7/12, रसीद या काटा पर्ची की फ़ोटो ले; Gemini आसान भाषा में बताता है कि ये क्या है और तीन ज़रूरी बातें, ऐप अपनी सावधानी जोड़ता है और पढ़कर सुनाता है। बैंक का नोटिस या चिट्ठी पढ़ी जाती है; आधार, पैन, पासबुक, चेक या कार्ड मना, और खाता, आधार या फ़ोन नंबर कभी दोहराया नहीं जाता। फ़ोटो Google Cloud को जाती है और रखी नहीं जाती — चालू करने से पहले प्राइवेसी पेज पर ये लिखना ज़रूरी है।',
+    f_ai_kvk: 'इस हफ़्ते की सरकारी सलाह', f_ai_kvk_d: 'ज़िले की कृषि मौसम सलाह बुलेटिन (जलगाँव: ग्रामीण कृषि मौसम सेवा, AMFU पुणे — मंगलवार और शुक्रवार) आसान हिंदी, मराठी और अंग्रेज़ी में, कार्ड-कार्ड करके, पढ़कर सुनाई जाती है। हर बुलेटिन से Claude लिखता है और मालिक के पढ़ने के बाद ही छपती है; दवा और उसकी मात्रा वही जो बुलेटिन में छपी है। किसान के लिए मुफ़्त, चलाने में कोई ख़र्च नहीं। बाकी ज़िलों में “अभी शुरू नहीं हुई” दिखता है।',
+    f_ai_suno: 'जवाब सुनें (सुनें)', f_ai_suno_d: 'हर AI जवाब के नीचे “सुनें” — दबाने पर जवाब पढ़कर सुनाया जाता है, और AI सेवा में “आज का भाव सुनें”। फ़ोन की अपनी आवाज़ में, जब तक नीचे वाली नैचुरल आवाज़ चालू न हो।',
+    f_ai_voice_cloud: 'पूरी ऐप की नैचुरल आवाज़ — सिर्फ़ Plus में (पैसे लगते हैं)', f_ai_voice_cloud_d: 'Khalihan Plus के सदस्यों के लिए (आज गिफ़्ट कोड, आगे सदस्यता) ऐप जो भी बोलती है — होम और फ़सल के पेज के भाव, योजनाएँ, फ़सल कैलेंडर, AI के जवाब, कागज़, हफ़्ते की सलाह — वह फ़ोन की मशीनी आवाज़ की जगह Gemini की “Kore” आवाज़ में, किसान की चुनी बोलने की रफ़्तार पर; बाकी सबके लिए फ़ोन की आवाज़ ही रहती है। ख़र्च: एक मिनट बोलने का लगभग ₹1.7 (15 नवंबर 2026 को Google के बिल में यही दिखा — पहले पढ़े दाम से दुगना)। एक फ़ोन को रोज़ 4 मिनट नई आवाज़; जो एक बार बोला गया वह 10 दिन फ़ोन में रहता है और दोबारा सुनना मुफ़्त। बंद हो, सीमा पूरी हो या इंटरनेट न हो तो फ़ोन की आवाज़ बोलती है। जो बोला जाता है वह Google Cloud को जाता है — पहले प्राइवेसी पेज पर लिखना ज़रूरी है।',
+    f_price_border: 'फ़सल की फ़ोटो पर भाव का रंग', f_price_border_d: 'भाव के पास फ़सल की फ़ोटो के खाने पर भाव के रंग की रेखा: पिछली रिपोर्ट से भाव चढ़ा तो हरी और ऊपर का छोटा तीर, गिरा तो लाल और नीचे का तीर, न बदला या भाव आज का नहीं तो स्लेटी। Home की सूची और सभी फ़सलों की सूची में। बंद = पहले जैसा, कोई रेखा नहीं (ऐप v1.0.9)।',
+    f_ai_open: 'कुछ भी पूछें (ऐप से बाहर के सवाल, Gemini) — सिर्फ़ Plus में (पैसे लगते हैं)', f_ai_open_d: 'जब सवाल भाव, मौसम, बिक्री या खेत के हिसाब का न हो — "कैसे हो", सर्दी में गाय की देखभाल, कोई योजना आम तौर पर — Gemini किसान की भाषा में कुछ सीधी लाइनों में जवाब देता है, शीट के पिछले 3 सवाल याद रखकर। खाद या दवाई का नाम या मात्रा कभी नहीं बताता (AI नियम 1: वह सिर्फ़ जाँची गई तालिका से — ऐसी लाइन हटा दी जाती है और किसान को "क्या छिड़कें" पर भेजा जाता है)। Aadhaar, बैंक, OTP कभी नहीं भेजे जाते। Plus सदस्यों के लिए (आज गिफ़्ट कोड); बाकी को बताया जाता है कि यह Plus में है। एक फ़ोन से रोज़ 20 सवाल; हर सवाल का थोड़ा ख़र्च (Gemini) — सीमा आप बाद में तय करेंगे। आपका टेस्ट फ़ोन देखेगा (ऐप v1.0.9)।',
+    f_ai_chats: 'मेरी बातचीत (जो पूछा, फ़ोन में रखा)', f_ai_chats_d: 'Khalihan AI के पेज पर "मेरा रिकॉर्ड" में: हर जवाब वाला सवाल और हर पढ़ी गई फ़ोटो (बिल, मिट्टी कार्ड, कागज़, बीमार पत्ता) किसान के फ़ोन में एक लाइन के सार, जवाब और फ़ोटो की छोटी कॉपी के साथ रहती है — दिन के हिसाब से, नई सबसे ऊपर; एक या सब मिटा सकते हैं। आख़िरी 200 रहती हैं। कुछ भी फ़ोन से बाहर नहीं जाता; Aadhaar, बैंक या OTP वाला सवाल कभी नहीं रखा जाता। (किसान के अकाउंट में रखना लॉगिन के साथ, बाद में।)',
+    f_ai_applied: 'भरे हुए फ़ॉर्म (ड्राफ़्ट, जमा, स्थिति — फ़ोन में)', f_ai_applied_d: '"मेरा रिकॉर्ड" में: Khalihan AI के साथ भरा हर फ़ॉर्म ड्राफ़्ट के रूप में रहता है; जब साइट ख़ुद "सफलतापूर्वक जमा" कहती है, तो वह साइट के दिखाए आवेदन नंबर के साथ "जमा किए" में जाता है (फ़ोन पर पढ़ा, ₹0)। "स्थिति देखें" साइट को ऐप के अंदर खोलता है, नंबर भरता है, CAPTCHA / OTP किसान भरता है, और साइट की दिखाई स्थिति की लाइन तारीख़ के साथ रखी जाती है (मंज़ूर, जाँच में, मिल गया, नामंज़ूर)। किसान ख़ुद भी बता सकता है। पीछे से अपने आप कुछ नहीं देखा जाता। Aadhaar या मोबाइल जैसा नंबर कभी नहीं रखा जाता। सिर्फ़ फ़ोन में (अकाउंट लॉगिन के साथ)। "सरकारी फ़ॉर्म भरना" चालू होना ज़रूरी (ऐप v1.0.9)।',
+    f_ai_mydocs: 'मेरे दस्तावेज़ (कागज़ फ़ोन में)', f_ai_mydocs_d: '"मेरा रिकॉर्ड" में: ऐप के अंदर सरकारी साइट जो PDF देती है (किसान का लिया 7/12, पॉलिसी, रसीद) वह अपने आप रखा जाता है, और फ़ोटो से पढ़ा कागज़ (नोटिस, मृदा स्वास्थ्य कार्ड) "मेरे दस्तावेज़ में रखें" से — तारीख़, समय, नाम और एक लाइन के साथ। "खोलें या भेजें" से फ़ोन का PDF ऐप या WhatsApp। सिर्फ़ फ़ोन में; कुछ भी निजी (Aadhaar, बैंक, OTP) नहीं रखा जाता। साइट से PDF लेना सिर्फ़ फ़ोन पर चलता है — पहले वहीं जाँचें (ऐप v1.0.9)।',
+    f_ai_account: 'Khalihan AI का रिकॉर्ड किसान के अकाउंट में', f_ai_account_d: 'मोबाइल नंबर से लॉगिन किए किसान की "मेरी बातचीत", "भरे हुए फ़ॉर्म" और "मेरे दस्तावेज़" उसके अकाउंट में भी रहते हैं — नए फ़ोन (या दोबारा इंस्टॉल) पर अगली लॉगिन में वापस मिलते हैं। सूचियाँ Firestore में (users/{uid}/ai — सिर्फ़ वही किसान, स्टाफ़ नहीं), फ़ोटो और कागज़ Cloud Storage में (ai/{uid}/ — वैसे ही)। अकाउंट हटाने पर ये भी हटते हैं। ज़रूरी: "मोबाइल लॉगिन" चालू, नए Firestore rules और Storage rules deploy, Storage bucket बना हुआ — और प्राइवेसी पेज / Play Data safety में "फ़ाइलें और कागज़" रखे जाने की बात (ऐप v1.0.9)।',
+    f_ai_deep: 'डीप सर्च — "कुछ भी पूछें" के लिए Google खोज (Plus; हर खोज का ख़र्च)', f_ai_deep_d: '"कुछ भी पूछें" के जवाब के नीचे किसान "Google पर खोजें" दबा सकता है: वही सवाल Google खोज (grounding) के साथ Gemini को जाता है, और जवाब के साथ वे वेब पेज आते हैं जिन पर वह टिका है, और Google के अपने "search suggestions" (Google का नियम: दोनों जवाब के साथ दिखाने हैं)। सिर्फ़ किसान के दबाने पर, अपने आप कभी नहीं। नियम 1 क़ायम (दवाई या खाद का नाम या मात्रा नहीं; ऐसी लाइन हटा दी जाती है)। Plus सदस्यों के लिए; अभी एक फ़ोन से रोज़ 5 खोज। ख़र्च: महीने की 5,000 खोज मुफ़्त, फिर लगभग $14 प्रति 1,000, साथ में मॉडल। "कुछ भी पूछें" चालू होना ज़रूरी। "मेरी बातचीत" में पेजों के साथ रहता है (ऐप v1.0.9)।',
+    f_ai_docs: 'दस्तावेज़ निकालें (7/12 और दूसरे सरकारी कागज़)', f_ai_docs_d: 'Khalihan AI के पेज पर तीसरा बटन: कागज़ का सरकारी पेज ऐप के अंदर खुलता है — 7/12 और 8A (मुफ़्त देखना, और साइन वाली प्रति जिसका शुल्क साइट लेती है; सिर्फ़ महाराष्ट्र), PM-KISAN स्टेटस, फसल बीमा पॉलिसी, मृदा स्वास्थ्य कार्ड। Khalihan AI वही भरता है जो प्रोफ़ाइल में है; CAPTCHA, OTP और भुगतान किसान के ही। कागज़ ऐप के अंदर सेव करना अभी नहीं बना (उसके लिए "ब्राउज़र में खोलें")। "सरकारी फ़ॉर्म भरना" चालू होना ज़रूरी (ऐप v1.0.9)।',
+    f_crop_photos: 'फ़सलों की असली फ़ोटो', f_crop_photos_d: 'फ़सल के कार्ड के नीचे का ढेर और सूची का चौकोर आइकन असली फ़ोटो (सफ़ेद पर) — ऐप की हर फ़सल की फ़ोटो है (15 नवंबर 2026 से सभी 106 चित्र)। बंद = सब पहले जैसा: जहाँ बना है वहाँ पुराना चित्र, और इमोजी।',
+    f_ai_pest: 'फ़ोटो से कीट / रोग पहचान (हर फ़ोटो के पैसे)', f_ai_pest_d: 'पत्ते या कीड़े की फ़ोटो Gemini देखता है और सिर्फ़ कीट/रोग का नाम और भरोसा बताता है (पहले किसान फ़सल बताता है; सिर्फ़ Gemini Flash — हल्का मॉडल 15 नवंबर 2026 की हमारी जाँच में फेल हुआ; 85 % से कम: "फ़ोटो दोबारा लें / KVK को दिखाएँ")। पहले के उपाय और हर दवा का नाम व मात्रा ऐप के अंदर की जाँची हुई सूची से — जो सरकारी कागज़ में छपा है — AI से कभी नहीं। फ़ोटो Google Cloud को जाती है (पहले प्राइवेसी पेज)। ON होने पर भी, जब तक कृषि स्नातक सूची न जाँचे, किसानों को कुछ नहीं दिखता: तब तक सिर्फ़ टेस्ट बिल्ड पर।',
+    f_ai_dawai: '"क्या डालूँ?" का जवाब जाँची हुई सूची से', f_ai_dawai_d: '"कपास में सफ़ेद मक्खी है, क्या डालूँ?" जैसे सवाल का जवाब उसी जाँची हुई सूची से: पहले उपाय, फिर दवाएँ ठीक वैसी जैसी सरकारी कागज़ में छपी हैं, सावधानी और "इस्तेमाल का फ़ैसला किसान का" के साथ। बंद = पुराना जवाब ("कृषि सहायक से पूछें")। फ़ोटो पहचान वाला ही ताला: कृषि स्नातक की जाँच से पहले किसानों को कुछ नहीं।',
+    f_ai_gov: 'सरकारी फ़ॉर्म भरना (साइट ऐप के अंदर)', f_ai_gov_d: 'सरकारी साइट (सिर्फ़ gov.in / nic.in) ऐप के अंदर खुलती है। Khalihan AI पेज के खाने फ़ोन पर ही पढ़ता है (सिर्फ़ लेबल — कुछ भी फ़ोन से बाहर नहीं जाता, ₹0), नाम, राज्य, ज़िला प्रोफ़ाइल से और गाँव "मेरा खेत" से भरता है, बाकी किसान बोलकर या लिखकर भरता है, और फ़ॉर्म पढ़कर सुनाता है। Aadhaar, बैंक, IFSC, OTP, पासवर्ड, कैप्चा न पढ़ता है न भरता है, और "जमा करें" कभी नहीं दबाता। Step 2 से "फ़ॉर्म भरें" पूछता है "कौन सा फ़ॉर्म?" और किसान जो नाम बोले वह खोलता है — सिर्फ़ किसान के अपने राज्य के फ़ॉर्म (महाराष्ट्र के लिए Farmer ID, MahaDBT; सबके लिए PM-KISAN, फसल बीमा, मृदा स्वास्थ्य कार्ड, KCC); दूसरे राज्य का फ़ॉर्म "लागू नहीं" कहकर मना (आपका नियम, बाद में बदल सकता है)।',
+    f_ai_sound: 'Khalihan AI की अपनी आवाज़ें (फ़ोन की बीप नहीं)', f_ai_sound_d: 'सुनते समय फ़ोन की अपनी बीप बंद रहती है और दो हल्के चढ़ते सुर बताते हैं "अब बोलिए"; वही सुर और एक तीसरा Khalihan AI की आवाज़ से पहले बजता है (एक बार, हर वाक्य से पहले नहीं)। बंद = फ़ोन की बीप, और आवाज़ से पहले कोई धुन नहीं।',
     f_update_prompt: 'अपडेट की याद', f_update_prompt_d: 'Google Play पर Khalihan का नया वर्ज़न आते ही ऐप दिन में एक बार बताता है और ऐप के अंदर ही अपडेट हो जाता है (Play का अपना इन-ऐप अपडेट; ऐप v1.0.6)। बंद = कोई याद नहीं।',
     f_dark: 'डार्क मोड', f_dark_d: 'सूर्यास्त के बाद ऐप अपने आप डार्क, सूर्योदय पर लाइट (खेत के हिसाब से); या किसान Profile → ऐप का रंग में तय करे (ऐप v1.0.5)। बंद = सबके लिए हमेशा लाइट, Profile की लाइन छिप जाती है।',
   },
@@ -342,15 +446,64 @@ export const FEATURE_INFO = {
   farm_weather: { def: false, since: '1.0.7' },
   whats_new: { def: false, since: '1.0.7' },
   share_link: { def: false, since: '1.0.8' },
+  share_short: { def: false, since: '1.0.9' },
   rate_prompt: { def: false, since: '1.0.8' },
+  ai: { def: false, since: '1.0.9' },
+  ai_ask: { def: false, since: '1.0.9' },
+  ai_cloud: { def: false, since: '1.0.9' },
+  ai_vertex: { def: true, since: '1.0.9' },
+  ai_k: { def: false, since: '1.0.9' },
+  ai_seva: { def: false, since: '1.0.9' },
+  ai_yaad: { def: false, since: '1.0.9' },
+  ai_voice: { def: false, since: '1.0.9' },
+  ai_hisaab: { def: false, since: '1.0.9' },
+  ai_bill: { def: false, since: '1.0.9' },
+  ai_soil: { def: false, since: '1.0.9' },
+  ai_paper: { def: false, since: '1.0.9' },
+  ai_kvk: { def: false, since: '1.0.9' },
+  ai_suno: { def: false, since: '1.0.9' },
+  ai_voice_cloud: { def: false, since: '1.0.9' },
+  ai_pest: { def: false, since: '1.0.9' },
+  ai_dawai: { def: false, since: '1.0.9' },
+  ai_gov: { def: false, since: '1.0.9' },
+  ai_sound: { def: false, since: '1.0.9' },
+  crop_photos: { def: false, since: '1.0.9' },
+  price_border: { def: false, since: '1.0.9' },
+  ai_docs: { def: false, since: '1.0.9' },
+  ai_open: { def: false, since: '1.0.9' },
+  ai_chats: { def: false, since: '1.0.9' },
+  ai_applied: { def: false, since: '1.0.9' },
+  ai_mydocs: { def: false, since: '1.0.9' },
+  ai_account: { def: false, since: '1.0.9' },
+  ai_deep: { def: false, since: '1.0.9' },
 };
+
+/** Khalihan AI's limits per phone — the app's own numbers (lib/ai/ai_quota.dart,
+ *  keep the same) and what one use costs (₹, Google's bill, 16 Nov 2026).
+ *  Voice is in seconds in the app; shown here in minutes. */
+export const AI_LIMITS = {
+  uses: ['ask', 'open', 'deep', 'photo', 'voice'],
+  free: { ask: [10, 150], open: [0, 0], deep: [0, 0], photo: [2, 20], voice: [0, 0] },
+  plus: { ask: [30, 600], open: [15, 250], deep: [3, 40], photo: [6, 60], voice: [180, 2700] },
+  rupees: { ask: 0.05, open: 0.14, deep: 0.16, photo: 1.1, voice: 1.7 / 60 },
+};
+
+/** The most one phone can cost in a month, in ₹, for a limits map ({free, plus} → {use_month}). */
+export function aiMonthMost(limits, who) {
+  let sum = 0;
+  for (const u of AI_LIMITS.uses) {
+    const mine = (limits && limits[who] && typeof limits[who][u + '_month'] === 'number') ? limits[who][u + '_month'] : AI_LIMITS[who][u][1];
+    sum += mine * AI_LIMITS.rupees[u];
+  }
+  return sum;
+}
 
 /** The sections, in order. `kind` picks a special settings panel. */
 const SECTIONS = [
   { id: 'states', icon: '📍', kind: 'states' },
   { id: 'notice', icon: '📣', kind: 'notice' },
   { id: 'festival', icon: '🪔', kind: 'festival' },
-  { id: 'prices', icon: '📈', master: null, kids: ['day_voice', 'voice_search', 'share_picture', 'share_link', 'alerts', 'target', 'brief'] },
+  { id: 'prices', icon: '📈', master: null, kids: ['day_voice', 'voice_search', 'share_picture', 'share_link', 'share_short', 'alerts', 'target', 'brief', 'crop_photos', 'price_border'] },
   { id: 'sellmenu', icon: '🛒', master: 'sell_menu', kids: ['where_sell', 'price_map', 'hold_sell', 'sell_interest'] },
   { id: 'weather', icon: '🌦️', master: 'weather', kids: ['home_sky', 'advice', 'widget_weather', 'farm_weather'] },
   { id: 'calendar', icon: '🌱', master: 'calendar', kids: [] },
@@ -364,6 +517,8 @@ const SECTIONS = [
   { id: 'rate', icon: '⭐', master: 'rate_prompt', kids: [] },
   { id: 'guide', icon: '🧭', master: 'setup_guide', kids: [] },
   { id: 'whatsnew', icon: '✨', master: 'whats_new', kids: [] },
+  { id: 'ailimits', icon: '🧮', kind: 'ailimits' },
+  { id: 'ai', icon: '🤖', master: 'ai', kids: ['ai_ask', 'ai_k', 'ai_seva', 'ai_yaad', 'ai_hisaab', 'ai_bill', 'ai_soil', 'ai_paper', 'ai_kvk', 'ai_pest', 'ai_dawai', 'ai_gov', 'ai_docs', 'ai_open', 'ai_deep', 'ai_chats', 'ai_applied', 'ai_mydocs', 'ai_account', 'ai_suno', 'ai_voice', 'ai_sound', 'ai_voice_cloud', 'ai_cloud', 'ai_vertex'] },
 ];
 
 /** States as the government price data names them (same list as the app). */
@@ -483,6 +638,7 @@ export function createSwitches(c) {
     if (s.kind === 'states') return tr('sw_states');
     if (s.kind === 'notice') return tr('sw_notice');
     if (s.kind === 'festival') return tr('sw_fest');
+    if (s.kind === 'ailimits') return tr('sw_ail');
     return s.master ? tr('f_' + s.master) : tr('sw_prices');
   }
 
@@ -494,6 +650,9 @@ export function createSwitches(c) {
     return n.from > today ? 'sched' : 'live';
   }
   function summary(s) {
+    if (s.kind === 'ailimits') {
+      return esc(`${data.ailimits ? tr('sw_ail_yours') : tr('sw_ail_own')} · ≤ ₹${Math.round(aiMonthMost(data.ailimits, 'free'))} / ₹${Math.round(aiMonthMost(data.ailimits, 'plus'))}`);
+    }
     if (s.kind === 'festival') {
       const f = data.festival;
       const st = noticeState(f);
@@ -541,6 +700,7 @@ export function createSwitches(c) {
       if (st === 'sched') return `<span class="pill info">${esc(tr('sw_notice_sched', { d: noticeDays(data.notice.from) }))}</span>`;
       return `<span class="pill off">${tr('sw_off')}</span>`;
     }
+    if (s.kind === 'ailimits') return `<span class="pill ${data.ailimits ? 'info' : 'on'}">${data.ailimits ? tr('sw_ail_yours') : tr('sw_ail_own')}</span>`;
     if (!s.master) return `<span class="pill on">${tr('sw_always')}</span>`;
     const on = featOn(s.master) && (s.id !== 'kendra' || featOn('services'));
     const warn = on && ((s.kind === 'kendra' && !kendraDistricts().length && !Number(data.kinfo.km))
@@ -564,7 +724,7 @@ export function createSwitches(c) {
     return `<div class="swdh">
       <span class="swicon big" aria-hidden="true">${s.icon}</span>
       <div class="grow"><h2>${esc(sectionTitle(s))} ${s.master ? sinceChip(s.master) : ''}</h2><p class="sub">${esc(desc)}</p></div>
-      ${s.kind === 'states' || s.kind === 'notice' || s.kind === 'festival' ? '' : master}
+      ${s.kind === 'states' || s.kind === 'notice' || s.kind === 'festival' || s.kind === 'ailimits' ? '' : master}
     </div>`;
   }
 
@@ -812,9 +972,47 @@ export function createSwitches(c) {
       </div>`;
   }
 
+  function aiLimitsDetail(s) {
+    const l = data.ailimits || {};
+    const val = (who, u, i) => {
+      const k = `${u}_${i ? 'month' : 'day'}`;
+      const v = l[who] && typeof l[who][k] === 'number' ? l[who][k] : AI_LIMITS[who][u][i];
+      return u === 'voice' ? +(v / 60).toFixed(1) : v;
+    };
+    const cell = (who, u, i) => `<input type="number" min="0" step="${u === 'voice' ? '0.5' : '1'}" inputmode="decimal" class="ailim" data-who="${who}" data-use="${u}" data-i="${i}" value="${val(who, u, i)}" aria-label="${esc(tr('sw_ail_' + u) + ' · ' + tr('sw_ail_' + who) + ' · ' + tr(i ? 'sw_ail_month' : 'sw_ail_day'))}">`;
+    const rows = AI_LIMITS.uses.map((u) => `<tr>
+        <th scope="row">${esc(tr('sw_ail_' + u))}<div class="small muted">${esc(u === 'voice' ? tr('sw_ail_cost_min', { r: (AI_LIMITS.rupees[u] * 60).toFixed(1) }) : tr('sw_ail_cost', { r: AI_LIMITS.rupees[u] }))}</div></th>
+        <td>${cell('free', u, 0)}</td><td>${cell('free', u, 1)}</td><td>${cell('plus', u, 0)}</td><td>${cell('plus', u, 1)}</td>
+      </tr>`).join('');
+    return `${head(s, tr('sw_ail_d'))}
+      <div class="swblock">
+        <p><span class="pill ${data.ailimits ? 'info' : 'on'}">${data.ailimits ? tr('sw_ail_yours') : tr('sw_ail_own')}</span></p>
+        <div class="tablewrap"><table class="ailtable">
+          <thead><tr><th></th><th colspan="2">${tr('sw_ail_free')}</th><th colspan="2">${tr('sw_ail_plus')}</th></tr>
+          <tr><th></th><th>${tr('sw_ail_day')}</th><th>${tr('sw_ail_month')}</th><th>${tr('sw_ail_day')}</th><th>${tr('sw_ail_month')}</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table></div>
+        <p class="small" id="ail-most">${esc(tr('sw_ail_most', { f: Math.round(aiMonthMost(data.ailimits, 'free')), p: Math.round(aiMonthMost(data.ailimits, 'plus')) }))}</p>
+        <p class="small muted">${tr('sw_ail_note')}</p>
+        <div class="actions"><button class="main" id="ail-save">${tr('sw_ail_save')}</button>${data.ailimits ? `<button class="plain" id="ail-reset">${tr('sw_ail_reset')}</button>` : ''}</div>
+      </div>`;
+  }
+
+  /** The limits typed in the table, as config/app → ai_limits; null if a box is wrong. */
+  function aiLimitsTyped() {
+    const out = { free: {}, plus: {} };
+    for (const box of document.querySelectorAll('.ailim')) {
+      const n = Number(box.value);
+      if (box.value === '' || !Number.isFinite(n) || n < 0) return null;
+      const k = `${box.dataset.use}_${box.dataset.i === '1' ? 'month' : 'day'}`;
+      out[box.dataset.who][k] = box.dataset.use === 'voice' ? Math.round(n * 60) : Math.round(n);
+    }
+    return out;
+  }
+
   function detailHtml() {
     const s = SECTIONS.find((x) => x.id === memo.sel) || SECTIONS[0];
-    const body = s.kind === 'states' ? statesDetail(s) : s.kind === 'notice' ? noticeDetail(s) : s.kind === 'festival' ? festivalDetail(s) : s.kind === 'kendra' ? kendraDetail(s) : s.kind === 'sell' ? sellDetail(s) : featureDetail(s);
+    const body = s.kind === 'ailimits' ? aiLimitsDetail(s) : s.kind === 'states' ? statesDetail(s) : s.kind === 'notice' ? noticeDetail(s) : s.kind === 'festival' ? festivalDetail(s) : s.kind === 'kendra' ? kendraDetail(s) : s.kind === 'sell' ? sellDetail(s) : featureDetail(s);
     return `<section class="card swdetail">${wide() ? '' : `<button class="plain small swback" id="sw-back">${tr('sw_back')}</button>`}${body}</section>`;
   }
 
@@ -855,7 +1053,7 @@ export function createSwitches(c) {
       c.db().kendraCard().catch(() => ({ on: false, secs: 4, slides: [] })),
       loadStatus(false),
     ]);
-    data = { features: cfg.features || {}, launch: cfg.launch_states || [], sell: cfg.sell_districts || {}, notice: cfg.notice || null, festival: cfg.festival || null, kinfo: kinfo || {}, kcard };
+    data = { features: cfg.features || {}, launch: cfg.launch_states || [], sell: cfg.sell_districts || {}, notice: cfg.notice || null, festival: cfg.festival || null, ailimits: cfg.ai_limits || null, kinfo: kinfo || {}, kcard };
   }
 
   function render() {
@@ -1070,6 +1268,28 @@ export function createSwitches(c) {
       if (!confirm(tr('sw_fest_remove_q'))) return;
       fr.disabled = true;
       try { await c.db().setFestival(null); toast(tr('sw_fest_removed')); await refresh(); } catch (e) { fr.disabled = false; fail(e); }
+    };
+
+    // ── AI limits ──
+    document.querySelectorAll('.ailim').forEach((box) => {
+      box.oninput = () => {
+        const typed = aiLimitsTyped();
+        const most = document.getElementById('ail-most');
+        if (typed && most) most.textContent = tr('sw_ail_most', { f: Math.round(aiMonthMost(typed, 'free')), p: Math.round(aiMonthMost(typed, 'plus')) });
+      };
+    });
+    const as = document.getElementById('ail-save');
+    if (as) as.onclick = async () => {
+      const typed = aiLimitsTyped();
+      if (!typed) { toast(tr('sw_ail_bad')); return; }
+      as.disabled = true;
+      try { await c.db().setAiLimits(typed); toast(tr('sw_ail_saved')); await refresh(); } catch (e) { as.disabled = false; fail(e); }
+    };
+    const ar = document.getElementById('ail-reset');
+    if (ar) ar.onclick = async () => {
+      if (!confirm(tr('sw_ail_reset_q'))) return;
+      ar.disabled = true;
+      try { await c.db().setAiLimits(null); toast(tr('sw_ail_reset_done')); await refresh(); } catch (e) { ar.disabled = false; fail(e); }
     };
 
     const more = document.querySelector('.swmore');
