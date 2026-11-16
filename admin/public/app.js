@@ -19,7 +19,7 @@ import { statsPage } from './stats.js';
 import { budgetPage } from './budget.js';
 import { aiTestPage } from './aitest.js';
 
-const ADMIN_VERSION = '1.23 · 16 Nov 2026';
+const ADMIN_VERSION = '1.24 · 16 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

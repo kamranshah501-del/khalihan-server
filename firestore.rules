@@ -117,35 +117,6 @@ service cloud.firestore {
       allow delete: if isOwner();
     }
 
-    // ── Khalihan AI: the free farmers' month, all phones together ────
-    // (app v1.0.9, switch ai_pool; owner, 16 Nov 2026). ai_pool/{yyyy-mm} =
-    // {free, plus}: paise of AI used this month. Phones only add (0 < one
-    // step <= 2000 paise, the two fields only) and read the total; when
-    // free farmers together reach Admin's share (config/app ai_pool_free),
-    // free phones stop till the 1st and Plus goes on. Nobody can lower it;
-    // the owner can delete a month's count.
-    function poolBefore(field) {
-      return resource == null || !(field in resource.data) ? 0 : resource.data[field];
-    }
-    function poolStep(field) {
-      return !(field in request.resource.data)
-        || (request.resource.data[field] is int
-            && request.resource.data[field] - poolBefore(field) >= 0
-            && request.resource.data[field] - poolBefore(field) <= 2000);
-    }
-    match /ai_pool/{month} {
-      allow read: if true;
-      allow create: if month.matches('^20[0-9]{2}-(0[1-9]|1[0-2])$')
-        && request.resource.data.keys().hasOnly(['free', 'plus'])
-        && poolStep('free')
-        && poolStep('plus');
-      allow update: if request.resource.data.keys().hasOnly(['free', 'plus'])
-        && request.resource.data.keys().hasAll(resource.data.keys())
-        && poolStep('free')
-        && poolStep('plus');
-      allow delete: if isOwner();
-    }
-
     // ── "Khalihan ko becho" ────────────────────────────────────────────
     match /sell_requests/{id} {
       // Logged in: the request carries the uid and the OTP-checked number.
