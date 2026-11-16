@@ -143,7 +143,13 @@ export async function connect() {
     async appConfig() {
       const snap = await getDoc(doc(db, 'config', 'app'));
       const data = snap.data() || {};
-      return { features: data.features || {}, launch_states: data.launch_states || [], sell_districts: data.sell_districts || {}, notice: data.notice || null, festival: data.festival || null };
+      return { features: data.features || {}, launch_states: data.launch_states || [], sell_districts: data.sell_districts || {}, notice: data.notice || null, festival: data.festival || null, ai_limits: data.ai_limits || null };
+    },
+    // Khalihan AI's limits per phone (app v1.0.9): {free: {photo_day: 2, …},
+    // plus: {…}}; null = the app's own numbers.
+    async setAiLimits(limits) {
+      await updateDoc(doc(db, 'config', 'app'), { ai_limits: limits || deleteField() });
+      log('ai_limits', limits ? { free: Object.keys(limits.free || {}).length, plus: Object.keys(limits.plus || {}).length } : { removed: true });
     },
     // The notice on the app's Home (app v1.0.4+). The whole map is replaced,
     // so an old notice's words never mix into a new one; null takes it down.

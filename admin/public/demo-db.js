@@ -39,6 +39,7 @@ export async function connect() {
   const sellDistricts = { Maharashtra: ['jalgaon'] };
   let notice = null;
   let festival = null;
+  let aiLimits = null; // Khalihan AI limits per phone (null = the app's own)
   // Free Plus gift codes (Admin 1.16).
   let gifts = [
     { id: 'R7KM4QXP', name: 'Mera phone', note: '', until: null, test: true, device: 'a1b2c3d4e5f6g7h8i9j0', claimed: day(0, 8), app: '1.0.6', at: day(0, 7) },
@@ -226,7 +227,8 @@ export async function connect() {
       log('offers', { version: offers.version });
       return offers;
     },
-    async appConfig() { return { features: { ...features }, launch_states: [...launchStates], sell_districts: JSON.parse(JSON.stringify(sellDistricts)), notice: notice ? JSON.parse(JSON.stringify(notice)) : null, festival: festival ? { ...festival } : null }; },
+    async appConfig() { return { features: { ...features }, launch_states: [...launchStates], sell_districts: JSON.parse(JSON.stringify(sellDistricts)), notice: notice ? JSON.parse(JSON.stringify(notice)) : null, festival: festival ? { ...festival } : null, ai_limits: aiLimits ? JSON.parse(JSON.stringify(aiLimits)) : null }; },
+    async setAiLimits(l) { aiLimits = l ? JSON.parse(JSON.stringify(l)) : null; log('ai_limits', l ? { saved: true } : { removed: true }); },
     async setFestival(f) { festival = f ? { ...f } : null; log('festival', f ? { kind: f.kind } : { removed: true }); },
     async setNotice(n) { notice = n ? JSON.parse(JSON.stringify(n)) : null; log('notice', n ? { kind: n.kind } : { removed: true }); },
     async waitingCounts() { return { _total: 737, 'Madhya Pradesh': 412, Gujarat: 230, 'Uttar Pradesh': 95 }; },

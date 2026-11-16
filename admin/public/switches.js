@@ -92,6 +92,29 @@ export const SWITCH_WORDS = {
     sw_fest_remove_q: 'Take the festival look down from every phone?',
     sw_fest_saved: 'Festival look saved — open phones show it within seconds',
     sw_fest_removed: 'Festival look taken down',
+    sw_ail: 'AI limits (per phone)',
+    sw_ail_d: 'How much Khalihan AI one phone may use, per day and per month — a share for every farmer, a bigger one for Plus members. The app\'s own numbers hold until you save yours; a change reaches phones within seconds. The test phone has no limit. Prices: Google\'s bill, 16 Nov 2026.',
+    sw_ail_ask: 'Questions the phone could not read (AI reads them)',
+    sw_ail_open: '"Ask anything" answers (Plus)',
+    sw_ail_deep: 'Google searches (Plus)',
+    sw_ail_photo: 'Photo reads — bill, soil card, paper, sick leaf',
+    sw_ail_voice: 'Kaptan\'s voice — minutes of new speech (Plus)',
+    sw_ail_free: 'Every farmer',
+    sw_ail_plus: 'Plus member',
+    sw_ail_day: 'a day',
+    sw_ail_month: 'a month',
+    sw_ail_cost: '≈ ₹{r} each',
+    sw_ail_cost_min: '≈ ₹{r} a minute',
+    sw_ail_most: 'Most one phone can cost in a month: every farmer ≈ ₹{f} · Plus ≈ ₹{p}. Most phones use far less (≈ ₹3 and ≈ ₹30).',
+    sw_ail_own: 'The app\'s own numbers',
+    sw_ail_yours: 'Your numbers',
+    sw_ail_save: 'Save the limits',
+    sw_ail_saved: 'AI limits saved — phones follow within seconds',
+    sw_ail_reset: 'Back to the app\'s numbers',
+    sw_ail_reset_q: 'Go back to the app\'s own AI limits?',
+    sw_ail_reset_done: 'Back to the app\'s own numbers',
+    sw_ail_bad: 'Numbers only — 0 or more',
+    sw_ail_note: 'Deep search: the first 5,000 searches a month (whole app) are free, then ≈ ₹1.3 more each. Spoken lines said before cost nothing.',
     sw_fest_bad: 'Check the dates: "Until" must be on or after "From".',
     sw_fest_more: 'More festivals (Bail Pola, Gudi Padwa, Eid, Holi…) come with app updates.',
     sw_state_confirm: 'Open {s}? The app has only its prices so far — no mandi distances, district map or state schemes yet. Farmers there will see prices, weather and the calendar.',
@@ -263,6 +286,29 @@ export const SWITCH_WORDS = {
     sw_fest_remove_q: 'सभी फ़ोन से सजावट हटाएँ?',
     sw_fest_saved: 'सजावट लग गई — खुले फ़ोन पर कुछ सेकंड में दिखेगी',
     sw_fest_removed: 'सजावट हटा दी',
+    sw_ail: 'AI की हद (हर फ़ोन)',
+    sw_ail_d: 'एक फ़ोन Khalihan AI कितना इस्तेमाल कर सकता है, रोज़ और महीने में — हर किसान का हिस्सा, और Plus सदस्यों का बड़ा। आपके नंबर रखने तक ऐप के अपने नंबर चलते हैं; बदलाव सेकंडों में फ़ोनों तक पहुँचता है। टेस्ट फ़ोन पर कोई हद नहीं। दाम: Google का बिल, 16 नवंबर 2026।',
+    sw_ail_ask: 'सवाल जो फ़ोन नहीं समझा (AI समझता है)',
+    sw_ail_open: '"कुछ भी पूछें" के जवाब (Plus)',
+    sw_ail_deep: 'Google खोज (Plus)',
+    sw_ail_photo: 'फ़ोटो पढ़ना — बिल, मिट्टी कार्ड, कागज़, बीमार पत्ता',
+    sw_ail_voice: 'Kaptan की आवाज़ — नई बोली के मिनट (Plus)',
+    sw_ail_free: 'हर किसान',
+    sw_ail_plus: 'Plus सदस्य',
+    sw_ail_day: 'रोज़',
+    sw_ail_month: 'महीना',
+    sw_ail_cost: '≈ ₹{r} एक बार',
+    sw_ail_cost_min: '≈ ₹{r} एक मिनट',
+    sw_ail_most: 'एक फ़ोन महीने में ज़्यादा से ज़्यादा: हर किसान ≈ ₹{f} · Plus ≈ ₹{p}। ज़्यादातर फ़ोन बहुत कम (≈ ₹3 और ≈ ₹30)।',
+    sw_ail_own: 'ऐप के अपने नंबर',
+    sw_ail_yours: 'आपके नंबर',
+    sw_ail_save: 'हद रखें',
+    sw_ail_saved: 'AI की हद रखी — फ़ोन सेकंडों में मानेंगे',
+    sw_ail_reset: 'ऐप के नंबर पर वापस',
+    sw_ail_reset_q: 'ऐप की अपनी AI हद पर वापस जाएँ?',
+    sw_ail_reset_done: 'ऐप के अपने नंबर पर वापस',
+    sw_ail_bad: 'सिर्फ़ नंबर — 0 या ज़्यादा',
+    sw_ail_note: 'Google खोज: पूरे ऐप की महीने की पहली 5,000 खोज मुफ़्त, फिर हर एक ≈ ₹1.3 और। पहले बोली गई लाइनें मुफ़्त।',
     sw_fest_bad: 'तारीख़ देखें: "कब तक" "कब से" के बाद होनी चाहिए।',
     sw_fest_more: 'और त्योहार (बैल पोळा, गुढी पाडवा, ईद, होली…) ऐप अपडेट के साथ आएँगे।',
     sw_app_basic: 'ऐप: सिर्फ़ भाव',
@@ -432,6 +478,26 @@ export const FEATURE_INFO = {
   ai_deep: { def: false, since: '1.0.9' },
 };
 
+/** Khalihan AI's limits per phone — the app's own numbers (lib/ai/ai_quota.dart,
+ *  keep the same) and what one use costs (₹, Google's bill, 16 Nov 2026).
+ *  Voice is in seconds in the app; shown here in minutes. */
+export const AI_LIMITS = {
+  uses: ['ask', 'open', 'deep', 'photo', 'voice'],
+  free: { ask: [10, 150], open: [0, 0], deep: [0, 0], photo: [2, 20], voice: [0, 0] },
+  plus: { ask: [30, 600], open: [15, 250], deep: [3, 40], photo: [6, 60], voice: [180, 2700] },
+  rupees: { ask: 0.05, open: 0.14, deep: 0.16, photo: 1.1, voice: 1.7 / 60 },
+};
+
+/** The most one phone can cost in a month, in ₹, for a limits map ({free, plus} → {use_month}). */
+export function aiMonthMost(limits, who) {
+  let sum = 0;
+  for (const u of AI_LIMITS.uses) {
+    const mine = (limits && limits[who] && typeof limits[who][u + '_month'] === 'number') ? limits[who][u + '_month'] : AI_LIMITS[who][u][1];
+    sum += mine * AI_LIMITS.rupees[u];
+  }
+  return sum;
+}
+
 /** The sections, in order. `kind` picks a special settings panel. */
 const SECTIONS = [
   { id: 'states', icon: '📍', kind: 'states' },
@@ -451,6 +517,7 @@ const SECTIONS = [
   { id: 'rate', icon: '⭐', master: 'rate_prompt', kids: [] },
   { id: 'guide', icon: '🧭', master: 'setup_guide', kids: [] },
   { id: 'whatsnew', icon: '✨', master: 'whats_new', kids: [] },
+  { id: 'ailimits', icon: '🧮', kind: 'ailimits' },
   { id: 'ai', icon: '🤖', master: 'ai', kids: ['ai_ask', 'ai_k', 'ai_seva', 'ai_yaad', 'ai_hisaab', 'ai_bill', 'ai_soil', 'ai_paper', 'ai_kvk', 'ai_pest', 'ai_dawai', 'ai_gov', 'ai_docs', 'ai_open', 'ai_deep', 'ai_chats', 'ai_applied', 'ai_mydocs', 'ai_account', 'ai_suno', 'ai_voice', 'ai_sound', 'ai_voice_cloud', 'ai_cloud', 'ai_vertex'] },
 ];
 
@@ -571,6 +638,7 @@ export function createSwitches(c) {
     if (s.kind === 'states') return tr('sw_states');
     if (s.kind === 'notice') return tr('sw_notice');
     if (s.kind === 'festival') return tr('sw_fest');
+    if (s.kind === 'ailimits') return tr('sw_ail');
     return s.master ? tr('f_' + s.master) : tr('sw_prices');
   }
 
@@ -582,6 +650,9 @@ export function createSwitches(c) {
     return n.from > today ? 'sched' : 'live';
   }
   function summary(s) {
+    if (s.kind === 'ailimits') {
+      return esc(`${data.ailimits ? tr('sw_ail_yours') : tr('sw_ail_own')} · ≤ ₹${Math.round(aiMonthMost(data.ailimits, 'free'))} / ₹${Math.round(aiMonthMost(data.ailimits, 'plus'))}`);
+    }
     if (s.kind === 'festival') {
       const f = data.festival;
       const st = noticeState(f);
@@ -629,6 +700,7 @@ export function createSwitches(c) {
       if (st === 'sched') return `<span class="pill info">${esc(tr('sw_notice_sched', { d: noticeDays(data.notice.from) }))}</span>`;
       return `<span class="pill off">${tr('sw_off')}</span>`;
     }
+    if (s.kind === 'ailimits') return `<span class="pill ${data.ailimits ? 'info' : 'on'}">${data.ailimits ? tr('sw_ail_yours') : tr('sw_ail_own')}</span>`;
     if (!s.master) return `<span class="pill on">${tr('sw_always')}</span>`;
     const on = featOn(s.master) && (s.id !== 'kendra' || featOn('services'));
     const warn = on && ((s.kind === 'kendra' && !kendraDistricts().length && !Number(data.kinfo.km))
@@ -652,7 +724,7 @@ export function createSwitches(c) {
     return `<div class="swdh">
       <span class="swicon big" aria-hidden="true">${s.icon}</span>
       <div class="grow"><h2>${esc(sectionTitle(s))} ${s.master ? sinceChip(s.master) : ''}</h2><p class="sub">${esc(desc)}</p></div>
-      ${s.kind === 'states' || s.kind === 'notice' || s.kind === 'festival' ? '' : master}
+      ${s.kind === 'states' || s.kind === 'notice' || s.kind === 'festival' || s.kind === 'ailimits' ? '' : master}
     </div>`;
   }
 
@@ -900,9 +972,47 @@ export function createSwitches(c) {
       </div>`;
   }
 
+  function aiLimitsDetail(s) {
+    const l = data.ailimits || {};
+    const val = (who, u, i) => {
+      const k = `${u}_${i ? 'month' : 'day'}`;
+      const v = l[who] && typeof l[who][k] === 'number' ? l[who][k] : AI_LIMITS[who][u][i];
+      return u === 'voice' ? +(v / 60).toFixed(1) : v;
+    };
+    const cell = (who, u, i) => `<input type="number" min="0" step="${u === 'voice' ? '0.5' : '1'}" inputmode="decimal" class="ailim" data-who="${who}" data-use="${u}" data-i="${i}" value="${val(who, u, i)}" aria-label="${esc(tr('sw_ail_' + u) + ' · ' + tr('sw_ail_' + who) + ' · ' + tr(i ? 'sw_ail_month' : 'sw_ail_day'))}">`;
+    const rows = AI_LIMITS.uses.map((u) => `<tr>
+        <th scope="row">${esc(tr('sw_ail_' + u))}<div class="small muted">${esc(u === 'voice' ? tr('sw_ail_cost_min', { r: (AI_LIMITS.rupees[u] * 60).toFixed(1) }) : tr('sw_ail_cost', { r: AI_LIMITS.rupees[u] }))}</div></th>
+        <td>${cell('free', u, 0)}</td><td>${cell('free', u, 1)}</td><td>${cell('plus', u, 0)}</td><td>${cell('plus', u, 1)}</td>
+      </tr>`).join('');
+    return `${head(s, tr('sw_ail_d'))}
+      <div class="swblock">
+        <p><span class="pill ${data.ailimits ? 'info' : 'on'}">${data.ailimits ? tr('sw_ail_yours') : tr('sw_ail_own')}</span></p>
+        <div class="tablewrap"><table class="ailtable">
+          <thead><tr><th></th><th colspan="2">${tr('sw_ail_free')}</th><th colspan="2">${tr('sw_ail_plus')}</th></tr>
+          <tr><th></th><th>${tr('sw_ail_day')}</th><th>${tr('sw_ail_month')}</th><th>${tr('sw_ail_day')}</th><th>${tr('sw_ail_month')}</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table></div>
+        <p class="small" id="ail-most">${esc(tr('sw_ail_most', { f: Math.round(aiMonthMost(data.ailimits, 'free')), p: Math.round(aiMonthMost(data.ailimits, 'plus')) }))}</p>
+        <p class="small muted">${tr('sw_ail_note')}</p>
+        <div class="actions"><button class="main" id="ail-save">${tr('sw_ail_save')}</button>${data.ailimits ? `<button class="plain" id="ail-reset">${tr('sw_ail_reset')}</button>` : ''}</div>
+      </div>`;
+  }
+
+  /** The limits typed in the table, as config/app → ai_limits; null if a box is wrong. */
+  function aiLimitsTyped() {
+    const out = { free: {}, plus: {} };
+    for (const box of document.querySelectorAll('.ailim')) {
+      const n = Number(box.value);
+      if (box.value === '' || !Number.isFinite(n) || n < 0) return null;
+      const k = `${box.dataset.use}_${box.dataset.i === '1' ? 'month' : 'day'}`;
+      out[box.dataset.who][k] = box.dataset.use === 'voice' ? Math.round(n * 60) : Math.round(n);
+    }
+    return out;
+  }
+
   function detailHtml() {
     const s = SECTIONS.find((x) => x.id === memo.sel) || SECTIONS[0];
-    const body = s.kind === 'states' ? statesDetail(s) : s.kind === 'notice' ? noticeDetail(s) : s.kind === 'festival' ? festivalDetail(s) : s.kind === 'kendra' ? kendraDetail(s) : s.kind === 'sell' ? sellDetail(s) : featureDetail(s);
+    const body = s.kind === 'ailimits' ? aiLimitsDetail(s) : s.kind === 'states' ? statesDetail(s) : s.kind === 'notice' ? noticeDetail(s) : s.kind === 'festival' ? festivalDetail(s) : s.kind === 'kendra' ? kendraDetail(s) : s.kind === 'sell' ? sellDetail(s) : featureDetail(s);
     return `<section class="card swdetail">${wide() ? '' : `<button class="plain small swback" id="sw-back">${tr('sw_back')}</button>`}${body}</section>`;
   }
 
@@ -943,7 +1053,7 @@ export function createSwitches(c) {
       c.db().kendraCard().catch(() => ({ on: false, secs: 4, slides: [] })),
       loadStatus(false),
     ]);
-    data = { features: cfg.features || {}, launch: cfg.launch_states || [], sell: cfg.sell_districts || {}, notice: cfg.notice || null, festival: cfg.festival || null, kinfo: kinfo || {}, kcard };
+    data = { features: cfg.features || {}, launch: cfg.launch_states || [], sell: cfg.sell_districts || {}, notice: cfg.notice || null, festival: cfg.festival || null, ailimits: cfg.ai_limits || null, kinfo: kinfo || {}, kcard };
   }
 
   function render() {
@@ -1158,6 +1268,28 @@ export function createSwitches(c) {
       if (!confirm(tr('sw_fest_remove_q'))) return;
       fr.disabled = true;
       try { await c.db().setFestival(null); toast(tr('sw_fest_removed')); await refresh(); } catch (e) { fr.disabled = false; fail(e); }
+    };
+
+    // ── AI limits ──
+    document.querySelectorAll('.ailim').forEach((box) => {
+      box.oninput = () => {
+        const typed = aiLimitsTyped();
+        const most = document.getElementById('ail-most');
+        if (typed && most) most.textContent = tr('sw_ail_most', { f: Math.round(aiMonthMost(typed, 'free')), p: Math.round(aiMonthMost(typed, 'plus')) });
+      };
+    });
+    const as = document.getElementById('ail-save');
+    if (as) as.onclick = async () => {
+      const typed = aiLimitsTyped();
+      if (!typed) { toast(tr('sw_ail_bad')); return; }
+      as.disabled = true;
+      try { await c.db().setAiLimits(typed); toast(tr('sw_ail_saved')); await refresh(); } catch (e) { as.disabled = false; fail(e); }
+    };
+    const ar = document.getElementById('ail-reset');
+    if (ar) ar.onclick = async () => {
+      if (!confirm(tr('sw_ail_reset_q'))) return;
+      ar.disabled = true;
+      try { await c.db().setAiLimits(null); toast(tr('sw_ail_reset_done')); await refresh(); } catch (e) { ar.disabled = false; fail(e); }
     };
 
     const more = document.querySelector('.swmore');

@@ -535,3 +535,12 @@ button.plain.small, button.danger.small { padding: 4px 10px; font-size: 13px; }
   .sk, .livebadge i { animation: none; }
   .kpi, .btn, .sidenav { transition: none; }
 }
+
+/* AI limits table (Switches → AI limits) */
+.ailtable { width: 100%; border-collapse: collapse; }
+.ailtable th, .ailtable td { padding: 6px 6px; text-align: left; vertical-align: middle; }
+.ailtable thead th { font-size: 12px; color: var(--muted, #667); font-weight: 700; }
+.ailtable tbody tr + tr th, .ailtable tbody tr + tr td { border-top: 1px solid var(--line, #e3e6ea); }
+.ailtable tbody th { font-weight: 600; min-width: 180px; }
+.ailtable input.ailim { width: 72px; padding: 6px 8px; font-size: 15px; }
+.tablewrap { overflow-x: auto; }
