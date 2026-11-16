@@ -21,6 +21,14 @@ It runs as the service account `budget-stop@<project>` with only
 
 ## Deploy (Cloud Shell, project owner)
 
+One line (`budget/deploy.sh`, safe to run again; ends with a test message):
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/kamranshah501-del/khalihan-server/main/budget/deploy.sh)
+```
+
+The same, step by step:
+
 ```bash
 P=<project id>
 gcloud config set project $P
