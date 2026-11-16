@@ -19,7 +19,7 @@ import { statsPage } from './stats.js';
 import { budgetPage } from './budget.js';
 import { aiTestPage } from './aitest.js';
 
-const ADMIN_VERSION = '1.25 · 16 Nov 2026';
+const ADMIN_VERSION = '1.26 · 16 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -57,7 +57,7 @@ const I18N = {
     tab_stats: 'App numbers',
     tab_budget: 'Budget & targets',
     tab_aitest: 'AI test',
-    tab_plus: 'Khalihan Plus',
+    tab_plus: 'Khalihan Pro',
     tab_team: 'Team',
     tab_audit: 'Change log',
     tab_settings: 'Settings',
@@ -365,7 +365,7 @@ const I18N = {
     tab_stats: 'आँकड़े',
     tab_budget: 'बजट और लक्ष्य',
     tab_aitest: 'AI की जाँच',
-    tab_plus: 'Khalihan Plus',
+    tab_plus: 'Khalihan Pro',
     tab_team: 'टीम',
     tab_audit: 'रिकॉर्ड',
     tab_settings: 'सेटिंग्स',
