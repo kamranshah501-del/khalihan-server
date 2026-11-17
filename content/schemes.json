@@ -1,5 +1,5 @@
 {
- "version": 7,
+ "version": 8,
  "note": "Copied from khalihan-app lib/data/schemes_content.dart (tool/schemes_content.py). The app takes this list when version is higher than its own.",
  "schemes": [
   {
@@ -11,8 +11,8 @@
    ],
    "priority": 1,
    "apply": "https://mhfr.agristack.gov.in/farmer-registry-mh/",
-   "info": "https://mhfr.agristack.gov.in/farmer-registry-mh/",
-   "source": "AgriStack · Govt of Maharashtra",
+   "info": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2244626",
+   "source": "AgriStack · Govt of Maharashtra · PIB, Govt of India",
    "t": {
     "en": {
      "title": "Farmer ID (AgriStack)",
@@ -78,8 +78,8 @@
    "states": [],
    "priority": 2,
    "apply": "https://pmkisan.gov.in/",
-   "info": "https://pmkisan.gov.in/",
-   "source": "PM-KISAN · Govt of India",
+   "info": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2292437",
+   "source": "PM-KISAN · PIB, Govt of India",
    "t": {
     "en": {
      "title": "PM-KISAN",
@@ -153,8 +153,8 @@
    ],
    "priority": 3,
    "apply": null,
-   "info": "https://nsmny.mahait.org/",
-   "source": "Namo Shetkari · Govt of Maharashtra",
+   "info": "https://krishi.maharashtra.gov.in/",
+   "source": "Namo Shetkari · Agriculture Department, Govt of Maharashtra",
    "t": {
     "en": {
      "title": "Namo Shetkari Mahasanman Nidhi",
@@ -222,8 +222,8 @@
     12
    ],
    "apply": "https://pmfby.gov.in/",
-   "info": "https://pmfby.gov.in/",
-   "source": "PMFBY · Govt of India",
+   "info": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2237736",
+   "source": "PMFBY · PIB, Govt of India",
    "t": {
     "en": {
      "title": "Crop insurance (PMFBY)",
@@ -292,8 +292,8 @@
    "states": [],
    "priority": 3,
    "apply": null,
-   "info": "https://pmkisan.gov.in/",
-   "source": "Kisan Credit Card · Govt of India",
+   "info": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2238004",
+   "source": "Kisan Credit Card · PIB, Govt of India",
    "t": {
     "en": {
      "title": "Kisan Credit Card (KCC)",
@@ -585,8 +585,8 @@
    ],
    "priority": 5,
    "apply": "https://mahadbt.maharashtra.gov.in/",
-   "info": "https://www.myscheme.gov.in/schemes/gopinath-munde-shetkari-apghat-suraksha-sanugrah-audhan-yojana",
-   "source": "Govt of Maharashtra · myScheme",
+   "info": "https://krishi.maharashtra.gov.in/",
+   "source": "Agriculture Department · Govt of Maharashtra",
    "t": {
     "en": {
      "title": "Farmer accident cover (Gopinath Munde)",
@@ -658,8 +658,8 @@
    "states": [],
    "priority": 6,
    "apply": "https://maandhan.in/",
-   "info": "https://maandhan.in/",
-   "source": "PM Kisan Maandhan · Govt of India",
+   "info": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2309204",
+   "source": "PM Kisan Maandhan · PIB, Govt of India",
    "t": {
     "en": {
      "title": "Farmer pension (PM Kisan Maandhan)",
@@ -729,8 +729,8 @@
    "priority": 5,
    "cropsAny": true,
    "apply": null,
-   "info": "https://soilhealth.dac.gov.in/",
-   "source": "Soil Health Card · Govt of India",
+   "info": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2113718",
+   "source": "Soil Health Card · PIB, Govt of India",
    "t": {
     "en": {
      "title": "Soil Health Card",
@@ -806,8 +806,8 @@
     3
    ],
    "apply": null,
-   "info": "https://cotcorp.org.in/",
-   "source": "Cotton Corporation of India (CCI), cotcorp.org.in · reports of Sep 2026",
+   "info": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2245994",
+   "source": "Cotton Corporation of India (CCI) · PIB, Govt of India · reports of Sep 2026",
    "checked": "2026-11-10",
    "t": {
     "en": {
@@ -1274,8 +1274,8 @@
    "cropsAny": true,
    "checked": "2026-10-21",
    "apply": null,
-   "info": "https://pmfby.gov.in/",
-   "source": "PMFBY, pmfby.gov.in · Govt of India (Lok Sabha answer of 21 Dec 2021; wild-animal cover from kharif 2026)",
+   "info": "https://www.pib.gov.in/PressReleasePage.aspx?PRID=2237736",
+   "source": "PMFBY · PIB, Govt of India (Lok Sabha answer of 21 Dec 2021; wild-animal cover from kharif 2026)",
    "t": {
     "en": {
      "title": "Crop loss? Report within 72 hours",
@@ -1365,8 +1365,8 @@
    ],
    "checked": "2026-11-10",
    "apply": null,
-   "info": "https://bhulekh.mahabhumi.gov.in/",
-   "source": "e-Pik Pahani (DCS MH), Maharashtra land records — bhulekh.mahabhumi.gov.in · Govt of Maharashtra · reports of Sep–Oct 2026",
+   "info": "https://mahabhumi.gov.in/",
+   "source": "e-Pik Pahani (DCS MH), Maharashtra land records — mahabhumi.gov.in · Govt of Maharashtra · reports of Sep–Oct 2026",
    "t": {
     "en": {
      "title": "e-Pik Pahani (crop record on your 7/12)",
