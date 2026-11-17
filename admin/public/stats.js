@@ -33,6 +33,12 @@ const T = {
     k_new: 'New people (28 days)',
     k_new_in: 'New people in India (28 days)',
     k_new_sub: '{n} came back again',
+    goal_h: 'Launch target: 1,000 new farmers in India',
+    goal_d: 'Counted from 7 Nov 2026, when the ads began: people in India who opened the app for the first time (Google Analytics). At 1,000, Khalihan AI and Khalihan Pro go on (your yes).',
+    goal_n: '{n} of 1,000 · {left} to go',
+    goal_pace: 'Last 7 days: {p} a day → about {d} more days (around {date})',
+    goal_done: 'Reached — time to launch (your yes).',
+    goal_wait: 'Comes with the next update of the numbers.',
     k_wait_play: 'Waiting for Google Play',
     today: 'Today so far: {n}',
     daily_h: 'People using the app each day',
@@ -126,6 +132,12 @@ const T = {
     k_new: 'नए लोग (28 दिन)',
     k_new_in: 'भारत में नए लोग (28 दिन)',
     k_new_sub: '{n} लोग दोबारा आए',
+    goal_h: 'लॉन्च का लक्ष्य: भारत में 1,000 नए किसान',
+    goal_d: '7 Nov 2026 से गिनती, जब ऐड शुरू हुए: भारत के वो लोग जिन्होंने ऐप पहली बार खोला (Google Analytics)। 1,000 पर Khalihan AI और Khalihan Pro चालू (आपकी हाँ से)।',
+    goal_n: '1,000 में से {n} · {left} बाकी',
+    goal_pace: 'पिछले 7 दिन: रोज़ {p} → लगभग {d} दिन और ({date} के आसपास)',
+    goal_done: 'पूरा हुआ — लॉन्च का समय (आपकी हाँ से)।',
+    goal_wait: 'नंबरों के अगले अपडेट के साथ आएगा।',
     k_wait_play: 'Google Play से आना बाकी',
     today: 'आज अब तक: {n}',
     daily_h: 'रोज़ कितने लोगों ने ऐप चलाया',
@@ -523,6 +535,34 @@ export async function statsPage(deps) {
       ${kpi(t(hasIn ? 'k_new_in' : 'k_new'), n(neu), gaHas ? esc(t('k_new_sub', { n: n(back) })) : '', 'up')}
     </section>`;
 
+  // ── launch target (owner, 17 Nov 2026: "1000 installs aa gaye to launch") ──
+  const GOAL = 1000;
+  const got = gaHas && ga.inn_launch != null ? ga.inn_launch : null;
+  let goalBody;
+  if (got == null) {
+    goalBody = `<p class="muted small" style="margin:0">${esc(t('goal_wait'))}</p>`;
+  } else {
+    const left = Math.max(0, GOAL - got);
+    const pace = ga.inn7 != null ? ga.inn7 / 7 : 0;
+    let paceLine = '';
+    if (left && pace > 0) {
+      const days = Math.ceil(left / pace);
+      const when = new Date(Date.now() + days * 864e5);
+      const date = when.toLocaleDateString(L ? 'hi-IN' : 'en-GB', { weekday: 'short', day: 'numeric', month: 'short' });
+      paceLine = esc(t('goal_pace', { p: n(Math.round(pace)), d: n(days), date }));
+    }
+    goalBody = `
+      <div class="pipe-track" style="height:14px;border-radius:7px;margin:6px 0 8px"><span class="pipe-bar" style="display:block;height:100%;border-radius:7px;width:${Math.min(100, (got / GOAL) * 100)}%;background:${left ? '#20405E' : '#2E7D32'}"></span></div>
+      <div style="font-weight:800">${esc(t('goal_n', { n: n(got), left: n(left) }))}</div>
+      <div class="muted small" style="margin-top:4px">${left ? paceLine : esc(t('goal_done'))}</div>`;
+  }
+  const goalCard = `
+    <section class="card">
+      <div class="ch"><h2>🚀 ${esc(t('goal_h'))}</h2></div>
+      <p class="muted small" style="margin:0 0 6px">${esc(t('goal_d'))}</p>
+      ${goalBody}
+    </section>`;
+
   // ── bar lists ──
   const bars = (rows, opts = {}) => {
     if (!rows || !rows.length) return `<p class="muted small">${esc(opts.empty || t('none'))}</p>`;
@@ -695,6 +735,7 @@ export async function statsPage(deps) {
     <p class="muted small" style="margin:-4px 0 12px">${stamp}<br>${esc(t('play_late'))}</p>
     ${setupCard}
     ${tiles}
+    ${goalCard}
     <div class="dash" style="align-items:start">
       ${dailyCard}
       ${dlCard}

@@ -45,6 +45,7 @@ DEFAULTS = {
     "ai_dawai": False,  # v1.0.9 H8.3 "kya daalu" from the checked table
     "ai_gov": False,  # v1.0.9 H9 a government site inside the app, filled together (on the phone)
     "ai_sound": False,  # v1.0.9 Khalihan AI's own two sounds; the phone's listening beep silenced
+    "ai_interrupt": True,  # v1.0.9 talking over the AI stops it (loudness only, on the phone)
     "crop_photos": False,  # v1.0.9 real crop photos (all 106 since 15 Nov 2026)
     "price_border": False,  # v1.0.9 the crop picture's border follows the price (green up, red down)
     "pro_sale": False,  # v1.0.9 Khalihan Pro on sale in the app (owner, 17 Nov 2026: on at 1,000 installs)
@@ -61,7 +62,7 @@ PARENT = {
     "widget_weather": "weather", "farm_weather": "weather", "where_sell": "sell_menu", "price_map": "sell_menu",
     "hold_sell": "sell_menu", "sell_interest": "sell_menu", "ai_ask": "ai", "ai_cloud": "ai",
     "ai_seva": "ai", "ai_yaad": "ai", "ai_voice": "ai", "ai_hisaab": "ai", "ai_bill": "ai", "ai_soil": "ai", "ai_paper": "ai", "ai_kvk": "ai", "ai_suno": "ai", "ai_voice_cloud": "ai",
-    "ai_pest": "ai", "ai_dawai": "ai", "ai_gov": "ai", "ai_sound": "ai", "ai_docs": "ai",
+    "ai_pest": "ai", "ai_dawai": "ai", "ai_gov": "ai", "ai_sound": "ai", "ai_interrupt": "ai", "ai_docs": "ai",
     "ai_open": "ai", "ai_chats": "ai", "ai_applied": "ai", "ai_mydocs": "ai", "ai_account": "ai", "ai_deep": "ai",
 }
 # The launch plan (owner, 1 Nov 2026). Anything not listed: either is fine.

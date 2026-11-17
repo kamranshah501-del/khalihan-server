@@ -155,7 +155,7 @@ export async function connect() {
     : {
       at: new Date(Date.now() - 2 * 3600e3),
       ga: {
-        ok: true, through: ymd(day(1)), a1: 14, a7: 31, a28: 52, n1: 3, n7: 17, n28: 41, today: 6, in1: 9, in7: 22, in28: 31, inn28: 27,
+        ok: true, through: ymd(day(1)), a1: 14, a7: 31, a28: 52, n1: 3, n7: 17, n28: 41, today: 6, in1: 9, in7: 22, in28: 31, inn28: 27, inn7: 21, inn_launch: 312, launch_from: "2026-11-07",
         daily: series(30, (b) => ({ d: ymd(day(b)), a: Math.max(2, Math.round(4 + (30 - b) * 0.45 + ((b * 7) % 5))), n: Math.max(0, Math.round((30 - b) / 6 + ((b * 3) % 3) - 1)) })),
         events: [
           { k: '(not set)', c: 0, u: 39 }, { k: 'language_chosen', c: 47, u: 24 }, { k: 'district_chosen', c: 44, u: 19 }, { k: 'theme_chosen', c: 14, u: 9 }, { k: 'session_start', c: 412, u: 52 }, { k: 'screen_view', c: 1630, u: 52 }, { k: 'user_engagement', c: 980, u: 52 },

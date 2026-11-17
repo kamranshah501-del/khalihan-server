@@ -36,6 +36,7 @@ import sys
 from urllib.parse import quote
 
 PACKAGE = "in.khalihan.app"
+LAUNCH_FROM = "2026-11-07"  # the ads began; the 1,000 farmers are counted from here
 DAYS = 60  # how many days the daily charts keep
 
 # What the app records (lib/services/insights.dart) that needs a named
@@ -53,6 +54,19 @@ CUSTOM_DIMENSIONS = {
     "result": ("EVENT", "Guide result", "Setup guide result: done, denied, skipped, settings, retry, gps, manual (app)"),
     "loc": ("USER", "Location allowed", "Phone location for Khalihan: on, off, denied, denied_forever (app)"),
     "notif": ("USER", "Notifications allowed", "Notifications for Khalihan: on, off (app)"),
+    # v1.0.9, for Rakhwala (17 Nov 2026) — created ahead, since Analytics
+    # never counts backwards. Kinds and reasons only, never a value.
+    "site": ("EVENT", "Gov site", "Government site or form id: pmkisan, pmfby, mahadbt… (app)"),
+    "secs": ("EVENT", "Seconds taken", "How long it took: 0-2, 2-5, 5-10, 10-20, 20-60, 60+ (app)"),
+    "mins": ("EVENT", "Minutes on page", "Minutes on a government site: 0-1, 1-3, 3-10, 10-30, 30+ (app)"),
+    "why": ("EVENT", "Why", "Why it failed: refused, down, none, big, kind, no_option… (app)"),
+    "stuck": ("EVENT", "Form stuck at", "Box kinds the site would not take, as kind:reason (app)"),
+    "made": ("EVENT", "Paper made", "A paper for a site: as_is, jpg, pdf, page (app)"),
+    "ok": ("EVENT", "OK", "yes / no (app)"),
+    "up": ("EVENT", "Papers", "Papers to upload or given on a form (app)"),
+    "kind": ("EVENT", "Answer kind", "Kind of Khalihan AI answer (app)"),
+    "cloud": ("EVENT", "Cloud", "Did Gemini help: yes / no (app)"),
+    "via": ("EVENT", "Asked by", "voice / typed / tile (app)"),
 }
 
 BLANK = ("", "(not set)", "(other)")
@@ -349,6 +363,9 @@ def analytics(s):
         return rows[0] if rows else {"activeUsers": 0, "newUsers": 0}
 
     i1, i7, i28 = india("yesterday", "yesterday"), india("7daysAgo", "yesterday"), india("28daysAgo", "yesterday")
+    # The launch target (owner, 17 Nov 2026): 1,000 new farmers in India,
+    # counted from 7 Nov, when the ads began.
+    since_ads = india(LAUNCH_FROM, "today")
     daily = ga_report(s, prop, ["date"], ["activeUsers", "newUsers"], start=f"{DAYS}daysAgo", end="today", limit=DAYS + 2)
     daily = sorted(
         ({"d": f"{x['date'][:4]}-{x['date'][4:6]}-{x['date'][6:]}", "a": x["activeUsers"], "n": x["newUsers"]} for x in daily),
@@ -393,6 +410,7 @@ def analytics(s):
         "n1": a1["newUsers"], "n7": a7["newUsers"], "n28": a28["newUsers"],
         "today": today["activeUsers"],
         "in1": i1["activeUsers"], "in7": i7["activeUsers"], "in28": i28["activeUsers"], "inn28": i28["newUsers"],
+        "inn7": i7["newUsers"], "inn_launch": since_ads["newUsers"], "launch_from": LAUNCH_FROM,
         "daily": daily[-DAYS:],
         "events": [{"k": e["eventName"], "c": e["eventCount"], "u": e["totalUsers"]}
                    for e in events if e["eventName"] not in BLANK and e["eventCount"]],
