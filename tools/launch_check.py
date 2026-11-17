@@ -47,6 +47,7 @@ DEFAULTS = {
     "ai_sound": False,  # v1.0.9 Khalihan AI's own two sounds; the phone's listening beep silenced
     "crop_photos": False,  # v1.0.9 real crop photos (all 106 since 15 Nov 2026)
     "price_border": False,  # v1.0.9 the crop picture's border follows the price (green up, red down)
+    "pro_sale": False,  # v1.0.9 Khalihan Pro on sale in the app (owner, 17 Nov 2026: on at 1,000 installs)
     "ai_docs": False,  # v1.0.9 "Get documents": official pages of papers inside the app (needs ai_gov)
     "ai_open": False,  # v1.0.9 Step 2 "ask anything": Gemini answers questions outside the app (Plus; costs per question)
     "ai_chats": False,  # v1.0.9 Step 2 "My chats": questions and photo readings kept on the phone
@@ -71,6 +72,7 @@ PLAN = {
     "sell_interest": False,  # "kitna bechna hai?" promises a call back
     "update_prompt": True,  # the in-app update reminder
     "target": True,  # stays hidden anyway until Plus (gift codes open it)
+    "pro_sale": False,  # owner, 17 Nov 2026: Pro is sold from 1,000 installs
     "weather": True, "alerts": True, "calendar": True, "schemes": True, "services": True,
     "where_sell": True, "sell_menu": True, "feedback": True,
 }
