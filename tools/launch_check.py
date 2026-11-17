@@ -31,7 +31,6 @@ DEFAULTS = {
     "ai_ask": False,  # v1.0.9 "Khalihan AI से पूछें" (V2), inside "ai"
     "ai_cloud": False,  # v1.0.9 Gemini reads hard questions (test phone only)
     "ai_vertex": True,  # v1.0.9+18 the cloud part through Vertex AI (paid tier); OFF = Gemini Developer API
-    "ai_k": False,  # v1.0.9 H4 the K button on Home (after the V2 days)
     "ai_seva": False,  # v1.0.9 H4 "Khalihan AI सेवा" page
     "ai_yaad": False,  # v1.0.9 H4 "बोलकर याद" reminders (on the phone)
     "ai_voice": False,  # v1.0.9 the orb listens and speaks itself (microphone permission)
@@ -60,7 +59,7 @@ PARENT = {
     "schemes": "services", "kendra": "services", "home_sky": "weather", "advice": "weather",
     "widget_weather": "weather", "farm_weather": "weather", "where_sell": "sell_menu", "price_map": "sell_menu",
     "hold_sell": "sell_menu", "sell_interest": "sell_menu", "ai_ask": "ai", "ai_cloud": "ai",
-    "ai_k": "ai", "ai_seva": "ai", "ai_yaad": "ai", "ai_voice": "ai", "ai_hisaab": "ai", "ai_bill": "ai", "ai_soil": "ai", "ai_paper": "ai", "ai_kvk": "ai", "ai_suno": "ai", "ai_voice_cloud": "ai",
+    "ai_seva": "ai", "ai_yaad": "ai", "ai_voice": "ai", "ai_hisaab": "ai", "ai_bill": "ai", "ai_soil": "ai", "ai_paper": "ai", "ai_kvk": "ai", "ai_suno": "ai", "ai_voice_cloud": "ai",
     "ai_pest": "ai", "ai_dawai": "ai", "ai_gov": "ai", "ai_sound": "ai", "ai_docs": "ai",
     "ai_open": "ai", "ai_chats": "ai", "ai_applied": "ai", "ai_mydocs": "ai", "ai_account": "ai", "ai_deep": "ai",
 }
