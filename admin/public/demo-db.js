@@ -249,6 +249,23 @@ export async function connect() {
     async setNotice(n) { notice = n ? JSON.parse(JSON.stringify(n)) : null; log('notice', n ? { kind: n.kind } : { removed: true }); },
     async waitingCounts() { return { _total: 737, 'Madhya Pradesh': 412, Gujarat: 230, 'Uttar Pradesh': 95 }; },
     async setFeature(key, on) { features[key] = on; log('feature', { key, on }); },
+    async pushSupported() { return false; },
+    async turnOnPush() { throw new Error('demo'); },
+    async turnOffPush() {},
+    async myDevices() { return [{ id: 'd1', email: 'owner@example.com', kind: 'iPhone', browser: 'Safari', app: true, tz: 'Asia/Kolkata', at: day(2), last_sent: day(0, 10) }, { id: 'd2', email: 'owner@example.com', kind: 'Mac', browser: 'Chrome', app: false, tz: 'Asia/Kolkata', at: day(1), last_sent: day(0, 10) }]; },
+    async alertPrefs() { return {}; },
+    async saveAlertPrefs() {},
+    async testAlert() {},
+    watchAlerts(onList) {
+      onList([
+        { id: 'a1', kind: 'msg_problem', title: 'Problem · Jalna', body: 'AI answer wrong: 7/12 does not download', link: '/#feedback', at: day(0, 7) },
+        { id: 'a2', kind: 'msg_3h', title: '1 hour left to reply', body: 'Farmer message · Akola', link: '/#feedback', at: day(0, 10) },
+        { id: 'a3', kind: 'morning', title: 'Good morning', body: '312 of 1,000 farmers · 2 messages waiting', link: '/#home', at: day(0, 8) },
+        { id: 'a4', kind: 'pro', title: 'Khalihan Pro bought · 3 months', body: 'A farmer in Nashik', link: '/#plus', at: day(1, 21) },
+      ]);
+      return () => {};
+    },
+    watchFeedback() { return () => {}; },
     async setFeatures(map) { Object.assign(features, map); log('launch', { on: Object.keys(map).join(', ') }); },
     async switchPrefs() { return JSON.parse(JSON.stringify(switchPrefs)); },
     async saveSwitchPrefs(part) { Object.assign(switchPrefs, part); log('switch_prefs', { keys: Object.keys(part).join(', ') }); },

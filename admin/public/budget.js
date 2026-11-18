@@ -27,7 +27,7 @@ const T = {
     k_spent_sub: 'Day {d} of {n} · plan {rs}',
     k_spent_past: 'Whole month · plan {rs}',
     k_income: 'Income this month',
-    k_income_sub: 'Plus, trade, Kendra — typed below',
+    k_income_sub: 'Khalihan Pro {p} counts itself · trade and Kendra typed below',
     k_loss: 'Loss so far',
     k_gain: 'Ahead so far',
     k_loss_est: 'By month end about {rs}',
@@ -43,7 +43,7 @@ const T = {
     per_day: 'In the ad account: about {rs} a day before 18% GST',
     name_ph: 'e.g. Google Ads',
     total: 'Total',
-    income: 'Income this month (₹)',
+    income: 'Other income this month (₹) — trade, Kendra',
     add: '+ Add a line',
     remove: 'Remove this line (its amounts in every month too)',
     save: 'Save',
@@ -89,7 +89,7 @@ const T = {
     k_spent_sub: '{n} में से दिन {d} · प्लान {rs}',
     k_spent_past: 'पूरा महीना · प्लान {rs}',
     k_income: 'इस महीने की कमाई',
-    k_income_sub: 'Plus, व्यापार, केंद्र — नीचे भरें',
+    k_income_sub: 'Khalihan Pro {p} अपने-आप · व्यापार और केंद्र नीचे भरें',
     k_loss: 'अब तक घाटा',
     k_gain: 'अब तक बचत',
     k_loss_est: 'महीने के आख़िर तक लगभग {rs}',
@@ -105,7 +105,7 @@ const T = {
     per_day: 'Ad खाते में: 18% GST से पहले लगभग {rs} रोज़',
     name_ph: 'जैसे Google Ads',
     total: 'कुल',
-    income: 'इस महीने की कमाई (₹)',
+    income: 'इस महीने की बाकी कमाई (₹) — व्यापार, केंद्र',
     add: '+ नई लाइन',
     remove: 'ये लाइन हटाएँ (हर महीने की इसकी रकम भी)',
     save: 'Save',
@@ -155,7 +155,8 @@ const num = (v) => {
 };
 
 /** The month's sums — also used by the tests (tools/test_budget.mjs). */
-export function sums(data, key, today = new Date()) {
+/** auto = income that counts itself (Khalihan Pro from Google Play, Admin 1.30). */
+export function sums(data, key, today = new Date(), auto = 0) {
   const lines = data.lines || [];
   const m = (data.months || {})[key] || {};
   const spentOf = (id) => ((m.spent || {})[id]) || 0;
@@ -166,7 +167,7 @@ export function sums(data, key, today = new Date()) {
   const day = key === nowKey ? today.getDate() : (key < nowKey ? days : 0);
   const plan = lines.reduce((a, l) => a + (l.plan || 0), 0);
   const spent = lines.reduce((a, l) => a + spentOf(l.id), 0);
-  const income = m.income || 0;
+  const income = (m.income || 0) + (auto || 0);
   // Month end, if the ads follow the plan from today and every fixed bill
   // still to come is paid as planned.
   const est = lines.reduce((a, l) => {
@@ -193,7 +194,13 @@ export async function budgetPage(deps) {
 
   let saved = null;
   let stats = null;
-  try { [saved, stats] = await Promise.all([db().budget(), db().ownerStats().catch(() => null)]); } catch (e) { fail(e); }
+  let members = [];
+  try {
+    [saved, stats, members] = await Promise.all([db().budget(), db().ownerStats().catch(() => null), db().plusMembers ? db().plusMembers().catch(() => []) : []]);
+  } catch (e) { fail(e); }
+  // Khalihan Pro bought in a month (Google's price, test purchases left out):
+  // it counts itself (owner, 18 Nov 2026 — "Part 3": Pro income fills itself).
+  const proIn = (k) => (members || []).filter((x) => !x.test && x.at instanceof Date && keyOf(x.at) === k).reduce((a, x) => a + (x.price || 0), 0);
   let fresh = !saved;
   const data = saved ? JSON.parse(JSON.stringify({ ...saved, updated: undefined, by: undefined })) : {};
   data.lines = Array.isArray(data.lines) && data.lines.length ? data.lines
@@ -228,7 +235,8 @@ export async function budgetPage(deps) {
   };
 
   function render() {
-    const s = sums(data, key);
+    const pro = proIn(key);
+    const s = sums(data, key, new Date(), pro);
     const m = data.months[key] || {};
     const [y, mo] = key.split('-').map(Number);
     const limit = data.limit;
@@ -239,7 +247,7 @@ export async function budgetPage(deps) {
     const kpis = `<section class="kpis">
         ${kpi(t('k_plan'), rs(s.plan), gap == null ? esc(t('k_plan_nolimit')) : esc(t(gap >= 0 ? 'k_plan_under' : 'k_plan_over', { rs: rs(Math.abs(gap)) })), gap == null ? '' : (gap >= 0 ? 'up' : 'down'))}
         ${kpi(t('k_spent'), rs(s.spent), esc(s.current ? t('k_spent_sub', { d: s.day, n: s.days, rs: rs(s.plan) }) : t('k_spent_past', { rs: rs(s.plan) })))}
-        ${kpi(t('k_income'), rs(s.income), esc(t('k_income_sub')), s.income ? 'up' : '')}
+        ${kpi(t('k_income'), rs(s.income), esc(t('k_income_sub', { p: rs(pro) })), s.income ? 'up' : '')}
         ${kpi(t(loss >= 0 ? 'k_loss' : 'k_gain'), rs(Math.abs(loss)), esc([s.current ? t('k_loss_est', { rs: rs(Math.max(0, s.est)) }) : '', typeof limit === 'number' ? t('k_loss_limit', { rs: rs(limit) }) : ''].filter(Boolean).join(' · ')),
           typeof limit === 'number' && (s.current ? s.est : loss) > limit ? 'down' : '')}
       </section>`;

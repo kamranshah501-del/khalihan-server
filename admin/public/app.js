@@ -18,8 +18,9 @@ import { plusPage } from './plus.js';
 import { statsPage } from './stats.js';
 import { budgetPage, sums as budgetSums } from './budget.js';
 import { aiTestPage } from './aitest.js';
+import { ALERT_WORDS, alertsCard, bellList } from './alerts.js';
 
-const ADMIN_VERSION = '1.29 · 18 Nov 2026';
+const ADMIN_VERSION = '1.30 · 18 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -665,6 +666,8 @@ Object.assign(I18N.en, SWITCH_WORDS.en);
 Object.assign(I18N.hi, SWITCH_WORDS.hi);
 Object.assign(I18N.en, BIZ_WORDS.en);
 Object.assign(I18N.hi, BIZ_WORDS.hi);
+Object.assign(I18N.en, ALERT_WORDS.en);
+Object.assign(I18N.hi, ALERT_WORDS.hi);
 
 // Admin 1.29 (owner, 18 Nov 2026 — the Admin rework, Parts 3 and 4
 // approved 10:55 and 11:43): the new names in the menu, the Today page and
@@ -743,6 +746,8 @@ Object.assign(I18N.en, {
   help_features: 'Owner only. The Launch card on top; below it the switches you use, new features on trial, sleeping features, and Emergency off for the finished ones.',
   help_later: 'Pages of switched-off features. Each one wakes by itself when its feature turns on or something new arrives in it.',
   help_team: 'Who can open this panel, and every change made in it. Add a Gmail as staff (daily work) or owner (everything, including switches and money).',
+  help_settings: 'Alerts for you on your phone and computer; language, time and sound for this browser.',
+  set_note: 'Language, time and sound stay in this browser. Your alert choices go with your account, on every device.',
 });
 Object.assign(I18N.hi, {
   tab_home: 'आज',
@@ -818,6 +823,8 @@ Object.assign(I18N.hi, {
   help_features: 'सिर्फ़ मालिक। ऊपर Launch कार्ड; नीचे आपके काम के स्विच, ट्रायल वाले नए फ़ीचर, सोए हुए फ़ीचर, और पक्के फ़ीचर के लिए इमरजेंसी बंद।',
   help_later: 'बंद फ़ीचर के पेज। फ़ीचर चालू होते ही या कुछ नया आते ही हर पेज अपने-आप जाग जाता है।',
   help_team: 'ये पैनल कौन खोल सकता है, और इसमें हुआ हर बदलाव। Gmail को staff (रोज़ का काम) या owner (सब कुछ, स्विच और पैसा भी) बनाएँ।',
+  help_settings: 'आपके फ़ोन और कंप्यूटर पर आपके अलर्ट; भाषा, समय और आवाज़ इस ब्राउज़र के लिए।',
+  set_note: 'भाषा, समय और आवाज़ इसी ब्राउज़र में रहते हैं। अलर्ट की पसंद आपके खाते के साथ, हर डिवाइस पर।',
 });
 
 let lang = store.get('lang', 'en');
@@ -1095,12 +1102,20 @@ const sleeperOf = (tab) => SLEEPERS.find((s) => s.tab === tab);
  *  again whenever the owner changes a switch (Switches calls it). */
 async function loadWake() {
   const owner = me && me.role === 'owner';
-  const [cfg, plan, tests] = await Promise.all([
+  const [cfg, plan, tests, requests, deletions, orders, fbCounts] = await Promise.all([
     db.appConfig().catch(() => null),
     owner ? db.planState().catch(() => ({})) : Promise.resolve({}),
     owner ? db.aiTests().catch(() => ({ runs: [] })) : Promise.resolve({ runs: [] }),
+    cache.requests ? Promise.resolve(cache.requests) : db.sellRequests().catch(() => []),
+    db.deletions().catch(() => []),
+    db.kendraOrders ? db.kendraOrders().catch(() => []) : Promise.resolve([]),
+    db.feedbackCounts ? db.feedbackCounts().catch(() => null) : Promise.resolve(null),
   ]);
   if (cfg) cache.features = cfg.features || {};
+  cache.requests = requests;
+  cache.delOpen = deletions.filter((d) => !d.done).length;
+  cache.kendraNew = orders.filter((o) => o.status === 'new').length;
+  if (fbCounts) cache.fbOpen = fbCounts.open;
   cache.kadam = Number((plan || {}).kadam) || 0;
   cache.aiTestOpen = ((tests || {}).runs || []).some((r) => (r.asked || 0) > (r.marked || 0));
 }
@@ -1438,6 +1453,12 @@ function fbDraw() {
   }
   if ($('#fb-csv')) $('#fb-csv').onclick = () => fbCsv(st.rows.filter((f) => fbMatches(f, flt)));
   fbList();
+  // Opened from an alert (#feedback/<id>): show that message.
+  if (cache.fbFocus) {
+    const card = document.querySelector(`[data-fb="${CSS.escape(cache.fbFocus)}"]`);
+    cache.fbFocus = null;
+    if (card) { card.scrollIntoView({ block: 'center' }); card.classList.add('fresh'); }
+  }
 }
 
 /** The buttons on each card. Changes are kept in the loaded list, so the
@@ -1981,6 +2002,8 @@ const PAGES = {
 
   // Everyone on the team: language, time zone, who am I, links.
   async settings() {
+    const alerts = await alertsCard({ tr, esc, db, me, when, toast, fail, rerender: () => PAGES.settings() })
+      .catch((e) => { console.warn(e); return { html: '', wire: () => {} }; });
     const choice = (name, value, current, label) =>
       `<label class="choice"><input type="radio" name="${name}" value="${value}" ${value === current ? 'checked' : ''}> <span>${label}</span></label>`;
     const p = db.project && db.project !== 'demo' ? encodeURIComponent(db.project) : '';
@@ -2015,9 +2038,9 @@ const PAGES = {
           ${choice('tz', 'local', tz, tr('set_time_local'))}
         </div>
       </div>
+      ${alerts.html}
       <div class="card">
-        <div class="title">${tr('set_alerts')}</div>
-        <div class="sub">${tr('set_alerts_d')}</div>
+        <div class="title">${tr('al_tab_h')}</div>
         <label class="check"><input type="checkbox" id="s-sound" ${store.get('sound', 'on') === 'on' ? 'checked' : ''}> ${tr('set_sound')}</label>
         <label class="check"><input type="checkbox" id="s-desktop" ${desktopAllowed() && store.get('desktop', 'off') === 'on' ? 'checked' : ''}> ${tr('set_desktop')}</label>
         <p class="muted small" id="s-desktop-note" hidden>${tr('set_desktop_blocked')}</p>
@@ -2075,6 +2098,7 @@ const PAGES = {
       if (e.target.checked) chime(); // so one hears what it sounds like
       toast(tr('set_saved'));
     };
+    alerts.wire();
     $('#s-desktop').onchange = async (e) => {
       if (!e.target.checked) { store.set('desktop', 'off'); toast(tr('set_saved')); return; }
       const answer = await askDesktop();
@@ -2412,8 +2436,9 @@ async function showUser(u) {
   } catch (e) { fail(e); }
 }
 
-// ── live: new requests as they come ────────────────────────────────────
+// ── live: new requests and farmer messages as they come ───────────────
 let unwatch = null;
+let unwatchFb = null;
 
 function startLive() {
   if (unwatch) unwatch();
@@ -2422,6 +2447,66 @@ function startLive() {
     document.querySelectorAll('.live-dot').forEach((d) => d.classList.toggle('off', !ok));
     if (me) $('#livebadge').hidden = !ok;
   });
+  if (unwatchFb) unwatchFb();
+  unwatchFb = db.watchFeedback ? db.watchFeedback(onNewMessage) : null;
+}
+
+// A farmer message while the panel is open: sound, toast, the menu's count.
+function onNewMessage(f) {
+  cache.fbOpen = (cache.fbOpen || 0) + 1;
+  const text = `${tr('tab_feedback')}: “${String(f.text || '').slice(0, 80)}”`;
+  toast(text);
+  if (store.get('sound', 'on') === 'on') chime();
+  if (store.get('desktop', 'off') === 'on') desktopNotify(tr('tab_feedback'), String(f.text || '').slice(0, 120));
+  tabs();
+  if (page === 'home' && !document.querySelector('.panel')) PAGES.home().catch(fail);
+}
+
+// ── deep links: an alert opens "#feedback/<id>", "#plus", … ────────────
+function fromHash() {
+  const [pg, id] = decodeURIComponent(location.hash.replace(/^#\/?/, '')).split('/');
+  if (!pg || !PAGES[pg]) return null;
+  if (pg === 'feedback' && id) cache.fbFocus = id;
+  return pg;
+}
+window.addEventListener('hashchange', () => {
+  if (!me) return;
+  const pg = fromHash();
+  if (pg) { go(pg); history.replaceState(null, '', location.pathname + location.search); }
+});
+
+// ── the bell: the newest alerts (alerts_team, and the owner's own) ─────
+let unwatchBell = null;
+const bellSeen = () => Number(store.get('alerts_seen', '0')) || 0;
+function startBell() {
+  const bell = $('#bell');
+  if (!bell || !db.watchAlerts) return;
+  bell.hidden = false;
+  if (unwatchBell) unwatchBell();
+  unwatchBell = db.watchAlerts((list) => { cache.alerts = list; drawBell(); });
+  bell.onclick = (e) => {
+    e.stopPropagation();
+    const m = $('#bellmenu');
+    m.hidden = !m.hidden;
+    bell.setAttribute('aria-expanded', String(!m.hidden));
+  };
+  document.addEventListener('click', (e) => { if (!e.target.closest('.bellwrap')) $('#bellmenu').hidden = true; });
+}
+function drawBell() {
+  const list = cache.alerts || [];
+  const seen = bellSeen();
+  const fresh = list.filter((a) => a.at && a.at.getTime() > seen).length;
+  const count = $('#bellcount');
+  count.textContent = fresh > 9 ? '9+' : String(fresh);
+  count.hidden = !fresh;
+  $('#bell').setAttribute('aria-label', fresh ? `${tr('bell')}, ${fresh}` : tr('bell'));
+  $('#bellmenu').innerHTML = `<div class="bellhead"><b>${tr('bell')}</b>${fresh ? `<button class="linkbtn" id="bell-read">${tr('bell_read')}</button>` : ''}</div>
+    <div class="belllist">${bellList(list, seen, { tr, esc, ago: (d) => tr('ago', { t: dur(Date.now() - d.getTime()) }) })}</div>
+    <button class="linkbtn bellfoot" id="bell-set">${tr('bell_all')} →</button>`;
+  const read = $('#bell-read');
+  if (read) read.onclick = (e) => { e.stopPropagation(); store.set('alerts_seen', String(Date.now())); drawBell(); };
+  $('#bell-set').onclick = () => { $('#bellmenu').hidden = true; go('settings'); };
+  $('#bellmenu').querySelectorAll('.bellitem').forEach((a) => { a.addEventListener('click', () => { $('#bellmenu').hidden = true; }); });
 }
 
 function onNewRequest(r) {
@@ -2488,7 +2573,12 @@ async function start() {
     setMain(`<section class="center"><div><h1>${tr('not_started')}</h1><p class="muted">${esc(e.message || e)}</p></div></section>`);
     return;
   }
-  $('#logout').onclick = () => { if (unwatch) unwatch(); unwatch = null; db.logout(); };
+  $('#logout').onclick = () => {
+    [unwatch, unwatchFb, unwatchBell].forEach((f) => { if (f) f(); });
+    unwatch = unwatchFb = unwatchBell = null;
+    $('#bell').hidden = true;
+    db.logout();
+  };
   $('#install').onclick = installApp;
   showInstall();
   db.onUser((user) => {
@@ -2507,8 +2597,9 @@ async function start() {
     $('#who').textContent = whoLine();
     $('#logout').hidden = false;
     syncMe();
-    loadWake().finally(() => go('home'));
+    loadWake().finally(() => go(fromHash() || 'home'));
     startLive();
+    startBell();
   });
 }
 

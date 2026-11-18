@@ -95,8 +95,9 @@ service cloud.firestore {
         && request.resource.data.text.size() <= 500
         && request.resource.data.at == request.time;
       allow read: if isStaff();
+      // done_at (Admin 1.30): when it was answered, for the morning summary.
       allow update: if isStaff()
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['done', 'note', 'by']);
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['done', 'note', 'by', 'done_at']);
       allow delete: if isOwner();
     }
 
@@ -373,6 +374,49 @@ service cloud.firestore {
         && request.resource.data.at == request.time;
       allow read: if isOwner();
       allow update, delete: if false;
+    }
+
+    // ── Admin alerts on phones and computers (Admin 1.30, owner 18 Nov 2026,
+    // "Part 2" approved 10:41) ──────────────────────────────────────────
+    // One document per team member's phone or computer that gets alerts:
+    // that browser's Firebase push address, whose it is, the kind of device.
+    // Only that person and the owner see it; the server's alert job
+    // (tools/admin_alerts.py, service account) reads all and sends.
+    match /staff_devices/{id} {
+      allow read: if isStaff() && (resource.data.email == staffEmail() || isOwner());
+      allow create, update: if isStaff()
+        && request.resource.data.email == staffEmail()
+        && request.resource.data.keys().hasOnly(['email', 'token', 'kind', 'browser', 'app', 'tz', 'at', 'last_sent'])
+        && request.resource.data.token is string
+        && request.resource.data.token.size() > 20
+        && request.resource.data.token.size() < 600;
+      allow delete: if isStaff() && (resource.data.email == staffEmail() || isOwner());
+    }
+    // Each person's own choices: which alerts, quiet hours, time zone.
+    match /staff_prefs/{email} {
+      allow read: if isStaff() && (email == staffEmail() || isOwner());
+      allow write: if isStaff() && email == staffEmail();
+    }
+    // The bell's list — written only by the alert job. Team alerts for
+    // everyone on the team; the owner's own (Pro, launch counter) apart.
+    match /alerts_team/{id} {
+      allow read: if isStaff();
+      allow write: if false;
+    }
+    match /alerts_owner/{id} {
+      allow read: if isOwner();
+      allow write: if false;
+    }
+    // "Send me a test alert": the job sends it at its next run, then deletes it.
+    match /alert_requests/{id} {
+      allow create: if isStaff()
+        && request.resource.data.keys().hasOnly(['email', 'kind', 'device', 'at'])
+        && request.resource.data.email == staffEmail()
+        && request.resource.data.kind == 'test'
+        && request.resource.data.device is string
+        && request.resource.data.device.size() <= 64
+        && request.resource.data.at == request.time;
+      allow read, update, delete: if false;
     }
 
     match /owner_stats/{doc} {

@@ -101,7 +101,7 @@ export const BIZ_WORDS = {
     pr_cmp_h: 'Compare quotes', pr_cmp_crop: 'Crop', pr_cmp_latest: 'Latest', pr_cmp_avg: '14-day average', pr_cmp_n: 'Quotes', pr_cmp_none: 'No quotes for this crop yet.',
 
     // compliance
-    co_h: 'Licences & dates',
+    co_h: 'Dates and deadlines',
     co_sub: 'DML, Kendra licences, IEC, trademark, insurance, GST — nothing should lapse',
     co_add: '+ Add',
     co_quick: 'Quick add:',
@@ -119,6 +119,9 @@ export const BIZ_WORDS = {
     f_kind: 'Kind', f_due: 'Due date', f_every: 'Repeats', f_remind: 'Remind this many days before',
     kind_licence: 'Licence', kind_filing: 'Filing', kind_renewal: 'Renewal', kind_insurance: 'Insurance', kind_trademark: 'Trademark', kind_other: 'Other',
     co_v: 'Write a name and the due date.',
+    co_known_h: 'Dates we already know',
+    co_known_d: 'From the plan and the Google Cloud bills. Add them with one press; each reminds you before it comes.',
+    co_known_add: 'Add these {n} dates',
     co_t_dml: 'DML licence (MSAMB)', co_t_seed: 'Seed licence', co_t_fert: 'Fertiliser licence', co_t_pest: 'Pesticide licence',
     co_t_iec: 'IEC update (Apr–Jun)', co_t_tm: 'Trademark — Khalihan', co_t_ins: 'Insurance renewal', co_t_gst: 'GST return', co_t_roc: 'Company / FPO filing',
     co_task: '{name}: {when}',
@@ -218,7 +221,7 @@ export const BIZ_WORDS = {
     pr_v_name: 'नाम लिखें।', pr_v_rate: 'दिन, फसल और भाव लिखें।', pr_v_pay: 'गाड़ी/लॉट, रकम और तारीख लिखें।',
     pr_cmp_h: 'भाव तुलना', pr_cmp_crop: 'फसल', pr_cmp_latest: 'आखिरी', pr_cmp_avg: '14 दिन का औसत', pr_cmp_n: 'भाव', pr_cmp_none: 'इस फसल का अभी कोई भाव नहीं।',
 
-    co_h: 'लाइसेंस और तारीखें',
+    co_h: 'तारीखें और डेडलाइन',
     co_sub: 'DML, Kendra लाइसेंस, IEC, ट्रेडमार्क, बीमा, GST — कुछ भी छूटना नहीं चाहिए',
     co_add: '+ जोड़ें',
     co_quick: 'जल्दी जोड़ें:',
@@ -236,6 +239,9 @@ export const BIZ_WORDS = {
     f_kind: 'किस्म', f_due: 'आखिरी तारीख', f_every: 'दोहराव', f_remind: 'कितने दिन पहले याद दिलाएँ',
     kind_licence: 'लाइसेंस', kind_filing: 'फ़ाइलिंग', kind_renewal: 'रिन्यूअल', kind_insurance: 'बीमा', kind_trademark: 'ट्रेडमार्क', kind_other: 'अन्य',
     co_v: 'नाम और आखिरी तारीख लिखें।',
+    co_known_h: 'जो तारीखें पहले से पता हैं',
+    co_known_d: 'प्लान और Google Cloud के बिल से। एक बटन से जोड़ें; हर तारीख से पहले याद दिलाया जाएगा।',
+    co_known_add: 'ये {n} तारीखें जोड़ें',
     co_t_dml: 'DML लाइसेंस (MSAMB)', co_t_seed: 'बीज लाइसेंस', co_t_fert: 'खाद लाइसेंस', co_t_pest: 'कीटनाशक लाइसेंस',
     co_t_iec: 'IEC अपडेट (अप्रै–जून)', co_t_tm: 'ट्रेडमार्क — खलिहान', co_t_ins: 'बीमा रिन्यूअल', co_t_gst: 'GST रिटर्न', co_t_roc: 'कंपनी / FPO फ़ाइलिंग',
     co_task: '{name}: {when}',
@@ -292,6 +298,14 @@ const COMPLIANCE_TEMPLATES = [
 ];
 
 const KINDS = ['licence', 'filing', 'renewal', 'insurance', 'trademark', 'other'];
+// Dates already known (Admin 1.30, owner 18 Nov 2026 — "Part 3": Dates and
+// deadlines starts with the real ones). The owner adds them with one press.
+const KNOWN_DATES = [
+  { tpl: 'known_109', name: 'App 1.0.9 to Google Play review', kind: 'other', due: '2026-11-30', every: 0, remind: 7, notes: 'With the privacy page and Play Data safety updated (versionCode 19 or newer).' },
+  { tpl: 'known_launch', name: 'Launch target: 1,000 new farmers', kind: 'other', due: '2026-12-10', every: 0, remind: 14, notes: 'At 1,000: the Launch button on Switches (Khalihan AI and Pro).' },
+  { tpl: 'known_gemini', name: 'Gemini Flash prices double from 1 Jan', kind: 'other', due: '2026-12-31', every: 0, remind: 14, notes: 'Vertex AI: Gemini Flash and its speech cost twice as much from 1 Jan 2027 — check the AI limits.' },
+  { tpl: 'known_credit', name: 'Google Cloud free credit ends', kind: 'other', due: '2027-01-18', every: 0, remind: 14, notes: 'The collector VM and Vertex AI move to the paid bill.' },
+];
 const EVERY = [0, 1, 3, 12, 36];
 
 export function createBusiness(c) {
@@ -680,6 +694,7 @@ export function createBusiness(c) {
     const t = today();
     const open = items.filter((x) => !x.done).map((x) => ({ ...x, left: x.due ? daysBetween(t, x.due) : 9999 })).sort((a, b) => a.left - b.left);
     const closed = items.filter((x) => x.done);
+    const missing = KNOWN_DATES.filter((k) => !items.some((x) => x.tpl === k.tpl || x.name === k.name));
     const tone = (x) => (x.left < 0 ? 'warn' : x.left <= (num(x.remind) ?? 30) ? 'info' : 'off');
     const line = (x) => `
       <div class="card">
@@ -694,9 +709,22 @@ export function createBusiness(c) {
       <p class="muted">${tr('co_sub')}</p>
       <div class="row small" style="margin-bottom:12px"><span class="muted">${tr('co_quick')}</span>
         ${COMPLIANCE_TEMPLATES.filter((tp) => !items.some((x) => x.tpl === tp.key && !x.done)).map((tp) => `<button class="plain" data-tpl="${tp.key}">${esc(tr('co_t_' + tp.key))}</button>`).join('')}</div>
+      ${missing.length ? `<section class="card">
+        <div class="title">${tr('co_known_h')}</div><div class="sub">${tr('co_known_d')}</div>
+        <ul class="small" style="margin:8px 0">${missing.map((k) => `<li><b>${showDay(k.due)}</b> · ${esc(k.name)}</li>`).join('')}</ul>
+        <div class="actions"><button class="btn pri" id="co-known">${tr('co_known_add', { n: missing.length })}</button></div></section>` : ''}
       ${open.length ? open.map(line).join('') : `<div class="empty">${tr('co_none')}</div>`}
       ${closed.length ? `<details class="small"><summary>${tr('co_done_once')} (${closed.length})</summary>${closed.map((x) => `<div class="row between" style="padding:6px 0"><span>${esc(x.name)}</span><span class="muted">✓ ${showDay(x.last)}</span></div>`).join('')}</details>` : ''}`);
     document.getElementById('co-add').onclick = () => coPanel(null);
+    const known = document.getElementById('co-known');
+    if (known) known.onclick = async () => {
+      known.disabled = true;
+      try {
+        for (const k of missing) await db().saveCompliance(null, { ...k, done: false });
+        toast(tr('pl_saved'));
+        compliance();
+      } catch (e) { known.disabled = false; fail(e); }
+    };
     document.querySelectorAll('[data-tpl]').forEach((b) => {
       const tp = COMPLIANCE_TEMPLATES.find((x) => x.key === b.dataset.tpl);
       b.onclick = () => coPanel({ name: tr('co_t_' + tp.key), kind: tp.kind, every: tp.every, remind: tp.every === 1 ? 7 : 30, tpl: tp.key });

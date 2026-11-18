@@ -11,6 +11,7 @@ import {
   getCountFromServer, writeBatch, onSnapshot, deleteField, startAfter, collectionGroup,
 } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
 import { initializeAppCheck, ReCaptchaV3Provider } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app-check.js';
+import { getMessaging, getToken, deleteToken, isSupported } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-messaging.js';
 
 const toDate = (v) => (v && typeof v.toDate === 'function' ? v.toDate() : null);
 const rows = (snap) => snap.docs.map((d) => ({ id: d.id, ...d.data() }));
@@ -262,7 +263,9 @@ export async function connect() {
       return { total: t, done: d, open: Math.max(0, t - d) };
     },
     async feedbackDone(id, done) {
-      await updateDoc(doc(db, 'feedback', id), { done, by: me.email });
+      // done_at (Admin 1.30): when it was answered — the morning summary and
+      // Today count replies from it.
+      await updateDoc(doc(db, 'feedback', id), { done, by: me.email, done_at: done ? serverTimestamp() : deleteField() });
       log('feedback_done', { id, done });
     },
     // The team's private note (rules: staff may change only done, note, by).
@@ -553,6 +556,65 @@ export async function connect() {
       const idx = await this.aiTests();
       await setDoc(doc(db, 'business', 'ai_tests'), { runs: (idx.runs || []).filter((r) => r.id !== id), updated: serverTimestamp() });
       log('ai_test_delete', { run: id });
+    },
+
+    // ── alerts on phones and computers (Admin 1.30, owner 18 Nov 2026) ──
+    // The browser's Firebase push token goes to staff_devices/{sha256}; the
+    // server's alert job (tools/admin_alerts.py, every 10 minutes) sends to
+    // it. Each person's choices: staff_prefs/{email}.
+    async pushSupported() {
+      try { return ('serviceWorker' in navigator) && ('Notification' in window) && await isSupported(); } catch (_) { return false; }
+    },
+    async turnOnPush(info) {
+      const reg = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+      await navigator.serviceWorker.ready;
+      const token = await getToken(getMessaging(app), { serviceWorkerRegistration: reg });
+      if (!token) throw new Error('no-token');
+      const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(token));
+      const id = [...new Uint8Array(bytes)].slice(0, 16).map((b) => b.toString(16).padStart(2, '0')).join('');
+      await setDoc(doc(db, 'staff_devices', id), { email: me.email.toLowerCase(), token, kind: info.kind, browser: info.browser, app: !!info.app, tz: info.tz, at: serverTimestamp() });
+      log('alerts_on', { kind: info.kind, browser: info.browser });
+      return id;
+    },
+    async turnOffPush(id, here) {
+      await deleteDoc(doc(db, 'staff_devices', id));
+      if (here) { try { await deleteToken(getMessaging(app)); } catch (_) { /* already gone */ } }
+      log('alerts_off', { id });
+    },
+    async myDevices() {
+      const snap = await getDocs(query(collection(db, 'staff_devices'), where('email', '==', me.email.toLowerCase())));
+      return rows(snap).map((d) => ({ ...d, at: toDate(d.at), last_sent: toDate(d.last_sent) }));
+    },
+    async alertPrefs() {
+      const snap = await getDoc(doc(db, 'staff_prefs', me.email.toLowerCase()));
+      return snap.exists() ? snap.data() : {};
+    },
+    async saveAlertPrefs(p) {
+      await setDoc(doc(db, 'staff_prefs', me.email.toLowerCase()), { ...p, updated: serverTimestamp() }, { merge: true });
+    },
+    // "Send me a test alert": the alert job sends it at its next run.
+    async testAlert(device) {
+      await addDoc(collection(db, 'alert_requests'), { email: me.email.toLowerCase(), kind: 'test', device: device || '', at: serverTimestamp() });
+    },
+    // The bell: the newest alerts, live. Team alerts for everyone; the
+    // owner's own (Pro, launch counter) only for owners.
+    watchAlerts(onList) {
+      const lists = { team: [], owner: [] };
+      const emit = () => onList([...lists.team, ...lists.owner].sort((a, b) => (b.at || 0) - (a.at || 0)).slice(0, 30));
+      const watch = (name, key) => onSnapshot(query(collection(db, name), orderBy('at', 'desc'), limit(30)),
+        (snap) => { lists[key] = rows(snap).map((r) => ({ ...r, at: toDate(r.at) })); emit(); },
+        (e) => console.warn('alerts', e));
+      const offs = [watch('alerts_team', 'team')];
+      if (me.role === 'owner') offs.push(watch('alerts_owner', 'owner'));
+      return () => offs.forEach((f) => f());
+    },
+    // New farmer messages while the panel is open (in-tab sound and toast).
+    watchFeedback(onNew) {
+      let first = true;
+      return onSnapshot(query(collection(db, 'feedback'), orderBy('at', 'desc'), limit(5)), (snap) => {
+        if (first) { first = false; return; }
+        snap.docChanges().forEach((ch) => { if (ch.type === 'added') onNew({ id: ch.doc.id, ...ch.doc.data(), at: toDate(ch.doc.data().at) }); });
+      }, (e) => console.warn('feedback watch', e));
     },
 
     // ── record (owner) ──

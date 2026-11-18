@@ -1,0 +1,36 @@
+name: Admin alerts
+
+# Every 10 minutes: farmer messages, messages waiting 3 hours, Khalihan Pro,
+# the launch counter and the morning summary go to the team's phones and
+# computers as web push (tools/admin_alerts.py; owner, 18 Nov 2026 — Admin
+# rework Part 2). GitHub may start a scheduled run a few minutes late.
+# Prints counts only (public repository).
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch:
+
+# One run at a time; a run that is still going is not cut short.
+concurrency:
+  group: admin-alerts
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  alerts:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python tools/admin_alerts.py
+        env:
+          PYTHONUNBUFFERED: "1"
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
