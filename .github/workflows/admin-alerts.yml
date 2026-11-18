@@ -8,7 +8,9 @@ name: Admin alerts
 
 on:
   schedule:
-    - cron: "*/10 * * * *"
+    # Off the round minutes, where GitHub's scheduler is busiest (and the
+    # first schedule, "*/10", was never picked up — 18 Nov 2026).
+    - cron: "3,13,23,33,43,53 * * * *"
   workflow_dispatch:
 
 # One run at a time; a run that is still going is not cut short.
