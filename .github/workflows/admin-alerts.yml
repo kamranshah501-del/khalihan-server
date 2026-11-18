@@ -1,16 +1,12 @@
 name: Admin alerts
 
-# Every 10 minutes: farmer messages, messages waiting 3 hours, Khalihan Pro,
-# the launch counter and the morning summary go to the team's phones and
-# computers as web push (tools/admin_alerts.py; owner, 18 Nov 2026 — Admin
-# rework Part 2). GitHub may start a scheduled run a few minutes late.
-# Prints counts only (public repository).
+# Khalihan Admin alerts — fallback only. Since 18 Nov 2026 the alerts run in
+# Google Cloud (functions/alerts: at once for each new message, reply and test
+# request, and every 10 minutes by Cloud Scheduler). GitHub's schedule for
+# this never started, so this runs only by hand (Actions → Run workflow): the
+# very same pass, functions/alerts/alerts_core.py. Prints counts only.
 
 on:
-  schedule:
-    # Off the round minutes, where GitHub's scheduler is busiest (and the
-    # first schedule, "*/10", was never picked up — 18 Nov 2026).
-    - cron: "3,13,23,33,43,53 * * * *"
   workflow_dispatch:
 
 # One run at a time; a run that is still going is not cut short.
