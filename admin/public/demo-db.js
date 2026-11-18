@@ -111,6 +111,9 @@ export async function connect() {
   };
   // Made-up suggestions (no name or phone, like the real ones).
   let feedback = [
+    // App 1.0.10's messages: a kind, and what the farmer chose to share.
+    { id: 'm1', text: '७/१२ डाउनलोड होत नाही, बटन दाबल्यावर काहीच होत नाही. दोन वेळा प्रयत्न केला.', en: "The 7/12 doesn't download; nothing happens when I press the button. I tried twice.", kind: 'problem', name: 'Sunil Jadhav', phone: '9822012521', dev: 'k7q2mzz0abcdefghij12', state: 'Maharashtra', district: 'Jalna', lang: 'mr', app: '1.0.10', info: { model: 'Xiaomi Redmi Note 12', android: '14', app: '1.0.10', net: 'mobile', notif: 'on' }, trail: ['17 Nov 19:05 ai_bill what=offline', '18 Nov 07:29 ai_doc_save ok=no site=bhulekh', '18 Nov 07:31 ai_gov_fail why=down site=bhulekh'], at: new Date(Date.now() - 86 * 60e3) },
+    { id: 'm2', text: 'कपास के लिए जो दवाई बताई, दुकान वाले ने कहा ये नहीं मिलती', kind: 'ai_wrong', dev: '2z8pqqq0abcdefghij34', state: 'Maharashtra', district: 'Akola', lang: 'hi', app: '1.0.10', at: new Date(Date.now() - 220 * 60e3) },
     { id: 'f1', text: 'Kapas ka bhav Pachora ka bhi dikhao', state: 'Maharashtra', district: 'Jalgaon', lang: 'hi', app: '1.0.6', at: day(0, 8) },
     { id: 'f2', text: 'खताची किंमत पाहिजे', state: 'Maharashtra', district: 'Jalgaon', lang: 'mr', app: '1.0.5', at: day(3), done: true, note: 'MRP list v1.0.7 mein', by: 'owner@example.com' },
     { id: 'f3', text: 'कांद्याचा भाव कालचा दिसतो, आजचा कधी येतो?', state: 'Maharashtra', district: 'Nashik', lang: 'mr', app: '1.0.6', at: day(1, 19) },
@@ -118,7 +121,8 @@ export async function connect() {
     { id: 'f5', text: 'मौसम बहुत अच्छा बताता है, धन्यवाद', state: 'Maharashtra', district: 'Jalgaon', lang: 'hi', app: '1.0.5', at: day(5), done: true, by: 'staff@example.com' },
     { id: 'f6', text: 'जामनेर मंडीचा भाव रोज यावा', state: 'Maharashtra', district: 'Jalgaon', lang: 'mr', app: '1.0.6', at: day(9, 18) },
   ];
-  const FB_PAGE = 4; // small in the demo, so "older" can be tried
+  const FB_PAGE = 6; // small in the demo, so "older" can be tried
+  const replies = [];
   const users = [
     { id: 'u1', phone: '+919876543210', name: 'Ramesh Patil', state: 'Maharashtra', district: 'Jalgaon', lang: 'mr', app: '1.0.2', crops: ['Maize', 'Cotton'], seen: day(0, 9), created: day(5) },
     { id: 'u2', phone: '+919812345678', name: '', state: 'Maharashtra', district: 'Jalgaon', lang: 'hi', app: '1.0.2', crops: ['Cotton'], seen: day(1), created: day(1) },
@@ -309,6 +313,8 @@ export async function connect() {
       const done = feedback.filter((f) => f.done).length;
       return { total: feedback.length, done, open: feedback.length - done };
     },
+    async replyToFarmer(f, text, lang) { const x = feedback.find((y) => y.id === f.id); if (x) { x.done = true; x.replied_at = new Date(); x.done_at = new Date(); } replies.push({ id: 'r' + replies.length, dev: f.dev, text, lang, for: f.id, by: me.email, by_name: me.name, at: new Date() }); log('farmer_reply', { id: f.id }); },
+    async farmerReplies(dev) { return replies.filter((r) => r.dev === dev); },
     async feedbackDone(id, done) { const f = feedback.find((x) => x.id === id); if (f) { f.done = done; f.by = me.email; } log('feedback_done', { id, done }); },
     async feedbackNote(id, note) { const f = feedback.find((x) => x.id === id); if (f) { f.note = note; f.by = me.email; } log('feedback_note', { id }); },
     async feedbackDelete(id) { feedback = feedback.filter((x) => x.id !== id); log('feedback_delete', { id }); },

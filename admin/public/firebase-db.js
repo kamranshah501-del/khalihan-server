@@ -237,7 +237,7 @@ export async function connect() {
     // ── suggestions ──
     async feedback() {
       const snap = await getDocs(query(collection(db, 'feedback'), orderBy('at', 'desc'), limit(200)));
-      return rows(snap).map((r) => ({ ...r, at: toDate(r.at) }));
+      return rows(snap).map((r) => ({ ...r, at: toDate(r.at), done_at: toDate(r.done_at), replied_at: toDate(r.replied_at) }));
     },
     // One page, newest first. `after` = the previous page's `next`; `next`
     // is null when nothing older is left (Admin 1.17: no more 200 limit).
@@ -247,7 +247,7 @@ export async function connect() {
       steps.push(limit(FB_PAGE));
       const snap = await getDocs(query(collection(db, 'feedback'), ...steps));
       return {
-        rows: rows(snap).map((r) => ({ ...r, at: toDate(r.at) })),
+        rows: rows(snap).map((r) => ({ ...r, at: toDate(r.at), done_at: toDate(r.done_at), replied_at: toDate(r.replied_at) })),
         next: snap.docs.length === FB_PAGE ? snap.docs[snap.docs.length - 1] : null,
       };
     },
@@ -556,6 +556,24 @@ export async function connect() {
       const idx = await this.aiTests();
       await setDoc(doc(db, 'business', 'ai_tests'), { runs: (idx.runs || []).filter((r) => r.id !== id), updated: serverTimestamp() });
       log('ai_test_delete', { run: id });
+    },
+
+    // ── replies to farmers, inside the app (Admin 1.31; app 1.0.10) ──
+    // One write: the reply in inbox/{dev}/replies, the push request in
+    // reply_queue (the alert job sends it), and the message marked answered.
+    async replyToFarmer(f, text, lang) {
+      const email = me.email.toLowerCase();
+      const ref = doc(collection(db, 'inbox', f.dev, 'replies'));
+      const batch = writeBatch(db);
+      batch.set(ref, { text, shown: '', lang, for: f.id, by: email, by_name: me.name || '', at: serverTimestamp() });
+      batch.set(doc(db, 'reply_queue', ref.id), { dev: f.dev, reply: ref.id, by: email, at: serverTimestamp() });
+      batch.update(doc(db, 'feedback', f.id), { done: true, by: me.email, done_at: serverTimestamp(), replied_at: serverTimestamp(), reply_by: email });
+      await batch.commit();
+      log('farmer_reply', { id: f.id });
+    },
+    async farmerReplies(dev) {
+      const snap = await getDocs(query(collection(db, 'inbox', dev, 'replies'), orderBy('at')));
+      return rows(snap).map((r) => ({ ...r, at: toDate(r.at) }));
     },
 
     // ── alerts on phones and computers (Admin 1.30, owner 18 Nov 2026) ──

@@ -19,8 +19,9 @@ import { statsPage } from './stats.js';
 import { budgetPage, sums as budgetSums } from './budget.js';
 import { aiTestPage } from './aitest.js';
 import { ALERT_WORDS, alertsCard, bellList } from './alerts.js';
+import { MSG_WORDS, msgHead, msgStats, msgKind, openMessage } from './messages.js';
 
-const ADMIN_VERSION = '1.30 · 18 Nov 2026';
+const ADMIN_VERSION = '1.31 · 18 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -668,6 +669,8 @@ Object.assign(I18N.en, BIZ_WORDS.en);
 Object.assign(I18N.hi, BIZ_WORDS.hi);
 Object.assign(I18N.en, ALERT_WORDS.en);
 Object.assign(I18N.hi, ALERT_WORDS.hi);
+Object.assign(I18N.en, MSG_WORDS.en);
+Object.assign(I18N.hi, MSG_WORDS.hi);
 
 // Admin 1.29 (owner, 18 Nov 2026 — the Admin rework, Parts 3 and 4
 // approved 10:55 and 11:43): the new names in the menu, the Today page and
@@ -747,6 +750,7 @@ Object.assign(I18N.en, {
   help_later: 'Pages of switched-off features. Each one wakes by itself when its feature turns on or something new arrives in it.',
   help_team: 'Who can open this panel, and every change made in it. Add a Gmail as staff (daily work) or owner (everything, including switches and money).',
   help_settings: 'Alerts for you on your phone and computer; language, time and sound for this browser.',
+  help_feedback: 'Problems, suggestions, praise and "AI answer wrong" from the app. Reply within 4 hours: open a message, write in Hindi or English, Send in the app — the farmer reads it in his language with a notification (app 1.0.10 and newer; older ones: only Done).',
   set_note: 'Language, time and sound stay in this browser. Your alert choices go with your account, on every device.',
 });
 Object.assign(I18N.hi, {
@@ -824,6 +828,7 @@ Object.assign(I18N.hi, {
   help_later: 'बंद फ़ीचर के पेज। फ़ीचर चालू होते ही या कुछ नया आते ही हर पेज अपने-आप जाग जाता है।',
   help_team: 'ये पैनल कौन खोल सकता है, और इसमें हुआ हर बदलाव। Gmail को staff (रोज़ का काम) या owner (सब कुछ, स्विच और पैसा भी) बनाएँ।',
   help_settings: 'आपके फ़ोन और कंप्यूटर पर आपके अलर्ट; भाषा, समय और आवाज़ इस ब्राउज़र के लिए।',
+  help_feedback: 'ऐप से आईं दिक्कतें, सुझाव, तारीफ़ और "AI का जवाब गलत"। 4 घंटे में जवाब दें: संदेश खोलें, हिंदी या English में लिखें, "ऐप में भेजें" — किसान अपनी भाषा में सूचना के साथ पढ़ेगा (ऐप 1.0.10 और नया; पुराने: सिर्फ़ पूरा करें)।',
   set_note: 'भाषा, समय और आवाज़ इसी ब्राउज़र में रहते हैं। अलर्ट की पसंद आपके खाते के साथ, हर डिवाइस पर।',
 });
 
@@ -1290,7 +1295,9 @@ async function go(next) {
 // The app sends text, state, district, language and app version — no name,
 // no phone. Any other field a later app version sends shows as a small tag,
 // so nothing new is hidden from the team.
-const FB_KNOWN = new Set(['id', 'text', 'state', 'district', 'lang', 'app', 'at', 'done', 'note', 'by']);
+const FB_KNOWN = new Set(['id', 'text', 'state', 'district', 'lang', 'app', 'at', 'done', 'note', 'by',
+  // app 1.0.10 and Admin 1.30–1.31 (messages.js shows these)
+  'kind', 'en', 'name', 'phone', 'photo', 'dev', 'info', 'trail', 'reply_to', 'done_at', 'replied_at', 'reply_by']);
 const FB_LANGS = { en: 'English', hi: 'हिंदी', mr: 'मराठी', gu: 'ગુજરાતી', pa: 'ਪੰਜਾਬੀ', te: 'తెలుగు', kn: 'ಕನ್ನಡ', ta: 'தமிழ்', bn: 'বাংলা', ml: 'മലയാളം' };
 const fbLang = (c) => FB_LANGS[c] || c || '—';
 const fbPlace = (f) => f.district || f.state || '—';
@@ -1306,6 +1313,8 @@ function fbAge(d) {
 function fbMatches(f, flt) {
   if (flt.status === 'open' && f.done) return false;
   if (flt.status === 'done' && !f.done) return false;
+  if (flt.status === 'replied' && !f.replied_at) return false;
+  if (flt.kind && msgKind(f) !== flt.kind) return false;
   if (flt.lang && f.lang !== flt.lang) return false;
   if (flt.place && fbPlace(f) !== flt.place) return false;
   if (flt.app && String(f.app || '') !== flt.app) return false;
@@ -1350,6 +1359,7 @@ function fbCard(f, owner) {
     .map(([k, v]) => `<span class="pill info">${esc(k)}: ${esc(String(typeof v === 'object' ? JSON.stringify(v) : v).slice(0, 60))}</span>`)
     .join(' ');
   return `<div class="card" data-fb="${id}">
+    ${msgHead(f, { tr, esc, dur })}
     <div class="row between">
       <div class="sub">${when(f.at)} · ${esc(fbAge(f.at))} · ${esc(fbPlace(f))} · ${esc(fbLang(f.lang))} · v${esc(f.app || '—')}</div>
       <span class="pill ${f.done ? 'on' : 'warn'}">${f.done ? tr('fb_f_done') : tr('fb_f_new')}</span>
@@ -1359,6 +1369,7 @@ function fbCard(f, owner) {
     ${f.note ? `<div class="note small" style="margin-top:8px"><strong>${tr('fb_note_label')}:</strong> <span style="white-space:pre-wrap">${esc(f.note)}</span></div>` : ''}
     ${f.by ? `<div class="muted small" style="margin-top:6px">${tr('fb_last', { e: esc(f.by) })}</div>` : ''}
     <div class="actions row">
+      <button class="main" data-fb-open="${id}">${tr('mg_open')}</button>
       <button class="plain" data-fb-done="${id}">${f.done ? tr('fb_reopen') : tr('fb_done')}</button>
       <button class="plain" data-fb-note="${id}" aria-expanded="false">${tr('fb_note')}</button>
       <button class="plain" data-fb-copy="${id}">${tr('fb_copy')}</button>
@@ -1412,11 +1423,11 @@ function fbDraw() {
   setMain(`
     <div class="row between"><h1>${tr('tab_feedback')}</h1>
       ${owner ? `<button class="plain" id="fb-csv">${tr('fb_csv')}</button>` : ''}</div>
-    <div class="kpis">
-      ${stat(c.total, tr('fb_total'))}${stat(c.open, tr('fb_f_new'), c.open ? 'warn' : '')}${stat(c.done, tr('fb_f_done'), 'good')}${stat(week, tr('fb_week'))}
-    </div>
+    <div class="kpis">${msgStats(all, c.open, { tr, dur })}</div>
+    <p class="muted small" style="margin-top:-4px">${tr('fb_total')}: ${c.total} · ${tr('fb_f_done')}: ${c.done} · ${tr('fb_week')}: ${week}</p>
     ${places.length ? `<div class="filters"><span class="small muted" style="align-self:center">${tr('fb_from')}</span>${places.slice(0, 6).map(([v, n]) => `<button data-fb-place="${esc(v)}" class="${flt.place === v ? 'on' : ''}" aria-pressed="${flt.place === v}">${esc(v)} · ${n}</button>`).join('')}</div>` : ''}
-    <div class="filters">${sbtn('open', tr('fb_f_new'))}${sbtn('done', tr('fb_f_done'))}${sbtn('all', tr('fb_f_all'))}</div>
+    <div class="filters">${sbtn('open', tr('fb_f_new'))}${sbtn('replied', tr('mg_f_replied'))}${sbtn('done', tr('fb_f_done'))}${sbtn('all', tr('fb_f_all'))}</div>
+    <div class="filters">${['problem', 'ai_wrong', 'suggestion', 'praise'].map((k) => `<button data-fb-kind="${k}" class="${flt.kind === k ? 'on' : ''}" aria-pressed="${flt.kind === k}">${tr('mg_kind_' + k)}</button>`).join('')}</div>
     <div class="row" style="margin-bottom:12px">
       <input id="fb-q" type="search" style="flex:2 1 260px;width:auto" value="${esc(flt.q)}" placeholder="${esc(tr('fb_search'))}" aria-label="${esc(tr('fb_search'))}">
       <select id="fb-lang" style="flex:1 1 150px;width:auto" aria-label="${esc(tr('fb_any_lang'))}">${opt(langs, flt.lang, tr('fb_any_lang'), fbLang)}</select>
@@ -1428,13 +1439,14 @@ function fbDraw() {
     <div id="fb-list"></div>
     ${st.next ? `<button class="plain" id="fb-more">${tr('fb_more')}</button>` : (all.length ? `<p class="muted small">${tr('fb_all_loaded')}</p>` : '')}`);
   document.querySelectorAll('[data-fb-st]').forEach((b) => { b.onclick = () => { flt.status = b.dataset.fbSt; fbDraw(); }; });
+  document.querySelectorAll('[data-fb-kind]').forEach((b) => { b.onclick = () => { flt.kind = flt.kind === b.dataset.fbKind ? '' : b.dataset.fbKind; fbDraw(); }; });
   document.querySelectorAll('[data-fb-place]').forEach((b) => {
     b.onclick = () => { flt.place = flt.place === b.dataset.fbPlace ? '' : b.dataset.fbPlace; fbDraw(); };
   });
   $('#fb-lang').onchange = (e) => { flt.lang = e.target.value; fbDraw(); };
   $('#fb-place').onchange = (e) => { flt.place = e.target.value; fbDraw(); };
   $('#fb-app').onchange = (e) => { flt.app = e.target.value; fbDraw(); };
-  $('#fb-clear').onclick = () => { Object.assign(flt, { q: '', lang: '', place: '', app: '' }); fbDraw(); };
+  $('#fb-clear').onclick = () => { Object.assign(flt, { q: '', lang: '', place: '', app: '', kind: '' }); fbDraw(); };
   let typing;
   $('#fb-q').oninput = (e) => {
     clearTimeout(typing);
@@ -1453,12 +1465,23 @@ function fbDraw() {
   }
   if ($('#fb-csv')) $('#fb-csv').onclick = () => fbCsv(st.rows.filter((f) => fbMatches(f, flt)));
   fbList();
-  // Opened from an alert (#feedback/<id>): show that message.
+  // Opened from an alert (#feedback/<id>): show that message, open.
   if (cache.fbFocus) {
     const card = document.querySelector(`[data-fb="${CSS.escape(cache.fbFocus)}"]`);
+    const f = st.rows.find((x) => x.id === cache.fbFocus);
     cache.fbFocus = null;
     if (card) { card.scrollIntoView({ block: 'center' }); card.classList.add('fresh'); }
+    if (f) fbOpen(f);
   }
+}
+
+/** The whole message and the reply, in the side panel (messages.js). */
+function fbOpen(f) {
+  if (!f) return;
+  openMessage(f, {
+    tr, esc, db, me, openPanel, closePanel, toast, fail, when, dur, rows: cache.fb ? cache.fb.rows : [],
+    onChange: () => PAGES.feedback(),
+  }).catch(fail);
 }
 
 /** The buttons on each card. Changes are kept in the loaded list, so the
@@ -1466,6 +1489,7 @@ function fbDraw() {
 function fbWire() {
   const st = cache.fb;
   const find = (id) => st.rows.find((f) => f.id === id);
+  document.querySelectorAll('[data-fb-open]').forEach((b) => { b.onclick = () => fbOpen(find(b.dataset.fbOpen)); });
   const boxOf = (id) => document.querySelector(`[data-fb-box="${CSS.escape(id)}"]`);
   const recount = () => { if (st.counts) { cache.fbOpen = st.counts.open; tabs(); } };
   document.querySelectorAll('[data-fb-done]').forEach((b) => {

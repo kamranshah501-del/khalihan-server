@@ -703,3 +703,15 @@ button.plain.small, button.danger.small { padding: 4px 10px; font-size: 13px; }
 .altable tr.dim td { opacity: .6; }
 .altable input[type=checkbox] { width: 20px; height: 20px; accent-color: var(--green-dark); }
 @media (max-width: 600px) { .bellmenu { position: fixed; left: 12px; right: 12px; top: 60px; width: auto; } }
+
+/* ── Admin 1.31: Farmer messages (owner 18 Nov 2026, Part 1) ── */
+.mghead { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
+.mgav { display: inline-flex; align-items: center; justify-content: center; background: var(--navy); color: #fff; font-weight: 800; }
+.chip.mgk { background: #eef1f4; color: var(--muted); }
+.chip.mgk.problem, .chip.mgk.ai_wrong { background: var(--red-tint); color: #8c241f; }
+.chip.mgk.praise { background: var(--green-tint); color: var(--green-dark); }
+.chip.mgk.suggestion { background: var(--amber-tint); color: var(--amber); }
+.mgsender { display: flex; gap: 12px; align-items: flex-start; }
+.mgmsg { background: #f6f8fa; border-radius: 14px; padding: 12px 14px; margin-top: 12px; }
+.mgtrail { margin: 4px 0; padding-left: 18px; }
+.mgreply { background: var(--green-tint); border-radius: 12px; padding: 8px 12px; margin-bottom: 6px; }

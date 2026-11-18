@@ -226,10 +226,13 @@ def main():
         if f["at"] < last_run - timedelta(days=1):
             continue  # an old one the memory had let go
         text = str(f.get("text", ""))
-        problem = text.startswith("🤖")
+        kind = f.get("kind") or ("ai_wrong" if text.startswith("🤖") else "")
+        problem = kind in ("problem", "ai_wrong")
+        label = {"problem": "Problem", "ai_wrong": "AI answer wrong", "praise": "Praise", "suggestion": "Suggestion"}.get(kind, "New farmer message")
+        who = f"{f['name']}, " if f.get("name") else ""
         run.send({
             "kind": "msg_problem" if problem else "msg_new",
-            "title": f"{'AI answer wrong' if problem else 'New farmer message'} · {place(f)}",
+            "title": f"{label} · {who}{place(f)}",
             "body": short(text, 150),
             "link": f"/#feedback/{f['id']}", "tag": f"fb-{f['id']}",
         })
@@ -315,6 +318,31 @@ def main():
                         "body": f"{int(got):,} of 1,000 on the launch counter",
                         "link": "/#features" if ms == 1000 else "/#stats", "tag": f"launch-{ms}",
                     })
+
+    # ── the team's replies → the farmer's phone (app 1.0.10, Admin 1.31) ──
+    for d in db.collection("reply_queue").limit(50).stream():
+        q = d.to_dict() or {}
+        dev, rid = str(q.get("dev") or ""), str(q.get("reply") or "")
+        try:
+            box = db.collection("inbox").document(dev)
+            inbox = box.get()
+            token = (inbox.to_dict() or {}).get("token") if inbox.exists else None
+            rep = box.collection("replies").document(rid).get()
+            text = str((rep.to_dict() or {}).get("text", "")) if rep.exists else ""
+            if token and text:
+                messaging.send(messaging.Message(
+                    token=token,
+                    data={"type": "reply", "id": rid, "text": short(text, 300)},
+                    android=messaging.AndroidConfig(priority="high"),
+                ))
+                run.count("replies_pushed")
+            else:
+                run.count("replies_no_phone")
+        except (messaging.UnregisteredError, messaging.SenderIdMismatchError):
+            run.count("replies_no_phone")
+        except Exception as e:
+            print(f"  a reply push failed: {type(e).__name__}")
+        d.reference.delete()
 
     # ── "Send me a test alert" from Admin ──
     for d in db.collection("alert_requests").limit(20).stream():

@@ -88,17 +88,79 @@ service cloud.firestore {
     }
 
     // ── "सुझाव दें" ────────────────────────────────────────────────────
+    // App 1.0.10 ("Message to the Khalihan team", owner 18 Nov 2026 — Admin
+    // rework Part 1): the kind of message, and — only if the farmer turns each
+    // on while sending — his name, a small profile photo (JPEG as text, a few
+    // KB), his mobile number and phone details (`info`: model, Android, network,
+    // notifications; `trail`: what went wrong in the app this week, as short
+    // codes). `dev` is the phone's random ID, where the reply goes (inbox/);
+    // `en`, the phone's English translation for the team.
     match /feedback/{id} {
-      allow create: if request.resource.data.keys().hasOnly(['text', 'state', 'district', 'lang', 'app', 'at'])
+      allow create: if request.resource.data.keys().hasOnly(
+            ['text', 'state', 'district', 'lang', 'app', 'at', 'kind', 'en', 'name', 'phone', 'photo', 'dev', 'info', 'trail', 'reply_to'])
         && request.resource.data.text is string
         && request.resource.data.text.size() > 0
         && request.resource.data.text.size() <= 500
-        && request.resource.data.at == request.time;
+        && request.resource.data.at == request.time
+        && request.resource.data.get('kind', 'suggestion') in ['problem', 'suggestion', 'praise', 'ai_wrong']
+        && request.resource.data.get('name', '') is string
+        && request.resource.data.get('name', '').size() <= 60
+        && request.resource.data.get('phone', '') is string
+        && (request.resource.data.get('phone', '') == '' || request.resource.data.get('phone', '').matches('^[6-9][0-9]{9}$'))
+        && request.resource.data.get('photo', '') is string
+        && request.resource.data.get('photo', '').size() <= 24000
+        && request.resource.data.get('dev', 'aaaaaaaaaaaaaaaaaaaa').matches('^[a-z0-9]{20}$')
+        && request.resource.data.get('info', {}) is map
+        && request.resource.data.get('info', {}).size() <= 12
+        && request.resource.data.get('trail', []) is list
+        && request.resource.data.get('trail', []).size() <= 40
+        && request.resource.data.get('reply_to', '') is string
+        && request.resource.data.get('reply_to', '').size() <= 40
+        && request.resource.data.get('en', '') is string
+        && request.resource.data.get('en', '').size() <= 1500;
       allow read: if isStaff();
       // done_at (Admin 1.30): when it was answered, for the morning summary.
+      // en, replied_at, reply_by (Admin 1.31): the English the team reads, and
+      // when and by whom the farmer got a reply in the app.
       allow update: if isStaff()
-        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['done', 'note', 'by', 'done_at']);
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['done', 'note', 'by', 'done_at', 'en', 'replied_at', 'reply_by']);
       allow delete: if isOwner();
+    }
+
+    // ── The team's replies, inside the app (app 1.0.10, Admin 1.31) ─────
+    // inbox/{dev}: the phone's random ID → where its replies are sent (the
+    // phone's notification token). The phone writes it only when it sends a
+    // message; only the team reads it. inbox/{dev}/replies: the team writes;
+    // the phone reads its own by its random ID (like a Kendra order by its
+    // id) and may only mark one seen or say if it helped.
+    match /inbox/{dev} {
+      allow create, update: if dev.matches('^[a-z0-9]{20}$')
+        && request.resource.data.keys().hasOnly(['token', 'lang', 'app', 'at'])
+        && request.resource.data.token is string
+        && request.resource.data.token.size() < 600
+        && request.resource.data.lang is string
+        && request.resource.data.lang.size() <= 8
+        && request.resource.data.app is string
+        && request.resource.data.app.size() <= 20
+        && request.resource.data.at == request.time;
+      allow read: if isStaff();
+      allow delete: if isOwner();
+      match /replies/{id} {
+        allow get, list: if dev.matches('^[a-z0-9]{20}$');
+        allow create: if isStaff()
+          && request.resource.data.keys().hasOnly(['text', 'shown', 'lang', 'for', 'by', 'by_name', 'at'])
+          && request.resource.data.text is string
+          && request.resource.data.text.size() > 0
+          && request.resource.data.text.size() <= 1000
+          && request.resource.data.shown is string
+          && request.resource.data.shown.size() <= 2000
+          && request.resource.data.by == staffEmail()
+          && request.resource.data.at == request.time;
+        allow update: if request.resource.data.diff(resource.data).affectedKeys().hasOnly(['helped', 'seen'])
+          && request.resource.data.get('helped', true) is bool
+          && request.resource.data.get('seen', true) is bool;
+        allow delete: if isOwner();
+      }
     }
 
     // ── "My state isn't in the list" (app v1.0.4+, 20 Oct 2026) ─────────
@@ -374,6 +436,19 @@ service cloud.firestore {
         && request.resource.data.at == request.time;
       allow read: if isOwner();
       allow update, delete: if false;
+    }
+
+    // A reply waiting to be pushed to the farmer's phone: the alert job
+    // (tools/admin_alerts.py) sends it at its next run, then deletes it.
+    match /reply_queue/{id} {
+      allow create: if isStaff()
+        && request.resource.data.keys().hasOnly(['dev', 'reply', 'by', 'at'])
+        && request.resource.data.dev.matches('^[a-z0-9]{20}$')
+        && request.resource.data.reply is string
+        && request.resource.data.reply.size() <= 40
+        && request.resource.data.by == staffEmail()
+        && request.resource.data.at == request.time;
+      allow read, update, delete: if false;
     }
 
     // ── Admin alerts on phones and computers (Admin 1.30, owner 18 Nov 2026,
