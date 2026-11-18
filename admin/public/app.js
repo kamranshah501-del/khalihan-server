@@ -12,14 +12,14 @@ import { columnChart, wireTips, pipeline, table } from './charts.js';
 import { chime, askDesktop, desktopAllowed, desktopNotify } from './live.js';
 import { dealNumbers, monthSummary, offerPlan } from './money.js';
 import { KENDRA_WORDS, createKendra } from './kendra.js';
-import { SWITCH_WORDS, createSwitches } from './switches.js';
+import { SWITCH_WORDS, FEATURE_INFO, createSwitches } from './switches.js';
 import { BIZ_WORDS, createBusiness } from './business.js';
 import { plusPage } from './plus.js';
 import { statsPage } from './stats.js';
-import { budgetPage } from './budget.js';
+import { budgetPage, sums as budgetSums } from './budget.js';
 import { aiTestPage } from './aitest.js';
 
-const ADMIN_VERSION = '1.28 · 17 Nov 2026';
+const ADMIN_VERSION = '1.29 · 18 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -666,6 +666,160 @@ Object.assign(I18N.hi, SWITCH_WORDS.hi);
 Object.assign(I18N.en, BIZ_WORDS.en);
 Object.assign(I18N.hi, BIZ_WORDS.hi);
 
+// Admin 1.29 (owner, 18 Nov 2026 — the Admin rework, Parts 3 and 4
+// approved 10:55 and 11:43): the new names in the menu, the Today page and
+// the Later shelf. Kept last so these names win over the older ones above.
+Object.assign(I18N.en, {
+  tab_home: 'Today',
+  tab_feedback: 'Farmer messages',
+  tab_stats: 'Launch and numbers',
+  tab_budget: 'Money',
+  tab_compliance: 'Dates and deadlines',
+  tab_features: 'Switches',
+  tab_team: 'Team and change log',
+  tab_team_only: 'Team',
+  tab_settings: 'Settings and alerts',
+  tab_later: 'Later shelf',
+  nav_owner: 'Owner only',
+  n_asleep: '{n} asleep',
+  td_msgs: 'FARMER MESSAGES',
+  td_waiting: '{n} waiting',
+  td_all_answered: 'All answered',
+  td_oldest: 'Oldest {t}',
+  td_left: '{t} to the 4-hour promise',
+  td_over: '{t} past the 4-hour promise',
+  td_reply: 'Reply now',
+  td_open: 'Open',
+  td_problem: 'PROBLEM RIGHT NOW',
+  td_prob_job: 'The price job has not run since {d}',
+  td_prob_state: '{s}: today\'s prices did not come',
+  td_prob_see: 'See the states',
+  td_well: 'ALL WELL',
+  td_well_d: 'The price job ran {t} ago',
+  td_well_none: 'No price run seen yet',
+  td_answered: 'ANSWERED THIS WEEK',
+  td_answered_n: '{a} of {b}',
+  td_answered_sub: 'Messages of the last 7 days marked done',
+  td_answered_soon: 'Replying inside the app comes with app 1.0.10.',
+  td_latest: 'Latest',
+  td_latest_none: 'Nothing new in the last two weeks.',
+  td_need: 'Needs doing',
+  td_only_you: 'ONLY YOU SEE THIS PART',
+  td_launch: 'LAUNCH COUNTER',
+  td_launch_of: 'of 1,000',
+  td_launch_pace: '+{p} a day · about {d} more days',
+  td_launch_done: 'Reached — the Launch button is on Switches',
+  td_launch_wait: 'Waiting for the first count',
+  td_pro: 'KHALIHAN PRO',
+  td_pro_off: 'Sale starts at 1,000',
+  td_pro_on: 'On sale',
+  td_pro_sub: '{m} members · {g} gift codes in use',
+  td_money: 'MONEY THIS MONTH',
+  td_money_plan: 'Plan {rs}',
+  td_money_spent: 'Spent so far {rs}',
+  td_money_none: 'Type the month\'s plan on Money',
+  td_money_pro: 'Pro income {rs}',
+  td_dates: 'NEXT DATES',
+  td_dates_none: 'No dates yet. Add them on Dates and deadlines.',
+  td_dates_late: '{d} days late',
+  later_intro: 'Pages for features that are switched off. They keep everything and come back to the menu by themselves when their feature turns on or something new arrives in them.',
+  later_why_sell: 'Wakes when Sell to Khalihan is on',
+  later_why_kendra: 'Wakes when the Kendra shop is on',
+  later_why_login: 'Wakes when mobile login is on',
+  later_why_trade: 'Wakes when trading starts (plan step 1)',
+  later_why_aitest: 'Wakes when you start a test',
+  later_open: 'Open anyway',
+  later_awake: 'Awake · in the menu',
+  later_d_requests: 'Farmers who want to sell their crop to Khalihan.',
+  later_d_offers: 'The price Khalihan pays for a crop, and where.',
+  later_d_kendra: 'The shop: orders, stock, the Home card, complaints.',
+  later_d_farmers: 'Farmers who logged in with their mobile number.',
+  later_d_deletions: 'Farmers who deleted their account — clean up in 30 days.',
+  later_d_processors: 'Who buys from us: formulas, quotes, what they owe.',
+  later_d_plan: 'Steps, conditions and money from Business Plan v2.',
+  later_d_aitest: 'The 200 real questions, every answer checked.',
+  later_banner: 'This page is asleep on the Later shelf. {why}.',
+  help_home: 'What is waiting for the team today. Farmer messages carry a 4-hour promise. Pages of features that are off sleep on the Later shelf.',
+  help_features: 'Owner only. The Launch card on top; below it the switches you use, new features on trial, sleeping features, and Emergency off for the finished ones.',
+  help_later: 'Pages of switched-off features. Each one wakes by itself when its feature turns on or something new arrives in it.',
+  help_team: 'Who can open this panel, and every change made in it. Add a Gmail as staff (daily work) or owner (everything, including switches and money).',
+});
+Object.assign(I18N.hi, {
+  tab_home: 'आज',
+  tab_feedback: 'किसानों के संदेश',
+  tab_stats: 'लॉन्च और आँकड़े',
+  tab_budget: 'पैसा',
+  tab_compliance: 'तारीखें और डेडलाइन',
+  tab_features: 'स्विच',
+  tab_team: 'टीम और रिकॉर्ड',
+  tab_team_only: 'टीम',
+  tab_settings: 'सेटिंग्स और अलर्ट',
+  tab_later: 'बाद वाली शेल्फ़',
+  nav_owner: 'सिर्फ़ मालिक',
+  n_asleep: '{n} सोए हुए',
+  td_msgs: 'किसानों के संदेश',
+  td_waiting: '{n} बाकी',
+  td_all_answered: 'सबका जवाब हो गया',
+  td_oldest: 'सबसे पुराना {t}',
+  td_left: '4 घंटे के वादे में {t} बाकी',
+  td_over: '4 घंटे का वादा {t} पहले टूटा',
+  td_reply: 'अभी जवाब दें',
+  td_open: 'खोलें',
+  td_problem: 'अभी की दिक्कत',
+  td_prob_job: 'भाव वाला काम {d} से नहीं चला',
+  td_prob_state: '{s}: आज के भाव नहीं आए',
+  td_prob_see: 'राज्य देखें',
+  td_well: 'सब ठीक',
+  td_well_d: 'भाव वाला काम {t} पहले चला',
+  td_well_none: 'अभी भाव का कोई रन नहीं दिखा',
+  td_answered: 'इस हफ़्ते के जवाब',
+  td_answered_n: '{b} में से {a}',
+  td_answered_sub: 'पिछले 7 दिन के संदेश जो पूरे हुए',
+  td_answered_soon: 'ऐप के अंदर जवाब ऐप 1.0.10 से।',
+  td_latest: 'ताज़ा',
+  td_latest_none: 'पिछले दो हफ़्ते में कुछ नया नहीं।',
+  td_need: 'करना है',
+  td_only_you: 'ये हिस्सा सिर्फ़ आप देखते हैं',
+  td_launch: 'लॉन्च काउंटर',
+  td_launch_of: '1,000 में से',
+  td_launch_pace: 'रोज़ +{p} · लगभग {d} दिन और',
+  td_launch_done: 'पूरा — Launch बटन स्विच पेज पर है',
+  td_launch_wait: 'पहली गिनती का इंतज़ार',
+  td_pro: 'KHALIHAN PRO',
+  td_pro_off: '1,000 पर बिक्री शुरू',
+  td_pro_on: 'बिक्री चालू',
+  td_pro_sub: '{m} सदस्य · {g} गिफ़्ट कोड चालू',
+  td_money: 'इस महीने का पैसा',
+  td_money_plan: 'प्लान {rs}',
+  td_money_spent: 'अब तक खर्च {rs}',
+  td_money_none: 'महीने का प्लान "पैसा" पेज पर लिखें',
+  td_money_pro: 'Pro की कमाई {rs}',
+  td_dates: 'आने वाली तारीखें',
+  td_dates_none: 'अभी कोई तारीख नहीं। "तारीखें और डेडलाइन" में जोड़ें।',
+  td_dates_late: '{d} दिन देर',
+  later_intro: 'बंद फ़ीचर के पेज। सब कुछ सँभाल कर रखते हैं, और फ़ीचर चालू होते ही या कुछ नया आते ही अपने-आप मेन्यू में लौट आते हैं।',
+  later_why_sell: '"Khalihan को बेचो" चालू होने पर जागेगा',
+  later_why_kendra: 'Kendra दुकान चालू होने पर जागेगा',
+  later_why_login: 'मोबाइल लॉगिन चालू होने पर जागेगा',
+  later_why_trade: 'ट्रेड शुरू होने पर जागेगा (प्लान का कदम 1)',
+  later_why_aitest: 'जाँच शुरू करने पर जागेगा',
+  later_open: 'फिर भी खोलें',
+  later_awake: 'जागा हुआ · मेन्यू में',
+  later_d_requests: 'किसान जो अपनी फ़सल Khalihan को बेचना चाहते हैं।',
+  later_d_offers: 'Khalihan किस फ़सल का क्या भाव देता है, और कहाँ।',
+  later_d_kendra: 'दुकान: ऑर्डर, स्टॉक, Home का कार्ड, शिकायतें।',
+  later_d_farmers: 'किसान जिन्होंने मोबाइल नंबर से लॉगिन किया।',
+  later_d_deletions: 'किसान जिन्होंने खाता हटाया — 30 दिन में सफ़ाई।',
+  later_d_processors: 'हमसे कौन ख़रीदता है: फ़ॉर्मूला, भाव, उनका बकाया।',
+  later_d_plan: 'Business Plan v2 के कदम, शर्तें और पैसा।',
+  later_d_aitest: '200 असली सवाल, हर जवाब की जाँच।',
+  later_banner: 'ये पेज बाद वाली शेल्फ़ पर सोया है। {why}।',
+  help_home: 'आज टीम के लिए क्या बाकी है। किसानों के संदेश का जवाब 4 घंटे में। बंद फ़ीचर के पेज बाद वाली शेल्फ़ पर सोते हैं।',
+  help_features: 'सिर्फ़ मालिक। ऊपर Launch कार्ड; नीचे आपके काम के स्विच, ट्रायल वाले नए फ़ीचर, सोए हुए फ़ीचर, और पक्के फ़ीचर के लिए इमरजेंसी बंद।',
+  help_later: 'बंद फ़ीचर के पेज। फ़ीचर चालू होते ही या कुछ नया आते ही हर पेज अपने-आप जाग जाता है।',
+  help_team: 'ये पैनल कौन खोल सकता है, और इसमें हुआ हर बदलाव। Gmail को staff (रोज़ का काम) या owner (सब कुछ, स्विच और पैसा भी) बनाएँ।',
+});
+
 let lang = store.get('lang', 'en');
 if (!I18N[lang]) lang = 'en';
 let tz = store.get('tz', 'ist') === 'local' ? 'local' : 'ist';
@@ -887,6 +1041,8 @@ const ICON_PATHS = {
   budget: 'M4 7h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4zM4 7V5a1 1 0 0 1 1-1h11v3M15.5 13.5h1.5',
   aitest: 'M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3M7.5 15h9',
   home: 'M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z',
+  later: 'M3 4h18M3 20h18M5 4v16M19 4v16M5 12h14M9 8h2M9 16h2',
+  lock: 'M6 11h12v10H6zM8 11V8a4 4 0 0 1 8 0v3',
   requests: 'M4 7h16M4 12h16M4 17h10',
   offers: 'M3 12V5a2 2 0 0 1 2-2h7l9 9-9 9zM8 6.5a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3',
   kendra: 'M4 9h16l-1.5-5h-13zM5 9v11h14V9M9.5 20v-6h5v6',
@@ -904,6 +1060,51 @@ const ICON_PATHS = {
 };
 const icon = (k) => `<svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${ICON_PATHS[k] || ''}"/></svg>`;
 
+// ── sleeping pages: the Later shelf (Admin 1.29, owner 18 Nov 2026) ────
+// A page whose feature is off waits on the Later shelf instead of the menu.
+// It comes back by itself when its feature turns on, or when something new
+// arrives in it (a sell request, a Kendra order, an account deletion).
+const SLEEPERS = [
+  { tab: 'requests', feature: 'sell', why: 'later_why_sell' },
+  { tab: 'offers', feature: 'sell', why: 'later_why_sell' },
+  { tab: 'kendra', feature: 'kendra', why: 'later_why_kendra' },
+  { tab: 'farmers', feature: 'login', why: 'later_why_login' },
+  { tab: 'deletions', feature: 'login', why: 'later_why_login' },
+  { tab: 'processors', owner: true, why: 'later_why_trade' },
+  { tab: 'plan', owner: true, why: 'later_why_trade' },
+  { tab: 'aitest', owner: true, why: 'later_why_aitest' },
+];
+const featureOn = (key) => {
+  const f = cache.features || {};
+  return typeof f[key] === 'boolean' ? f[key] : !!(FEATURE_INFO[key] && FEATURE_INFO[key].def);
+};
+function isAwake(s) {
+  if (s.feature && featureOn(s.feature)) return true;
+  if (s.tab === 'requests') return (cache.requests || []).some((r) => r.status === 'new');
+  if (s.tab === 'kendra') return !!cache.kendraNew;
+  if (s.tab === 'deletions') return !!cache.delOpen;
+  if (s.tab === 'processors') return (cache.kadam || 0) >= 1 || !!(cache.biz && cache.biz.processors);
+  if (s.tab === 'plan') return (cache.kadam || 0) >= 1;
+  if (s.tab === 'aitest') return !!cache.aiTestOpen;
+  return false;
+}
+const shelfFor = (owner) => SLEEPERS.filter((s) => owner || !s.owner);
+const sleeperOf = (tab) => SLEEPERS.find((s) => s.tab === tab);
+
+/** What the menu needs to know which pages are awake — once at login, and
+ *  again whenever the owner changes a switch (Switches calls it). */
+async function loadWake() {
+  const owner = me && me.role === 'owner';
+  const [cfg, plan, tests] = await Promise.all([
+    db.appConfig().catch(() => null),
+    owner ? db.planState().catch(() => ({})) : Promise.resolve({}),
+    owner ? db.aiTests().catch(() => ({ runs: [] })) : Promise.resolve({ runs: [] }),
+  ]);
+  if (cfg) cache.features = cfg.features || {};
+  cache.kadam = Number((plan || {}).kadam) || 0;
+  cache.aiTestOpen = ((tests || {}).runs || []).some((r) => (r.asked || 0) > (r.marked || 0));
+}
+
 function tabs() {
   const owner = me && me.role === 'owner';
   const fresh = (cache.requests || []).filter((r) => r.status === 'new').length;
@@ -916,25 +1117,31 @@ function tabs() {
     processors: owner && cache.biz && cache.biz.processors ? [cache.biz.processors, 'red'] : null,
     compliance: owner && cache.biz && cache.biz.compliance ? [cache.biz.compliance, 'amber'] : null,
   };
-  const item = (k, label) => `<button data-tab="${k}" class="${k === page ? 'on' : ''}" ${k === page ? 'aria-current="page"' : ''}>
+  const shelf = shelfFor(owner);
+  const asleep = shelf.filter((s) => !isAwake(s));
+  counts.later = asleep.length ? [tr('n_asleep', { n: asleep.length }), 'grey'] : null;
+  // A sleeping page opened from the shelf lights up the shelf; the change
+  // log lights up "Team and change log".
+  const lit = page === 'audit' ? 'team' : (asleep.some((s) => s.tab === page) ? 'later' : page);
+  const item = (k, label) => `<button data-tab="${k}" class="${k === lit ? 'on' : ''}" ${k === lit ? 'aria-current="page"' : ''}>
       ${icon(k)}<span class="lbl">${label}</span>${counts[k] ? `<span class="badge ${counts[k][1]}">${counts[k][0]}</span>` : ''}</button>`;
+  const awakeTeam = shelf.filter((s) => !s.owner && isAwake(s)).map((s) => item(s.tab, tr('tab_' + s.tab))).join('');
+  const awakeOwner = shelf.filter((s) => s.owner && isAwake(s)).map((s) => item(s.tab, tr('tab_' + s.tab))).join('');
   const nav = $('#tabs');
   nav.hidden = false;
   nav.innerHTML = `
     ${item('home', tr('tab_home'))}
-    ${item('requests', tr('tab_requests'))}
-    ${item('offers', tr('tab_offers'))}
-    ${item('kendra', tr('tab_kendra'))}
     ${item('feedback', tr('tab_feedback'))}
-    ${item('farmers', tr('tab_farmers'))}
-    ${item('deletions', tr('tab_deletions'))}
-    ${owner ? `<div class="navh">${tr('nav_owner')}</div>${item('stats', tr('tab_stats'))}${item('budget', tr('tab_budget'))}${item('plan', tr('tab_plan'))}${item('processors', tr('tab_processors'))}${item('compliance', tr('tab_compliance'))}${item('features', tr('tab_features'))}${item('plus', tr('tab_plus'))}${item('aitest', tr('tab_aitest'))}${item('team', tr('tab_team'))}${item('audit', tr('tab_audit'))}` : ''}
+    ${awakeTeam}
+    ${owner ? `<div class="navh">${tr('nav_owner')}</div>${item('stats', tr('tab_stats'))}${item('plus', tr('tab_plus'))}${item('budget', tr('tab_budget'))}${item('compliance', tr('tab_compliance'))}${item('features', tr('tab_features'))}${item('team', tr('tab_team'))}${awakeOwner}` : ''}
     <div class="navgap"></div>
+    ${shelf.length ? item('later', tr('tab_later')) : ''}
     ${item('settings', tr('tab_settings'))}
     <div class="navfoot">Khalihan Admin ${ADMIN_VERSION.split(' ')[0]}</div>`;
   nav.querySelectorAll('button[data-tab]').forEach((b) => { b.onclick = () => { closeNav(); go(b.dataset.tab); }; });
   // The browser tab shows how many are waiting: "(2) Khalihan Admin".
-  document.title = fresh ? `(${fresh}) Khalihan Admin` : 'Khalihan Admin';
+  const waitingAll = (cache.fbOpen || 0) + fresh;
+  document.title = waitingAll ? `(${waitingAll}) Khalihan Admin` : 'Khalihan Admin';
   $('#menu').hidden = false;
   $('#search').hidden = false;
   $('#langbtn').hidden = false;
@@ -1055,6 +1262,9 @@ async function go(next) {
   setMain(skeleton());
   try {
     await (PAGES[next] || PAGES.home)();
+    // Opened from the Later shelf while asleep: say so at the top.
+    const s = sleeperOf(next);
+    if (s && !isAwake(s) && page === next) $('#main').insertAdjacentHTML('afterbegin', `<p class="note">${esc(tr('later_banner', { why: tr(s.why) }))}</p>`);
   } catch (e) {
     fail(e);
     setMain(`<div class="empty">${tr('page_failed')}</div>`);
@@ -1309,191 +1519,226 @@ function fbWire() {
 }
 
 // ── pages ──────────────────────────────────────────────────────────────
+const teamTabs = (on) => `<div class="subtabs" role="tablist">
+  <button role="tab" aria-selected="${on === 'team'}" class="${on === 'team' ? 'on' : ''}" data-sub="team">${tr('tab_team_only')}</button>
+  <button role="tab" aria-selected="${on === 'audit'}" class="${on === 'audit' ? 'on' : ''}" data-sub="audit">${tr('tab_audit')}</button>
+</div>`;
+const wireTeamTabs = () => document.querySelectorAll('[data-sub]').forEach((b) => { b.onclick = () => go(b.dataset.sub); });
+
 const PAGES = {
+  // Today (Admin 1.29, owner 18 Nov 2026 — "Part 3" approved 10:55): what
+  // waits for the team, whether something is wrong right now, and — owner
+  // only — the launch counter, Pro, the month's money and the next dates.
+  // Pages whose feature is off stay out of it (they sleep on the Later shelf).
   async home() {
     const owner = me.role === 'owner';
     const none = (v) => Promise.resolve(v);
-    const [requests, feedback, deletions, offers, users, money, orders, complaints, kinfo, people] = await Promise.all([
-      db.sellRequests(), db.feedback(), db.deletions(), db.offers(), db.usersCount().catch(() => null),
-      owner ? db.allDealMoney().catch(() => ({})) : none({}),
+    const [requests, feedback, fbCounts, deletions, offers, orders, complaints, kinfo, server, cfg] = await Promise.all([
+      db.sellRequests().catch(() => []), db.feedback().catch(() => []),
+      db.feedbackCounts ? db.feedbackCounts().catch(() => null) : none(null),
+      db.deletions().catch(() => []), db.offers().catch(() => ({ list: [] })),
       db.kendraOrders ? db.kendraOrders().catch(() => []) : none([]),
       db.kendraComplaints ? db.kendraComplaints().catch(() => []) : none([]),
       db.kendraInfo ? db.kendraInfo().catch(() => ({})) : none({}),
-      db.users ? db.users().catch(() => []) : none([]),
+      db.serverStatus ? db.serverStatus().catch(() => null) : none(null),
+      db.appConfig().catch(() => null),
     ]);
+    const [stats, members, gifts, budget, bizData] = owner ? await Promise.all([
+      db.ownerStats().catch(() => null), db.plusMembers().catch(() => []), db.plusGifts().catch(() => []),
+      db.budget().catch(() => null), biz().homeData().catch(() => null),
+    ]) : [null, [], [], null, null];
+
     const now = Date.now();
     const day = 864e5;
-    const count = (st) => requests.filter((r) => r.status === st).length;
-    const waiting = requests.filter((r) => r.status === 'new' && r.at instanceof Date).sort((x, y) => x.at - y.at);
-    const oldest = waiting[0];
-    const liveOffers = offers.list.filter((o) => String(o.until || '') >= istToday());
     const openFeedback = feedback.filter((f) => !f.done);
-    const openDel = deletions.filter((d) => !d.done);
     const kNew = orders.filter((o) => o.status === 'new');
     const kReady = orders.filter((o) => o.status === 'ready');
     const openComplaints = complaints.filter((x) => !x.done);
+    const openDel = deletions.filter((d) => !d.done);
+    const liveOffers = (offers.list || []).filter((o) => String(o.until || '') >= istToday());
     cache.requests = requests;
-    cache.money = money;
     cache.kendraNew = kNew.length;
-    cache.fbOpen = openFeedback.length;
+    cache.fbOpen = fbCounts ? fbCounts.open : openFeedback.length;
     cache.delOpen = openDel.length;
     cache.liveOffers = liveOffers.length;
+    if (cfg) cache.features = cfg.features || {};
+    if (bizData) { cache.biz = biz().badges(bizData); cache.kadam = Number((bizData.plan || {}).kadam) || 0; }
     tabs();
+    const awake = (tab) => isAwake(sleeperOf(tab));
+    const sellAwake = awake('requests');
+    const kendraAwake = awake('kendra');
 
-    // 14 days, by the panel's clock: requests (chart, sparkline) and Kendra orders.
-    const points = [];
-    const reqDays = [];
-    const ordDays = [];
-    for (let i = 13; i >= 0; i--) {
-      const d = new Date(now - i * day);
-      const those = requests.filter((r) => r.at instanceof Date && sameDay(r.at, d));
-      const q = those.reduce((sum, r) => sum + (Number(r.qty) || 0), 0);
-      const p = parts(d);
-      const label = `${p.day} ${MONTHS[p.m]}`;
-      points.push({ label: String(p.day), value: those.length, tip: tr('days_tip', { d: label, n: those.length, q }), full: label, q });
-      reqDays.push(those.length);
-      ordDays.push(orders.filter((o) => o.at instanceof Date && sameDay(o.at, d) && o.status !== 'cancelled').length);
+    // ── farmer messages: the 4-hour promise ──
+    const PROMISE = 4 * 3600e3;
+    const waiting = openFeedback.filter((f) => f.at instanceof Date).sort((x, y) => x.at - y.at);
+    const oldest = waiting[0];
+    const nOpen = cache.fbOpen;
+    let msgCard;
+    if (!nOpen) {
+      msgCard = `<section class="tcard green"><div class="tl">${tr('td_msgs')}</div><div class="tb">${tr('td_all_answered')}</div>
+        <button class="btn sec" data-go="feedback">${tr('td_open')}</button></section>`;
+    } else {
+      const age = oldest ? now - oldest.at : 0;
+      const late = age >= PROMISE;
+      msgCard = `<section class="tcard ${late ? 'red' : 'amber'}">
+        <div class="tl">${tr('td_msgs')}</div>
+        <div class="tb">${tr('td_waiting', { n: nOpen })}</div>
+        ${oldest ? `<div class="ts">${tr('td_oldest', { t: dur(age) })} — ${late ? tr('td_over', { t: dur(age - PROMISE) }) : tr('td_left', { t: dur(PROMISE - age) })}</div>` : ''}
+        <button class="btn pri" data-go="feedback">${tr('td_reply')}</button></section>`;
     }
-    const inDays = (list, from, to) => list.filter((r) => r.at instanceof Date && now - r.at >= from * day && now - r.at < to * day).length;
-    const req7 = inDays(requests, 0, 7);
-    const prev7 = inDays(requests, 7, 14);
-    const change = prev7 ? Math.round(((req7 - prev7) / prev7) * 100) : null;
-    const todayOrders = orders.filter((o) => o.at instanceof Date && sameDay(o.at, new Date(now)) && o.status !== 'cancelled');
-    const reserved = todayOrders.reduce((sum, o) => sum + (Number(o.total) || 0), 0);
-    const joined7 = people.length && people.length < 200 ? people.filter((u) => u.created instanceof Date && now - u.created < 7 * day).length : null;
 
-    // How long farmers wait for the first call (last 30 days).
-    const waits = requests
-      .filter((r) => r.at instanceof Date && now - r.at < 30 * day)
-      .map((r) => {
-        const first = (r.history || []).map((h) => toDate(h.at)).filter(Boolean).sort((x, y) => x - y)[0];
-        return first ? first - r.at : null;
-      })
-      .filter((v) => v != null && v >= 0);
-    const avgWait = waits.length ? waits.reduce((x, y) => x + y, 0) / waits.length : null;
+    // ── problem right now: the price job (more kinds come with alerts) ──
+    const problems = [];
+    if (server && server.at instanceof Date && now - server.at > 30 * 3600e3) problems.push({ t: tr('td_prob_job', { d: when(server.at) }) });
+    const openStates = ['Maharashtra', ...(((cfg || {}).launch_states) || []).filter((x) => x !== 'Maharashtra')];
+    if (server && server.states) {
+      openStates.forEach((st) => {
+        const run = server.states[st];
+        if (run && !run.rows && run.error) problems.push({ t: tr('td_prob_state', { s: st }), d: String(run.error).slice(0, 120) });
+      });
+    }
+    const probCard = problems.length
+      ? `<section class="tcard red"><div class="tl">${tr('td_problem')}</div><div class="tb sm">${esc(problems[0].t)}</div>
+          <div class="ts">${esc(problems[0].d || '')}${problems.length > 1 ? ` · +${problems.length - 1}` : ''}</div>
+          ${owner ? `<button class="btn sec" data-go="features">${tr('td_prob_see')}</button>` : ''}</section>`
+      : `<section class="tcard green"><div class="tl">${tr('td_well')}</div><div class="tb sm">${server && server.at instanceof Date ? tr('td_well_d', { t: dur(now - server.at) }) : tr('td_well_none')}</div></section>`;
 
-    const sum = owner ? monthSummary(requests, money, monthStart()) : null;
-    // Business Plan v2 (owner): dates coming up, processor payments late, the step.
-    const bizData = owner ? await biz().homeData().catch(() => null) : null;
-    if (bizData) { cache.biz = biz().badges(bizData); tabs(); }
-    const firstVisit = !cache.dashSeen;
-    cache.dashSeen = true;
-    const n = waiting.length;
+    // ── answered this week ──
+    const week = feedback.filter((f) => f.at instanceof Date && now - f.at < 7 * day);
+    const weekDone = week.filter((f) => f.done).length;
+    const ansCard = `<section class="tcard blue"><div class="tl">${tr('td_answered')}</div>
+      <div class="tb">${week.length ? tr('td_answered_n', { a: weekDone, b: week.length }) : '—'}</div>
+      <div class="ts">${tr('td_answered_sub')}</div><div class="ts dim">${tr('td_answered_soon')}</div></section>`;
 
-    // ── what needs doing ──
+    // ── needs doing: only what belongs to awake pages ──
     const tasks = [];
-    if (oldest) {
-      tasks.push({ icon: '📞', tone: 'red', title: tr('t_call', { who: esc(oldest.name || phoneShow(oldest.phone)), qty: esc(oldest.qty), crop: esc(oldest.crop) }),
-        sub: [tr('t_waited', { t: dur(now - oldest.at) }), esc(oldest.village || '')].filter(Boolean).join(' · '),
-        actions: `<a class="btn pri" href="tel:${esc(phoneTen(oldest.phone) ? '+91' + phoneTen(oldest.phone) : oldest.phone)}">${tr('call')}</a><button class="btn sec" id="open-oldest">${tr('open')}</button>` });
-      if (n > 1) tasks.push({ icon: '⏳', tone: 'amber', title: tr('t_more_waiting', { n: n - 1 }), sub: tr('t_more_waiting_d'), actions: `<button class="btn sec" data-filter="new">${tr('open')}</button>` });
+    const newReq = requests.filter((r) => r.status === 'new' && r.at instanceof Date).sort((x, y) => x.at - y.at);
+    if (sellAwake && newReq.length) {
+      const o = newReq[0];
+      tasks.push({ icon: '📞', tone: 'red', title: tr('t_call', { who: esc(o.name || phoneShow(o.phone)), qty: esc(o.qty), crop: esc(o.crop) }),
+        sub: [tr('t_waited', { t: dur(now - o.at) }), esc(o.village || '')].filter(Boolean).join(' · '),
+        actions: `<a class="btn pri" href="tel:${esc(phoneTen(o.phone) ? '+91' + phoneTen(o.phone) : o.phone)}">${tr('call')}</a><button class="btn sec" id="open-oldest">${tr('open')}</button>` });
+      if (newReq.length > 1) tasks.push({ icon: '⏳', tone: 'amber', title: tr('t_more_waiting', { n: newReq.length - 1 }), sub: tr('t_more_waiting_d'), actions: `<button class="btn sec" data-filter="new">${tr('open')}</button>` });
     }
-    if (kNew.length) tasks.push({ icon: '🧾', tone: 'sky', title: tr('t_k_new', { n: kNew.length }), sub: kReady.length ? tr('t_k_ready', { n: kReady.length }) : tr('t_k_new_d'), actions: `<button class="btn sec" data-go="kendra">${tr('open')}</button>` });
-    const stock = kinfo.stock || {};
-    const lowStock = ['urea', 'dap', 'mop'].filter((k) => stock[k] === 'low' || stock[k] === 'out');
-    if (lowStock.length) tasks.push({ icon: '📦', tone: 'amber', title: tr('t_stock', { s: lowStock.map((k) => `${tr('k_' + k)} ${tr('k_' + stock[k])}`).join(', ') }), sub: tr('t_stock_d'), actions: `<button class="btn sec" data-go="kendra">${tr('t_update')}</button>` });
-    if (openComplaints.length) tasks.push({ icon: '⚠️', tone: 'red', title: tr('t_complaints', { n: openComplaints.length }), sub: tr('t_oldest_on', { d: when(openComplaints[openComplaints.length - 1].at) }), actions: `<button class="btn sec" data-go="kendra">${tr('read')}</button>` });
-    if (openFeedback.length) tasks.push({ icon: '💬', tone: 'amber', title: tr('t_feedback', { n: openFeedback.length }), sub: `“${esc(String(openFeedback[0].text || '').slice(0, 70))}”`, actions: `<button class="btn sec" data-go="feedback">${tr('read')}</button>` });
+    if (kendraAwake) {
+      if (kNew.length) tasks.push({ icon: '🧾', tone: 'sky', title: tr('t_k_new', { n: kNew.length }), sub: kReady.length ? tr('t_k_ready', { n: kReady.length }) : tr('t_k_new_d'), actions: `<button class="btn sec" data-go="kendra">${tr('open')}</button>` });
+      const stock = kinfo.stock || {};
+      const lowStock = ['urea', 'dap', 'mop'].filter((k) => stock[k] === 'low' || stock[k] === 'out');
+      if (featureOn('kendra') && lowStock.length) tasks.push({ icon: '📦', tone: 'amber', title: tr('t_stock', { s: lowStock.map((k) => `${tr('k_' + k)} ${tr('k_' + stock[k])}`).join(', ') }), sub: tr('t_stock_d'), actions: `<button class="btn sec" data-go="kendra">${tr('t_update')}</button>` });
+      if (openComplaints.length) tasks.push({ icon: '⚠️', tone: 'red', title: tr('t_complaints', { n: openComplaints.length }), sub: tr('t_oldest_on', { d: when(openComplaints[openComplaints.length - 1].at) }), actions: `<button class="btn sec" data-go="kendra">${tr('read')}</button>` });
+    }
     if (openDel.length) {
       const first = openDel.filter((d) => d.at instanceof Date).sort((x, y) => x.at - y.at)[0];
       const left = first ? Math.max(0, 30 - Math.floor((now - first.at) / day)) : null;
       tasks.push({ icon: '🗑️', tone: 'red', title: tr('t_deletions', { n: openDel.length }), sub: left == null ? tr('t_del_d') : tr('t_del_left', { d: left }), actions: `<button class="btn sec" data-go="deletions">${tr('open')}</button>` });
     }
-    if (bizData) tasks.push(...biz().homeTasks(bizData));
-    const ending = liveOffers.filter((o) => { const u = String(o.until || ''); return u && u <= new Date(now + 2 * day + 5.5 * 3600e3).toISOString().slice(0, 10); });
-    if (ending.length) tasks.push({ icon: '🏷️', tone: 'sky', title: tr('t_offers_end', { n: ending.length }), sub: ending.map((o) => esc(o.crop || '')).join(', '), actions: `<button class="btn sec" data-go="offers">${tr('open')}</button>` });
+    if (bizData && awake('processors')) tasks.push(...biz().homeTasks({ ...bizData, items: [] }));
+    if (sellAwake) {
+      const ending = liveOffers.filter((o) => { const u = String(o.until || ''); return u && u <= new Date(now + 2 * day + 5.5 * 3600e3).toISOString().slice(0, 10); });
+      if (ending.length) tasks.push({ icon: '🏷️', tone: 'sky', title: tr('t_offers_end', { n: ending.length }), sub: ending.map((o) => esc(o.crop || '')).join(', '), actions: `<button class="btn sec" data-go="offers">${tr('open')}</button>` });
+    }
 
-    // ── what just happened ──
+    // ── latest ──
     const person = (email) => { const u = String(email || '').split('@')[0]; return u ? u.charAt(0).toUpperCase() + u.slice(1) : '—'; };
     const events = [];
-    requests.slice(0, 30).forEach((r) => {
-      if (r.at instanceof Date) events.push({ at: r.at, who: r.name || phoneShow(r.phone), html: tr('e_wants', { qty: esc(r.qty), crop: esc(r.crop) }), chip: 'new' });
-      (r.history || []).forEach((h) => { const at = toDate(h.at); if (at) events.push({ at, who: person(h.by), html: tr('e_moved', { who: esc(r.name || phoneShow(r.phone)) }), chip: h.status }); });
+    feedback.slice(0, 20).forEach((f) => { if (f.at instanceof Date) events.push({ at: f.at, dot: f.done ? 'green' : 'amber', html: `${tr('tab_feedback')} · “${esc(String(f.text || '').slice(0, 70))}” · ${esc(f.district || f.state || '')}` }); });
+    if (sellAwake) requests.slice(0, 20).forEach((r) => {
+      if (r.at instanceof Date) events.push({ at: r.at, dot: 'red', html: `${esc(r.name || phoneShow(r.phone))} ${tr('e_wants', { qty: esc(r.qty), crop: esc(r.crop) })}` });
+      (r.history || []).forEach((h) => { const at = toDate(h.at); if (at) events.push({ at, dot: 'blue', html: `${esc(person(h.by))} ${tr('e_moved', { who: esc(r.name || phoneShow(r.phone)) })}` }); });
     });
-    orders.slice(0, 20).forEach((o) => {
-      if (o.at instanceof Date) events.push({ at: o.at, who: o.name || phoneShow(o.phone), html: tr('e_order', { code: esc(o.code || ''), rs: rs(o.total) }), tag: 'Kendra' });
-    });
-    feedback.slice(0, 10).forEach((f) => { if (f.at instanceof Date) events.push({ at: f.at, who: '💡', html: tr('e_feedback', { t: esc(String(f.text || '').slice(0, 60)) }) }); });
-    const feed = events.filter((e) => now - e.at < 14 * day).sort((x, y) => y.at - x.at).slice(0, 8);
-    const hue = (t) => { let h = 0; for (const ch of String(t)) h = (h * 31 + ch.charCodeAt(0)) % 360; return h; };
-    const initials = (t) => {
-      if (/^\p{Extended_Pictographic}/u.test(t)) return t;
-      const letters = String(t).replace(/[^\p{L}\s]/gu, '').split(/\s+/).filter(Boolean).slice(0, 2).map((w) => w[0].toUpperCase()).join('');
-      return letters || String(t).replace(/\D/g, '').slice(-2) || '•'; // a phone number: its last two digits
-    };
+    if (kendraAwake) orders.slice(0, 20).forEach((o) => { if (o.at instanceof Date) events.push({ at: o.at, dot: 'blue', html: `${esc(o.name || phoneShow(o.phone))} ${tr('e_order', { code: esc(o.code || ''), rs: rs(o.total) })}` }); });
+    const feed = events.filter((e) => now - e.at < 14 * day).sort((x, y) => y.at - x.at).slice(0, 6);
 
-    const kpi = (o) => `<button class="kpi ${o.cls || ''}" ${o.go ? `data-go="${o.go}"` : ''} ${o.id ? `id="${o.id}"` : ''}>
-        <span class="kl">${o.label}</span>
-        <span class="kv"${o.count != null && firstVisit ? ` data-count="${o.count}"` : ''}>${o.count != null && firstVisit ? 0 : o.value}</span>
-        <span class="kd ${o.subCls || ''}">${o.sub || '&nbsp;'}</span>
-        ${o.spark ? sparkline(o.spark, o.color) : ''}</button>`;
-
-    const greet = [
-      n ? tr('g_waiting', { n }) : tr('g_calm'),
-      kNew.length ? tr('g_orders', { n: kNew.length }) : '',
-    ].filter(Boolean).join(' · ');
+    // ── owner only ──
+    let ownerPart = '';
+    if (owner) {
+      const ga = (stats && stats.ga) || {};
+      const got = ga.inn_launch != null ? ga.inn_launch : null;
+      const GOAL = 1000;
+      let launch;
+      if (got == null) launch = `<div class="ob">—</div><div class="os">${tr('td_launch_wait')}</div>`;
+      else {
+        const left = Math.max(0, GOAL - got);
+        const pace = ga.inn7 != null ? ga.inn7 / 7 : 0;
+        launch = `<div class="ob">${got.toLocaleString('en-IN')} <small>${tr('td_launch_of')}</small></div>
+          <div class="obar"><span style="width:${Math.min(100, (got / GOAL) * 100).toFixed(1)}%"></span></div>
+          <div class="os">${left ? (pace > 0 ? tr('td_launch_pace', { p: Math.round(pace), d: Math.ceil(left / pace) }) : '') : tr('td_launch_done')}</div>`;
+      }
+      const paid = (members || []).filter((m) => !m.test && m.until instanceof Date && m.until.getTime() > now);
+      const inUse = (gifts || []).filter((g) => g.device).length;
+      const proOn = featureOn('pro_sale');
+      const mStart = monthStart();
+      const proIncome = (members || []).filter((m) => !m.test && m.at instanceof Date && m.at >= mStart).reduce((a, m) => a + (m.price || 0), 0);
+      const ym = new Date();
+      const key = `${ym.getFullYear()}-${String(ym.getMonth() + 1).padStart(2, '0')}`;
+      const bs = budget && (budget.lines || []).length ? budgetSums(budget, key) : null;
+      const money = bs && bs.plan
+        ? `<div class="ob sm">${tr('td_money_plan', { rs: rs(bs.plan) })}</div><div class="os">${tr('td_money_spent', { rs: rs(bs.spent) })} · ${tr('td_money_pro', { rs: rs(proIncome) })}</div>`
+        : `<div class="ob sm">—</div><div class="os">${tr('td_money_none')}</div>`;
+      const t0 = istToday();
+      const showDay = (iso) => new Date(iso + 'T00:00:00Z').toLocaleDateString(lang === 'hi' ? 'hi-IN' : 'en-IN', { weekday: 'short', day: 'numeric', month: 'short', timeZone: 'UTC' });
+      const dates = ((bizData && bizData.items) || []).filter((x) => !x.done && x.due).sort((a, b) => String(a.due).localeCompare(String(b.due))).slice(0, 6);
+      const dateRows = dates.map((x) => {
+        const lateBy = Math.round((Date.parse(t0) - Date.parse(x.due)) / day);
+        return `<div><b>${esc(showDay(x.due))}</b> · ${esc(x.name || '')}${lateBy > 0 ? ` <span class="late">${tr('td_dates_late', { d: lateBy })}</span>` : ''}</div>`;
+      }).join('');
+      ownerPart = `<section class="ownerpart">
+        <div class="ohead">${icon('lock')}${tr('td_only_you')}</div>
+        <div class="otiles">
+          <button class="otile" data-go="stats"><div class="ol">${tr('td_launch')}</div>${launch}</button>
+          <button class="otile" data-go="plus"><div class="ol">${tr('td_pro')}</div><div class="ob sm">${proOn ? tr('td_pro_on') : tr('td_pro_off')}</div><div class="os">${tr('td_pro_sub', { m: paid.length, g: inUse })}</div></button>
+          <button class="otile" data-go="budget"><div class="ol">${tr('td_money')}</div>${money}</button>
+        </div>
+        <button class="otile wide" data-go="compliance"><div class="ol">${tr('td_dates')}</div>
+          ${dateRows ? `<div class="odates">${dateRows}</div>` : `<div class="os">${tr('td_dates_none')}</div>`}</button>
+      </section>`;
+    }
 
     setMain(`
       ${db.demo ? `<p class="note">${tr('demo_note')}</p>` : ''}
       <div class="ph">
         <div class="ph-t"><h1>${tr('tab_home')}</h1><span class="ph-date">${esc(todayLabel())}</span></div>
-        <div class="ph-acts">
-          <button class="btn sec" data-go="kendra">${tr('a_kendra')}</button>
-          <button class="btn pri" data-go="offers">${tr('a_offer')}</button>
-        </div>
       </div>
-      <p class="hello">${markSVG(22, { animate: firstVisit })}<span>${tr('hello', { n: me.name ? ' ' + esc(me.name) : '' })} — ${greet}</span></p>
-
-      <section class="kpis">
-        ${kpi({ label: `<span class="dot ${n ? 'red' : 'green'}"></span>${tr('k1')}`, value: n, count: n, sub: oldest ? tr('t_waited', { t: dur(now - oldest.at) }) : tr('k1_none'), subCls: n ? (now - oldest.at > 2 * 3600e3 ? 'down' : 'warnt') : 'up', cls: n ? 'alert' : '', id: n ? 'kpi-wait' : '', go: n ? '' : 'requests', spark: reqDays, color: n ? '#d9534f' : '#2f7a00' })}
-        ${kpi({ label: tr('k2'), value: req7, count: req7, sub: change == null ? tr('k2_sub', { n: prev7 }) : `${change >= 0 ? '▲' : '▼'} ${Math.abs(change)}% ${tr('vs_last')}`, subCls: change == null ? '' : change >= 0 ? 'up' : 'down', go: 'requests', spark: reqDays, color: '#20405E' })}
-        ${kpi({ label: tr('k3'), value: todayOrders.length, count: todayOrders.length, sub: todayOrders.length ? tr('k3_sub', { rs: rs(reserved) }) : tr('k3_none'), subCls: todayOrders.length ? 'up' : '', go: 'kendra', spark: ordDays, color: '#2f7a00' })}
-        ${kpi({ label: tr('s_users'), value: users == null ? '—' : users, count: users == null ? null : users, sub: joined7 ? `▲ ${tr('k4_sub', { n: joined7 })}` : (avgWait == null ? '' : tr('k4_wait', { t: dur(avgWait) })), subCls: joined7 ? 'up' : '', go: 'farmers', spark: null })}
+      <p class="hello">${markSVG(22, { animate: !cache.dashSeen })}<span>${tr('hello', { n: me.name ? ' ' + esc(me.name) : '' })}</span></p>
+      <div class="trow">${msgCard}${probCard}${ansCard}</div>
+      ${tasks.length ? `<section class="card">
+        <div class="ch"><h2>${tr('td_need')}</h2><span class="pill warn">${tasks.length}</span></div>
+        <div class="todo">${tasks.map((t) => `<div class="ti">
+            <span class="tic ${t.tone}" aria-hidden="true">${t.icon}</span>
+            <div class="grow"><div class="tt">${t.title}</div><div class="ts">${t.sub}</div></div>
+            <div class="tact">${t.actions}</div></div>`).join('')}</div>
+      </section>` : ''}
+      <section class="card">
+        <div class="ch"><h2>${tr('td_latest')}</h2><span class="livebadge in ${cache.live === false ? 'off' : ''}"><i></i>${cache.live === false ? tr('live_off') : tr('live')}</span></div>
+        ${feed.length ? `<div class="tfeed">${feed.map((e) => `<div class="tfi"><span class="tdot ${e.dot}" aria-hidden="true"></span><span class="grow">${e.html}</span><span class="muted small">${tr('ago', { t: dur(now - e.at) })}</span></div>`).join('')}</div>`
+          : `<p class="muted small">${tr('td_latest_none')}</p>`}
       </section>
-
-      <div class="dash">
-        <section class="card">
-          <div class="ch"><h2>${tr('need_h')}</h2><span class="pill ${tasks.length ? 'warn' : 'on'}">${tasks.length}</span></div>
-          ${tasks.length ? `<div class="todo">${tasks.map((t) => `<div class="ti">
-              <span class="tic ${t.tone}" aria-hidden="true">${t.icon}</span>
-              <div class="grow"><div class="tt">${t.title}</div><div class="ts">${t.sub}</div></div>
-              <div class="tact">${t.actions}</div></div>`).join('')}</div>`
-            : `<div class="calm"><div class="calm-i">✅</div><b>${tr('need_none')}</b><p class="muted small">${tr('need_none_d')}</p></div>`}
-        </section>
-        <section class="card">
-          <div class="ch"><h2>${tr('feed_h')}</h2><span class="livebadge in ${cache.live === false ? 'off' : ''}"><i></i>${cache.live === false ? tr('live_off') : tr('live')}</span></div>
-          ${feed.length ? `<div class="feed">${feed.map((e) => `<div class="fi">
-              <span class="fa" style="background:hsl(${hue(e.who)} 45% 42%)">${esc(initials(e.who))}</span>
-              <div class="grow"><div class="fx"><b>${esc(e.who)}</b> ${e.html} ${e.chip ? `<span class="chip ${(STATUS[e.chip] || STATUS.new).cls}">${statusLabel(e.chip)}</span>` : ''}${e.tag ? `<span class="chip kt-stock">${e.tag}</span>` : ''}</div>
-                <div class="fw">${tr('ago', { t: dur(now - e.at) })}</div></div></div>`).join('')}</div>`
-            : `<div class="calm"><div class="calm-i">🌱</div><p class="muted small">${tr('feed_none')}</p></div>`}
-        </section>
-        <section class="card">
-          <div class="ch"><h2>${tr('pipeline_h')}</h2><button class="linkbtn" data-go="requests">${tr('tab_requests')} →</button></div>
-          ${pipeline(['new', 'called', 'agreed', 'picked', 'paid'].map((k) => ({ key: k, label: statusLabel(k), value: count(k) })))}
-          <p class="muted small">${tr('pipeline_d', { n: count('cancelled') })}${avgWait == null ? '' : ` · ${tr('first_call')}: <b>${dur(avgWait)}</b>`}</p>
-        </section>
-        <section class="card">
-          <div class="ch"><h2>${tr('days_h')}</h2></div>
-          ${columnChart(points, { title: tr('days_h') })}
-          <details class="small"><summary>${tr('days_table')}</summary>
-            ${table([tr('day_col'), tr('req_col'), tr('qtl_col')], points.slice().reverse().map((p) => [p.full, p.value, p.q]))}
-          </details>
-        </section>
-        ${sum ? moneyCard(sum) : ''}
-        ${bizData ? biz().homeCard(bizData, monthSummary(requests, money, new Date(0))) : ''}
-      </div>`);
+      ${ownerPart}`);
+    cache.dashSeen = true;
     document.querySelectorAll('[data-go]').forEach((el) => { if (el.dataset.go) el.onclick = () => go(el.dataset.go); });
-    document.querySelectorAll('.pipe-row').forEach((el) => {
-      el.onclick = () => { cache.reqFilter = el.dataset.f; go('requests'); };
-    });
     document.querySelectorAll('[data-filter]').forEach((el) => { el.onclick = () => { cache.reqFilter = el.dataset.filter; go('requests'); }; });
     const openOldest = $('#open-oldest');
-    if (openOldest) openOldest.onclick = () => showRequest(oldest);
-    const waitKpi = $('#kpi-wait');
-    if (waitKpi) waitKpi.onclick = () => showRequest(oldest);
-    wireTips($('#main'));
-    if (firstVisit) countUp();
+    if (openOldest) openOldest.onclick = () => showRequest(newReq[0]);
+  },
+
+  // The Later shelf: every sleeping page, why it sleeps, and a way in.
+  async later() {
+    const owner = me.role === 'owner';
+    const shelf = shelfFor(owner);
+    setMain(`
+      <h1>${tr('tab_later')}</h1>
+      <div class="shelf">
+        ${shelf.map((s) => {
+          const up = isAwake(s);
+          return `<section class="shelfcard${up ? ' up' : ''}">
+            <div class="sht">${icon(s.tab)}<span>${tr('tab_' + s.tab)}</span></div>
+            <div class="shd">${tr('later_d_' + s.tab)}</div>
+            <div class="shw">${up ? tr('later_awake') : tr(s.why)}</div>
+            <button class="linkbtn" data-go="${s.tab}">${up ? tr('open') : tr('later_open')} →</button>
+          </section>`;
+        }).join('')}
+      </div>`);
+    document.querySelectorAll('[data-go]').forEach((el) => { el.onclick = () => go(el.dataset.go); });
   },
 
   async requests() {
@@ -1625,7 +1870,7 @@ const PAGES = {
 
   // Owner: every feature, state and district switch, in sections.
   async features() {
-    switchPages = switchPages || createSwitches({ tr, esc, toast, fail, setMain, db: () => db, lang: () => lang });
+    switchPages = switchPages || createSwitches({ tr, esc, toast, fail, setMain, db: () => db, lang: () => lang, onChange: () => loadWake().then(tabs) });
     await switchPages.page();
   },
 
@@ -1695,6 +1940,7 @@ const PAGES = {
     const list = await db.staff();
     setMain(`
       <h1>${tr('tab_team')}</h1>
+      ${teamTabs('team')}
       <p class="muted">${tr('team_intro')}</p>
       ${list.map((s) => `
         <div class="card row between">
@@ -1707,6 +1953,7 @@ const PAGES = {
         <div><label>${tr('name')}</label><input id="s-name"></div>
         <div><label>${tr('role')}</label><select id="s-role"><option value="staff">staff</option><option value="owner">owner</option></select></div>
       </div><div class="actions"><button class="main" id="s-add">${tr('add')}</button></div></div>`);
+    wireTeamTabs();
     document.querySelectorAll('[data-rm]').forEach((b) => {
       b.onclick = async () => {
         if (!confirm(tr('rm_q', { e: b.dataset.rm }))) return;
@@ -1723,10 +1970,13 @@ const PAGES = {
   async audit() {
     const list = await db.audit();
     setMain(`
-      <h1>${tr('tab_audit')} <span class="muted small">${tr('audit_sub')}</span></h1>
+      <h1>${tr('tab_team')}</h1>
+      ${teamTabs('audit')}
+      <p class="muted small">${tr('audit_sub')}</p>
       ${list.length ? `<table><tr><th>${tr('a_when')}</th><th>${tr('a_who')}</th><th>${tr('a_what')}</th><th>${tr('a_details')}</th></tr>
         ${list.map((a) => `<tr><td>${when(a.at)}</td><td>${esc(a.by)}</td><td>${esc(a.action)}</td><td class="small">${esc(JSON.stringify(a.details || {}))}</td></tr>`).join('')}
       </table>` : `<div class="empty">${tr('nothing_yet')}</div>`}`);
+    wireTeamTabs();
   },
 
   // Everyone on the team: language, time zone, who am I, links.
@@ -2257,7 +2507,7 @@ async function start() {
     $('#who').textContent = whoLine();
     $('#logout').hidden = false;
     syncMe();
-    go('home');
+    loadWake().finally(() => go('home'));
     startLive();
   });
 }

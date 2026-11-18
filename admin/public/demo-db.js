@@ -34,7 +34,14 @@ export async function connect() {
   });
   const offerMoney = { 'makka-jalgaon-20261008': { rate: 2140, transport: 45, other: 15 } };
   let offers = { version: 3, list: [{ id: 'makka-jalgaon-20261008', crops: ['maize'], districts: ['jalgaon'], state: 'Maharashtra', price: 1980, pickup: 'doorstep', centre: '', payment_days: 0, until: day(-6).toISOString().slice(0, 10), whatsapp: '919800000000', moisture_max: 14, min_qty: 10, note: { hi: 'खेत से उठाएँगे' } }] };
-  const features = { login: true, sell: true, kendra: true };
+  // Like the live switches on 18 Nov 2026: Kendra, Sell to Khalihan and
+  // login asleep, AI and the Pro sale not launched yet.
+  const features = {
+    login: false, sell: false, kendra: false, sell_menu: false, voice_search: true, share_link: true,
+    weather: true, calendar: true, services: true, feedback: true, dark: true, update_prompt: true,
+    rate_prompt: true, setup_guide: true, whats_new: true, farm_weather: true, ai: false, ai_interrupt: true, ai_vertex: true,
+  };
+  const switchPrefs = {};
   let launchStates = ['Maharashtra'];
   const sellDistricts = { Maharashtra: ['jalgaon'] };
   let notice = null;
@@ -242,6 +249,9 @@ export async function connect() {
     async setNotice(n) { notice = n ? JSON.parse(JSON.stringify(n)) : null; log('notice', n ? { kind: n.kind } : { removed: true }); },
     async waitingCounts() { return { _total: 737, 'Madhya Pradesh': 412, Gujarat: 230, 'Uttar Pradesh': 95 }; },
     async setFeature(key, on) { features[key] = on; log('feature', { key, on }); },
+    async setFeatures(map) { Object.assign(features, map); log('launch', { on: Object.keys(map).join(', ') }); },
+    async switchPrefs() { return JSON.parse(JSON.stringify(switchPrefs)); },
+    async saveSwitchPrefs(part) { Object.assign(switchPrefs, part); log('switch_prefs', { keys: Object.keys(part).join(', ') }); },
     async setLaunchStates(list) { launchStates = [...list]; log('launch_states', { states: list.join(', ') }); },
     async setSellDistricts(state, keys) { sellDistricts[state] = [...keys]; log('sell_districts', { state, on: keys.length }); },
     async liveStatus(pairs) {

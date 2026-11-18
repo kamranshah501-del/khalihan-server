@@ -423,6 +423,140 @@ SWITCH_WORDS.en.f_kendra = KENDRA_WORDS.en.feat_kendra;
 SWITCH_WORDS.hi.f_kendra = KENDRA_WORDS.hi.feat_kendra;
 
 /** Every switch the app reads: its default and the first app version that reads it. */
+
+// Admin 1.29 (owner 18 Nov 2026, "Part 4" approved 11:43): the page in
+// groups, the Launch card and its confirmation, trials, Emergency off, Undo.
+Object.assign(SWITCH_WORDS.en, {
+  sw_intro2: 'Finished features simply stay on. A change reaches farmers the next time they open the app — no update needed.',
+  sw_lc_tag: 'LAUNCH DAY · KHALIHAN AI AND PRO',
+  sw_lc_of: 'of 1,000 farmers',
+  sw_lc_d: 'One press turns on the Pro sale, Khalihan AI with all its parts, and the AI limits.',
+  sw_lc_btn: 'Launch',
+  sw_lc_left: 'Launch · {n} left',
+  sw_lc_hint: 'The button opens when all four are ready.',
+  sw_lc_farmers: '1,000 farmers',
+  sw_lc_farmers_n: '{n} now',
+  sw_lc_farmers_wait: 'Waiting for the first count',
+  sw_lc_play: 'App 1.0.9 live on Play',
+  sw_lc_play_d: 'Mark it when Google Play has approved 1.0.9',
+  sw_lc_play_auto: 'Live since {d}',
+  sw_lc_aitest: 'AI test passed',
+  sw_lc_aitest_n: 'Latest test: {m} of {a} answers checked, {r} right',
+  sw_lc_aitest_none: '200 real questions, every answer checked — no test yet',
+  sw_lc_privacy: 'Privacy page and Data safety',
+  sw_lc_privacy_d: 'Updated for app 1.0.9',
+  sw_lc_mark: 'Mark done',
+  sw_lc_unmark: 'Not yet',
+  sw_lc_what: 'What it turns on:',
+  sw_lc_ai_parts: 'Khalihan AI ({n} parts)',
+  sw_live_tag: 'KHALIHAN AI AND PRO · LIVE',
+  sw_live_d: 'Pause the sale or a costly part here. The other AI parts simply follow Khalihan AI.',
+  sw_g_emerg: 'Off in an emergency',
+  sw_g_emerg_d: 'Finished features that were turned off. Turn them back on when they are fixed.',
+  sw_g_use: 'Switches you use',
+  sw_g_trial: 'New, on trial',
+  sw_g_trial_d: 'A new feature keeps its switch for 14 days after its app version reaches farmers on Play. Then you can make it permanent.',
+  sw_g_sleep: 'Sleeping features',
+  sw_g_sleep_d: 'Turning one on also wakes its pages on the Later shelf.',
+  sw_g_always: 'Always on now · {n} switches gone',
+  sw_g_always_d: 'These features are finished, so they no longer need a switch.',
+  sw_g_always_list: 'Which ones',
+  sw_emerg_btn: 'Emergency off',
+  sw_emerg_d: 'These features are finished and stay on. Turn one off only if it breaks — it then comes back to the top of the list until it is fixed.',
+  sw_emerg_q: 'Turn off "{s}" for every farmer? Do this only if it is broken.',
+  sw_tr_wait: 'Waits for app {v} on Play',
+  sw_tr_day: 'On trial · day {d} of {n}',
+  sw_tr_over: 'Trial over',
+  sw_tr_perm: 'Make permanent',
+  sw_tr_perm_q: 'Make "{s}" permanent? Its switch moves to Always on; Emergency off still turns it off if it ever breaks.',
+  sw_tr_perm_done: '"{s}" is permanent',
+  sw_undo: 'Undo',
+  sw_dlg_tag: 'ALL FOUR READY',
+  sw_dlg_h: 'Launch Khalihan AI and Pro?',
+  sw_dlg_d: 'This turns on, for every farmer, at the same time:',
+  sw_dlg_pro: 'Khalihan Pro sale',
+  sw_dlg_m1: '1 month', sw_dlg_m3: '3 months', sw_dlg_m6: '6 months', sw_dlg_m12: '1 year',
+  sw_dlg_trial: '7-day free trial, auto-pay',
+  sw_dlg_ai: 'Khalihan AI for every farmer · {n} parts',
+  sw_dlg_already: 'Already on today: {s}.',
+  sw_dlg_paid: 'Pro members only · {n} parts that cost money',
+  sw_dlg_lim: 'AI limits, as you set them',
+  sw_dlg_lim_free: 'Free: {a} questions and {p} photos a day',
+  sw_dlg_lim_pro: 'Pro: {a} questions, {o} ask-anything, {d} deep searches and {p} photos a day',
+  sw_dlg_lim_edit: 'Change limits',
+  sw_dlg_untick: 'Untick anything you want to keep off. You can change all of it later.',
+  sw_dlg_before: 'Before this: a test purchase, the paid Open-Meteo plan, and Play\'s Data safety.',
+  sw_dlg_sure: 'I understand: Pro sales and Google AI costs start the moment I press Launch.',
+  sw_dlg_cancel: 'Cancel',
+  sw_dlg_go: 'Launch now',
+  sw_dlg_done: 'Launched — Khalihan AI and Pro are on.',
+});
+Object.assign(SWITCH_WORDS.hi, {
+  sw_intro2: 'पक्के फ़ीचर बस चालू रहते हैं। बदलाव किसान को अगली बार ऐप खोलते ही मिलता है — अपडेट की ज़रूरत नहीं।',
+  sw_lc_tag: 'लॉन्च का दिन · KHALIHAN AI और PRO',
+  sw_lc_of: '1,000 किसानों में से',
+  sw_lc_d: 'एक बटन से Pro की बिक्री, Khalihan AI अपने सब हिस्सों के साथ, और AI की सीमाएँ चालू।',
+  sw_lc_btn: 'Launch',
+  sw_lc_left: 'Launch · {n} बाकी',
+  sw_lc_hint: 'चारों तैयार होने पर बटन खुलेगा।',
+  sw_lc_farmers: '1,000 किसान',
+  sw_lc_farmers_n: 'अभी {n}',
+  sw_lc_farmers_wait: 'पहली गिनती का इंतज़ार',
+  sw_lc_play: 'ऐप 1.0.9 Play पर लाइव',
+  sw_lc_play_d: 'Google Play से 1.0.9 मंज़ूर होने पर निशान लगाएँ',
+  sw_lc_play_auto: '{d} से लाइव',
+  sw_lc_aitest: 'AI की जाँच पास',
+  sw_lc_aitest_n: 'पिछली जाँच: {a} में से {m} जवाब जाँचे, {r} सही',
+  sw_lc_aitest_none: '200 असली सवाल, हर जवाब की जाँच — अभी कोई जाँच नहीं',
+  sw_lc_privacy: 'प्राइवेसी पेज और Data safety',
+  sw_lc_privacy_d: 'ऐप 1.0.9 के लिए अपडेट',
+  sw_lc_mark: 'हो गया',
+  sw_lc_unmark: 'अभी नहीं',
+  sw_lc_what: 'ये चालू होगा:',
+  sw_lc_ai_parts: 'Khalihan AI ({n} हिस्से)',
+  sw_live_tag: 'KHALIHAN AI और PRO · लाइव',
+  sw_live_d: 'बिक्री या महँगा हिस्सा यहाँ रोकें। बाकी AI हिस्से Khalihan AI के साथ चलते हैं।',
+  sw_g_emerg: 'इमरजेंसी में बंद',
+  sw_g_emerg_d: 'पक्के फ़ीचर जो बंद किए गए। ठीक होने पर फिर चालू करें।',
+  sw_g_use: 'आपके काम के स्विच',
+  sw_g_trial: 'नए, ट्रायल पर',
+  sw_g_trial_d: 'नया फ़ीचर अपने ऐप वर्ज़न के Play पर किसानों तक पहुँचने के 14 दिन बाद तक स्विच रखता है। फिर उसे पक्का कर सकते हैं।',
+  sw_g_sleep: 'सोए हुए फ़ीचर',
+  sw_g_sleep_d: 'चालू करने पर उसके पेज भी बाद वाली शेल्फ़ से जाग जाते हैं।',
+  sw_g_always: 'अब हमेशा चालू · {n} स्विच हटे',
+  sw_g_always_d: 'ये फ़ीचर पक्के हो चुके, इन्हें स्विच की ज़रूरत नहीं।',
+  sw_g_always_list: 'कौन-कौन से',
+  sw_emerg_btn: 'इमरजेंसी में बंद करें',
+  sw_emerg_d: 'ये फ़ीचर पक्के हैं और चालू रहते हैं। सिर्फ़ ख़राब होने पर बंद करें — तब ये ठीक होने तक लिस्ट में सबसे ऊपर लौट आते हैं।',
+  sw_emerg_q: '"{s}" हर किसान के लिए बंद करें? सिर्फ़ तभी जब ये ख़राब हो।',
+  sw_tr_wait: 'Play पर ऐप {v} का इंतज़ार',
+  sw_tr_day: 'ट्रायल · {n} में से दिन {d}',
+  sw_tr_over: 'ट्रायल पूरा',
+  sw_tr_perm: 'पक्का करें',
+  sw_tr_perm_q: '"{s}" पक्का करें? इसका स्विच "हमेशा चालू" में जाएगा; ख़राब होने पर इमरजेंसी में बंद कर सकते हैं।',
+  sw_tr_perm_done: '"{s}" पक्का हो गया',
+  sw_undo: 'वापस लें',
+  sw_dlg_tag: 'चारों तैयार',
+  sw_dlg_h: 'Khalihan AI और Pro लॉन्च करें?',
+  sw_dlg_d: 'ये हर किसान के लिए एक साथ चालू होगा:',
+  sw_dlg_pro: 'Khalihan Pro की बिक्री',
+  sw_dlg_m1: '1 महीना', sw_dlg_m3: '3 महीने', sw_dlg_m6: '6 महीने', sw_dlg_m12: '1 साल',
+  sw_dlg_trial: '7 दिन मुफ़्त ट्रायल, ऑटो-पे',
+  sw_dlg_ai: 'हर किसान के लिए Khalihan AI · {n} हिस्से',
+  sw_dlg_already: 'आज पहले से चालू: {s}।',
+  sw_dlg_paid: 'सिर्फ़ Pro सदस्य · {n} पैसे वाले हिस्से',
+  sw_dlg_lim: 'AI की सीमाएँ, जैसी आपने रखीं',
+  sw_dlg_lim_free: 'मुफ़्त: रोज़ {a} सवाल और {p} फ़ोटो',
+  sw_dlg_lim_pro: 'Pro: रोज़ {a} सवाल, {o} कुछ भी पूछें, {d} गहरी खोज और {p} फ़ोटो',
+  sw_dlg_lim_edit: 'सीमाएँ बदलें',
+  sw_dlg_untick: 'जो बंद रखना हो उसका निशान हटाएँ। बाद में सब बदल सकते हैं।',
+  sw_dlg_before: 'इससे पहले: एक टेस्ट ख़रीदारी, Open-Meteo का पैसे वाला प्लान, और Play का Data safety।',
+  sw_dlg_sure: 'मैं समझता हूँ: Launch दबाते ही Pro की बिक्री और Google AI का खर्च शुरू।',
+  sw_dlg_cancel: 'रद्द करें',
+  sw_dlg_go: 'अभी लॉन्च करें',
+  sw_dlg_done: 'लॉन्च हो गया — Khalihan AI और Pro चालू।',
+});
+
 export const FEATURE_INFO = {
   price_map: { def: true, since: '1.0.3' },
   hold_sell: { def: true, since: '1.0.3' },
@@ -484,6 +618,45 @@ export const FEATURE_INFO = {
   ai_account: { def: false, since: '1.0.9' },
   ai_deep: { def: false, since: '1.0.9' },
 };
+
+
+// ── Admin 1.29: where each switch sits (owner 18 Nov 2026, Part 4) ──────
+// Finished features: no switch on the page any more, only Emergency off.
+// The value in config/app stays as it is (all on), because older app
+// versions still read every key.
+export const ALWAYS = ['weather', 'home_sky', 'advice', 'widget_weather', 'farm_weather', 'calendar', 'services', 'schemes',
+  'feedback', 'dark', 'update_prompt', 'rate_prompt', 'setup_guide', 'whats_new',
+  'day_voice', 'share_picture', 'alerts', 'target', 'brief'];
+// New features: they keep their switch for TRIAL_DAYS after their app
+// version is live on Google Play; then the owner may make them permanent
+// (business/switches.permanent).
+export const TRIAL = ['voice_search', 'share_link', 'share_short', 'crop_photos', 'price_border'];
+export const TRIAL_DAYS = 14;
+// When each app version went live on Google Play's production track (India
+// date). Add a line at every release: trials and the launch check read it.
+export const PLAY_LIVE = { '1.0.7': '2026-11-11' };
+// Khalihan AI's parts that cost money per use: after launch they keep their
+// own Pause switch; the rest simply follow Khalihan AI.
+export const COSTLY = ['ai_open', 'ai_deep', 'ai_voice_cloud', 'ai_pest'];
+// Only Pro members get these (the launch confirmation lists them apart).
+export const PRO_ONLY = ['ai_open', 'ai_deep', 'ai_voice_cloud'];
+const GROUP_USE = ['states', 'notice', 'festival', 'sellmenu'];
+const GROUP_SLEEP = ['kendra', 'sell', 'login'];
+/** -1, 0 or 1 for two versions such as '1.0.10' and '1.0.9'. */
+export const cmpVer = (a, b) => {
+  const x = String(a).split('.').map(Number), y = String(b).split('.').map(Number);
+  for (let i = 0; i < Math.max(x.length, y.length); i++) { const d = (x[i] || 0) - (y[i] || 0); if (d) return d < 0 ? -1 : 1; }
+  return 0;
+};
+/** A trial's state today: wait (its version is not on Play yet), trial, over. */
+export function trialState(key, todayIso) {
+  const since = FEATURE_INFO[key].since;
+  const live = Object.entries(PLAY_LIVE).filter(([v]) => cmpVer(v, since) >= 0).map(([, d]) => d).sort()[0];
+  if (!live) return { kind: 'wait', since };
+  const days = Math.round((Date.parse(todayIso + 'T00:00:00Z') - Date.parse(live + 'T00:00:00Z')) / 864e5);
+  if (days < TRIAL_DAYS) return { kind: 'trial', day: Math.max(1, days + 1) };
+  return { kind: 'over' };
+}
 
 /** Khalihan AI's limits per phone — the app's own numbers (lib/ai/ai_quota.dart,
  *  keep the same) and what one use costs (₹, Google's bill, 16 Nov 2026).
@@ -722,14 +895,199 @@ export function createSwitches(c) {
     return `<span class="pill ${on ? (warn ? 'warn' : 'on') : 'off'}">${on ? (warn ? '⚠️ ' : '') + tr('sw_on') : tr('sw_off')}</span>`;
   }
 
-  function listHtml() {
-    return `<nav class="swlist" aria-label="${esc(tr('sw_sections'))}">
-      ${SECTIONS.map((s) => `<button class="swrow${memo.sel === s.id ? ' sel' : ''}" data-sec="${s.id}">
+  // ── Admin 1.29: groups, trials, the Launch card ─────────────────────
+  const prefs = () => memo.prefs || {};
+  const permanent = () => new Set(prefs().permanent || []);
+  const alwaysKeys = () => [...ALWAYS, ...TRIAL.filter((k) => permanent().has(k))];
+  const trialKeys = () => TRIAL.filter((k) => !permanent().has(k));
+  const aiKids = () => (SECTIONS.find((x) => x.id === 'ai') || { kids: [] }).kids;
+  const launched = () => featOn('ai') && featOn('pro_sale');
+  const fname = (k) => tr('f_' + k);
+  // "Voice reminders (बोलकर याद)" → "Voice reminders"; keeps "(7/12 …)".
+  const dropParen = (t) => t.replace(/\s*\((?![^)]*\d)[^)]*\)\s*$/, '');
+  const shortName = (k) => dropParen(dropParen(fname(k)).replace(/\s+—.*$/, ''));
+  const svgTick = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>';
+  const svgClock = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>';
+
+  function trialText(key) {
+    const st = trialState(key, todayIst());
+    if (st.kind === 'wait') return { kind: 'wait', text: tr('sw_tr_wait', { v: st.since }) };
+    if (st.kind === 'trial') return { kind: 'trial', text: tr('sw_tr_day', { d: st.day, n: TRIAL_DAYS }) };
+    return { kind: 'over', text: tr('sw_tr_over') };
+  }
+
+  function launchChecks() {
+    const ga = (memo.stats && memo.stats.ga) || {};
+    const got = ga.inn_launch != null ? ga.inn_launch : null;
+    const checks = prefs().checks || {};
+    const playDate = Object.entries(PLAY_LIVE).filter(([v]) => cmpVer(v, '1.0.9') >= 0).map(([, d]) => d).sort()[0];
+    const last = ((memo.tests || {}).runs || [])[0];
+    return [
+      { id: 'farmers', ok: got != null && got >= 1000, title: tr('sw_lc_farmers'), sub: got == null ? tr('sw_lc_farmers_wait') : tr('sw_lc_farmers_n', { n: got.toLocaleString('en-IN') }) },
+      { id: 'play', ok: !!playDate || !!checks.play, title: tr('sw_lc_play'), sub: playDate ? tr('sw_lc_play_auto', { d: playDate }) : tr('sw_lc_play_d'), manual: !playDate },
+      { id: 'aitest', ok: !!checks.aitest, title: tr('sw_lc_aitest'), sub: last ? tr('sw_lc_aitest_n', { m: last.marked || 0, a: last.asked || 0, r: last.right || 0 }) : tr('sw_lc_aitest_none'), manual: true },
+      { id: 'privacy', ok: !!checks.privacy, title: tr('sw_lc_privacy'), sub: tr('sw_lc_privacy_d'), manual: true },
+    ];
+  }
+
+  function launchCard() {
+    const links = (withPro) => `<div class="llinks">${withPro ? `${tr('sw_lc_what')} <button class="linkbtn inl" data-sec="prosale">${esc(fname('pro_sale'))}</button> · ` : ''}<button class="linkbtn inl" data-sec="ai">${esc(tr('sw_lc_ai_parts', { n: aiKids().length }))}</button> · <button class="linkbtn inl" data-sec="ailimits">${tr('sw_ail')}</button></div>`;
+    if (launched()) {
+      const row = (k, attr) => `<div class="lrow"><span class="grow">${esc(shortName(k))}</span>${toggle(attr, k, featOn(k))}</div>`;
+      return `<section class="lcard live">
+        <div class="ltag">${tr('sw_live_tag')}</div>
+        <div class="lsub">${tr('sw_live_d')}</div>
+        <div class="lrows">${row('pro_sale', 'data-master')}${row('ai', 'data-master')}${COSTLY.map((k) => row(k, 'data-kid')).join('')}</div>
+        ${links(false)}
+      </section>`;
+    }
+    const ga = (memo.stats && memo.stats.ga) || {};
+    const got = ga.inn_launch != null ? ga.inn_launch : null;
+    const list = launchChecks();
+    const left = list.filter((x) => !x.ok).length;
+    return `<section class="lcard">
+      <div class="lhead">
+        <div class="lmain">
+          <div class="ltag">${tr('sw_lc_tag')}</div>
+          <div class="lnum">${got == null ? '—' : got.toLocaleString('en-IN')} <small>${tr('sw_lc_of')}</small></div>
+          <div class="lbar"><span style="width:${got == null ? 0 : Math.min(100, got / 10).toFixed(1)}%"></span></div>
+          <div class="lsub">${tr('sw_lc_d')}</div>
+        </div>
+        <div class="lact">
+          <button class="lbtn" id="launch-open" ${left ? 'disabled' : ''}>${left ? tr('sw_lc_left', { n: left }) : tr('sw_lc_btn')}</button>
+          <div class="lsub">${tr('sw_lc_hint')}</div>
+        </div>
+      </div>
+      <div class="lchecks">${list.map((x) => `<div class="lcheck${x.ok ? ' ok' : ''}">${x.ok ? svgTick : svgClock}
+        <div class="grow"><b>${esc(x.title)}</b><span>${esc(x.sub)}</span></div>
+        ${x.manual ? `<button class="lmark" data-check="${x.id}" data-v="${x.ok ? 0 : 1}">${x.ok ? tr('sw_lc_unmark') : tr('sw_lc_mark')}</button>` : ''}</div>`).join('')}</div>
+      ${links(true)}
+    </section>`;
+  }
+
+  function secRow(id) {
+    const s = SECTIONS.find((x) => x.id === id);
+    return `<button class="swrow${memo.sel === s.id ? ' sel' : ''}" data-sec="${s.id}">
         <span class="swicon" aria-hidden="true">${s.icon}</span>
         <span class="grow"><span class="swrt">${esc(sectionTitle(s))}</span><span class="swrs">${summary(s)}</span></span>
         ${statePill(s)}<span class="chev" aria-hidden="true">›</span>
-      </button>`).join('')}
+      </button>`;
+  }
+  /** One feature with its own switch, right in the list. */
+  function keyRow(key, sub) {
+    return `<div class="swrow swkey">
+      <span class="grow"><span class="swrt">${esc(shortName(key))}</span><span class="swrs">${sub}</span></span>
+      ${toggle('data-kid', key, featOn(key))}
+    </div>`;
+  }
+
+  function listHtml() {
+    const head = (t, d) => `<div class="swgh"><b>${esc(t)}</b>${d ? `<span>${esc(d)}</span>` : ''}</div>`;
+    const always = alwaysKeys();
+    const emerg = always.filter((k) => !featOn(k));
+    const trials = trialKeys().map((k) => {
+      const st = trialText(k);
+      const perm = st.kind === 'over' && featOn(k) ? ` · <button class="linkbtn inl" data-perm="${k}">${tr('sw_tr_perm')}</button>` : '';
+      return keyRow(k, `<span class="trs ${st.kind}">${esc(st.text)}</span>${perm}`);
+    }).join('');
+    return `<nav class="swlist grouped" aria-label="${esc(tr('sw_sections'))}">
+      ${emerg.length ? `<div class="swgroup emerg">${head(tr('sw_g_emerg'), tr('sw_g_emerg_d'))}${emerg.map((k) => keyRow(k, sinceChip(k))).join('')}</div>` : ''}
+      <div class="swgroup">${head(tr('sw_g_use'))}${GROUP_USE.map(secRow).join('')}</div>
+      ${trials ? `<div class="swgroup">${head(tr('sw_g_trial'), tr('sw_g_trial_d'))}${trials}</div>` : ''}
+      <div class="swgroup">${head(tr('sw_g_sleep'), tr('sw_g_sleep_d'))}${GROUP_SLEEP.map(secRow).join('')}</div>
+      <div class="swgroup always">${head(tr('sw_g_always', { n: always.length }), tr('sw_g_always_d'))}
+        <details class="swchips"><summary>${tr('sw_g_always_list')}</summary>${always.map((k) => `<span class="chip">${esc(shortName(k))}</span>`).join('')}</details>
+        <button class="swrow${memo.sel === 'always' ? ' sel' : ''}" data-sec="always"><span class="swicon" aria-hidden="true">🛟</span><span class="grow"><span class="swrt">${tr('sw_emerg_btn')}</span></span><span class="chev" aria-hidden="true">›</span></button>
+      </div>
     </nav>`;
+  }
+
+  function alwaysDetail() {
+    return `<div class="swdh"><span class="swicon big" aria-hidden="true">🛟</span>
+        <div class="grow"><h2>${tr('sw_emerg_btn')}</h2><p class="sub">${esc(tr('sw_emerg_d'))}</p></div></div>
+      <div class="swblock">${alwaysKeys().map((k) => `<div class="swkey2">
+        <div class="grow"><div class="swkt">${esc(shortName(k))} ${sinceChip(k)}</div><div class="sub">${esc(String(tr('f_' + k + '_d')).slice(0, 170))}</div></div>
+        ${toggle('data-kid', k, featOn(k))}</div>`).join('')}</div>`;
+  }
+
+  /** "Undo" for 10 seconds after a switch is pressed. */
+  function undoToast(msg, undo) {
+    let el = document.getElementById('swundo');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'swundo';
+      el.className = 'undotoast';
+      el.setAttribute('role', 'status');
+      document.body.appendChild(el);
+    }
+    el.innerHTML = `<span>${esc(msg)}</span><button type="button">${tr('sw_undo')}</button>`;
+    el.hidden = false;
+    clearTimeout(undoToast.t);
+    undoToast.t = setTimeout(() => { el.hidden = true; }, 10000);
+    el.querySelector('button').onclick = async () => {
+      el.hidden = true;
+      clearTimeout(undoToast.t);
+      try { await undo(); await refresh(); } catch (e) { fail(e); }
+    };
+  }
+
+  /** The launch confirmation: what turns on, untick to keep off, one tick to go. */
+  function openLaunch() {
+    const kids = aiKids();
+    const already = kids.filter((k) => featOn(k));
+    const paid = kids.filter((k) => PRO_ONLY.includes(k) && !featOn(k));
+    const forAll = kids.filter((k) => !PRO_ONLY.includes(k) && !featOn(k));
+    const l = data.ailimits || {};
+    const lim = (who, u) => (l[who] && typeof l[who][`${u}_day`] === 'number' ? l[who][`${u}_day`] : AI_LIMITS[who][u][0]);
+    const price = (rsv, len, extra) => `<div class="ldprice"><b>${rsv}</b><span>${tr(len)}</span>${extra ? `<em>${tr(extra)}</em>` : ''}</div>`;
+    const dlg = document.createElement('dialog');
+    dlg.className = 'ldlg';
+    dlg.setAttribute('aria-labelledby', 'ldlg-h');
+    dlg.innerHTML = `
+      <div class="ldh"><div class="ltag">${tr('sw_dlg_tag')}</div><h2 id="ldlg-h">${tr('sw_dlg_h')}</h2><p>${tr('sw_dlg_d')}</p></div>
+      <div class="ldb">
+        <section class="lds pro"><label class="ldt"><input type="checkbox" id="ld-pro" checked> ${tr('sw_dlg_pro')}</label>
+          <div class="ldprices">${price('₹149', 'sw_dlg_m1', 'sw_dlg_trial')}${price('₹419', 'sw_dlg_m3')}${price('₹799', 'sw_dlg_m6')}${price('₹1,499', 'sw_dlg_m12')}</div></section>
+        <section class="lds"><label class="ldt"><input type="checkbox" id="ld-ai" checked> ${tr('sw_dlg_ai', { n: forAll.length })}</label>
+          <div class="ldkids">${forAll.map((k) => `<label><input type="checkbox" data-lk="${k}" checked> ${esc(shortName(k))}</label>`).join('')}</div>
+          ${already.length ? `<p class="small muted">${esc(tr('sw_dlg_already', { s: already.map(shortName).join(', ') }))}</p>` : ''}</section>
+        ${paid.length ? `<section class="lds"><label class="ldt"><input type="checkbox" id="ld-paid" checked> ${tr('sw_dlg_paid', { n: paid.length })}</label>
+          <div class="small">${esc(paid.map(shortName).join(' · '))}</div></section>` : ''}
+        <section class="lds"><b>${tr('sw_dlg_lim')}</b>
+          <div class="small">${esc(tr('sw_dlg_lim_free', { a: lim('free', 'ask'), p: lim('free', 'photo') }))}</div>
+          <div class="small">${esc(tr('sw_dlg_lim_pro', { a: lim('pro', 'ask'), o: lim('pro', 'open'), d: lim('pro', 'deep'), p: lim('pro', 'photo') }))}</div>
+          <button class="linkbtn inl" id="ld-lim">${tr('sw_dlg_lim_edit')}</button></section>
+        <p class="small muted">${tr('sw_dlg_untick')}</p>
+        <p class="small ldwarn">${tr('sw_dlg_before')}</p>
+        <label class="ldsure"><input type="checkbox" id="ld-sure"> ${tr('sw_dlg_sure')}</label>
+        <div class="ldacts"><button class="btn sec" id="ld-cancel">${tr('sw_dlg_cancel')}</button><button class="btn lgo" id="ld-go" disabled>${tr('sw_dlg_go')}</button></div>
+      </div>`;
+    document.body.appendChild(dlg);
+    const q = (id) => dlg.querySelector('#' + id);
+    const close = () => { dlg.close(); dlg.remove(); };
+    dlg.addEventListener('cancel', () => setTimeout(() => dlg.remove(), 0));
+    q('ld-cancel').onclick = close;
+    q('ld-lim').onclick = () => { close(); memo.sel = 'ailimits'; render(); };
+    q('ld-ai').onchange = () => dlg.querySelectorAll('[data-lk]').forEach((b) => { b.disabled = !q('ld-ai').checked; });
+    q('ld-sure').onchange = () => { q('ld-go').disabled = !q('ld-sure').checked; };
+    q('ld-go').onclick = async () => {
+      const map = {};
+      if (q('ld-pro').checked) map.pro_sale = true;
+      if (q('ld-ai').checked) {
+        map.ai = true;
+        dlg.querySelectorAll('[data-lk]').forEach((b) => { if (b.checked) map[b.dataset.lk] = true; });
+        if (q('ld-paid') && q('ld-paid').checked) paid.forEach((k) => { map[k] = true; });
+      }
+      if (!Object.keys(map).length) { close(); return; }
+      q('ld-go').disabled = true;
+      try {
+        await c.db().setFeatures(map);
+        close();
+        toast(tr('sw_dlg_done'));
+        await refresh();
+      } catch (e) { q('ld-go').disabled = false; fail(e); }
+    };
+    dlg.showModal();
   }
 
   // ── settings of one section ───────────────────────────────────────────
@@ -1040,6 +1398,7 @@ export function createSwitches(c) {
   }
 
   function detailHtml() {
+    if (memo.sel === 'always') return `<section class="card swdetail">${wide() ? '' : `<button class="plain small swback" id="sw-back">${tr('sw_back')}</button>`}${alwaysDetail()}</section>`;
     const s = SECTIONS.find((x) => x.id === memo.sel) || SECTIONS[0];
     const body = s.kind === 'ailimits' ? aiLimitsDetail(s) : s.kind === 'states' ? statesDetail(s) : s.kind === 'notice' ? noticeDetail(s) : s.kind === 'festival' ? festivalDetail(s) : s.kind === 'kendra' ? kendraDetail(s) : s.kind === 'sell' ? sellDetail(s) : featureDetail(s);
     return `<section class="card swdetail">${wide() ? '' : `<button class="plain small swback" id="sw-back">${tr('sw_back')}</button>`}${body}</section>`;
@@ -1076,12 +1435,18 @@ export function createSwitches(c) {
   }
 
   async function load() {
-    const [cfg, kinfo, kcard] = await Promise.all([
+    const [cfg, kinfo, kcard, swPrefs, stats, tests] = await Promise.all([
       c.db().appConfig(),
       c.db().kendraInfo().catch(() => ({})),
       c.db().kendraCard().catch(() => ({ on: false, secs: 4, slides: [] })),
+      c.db().switchPrefs ? c.db().switchPrefs().catch(() => ({})) : Promise.resolve({}),
+      c.db().ownerStats ? c.db().ownerStats().catch(() => null) : Promise.resolve(null),
+      c.db().aiTests ? c.db().aiTests().catch(() => ({ runs: [] })) : Promise.resolve({ runs: [] }),
       loadStatus(false),
     ]);
+    memo.prefs = swPrefs || {};
+    memo.stats = stats;
+    memo.tests = tests;
     data = { features: cfg.features || {}, launch: cfg.launch_states || [], sell: cfg.sell_districts || {}, notice: cfg.notice || null, festival: cfg.festival || null, ailimits: cfg.ai_limits || null, kinfo: kinfo || {}, kcard };
   }
 
@@ -1091,7 +1456,8 @@ export function createSwitches(c) {
     const scrollY = window.scrollY;
     setMain(`
       <h1>${tr('tab_features')}</h1>
-      <p class="muted">${tr('sw_intro')}</p>
+      <p class="muted">${tr('sw_intro2')}</p>
+      ${showList ? launchCard() : ''}
       <div class="swlayout${memo.sel ? ' has-sel' : ''}">
         ${showList ? listHtml() : ''}
         ${memo.sel ? detailHtml() : ''}
@@ -1108,6 +1474,7 @@ export function createSwitches(c) {
   async function refresh() {
     await load();
     render();
+    if (c.onChange) c.onChange();
   }
 
   // ── actions ───────────────────────────────────────────────────────────
@@ -1133,14 +1500,65 @@ export function createSwitches(c) {
         if (!next && inside.length && !confirm(tr('sw_off_confirm', { s: tr('f_' + key), k: inside.map((k) => tr('f_' + k)).join(', ') }))) return;
         if (next && key === 'pro_sale' && !confirm(tr('sw_pro_on_confirm'))) return;
         b.disabled = true;
-        try { await c.db().setFeature(key, next); toast(`${tr('f_' + key)}: ${next ? tr('sw_on') : tr('sw_off')}`); await refresh(); } catch (e) { b.disabled = false; fail(e); }
+        try {
+          await c.db().setFeature(key, next);
+          undoToast(`${shortName(key)}: ${next ? tr('sw_on') : tr('sw_off')}`, () => c.db().setFeature(key, !next));
+          await refresh();
+        } catch (e) { b.disabled = false; fail(e); }
       };
     });
+
+    // A single feature's own switch (trials, Emergency off, costly AI parts).
+    $$('[data-kid]').forEach((b) => {
+      b.onclick = async () => {
+        const key = b.dataset.kid;
+        const next = !featOn(key);
+        if (!next && alwaysKeys().includes(key) && !confirm(tr('sw_emerg_q', { s: shortName(key) }))) return;
+        b.disabled = true;
+        try {
+          await c.db().setFeature(key, next);
+          undoToast(`${shortName(key)}: ${next ? tr('sw_on') : tr('sw_off')}`, () => c.db().setFeature(key, !next));
+          await refresh();
+        } catch (e) { b.disabled = false; fail(e); }
+      };
+    });
+
+    // A trial that went well: its switch moves to Always on.
+    $$('[data-perm]').forEach((b) => {
+      b.onclick = async () => {
+        const key = b.dataset.perm;
+        if (!confirm(tr('sw_tr_perm_q', { s: shortName(key) }))) return;
+        const before = prefs().permanent || [];
+        try {
+          await c.db().saveSwitchPrefs({ permanent: [...new Set([...before, key])] });
+          undoToast(tr('sw_tr_perm_done', { s: shortName(key) }), () => c.db().saveSwitchPrefs({ permanent: before }));
+          await refresh();
+        } catch (e) { fail(e); }
+      };
+    });
+
+    // The launch checks the owner ticks by hand.
+    $$('[data-check]').forEach((b) => {
+      b.onclick = async () => {
+        b.disabled = true;
+        try {
+          await c.db().saveSwitchPrefs({ checks: { ...(prefs().checks || {}), [b.dataset.check]: b.dataset.v === '1' } });
+          await refresh();
+        } catch (e) { b.disabled = false; fail(e); }
+      };
+    });
+    const lo = document.getElementById('launch-open');
+    if (lo) lo.onclick = openLaunch;
 
     $$('[data-feature]').forEach((box) => {
       box.onchange = async () => {
         const key = box.dataset.feature;
-        try { await c.db().setFeature(key, box.checked); toast(`${tr('f_' + key)}: ${box.checked ? tr('sw_on') : tr('sw_off')}`); await refresh(); } catch (e) { box.checked = !box.checked; fail(e); }
+        const next = box.checked;
+        try {
+          await c.db().setFeature(key, next);
+          undoToast(`${shortName(key)}: ${next ? tr('sw_on') : tr('sw_off')}`, () => c.db().setFeature(key, !next));
+          await refresh();
+        } catch (e) { box.checked = !next; fail(e); }
       };
     });
 

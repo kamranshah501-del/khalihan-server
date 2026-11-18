@@ -181,6 +181,21 @@ export async function connect() {
       await setDoc(doc(db, 'config', 'app'), { features: { [key]: on } }, { merge: true });
       log('feature', { key, on });
     },
+    // Launch day (Admin 1.29): many switches in one write, one record.
+    async setFeatures(map) {
+      await setDoc(doc(db, 'config', 'app'), { features: map }, { merge: true });
+      log('launch', { on: Object.keys(map).filter((k) => map[k]).join(', ') });
+    },
+    // The Switches page's own notes (owner only, business/switches): trials
+    // made permanent, the launch checks ticked by hand. Nothing farmers read.
+    async switchPrefs() {
+      const snap = await getDoc(doc(db, 'business', 'switches'));
+      return snap.exists() ? snap.data() : {};
+    },
+    async saveSwitchPrefs(part) {
+      await setDoc(doc(db, 'business', 'switches'), { ...part, updated: serverTimestamp(), by: me.email }, { merge: true });
+      log('switch_prefs', { keys: Object.keys(part).join(', ') });
+    },
     // States farmers can pick (Maharashtra always first).
     async setLaunchStates(list) {
       await setDoc(doc(db, 'config', 'app'), { launch_states: list }, { merge: true });
