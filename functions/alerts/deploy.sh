@@ -35,7 +35,7 @@ echo "== 3/6 The code (github.com/kamranshah501-del/khalihan-server, functions/a
 D=$(mktemp -d)
 git clone -q --depth 1 https://github.com/kamranshah501-del/khalihan-server "$D/s"
 cd "$D/s/functions/alerts"
-python3 -m py_compile main.py alerts_core.py
+python3 -m py_compile main.py alerts_core.py imd_core.py
 
 echo "== 4/6 Where Firestore keeps the data"
 LOC=$(gcloud firestore databases describe --database='(default)' --project "$P" --format='value(locationId)')

@@ -1,0 +1,29 @@
+name: IMD warnings check
+
+# Tests the IMD reader and shows what IMD says for Maharashtra right now.
+# "[imdpush]" in the commit message also sends the fake hail to topic wx_test
+# (test-build phones that opted in on Profile → चेतावनी की जाँच).
+on:
+  push:
+    branches: [imd-warnings]
+    paths: ["functions/alerts/imd_core.py", "tools/imd_warnings.py", "tools/test_imd.py", "tools/fixtures/imd/**", ".github/workflows/imd-check.yml"]
+  workflow_dispatch:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python tools/test_imd.py
+      - name: What IMD says now
+        run: python tools/imd_warnings.py
+      - name: Test push to wx_test
+        if: contains(github.event.head_commit.message, '[imdpush]')
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          pip install firebase-admin==6.5.0
+          python tools/imd_warnings.py --test-push
