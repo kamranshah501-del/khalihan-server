@@ -187,6 +187,7 @@ export const SWITCH_WORDS = {
     f_whats_new: 'New in Khalihan (after an update)', f_whats_new_d: 'Once after an update: a short moving tour of the new features that are ON for that farmer — "Skip", "Next", "Let\'s start". A feature switched on later gets its own page then (no app update). Not after a fresh install. Profile → "What\'s new" plays it again (app v1.0.7).',
     f_share_link: 'App link in every share', f_share_link_d: 'Every price, list, "Where to sell?" or scheme shared to WhatsApp ends with Khalihan\'s Google Play link, and the price picture says "Free on Google Play — search Khalihan". A farmer who gets a price installs the app in one tap; Admin → 📊 and Play see installs that came from shares (utm_source=whatsapp). Off = shares as before (app v1.0.8).',
     f_share_short: 'Short app link (khalihan.web.app)', f_share_short_d: 'The link at the end of a share becomes short — khalihan.web.app/crop instead of the long Google Play address. The short address only sends the phone on to the same Play page and still tells Play and Admin → 📊 that the install came from a share. Turn it on ONLY after the short link has been deployed (Deploy workflow → what = link) and opens Google Play when tapped; before that the link would lead nowhere. Works inside "App link in every share". Off = the long Play address.',
+    f_insta: 'Farming tips on Instagram', f_insta_d: 'A Home button under the crop calendar: opens our official Instagram page Khalihan Shetishala (@khalihan_shetishala) — district-wise farming tips as reels, each with its source. Opens the Instagram app if the phone has it, else the browser (app v1.0.10).',
     f_rate_prompt: 'Ask for a Play rating', f_rate_prompt_d: 'Play\'s own "rate Khalihan" card, once, a few seconds after fresh prices load — only after the farmer has seen prices on 4 different days, and never again for 120 days. Play itself may skip it; the farmer can always close it. Only the Play Store build shows it (app v1.0.8).',
     f_ai: 'Khalihan AI', f_ai_d: 'The whole AI section. First part (app v1.0.9): questions understood on the phone and answered from Khalihan\'s own prices, "Where to sell?" sums and weather — no cloud, no cost. Cloud AI (Blaze + App Check) comes later, each part with its own switch. Your test phone sees it even when OFF.',
     f_ai_ask: 'Ask Khalihan AI (V2)', f_ai_ask_d: 'The V2 design: a tab peeks out of the bottom bar\'s right edge; a swipe or tap shows the logo pill, which opens the question sheet (the orb, the answer in amber, its source). Understands price, where to sell, money in hand, weather and spraying — Hindi, Marathi, English, spoken or typed. Never names a pesticide or a dose. Nothing leaves the phone (app v1.0.9).',
@@ -385,6 +386,7 @@ export const SWITCH_WORDS = {
     f_whats_new: 'Khalihan में नया (अपडेट के बाद)', f_whats_new_d: 'अपडेट के बाद एक बार: उस किसान के लिए चालू नए फ़ीचर का छोटा, चलता-फिरता टूर — "छोड़ें", "आगे", "चलिए, शुरू करें"। कोई फ़ीचर बाद में चालू करें तो उसका पेज तभी दिखेगा (ऐप अपडेट की ज़रूरत नहीं)। नया इंस्टॉल करने वालों को नहीं। प्रोफ़ाइल → "नया क्या है" से फिर देख सकते हैं (ऐप v1.0.7)।',
     f_share_link: 'हर शेयर में ऐप का लिंक', f_share_link_d: 'WhatsApp पर भेजा हर भाव, सूची, "कहाँ बेचें?" या योजना आख़िर में Khalihan का Google Play लिंक जोड़ता है, और भाव की फ़ोटो पर लिखा आता है "Google Play पर मुफ़्त — Khalihan खोजें"। भाव पाने वाला किसान एक टैप में ऐप लगा लेता है; Admin → 📊 और Play में शेयर से आए इंस्टॉल दिखते हैं (utm_source=whatsapp)। बंद = पहले जैसा शेयर (ऐप v1.0.8)।',
     f_share_short: 'ऐप का छोटा लिंक (khalihan.web.app)', f_share_short_d: 'शेयर के आख़िर का लिंक छोटा हो जाता है — लंबे Google Play पते की जगह khalihan.web.app/crop। छोटा पता फ़ोन को उसी Play पेज पर भेजता है और Play व Admin → 📊 को अब भी पता चलता है कि इंस्टॉल शेयर से आया। इसे तभी चालू करें जब छोटा लिंक डिप्लॉय हो चुका हो (Deploy workflow → what = link) और दबाने पर Google Play खुले; उससे पहले लिंक कहीं नहीं ले जाएगा। "हर शेयर में ऐप का लिंक" के अंदर काम करता है। बंद = लंबा Play पता।',
+    f_insta: 'Instagram पर खेती टिप्स', f_insta_d: 'Home पर फ़सल कैलेंडर के नीचे एक बटन: हमारा ऑफ़िशियल Instagram पेज खलिहान शेतीशाळा (@khalihan_shetishala) खोलता है — ज़िलेवार खेती टिप्स की रील्स, हर रील में स्रोत। फ़ोन में Instagram ऐप हो तो उसमें, नहीं तो ब्राउज़र में (ऐप v1.0.10)।',
     f_rate_prompt: 'Play रेटिंग माँगें', f_rate_prompt_d: 'Play का अपना "Khalihan को रेट करें" कार्ड, एक बार, ताज़ा भाव आने के कुछ सेकंड बाद — तभी जब किसान 4 अलग दिन भाव देख चुका हो, और फिर 120 दिन तक नहीं। Play ख़ुद भी छोड़ सकता है; किसान हमेशा बंद कर सकता है। सिर्फ़ Play Store वाले ऐप में दिखता है (ऐप v1.0.8)।',
     f_ai: 'Khalihan AI', f_ai_d: 'पूरा AI हिस्सा। पहला भाग (ऐप v1.0.9): सवाल फ़ोन पर ही समझा जाता है, जवाब Khalihan के अपने भाव, "कहाँ बेचें?" के हिसाब और मौसम से — न क्लाउड, न खर्च। क्लाउड AI (Blaze + App Check) बाद में, हर भाग का अलग स्विच। बंद होने पर भी आपके टेस्ट फ़ोन पर दिखेगा।',
     f_ai_ask: 'Khalihan AI से पूछें (V2)', f_ai_ask_d: 'V2 डिज़ाइन: नीचे की पट्टी के दाएँ किनारे से टैब झाँकता है; खिसकाने या दबाने पर लोगो वाला बार, उसे दबाने पर सवाल-जवाब शीट (गोला, नारंगी जवाब, स्रोत)। भाव, कहाँ बेचें, हाथ में कितना, मौसम और छिड़काव समझता है — हिंदी, मराठी, अंग्रेज़ी, बोलकर या लिखकर। दवा या मात्रा का नाम कभी नहीं बताता। फ़ोन से कुछ बाहर नहीं जाता (ऐप v1.0.9)।',
@@ -617,6 +619,7 @@ export const FEATURE_INFO = {
   ai_mydocs: { def: false, since: '1.0.9' },
   ai_account: { def: false, since: '1.0.9' },
   ai_deep: { def: false, since: '1.0.9' },
+  insta: { def: true, since: '1.0.10' },
 };
 
 
@@ -701,6 +704,7 @@ const SECTIONS = [
   { id: 'dark', icon: '🌙', master: 'dark', kids: [] },
   { id: 'update', icon: '⬆️', master: 'update_prompt', kids: [] },
   { id: 'rate', icon: '⭐', master: 'rate_prompt', kids: [] },
+  { id: 'insta', icon: '📸', master: 'insta', kids: [] },
   { id: 'guide', icon: '🧭', master: 'setup_guide', kids: [] },
   { id: 'whatsnew', icon: '✨', master: 'whats_new', kids: [] },
   { id: 'prosale', icon: '💳', master: 'pro_sale', kids: [] },
