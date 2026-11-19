@@ -2,11 +2,12 @@ name: IMD warnings check
 
 # Tests the IMD reader and shows what IMD says for Maharashtra right now.
 # "[imdpush]" in the commit message also sends the fake hail to topic wx_test
-# (test-build phones that opted in on Profile → चेतावनी की जाँच).
+# (test-build phones that opted in on Profile → चेतावनी की जाँच);
+# "[wxreport]" prints the Open-Meteo vs Google score so far.
 on:
   push:
     branches: [imd-warnings]
-    paths: ["functions/alerts/imd_core.py", "tools/imd_warnings.py", "tools/test_imd.py", "tools/fixtures/imd/**", ".github/workflows/imd-check.yml"]
+    paths: ["functions/alerts/**", "tools/imd_warnings.py", "tools/test_imd.py", "tools/wx_compare_report.py", "tools/fixtures/imd/**", ".github/workflows/imd-check.yml"]
   workflow_dispatch:
 
 jobs:
@@ -27,3 +28,10 @@ jobs:
         run: |
           pip install firebase-admin==6.5.0
           python tools/imd_warnings.py --test-push
+      - name: Weather comparison score (Open-Meteo vs Google vs IMD observed)
+        if: contains(github.event.head_commit.message, '[wxreport]')
+        env:
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
+        run: |
+          pip install firebase-admin==6.5.0
+          python tools/wx_compare_report.py

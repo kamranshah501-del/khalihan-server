@@ -18,6 +18,7 @@ from firebase_admin import firestore, messaging
 
 import alerts_core as core
 import imd_core
+import wx_compare
 
 firebase_admin.initialize_app()
 
@@ -45,5 +46,12 @@ def tick(request):
         line += " | " + imd_core.run(db, now, send=_push)
     except Exception as e:  # noqa: BLE001
         line += f" | IMD failed: {type(e).__name__}: {e}"
+    # Open-Meteo vs Google against IMD's observations, twice a day (wx_compare.py).
+    try:
+        extra = wx_compare.run(db, now)
+        if extra:
+            line += " | " + extra
+    except Exception as e:  # noqa: BLE001
+        line += f" | wx compare failed: {type(e).__name__}: {e}"
     print(line)
     return (line, 200)
