@@ -21,9 +21,17 @@ Firestore watcher/insta_token (no phone and no Admin page can read watcher/).
 
   python tools/insta_reels.py           read and write config/reels
   python tools/insta_reels.py --check   read only, print what it found
+
+Until a token exists (it needs a Facebook developer login — the owner's), the
+job reads the page's PUBLIC profile embed (instagram.com/khalihan_shetishala/
+embed/, the newest 6 posts) with a headless browser and keeps every reel it
+has seen: items {id, code, link} without "video" — the app then plays each
+reel in Instagram's own embed player (instagram.com/reel/<code>/embed/),
+which works without any Instagram account. First fill: INSTA_SEED.
 """
 import json
 import os
+import re
 import sys
 import urllib.error
 import urllib.parse
@@ -81,6 +89,83 @@ def profile(token):
         return get("me", fields="user_id,username", access_token=token)
 
 
+USER = "khalihan_shetishala"
+CODE = re.compile(r"[A-Za-z0-9_-]{11}")
+
+
+def _code_ok(c):
+    # Instagram shortcodes: 11 letters, digits, "-" or "_", with capitals.
+    return bool(CODE.fullmatch(c)) and any(ch.isupper() for ch in c) and not c.startswith("_")
+
+
+def discover(user=USER):
+    """The newest posts on the page's public profile embed
+    (instagram.com/<user>/embed/ — 6 tiles), newest first. Needs Playwright."""
+    from playwright.sync_api import sync_playwright
+    seen = []
+    with sync_playwright() as p:
+        browser = p.chromium.launch()
+        page = browser.new_page(viewport={"width": 400, "height": 900})
+
+        def on_response(r):
+            try:
+                if not re.search("json|javascript|html|text", r.headers.get("content-type", "")):
+                    return
+                body = r.text()
+            except Exception:  # noqa: BLE001
+                return
+            seen.extend(m.group(1) for m in re.finditer(r'"(?:shortcode|code)"\s*:\s*"([A-Za-z0-9_-]{11})"', body))
+
+        page.on("response", on_response)
+        try:
+            page.goto(f"https://www.instagram.com/{user}/embed/", wait_until="networkidle", timeout=60000)
+        except Exception as e:  # noqa: BLE001
+            print(f"embed page: {type(e).__name__}")
+        page.wait_for_timeout(3000)
+        html = page.content()
+        seen.extend(m.group(1) for m in re.finditer(r'(?:shortcode|/p/|/reel/)[\\"\s:/]*([A-Za-z0-9_-]{11})', html))
+        browser.close()
+    out = []
+    for c in seen:
+        if _code_ok(c) and c not in out:
+            out.append(c)
+    return out
+
+
+def embed_mode(db, now, check):
+    """config/reels from the public embeds: what is new goes first, what was
+    there stays (30 at most). Codes given in INSTA_SEED (comma-separated,
+    newest first) are added too — the first fill."""
+    found = discover()
+    seed = [c.strip() for c in (os.environ.get("INSTA_SEED") or "").split(",") if _code_ok(c.strip())]
+    print(f"@{USER}: profile embed shows {len(found)} posts: {', '.join(found)}" + (f"; seed {len(seed)}" if seed else ""))
+    if check:
+        return
+    ref = db.collection("config").document("reels")
+    snap = ref.get()
+    old = (snap.to_dict() or {}).get("items") or [] if snap.exists else []
+    order = []
+    for c in found + seed + [str(it.get("code") or it.get("id") or "") for it in old]:
+        if _code_ok(c) and c not in order:
+            order.append(c)
+    if not order:
+        print("nothing found — config/reels left as it was")
+        return
+    keep = {str(it.get("code") or it.get("id")): it for it in old}
+    items = []
+    for c in order[:KEEP]:
+        it = dict(keep.get(c) or {})
+        it.update({"id": c, "code": c, "link": f"https://www.instagram.com/reel/{c}/"})
+        it.setdefault("video", "")
+        it.setdefault("caption", "")
+        it.setdefault("thumb", "")
+        it.setdefault("found", now)
+        items.append(it)
+    ref.set({"at": now, "user": USER, "mode": "embed", "items": items})
+    new = [c for c in order[:KEEP] if c not in keep]
+    print(f"config/reels written: {len(items)} reels ({len(new)} new: {', '.join(new) or '—'})")
+
+
 def main():
     check = "--check" in sys.argv
     secret = (os.environ.get("INSTAGRAM_TOKEN") or "").strip()
@@ -99,9 +184,9 @@ def main():
         if kept.get("token") and kept.get("made") and (not secret or kept.get("from") == secret[-6:]):
             token, made = kept["token"], kept["made"]
     if not token:
-        # Not an error: until the owner makes the token, the app opens the
-        # Instagram page instead of playing reels.
-        print("No INSTAGRAM_TOKEN yet: the owner makes it once in Meta's App Dashboard (see this file's top).")
+        # No API token: Instagram's own public embeds (no login, the way any
+        # website shows a reel). The app plays each one in its embed player.
+        embed_mode(db, now, check)
         return
 
     me = profile(token)

@@ -1,11 +1,17 @@
 name: Instagram reels for the app
 
-# Every hour: our page's newest reels → Firestore config/reels (tools/insta_reels.py).
-# Needs the secret INSTAGRAM_TOKEN (the owner makes it once in Meta's App Dashboard).
+# Our page's newest reels → Firestore config/reels (tools/insta_reels.py), every
+# 3 hours. With the secret INSTAGRAM_TOKEN it uses Meta's API; without it, the
+# page's public embed (a headless browser reads the newest 6 posts).
 on:
   schedule:
-    - cron: "17 * * * *"
+    - cron: "17 */3 * * *"
   workflow_dispatch:
+    inputs:
+      seed:
+        description: "Reel codes to add (comma-separated, newest first) — e.g. the first fill"
+        required: false
+        default: ""
 
 jobs:
   reels:
@@ -16,9 +22,11 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install firebase-admin==6.5.0
+      - run: pip install firebase-admin==6.5.0 playwright==1.48.0
+      - run: python -m playwright install --with-deps chromium
       - run: python tools/insta_reels.py
         env:
           PYTHONUNBUFFERED: "1"
           INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+          INSTA_SEED: ${{ github.event.inputs.seed }}
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
