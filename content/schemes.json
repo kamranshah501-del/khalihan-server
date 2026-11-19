@@ -1,5 +1,5 @@
 {
- "version": 9,
+ "version": 10,
  "note": "Copied from khalihan-app lib/data/schemes_content.dart (tool/schemes_content.py). The app takes this list when version is higher than its own.",
  "schemes": [
   {
@@ -516,7 +516,7 @@
     "en": {
      "title": "Drip & sprinkler subsidy",
      "benefit": "About 80% subsidy (small farmers), 75% others",
-     "summary": "The central PMKSY share (55% for small and marginal farmers, 45% for others) plus Maharashtra's top-up comes to about 80% and 75%. Saves water and fertiliser — especially for sugarcane, cotton, banana and vegetables. Check the current rate on MahaDBT.",
+     "summary": "The central share (55% for small and marginal farmers, 45% for others) plus Maharashtra's top-up comes to about 80% and 75%. Saves water and fertiliser — especially for sugarcane, cotton, banana and vegetables. Check the current rate on MahaDBT.",
      "who": [
       "Farmers with land and a water source",
       "Not if the same land got this subsidy in recent years"
@@ -536,7 +536,7 @@
     "hi": {
      "title": "ड्रिप और स्प्रिंकलर अनुदान",
      "benefit": "लगभग 80% अनुदान (छोटे किसान), बाकी 75%",
-     "summary": "केंद्र की PMKSY (छोटे और सीमांत किसानों को 55%, बाकी को 45%) और महाराष्ट्र का पूरक अनुदान मिलाकर लगभग 80% और 75%। पानी और खाद बचती है — ख़ासकर गन्ना, कपास, केला और सब्ज़ियों में। ताज़ा दर MahaDBT पर देखें।",
+     "summary": "केंद्र का हिस्सा (छोटे और सीमांत किसानों को 55%, बाकी को 45%) और महाराष्ट्र का पूरक अनुदान मिलाकर लगभग 80% और 75%। पानी और खाद बचती है — ख़ासकर गन्ना, कपास, केला और सब्ज़ियों में। ताज़ा दर MahaDBT पर देखें।",
      "who": [
       "ज़मीन और पानी के स्रोत वाले किसान",
       "जिस ज़मीन पर हाल के सालों में यह अनुदान मिला हो, उस पर नहीं"
@@ -556,7 +556,7 @@
     "mr": {
      "title": "ठिबक व तुषार सिंचन अनुदान",
      "benefit": "सुमारे 80% अनुदान (अल्प-अत्यल्प भूधारक), इतरांना 75%",
-     "summary": "केंद्राची PMKSY (अल्प व अत्यल्प भूधारकांना 55%, इतरांना 45%) आणि महाराष्ट्राचे पूरक अनुदान मिळून सुमारे 80% आणि 75%. पाणी आणि खत वाचते — विशेषतः ऊस, कापूस, केळी आणि भाजीपाल्यात. सध्याचा दर MahaDBT वर पाहा.",
+     "summary": "केंद्राचा हिस्सा (अल्प व अत्यल्प भूधारकांना 55%, इतरांना 45%) आणि महाराष्ट्राचे पूरक अनुदान मिळून सुमारे 80% आणि 75%. पाणी आणि खत वाचते — विशेषतः ऊस, कापूस, केळी आणि भाजीपाल्यात. सध्याचा दर MahaDBT वर पाहा.",
      "who": [
       "जमीन आणि पाण्याचा स्रोत असलेले शेतकरी",
       "ज्या जमिनीवर अलीकडे हे अनुदान मिळाले, तिच्यावर नाही"
@@ -978,7 +978,7 @@
    ],
    "checked": "2026-11-10",
    "apply": null,
-   "info": "https://mahabhumi.gov.in/",
+   "info": "https://mahabhumi.gov.in/mahabhumilink",
    "source": "e-Pik Pahani · Maharashtra Land Records (mahabhumi.gov.in), Govt of Maharashtra",
    "t": {
     "en": {
