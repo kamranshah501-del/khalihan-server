@@ -6,16 +6,19 @@ Two entry points (deploy.sh):
               message, a team reply, a test request → sent at once.
   tick      — HTTP, called by Cloud Scheduler every 10 minutes (OIDC, no
               public access): reminders, Pro, the launch counter, the
-              morning summary, and anything the instant path missed.
+              morning summary, and anything the instant path missed; and
+              the farmers' IMD hail and storm warnings (imd_core.py).
 The logic is alerts_core.py (the same file tools/admin_alerts.py uses).
 """
 from datetime import datetime, timezone
 
 import firebase_admin
 import functions_framework
-from firebase_admin import firestore
+from firebase_admin import firestore, messaging
 
 import alerts_core as core
+import imd_core
+import wx_compare
 
 firebase_admin.initialize_app()
 
@@ -28,8 +31,27 @@ def on_create(event):
     print(f"{str(path).split('/')[0]}: {line}")
 
 
+def _push(topic, data):
+    messaging.send(messaging.Message(topic=topic, data=data, android=messaging.AndroidConfig(priority="high")))
+
+
 @functions_framework.http
 def tick(request):
-    line = core.run_pass(firestore.client(), datetime.now(timezone.utc))
+    db = firestore.client()
+    now = datetime.now(timezone.utc)
+    line = core.run_pass(db, now)
+    # IMD hail and storm warnings for farmers (imd_core.py). Its own try: an
+    # IMD outage must never stop the team's alerts.
+    try:
+        line += " | " + imd_core.run(db, now, send=_push)
+    except Exception as e:  # noqa: BLE001
+        line += f" | IMD failed: {type(e).__name__}: {e}"
+    # Open-Meteo vs Google against IMD's observations, twice a day (wx_compare.py).
+    try:
+        extra = wx_compare.run(db, now)
+        if extra:
+            line += " | " + extra
+    except Exception as e:  # noqa: BLE001
+        line += f" | wx compare failed: {type(e).__name__}: {e}"
     print(line)
     return (line, 200)

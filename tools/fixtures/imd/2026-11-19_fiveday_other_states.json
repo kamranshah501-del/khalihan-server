@@ -1,0 +1,35 @@
+[
+{
+"properties": {
+"ID": 1926,
+"Date": "2026-11-19",
+"District": "SOUTH 24 PARGANAS",
+"Day_1": "16,4,8",
+"Day_2": "16,4,8",
+"Day1_Color": 2,
+"Day2_Color": 2
+}
+},
+{
+"properties": {
+"ID": 2095,
+"Date": "2026-11-19",
+"District": "ALLURI SITHARAMA RAJU",
+"Day_1": "16,4,8",
+"Day_2": "2,4,8",
+"Day1_Color": 2,
+"Day2_Color": 3
+}
+},
+{
+"properties": {
+"ID": 1858,
+"Date": "2026-11-19",
+"District": "BALESHWAR",
+"Day_1": "16,4,8",
+"Day_2": "17,4,8",
+"Day1_Color": 2,
+"Day2_Color": 1
+}
+}
+]

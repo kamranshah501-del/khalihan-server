@@ -19,11 +19,17 @@ echo "== 1/6 Turning on the Google services it needs (a minute)"
 gcloud services enable cloudfunctions.googleapis.com run.googleapis.com cloudbuild.googleapis.com \
   artifactregistry.googleapis.com eventarc.googleapis.com pubsub.googleapis.com \
   cloudscheduler.googleapis.com fcm.googleapis.com firestore.googleapis.com --project "$P"
+# Google's Weather API for the 7-day forecast comparison (wx_compare.py; owner
+# OK 19 Nov 2026 17:08). Its own line: if Google wants a click first, the
+# rest still deploys and the comparison keeps Open-Meteo's half.
+gcloud services enable weather.googleapis.com --project "$P" \
+  || echo "   (Weather API not switched on — Console → APIs → Weather API → Enable)"
 
 echo "== 2/6 Service account admin-alerts"
 gcloud iam service-accounts describe "$SA" --project "$P" >/dev/null 2>&1 \
   || gcloud iam service-accounts create admin-alerts --display-name="Khalihan Admin alerts" --project "$P"
-for role in roles/datastore.user roles/firebasecloudmessaging.admin roles/eventarc.eventReceiver roles/run.invoker; do
+for role in roles/datastore.user roles/firebasecloudmessaging.admin roles/eventarc.eventReceiver roles/run.invoker \
+    roles/serviceusage.serviceUsageConsumer; do
   for i in 1 2 3 4 5 6; do
     if gcloud projects add-iam-policy-binding "$P" --condition=None --member="serviceAccount:$SA" \
          --role="$role" --quiet >/dev/null 2>&1; then break; fi
@@ -35,7 +41,7 @@ echo "== 3/6 The code (github.com/kamranshah501-del/khalihan-server, functions/a
 D=$(mktemp -d)
 git clone -q --depth 1 https://github.com/kamranshah501-del/khalihan-server "$D/s"
 cd "$D/s/functions/alerts"
-python3 -m py_compile main.py alerts_core.py
+python3 -m py_compile main.py alerts_core.py imd_core.py wx_compare.py
 
 echo "== 4/6 Where Firestore keeps the data"
 LOC=$(gcloud firestore databases describe --database='(default)' --project "$P" --format='value(locationId)')
