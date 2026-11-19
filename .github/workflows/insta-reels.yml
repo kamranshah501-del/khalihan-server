@@ -1,0 +1,24 @@
+name: Instagram reels for the app
+
+# Every hour: our page's newest reels → Firestore config/reels (tools/insta_reels.py).
+# Needs the secret INSTAGRAM_TOKEN (the owner makes it once in Meta's App Dashboard).
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+jobs:
+  reels:
+    runs-on: ubuntu-latest
+    if: ${{ vars.INSTA_REELS != 'off' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install firebase-admin==6.5.0
+      - run: python tools/insta_reels.py
+        env:
+          PYTHONUNBUFFERED: "1"
+          INSTAGRAM_TOKEN: ${{ secrets.INSTAGRAM_TOKEN }}
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
