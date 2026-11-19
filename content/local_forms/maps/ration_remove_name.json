@@ -1,0 +1,694 @@
+{
+ "page_pt": [
+  [
+   595.3,
+   841.9
+  ]
+ ],
+ "fields": [
+  {
+   "id": "gav",
+   "page": 1,
+   "kind": "text",
+   "x": 112,
+   "y": 127,
+   "size": 9.5,
+   "who": "profile",
+   "label": {
+    "mr": "शिधावाटप क्षेत्र / गाव",
+    "hi": "गाँव",
+    "en": "Village / rationing area"
+   },
+   "sample": "शेंदुर्णी",
+   "profile": "village_mr"
+  },
+  {
+   "id": "taluka",
+   "page": 1,
+   "kind": "text",
+   "x": 362,
+   "y": 127,
+   "size": 9.5,
+   "who": "profile",
+   "label": {
+    "mr": "विभाग / तालुका",
+    "hi": "तालुका",
+    "en": "Taluka"
+   },
+   "sample": "जामनेर",
+   "profile": "taluka"
+  },
+  {
+   "id": "naav",
+   "page": 1,
+   "kind": "text",
+   "x": 158,
+   "y": 199,
+   "size": 9.5,
+   "who": "profile",
+   "label": {
+    "mr": "अर्जदाराचे नाव (प्रथम आडनाव)",
+    "hi": "आवेदक का नाम (पहले उपनाम)",
+    "en": "Applicant's name (surname first)"
+   },
+   "sample": "पाटील रामदास गणपत",
+   "profile": "name_mr"
+  },
+  {
+   "id": "vay",
+   "page": 1,
+   "kind": "text",
+   "x": 313,
+   "y": 199,
+   "size": 9.5,
+   "who": "profile",
+   "label": {
+    "mr": "वय",
+    "hi": "उम्र",
+    "en": "Age"
+   },
+   "sample": "४२",
+   "profile": "age"
+  },
+  {
+   "id": "patta",
+   "page": 1,
+   "kind": "text",
+   "x": 130,
+   "y": 212,
+   "size": 9,
+   "who": "profile",
+   "label": {
+    "mr": "पूर्ण निवासी पत्ता",
+    "hi": "पूरा पता",
+    "en": "Full address"
+   },
+   "sample": "मु. पो. शेंदुर्णी, ता. जामनेर, जि. जळगाव",
+   "profile": "address"
+  },
+  {
+   "id": "patta2",
+   "page": 1,
+   "kind": "text",
+   "x": 122,
+   "y": 224,
+   "size": 9,
+   "who": "profile",
+   "label": {
+    "mr": "पत्ता (पुढे)",
+    "hi": "पता (आगे)",
+    "en": "Address (cont.)"
+   },
+   "sample": "",
+   "profile": "address_rest"
+  },
+  {
+   "id": "dukan",
+   "page": 1,
+   "kind": "text",
+   "x": 122,
+   "y": 236,
+   "size": 9,
+   "who": "farmer",
+   "label": {
+    "mr": "दुकान क्रमांक",
+    "hi": "राशन दुकान नंबर",
+    "en": "Ration shop number"
+   },
+   "sample": "१२"
+  },
+  {
+   "id": "card_no",
+   "page": 1,
+   "kind": "text",
+   "x": 393,
+   "y": 236,
+   "size": 8.5,
+   "who": "farmer",
+   "label": {
+    "mr": "शिधापत्रिका क्रमांक",
+    "hi": "राशन कार्ड नंबर",
+    "en": "Ration card number"
+   },
+   "sample": "XXXXXXXXXXXX"
+  },
+  {
+   "id": "m1_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 88,
+   "y": 317.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "पाटील गणपत भिका",
+   "row": 1,
+   "col": "naav"
+  },
+  {
+   "id": "m1_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 232,
+   "y": 317.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "वडील",
+   "row": 1,
+   "col": "nate"
+  },
+  {
+   "id": "m1_vay",
+   "page": 1,
+   "kind": "text",
+   "x": 286,
+   "y": 317.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "वय",
+    "hi": "उम्र",
+    "en": "Age"
+   },
+   "sample": "७८",
+   "row": 1,
+   "col": "vay"
+  },
+  {
+   "id": "m1_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 318,
+   "y": 317.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय",
+    "hi": "काम",
+    "en": "Occupation"
+   },
+   "sample": "शेती",
+   "row": 1,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m1_tarikh",
+   "page": 1,
+   "kind": "text",
+   "x": 376,
+   "y": 317.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "निघून गेल्याची किंवा मृत्यूची तारीख",
+    "hi": "जाने या मृत्यु की तारीख",
+    "en": "Date of leaving or death"
+   },
+   "sample": "मृत्यू ०२/०९/२०२६",
+   "row": 1,
+   "col": "tarikh"
+  },
+  {
+   "id": "m1_thikan",
+   "page": 1,
+   "kind": "text",
+   "x": 438,
+   "y": 317.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "सध्याचे ठिकाण",
+    "hi": "अभी कहाँ रहते हैं",
+    "en": "Present address"
+   },
+   "sample": "—",
+   "row": 1,
+   "col": "thikan"
+  },
+  {
+   "id": "m2_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 88,
+   "y": 329.5,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "naav"
+  },
+  {
+   "id": "m2_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 232,
+   "y": 329.5,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "nate"
+  },
+  {
+   "id": "m2_vay",
+   "page": 1,
+   "kind": "text",
+   "x": 286,
+   "y": 329.5,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "वय",
+    "hi": "उम्र",
+    "en": "Age"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "vay"
+  },
+  {
+   "id": "m2_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 318,
+   "y": 329.5,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय",
+    "hi": "काम",
+    "en": "Occupation"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m2_tarikh",
+   "page": 1,
+   "kind": "text",
+   "x": 376,
+   "y": 329.5,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "निघून गेल्याची किंवा मृत्यूची तारीख",
+    "hi": "जाने या मृत्यु की तारीख",
+    "en": "Date of leaving or death"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "tarikh"
+  },
+  {
+   "id": "m2_thikan",
+   "page": 1,
+   "kind": "text",
+   "x": 438,
+   "y": 329.5,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "सध्याचे ठिकाण",
+    "hi": "अभी कहाँ रहते हैं",
+    "en": "Present address"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "thikan"
+  },
+  {
+   "id": "m3_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 88,
+   "y": 342.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "naav"
+  },
+  {
+   "id": "m3_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 232,
+   "y": 342.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "nate"
+  },
+  {
+   "id": "m3_vay",
+   "page": 1,
+   "kind": "text",
+   "x": 286,
+   "y": 342.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "वय",
+    "hi": "उम्र",
+    "en": "Age"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "vay"
+  },
+  {
+   "id": "m3_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 318,
+   "y": 342.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय",
+    "hi": "काम",
+    "en": "Occupation"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m3_tarikh",
+   "page": 1,
+   "kind": "text",
+   "x": 376,
+   "y": 342.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "निघून गेल्याची किंवा मृत्यूची तारीख",
+    "hi": "जाने या मृत्यु की तारीख",
+    "en": "Date of leaving or death"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "tarikh"
+  },
+  {
+   "id": "m3_thikan",
+   "page": 1,
+   "kind": "text",
+   "x": 438,
+   "y": 342.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "सध्याचे ठिकाण",
+    "hi": "अभी कहाँ रहते हैं",
+    "en": "Present address"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "thikan"
+  },
+  {
+   "id": "m4_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 88,
+   "y": 354.5,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "naav"
+  },
+  {
+   "id": "m4_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 232,
+   "y": 354.5,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "nate"
+  },
+  {
+   "id": "m4_vay",
+   "page": 1,
+   "kind": "text",
+   "x": 286,
+   "y": 354.5,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "वय",
+    "hi": "उम्र",
+    "en": "Age"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "vay"
+  },
+  {
+   "id": "m4_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 318,
+   "y": 354.5,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय",
+    "hi": "काम",
+    "en": "Occupation"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m4_tarikh",
+   "page": 1,
+   "kind": "text",
+   "x": 376,
+   "y": 354.5,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "निघून गेल्याची किंवा मृत्यूची तारीख",
+    "hi": "जाने या मृत्यु की तारीख",
+    "en": "Date of leaving or death"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "tarikh"
+  },
+  {
+   "id": "m4_thikan",
+   "page": 1,
+   "kind": "text",
+   "x": 438,
+   "y": 354.5,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "सध्याचे ठिकाण",
+    "hi": "अभी कहाँ रहते हैं",
+    "en": "Present address"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "thikan"
+  },
+  {
+   "id": "m5_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 88,
+   "y": 367.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "naav"
+  },
+  {
+   "id": "m5_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 232,
+   "y": 367.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "nate"
+  },
+  {
+   "id": "m5_vay",
+   "page": 1,
+   "kind": "text",
+   "x": 286,
+   "y": 367.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "वय",
+    "hi": "उम्र",
+    "en": "Age"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "vay"
+  },
+  {
+   "id": "m5_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 318,
+   "y": 367.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय",
+    "hi": "काम",
+    "en": "Occupation"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m5_tarikh",
+   "page": 1,
+   "kind": "text",
+   "x": 376,
+   "y": 367.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "निघून गेल्याची किंवा मृत्यूची तारीख",
+    "hi": "जाने या मृत्यु की तारीख",
+    "en": "Date of leaving or death"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "tarikh"
+  },
+  {
+   "id": "m5_thikan",
+   "page": 1,
+   "kind": "text",
+   "x": 438,
+   "y": 367.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "सध्याचे ठिकाण",
+    "hi": "अभी कहाँ रहते हैं",
+    "en": "Present address"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "thikan"
+  },
+  {
+   "id": "dinank",
+   "page": 1,
+   "kind": "text",
+   "x": 96,
+   "y": 403,
+   "size": 9.5,
+   "who": "profile",
+   "label": {
+    "mr": "दिनांक",
+    "hi": "तारीख",
+    "en": "Date"
+   },
+   "sample": "१९/११/२०२६",
+   "profile": "today"
+  },
+  {
+   "id": "sahi",
+   "page": 1,
+   "kind": "sign",
+   "x": 418,
+   "y": 404,
+   "w": 76,
+   "h": 28,
+   "who": "farmer",
+   "label": {
+    "mr": "अर्जदाराची सही",
+    "hi": "आवेदक के हस्ताक्षर",
+    "en": "Applicant's signature"
+   },
+   "optional": true
+  }
+ ],
+ "office_only": [
+  "अनुक्रमांक",
+  "अर्ज No.",
+  "संदर्भ क्रमांक",
+  "शिधावाटप अधिकाऱ्याचा आदेश",
+  "स्थळप्रत"
+ ],
+ "thumb_note": "The form prints only 'अर्जदाराची सही'. A farmer who signs with his thumb gets a thumb box beside it (General Clauses Act s.3(56)).",
+ "form": "ration_remove_name",
+ "namuna": "9",
+ "title": {
+  "mr": "कौटुंबिक शिधापत्रिकेतील युनिट्स कायम स्वरूपात कमी करण्याकरिता अर्ज",
+  "hi": "राशन कार्ड से नाम हटाने का आवेदन",
+  "en": "Remove a name from the ration card"
+ },
+ "docs": []
+}

@@ -1,0 +1,1332 @@
+{
+ "page_pt": [
+  [
+   612,
+   792
+  ],
+  [
+   612,
+   792
+  ]
+ ],
+ "fields": [
+  {
+   "id": "photo",
+   "page": 1,
+   "kind": "photo_row",
+   "x": 40,
+   "y": 124,
+   "w": 530,
+   "h": 56,
+   "who": "farmer",
+   "label": {
+    "mr": "कुटुंबातील सर्व सदस्यांचे पासपोर्ट फोटो",
+    "hi": "परिवार के सब सदस्यों के फ़ोटो",
+    "en": "Passport photos of all members"
+   },
+   "each": [
+    44,
+    56
+   ]
+  },
+  {
+   "id": "gav",
+   "page": 1,
+   "kind": "text",
+   "x": 108,
+   "y": 236,
+   "size": 10,
+   "who": "profile",
+   "label": {
+    "mr": "शिधावाटप क्षेत्र / गाव",
+    "hi": "गाँव",
+    "en": "Village / rationing area"
+   },
+   "sample": "शेंदुर्णी",
+   "profile": "village_mr"
+  },
+  {
+   "id": "taluka",
+   "page": 1,
+   "kind": "text",
+   "x": 240,
+   "y": 236,
+   "size": 10,
+   "who": "profile",
+   "label": {
+    "mr": "विभाग / तालुका",
+    "hi": "तालुका",
+    "en": "Taluka"
+   },
+   "sample": "जामनेर",
+   "profile": "taluka"
+  },
+  {
+   "id": "jilha",
+   "page": 1,
+   "kind": "text",
+   "x": 412,
+   "y": 236,
+   "size": 10,
+   "who": "profile",
+   "label": {
+    "mr": "परिमंडळ / जिल्हा",
+    "hi": "ज़िला",
+    "en": "District"
+   },
+   "sample": "जळगाव",
+   "profile": "district"
+  },
+  {
+   "id": "naav",
+   "page": 1,
+   "kind": "text",
+   "x": 136,
+   "y": 318,
+   "size": 10.5,
+   "who": "profile",
+   "label": {
+    "mr": "अर्जदाराचे संपूर्ण नाव (आडनावाने सुरुवात)",
+    "hi": "पूरा नाम (उपनाम से)",
+    "en": "Full name (surname first)"
+   },
+   "sample": "पाटील रामदास गणपत",
+   "profile": "name_mr"
+  },
+  {
+   "id": "ling",
+   "page": 1,
+   "kind": "text",
+   "x": 92,
+   "y": 343,
+   "size": 9,
+   "who": "profile",
+   "label": {
+    "mr": "लिंग",
+    "hi": "लिंग",
+    "en": "Gender"
+   },
+   "sample": "पुरुष",
+   "profile": "gender"
+  },
+  {
+   "id": "nagrikatva",
+   "page": 1,
+   "kind": "text",
+   "x": 176,
+   "y": 343,
+   "size": 8,
+   "who": "ai",
+   "label": {
+    "mr": "नागरिकत्व",
+    "hi": "नागरिकता",
+    "en": "Citizenship"
+   },
+   "sample": "भारतीय"
+  },
+  {
+   "id": "patta",
+   "page": 1,
+   "kind": "text",
+   "x": 134,
+   "y": 359,
+   "size": 10,
+   "who": "profile",
+   "label": {
+    "mr": "पूर्ण निवासी पत्ता",
+    "hi": "पूरा पता",
+    "en": "Full address"
+   },
+   "sample": "मु. पो. शेंदुर्णी, ता. जामनेर, जि. जळगाव",
+   "profile": "address"
+  },
+  {
+   "id": "m1_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 58,
+   "y": 455.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "पाटील रामदास गणपत",
+   "row": 1,
+   "col": "naav"
+  },
+  {
+   "id": "m1_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 198,
+   "y": 455.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "स्वतः",
+   "row": 1,
+   "col": "nate"
+  },
+  {
+   "id": "m1_janm",
+   "page": 1,
+   "kind": "text",
+   "x": 247,
+   "y": 455.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "जन्म दिनांक",
+    "hi": "जन्म तारीख",
+    "en": "Date of birth"
+   },
+   "sample": "०१/०६/१९८४",
+   "row": 1,
+   "col": "janm"
+  },
+  {
+   "id": "m1_mobile",
+   "page": 1,
+   "kind": "text",
+   "x": 292,
+   "y": 455.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "मोबाईल",
+    "hi": "मोबाइल",
+    "en": "Mobile"
+   },
+   "sample": "XXXXXXXXXX",
+   "row": 1,
+   "col": "mobile"
+  },
+  {
+   "id": "m1_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 351,
+   "y": 455.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय व वार्षिक उत्पन्न",
+    "hi": "काम और सालाना आमदनी",
+    "en": "Occupation and yearly income"
+   },
+   "sample": "शेती, ८०,०००",
+   "row": 1,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m1_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 412,
+   "y": 455.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "आधार क्रमांक",
+    "hi": "आधार",
+    "en": "Aadhaar"
+   },
+   "sample": "XXXX XXXX XXXX",
+   "row": 1,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m1_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 490,
+   "y": 455.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "बँक, खाते क्रमांक व IFSC",
+    "hi": "बैंक, खाता, IFSC",
+    "en": "Bank, account, IFSC"
+   },
+   "sample": "XXXXXXXXXX",
+   "row": 1,
+   "col": "bank"
+  },
+  {
+   "id": "m2_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 58,
+   "y": 468.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "naav"
+  },
+  {
+   "id": "m2_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 198,
+   "y": 468.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "nate"
+  },
+  {
+   "id": "m2_janm",
+   "page": 1,
+   "kind": "text",
+   "x": 247,
+   "y": 468.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "जन्म दिनांक",
+    "hi": "जन्म तारीख",
+    "en": "Date of birth"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "janm"
+  },
+  {
+   "id": "m2_mobile",
+   "page": 1,
+   "kind": "text",
+   "x": 292,
+   "y": 468.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "मोबाईल",
+    "hi": "मोबाइल",
+    "en": "Mobile"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "mobile"
+  },
+  {
+   "id": "m2_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 351,
+   "y": 468.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय व वार्षिक उत्पन्न",
+    "hi": "काम और सालाना आमदनी",
+    "en": "Occupation and yearly income"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m2_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 412,
+   "y": 468.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "आधार क्रमांक",
+    "hi": "आधार",
+    "en": "Aadhaar"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m2_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 490,
+   "y": 468.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "बँक, खाते क्रमांक व IFSC",
+    "hi": "बैंक, खाता, IFSC",
+    "en": "Bank, account, IFSC"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "bank"
+  },
+  {
+   "id": "m3_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 58,
+   "y": 482.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "naav"
+  },
+  {
+   "id": "m3_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 198,
+   "y": 482.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "nate"
+  },
+  {
+   "id": "m3_janm",
+   "page": 1,
+   "kind": "text",
+   "x": 247,
+   "y": 482.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "जन्म दिनांक",
+    "hi": "जन्म तारीख",
+    "en": "Date of birth"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "janm"
+  },
+  {
+   "id": "m3_mobile",
+   "page": 1,
+   "kind": "text",
+   "x": 292,
+   "y": 482.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "मोबाईल",
+    "hi": "मोबाइल",
+    "en": "Mobile"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "mobile"
+  },
+  {
+   "id": "m3_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 351,
+   "y": 482.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय व वार्षिक उत्पन्न",
+    "hi": "काम और सालाना आमदनी",
+    "en": "Occupation and yearly income"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m3_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 412,
+   "y": 482.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "आधार क्रमांक",
+    "hi": "आधार",
+    "en": "Aadhaar"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m3_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 490,
+   "y": 482.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "बँक, खाते क्रमांक व IFSC",
+    "hi": "बैंक, खाता, IFSC",
+    "en": "Bank, account, IFSC"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "bank"
+  },
+  {
+   "id": "m4_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 58,
+   "y": 495.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "naav"
+  },
+  {
+   "id": "m4_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 198,
+   "y": 495.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "nate"
+  },
+  {
+   "id": "m4_janm",
+   "page": 1,
+   "kind": "text",
+   "x": 247,
+   "y": 495.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "जन्म दिनांक",
+    "hi": "जन्म तारीख",
+    "en": "Date of birth"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "janm"
+  },
+  {
+   "id": "m4_mobile",
+   "page": 1,
+   "kind": "text",
+   "x": 292,
+   "y": 495.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "मोबाईल",
+    "hi": "मोबाइल",
+    "en": "Mobile"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "mobile"
+  },
+  {
+   "id": "m4_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 351,
+   "y": 495.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय व वार्षिक उत्पन्न",
+    "hi": "काम और सालाना आमदनी",
+    "en": "Occupation and yearly income"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m4_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 412,
+   "y": 495.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "आधार क्रमांक",
+    "hi": "आधार",
+    "en": "Aadhaar"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m4_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 490,
+   "y": 495.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "बँक, खाते क्रमांक व IFSC",
+    "hi": "बैंक, खाता, IFSC",
+    "en": "Bank, account, IFSC"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "bank"
+  },
+  {
+   "id": "m5_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 58,
+   "y": 509.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "naav"
+  },
+  {
+   "id": "m5_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 198,
+   "y": 509.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "nate"
+  },
+  {
+   "id": "m5_janm",
+   "page": 1,
+   "kind": "text",
+   "x": 247,
+   "y": 509.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "जन्म दिनांक",
+    "hi": "जन्म तारीख",
+    "en": "Date of birth"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "janm"
+  },
+  {
+   "id": "m5_mobile",
+   "page": 1,
+   "kind": "text",
+   "x": 292,
+   "y": 509.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "मोबाईल",
+    "hi": "मोबाइल",
+    "en": "Mobile"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "mobile"
+  },
+  {
+   "id": "m5_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 351,
+   "y": 509.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय व वार्षिक उत्पन्न",
+    "hi": "काम और सालाना आमदनी",
+    "en": "Occupation and yearly income"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m5_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 412,
+   "y": 509.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "आधार क्रमांक",
+    "hi": "आधार",
+    "en": "Aadhaar"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m5_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 490,
+   "y": 509.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "बँक, खाते क्रमांक व IFSC",
+    "hi": "बैंक, खाता, IFSC",
+    "en": "Bank, account, IFSC"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "bank"
+  },
+  {
+   "id": "m6_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 58,
+   "y": 522.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 6,
+   "col": "naav"
+  },
+  {
+   "id": "m6_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 198,
+   "y": 522.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 6,
+   "col": "nate"
+  },
+  {
+   "id": "m6_janm",
+   "page": 1,
+   "kind": "text",
+   "x": 247,
+   "y": 522.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "जन्म दिनांक",
+    "hi": "जन्म तारीख",
+    "en": "Date of birth"
+   },
+   "sample": "",
+   "row": 6,
+   "col": "janm"
+  },
+  {
+   "id": "m6_mobile",
+   "page": 1,
+   "kind": "text",
+   "x": 292,
+   "y": 522.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "मोबाईल",
+    "hi": "मोबाइल",
+    "en": "Mobile"
+   },
+   "sample": "",
+   "row": 6,
+   "col": "mobile"
+  },
+  {
+   "id": "m6_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 351,
+   "y": 522.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय व वार्षिक उत्पन्न",
+    "hi": "काम और सालाना आमदनी",
+    "en": "Occupation and yearly income"
+   },
+   "sample": "",
+   "row": 6,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m6_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 412,
+   "y": 522.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "आधार क्रमांक",
+    "hi": "आधार",
+    "en": "Aadhaar"
+   },
+   "sample": "",
+   "row": 6,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m6_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 490,
+   "y": 522.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "बँक, खाते क्रमांक व IFSC",
+    "hi": "बैंक, खाता, IFSC",
+    "en": "Bank, account, IFSC"
+   },
+   "sample": "",
+   "row": 6,
+   "col": "bank"
+  },
+  {
+   "id": "m7_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 58,
+   "y": 535.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 7,
+   "col": "naav"
+  },
+  {
+   "id": "m7_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 198,
+   "y": 535.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 7,
+   "col": "nate"
+  },
+  {
+   "id": "m7_janm",
+   "page": 1,
+   "kind": "text",
+   "x": 247,
+   "y": 535.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "जन्म दिनांक",
+    "hi": "जन्म तारीख",
+    "en": "Date of birth"
+   },
+   "sample": "",
+   "row": 7,
+   "col": "janm"
+  },
+  {
+   "id": "m7_mobile",
+   "page": 1,
+   "kind": "text",
+   "x": 292,
+   "y": 535.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "मोबाईल",
+    "hi": "मोबाइल",
+    "en": "Mobile"
+   },
+   "sample": "",
+   "row": 7,
+   "col": "mobile"
+  },
+  {
+   "id": "m7_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 351,
+   "y": 535.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय व वार्षिक उत्पन्न",
+    "hi": "काम और सालाना आमदनी",
+    "en": "Occupation and yearly income"
+   },
+   "sample": "",
+   "row": 7,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m7_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 412,
+   "y": 535.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "आधार क्रमांक",
+    "hi": "आधार",
+    "en": "Aadhaar"
+   },
+   "sample": "",
+   "row": 7,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m7_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 490,
+   "y": 535.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "बँक, खाते क्रमांक व IFSC",
+    "hi": "बैंक, खाता, IFSC",
+    "en": "Bank, account, IFSC"
+   },
+   "sample": "",
+   "row": 7,
+   "col": "bank"
+  },
+  {
+   "id": "utpanna",
+   "page": 1,
+   "kind": "text",
+   "x": 500,
+   "y": 604,
+   "size": 8.5,
+   "who": "ai",
+   "label": {
+    "mr": "कुटुंबाचे एकूण वार्षिक उत्पन्न (रुपये)",
+    "hi": "परिवार की कुल सालाना आमदनी",
+    "en": "Family's total yearly income (₹)"
+   },
+   "sample": "१,२०,०००"
+  },
+  {
+   "id": "divyang",
+   "page": 1,
+   "kind": "choice",
+   "who": "ai",
+   "label": {
+    "mr": "सदस्य दिव्यांग आहे काय?",
+    "hi": "कोई दिव्यांग?",
+    "en": "Any member disabled?"
+   },
+   "options": {
+    "होय": [
+     399,
+     611,
+     16,
+     12
+    ],
+    "नाही": [
+     418,
+     611,
+     16,
+     12
+    ]
+   },
+   "sample": "नाही"
+  },
+  {
+   "id": "ajar",
+   "page": 1,
+   "kind": "choice",
+   "who": "ai",
+   "label": {
+    "mr": "गंभीर आजार आहे काय?",
+    "hi": "गंभीर बीमारी?",
+    "en": "Serious illness?"
+   },
+   "options": {
+    "होय": [
+     335,
+     626,
+     16,
+     12
+    ],
+    "नाही": [
+     352,
+     626,
+     16,
+     12
+    ]
+   },
+   "sample": "नाही"
+  },
+  {
+   "id": "mnrega",
+   "page": 1,
+   "kind": "choice",
+   "who": "ai",
+   "label": {
+    "mr": "मनरेगा नोंदणी केली आहे का?",
+    "hi": "मनरेगा में नाम?",
+    "en": "Registered under MNREGA?"
+   },
+   "options": {
+    "होय": [
+     228,
+     641,
+     16,
+     12
+    ],
+    "नाही": [
+     246,
+     641,
+     16,
+     12
+    ]
+   },
+   "sample": "नाही"
+  },
+  {
+   "id": "gas",
+   "page": 1,
+   "kind": "choice",
+   "who": "ai",
+   "label": {
+    "mr": "घरगुती गॅस आहे काय?",
+    "hi": "घर में गैस है?",
+    "en": "Cooking gas connection?"
+   },
+   "options": {
+    "होय": [
+     210,
+     656,
+     16,
+     12
+    ],
+    "नाही": [
+     227,
+     656,
+     16,
+     12
+    ]
+   },
+   "sample": "होय"
+  },
+  {
+   "id": "gas_details",
+   "page": 1,
+   "kind": "text",
+   "x": 432,
+   "y": 664,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "गॅस ग्राहक क्रमांक, वितरकाचे नाव व पत्ता",
+    "hi": "गैस ग्राहक नंबर, एजेंसी",
+    "en": "Gas consumer no., agency"
+   },
+   "sample": "XXXXXXX, जामनेर गॅस"
+  },
+  {
+   "id": "sodne",
+   "page": 1,
+   "kind": "choice",
+   "who": "ai",
+   "label": {
+    "mr": "हक्क स्वेच्छेने सोडू इच्छिता काय?",
+    "hi": "अनाज का हक़ अपनी मर्ज़ी से छोड़ना?",
+    "en": "Give up the grain right voluntarily?"
+   },
+   "options": {
+    "होय": [
+     383,
+     671,
+     16,
+     12
+    ],
+    "नाही": [
+     400,
+     671,
+     16,
+     12
+    ]
+   },
+   "sample": "नाही"
+  },
+  {
+   "id": "nivas_pura",
+   "page": 1,
+   "kind": "tick",
+   "who": "ai",
+   "label": {
+    "mr": "निवासाचा पुरावा",
+    "hi": "निवास का प्रमाण",
+    "en": "Proof of residence"
+   },
+   "options": {
+    "भाडे पावती": [
+     52,
+     714
+    ],
+    "मालकीचा पुरावा": [
+     169,
+     714
+    ],
+    "LPG जोडणी क्रमांक": [
+     315,
+     714
+    ],
+    "विजेचे देयक": [
+     457,
+     714
+    ],
+    "टेलिफोन/मोबाईल देयक": [
+     54,
+     727
+    ],
+    "बँक पासबुक": [
+     169,
+     727
+    ],
+    "ड्रायव्हिंग लायसन्स": [
+     315,
+     727
+    ],
+    "मतदार ओळखपत्र": [
+     457,
+     727
+    ],
+    "आधार कार्ड": [
+     54,
+     740
+    ],
+    "इतर शासकीय ओळखपत्र": [
+     169,
+     740
+    ]
+   },
+   "sample": "विजेचे देयक"
+  },
+  {
+   "id": "olakh",
+   "page": 2,
+   "kind": "tick",
+   "who": "ai",
+   "label": {
+    "mr": "ओळखीचा पुरावा",
+    "hi": "पहचान का प्रमाण",
+    "en": "Proof of identity"
+   },
+   "options": {
+    "आधार कार्ड": [
+     61,
+     43
+    ],
+    "पॅन कार्ड": [
+     133,
+     43
+    ],
+    "ड्रायव्हिंग लायसन्स": [
+     205,
+     43
+    ],
+    "शासकीय ओळखपत्र": [
+     313,
+     43
+    ]
+   },
+   "sample": "आधार कार्ड"
+  },
+  {
+   "id": "dinank",
+   "page": 2,
+   "kind": "text",
+   "x": 66,
+   "y": 239,
+   "size": 10,
+   "who": "profile",
+   "label": {
+    "mr": "दिनांक",
+    "hi": "तारीख",
+    "en": "Date"
+   },
+   "sample": "१९/११/२०२६",
+   "profile": "today"
+  },
+  {
+   "id": "sahi",
+   "page": 2,
+   "kind": "sign",
+   "x": 440,
+   "y": 200,
+   "w": 72,
+   "h": 28,
+   "who": "farmer",
+   "label": {
+    "mr": "अर्जदाराची सही",
+    "hi": "आवेदक के हस्ताक्षर",
+    "en": "Applicant's signature"
+   },
+   "optional": true
+  },
+  {
+   "id": "angtha",
+   "page": 2,
+   "kind": "thumb",
+   "x": 524,
+   "y": 196,
+   "w": 44,
+   "h": 44,
+   "who": "ink",
+   "label": {
+    "mr": "अंगठ्याचा ठसा",
+    "hi": "अंगूठे का निशान",
+    "en": "Thumb impression"
+   }
+  }
+ ],
+ "office_only": [
+  "क्रमांक (boxes)",
+  "कोड / अनुक्रमांक / नोंदणी क्रमांक",
+  "पडताळले व बरोबर आढळले — निरीक्षक",
+  "स्थळप्रत"
+ ],
+ "form": "ration_new",
+ "namuna": "1",
+ "title": {
+  "mr": "नवीन शिधापत्रिकेसाठी अर्ज (कुटुंब प्रमुखाने भरावा)",
+  "hi": "नया राशन कार्ड का आवेदन",
+  "en": "New ration card"
+ },
+ "docs": [
+  {
+   "id": "photo",
+   "mr": "कुटुंबातील सर्व सदस्यांचे पासपोर्ट साईज फोटो",
+   "hi": "परिवार के सब सदस्यों के पासपोर्ट साइज़ फ़ोटो",
+   "en": "Passport-size photos of all family members",
+   "when": "always"
+  },
+  {
+   "id": "removal",
+   "mr": "इतर शिधापत्रिकेत नाव असल्यास: नाव कमी केल्याचा दाखला किंवा शिधापत्रिका जमा पावती",
+   "hi": "दूसरे कार्ड में नाम हो तो: नाम कम करने का दाखला या कार्ड जमा की पावती",
+   "en": "If a name is in another card: removal certificate or surrender receipt",
+   "when": "if_other_card"
+  },
+  {
+   "id": "residence",
+   "mr": "निवासाचा पुरावा (एक): भाडे पावती / मालकीचा पुरावा / LPG जोडणी / वीज देयक / टेलिफोन-मोबाईल देयक / बँक पासबुक / ड्रायव्हिंग लायसन्स / मतदार ओळखपत्र / आधार / इतर शासकीय ओळखपत्र",
+   "hi": "निवास का एक प्रमाण: किराया रसीद / मालिकाना / गैस कनेक्शन / बिजली बिल / फ़ोन बिल / बैंक पासबुक / ड्राइविंग लाइसेंस / वोटर कार्ड / आधार / सरकारी पहचान पत्र",
+   "en": "One proof of residence: rent receipt / ownership / LPG / electricity bill / phone bill / bank passbook / driving licence / voter ID / Aadhaar / government ID",
+   "when": "always"
+  },
+  {
+   "id": "rent",
+   "mr": "घर भाड्याचे असल्यास: भाडे करारनामा व मूळ मालकाचे ना-हरकत प्रमाणपत्र (शासकीय निवासस्थान: अलॉटमेंट आदेश)",
+   "hi": "घर किराये का हो तो: किरायानामा और मालिक का अनापत्ति प्रमाणपत्र",
+   "en": "If rented: rent agreement and the owner's NOC (government quarters: allotment order)",
+   "when": "if_rented"
+  },
+  {
+   "id": "id_proof",
+   "mr": "ओळखीचा पुरावा: आधार कार्ड / पॅन कार्ड / ड्रायव्हिंग लायसन्स / शासकीय दाखला किंवा ओळखपत्र (एक)",
+   "hi": "पहचान का एक प्रमाण: आधार / पैन / ड्राइविंग लाइसेंस / सरकारी पहचान पत्र",
+   "en": "One proof of identity: Aadhaar / PAN / driving licence / government ID",
+   "when": "always"
+  },
+  {
+   "id": "income",
+   "mr": "कुटुंबाचे वार्षिक उत्पन्न: शासनाचा उत्पन्नाचा दाखला किंवा स्वयंघोषणापत्र",
+   "hi": "परिवार की सालाना आमदनी: आय प्रमाणपत्र या स्वघोषणा पत्र",
+   "en": "Family income: income certificate or a self-declaration",
+   "when": "always"
+  },
+  {
+   "id": "disability",
+   "mr": "सदस्य दिव्यांग असल्यास: प्रमाणपत्र",
+   "hi": "कोई दिव्यांग हो तो: प्रमाणपत्र",
+   "en": "If a member is disabled: certificate",
+   "when": "if_divyang"
+  }
+ ]
+}

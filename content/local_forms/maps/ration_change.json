@@ -1,0 +1,211 @@
+{
+ "page_pt": [
+  [
+   595.3,
+   841.9
+  ]
+ ],
+ "fields": [
+  {
+   "id": "gav",
+   "page": 1,
+   "kind": "text",
+   "x": 114,
+   "y": 125,
+   "size": 9,
+   "who": "profile",
+   "label": {
+    "mr": "शिधावाटप क्षेत्र / गाव",
+    "hi": "गाँव",
+    "en": "Village / rationing area"
+   },
+   "sample": "शेंदुर्णी",
+   "profile": "village_mr"
+  },
+  {
+   "id": "taluka",
+   "page": 1,
+   "kind": "text",
+   "x": 241,
+   "y": 125,
+   "size": 9,
+   "who": "profile",
+   "label": {
+    "mr": "विभाग / तालुका",
+    "hi": "तालुका",
+    "en": "Taluka"
+   },
+   "sample": "जामनेर",
+   "profile": "taluka"
+  },
+  {
+   "id": "naav",
+   "page": 1,
+   "kind": "text",
+   "x": 182,
+   "y": 247,
+   "size": 9.5,
+   "who": "profile",
+   "label": {
+    "mr": "अर्जदाराचे नाव (प्रथम आडनाव)",
+    "hi": "आवेदक का नाम (पहले उपनाम)",
+    "en": "Applicant's name (surname first)"
+   },
+   "sample": "पाटील रामदास गणपत",
+   "profile": "name_mr"
+  },
+  {
+   "id": "vay",
+   "page": 1,
+   "kind": "text",
+   "x": 365,
+   "y": 247,
+   "size": 9.5,
+   "who": "profile",
+   "label": {
+    "mr": "वय",
+    "hi": "उम्र",
+    "en": "Age"
+   },
+   "sample": "४२",
+   "profile": "age"
+  },
+  {
+   "id": "patta",
+   "page": 1,
+   "kind": "text",
+   "x": 132,
+   "y": 260,
+   "size": 9,
+   "who": "profile",
+   "label": {
+    "mr": "पूर्ण निवासी पत्ता",
+    "hi": "पूरा पता",
+    "en": "Full address"
+   },
+   "sample": "मु. पो. शेंदुर्णी, ता. जामनेर, जि. जळगाव",
+   "profile": "address"
+  },
+  {
+   "id": "dukan",
+   "page": 1,
+   "kind": "text",
+   "x": 184,
+   "y": 282,
+   "size": 8.5,
+   "who": "farmer",
+   "label": {
+    "mr": "दुकान क्रमांक",
+    "hi": "राशन दुकान नंबर",
+    "en": "Ration shop number"
+   },
+   "sample": "१२"
+  },
+  {
+   "id": "card_no",
+   "page": 1,
+   "kind": "text",
+   "x": 228,
+   "y": 294,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "शिधापत्रिका क्रमांक",
+    "hi": "राशन कार्ड नंबर",
+    "en": "Ration card number"
+   },
+   "sample": "XXXXXXXXXXXX"
+  },
+  {
+   "id": "sthiti",
+   "page": 1,
+   "kind": "text",
+   "x": 172,
+   "y": 306,
+   "size": 9,
+   "who": "ai",
+   "label": {
+    "mr": "(अ) विद्यमान स्थिती",
+    "hi": "अभी क्या लिखा है",
+    "en": "(a) What the card says now"
+   },
+   "sample": "पत्ता: मु. पो. वाकोद, ता. जामनेर"
+  },
+  {
+   "id": "pherphar",
+   "page": 1,
+   "kind": "text",
+   "x": 172,
+   "y": 318,
+   "size": 9,
+   "who": "ai",
+   "label": {
+    "mr": "(ब) इच्छित फेरफार",
+    "hi": "क्या बदलना है",
+    "en": "(b) Change wanted"
+   },
+   "sample": "पत्ता: मु. पो. शेंदुर्णी, ता. जामनेर"
+  },
+  {
+   "id": "karan",
+   "page": 1,
+   "kind": "text",
+   "x": 150,
+   "y": 330,
+   "size": 9,
+   "who": "ai",
+   "label": {
+    "mr": "(क) कारणे",
+    "hi": "कारण",
+    "en": "(c) Reason"
+   },
+   "sample": "कुटुंब शेंदुर्णी येथे राहण्यास आले"
+  },
+  {
+   "id": "dinank",
+   "page": 1,
+   "kind": "text",
+   "x": 108,
+   "y": 384,
+   "size": 9.5,
+   "who": "profile",
+   "label": {
+    "mr": "दिनांक",
+    "hi": "तारीख",
+    "en": "Date"
+   },
+   "sample": "१९/११/२०२६",
+   "profile": "today"
+  },
+  {
+   "id": "sahi",
+   "page": 1,
+   "kind": "sign",
+   "x": 376,
+   "y": 366,
+   "w": 72,
+   "h": 26,
+   "who": "farmer",
+   "label": {
+    "mr": "अर्जदाराची सही",
+    "hi": "आवेदक के हस्ताक्षर",
+    "en": "Applicant's signature"
+   },
+   "optional": true
+  }
+ ],
+ "office_only": [
+  "NO. x y z",
+  "पावती / अधिकाऱ्याचा आदेश",
+  "स्थळप्रत"
+ ],
+ "thumb_note": "Prints only 'अर्जदाराची सही' — thumb box only if the farmer signs with his thumb.",
+ "form": "ration_change",
+ "namuna": "14",
+ "title": {
+  "mr": "शिधापत्रिकेमध्ये फेरफार करण्याकरिता अर्ज (पत्ता, कुटुंबप्रमुख, दुकान, नाव दुरुस्ती)",
+  "hi": "राशन कार्ड में बदलाव (पता, मुखिया, दुकान, नाम सुधार)",
+  "en": "Change in the ration card (address, head of family, shop, name)"
+ },
+ "docs": []
+}

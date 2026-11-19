@@ -1,0 +1,907 @@
+{
+ "page_pt": [
+  [
+   612,
+   792
+  ],
+  [
+   612,
+   792
+  ]
+ ],
+ "fields": [
+  {
+   "id": "photo",
+   "page": 1,
+   "kind": "photo_row",
+   "x": 300,
+   "y": 86,
+   "w": 270,
+   "h": 92,
+   "who": "farmer",
+   "label": {
+    "mr": "नवीन सदस्याचा पासपोर्ट साईज फोटो",
+    "hi": "नए सदस्य का पासपोर्ट फ़ोटो",
+    "en": "Passport photo of each new member"
+   },
+   "each": [
+    66,
+    86
+   ]
+  },
+  {
+   "id": "gav",
+   "page": 1,
+   "kind": "text",
+   "x": 108,
+   "y": 213,
+   "size": 10,
+   "who": "profile",
+   "label": {
+    "mr": "शिधावाटप क्षेत्र / गाव",
+    "hi": "गाँव",
+    "en": "Village / rationing area"
+   },
+   "sample": "शेंदुर्णी",
+   "profile": "village_mr"
+  },
+  {
+   "id": "taluka",
+   "page": 1,
+   "kind": "text",
+   "x": 238,
+   "y": 213,
+   "size": 10,
+   "who": "profile",
+   "label": {
+    "mr": "विभाग / तालुका",
+    "hi": "तालुका",
+    "en": "Taluka"
+   },
+   "sample": "जामनेर",
+   "profile": "taluka"
+  },
+  {
+   "id": "jilha",
+   "page": 1,
+   "kind": "text",
+   "x": 410,
+   "y": 213,
+   "size": 10,
+   "who": "profile",
+   "label": {
+    "mr": "परिमंडळ / जिल्हा",
+    "hi": "ज़िला",
+    "en": "District"
+   },
+   "sample": "जळगाव",
+   "profile": "district"
+  },
+  {
+   "id": "naav",
+   "page": 1,
+   "kind": "text",
+   "x": 60,
+   "y": 279,
+   "size": 10.5,
+   "who": "profile",
+   "label": {
+    "mr": "अर्जदाराचे नाव (प्रथम आडनाव)",
+    "hi": "आवेदक का नाम (पहले उपनाम)",
+    "en": "Applicant's name (surname first)"
+   },
+   "sample": "पाटील रामदास गणपत",
+   "profile": "name_mr"
+  },
+  {
+   "id": "vay",
+   "page": 1,
+   "kind": "text",
+   "x": 385,
+   "y": 279,
+   "size": 10.5,
+   "who": "profile",
+   "label": {
+    "mr": "वय",
+    "hi": "उम्र",
+    "en": "Age"
+   },
+   "sample": "४२",
+   "profile": "age"
+  },
+  {
+   "id": "ling",
+   "page": 1,
+   "kind": "text",
+   "x": 66,
+   "y": 312,
+   "size": 10,
+   "who": "profile",
+   "label": {
+    "mr": "लिंग",
+    "hi": "लिंग",
+    "en": "Gender"
+   },
+   "sample": "पुरुष",
+   "profile": "gender"
+  },
+  {
+   "id": "nagrikatva",
+   "page": 1,
+   "kind": "text",
+   "x": 140,
+   "y": 312,
+   "size": 10,
+   "who": "ai",
+   "label": {
+    "mr": "नागरिकत्व",
+    "hi": "नागरिकता",
+    "en": "Citizenship"
+   },
+   "sample": "भारतीय"
+  },
+  {
+   "id": "patta",
+   "page": 1,
+   "kind": "text",
+   "x": 112,
+   "y": 328,
+   "size": 10,
+   "who": "profile",
+   "label": {
+    "mr": "पूर्ण निवासी पत्ता",
+    "hi": "पूरा पता",
+    "en": "Full address"
+   },
+   "sample": "मु. पो. शेंदुर्णी, ता. जामनेर, जि. जळगाव",
+   "profile": "address"
+  },
+  {
+   "id": "dukan",
+   "page": 1,
+   "kind": "text",
+   "x": 128,
+   "y": 361,
+   "size": 10,
+   "who": "farmer",
+   "label": {
+    "mr": "दुकान क्रमांक",
+    "hi": "राशन दुकान नंबर",
+    "en": "Ration shop number"
+   },
+   "sample": "१२"
+  },
+  {
+   "id": "card_no",
+   "page": 1,
+   "kind": "boxes",
+   "x": 437,
+   "y": 352,
+   "w": 143.5,
+   "h": 13,
+   "who": "farmer",
+   "label": {
+    "mr": "शिधापत्रिका क्रमांक",
+    "hi": "राशन कार्ड नंबर",
+    "en": "Ration card number"
+   },
+   "n": 12,
+   "sensitive": false
+  },
+  {
+   "id": "m1_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 58,
+   "y": 433.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "पाटील सीमा रामदास",
+   "row": 1,
+   "col": "naav"
+  },
+  {
+   "id": "m1_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 170,
+   "y": 433.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "आवेदक से रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "मुलगी",
+   "row": 1,
+   "col": "nate"
+  },
+  {
+   "id": "m1_janm",
+   "page": 1,
+   "kind": "text",
+   "x": 217,
+   "y": 433.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "जन्म दिनांक",
+    "hi": "जन्म तारीख",
+    "en": "Date of birth"
+   },
+   "sample": "०५/०६/२००८",
+   "row": 1,
+   "col": "janm"
+  },
+  {
+   "id": "m1_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 266,
+   "y": 433.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय",
+    "hi": "काम",
+    "en": "Occupation"
+   },
+   "sample": "विद्यार्थिनी",
+   "row": 1,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m1_mobile",
+   "page": 1,
+   "kind": "text",
+   "x": 323,
+   "y": 433.0,
+   "size": 7.5,
+   "who": "farmer",
+   "label": {
+    "mr": "मोबाईल क्रमांक",
+    "hi": "मोबाइल",
+    "en": "Mobile"
+   },
+   "sample": "",
+   "row": 1,
+   "col": "mobile"
+  },
+  {
+   "id": "m1_agaman",
+   "page": 1,
+   "kind": "text",
+   "x": 366,
+   "y": 433.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "आगमनाची तारीख",
+    "hi": "आने की तारीख",
+    "en": "Date of joining the family"
+   },
+   "sample": "जन्मापासून",
+   "row": 1,
+   "col": "agaman"
+  },
+  {
+   "id": "m1_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 418,
+   "y": 433.0,
+   "size": 7.5,
+   "who": "farmer",
+   "label": {
+    "mr": "आधारकार्ड क्रमांक",
+    "hi": "आधार नंबर",
+    "en": "Aadhaar number"
+   },
+   "sample": "XXXX XXXX XXXX",
+   "row": 1,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m1_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 497,
+   "y": 433.0,
+   "size": 7.5,
+   "who": "farmer",
+   "label": {
+    "mr": "बँकखाते क्रमांक",
+    "hi": "बैंक खाता",
+    "en": "Bank account"
+   },
+   "sample": "XXXXXXXXXX",
+   "row": 1,
+   "col": "bank"
+  },
+  {
+   "id": "m2_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 58,
+   "y": 454.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "naav"
+  },
+  {
+   "id": "m2_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 170,
+   "y": 454.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "आवेदक से रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "nate"
+  },
+  {
+   "id": "m2_janm",
+   "page": 1,
+   "kind": "text",
+   "x": 217,
+   "y": 454.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "जन्म दिनांक",
+    "hi": "जन्म तारीख",
+    "en": "Date of birth"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "janm"
+  },
+  {
+   "id": "m2_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 266,
+   "y": 454.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय",
+    "hi": "काम",
+    "en": "Occupation"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m2_mobile",
+   "page": 1,
+   "kind": "text",
+   "x": 323,
+   "y": 454.0,
+   "size": 7.5,
+   "who": "farmer",
+   "label": {
+    "mr": "मोबाईल क्रमांक",
+    "hi": "मोबाइल",
+    "en": "Mobile"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "mobile"
+  },
+  {
+   "id": "m2_agaman",
+   "page": 1,
+   "kind": "text",
+   "x": 366,
+   "y": 454.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "आगमनाची तारीख",
+    "hi": "आने की तारीख",
+    "en": "Date of joining the family"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "agaman"
+  },
+  {
+   "id": "m2_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 418,
+   "y": 454.0,
+   "size": 7.5,
+   "who": "farmer",
+   "label": {
+    "mr": "आधारकार्ड क्रमांक",
+    "hi": "आधार नंबर",
+    "en": "Aadhaar number"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m2_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 497,
+   "y": 454.0,
+   "size": 7.5,
+   "who": "farmer",
+   "label": {
+    "mr": "बँकखाते क्रमांक",
+    "hi": "बैंक खाता",
+    "en": "Bank account"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "bank"
+  },
+  {
+   "id": "m3_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 58,
+   "y": 476.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "naav"
+  },
+  {
+   "id": "m3_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 170,
+   "y": 476.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "आवेदक से रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "nate"
+  },
+  {
+   "id": "m3_janm",
+   "page": 1,
+   "kind": "text",
+   "x": 217,
+   "y": 476.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "जन्म दिनांक",
+    "hi": "जन्म तारीख",
+    "en": "Date of birth"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "janm"
+  },
+  {
+   "id": "m3_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 266,
+   "y": 476.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय",
+    "hi": "काम",
+    "en": "Occupation"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m3_mobile",
+   "page": 1,
+   "kind": "text",
+   "x": 323,
+   "y": 476.0,
+   "size": 7.5,
+   "who": "farmer",
+   "label": {
+    "mr": "मोबाईल क्रमांक",
+    "hi": "मोबाइल",
+    "en": "Mobile"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "mobile"
+  },
+  {
+   "id": "m3_agaman",
+   "page": 1,
+   "kind": "text",
+   "x": 366,
+   "y": 476.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "आगमनाची तारीख",
+    "hi": "आने की तारीख",
+    "en": "Date of joining the family"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "agaman"
+  },
+  {
+   "id": "m3_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 418,
+   "y": 476.0,
+   "size": 7.5,
+   "who": "farmer",
+   "label": {
+    "mr": "आधारकार्ड क्रमांक",
+    "hi": "आधार नंबर",
+    "en": "Aadhaar number"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m3_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 497,
+   "y": 476.0,
+   "size": 7.5,
+   "who": "farmer",
+   "label": {
+    "mr": "बँकखाते क्रमांक",
+    "hi": "बैंक खाता",
+    "en": "Bank account"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "bank"
+  },
+  {
+   "id": "m4_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 58,
+   "y": 497.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "naav"
+  },
+  {
+   "id": "m4_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 170,
+   "y": 497.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "अर्जदाराशी नाते",
+    "hi": "आवेदक से रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "nate"
+  },
+  {
+   "id": "m4_janm",
+   "page": 1,
+   "kind": "text",
+   "x": 217,
+   "y": 497.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "जन्म दिनांक",
+    "hi": "जन्म तारीख",
+    "en": "Date of birth"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "janm"
+  },
+  {
+   "id": "m4_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 266,
+   "y": 497.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय",
+    "hi": "काम",
+    "en": "Occupation"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m4_mobile",
+   "page": 1,
+   "kind": "text",
+   "x": 323,
+   "y": 497.0,
+   "size": 7.5,
+   "who": "farmer",
+   "label": {
+    "mr": "मोबाईल क्रमांक",
+    "hi": "मोबाइल",
+    "en": "Mobile"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "mobile"
+  },
+  {
+   "id": "m4_agaman",
+   "page": 1,
+   "kind": "text",
+   "x": 366,
+   "y": 497.0,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "आगमनाची तारीख",
+    "hi": "आने की तारीख",
+    "en": "Date of joining the family"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "agaman"
+  },
+  {
+   "id": "m4_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 418,
+   "y": 497.0,
+   "size": 7.5,
+   "who": "farmer",
+   "label": {
+    "mr": "आधारकार्ड क्रमांक",
+    "hi": "आधार नंबर",
+    "en": "Aadhaar number"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m4_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 497,
+   "y": 497.0,
+   "size": 7.5,
+   "who": "farmer",
+   "label": {
+    "mr": "बँकखाते क्रमांक",
+    "hi": "बैंक खाता",
+    "en": "Bank account"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "bank"
+  },
+  {
+   "id": "divyang",
+   "page": 1,
+   "kind": "choice",
+   "who": "ai",
+   "label": {
+    "mr": "सदस्य दिव्यांग आहे काय?",
+    "hi": "कोई सदस्य दिव्यांग?",
+    "en": "Any member disabled?"
+   },
+   "options": {
+    "होय": [
+     285,
+     547,
+     16,
+     13
+    ],
+    "नाही": [
+     302,
+     547,
+     19,
+     13
+    ]
+   },
+   "sample": "नाही"
+  },
+  {
+   "id": "ajar",
+   "page": 1,
+   "kind": "choice",
+   "who": "ai",
+   "label": {
+    "mr": "सदस्य गंभीर आजाराने ग्रस्त आहे काय?",
+    "hi": "कोई गंभीर बीमारी?",
+    "en": "Any serious illness?"
+   },
+   "options": {
+    "होय": [
+     327,
+     571,
+     17,
+     13
+    ],
+    "नाही": [
+     345,
+     571,
+     18,
+     13
+    ]
+   },
+   "sample": "नाही"
+  },
+  {
+   "id": "olakh",
+   "page": 1,
+   "kind": "tick",
+   "who": "ai",
+   "label": {
+    "mr": "ओळखीचा पुरावा",
+    "hi": "पहचान का प्रमाण",
+    "en": "Proof of identity"
+   },
+   "options": {
+    "आधार कार्ड": [
+     61,
+     625
+    ],
+    "पॅन कार्ड": [
+     133,
+     625
+    ],
+    "ड्रायव्हिंग लायसन्स": [
+     205,
+     625
+    ],
+    "शासकीय दाखला / ओळखपत्र": [
+     313,
+     625
+    ]
+   },
+   "sample": "आधार कार्ड"
+  },
+  {
+   "id": "dinank",
+   "page": 1,
+   "kind": "text",
+   "x": 72,
+   "y": 737,
+   "size": 10,
+   "who": "profile",
+   "label": {
+    "mr": "दिनांक",
+    "hi": "तारीख",
+    "en": "Date"
+   },
+   "sample": "१९/११/२०२६",
+   "profile": "today"
+  },
+  {
+   "id": "sahi",
+   "page": 1,
+   "kind": "sign",
+   "x": 418,
+   "y": 690,
+   "w": 80,
+   "h": 34,
+   "who": "farmer",
+   "label": {
+    "mr": "अर्जदाराची सही",
+    "hi": "आवेदक के हस्ताक्षर",
+    "en": "Applicant's signature"
+   },
+   "optional": true
+  },
+  {
+   "id": "angtha",
+   "page": 1,
+   "kind": "thumb",
+   "x": 540,
+   "y": 680,
+   "w": 44,
+   "h": 44,
+   "who": "ink",
+   "label": {
+    "mr": "अंगठ्याचा ठसा",
+    "hi": "अंगूठे का निशान",
+    "en": "Thumb impression"
+   }
+  }
+ ],
+ "office_only": [
+  "कोड / अनुक्रमांक / नोंदणी क्रमांक",
+  "संदर्भ क्रमांक",
+  "page 2: शिधावाटप निरीक्षकाचे प्रतिवृत्त, अधिकाऱ्याचे आदेश (and the signature line under the order — signed at the office), स्थळप्रत"
+ ],
+ "form": "ration_add_name",
+ "namuna": "8",
+ "title": {
+  "mr": "कौटुंबिक शिधापत्रिकेमध्ये नाव वाढविण्याकरिता अर्ज",
+  "hi": "राशन कार्ड में नाम जोड़ने का आवेदन",
+  "en": "Add a name to the ration card"
+ },
+ "docs": [
+  {
+   "id": "photo",
+   "mr": "नवीन सदस्याचा पासपोर्ट साईज फोटो (अर्जावर चिकटवणे)",
+   "hi": "नए सदस्य का पासपोर्ट साइज़ फ़ोटो (अर्ज पर चिपकाएँ)",
+   "en": "Passport-size photo of each new member (pasted on the form)",
+   "when": "always"
+  },
+  {
+   "id": "removal",
+   "mr": "इतर शिधापत्रिकेत नाव असल्यास: नाव कमी केल्याचा दाखला किंवा ती शिधापत्रिका जमा केल्याची पावती",
+   "hi": "दूसरे राशन कार्ड में नाम हो तो: नाम कम करने का दाखला या वह कार्ड जमा करने की पावती",
+   "en": "If the name is in another ration card: its removal certificate or the surrender receipt",
+   "when": "if_other_card"
+  },
+  {
+   "id": "id_proof",
+   "mr": "ओळखीचा पुरावा: आधार कार्ड / पॅन कार्ड / ड्रायव्हिंग लायसन्स / शासकीय दाखला किंवा ओळखपत्र (एक)",
+   "hi": "पहचान का एक प्रमाण: आधार / पैन / ड्राइविंग लाइसेंस / सरकारी पहचान पत्र",
+   "en": "One proof of identity: Aadhaar / PAN / driving licence / government ID",
+   "when": "always"
+  },
+  {
+   "id": "disability",
+   "mr": "सदस्य दिव्यांग असल्यास: त्याबाबतचे प्रमाणपत्र",
+   "hi": "कोई सदस्य दिव्यांग हो तो: उसका प्रमाणपत्र",
+   "en": "If a member is disabled: the certificate",
+   "when": "if_divyang"
+  }
+ ]
+}

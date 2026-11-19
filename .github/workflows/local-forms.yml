@@ -1,0 +1,37 @@
+name: Publish local forms
+
+# content/local_forms → Firestore config/local_forms (tools/local_forms.py).
+# The page pictures in admin/public/forms go out with the Admin site's own
+# deploy. Runs on main only — this branch (local-forms) publishes nothing.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - content/local_forms/**
+      - tools/local_forms.py
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: local-forms
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - run: python tools/local_forms.py --check
+      - run: python tools/local_forms.py
+        env:
+          PYTHONUNBUFFERED: "1"
+          FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}

@@ -1,0 +1,798 @@
+{
+ "page_pt": [
+  [
+   595.3,
+   841.9
+  ]
+ ],
+ "fields": [
+  {
+   "id": "gav",
+   "page": 1,
+   "kind": "text",
+   "x": 120,
+   "y": 144,
+   "size": 9,
+   "who": "profile",
+   "label": {
+    "mr": "शिधावाटप क्षेत्र / गाव",
+    "hi": "गाँव",
+    "en": "Village / rationing area"
+   },
+   "sample": "शेंदुर्णी",
+   "profile": "village_mr"
+  },
+  {
+   "id": "taluka",
+   "page": 1,
+   "kind": "text",
+   "x": 322,
+   "y": 149,
+   "size": 9,
+   "who": "profile",
+   "label": {
+    "mr": "विभाग / तालुका",
+    "hi": "तालुका",
+    "en": "Taluka"
+   },
+   "sample": "जामनेर",
+   "profile": "taluka"
+  },
+  {
+   "id": "naav",
+   "page": 1,
+   "kind": "text",
+   "x": 140,
+   "y": 217,
+   "size": 9.5,
+   "who": "profile",
+   "label": {
+    "mr": "अर्जदाराचे नाव (प्रथम आडनाव)",
+    "hi": "आवेदक का नाम (पहले उपनाम)",
+    "en": "Applicant's name (surname first)"
+   },
+   "sample": "पाटील रामदास गणपत",
+   "profile": "name_mr"
+  },
+  {
+   "id": "vay",
+   "page": 1,
+   "kind": "text",
+   "x": 368,
+   "y": 217,
+   "size": 9,
+   "who": "profile",
+   "label": {
+    "mr": "वय",
+    "hi": "उम्र",
+    "en": "Age"
+   },
+   "sample": "४२",
+   "profile": "age"
+  },
+  {
+   "id": "rahnar",
+   "page": 1,
+   "kind": "text",
+   "x": 420,
+   "y": 217,
+   "size": 9,
+   "who": "profile",
+   "label": {
+    "mr": "राहणार",
+    "hi": "निवासी",
+    "en": "Resident of"
+   },
+   "sample": "शेंदुर्णी",
+   "profile": "village_mr"
+  },
+  {
+   "id": "dukan",
+   "page": 1,
+   "kind": "text",
+   "x": 190,
+   "y": 243,
+   "size": 8.5,
+   "who": "farmer",
+   "label": {
+    "mr": "दुकान क्रमांक",
+    "hi": "राशन दुकान नंबर",
+    "en": "Ration shop number"
+   },
+   "sample": "१२"
+  },
+  {
+   "id": "card_no",
+   "page": 1,
+   "kind": "text",
+   "x": 270,
+   "y": 254,
+   "size": 7.5,
+   "who": "farmer",
+   "label": {
+    "mr": "शिधापत्रिका क्रमांक",
+    "hi": "राशन कार्ड नंबर",
+    "en": "Ration card number"
+   },
+   "sample": "XXXXXXXXXXXX"
+  },
+  {
+   "id": "card_date",
+   "page": 1,
+   "kind": "text",
+   "x": 370,
+   "y": 254,
+   "size": 7.5,
+   "who": "ai",
+   "label": {
+    "mr": "दिनांक (कार्ड हरवले / खराब झाले)",
+    "hi": "कार्ड कब खोया / खराब हुआ",
+    "en": "Date lost / damaged"
+   },
+   "sample": "१०/११/२०२६"
+  },
+  {
+   "id": "karan",
+   "page": 1,
+   "kind": "choice",
+   "who": "ai",
+   "label": {
+    "mr": "कारण",
+    "hi": "कारण",
+    "en": "Reason"
+   },
+   "options": {
+    "हरवल्यामुळे": [
+     438,
+     248,
+     46,
+     12
+    ],
+    "चोरीस गेल्यामुळे": [
+     484,
+     248,
+     32,
+     12
+    ],
+    "फाटल्यामुळे": [
+     113,
+     258,
+     38,
+     12
+    ],
+    "खराब झाल्यामुळे": [
+     151,
+     258,
+     58,
+     12
+    ]
+   },
+   "sample": "फाटल्यामुळे"
+  },
+  {
+   "id": "navin_dukan",
+   "page": 1,
+   "kind": "text",
+   "x": 367,
+   "y": 281,
+   "size": 8,
+   "who": "farmer",
+   "label": {
+    "mr": "नवीन कार्ड कोणत्या दुकानात नोंदवणार",
+    "hi": "किस दुकान में दर्ज",
+    "en": "Shop for the new card"
+   },
+   "sample": "१२"
+  },
+  {
+   "id": "dhanda",
+   "page": 1,
+   "kind": "text",
+   "x": 278,
+   "y": 301,
+   "size": 8,
+   "who": "ai",
+   "label": {
+    "mr": "मालकाचे / धंद्याचे नाव व पत्ता",
+    "hi": "काम / मालिक का नाम और पता",
+    "en": "Employer / business and address"
+   },
+   "sample": "स्वतःची शेती, मु. पो. शेंदुर्णी"
+  },
+  {
+   "id": "m1_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 92,
+   "y": 384.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "पाटील सुमन रामदास",
+   "row": 1,
+   "col": "naav"
+  },
+  {
+   "id": "m1_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 270,
+   "y": 387.9,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "पत्नी",
+   "row": 1,
+   "col": "nate"
+  },
+  {
+   "id": "m1_vay",
+   "page": 1,
+   "kind": "text",
+   "x": 326,
+   "y": 389.1,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "वय",
+    "hi": "उम्र",
+    "en": "Age"
+   },
+   "sample": "३८",
+   "row": 1,
+   "col": "vay"
+  },
+  {
+   "id": "m1_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 352,
+   "y": 389.7,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय",
+    "hi": "काम",
+    "en": "Occupation"
+   },
+   "sample": "शेती",
+   "row": 1,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m2_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 92,
+   "y": 396.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "naav"
+  },
+  {
+   "id": "m2_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 270,
+   "y": 399.9,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "nate"
+  },
+  {
+   "id": "m2_vay",
+   "page": 1,
+   "kind": "text",
+   "x": 326,
+   "y": 401.1,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "वय",
+    "hi": "उम्र",
+    "en": "Age"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "vay"
+  },
+  {
+   "id": "m2_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 352,
+   "y": 401.7,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय",
+    "hi": "काम",
+    "en": "Occupation"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m3_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 92,
+   "y": 408.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "naav"
+  },
+  {
+   "id": "m3_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 270,
+   "y": 411.9,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "nate"
+  },
+  {
+   "id": "m3_vay",
+   "page": 1,
+   "kind": "text",
+   "x": 326,
+   "y": 413.1,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "वय",
+    "hi": "उम्र",
+    "en": "Age"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "vay"
+  },
+  {
+   "id": "m3_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 352,
+   "y": 413.7,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय",
+    "hi": "काम",
+    "en": "Occupation"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m4_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 92,
+   "y": 421.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "naav"
+  },
+  {
+   "id": "m4_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 270,
+   "y": 424.9,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "nate"
+  },
+  {
+   "id": "m4_vay",
+   "page": 1,
+   "kind": "text",
+   "x": 326,
+   "y": 426.1,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "वय",
+    "hi": "उम्र",
+    "en": "Age"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "vay"
+  },
+  {
+   "id": "m4_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 352,
+   "y": 426.7,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय",
+    "hi": "काम",
+    "en": "Occupation"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m5_naav",
+   "page": 1,
+   "kind": "text",
+   "x": 92,
+   "y": 434.0,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाव",
+    "hi": "नाम",
+    "en": "Name"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "naav"
+  },
+  {
+   "id": "m5_nate",
+   "page": 1,
+   "kind": "text",
+   "x": 270,
+   "y": 437.9,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "नाते",
+    "hi": "रिश्ता",
+    "en": "Relation"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "nate"
+  },
+  {
+   "id": "m5_vay",
+   "page": 1,
+   "kind": "text",
+   "x": 326,
+   "y": 439.1,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "वय",
+    "hi": "उम्र",
+    "en": "Age"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "vay"
+  },
+  {
+   "id": "m5_vyavsay",
+   "page": 1,
+   "kind": "text",
+   "x": 352,
+   "y": 439.7,
+   "size": 7,
+   "who": "ai",
+   "label": {
+    "mr": "व्यवसाय",
+    "hi": "काम",
+    "en": "Occupation"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "vyavsay"
+  },
+  {
+   "id": "m1_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 396,
+   "y": 396.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "आधार क्रमांक",
+    "hi": "आधार",
+    "en": "Aadhaar"
+   },
+   "sample": "XXXX XXXX XXXX",
+   "row": 1,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m1_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 489,
+   "y": 396.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "बँक खाते क्रमांक",
+    "hi": "बैंक खाता",
+    "en": "Bank account"
+   },
+   "sample": "XXXXXXXXXX",
+   "row": 1,
+   "col": "bank"
+  },
+  {
+   "id": "m2_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 396,
+   "y": 411.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "आधार क्रमांक",
+    "hi": "आधार",
+    "en": "Aadhaar"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m2_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 489,
+   "y": 411.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "बँक खाते क्रमांक",
+    "hi": "बैंक खाता",
+    "en": "Bank account"
+   },
+   "sample": "",
+   "row": 2,
+   "col": "bank"
+  },
+  {
+   "id": "m3_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 396,
+   "y": 425.5,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "आधार क्रमांक",
+    "hi": "आधार",
+    "en": "Aadhaar"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m3_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 489,
+   "y": 425.5,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "बँक खाते क्रमांक",
+    "hi": "बैंक खाता",
+    "en": "Bank account"
+   },
+   "sample": "",
+   "row": 3,
+   "col": "bank"
+  },
+  {
+   "id": "m4_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 396,
+   "y": 439.5,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "आधार क्रमांक",
+    "hi": "आधार",
+    "en": "Aadhaar"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m4_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 489,
+   "y": 439.5,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "बँक खाते क्रमांक",
+    "hi": "बैंक खाता",
+    "en": "Bank account"
+   },
+   "sample": "",
+   "row": 4,
+   "col": "bank"
+  },
+  {
+   "id": "m5_aadhaar",
+   "page": 1,
+   "kind": "text",
+   "x": 396,
+   "y": 454.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "आधार क्रमांक",
+    "hi": "आधार",
+    "en": "Aadhaar"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "aadhaar"
+  },
+  {
+   "id": "m5_bank",
+   "page": 1,
+   "kind": "text",
+   "x": 489,
+   "y": 454.0,
+   "size": 7,
+   "who": "farmer",
+   "label": {
+    "mr": "बँक खाते क्रमांक",
+    "hi": "बैंक खाता",
+    "en": "Bank account"
+   },
+   "sample": "",
+   "row": 5,
+   "col": "bank"
+  },
+  {
+   "id": "juna_card",
+   "page": 1,
+   "kind": "text",
+   "x": 198,
+   "y": 474,
+   "size": 8,
+   "who": "farmer",
+   "label": {
+    "mr": "माझी जुनी शिधापत्रिका क्रमांक",
+    "hi": "पुराना कार्ड नंबर",
+    "en": "Old card number"
+   },
+   "sample": "XXXXXXXXXXXX"
+  },
+  {
+   "id": "dinank",
+   "page": 1,
+   "kind": "text",
+   "x": 104,
+   "y": 549,
+   "size": 9.5,
+   "who": "profile",
+   "label": {
+    "mr": "दिनांक",
+    "hi": "तारीख",
+    "en": "Date"
+   },
+   "sample": "१९/११/२०२६",
+   "profile": "today"
+  },
+  {
+   "id": "sahi",
+   "page": 1,
+   "kind": "sign",
+   "x": 430,
+   "y": 505,
+   "w": 74,
+   "h": 26,
+   "who": "farmer",
+   "label": {
+    "mr": "अर्जदाराची सही",
+    "hi": "आवेदक के हस्ताक्षर",
+    "en": "Applicant's signature"
+   },
+   "optional": true
+  },
+  {
+   "id": "angtha",
+   "page": 1,
+   "kind": "thumb",
+   "x": 522,
+   "y": 492,
+   "w": 42,
+   "h": 42,
+   "who": "ink",
+   "label": {
+    "mr": "अंगठ्याचा ठसा",
+    "hi": "अंगूठे का निशान",
+    "en": "Thumb impression"
+   }
+  }
+ ],
+ "office_only": [
+  "कोड क्रमांक",
+  "अनुक्रमांक",
+  "संदर्भ नोंदणी पुस्तक क्रमांक",
+  "दुकानदाराकडून माहिती",
+  "स्थळप्रत"
+ ],
+ "form": "ration_duplicate",
+ "namuna": "15",
+ "title": {
+  "mr": "हरवलेल्या / फाटलेल्या / खराब शिधापत्रिकेची दुसरी प्रत मिळण्यासाठी अर्ज",
+  "hi": "राशन कार्ड की दूसरी प्रति (खोया / फटा / खराब)",
+  "en": "Duplicate ration card (lost / torn / damaged)"
+ },
+ "docs": [
+  {
+   "id": "old_card",
+   "mr": "फाटलेली / खराब झालेली जुनी शिधापत्रिका (अर्जासोबत जोडणे आवश्यक)",
+   "hi": "फटा / खराब पुराना राशन कार्ड (अर्ज के साथ ज़रूरी)",
+   "en": "The torn / damaged old card (must be attached)",
+   "when": "if_damaged"
+  }
+ ]
+}

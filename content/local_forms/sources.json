@@ -1,0 +1,174 @@
+{
+  "checked": "2026-11-19",
+  "note": "Official blank forms for the 'print and take to the office' flow (tahsil). Downloaded from the department's own S3WaaS file store; sha256 of the copy read on 19 Nov 2026. The PDFs go to the server branch local-forms in Step 3, not into the app.",
+  "page": "https://mahafood.gov.in/en/forms/",
+  "rts_list": "https://mahafood.gov.in/website/PDF_files/RTS_list_E.pdf",
+  "online_route": {
+    "what": "The same ration card services (new card, add / remove name, address change, duplicate) are also online on RCMS Public Login — the department's Services page links every one of them there.",
+    "apply": "https://rcms.mahafood.gov.in/PublicLogin/frmPublicLogin.aspx",
+    "services_page": "https://mahafood.gov.in/en/services/",
+    "guide": "https://cdnbbsr.s3waas.gov.in/s3e21e4e58ad9ab56e8a4634046da90113/uploads/2024/04/202404161339556314.pdf",
+    "guide_note": "Govt circular संकीर्ण-2023/प्र.क्र.107, 20 Dec 2023 + 21-page RCMS help module. Registration and login need an OTP on the mobile linked to Aadhaar (or user name + password + OTP, or ration card number + OTP).",
+    "app_rule": "Show both: online (RCMS, needs the Aadhaar-linked mobile for OTP) or the paper form at the rationing / tahsil supply office. Paper is for the farmer whose mobile isn't linked or who goes to the office."
+  },
+  "forms": [
+    {
+      "id": "ration_add_name",
+      "namuna": "8",
+      "name_mr": "कौटुंबिक शिधापत्रिकेमध्ये नाव वाढविण्याकरिता अर्ज",
+      "name_hi": "राशन कार्ड में नाम जोड़ने का आवेदन",
+      "office": "Rationing / Tahsil supply branch (शिधावाटप कार्यालय / तहसील पुरवठा शाखा)",
+      "pdf": "https://cdnbbsr.s3waas.gov.in/s3e21e4e58ad9ab56e8a4634046da90113/uploads/2024/03/20240313448190991.pdf",
+      "sha256": "e6479cbd2fcfe87216694fce6aa69dc363b347e872d853f9acab93cd5e2a2c33",
+      "pages": 2,
+      "page_size": "Letter 612x792 pt",
+      "text_layer": "yes, legacy font (Sakal Marathi) — positions usable, text garbled",
+      "fee_on_form": "₹2",
+      "rts_time": "3 working days; 30 days if a home visit is needed",
+      "sign_box": "अर्जदाराची सही किंवा अंगठ्याचा ठसा (page 1 and page 2)",
+      "docs_on_form": [
+        "Passport size photo of every member being added (pasted in the box at the top)",
+        "If the name is in another ration card: certificate of its removal (कमी केल्याचा दाखला) or the receipt of that card's surrender",
+        "One proof of identity: Aadhaar card, PAN card, driving licence, or a government certificate / ID (office / other)",
+        "Disability certificate — only if a member is disabled; information on serious illness — only if any"
+      ],
+      "sensitive_fields": [
+        "Aadhaar number (table column)",
+        "bank account number (table column)",
+        "mobile"
+      ]
+    },
+    {
+      "id": "ration_remove_name",
+      "namuna": "9",
+      "name_mr": "कौटुंबिक शिधापत्रिकेतील युनिट्स कायम स्वरूपात कमी करण्याकरिता अर्ज",
+      "name_hi": "राशन कार्ड से नाम हटाने का आवेदन",
+      "office": "Rationing / Tahsil supply branch",
+      "pdf": "https://cdnbbsr.s3waas.gov.in/s3e21e4e58ad9ab56e8a4634046da90113/uploads/2024/03/20240313788228021.pdf",
+      "sha256": "e2874946a107a861bceaeb9964160e77e33f3fdbc425a83a8faa3c18a2f6e21e",
+      "pages": 1,
+      "page_size": "A4",
+      "text_layer": "no (scan) — field map by picture",
+      "fee_on_form": "₹2",
+      "rts_time": "in the RTS list; time not legible in our read — to confirm",
+      "sign_box": "अर्जदाराची सही",
+      "docs_on_form": [
+        "Table: name, relation, age, occupation, date of leaving or death, present address of the person leaving"
+      ],
+      "sensitive_fields": []
+    },
+    {
+      "id": "ration_new",
+      "namuna": "1",
+      "name_mr": "नवीन पुरवठा पत्रिकेसाठी / शिधापत्रिकेसाठी अर्ज (कुटुंब प्रमुखाने भरावा)",
+      "name_hi": "नया राशन कार्ड का आवेदन",
+      "office": "Rationing / Tahsil supply branch",
+      "pdf": "https://cdnbbsr.s3waas.gov.in/s3e21e4e58ad9ab56e8a4634046da90113/uploads/2024/03/20240313555393735.pdf",
+      "sha256": "eeac65eb0de0d30bbdde4f17eeb825b845a1220445d1ea81bd3741158219d299",
+      "pages": 2,
+      "page_size": "Letter 612x792 pt",
+      "text_layer": "yes, legacy font",
+      "fee_on_form": "₹2",
+      "rts_time": "30 days",
+      "sign_box": "अर्जदाराची स्वाक्षरी / अंगठ्याचा ठसा (page 2)",
+      "docs_on_form": [
+        "Passport size photo of every family member",
+        "If any name is in another card: removal certificate or surrender receipt",
+        "Proof of residence — one of: rent receipt, ownership proof, LPG connection number, electricity bill, telephone/mobile bill, bank passbook, driving licence, voter ID, Aadhaar, other government ID (if rented: rent agreement + owner's NOC)",
+        "Proof of identity — one of: Aadhaar, PAN, driving licence, government ID",
+        "Income: annual income of all members (certificate or self-declaration)"
+      ],
+      "sensitive_fields": [
+        "Aadhaar of every member",
+        "bank account + IFSC",
+        "mobile",
+        "annual income"
+      ]
+    },
+    {
+      "id": "ration_change",
+      "namuna": "14",
+      "name_mr": "शिधापत्रिकेमध्ये (युनिट्सच्या संख्येतील फेरफार खेरीजकरण इतर) फेरफार करण्याकरिता अर्ज",
+      "name_hi": "राशन कार्ड में बदलाव (पता, मुखिया, दुकान, नाम सुधार)",
+      "office": "Rationing / Tahsil supply branch (for a new address: the new area's office after the old office's slip)",
+      "pdf": "https://cdnbbsr.s3waas.gov.in/s3e21e4e58ad9ab56e8a4634046da90113/uploads/2024/03/202403131725336884.pdf",
+      "sha256": "9fe72c75cc371222426e343ca13bad164b61baf4d42b75abb4484ed3e2307cc0",
+      "pages": 1,
+      "page_size": "A4",
+      "text_layer": "no (scan)",
+      "fee_on_form": "₹2",
+      "rts_time": "name correction 3 working days; address change — to confirm",
+      "sign_box": "अर्जदाराची सही",
+      "docs_on_form": [
+        "Present position, change wanted, reason (free text)"
+      ],
+      "sensitive_fields": []
+    },
+    {
+      "id": "ration_duplicate",
+      "namuna": "15",
+      "name_mr": "हरवलेल्या/चोरीस गेलेल्या/फाटलेल्या/खराब झालेल्या शिधापत्रिकेच्या बाबतीत तिची दुसरी प्रत मिळण्यासाठी अर्ज",
+      "name_hi": "राशन कार्ड की दूसरी प्रति (खोया/फटा/खराब)",
+      "office": "Rationing / Tahsil supply branch",
+      "pdf": "https://cdnbbsr.s3waas.gov.in/s3e21e4e58ad9ab56e8a4634046da90113/uploads/2024/03/20240313135875379.pdf",
+      "sha256": "8f638cd57835559fa65d74954bf5203918e1a18bd408c5decb13d2735e6a2248",
+      "pages": 1,
+      "page_size": "A4",
+      "text_layer": "no (scan)",
+      "fee_on_form": "₹2",
+      "rts_time": "torn/damaged: 6 days (30 with a home visit); lost: 30 days",
+      "sign_box": "अर्जदाराची सही / अंगठ्याचा ठसा",
+      "docs_on_form": [
+        "Torn or damaged card: the old card must be attached",
+        "Table of members with Aadhaar and bank account columns"
+      ],
+      "sensitive_fields": [
+        "Aadhaar (table)",
+        "bank account (table)"
+      ]
+    },
+    {
+      "id": "sanjay_gandhi_niradhar",
+      "namuna": "शासकीय मुद्रणालय नमुना (सोग-२८८)",
+      "name_mr": "संजय गांधी निराधार अनुदान योजनेखाली अर्थसहाय्यासाठी करावयाच्या अर्जाचा / अर्ज तपासणीचा व मंजुरीचा नमुना",
+      "name_hi": "संजय गांधी निराधार अनुदान — आवेदन",
+      "office": "Tahsildar (Sanjay Gandhi Yojana branch), through the Talathi",
+      "page": "https://pune.gov.in/%E0%A4%B8%E0%A4%82%E0%A4%9C%E0%A4%AF-%E0%A4%97%E0%A4%BE%E0%A4%82%E0%A4%A7%E0%A5%80-%E0%A4%AF%E0%A5%8B%E0%A4%9C%E0%A4%A8%E0%A4%BE-%E0%A4%B6%E0%A4%BE%E0%A4%96%E0%A4%BE/",
+      "pdf": "https://cdn.s3waas.gov.in/s3ffeabd223de0d4eacb9a3e6e53e5448d/uploads/2025/03/2025032041.pdf",
+      "sha256": "bdae1079da9524c6a8cb47705b708e9211e2ac59aa06360574b655571357010a",
+      "pages": 7,
+      "page_size": "A4",
+      "text_layer": "no (scan of the Government Press form)",
+      "fee_on_form": null,
+      "rts_time": "to confirm",
+      "sign_box": "to map (Step 3)",
+      "docs_on_form": "to read page by page in Step 3",
+      "sensitive_fields": [
+        "UID (Aadhaar)",
+        "bank account",
+        "income",
+        "caste category"
+      ],
+      "note": "Addressed 'प्रति, तहसीलदार'. Applicant's photo box on page 1. Pages 2-7 hold the checking and sanction parts (office) — to separate the applicant's part in Step 3."
+    }
+  ],
+  "pending": [],
+  "second_batch": [
+    {
+      "id": "shravanbal",
+      "name_mr": "श्रावणबाळ सेवा राज्य निवृत्ती वेतन योजना अर्जाचा नमुना",
+      "pdf": "https://cdn.s3waas.gov.in/s3ffeabd223de0d4eacb9a3e6e53e5448d/uploads/2025/03/2025032036.pdf",
+      "sha256": "ab7cbc2f146a09c37492527fe9c62985d83d5967f9883d938035654778d59083",
+      "pages": 8,
+      "page": "https://pune.gov.in/%E0%A4%B8%E0%A4%82%E0%A4%9C%E0%A4%AF-%E0%A4%97%E0%A4%BE%E0%A4%82%E0%A4%A7%E0%A5%80-%E0%A4%AF%E0%A5%8B%E0%A4%9C%E0%A4%A8%E0%A4%BE-%E0%A4%B6%E0%A4%BE%E0%A4%96%E0%A4%BE/"
+    },
+    {
+      "id": "rashtriya_kutumb_labh",
+      "name_mr": "राष्ट्रीय कुटुंब लाभ योजना नमुना अर्ज",
+      "pdf": "https://cdn.s3waas.gov.in/s3ffeabd223de0d4eacb9a3e6e53e5448d/uploads/2025/03/2025032043.pdf",
+      "sha256": "481f33d7adf6bfc85543cc470c134292e3cb83d3a07c5af9fa7e46fd552f3649",
+      "pages": 1,
+      "page": "https://pune.gov.in/%E0%A4%B8%E0%A4%82%E0%A4%9C%E0%A4%AF-%E0%A4%97%E0%A4%BE%E0%A4%82%E0%A4%A7%E0%A5%80-%E0%A4%AF%E0%A5%8B%E0%A4%9C%E0%A4%A8%E0%A4%BE-%E0%A4%B6%E0%A4%BE%E0%A4%96%E0%A4%BE/"
+    }
+  ]
+}
