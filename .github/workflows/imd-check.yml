@@ -6,9 +6,18 @@ name: IMD warnings check
 # "[wxreport]" prints the Open-Meteo vs Google score so far.
 on:
   push:
-    branches: [imd-warnings]
+    branches: [imd-warnings, main]
     paths: ["functions/alerts/**", "tools/imd_warnings.py", "tools/test_imd.py", "tools/wx_compare_report.py", "tools/fixtures/imd/**", ".github/workflows/imd-check.yml"]
   workflow_dispatch:
+    inputs:
+      report:
+        description: "Print the Open-Meteo vs Google weather score"
+        type: boolean
+        default: true
+      test_push:
+        description: "Send the fake IMD hail to topic wx_test"
+        type: boolean
+        default: false
 
 jobs:
   check:
@@ -22,14 +31,14 @@ jobs:
       - name: What IMD says now
         run: python tools/imd_warnings.py
       - name: Test push to wx_test
-        if: contains(github.event.head_commit.message, '[imdpush]')
+        if: contains(github.event.head_commit.message, '[imdpush]') || inputs.test_push
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: |
           pip install firebase-admin==6.5.0
           python tools/imd_warnings.py --test-push
       - name: Weather comparison score (Open-Meteo vs Google vs IMD observed)
-        if: contains(github.event.head_commit.message, '[wxreport]')
+        if: contains(github.event.head_commit.message, '[wxreport]') || inputs.report
         env:
           FIREBASE_SERVICE_ACCOUNT: ${{ secrets.FIREBASE_SERVICE_ACCOUNT }}
         run: |
