@@ -208,9 +208,9 @@
    "size": 7,
    "who": "ai",
    "label": {
-    "mr": "नाव",
-    "hi": "नाम",
-    "en": "Name"
+    "mr": "अर्जदार सोडून इतर सदस्याचे नाव",
+    "hi": "आवेदक को छोड़ बाकी सदस्य का नाम",
+    "en": "Name of another member (not the applicant)"
    },
    "sample": "पाटील सुमन रामदास",
    "row": 1,
@@ -276,9 +276,9 @@
    "size": 7,
    "who": "ai",
    "label": {
-    "mr": "नाव",
-    "hi": "नाम",
-    "en": "Name"
+    "mr": "अर्जदार सोडून इतर सदस्याचे नाव",
+    "hi": "आवेदक को छोड़ बाकी सदस्य का नाम",
+    "en": "Name of another member (not the applicant)"
    },
    "sample": "",
    "row": 2,
@@ -344,9 +344,9 @@
    "size": 7,
    "who": "ai",
    "label": {
-    "mr": "नाव",
-    "hi": "नाम",
-    "en": "Name"
+    "mr": "अर्जदार सोडून इतर सदस्याचे नाव",
+    "hi": "आवेदक को छोड़ बाकी सदस्य का नाम",
+    "en": "Name of another member (not the applicant)"
    },
    "sample": "",
    "row": 3,
@@ -412,9 +412,9 @@
    "size": 7,
    "who": "ai",
    "label": {
-    "mr": "नाव",
-    "hi": "नाम",
-    "en": "Name"
+    "mr": "अर्जदार सोडून इतर सदस्याचे नाव",
+    "hi": "आवेदक को छोड़ बाकी सदस्य का नाम",
+    "en": "Name of another member (not the applicant)"
    },
    "sample": "",
    "row": 4,
@@ -480,9 +480,9 @@
    "size": 7,
    "who": "ai",
    "label": {
-    "mr": "नाव",
-    "hi": "नाम",
-    "en": "Name"
+    "mr": "अर्जदार सोडून इतर सदस्याचे नाव",
+    "hi": "आवेदक को छोड़ बाकी सदस्य का नाम",
+    "en": "Name of another member (not the applicant)"
    },
    "sample": "",
    "row": 5,
