@@ -227,14 +227,16 @@ service cloud.firestore {
     }
 
     // Khalihan AI's records in the farmer's account (v1.0.9 Step 3, switch
-    // ai_account): My chats, Applied forms, My documents — one document
+    // ai_account): My chats, Applied forms, My documents, My form details
+    // (21 Nov 2026: answers given to forms and site user names — never
+    // Aadhaar or PAN, which stay in the phone's locked store) — one document
     // each, the list as text. Only that farmer reads or writes them; staff
     // do not (private papers). Their photos and papers are in Cloud Storage
     // (storage.rules), likewise.
     match /users/{uid}/ai/{part} {
       allow read, delete: if isSelf(uid);
       allow create, update: if isSelf(uid)
-        && part in ['chats', 'applied', 'docs']
+        && part in ['chats', 'applied', 'docs', 'form']
         && request.resource.data.keys().hasOnly(['items', 'gone', 'n', 'at'])
         && request.resource.data.items is string
         && request.resource.data.items.size() <= 1000000
