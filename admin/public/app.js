@@ -21,7 +21,7 @@ import { aiTestPage } from './aitest.js';
 import { ALERT_WORDS, alertsCard, bellList } from './alerts.js';
 import { MSG_WORDS, msgHead, msgStats, msgKind, openMessage } from './messages.js';
 
-const ADMIN_VERSION = '1.31 · 18 Nov 2026';
+const ADMIN_VERSION = '1.32 · 21 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -706,7 +706,7 @@ Object.assign(I18N.en, {
   td_answered: 'ANSWERED THIS WEEK',
   td_answered_n: '{a} of {b}',
   td_answered_sub: 'Messages of the last 7 days marked done',
-  td_answered_soon: 'Replying inside the app comes with app 1.0.10.',
+  td_answered_soon: 'Replying inside the app comes with app 1.0.9.',
   td_latest: 'Latest',
   td_latest_none: 'Nothing new in the last two weeks.',
   td_need: 'Needs doing',
@@ -750,7 +750,7 @@ Object.assign(I18N.en, {
   help_later: 'Pages of switched-off features. Each one wakes by itself when its feature turns on or something new arrives in it.',
   help_team: 'Who can open this panel, and every change made in it. Add a Gmail as staff (daily work) or owner (everything, including switches and money).',
   help_settings: 'Alerts for you on your phone and computer; language, time and sound for this browser.',
-  help_feedback: 'Problems, suggestions, praise and "AI answer wrong" from the app. Reply within 4 hours: open a message, write in Hindi or English, Send in the app — the farmer reads it in his language with a notification (app 1.0.10 and newer; older ones: only Done).',
+  help_feedback: 'Problems, suggestions, praise and "AI answer wrong" from the app. Reply within 4 hours: open a message, write in Hindi or English, Send in the app — the farmer reads it in his language with a notification (app 1.0.9 and newer; older ones: only Done).',
   set_note: 'Language, time and sound stay in this browser. Your alert choices go with your account, on every device.',
 });
 Object.assign(I18N.hi, {
@@ -784,7 +784,7 @@ Object.assign(I18N.hi, {
   td_answered: 'इस हफ़्ते के जवाब',
   td_answered_n: '{b} में से {a}',
   td_answered_sub: 'पिछले 7 दिन के संदेश जो पूरे हुए',
-  td_answered_soon: 'ऐप के अंदर जवाब ऐप 1.0.10 से।',
+  td_answered_soon: 'ऐप के अंदर जवाब ऐप 1.0.9 से।',
   td_latest: 'ताज़ा',
   td_latest_none: 'पिछले दो हफ़्ते में कुछ नया नहीं।',
   td_need: 'करना है',
@@ -828,7 +828,7 @@ Object.assign(I18N.hi, {
   help_later: 'बंद फ़ीचर के पेज। फ़ीचर चालू होते ही या कुछ नया आते ही हर पेज अपने-आप जाग जाता है।',
   help_team: 'ये पैनल कौन खोल सकता है, और इसमें हुआ हर बदलाव। Gmail को staff (रोज़ का काम) या owner (सब कुछ, स्विच और पैसा भी) बनाएँ।',
   help_settings: 'आपके फ़ोन और कंप्यूटर पर आपके अलर्ट; भाषा, समय और आवाज़ इस ब्राउज़र के लिए।',
-  help_feedback: 'ऐप से आईं दिक्कतें, सुझाव, तारीफ़ और "AI का जवाब गलत"। 4 घंटे में जवाब दें: संदेश खोलें, हिंदी या English में लिखें, "ऐप में भेजें" — किसान अपनी भाषा में सूचना के साथ पढ़ेगा (ऐप 1.0.10 और नया; पुराने: सिर्फ़ पूरा करें)।',
+  help_feedback: 'ऐप से आईं दिक्कतें, सुझाव, तारीफ़ और "AI का जवाब गलत"। 4 घंटे में जवाब दें: संदेश खोलें, हिंदी या English में लिखें, "ऐप में भेजें" — किसान अपनी भाषा में सूचना के साथ पढ़ेगा (ऐप 1.0.9 और नया; पुराने: सिर्फ़ पूरा करें)।',
   set_note: 'भाषा, समय और आवाज़ इसी ब्राउज़र में रहते हैं। अलर्ट की पसंद आपके खाते के साथ, हर डिवाइस पर।',
 });
 
