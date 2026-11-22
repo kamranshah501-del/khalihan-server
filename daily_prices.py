@@ -746,7 +746,9 @@ def save_popular(db, state):
     reported them: [{"n": crop, "d": days, "m": mandi-days}], most first. Phones read it once a day and put the farmer's own
     district's crops first (owner, 26 Oct 2026). Public prices only."""
     base = slug(state)
-    since = (datetime.now(timezone.utc) - timedelta(days=POPULAR_DAYS)).strftime("%Y-%m-%d")
+    # The last 30 dates, today included: "d >= today - 30" held 31, and the
+    # app said "31 of 30 days" (22 Nov 2026).
+    since = (datetime.now(timezone.utc) - timedelta(days=POPULAR_DAYS - 1)).strftime("%Y-%m-%d")
 
     def ranked(scope):
         seen = defaultdict(dict)  # crop -> {day: mandis}
