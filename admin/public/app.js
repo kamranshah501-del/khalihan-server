@@ -18,10 +18,11 @@ import { plusPage } from './plus.js';
 import { statsPage } from './stats.js';
 import { budgetPage, sums as budgetSums } from './budget.js';
 import { aiTestPage } from './aitest.js';
+import { aiFormsPage } from './aiforms.js';
 import { ALERT_WORDS, alertsCard, bellList } from './alerts.js';
 import { MSG_WORDS, msgHead, msgStats, msgKind, openMessage } from './messages.js';
 
-const ADMIN_VERSION = '1.32 · 21 Nov 2026';
+const ADMIN_VERSION = '1.33 · 22 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -58,6 +59,7 @@ const I18N = {
     tab_features: 'Feature switches',
     tab_stats: 'App numbers',
     tab_budget: 'Budget & targets',
+    tab_aiforms: 'AI forms',
     tab_aitest: 'AI test',
     tab_plus: 'Khalihan Pro',
     tab_team: 'Team',
@@ -344,6 +346,7 @@ const I18N = {
     help_deletions: 'Farmers who deleted their account. Remove their sell requests and WhatsApp chat within 30 days, then mark Done.',
     help_stats: 'Owner only. Downloads from Google Play and what farmers do in the app, from Google Analytics for Firebase — updated twice a day, counts only.',
     help_budget: 'Owner only. The month\'s plan against what was really spent, your loss limit, and how far the targets are — farmers using the app, Plus members. The amounts are kept only in your owner account.',
+    help_aiforms: 'Owner only. What Khalihan AI does inside "Fill a government form" and "Get a document": its model, instruction, limits, notes about a site and the lists of sites — changed without a new app. A change goes to your test phones first, then "Send to every farmer"; any earlier version comes back in one click. The safety rules (Aadhaar, bank, OTP, password, captcha, Submit) stay locked in the app.',
     help_aitest: 'Owner only. Khalihan AI\'s 200-question test: farmers\' real questions, asked on the test phone, every answer marked by an agri graduate. The share marked right is the only accuracy number AI may show.',
     help_features: 'Owner only. One section per feature: click it to switch it on or off and change its settings — states, where Khalihan buys, the Kendra\'s districts and location.',
     help_team: 'Who can open this panel. Add a Gmail as staff (daily work) or owner (everything, including switches and money).',
@@ -366,6 +369,7 @@ const I18N = {
     tab_features: 'फ़ीचर स्विच',
     tab_stats: 'आँकड़े',
     tab_budget: 'बजट और लक्ष्य',
+    tab_aiforms: 'AI फ़ॉर्म',
     tab_aitest: 'AI की जाँच',
     tab_plus: 'Khalihan Pro',
     tab_team: 'टीम',
@@ -652,6 +656,7 @@ const I18N = {
     help_deletions: 'जिन किसानों ने खाता हटाया। उनकी बिक्री रिक्वेस्ट और WhatsApp चैट 30 दिन में हटाएँ, फिर "हो गया" करें।',
     help_stats: 'सिर्फ़ मालिक। Google Play से डाउनलोड, और Google Analytics for Firebase से किसान ऐप में क्या करते हैं — दिन में दो बार अपडेट, सिर्फ़ गिनती।',
     help_budget: 'सिर्फ़ मालिक। महीने का प्लान और असली खर्च, घाटे की सीमा, और लक्ष्य कितना पूरा हुआ — ऐप चलाने वाले किसान, Plus मेंबर। रकम सिर्फ़ आपके मालिक वाले खाते में रहती है।',
+    help_aiforms: 'सिर्फ़ मालिक। "सरकारी फ़ॉर्म भरें" और "दस्तावेज़ निकालें" में Khalihan AI क्या करता है: मॉडल, समझाने वाला टेक्स्ट, सीमाएँ, साइट के नोट और साइटों की सूची — नए ऐप के बिना बदलें। बदलाव पहले आपके टेस्ट फ़ोन पर, फिर "हर किसान को भेजें"; पुराना वर्शन एक क्लिक में वापस। सुरक्षा के नियम (Aadhaar, बैंक, OTP, पासवर्ड, कैप्चा, जमा करें) ऐप में बंद रहते हैं।',
     help_aitest: 'सिर्फ़ मालिक। Khalihan AI की 200 सवाल वाली जाँच: किसानों के असली सवाल टेस्ट फ़ोन पर पूछे जाते हैं, हर जवाब कृषि स्नातक जाँचते हैं। जितने सही, बस वही संख्या AI दिखा सकता है।',
     help_features: 'सिर्फ़ मालिक। हर फ़ीचर का अपना हिस्सा: उस पर क्लिक करके चालू/बंद करें और सेटिंग बदलें — राज्य, Khalihan कहाँ ख़रीदे, Kendra के ज़िले और जगह।',
     help_team: 'ये पैनल कौन खोल सकता है। Gmail को staff (रोज़ का काम) या owner (सब कुछ, स्विच और पैसा भी) बनाकर जोड़ें।',
@@ -1052,6 +1057,7 @@ const ICON_PATHS = {
   stats: 'M4 20h16M7 16v-5M12 16V6M17 16v-8',
   budget: 'M4 7h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4zM4 7V5a1 1 0 0 1 1-1h11v3M15.5 13.5h1.5',
   aitest: 'M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3M7.5 15h9',
+  aiforms: 'M6 3h9l4 4v14H6zM15 3v4h4M9 12h7M9 16h4M17.5 14.5l1 1.5 1.5.5-1.5.5-1 1.5-.5-1.5-1.5-.5 1.5-.5z',
   home: 'M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z',
   later: 'M3 4h18M3 20h18M5 4v16M19 4v16M5 12h14M9 8h2M9 16h2',
   lock: 'M6 11h12v10H6zM8 11V8a4 4 0 0 1 8 0v3',
@@ -1153,7 +1159,7 @@ function tabs() {
     ${item('home', tr('tab_home'))}
     ${item('feedback', tr('tab_feedback'))}
     ${awakeTeam}
-    ${owner ? `<div class="navh">${tr('nav_owner')}</div>${item('stats', tr('tab_stats'))}${item('plus', tr('tab_plus'))}${item('budget', tr('tab_budget'))}${item('compliance', tr('tab_compliance'))}${item('features', tr('tab_features'))}${item('team', tr('tab_team'))}${awakeOwner}` : ''}
+    ${owner ? `<div class="navh">${tr('nav_owner')}</div>${item('stats', tr('tab_stats'))}${item('plus', tr('tab_plus'))}${item('budget', tr('tab_budget'))}${item('compliance', tr('tab_compliance'))}${item('features', tr('tab_features'))}${item('aiforms', tr('tab_aiforms'))}${item('team', tr('tab_team'))}${awakeOwner}` : ''}
     <div class="navgap"></div>
     ${shelf.length ? item('later', tr('tab_later')) : ''}
     ${item('settings', tr('tab_settings'))}
@@ -1911,6 +1917,13 @@ const PAGES = {
   async aitest() {
     if (me.role !== 'owner') return PAGES.home();
     await aiTestPage({ esc, setMain, lang: () => lang, db: () => db, fail, toast });
+  },
+
+  // Owner: Khalihan AI for government forms (Admin 1.33, see aiforms.js —
+  // config/app → ai_forms {live, test}; history under business/, owner only).
+  async aiforms() {
+    if (me.role !== 'owner') return PAGES.home();
+    await aiFormsPage({ esc, setMain, lang: () => lang, db: () => db, fail, toast });
   },
 
   // Owner: every feature, state and district switch, in sections.

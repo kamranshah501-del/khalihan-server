@@ -371,7 +371,7 @@ def analytics(s):
         ({"d": f"{x['date'][:4]}-{x['date'][4:6]}-{x['date'][6:]}", "a": x["activeUsers"], "n": x["newUsers"]} for x in daily),
         key=lambda x: x["d"],
     )
-    events = ga_report(s, prop, ["eventName"], ["eventCount", "totalUsers"], limit=60, order="eventCount")
+    events = ga_report(s, prop, ["eventName"], ["eventCount", "totalUsers"], limit=150, order="eventCount")
     screens = ga_report(s, prop, ["unifiedScreenName"], ["screenPageViews", "activeUsers"], limit=40, order="screenPageViews")
     versions = ga_report(s, prop, ["appVersion"], ["activeUsers"], limit=10, order="activeUsers")
     regions = ga_report(s, prop, ["country", "region"], ["activeUsers"], limit=40, order="activeUsers")
@@ -437,6 +437,14 @@ def analytics(s):
         "perm_loc": custom("customUser:loc", "activeUsers", n=6) if "loc" in ready else [],
         "perm_notif": custom("customUser:notif", "activeUsers", n=4) if "notif" in ready else [],
         "fail_why": custom("customEvent:code", "eventCount", ("eventName", "prices_failed"), n=8) if "code" in ready else [],
+        # Khalihan AI forms (Admin → 🧠 AI Forms, 22 Nov 2026; owner: "jo bhi
+        # kisan form bharega us par hamari nazar rahegi — data par nahi"):
+        # which sites were filled, where the sites refused a box (box kind
+        # and reason only, never what was in it), why sites did not open.
+        "gov_fill_site": custom("customEvent:site", "eventCount", ("eventName", "ai_gov_fill"), n=10) if "site" in ready else [],
+        "gov_open_site": custom("customEvent:site", "eventCount", ("eventName", "ai_gov_open"), n=10) if "site" in ready else [],
+        "gov_stuck": custom("customEvent:stuck", "eventCount", ("eventName", "ai_gov_filled"), n=12) if "stuck" in ready else [],
+        "gov_fail_why": custom("customEvent:why", "eventCount", ("eventName", "ai_gov_fail"), n=8) if "why" in ready else [],
         "fail_state": custom("customUser:state", "eventCount", ("eventName", "prices_failed"), n=8) if "state" in ready else [],
         "dims": sorted(ready), "dims_note": dim_note,
         "key_events": keys, "key_note": key_note,

@@ -152,6 +152,69 @@ export async function connect() {
       await updateDoc(doc(db, 'config', 'app'), { ai_limits: limits || deleteField() });
       log('ai_limits', limits ? { free: Object.keys(limits.free || {}).length, plus: Object.keys(limits.plus || {}).length, pro: Object.keys(limits.pro || {}).length } : { removed: true });
     },
+    // ── Khalihan AI for forms (Admin 1.33, owner 22 Nov 2026 — see aiforms.js) ──
+    // config/app → ai_forms {live, test}: each {v, set, note, by, at}. The
+    // app takes `test` on the owner's test phones and `live` everywhere
+    // else. Every version is also kept in business/ai_forms_history (owner
+    // only), so any earlier one can go live again.
+    async aiForms() {
+      const [c, h] = await Promise.all([
+        getDoc(doc(db, 'config', 'app')),
+        getDoc(doc(db, 'business', 'ai_forms_history')),
+      ]);
+      const f = (c.data() || {}).ai_forms || {};
+      const part = (p) => (p && p.set ? { ...p, at: toDate(p.at) } : null);
+      const list = (h.exists() ? h.data().list : null) || [];
+      return { live: part(f.live), test: part(f.test), history: list.map((e) => ({ ...e, at: toDate(e.at) })) };
+    },
+    async _aiFormsKeep(entry, to) {
+      const h = await getDoc(doc(db, 'business', 'ai_forms_history'));
+      const list = ((h.exists() ? h.data().list : null) || []).filter((e) => e.v !== entry.v);
+      list.unshift({ ...entry, to });
+      await setDoc(doc(db, 'business', 'ai_forms_history'), { list: list.slice(0, 30), updated: serverTimestamp() });
+    },
+    async _aiFormsNext() {
+      const cur = await this.aiForms();
+      return Math.max(0, cur.live?.v || 0, cur.test?.v || 0, ...cur.history.map((e) => e.v || 0)) + 1;
+    },
+    // A change goes to the test phones first.
+    async saveAiFormsTest(set, note) {
+      const entry = { v: await this._aiFormsNext(), set, note: note || '', by: me.email, at: Timestamp.now() };
+      await updateDoc(doc(db, 'config', 'app'), { 'ai_forms.test': entry });
+      await this._aiFormsKeep(entry, 'test');
+      log('ai_forms_test', { v: entry.v, note: entry.note });
+      return entry.v;
+    },
+    // What the test phones have → every farmer.
+    async aiFormsGoLive() {
+      const cur = await this.aiForms();
+      if (!cur.test) throw new Error('No test version to send.');
+      const entry = { v: cur.test.v, set: cur.test.set, note: cur.test.note || '', by: me.email, at: Timestamp.now() };
+      await updateDoc(doc(db, 'config', 'app'), { 'ai_forms.live': entry, 'ai_forms.test': deleteField() });
+      await this._aiFormsKeep(entry, 'live');
+      log('ai_forms_live', { v: entry.v });
+      return entry.v;
+    },
+    async aiFormsDropTest() {
+      await updateDoc(doc(db, 'config', 'app'), { 'ai_forms.test': deleteField() });
+      log('ai_forms_test_removed', {});
+    },
+    // An earlier version back for every farmer (a new number, the old set).
+    async aiFormsRollback(v) {
+      const cur = await this.aiForms();
+      const old = cur.history.find((e) => e.v === v);
+      if (!old) throw new Error('That version is not kept.');
+      const entry = { v: await this._aiFormsNext(), set: old.set, note: `back to v${v}`, by: me.email, at: Timestamp.now() };
+      await updateDoc(doc(db, 'config', 'app'), { 'ai_forms.live': entry });
+      await this._aiFormsKeep(entry, 'live');
+      log('ai_forms_rollback', { to: v, v: entry.v });
+      return entry.v;
+    },
+    // Back to the app's own everywhere (Admin's set removed; history kept).
+    async aiFormsClear() {
+      await updateDoc(doc(db, 'config', 'app'), { ai_forms: deleteField() });
+      log('ai_forms_cleared', {});
+    },
     // The notice on the app's Home (app v1.0.4+). The whole map is replaced,
     // so an old notice's words never mix into a new one; null takes it down.
     async setNotice(notice) {

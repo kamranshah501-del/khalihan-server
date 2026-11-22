@@ -47,6 +47,10 @@ export async function connect() {
   let notice = null;
   let festival = null;
   let aiLimits = null; // Khalihan AI limits per phone (null = the app's own)
+  // Khalihan AI for forms (aiforms.js): live / test / history, as in config/app → ai_forms.
+  const aiForms = { live: { v: 2, set: { models: ['gemini-3.8-flash', 'gemini-3.5-flash-lite'], pages: 14, searches: 4, notes: { 'mahadbt.maharashtra.gov.in': 'OTP is sent to the mobile linked with Aadhaar.' } }, note: 'MahaDBT note', by: 'owner@khalihan.in', at: Date.now() - 86400000 }, test: null, history: [] };
+  aiForms.history.push({ ...aiForms.live, to: 'live' });
+  const aiFormsNext = () => Math.max(0, aiForms.live?.v || 0, aiForms.test?.v || 0, ...aiForms.history.map((e) => e.v || 0)) + 1;
   // Free Plus gift codes (Admin 1.16).
   let gifts = [
     { id: 'R7KM4QXP', name: 'Mera phone', note: '', until: null, test: true, tier: 'pro', device: 'a1b2c3d4e5f6g7h8i9j0', claimed: day(0, 8), app: '1.0.6', at: day(0, 7) },
@@ -177,7 +181,13 @@ export async function connect() {
           { k: 'price_map', c: 9, u: 5 }, { k: 'compare_opened', c: 8, u: 4 }, { k: 'feedback_sent', c: 3, u: 3 },
           { k: 'widget_opened', c: 11, u: 3 }, { k: 'app_remove', c: 6, u: 6 }, { k: 'prices_failed', c: 17, u: 9 },
           { k: 'notification_open', c: 25, u: 11 }, { k: 'guide_shown', c: 30, u: 24 }, { k: 'guide_done', c: 18, u: 18 }, { k: 'guide_step', c: 51, u: 20 }, { k: 'app_update', c: 30, u: 30 },
+          { k: 'ai_gov_open', c: 21, u: 4 }, { k: 'ai_gov_offer', c: 17, u: 4 }, { k: 'ai_gov_fill', c: 12, u: 3 }, { k: 'ai_gov_filled', c: 11, u: 3 }, { k: 'ai_gov_interview', c: 9, u: 3 },
+          { k: 'ai_gov_account', c: 6, u: 3 }, { k: 'ai_gov_join', c: 3, u: 2 }, { k: 'ai_gov_joined', c: 2, u: 2 }, { k: 'ai_gov_login_go', c: 4, u: 2 }, { k: 'ai_gov_signed', c: 7, u: 3 }, { k: 'ai_gov_trouble', c: 2, u: 1 }, { k: 'ai_gov_fail', c: 1, u: 1 },
         ],
+        gov_fill_site: [{ k: 'govtest.khalihan.gov.in', n: 7 }, { k: 'pmkisan.gov.in', n: 3 }, { k: 'mahadbt.maharashtra.gov.in', n: 2 }],
+        gov_open_site: [{ k: 'govtest.khalihan.gov.in', n: 11 }, { k: 'pmkisan.gov.in', n: 6 }, { k: 'mahadbt.maharashtra.gov.in', n: 4 }],
+        gov_stuck: [{ k: 'select:no_match', n: 2 }, { k: 'date:readonly', n: 1 }],
+        gov_fail_why: [{ k: 'timeout', n: 1 }],
         screens: [
           { k: 'tab_home', v: 520, u: 52 }, { k: 'crop', v: 233, u: 38 }, { k: 'tab_prices', v: 190, u: 35 },
           { k: 'weather', v: 141, u: 33 }, { k: 'where_sell', v: 48, u: 17 }, { k: 'market_locator', v: 40, u: 15 },
@@ -248,6 +258,12 @@ export async function connect() {
       return offers;
     },
     async appConfig() { return { features: { ...features }, launch_states: [...launchStates], sell_districts: JSON.parse(JSON.stringify(sellDistricts)), notice: notice ? JSON.parse(JSON.stringify(notice)) : null, festival: festival ? { ...festival } : null, ai_limits: aiLimits ? JSON.parse(JSON.stringify(aiLimits)) : null }; },
+    async aiForms() { return JSON.parse(JSON.stringify(aiForms), (k, v) => (k === 'at' && v ? new Date(v) : v)); },
+    async saveAiFormsTest(set, note) { const v = aiFormsNext(); aiForms.test = { v, set, note: note || '', by: 'demo@khalihan.in', at: Date.now() }; aiForms.history.unshift({ ...aiForms.test, to: 'test' }); log('ai_forms_test', { v }); return v; },
+    async aiFormsGoLive() { if (!aiForms.test) throw new Error('No test version to send.'); aiForms.live = { ...aiForms.test, at: Date.now() }; aiForms.history = aiForms.history.filter((e) => e.v !== aiForms.live.v); aiForms.history.unshift({ ...aiForms.live, to: 'live' }); aiForms.test = null; log('ai_forms_live', {}); return aiForms.live.v; },
+    async aiFormsDropTest() { aiForms.test = null; },
+    async aiFormsRollback(v) { const old = aiForms.history.find((e) => e.v === v); if (!old) throw new Error('That version is not kept.'); aiForms.live = { v: aiFormsNext(), set: old.set, note: `back to v${v}`, by: 'demo@khalihan.in', at: Date.now() }; aiForms.history.unshift({ ...aiForms.live, to: 'live' }); return aiForms.live.v; },
+    async aiFormsClear() { aiForms.live = null; aiForms.test = null; },
     async setAiLimits(l) { aiLimits = l ? JSON.parse(JSON.stringify(l)) : null; log('ai_limits', l ? { saved: true } : { removed: true }); },
     async setFestival(f) { festival = f ? { ...f } : null; log('festival', f ? { kind: f.kind } : { removed: true }); },
     async setNotice(n) { notice = n ? JSON.parse(JSON.stringify(n)) : null; log('notice', n ? { kind: n.kind } : { removed: true }); },
