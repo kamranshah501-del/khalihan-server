@@ -1433,7 +1433,7 @@ function fbDraw() {
     <p class="muted small" style="margin-top:-4px">${tr('fb_total')}: ${c.total} · ${tr('fb_f_done')}: ${c.done} · ${tr('fb_week')}: ${week}</p>
     ${places.length ? `<div class="filters"><span class="small muted" style="align-self:center">${tr('fb_from')}</span>${places.slice(0, 6).map(([v, n]) => `<button data-fb-place="${esc(v)}" class="${flt.place === v ? 'on' : ''}" aria-pressed="${flt.place === v}">${esc(v)} · ${n}</button>`).join('')}</div>` : ''}
     <div class="filters">${sbtn('open', tr('fb_f_new'))}${sbtn('replied', tr('mg_f_replied'))}${sbtn('done', tr('fb_f_done'))}${sbtn('all', tr('fb_f_all'))}</div>
-    <div class="filters">${['problem', 'ai_wrong', 'suggestion', 'praise'].map((k) => `<button data-fb-kind="${k}" class="${flt.kind === k ? 'on' : ''}" aria-pressed="${flt.kind === k}">${tr('mg_kind_' + k)}</button>`).join('')}</div>
+    <div class="filters">${['form', 'problem', 'ai_wrong', 'suggestion', 'praise'].map((k) => `<button data-fb-kind="${k}" class="${flt.kind === k ? 'on' : ''}" aria-pressed="${flt.kind === k}">${tr('mg_kind_' + k)}</button>`).join('')}</div>
     <div class="row" style="margin-bottom:12px">
       <input id="fb-q" type="search" style="flex:2 1 260px;width:auto" value="${esc(flt.q)}" placeholder="${esc(tr('fb_search'))}" aria-label="${esc(tr('fb_search'))}">
       <select id="fb-lang" style="flex:1 1 150px;width:auto" aria-label="${esc(tr('fb_any_lang'))}">${opt(langs, flt.lang, tr('fb_any_lang'), fbLang)}</select>

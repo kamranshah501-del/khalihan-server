@@ -708,7 +708,7 @@ button.plain.small, button.danger.small { padding: 4px 10px; font-size: 13px; }
 .mghead { display: flex; align-items: center; gap: 10px; margin-bottom: 6px; }
 .mgav { display: inline-flex; align-items: center; justify-content: center; background: var(--navy); color: #fff; font-weight: 800; }
 .chip.mgk { background: #eef1f4; color: var(--muted); }
-.chip.mgk.problem, .chip.mgk.ai_wrong { background: var(--red-tint); color: #8c241f; }
+.chip.mgk.problem, .chip.mgk.ai_wrong, .chip.mgk.formhelp { background: var(--red-tint); color: #8c241f; }
 .chip.mgk.praise { background: var(--green-tint); color: var(--green-dark); }
 .chip.mgk.suggestion { background: var(--amber-tint); color: var(--amber); }
 .mgsender { display: flex; gap: 12px; align-items: flex-start; }

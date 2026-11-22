@@ -13,7 +13,9 @@ export const MSG_WORDS = {
   en: {
     mg_unknown: 'Unknown farmer',
     mg_farmer: 'Farmer {id}',
-    mg_kind_problem: 'Problem', mg_kind_ai_wrong: 'AI answer wrong', mg_kind_suggestion: 'Suggestion', mg_kind_praise: 'Praise',
+    mg_kind_problem: 'Problem', mg_kind_ai_wrong: 'AI answer wrong', mg_kind_suggestion: 'Suggestion', mg_kind_praise: 'Praise', mg_kind_form: 'Stuck on a form',
+    mg_form: 'Form', mg_form_boxes: '{n} boxes on the page', mg_form_note: 'Only the site, the kind of page and the number of boxes come with it — never what he typed. Open the site yourself to see the page.',
+    mg_fp_login: 'sign-in page', mg_fp_otp: 'OTP page', mg_fp_captcha: 'captcha page', mg_fp_form: 'form page', mg_fp_error: 'error page', mg_fp_success: 'done page', mg_fp_info: 'information page', mg_fp_none: 'the site did not open',
     mg_open: 'Open and reply',
     mg_waiting: 'waiting {t} of 4 h',
     mg_late: 'waiting {t} — past 4 h',
@@ -50,7 +52,9 @@ export const MSG_WORDS = {
   hi: {
     mg_unknown: 'अनजान किसान',
     mg_farmer: 'किसान {id}',
-    mg_kind_problem: 'दिक्कत', mg_kind_ai_wrong: 'AI का जवाब गलत', mg_kind_suggestion: 'सुझाव', mg_kind_praise: 'तारीफ़',
+    mg_kind_problem: 'दिक्कत', mg_kind_ai_wrong: 'AI का जवाब गलत', mg_kind_suggestion: 'सुझाव', mg_kind_praise: 'तारीफ़', mg_kind_form: 'फ़ॉर्म में अटका',
+    mg_form: 'फ़ॉर्म', mg_form_boxes: 'पेज पर {n} खाने', mg_form_note: 'साथ में सिर्फ़ साइट, पेज की किस्म और खानों की गिनती आती है — उसने जो लिखा, वो कभी नहीं। पेज देखने के लिए साइट ख़ुद खोलें।',
+    mg_fp_login: 'लॉगिन पेज', mg_fp_otp: 'OTP पेज', mg_fp_captcha: 'कैप्चा पेज', mg_fp_form: 'फ़ॉर्म पेज', mg_fp_error: 'गलती वाला पेज', mg_fp_success: 'पूरा हुआ पेज', mg_fp_info: 'जानकारी वाला पेज', mg_fp_none: 'साइट नहीं खुली',
     mg_open: 'खोलें और जवाब दें',
     mg_waiting: '4 घंटे में से {t} से रुका',
     mg_late: '{t} से रुका — 4 घंटे पार',
@@ -89,8 +93,11 @@ export const MSG_WORDS = {
 const LANG_NAME = { en: 'English', hi: 'Hindi', mr: 'Marathi', gu: 'Gujarati', pa: 'Punjabi', te: 'Telugu', kn: 'Kannada', ta: 'Tamil', bn: 'Bengali', ml: 'Malayalam' };
 const PROMISE = 4 * 3600e3;
 
-/** problem, ai_wrong, suggestion, praise — or '' (an old app's message). */
+/** form, problem, ai_wrong, suggestion, praise — or '' (an old app's message).
+ *  form: "मदद" on a government site (app 1.0.9+, Admin 1.33) — sent as a
+ *  problem with info.form_site / form_page / form_boxes. */
 export function msgKind(f) {
+  if (f.info && f.info.form_site) return 'form';
   if (f.kind) return f.kind;
   return String(f.text || '').startsWith('🤖') ? 'ai_wrong' : '';
 }
@@ -126,7 +133,7 @@ export function msgHead(f, deps) {
   const { tr, esc, dur } = deps;
   const kind = msgKind(f);
   return `<div class="mghead">${avatar(f, tr, esc, 36)}
-    <div class="grow"><b>${esc(senderName(f, tr))}</b>${kind ? ` <span class="chip mgk ${esc(kind)}">${tr('mg_kind_' + kind)}</span>` : ''}</div>
+    <div class="grow"><b>${esc(senderName(f, tr))}</b>${kind ? ` <span class="chip mgk ${esc(kind === 'form' ? 'formhelp' : kind)}">${tr('mg_kind_' + kind)}</span>` : ''}</div>
     ${waitLine(f, tr, dur)}</div>`;
 }
 
@@ -180,6 +187,7 @@ export async function openMessage(f, deps) {
       ${ten ? `<div>${tr('mg_mobile')}</div><div><span id="mg-num">${esc(masked)}</span> <button class="linkbtn inl" id="mg-show">${tr('mg_show')}</button></div>` : ''}
       ${info.model || info.android ? `<div>${tr('mg_phone')}</div><div>${esc([info.model, info.android ? 'Android ' + info.android : ''].filter(Boolean).join(' · '))}</div>` : ''}
       <div>${tr('mg_app')}</div><div>${esc(f.app || '—')}</div>
+      ${info.form_site ? `<div>${tr('mg_form')}</div><div>${/^[a-z0-9.-]+\.(gov|nic)\.in$/i.test(info.form_site) ? `<a href="https://${esc(info.form_site)}/" target="_blank" rel="noopener noreferrer">${esc(info.form_site)}</a>` : esc(info.form_site)} · ${esc(tr('mg_fp_' + (info.form_page || 'info')))} · ${esc(tr('mg_form_boxes', { n: String(info.form_boxes || 0) }))}<div class="small muted">${tr('mg_form_note')}</div></div>` : ''}
       ${info.net || info.notif ? `<div>${tr('mg_when')}</div><div>${esc([info.net ? tr('mg_net_' + info.net) : '', info.notif ? tr(info.notif === 'on' ? 'mg_notif_on' : 'mg_notif_off') : ''].filter(Boolean).join(' · '))}</div>` : ''}
     </div>
     <section class="mgmsg">
