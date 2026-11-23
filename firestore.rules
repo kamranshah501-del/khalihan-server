@@ -274,6 +274,52 @@ service cloud.firestore {
       allow delete: if isOwner();
     }
 
+    // Khalihan AI's use, counted with the account (review of 23 Nov 2026:
+    // the count lived on the phone only, so clearing the app's data or
+    // installing it again gave a fresh share). One document for the day
+    // (d20261123) and one for the month (m202611), India's date by OUR
+    // clock — a phone whose date is moved cannot open another day's
+    // document. Counts only, and only upward: one use at a time (Kaptan's
+    // voice: up to 10 minutes of seconds). Nothing about what was asked.
+    function aiDayId() {
+      let n = request.time + duration.value(330, 'm');
+      return 'd' + string(n.year())
+        + (n.month() < 10 ? '0' : '') + string(n.month())
+        + (n.day() < 10 ? '0' : '') + string(n.day());
+    }
+    function aiMonthId() {
+      let n = request.time + duration.value(330, 'm');
+      return 'm' + string(n.year()) + (n.month() < 10 ? '0' : '') + string(n.month());
+    }
+    function aiFirst(k, most) {
+      return request.resource.data.get(k, 0) is number
+        && request.resource.data.get(k, 0) >= 0
+        && request.resource.data.get(k, 0) <= most;
+    }
+    function aiMore(k, most) {
+      return request.resource.data.get(k, 0) is number
+        && request.resource.data.get(k, 0) >= resource.data.get(k, 0)
+        && request.resource.data.get(k, 0) <= resource.data.get(k, 0) + most;
+    }
+    // (Not under …/ai/, which holds the farmer's own records and is his to
+    // delete: a count he could delete would be no count.)
+    match /users/{uid}/aiuse/{period} {
+      allow read: if isSelf(uid) || canSeePhones();
+      allow create: if isSelf(uid)
+        && (period == aiDayId() || period == aiMonthId())
+        && request.resource.data.keys().hasOnly(['ask', 'open', 'deep', 'photo', 'voice', 'page', 'help', 'at'])
+        && aiFirst('ask', 1) && aiFirst('open', 1) && aiFirst('deep', 1) && aiFirst('photo', 1)
+        && aiFirst('page', 1) && aiFirst('help', 1) && aiFirst('voice', 600)
+        && request.resource.data.at == request.time;
+      allow update: if isSelf(uid)
+        && (period == aiDayId() || period == aiMonthId())
+        && request.resource.data.keys().hasOnly(['ask', 'open', 'deep', 'photo', 'voice', 'page', 'help', 'at'])
+        && aiMore('ask', 1) && aiMore('open', 1) && aiMore('deep', 1) && aiMore('photo', 1)
+        && aiMore('page', 1) && aiMore('help', 1) && aiMore('voice', 600)
+        && request.resource.data.at == request.time;
+      allow delete: if isOwner();
+    }
+
     // The free week (owner, 23 Nov 2026: seven days of Khalihan Pro at
     // login, no payment, no auto-pay; "Suresh ne 7 days use kar liya,
     // khatam"). One per mobile number — this document, named by the
