@@ -646,7 +646,7 @@ export const TRIAL = ['voice_search', 'share_link', 'share_short', 'crop_photos'
 export const TRIAL_DAYS = 14;
 // When each app version went live on Google Play's production track (India
 // date). Add a line at every release: trials and the launch check read it.
-export const PLAY_LIVE = { '1.0.7': '2026-11-11' };
+export const PLAY_LIVE = { '1.0.7': '2026-11-11', '1.0.8': '2026-11-20' };
 // Khalihan AI's parts that cost money per use: after launch they keep their
 // own Pause switch; the rest simply follow Khalihan AI.
 export const COSTLY = ['ai_open', 'ai_deep', 'ai_voice_cloud', 'ai_pest'];
