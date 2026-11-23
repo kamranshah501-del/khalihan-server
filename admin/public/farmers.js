@@ -146,9 +146,9 @@ const T = {
 export const PLAN_DEFAULTS = {
   week: { forms: 1, docs: 3 },
   m1: { forms: 5, docs: 10 },
-  m3: { forms: 18, docs: 36 },
-  m6: { forms: 40, docs: 80 },
-  m12: { forms: 100, docs: 200 },
+  m3: { forms: 15, docs: 30 },
+  m6: { forms: 30, docs: 60 },
+  m12: { forms: 50, docs: 100 },
 };
 const PLANS = ['week', 'm1', 'm3', 'm6', 'm12'];
 const WEEK_DAYS = 7;
