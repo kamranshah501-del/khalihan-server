@@ -19,10 +19,11 @@ import { statsPage } from './stats.js';
 import { budgetPage, sums as budgetSums } from './budget.js';
 import { aiTestPage } from './aitest.js';
 import { aiFormsPage } from './aiforms.js';
+import { farmersPage } from './farmers.js';
 import { ALERT_WORDS, alertsCard, bellList } from './alerts.js';
 import { MSG_WORDS, msgHead, msgStats, msgKind, openMessage } from './messages.js';
 
-const ADMIN_VERSION = '1.33 · 22 Nov 2026';
+const ADMIN_VERSION = '1.34 · 23 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -200,7 +201,8 @@ const I18N = {
     del_q: 'Delete all of this farmer\'s sell requests and account data for ever? (Delete the WhatsApp chat on the phone yourself.)',
     del_done: '{n} requests deleted',
     del_none: 'No requests.',
-    team_intro: 'A Google email added here can open Khalihan Admin. "staff" can see everything and change requests and offers; "owner" can also change switches, the team and see the change log.',
+    team_intro: 'A Google email added here can open Khalihan Admin. "staff" can see everything and change requests and offers; "owner" can also change switches, the team and see the change log. Farmers\' accounts and full mobile numbers: only the owner and staff ticked "Full numbers" (for support calls and AI problems).',
+    team_phones: 'Full numbers — may see farmers\' accounts and full mobile numbers',
     remove: 'Remove',
     you: 'you',
     new_member: 'New member',
@@ -211,6 +213,7 @@ const I18N = {
     rm_q: 'Remove {e} from the team?',
     v_email: 'Enter a valid email',
     added: 'Added',
+    phones_saved: 'Saved',
     audit_sub: '(every change, last 300)',
     a_when: 'When',
     a_who: 'Who',
@@ -342,7 +345,7 @@ const I18N = {
     help_offers: 'The price Khalihan pays for a crop, and where. Start, change or end an offer here; the app shows it at its next start — only where "Sell to Khalihan" is on.',
     help_kendra: 'The Khalihan Kendra shop: orders (mark Ready, then Picked up), products and stock, the square card on Home, the shop\'s details, and complaints.',
     help_feedback: 'Suggestions farmers send from the app — no name, no phone. Search and filter them, add a team note, then tick Done. Owner: delete one only when a farmer asks (privacy policy: within 30 days).',
-    help_farmers: 'Farmers who made an account (mobile login). Find one by mobile number.',
+    help_farmers: 'Farmers who made an account (mobile login, or the free week at Khalihan AI): name, number, village, the free week and the plan\'s forms — never what is inside the account. By area; end a free week or give days; forms and papers per plan.',
     help_deletions: 'Farmers who deleted their account. Remove their sell requests and WhatsApp chat within 30 days, then mark Done.',
     help_stats: 'Owner only. Downloads from Google Play and what farmers do in the app, from Google Analytics for Firebase — updated twice a day, counts only.',
     help_budget: 'Owner only. The month\'s plan against what was really spent, your loss limit, and how far the targets are — farmers using the app, Plus members. The amounts are kept only in your owner account.',
@@ -510,7 +513,8 @@ const I18N = {
     del_q: 'इस किसान की सारी बिक्री रिक्वेस्ट और खाता-डेटा हमेशा के लिए हटाएँ? (WhatsApp की बातचीत फ़ोन में ख़ुद हटाएँ)',
     del_done: '{n} रिक्वेस्ट हटाई गईं',
     del_none: 'कोई माँग नहीं।',
-    team_intro: 'यहाँ जोड़ा गया Google ईमेल Khalihan Admin खोल सकता है। "staff" सब देख और रिक्वेस्ट/ऑफ़र बदल सकता है; "owner" स्विच, टीम और रिकॉर्ड भी।',
+    team_intro: 'यहाँ जोड़ा गया Google ईमेल Khalihan Admin खोल सकता है। "staff" सब देख और रिक्वेस्ट/ऑफ़र बदल सकता है; "owner" स्विच, टीम और रिकॉर्ड भी। किसानों के खाते और पूरे मोबाइल नंबर: सिर्फ़ मालिक और "पूरे नंबर" टिक किए स्टाफ़ (मदद के कॉल और AI की दिक़्क़त के लिए)।',
+    team_phones: 'पूरे नंबर — किसानों के खाते और पूरे मोबाइल नंबर देख सकते हैं',
     remove: 'हटाएँ',
     you: 'आप',
     new_member: 'नया सदस्य',
@@ -521,6 +525,7 @@ const I18N = {
     rm_q: '{e} को टीम से हटाएँ?',
     v_email: 'सही ईमेल डालें',
     added: 'जोड़ दिया',
+    phones_saved: 'सेव हुआ',
     audit_sub: '(हर बदलाव, आख़िरी 300)',
     a_when: 'कब',
     a_who: 'किसने',
@@ -652,7 +657,7 @@ const I18N = {
     help_offers: 'Khalihan किसी फ़सल का क्या भाव देगा, और कहाँ। यहाँ ऑफ़र शुरू करें, बदलें या बंद करें; ऐप अगली बार खुलने पर दिखाएगा — सिर्फ़ वहाँ जहाँ "Khalihan को बेचें" चालू है।',
     help_kendra: 'Khalihan Kendra दुकान: ऑर्डर (पहले "तैयार", फिर "उठा लिया"), माल और स्टॉक, Home का square card, दुकान की जानकारी और शिकायतें।',
     help_feedback: 'किसानों के ऐप से भेजे सुझाव — नाम या फ़ोन नहीं। ढूँढें, फ़िल्टर करें, टीम नोट लिखें, फिर "हो गया" दबाएँ। Owner: सिर्फ़ तभी हटाएँ जब किसान कहे (प्राइवेसी पॉलिसी: 30 दिन के अंदर)।',
-    help_farmers: 'जिन किसानों ने खाता बनाया (मोबाइल लॉग इन)। मोबाइल नंबर से ढूँढें।',
+    help_farmers: 'जिन किसानों ने खाता बनाया (मोबाइल लॉगिन, या Khalihan AI पर मुफ़्त हफ़्ता): नाम, नंबर, गाँव, मुफ़्त हफ़्ता और प्लान के फ़ॉर्म — खाते के अंदर की बातें कभी नहीं। इलाक़े से; मुफ़्त हफ़्ता बंद करें या दिन दें; हर प्लान के फ़ॉर्म और कागज़।',
     help_deletions: 'जिन किसानों ने खाता हटाया। उनकी बिक्री रिक्वेस्ट और WhatsApp चैट 30 दिन में हटाएँ, फिर "हो गया" करें।',
     help_stats: 'सिर्फ़ मालिक। Google Play से डाउनलोड, और Google Analytics for Firebase से किसान ऐप में क्या करते हैं — दिन में दो बार अपडेट, सिर्फ़ गिनती।',
     help_budget: 'सिर्फ़ मालिक। महीने का प्लान और असली खर्च, घाटे की सीमा, और लक्ष्य कितना पूरा हुआ — ऐप चलाने वाले किसान, Plus मेंबर। रकम सिर्फ़ आपके मालिक वाले खाते में रहती है।',
@@ -736,7 +741,7 @@ Object.assign(I18N.en, {
   later_intro: 'Pages for features that are switched off. They keep everything and come back to the menu by themselves when their feature turns on or something new arrives in them.',
   later_why_sell: 'Wakes when Sell to Khalihan is on',
   later_why_kendra: 'Wakes when the Kendra shop is on',
-  later_why_login: 'Wakes when mobile login is on',
+  later_why_login: 'Wakes when mobile login is on, or Khalihan AI with Pro on sale (the free week)',
   later_why_trade: 'Wakes when trading starts (plan step 1)',
   later_why_aitest: 'Wakes when you start a test',
   later_open: 'Open anyway',
@@ -814,7 +819,7 @@ Object.assign(I18N.hi, {
   later_intro: 'बंद फ़ीचर के पेज। सब कुछ सँभाल कर रखते हैं, और फ़ीचर चालू होते ही या कुछ नया आते ही अपने-आप मेन्यू में लौट आते हैं।',
   later_why_sell: '"Khalihan को बेचो" चालू होने पर जागेगा',
   later_why_kendra: 'Kendra दुकान चालू होने पर जागेगा',
-  later_why_login: 'मोबाइल लॉगिन चालू होने पर जागेगा',
+  later_why_login: 'मोबाइल लॉगिन चालू होने पर, या Khalihan AI और Pro की बिक्री चालू होने पर (मुफ़्त हफ़्ता) जागेगा',
   later_why_trade: 'ट्रेड शुरू होने पर जागेगा (प्लान का कदम 1)',
   later_why_aitest: 'जाँच शुरू करने पर जागेगा',
   later_open: 'फिर भी खोलें',
@@ -1098,6 +1103,9 @@ const featureOn = (key) => {
 };
 function isAwake(s) {
   if (s.feature && featureOn(s.feature)) return true;
+  // The free week asks for a login at Khalihan AI (owner, 23 Nov 2026):
+  // farmers' accounts come with Khalihan AI and Pro on sale too.
+  if ((s.tab === 'farmers' || s.tab === 'deletions') && featureOn('ai') && featureOn('pro_sale')) return true;
   if (s.tab === 'requests') return (cache.requests || []).some((r) => r.status === 'new');
   if (s.tab === 'kendra') return !!cache.kendraNew;
   if (s.tab === 'deletions') return !!cache.delOpen;
@@ -1951,28 +1959,12 @@ const PAGES = {
     fbDraw();
   },
 
+  // Admin 1.34 (owner, 23 Nov 2026): the account's front only — name,
+  // number, village / taluka / district, the free week and the plan's
+  // forms; by area; the free week ended or given days; forms and papers
+  // per plan. Owner and staff allowed to see numbers (see farmers.js).
   async farmers() {
-    const list = await db.users();
-    setMain(`
-      <h1>${tr('tab_farmers')} <span class="muted small">${tr('farmers_sub')}</span></h1>
-      <div class="row" style="margin-bottom:12px">
-        <input id="u-phone" class="grow" inputmode="numeric" placeholder="${esc(tr('find_ph'))}">
-        <button class="plain" id="u-find">${tr('find')}</button>
-      </div>
-      <div id="u-list">${userRows(list)}</div>`);
-    const bind = (rowsList) => document.querySelectorAll('[data-user]').forEach((n) => {
-      n.onclick = () => showUser(rowsList.find((u) => u.id === n.dataset.user));
-    });
-    bind(list);
-    $('#u-find').onclick = async () => {
-      const ten = phoneTen($('#u-phone').value);
-      if (ten.length !== 10) return toast(tr('v_ten'));
-      try {
-        const found = await db.userByPhone('+91' + ten);
-        $('#u-list').innerHTML = found.length ? userRows(found) : `<div class="empty">${tr('no_account_num')}</div>`;
-        bind(found);
-      } catch (e) { fail(e); }
-    };
+    await farmersPage({ esc, setMain, lang: () => lang, db, fail, toast, me, openPanel, when, phoneShow, phoneTen, reqCard });
   },
 
   async deletions() {
@@ -2002,7 +1994,9 @@ const PAGES = {
       <p class="muted">${tr('team_intro')}</p>
       ${list.map((s) => `
         <div class="card row between">
-          <div><div class="title">${esc(s.id)}</div><div class="sub">${esc(s.role)}${s.name ? ' · ' + esc(s.name) : ''}</div></div>
+          <div><div class="title">${esc(s.id)}</div><div class="sub">${esc(s.role)}${s.name ? ' · ' + esc(s.name) : ''}</div>
+            ${s.role !== 'owner' && me.role === 'owner' ? `<label class="check small" style="margin-top:6px"><input type="checkbox" data-phones="${esc(s.id)}" ${s.phones ? 'checked' : ''}> ${tr('team_phones')}</label>` : ''}
+          </div>
           ${s.id !== me.email ? `<button class="danger" data-rm="${esc(s.id)}">${tr('remove')}</button>` : `<span class="muted small">${tr('you')}</span>`}
         </div>`).join('')}
       <h2>${tr('new_member')}</h2>
@@ -2012,6 +2006,11 @@ const PAGES = {
         <div><label>${tr('role')}</label><select id="s-role"><option value="staff">staff</option><option value="owner">owner</option></select></div>
       </div><div class="actions"><button class="main" id="s-add">${tr('add')}</button></div></div>`);
     wireTeamTabs();
+    document.querySelectorAll('[data-phones]').forEach((c) => {
+      c.onchange = async () => {
+        try { await db.setStaffPhones(c.dataset.phones, c.checked); toast(tr('phones_saved')); } catch (e) { c.checked = !c.checked; fail(e); }
+      };
+    });
     document.querySelectorAll('[data-rm]').forEach((b) => {
       b.onclick = async () => {
         if (!confirm(tr('rm_q', { e: b.dataset.rm }))) return;
@@ -2441,35 +2440,6 @@ async function saveOffer() {
     }
     toast(tr('o_saved'));
     PAGES.offers();
-  } catch (e) { fail(e); }
-}
-
-function userRows(list) {
-  if (!list.length) return `<div class="empty">${tr('no_accounts')}</div>`;
-  return list.map((u) => `<div class="card click" data-user="${esc(u.id)}">
-    <div class="row between"><div class="grow">
-      <div class="title">${esc(u.name || '—')} · ${phoneShow(u.phone)}</div>
-      <div class="sub">${esc(u.district || '')}${u.state ? ', ' + esc(u.state) : ''} · ${esc((u.crops || []).slice(0, 5).join(', '))}</div>
-    </div><div class="sub">${when(u.seen)}</div></div>
-  </div>`).join('');
-}
-
-async function showUser(u) {
-  if (!u) return;
-  const panel = openPanel(`
-    <h1>${esc(u.name || tr('farmer'))}</h1>
-    <div class="kv">
-      <div>${tr('k_mobile')}</div><div>${phoneShow(u.phone)}</div>
-      <div>${tr('k_place')}</div><div>${esc(u.district || '—')}, ${esc(u.state || '')}</div>
-      <div>${tr('k_lang_app')}</div><div>${esc(u.lang)} · v${esc(u.app)}</div>
-      <div>${tr('k_crops')}</div><div>${esc((u.crops || []).join(', ') || '—')}</div>
-      <div>${tr('k_created')}</div><div>${when(u.created)}</div>
-      <div>${tr('k_seen')}</div><div>${when(u.seen)}</div>
-    </div>
-    <h2>${tr('sales_h')}</h2><div id="u-req" class="muted">${tr('loading')}</div>`);
-  try {
-    const reqs = await db.requestsOf(u.id);
-    panel.querySelector('#u-req').innerHTML = reqs.length ? reqs.map(reqCard).join('') : tr('none');
   } catch (e) { fail(e); }
 }
 

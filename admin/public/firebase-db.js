@@ -46,7 +46,10 @@ export async function connect() {
         try {
           const snap = await getDoc(doc(db, 'staff', email));
           if (!snap.exists()) { me = null; return callback({ email, role: null }); }
-          me = { email, role: snap.data().role === 'owner' ? 'owner' : 'staff', name: snap.data().name || '' };
+          const role = snap.data().role === 'owner' ? 'owner' : 'staff';
+          // Full mobile numbers and accounts: the owner, and staff he allowed
+          // (staff/{email}.phones — the rules check the same, 23 Nov 2026).
+          me = { email, role, name: snap.data().name || '', phones: role === 'owner' || snap.data().phones === true };
           callback(me);
         } catch (e) {
           console.warn(e);
@@ -144,7 +147,13 @@ export async function connect() {
     async appConfig() {
       const snap = await getDoc(doc(db, 'config', 'app'));
       const data = snap.data() || {};
-      return { features: data.features || {}, launch_states: data.launch_states || [], sell_districts: data.sell_districts || {}, notice: data.notice || null, festival: data.festival || null, ai_limits: data.ai_limits || null };
+      return { features: data.features || {}, launch_states: data.launch_states || [], sell_districts: data.sell_districts || {}, notice: data.notice || null, festival: data.festival || null, ai_limits: data.ai_limits || null, plan_limits: data.plan_limits || null };
+    },
+    // Forms and papers per Khalihan Pro plan (app 1.0.9, owner 23 Nov 2026):
+    // {week: {forms, docs}, m1: …, m12: …, forms_day}; null = the app's own.
+    async setPlanLimits(limits) {
+      await setDoc(doc(db, 'config', 'app'), { plan_limits: limits || deleteField() }, { merge: true });
+      log('plan_limits', { set: !!limits });
     },
     // Khalihan AI's limits per phone (app v1.0.9): {free: {photo_day: 2, …},
     // plus: {…}}; null = the app's own numbers.
@@ -348,12 +357,31 @@ export async function connect() {
       return snap.data().count;
     },
     async users() {
-      const snap = await getDocs(query(collection(db, 'users'), orderBy('seen', 'desc'), limit(200)));
-      return rows(snap).map((r) => ({ ...r, seen: toDate(r.seen), created: toDate(r.created) }));
+      const snap = await getDocs(query(collection(db, 'users'), orderBy('seen', 'desc'), limit(1000)));
+      return rows(snap).map((r) => ({ ...r, seen: toDate(r.seen), created: toDate(r.created), consent: toDate(r.consent) }));
     },
     async userByPhone(phone) {
       const snap = await getDocs(query(collection(db, 'users'), where('phone', '==', phone), limit(5)));
-      return rows(snap).map((r) => ({ ...r, seen: toDate(r.seen), created: toDate(r.created) }));
+      return rows(snap).map((r) => ({ ...r, seen: toDate(r.seen), created: toDate(r.created), consent: toDate(r.consent) }));
+    },
+    // The free weeks (plus_trials/{+91…}): when each began, its own end if
+    // the owner changed it, the week's forms and papers. Owner and staff
+    // allowed to see numbers (rules).
+    async freeWeeks() {
+      const snap = await getDocs(query(collection(db, 'plus_trials'), limit(5000)));
+      return rows(snap).map((r) => ({ ...r, phone: r.id, start: toDate(r.start), end: toDate(r.end) }));
+    },
+    // Owner: end a week now, or move its end (more days).
+    async setWeekEnd(phone, end, note) {
+      await updateDoc(doc(db, 'plus_trials', phone), {
+        end: end ? Timestamp.fromDate(end) : serverTimestamp(), note: note || '', by: me.email,
+      });
+      log('week_end', { phone: phone.slice(-4), end: end ? end.toISOString() : 'now' });
+    },
+    // A bought plan's forms and papers (users/{uid}/use/{plan_end}).
+    async planUse(uid) {
+      const snap = await getDocs(collection(db, 'users', uid, 'use'));
+      return rows(snap).map((r) => ({ ...r, at: toDate(r.at) }));
     },
     async requestsOf(uid) {
       const snap = await getDocs(query(collection(db, 'sell_requests'), where('uid', '==', uid), limit(100)));
@@ -371,6 +399,10 @@ export async function connect() {
       const batch = writeBatch(db);
       snap.docs.forEach((d) => batch.delete(d.ref));
       batch.delete(doc(db, 'users', uid));
+      // The plan's form and paper counts (23 Nov 2026; the farmer cannot
+      // delete them himself — the rules — so the team does, with the rest).
+      const use = await getDocs(collection(db, 'users', uid, 'use')).catch(() => null);
+      if (use) use.docs.forEach((d) => batch.delete(d.ref));
       await batch.commit();
       await updateDoc(doc(db, 'deletion_requests', uid), { done: true, by: me.email });
       log('farmer_deleted', { uid, requests: snap.size });
@@ -431,6 +463,11 @@ export async function connect() {
       const id = email.trim().toLowerCase();
       await setDoc(doc(db, 'staff', id), { role, name: name || '', added: serverTimestamp(), by: me.email });
       log('staff_add', { email: id, role });
+    },
+    // Owner: may this person see farmers' full numbers and accounts?
+    async setStaffPhones(email, on) {
+      await updateDoc(doc(db, 'staff', email), { phones: !!on });
+      log('staff_phones', { email, on: !!on });
     },
     async removeStaff(email) {
       await deleteDoc(doc(db, 'staff', email));

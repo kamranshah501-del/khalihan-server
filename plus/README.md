@@ -36,7 +36,7 @@ and subscriptions*. Google Play may take up to a day to start answering.
 **Play Console products** (the ids can't change later): subscriptions
 `khalihan_plus` (Kisan Plus) and `khalihan_pro` (Kisan Pro); base plans
 `m1`, `m3`, `m6`, `m12` (auto-renewing; Admin reads the months from the id);
-a 7-day free-trial offer on the base plans that should have one.
+no trial offer (owner, 23 Nov 2026: the free week at login replaces it — plus_trials in firestore.rules).
 
 **Later.** Google's real-time developer notifications (Pub/Sub) so renewals,
 cancellations and refunds reach the account without the app asking; until

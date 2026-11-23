@@ -4,7 +4,7 @@ import { runSummary } from './aitest.js';
 const day = (n, h = 10) => { const d = new Date(); d.setDate(d.getDate() - n); d.setHours(h, 15, 0, 0); return d; };
 
 export async function connect() {
-  const me = { email: 'owner@example.com', role: 'owner', name: 'Demo owner' };
+  const me = { email: 'owner@example.com', role: 'owner', name: 'Demo owner', phones: true };
   // Spread over two weeks so the dashboard has something to show.
   const crops = [['Maize', 1980], ['Cotton', 7400], ['Soybean', 4650], ['Maize', 1990]];
   const older = [];
@@ -129,9 +129,17 @@ export async function connect() {
   const FB_PAGE = 6; // small in the demo, so "older" can be tried
   const replies = [];
   const users = [
-    { id: 'u1', phone: '+919876543210', name: 'Ramesh Patil', state: 'Maharashtra', district: 'Jalgaon', lang: 'mr', app: '1.0.2', crops: ['Maize', 'Cotton'], seen: day(0, 9), created: day(5) },
-    { id: 'u2', phone: '+919812345678', name: '', state: 'Maharashtra', district: 'Jalgaon', lang: 'hi', app: '1.0.2', crops: ['Cotton'], seen: day(1), created: day(1) },
+    { id: 'u1', phone: '+919876543210', name: 'Ramesh Patil', state: 'Maharashtra', district: 'Jalgaon', taluka: 'Jamner', village: 'Fatehpur', lang: 'mr', app: '1.0.9', crops: ['Maize', 'Cotton'], seen: day(0, 9), created: day(5), consent: day(2), offers: true },
+    { id: 'u2', phone: '+919812345678', name: 'Suresh Mahajan', state: 'Maharashtra', district: 'Jalgaon', taluka: 'Jamner', village: 'Shendurni', lang: 'hi', app: '1.0.9', crops: ['Cotton'], seen: day(1), created: day(1), consent: day(1), offers: false },
+    { id: 'u3', phone: '+919822001122', name: 'Vijay Jadhav', state: 'Maharashtra', district: 'Jalgaon', taluka: 'Pachora', village: 'Varkhedi', lang: 'mr', app: '1.0.9', crops: ['Banana'], seen: day(3), created: day(9), consent: day(9), offers: true },
+    { id: 'u4', phone: '+919833445566', name: '', state: 'Maharashtra', district: 'Dhule', lang: 'hi', app: '1.0.8', crops: ['Cotton'], seen: day(4), created: day(20) },
   ];
+  const weeks = [
+    { id: '+919876543210', phone: '+919876543210', uid: 'u1', start: day(2), forms: 1, docs: 2, app: '1.0.9' },
+    { id: '+919812345678', phone: '+919812345678', uid: 'u2', start: day(1), forms: 0, docs: 1, app: '1.0.9' },
+    { id: '+919822001122', phone: '+919822001122', uid: 'u3', start: day(9), forms: 1, docs: 3, app: '1.0.9' },
+  ];
+  let planLimits = null;
   const deletions = [{ id: 'u9', phone: '+919900112233', at: day(2) }];
   const staff = [{ id: 'owner@example.com', role: 'owner', name: 'Demo owner' }, { id: 'staff@example.com', role: 'staff', name: 'Jamner' }];
   const audit = [{ id: 'a1', by: 'staff@example.com', action: 'sell_request_status', details: { id: 'r2', status: 'called' }, at: day(1, 17) }];
@@ -258,7 +266,7 @@ export async function connect() {
       log('offers', { version: offers.version });
       return offers;
     },
-    async appConfig() { return { features: { ...features }, launch_states: [...launchStates], sell_districts: JSON.parse(JSON.stringify(sellDistricts)), notice: notice ? JSON.parse(JSON.stringify(notice)) : null, festival: festival ? { ...festival } : null, ai_limits: aiLimits ? JSON.parse(JSON.stringify(aiLimits)) : null }; },
+    async appConfig() { return { features: { ...features }, launch_states: [...launchStates], sell_districts: JSON.parse(JSON.stringify(sellDistricts)), notice: notice ? JSON.parse(JSON.stringify(notice)) : null, festival: festival ? { ...festival } : null, ai_limits: aiLimits ? JSON.parse(JSON.stringify(aiLimits)) : null, plan_limits: planLimits ? JSON.parse(JSON.stringify(planLimits)) : null }; },
     async aiForms() { return JSON.parse(JSON.stringify(aiForms), (k, v) => (k === 'at' && v ? new Date(v) : v)); },
     async saveAiFormsTest(set, note) { const v = aiFormsNext(); aiForms.test = { v, set, note: note || '', by: 'demo@khalihan.in', at: Date.now() }; aiForms.history.unshift({ ...aiForms.test, to: 'test' }); log('ai_forms_test', { v }); return v; },
     async aiFormsGoLive() { if (!aiForms.test) throw new Error('No test version to send.'); aiForms.live = { ...aiForms.test, at: Date.now() }; aiForms.history = aiForms.history.filter((e) => e.v !== aiForms.live.v); aiForms.history.unshift({ ...aiForms.live, to: 'live' }); aiForms.test = null; log('ai_forms_live', {}); return aiForms.live.v; },
@@ -337,6 +345,11 @@ export async function connect() {
     async feedbackDelete(id) { feedback = feedback.filter((x) => x.id !== id); log('feedback_delete', { id }); },
     async usersCount() { return users.length; },
     async users() { return users.map((u) => ({ ...u })); },
+    async freeWeeks() { return weeks.map((w) => ({ ...w })); },
+    async setWeekEnd(phone, end, note) { const w = weeks.find((x) => x.phone === phone); if (w) { w.end = end || new Date(); w.note = note || ''; } log('week_end', { phone: phone.slice(-4) }); },
+    async planUse() { return []; },
+    async setPlanLimits(l) { planLimits = l ? JSON.parse(JSON.stringify(l)) : null; log('plan_limits', { set: !!l }); },
+    async setStaffPhones(email, on) { const s2 = staff.find((x) => x.id === email); if (s2) s2.phones = !!on; log('staff_phones', { email, on: !!on }); },
     async userByPhone(phone) { return users.filter((u) => u.phone === phone); },
     async requestsOf(uid) { return requests.filter((r) => r.uid === uid); },
     async deletions() { return deletions.map((d) => ({ ...d })); },

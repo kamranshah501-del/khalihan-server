@@ -1,6 +1,6 @@
 rules_version = '2';
 
-// Khalihan — Firestore rules (8 Oct 2026; Kendra 12 Oct; price history server-only 19 Oct; free Plus gift codes 1 Nov 2026; owner stats 10 Nov 2026; Plus on Play 16 Nov 2026).
+// Khalihan — Firestore rules (8 Oct 2026; Kendra 12 Oct; price history server-only 19 Oct; free Plus gift codes 1 Nov 2026; owner stats 10 Nov 2026; Plus on Play 16 Nov 2026; free week, plan counts and who sees full numbers 23 Nov 2026).
 //
 // Who is who:
 //   • Farmers: the app. Prices, schemes, calendar and offers are open to
@@ -40,6 +40,15 @@ service cloud.firestore {
     }
     function phoneOfLogin() {
       return request.auth.token.get('phone_number', '');
+    }
+    // Farmers' full mobile numbers and accounts (owner, 23 Nov 2026: "pura
+    // mobile number sirf admin dekhe, aur technical team jise main access
+    // doon"): the owner, and staff the owner allowed in Admin → Team
+    // (staff/{email}.phones == true). Other staff do not read accounts.
+    function canSeePhones() {
+      return isOwner()
+        || (isStaff()
+            && get(/databases/$(database)/documents/staff/$(staffEmail())).data.get('phones', false) == true);
     }
 
     // ── prices: the server writes; phones read, and keep a backup copy ─
@@ -214,16 +223,100 @@ service cloud.firestore {
     }
 
     // ── a farmer's account ─────────────────────────────────────────────
+    // 23 Nov 2026: the village and taluka (the team's view by area), and
+    // when the farmer said "I agree" and whether he wants offers (the free
+    // week's details page). Read: the farmer, the owner and staff allowed
+    // to see numbers.
     match /users/{uid} {
-      allow read: if isSelf(uid) || isStaff();
+      allow read: if isSelf(uid) || canSeePhones();
       allow create, update: if isSelf(uid)
         && request.resource.data.keys().hasOnly(
-             ['phone', 'name', 'state', 'district', 'lang', 'app', 'crops', 'seen', 'created', 'data'])
+             ['phone', 'name', 'state', 'district', 'lang', 'app', 'crops', 'seen', 'created', 'data',
+              'taluka', 'village', 'consent', 'offers'])
         && request.resource.data.phone == phoneOfLogin()
         && request.resource.data.name is string
         && request.resource.data.name.size() <= 60
-        && request.resource.data.data is map;
+        && request.resource.data.data is map
+        && request.resource.data.get('taluka', '') is string
+        && request.resource.data.get('taluka', '').size() <= 80
+        && request.resource.data.get('village', '') is string
+        && request.resource.data.get('village', '').size() <= 80
+        && (!('consent' in request.resource.data) || request.resource.data.consent is timestamp)
+        && request.resource.data.get('offers', false) is bool;
       allow delete: if isSelf(uid) || isOwner();
+    }
+
+    // A bought plan's forms and papers (owner, 23 Nov 2026): one document
+    // per plan and its end date (m1_20261223 …), counted by the farmer's
+    // phone — only up, one at a time; the farmer cannot lower or delete
+    // it. Read by the farmer and the team allowed to see accounts.
+    match /users/{uid}/use/{period} {
+      allow read: if isSelf(uid) || canSeePhones();
+      allow create: if isSelf(uid)
+        && period.matches('^m(1|3|6|12)_[0-9]{8}$')
+        && request.resource.data.keys().hasOnly(['forms', 'docs', 'at'])
+        && request.resource.data.get('forms', 0) is int
+        && request.resource.data.get('forms', 0) >= 0
+        && request.resource.data.get('forms', 0) <= 1
+        && request.resource.data.get('docs', 0) is int
+        && request.resource.data.get('docs', 0) >= 0
+        && request.resource.data.get('docs', 0) <= 1
+        && request.resource.data.at == request.time;
+      allow update: if isSelf(uid)
+        && request.resource.data.keys().hasOnly(['forms', 'docs', 'at'])
+        && request.resource.data.get('forms', 0) is int
+        && request.resource.data.get('forms', 0) >= resource.data.get('forms', 0)
+        && request.resource.data.get('forms', 0) <= resource.data.get('forms', 0) + 1
+        && request.resource.data.get('docs', 0) is int
+        && request.resource.data.get('docs', 0) >= resource.data.get('docs', 0)
+        && request.resource.data.get('docs', 0) <= resource.data.get('docs', 0) + 1
+        && request.resource.data.at == request.time;
+      allow delete: if isOwner();
+    }
+
+    // The free week (owner, 23 Nov 2026: seven days of Khalihan Pro at
+    // login, no payment, no auto-pay; "Suresh ne 7 days use kar liya,
+    // khatam"). One per mobile number — this document, named by the
+    // number — and one per phone: trial_devices/{hash of the phone's
+    // Android id for our app}, written in the same batch. Its start is
+    // the server's clock, never the phone's; the week ends seven days on,
+    // or at `end` when the owner changes it in Admin. The farmer's phone
+    // counts the week's forms and papers here — only up, one at a time.
+    match /plus_trials/{phone} {
+      allow get: if signedIn() && phone == phoneOfLogin();
+      allow read: if canSeePhones();
+      allow create: if signedIn() && phone == phoneOfLogin()
+        && request.resource.data.keys().hasOnly(['uid', 'start', 'device', 'app', 'forms', 'docs'])
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.start == request.time
+        && request.resource.data.device is string
+        && request.resource.data.device.matches('^[a-f0-9]{64}$')
+        && request.resource.data.app is string
+        && request.resource.data.app.size() <= 20
+        && request.resource.data.forms == 0
+        && request.resource.data.docs == 0
+        && !exists(/databases/$(database)/documents/trial_devices/$(request.resource.data.device))
+        && existsAfter(/databases/$(database)/documents/trial_devices/$(request.resource.data.device));
+      allow update: if (signedIn() && phone == phoneOfLogin()
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['forms', 'docs'])
+          && request.resource.data.forms is int
+          && request.resource.data.forms >= resource.data.forms
+          && request.resource.data.forms <= resource.data.forms + 1
+          && request.resource.data.docs is int
+          && request.resource.data.docs >= resource.data.docs
+          && request.resource.data.docs <= resource.data.docs + 1)
+        || (isOwner()
+          && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['end', 'note', 'by'])
+          && request.resource.data.get('end', request.time) is timestamp);
+      allow delete: if isOwner();
+    }
+    match /trial_devices/{device} {
+      allow create: if signedIn()
+        && device.matches('^[a-f0-9]{64}$')
+        && request.resource.data.keys().hasOnly(['at'])
+        && request.resource.data.at == request.time
+        && getAfter(/databases/$(database)/documents/plus_trials/$(phoneOfLogin())).data.device == device;
+      allow read, delete: if isOwner();
     }
 
     // Khalihan AI's records in the farmer's account (v1.0.9 Step 3, switch
