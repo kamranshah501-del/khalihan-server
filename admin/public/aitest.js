@@ -58,6 +58,12 @@ const T = {
     ok: '✓ Right',
     part: '½ Partly',
     wrong: '✗ Wrong',
+    danger: '⚠ Wrong and harmful',
+    danger_hint: 'Wrong in a way that could hurt the farmer: a medicine or dose, a price, money, a date. Even one stops the line.',
+    auto_wrong: 'Counted wrong — the phone gave no answer',
+    k_danger: 'Harmful',
+    line_danger: 'Not ready: {d} harmful answer(s) — fix, then test again',
+    line_meta: 'Measured on app {app} · {models} · {at}',
     note_ph: 'Note (what was wrong)',
     filter_all: 'All',
     filter_todo: 'Not marked',
@@ -71,7 +77,7 @@ const T = {
     by_lang: 'By language',
     line_h: 'The line under AI answers',
     line_wait: 'जाँच चल रही है',
-    line_wait_why: 'Shown until at least 200 answers are marked.',
+    line_wait_why: 'Shown until all the questions (at least 200) have been asked on the phone and every answer is marked. The percent is of all the questions asked — an answer the phone could not give counts as wrong.',
     line_done: 'जाँच: {n} में से {r} जवाब सही ({p}%) · {by} · {m}',
     csv: 'Download CSV',
     save: 'Save',
@@ -120,6 +126,12 @@ const T = {
     ok: '✓ सही',
     part: '½ अधूरा',
     wrong: '✗ गलत',
+    danger: '⚠ गलत और नुकसानदेह',
+    danger_hint: 'ऐसा गलत जिससे किसान का नुकसान हो: दवा या मात्रा, भाव, पैसा, तारीख़। एक भी हो तो लाइन नहीं बनेगी।',
+    auto_wrong: 'गलत गिना गया — फ़ोन से जवाब नहीं आया',
+    k_danger: 'नुकसानदेह',
+    line_danger: 'तैयार नहीं: {d} नुकसानदेह जवाब — ठीक करें, फिर जाँच दोबारा करें',
+    line_meta: 'नापा गया: ऐप {app} · {models} · {at}',
     note_ph: 'नोट (क्या गलत था)',
     filter_all: 'सब',
     filter_todo: 'बिना जाँचे',
@@ -133,7 +145,7 @@ const T = {
     by_lang: 'भाषा के हिसाब से',
     line_h: 'AI के जवाब के नीचे की लाइन',
     line_wait: 'जाँच चल रही है',
-    line_wait_why: 'कम से कम 200 जवाब जाँचे जाने तक यही दिखेगा।',
+    line_wait_why: 'जब तक सारे सवाल (कम से कम 200) फ़ोन पर पूछे न जाएँ और हर जवाब जाँचा न जाए, यही दिखेगा। प्रतिशत पूछे गए सारे सवालों का है — जिसका जवाब फ़ोन नहीं दे पाया वह गलत गिना जाता है।',
     line_done: 'जाँच: {n} में से {r} जवाब सही ({p}%) · {by} · {m}',
     csv: 'CSV डाउनलोड',
     save: 'Save',
@@ -184,12 +196,28 @@ export function resultsFrom(text, runId) {
       fail: it.fail ? String(it.fail).slice(0, 40) : '',
     };
   }
-  return { app: String(json.app || ''), lang: String(json.lang || ''), at: String(json.at || ''), answers: out };
+  const models = Array.isArray(json.models) ? json.models.map((m) => String(m).slice(0, 60)).slice(0, 8) : [];
+  return { app: String(json.app || ''), lang: String(json.lang || ''), at: String(json.at || ''), models, answers: out };
 }
 
-/** Counts for a run: asked, answered, marked, right (½ is not right). */
+/**
+ * How an answer counts: the grader's mark — or, when the phone gave no
+ * answer for a question it was asked (via "fail"), wrong by itself (review
+ * of 23 Nov 2026: such questions could be left unmarked, and the percent was
+ * of the marked ones only, so skipping the bad ones raised it).
+ */
+export function gradeOf(it) {
+  if (it.grade) return it.grade;
+  return it.ai && it.ai.via === 'fail' ? 'wrong' : null;
+}
+
+/**
+ * Counts for a run: asked, answered, marked, right (½ is not right),
+ * harmful ("danger": wrong in a way that could hurt the farmer — counted
+ * as wrong too), and how many were counted wrong by themselves.
+ */
 export function tally(items) {
-  const s = { asked: items.length, answered: 0, marked: 0, right: 0, part: 0, wrong: 0, byKind: {}, byLang: {} };
+  const s = { asked: items.length, answered: 0, marked: 0, right: 0, part: 0, wrong: 0, danger: 0, auto: 0, byKind: {}, byLang: {} };
   const bump = (map, key, grade) => {
     const m = map[key] || (map[key] = { n: 0, right: 0 });
     m.n++;
@@ -197,24 +225,33 @@ export function tally(items) {
   };
   for (const it of items) {
     if (it.ai) s.answered++;
-    if (!it.grade) continue;
+    const grade = gradeOf(it);
+    if (!grade) continue;
     s.marked++;
-    if (it.grade === 'ok') s.right++;
-    else if (it.grade === 'part') s.part++;
+    if (!it.grade) s.auto++;
+    if (grade === 'ok') s.right++;
+    else if (grade === 'part') s.part++;
     else s.wrong++;
-    for (const k of String((it.ai && it.ai.kind) || 'unknown').split('+')) bump(s.byKind, k || 'unknown', it.grade);
-    bump(s.byLang, it.lang || 'mix', it.grade);
+    if (grade === 'danger') s.danger++;
+    for (const k of String((it.ai && it.ai.kind) || 'unknown').split('+')) bump(s.byKind, k || 'unknown', grade);
+    bump(s.byLang, it.lang || 'mix', grade);
   }
   return s;
 }
 
-/** The accuracy line, or null while the test isn't complete (rule 1, 7). */
+/**
+ * The accuracy line, or null while the test isn't complete (rule 1, 7):
+ * at least 200 questions, every one of them answered-or-failed and marked,
+ * and a grader's name. The percent is of ALL the questions asked. One
+ * harmful answer and there is no percent at all — the line says so.
+ */
 export function accuracyLine(s, by, when) {
-  if (s.marked < NEED || !by) return null;
-  const p = Math.floor((s.right / s.marked) * 100);
+  if (s.asked < NEED || s.marked < s.asked || !by) return null;
+  if (s.danger > 0) return T.hi.line_danger.replace('{d}', String(s.danger));
+  const p = Math.floor((s.right / s.asked) * 100);
   const d = when instanceof Date ? when : new Date();
   return T.hi.line_done
-    .replace('{n}', String(s.marked)).replace('{r}', String(s.right)).replace('{p}', String(p))
+    .replace('{n}', String(s.asked)).replace('{r}', String(s.right)).replace('{p}', String(p))
     .replace('{by}', by).replace('{m}', `${MONTHS_HI[d.getMonth()]} ${d.getFullYear()}`);
 }
 
@@ -312,7 +349,7 @@ export async function aiTestPage(deps) {
     const kpi = (label, value) => `<div class="kpi" style="cursor:default"><span class="kl">${esc(label)}</span><span class="kv">${value}</span><span class="kd">&nbsp;</span></div>`;
     const breakdown = (map, name) => Object.entries(map).sort((a, b) => b[1].n - a[1].n).map(([k, v]) =>
       `<tr><td>${esc(name(k))}</td><td style="text-align:right">${v.n}</td><td style="text-align:right">${v.right}</td><td style="text-align:right">${Math.floor((v.right / v.n) * 100)}%</td></tr>`).join('');
-    const shown = run.items.filter((it) => filter === 'all' || (filter === 'todo' ? !it.grade : (it.grade === 'wrong' || it.grade === 'part')));
+    const shown = run.items.filter((it) => filter === 'all' || (filter === 'todo' ? !gradeOf(it) : ['wrong', 'part', 'danger'].includes(gradeOf(it))));
     const gradeBtn = (it, g, label) => `<button class="btn ${it.grade === g ? 'pri' : 'sec'}" data-g="${g}" data-n="${it.n}" aria-pressed="${it.grade === g}">${esc(label)}</button>`;
     const via = (a) => (a.via === 'cloud' ? t('via_cloud') : a.via === 'phone' ? t('via_phone') : `${t('via_fail')}${a.fail ? ` (${a.fail})` : ''}`);
     const card = (it) => `<div class="card" style="margin:0 0 10px;padding:12px 14px">
@@ -325,7 +362,8 @@ export async function aiTestPage(deps) {
           <div style="margin-top:6px;background:var(--page);border-radius:10px;padding:8px 10px;white-space:pre-wrap">${esc(it.ai.answer || '—')}</div>
           ${it.ai.source ? `<div class="small muted" style="margin-top:4px">${esc(it.ai.source)}</div>` : ''}
           <div class="row" style="margin-top:8px;gap:6px;flex-wrap:wrap">
-            ${gradeBtn(it, 'ok', t('ok'))}${gradeBtn(it, 'part', t('part'))}${gradeBtn(it, 'wrong', t('wrong'))}
+            ${gradeBtn(it, 'ok', t('ok'))}${gradeBtn(it, 'part', t('part'))}${gradeBtn(it, 'wrong', t('wrong'))}<button class="btn ${it.grade === 'danger' ? 'pri' : 'sec'}" data-g="danger" data-n="${it.n}" aria-pressed="${it.grade === 'danger'}" title="${esc(t('danger_hint'))}" style="${it.grade === 'danger' ? 'background:var(--red);border-color:var(--red)' : 'color:var(--red)'}">${esc(t('danger'))}</button>
+            ${!it.grade && it.ai.via === 'fail' ? `<span class="pill warn">${esc(t('auto_wrong'))}</span>` : ''}
             <input data-note="${it.n}" value="${esc(it.note || '')}" placeholder="${esc(t('note_ph'))}" aria-label="${esc(t('note_ph'))} #${it.n}" style="flex:1;min-width:180px">
           </div>` : `<p class="small muted" style="margin:6px 0 0">${esc(t('no_answer'))}</p>`}
       </div>`;
@@ -333,11 +371,13 @@ export async function aiTestPage(deps) {
       ${db().demo ? `<p class="note">${esc(t('demo'))}</p>` : ''}
       <div class="ph"><div class="ph-t"><button class="ghost small" id="at-back">${esc(t('back'))}</button><h1>${esc(run.name)}</h1></div>
         <div class="ph-acts row">${dirty ? `<span class="pill warn">${esc(t('unsaved'))}</span>` : ''}<button class="btn pri" id="at-save">${esc(t('save'))}</button></div></div>
-      <section class="kpis">${kpi(t('k_asked'), s.asked)}${kpi(t('k_answered'), s.answered)}${kpi(t('k_marked'), s.marked)}${kpi(t('k_right'), s.marked ? `${Math.floor((s.right / s.marked) * 100)}%` : '—')}</section>
+      <section class="kpis">${kpi(t('k_asked'), s.asked)}${kpi(t('k_answered'), s.answered)}${kpi(t('k_marked'), s.marked)}${kpi(t('k_right'), s.marked ? `${Math.floor((s.right / s.marked) * 100)}%` : '—')}${kpi(t('k_danger'), s.danger)}</section>
       <section class="card" style="margin-bottom:14px">
         <div class="ch"><h2>${esc(t('line_h'))}</h2></div>
         <p style="font-weight:800;margin:4px 0">${esc(line || t('line_wait'))}</p>
         ${line ? '' : `<p class="small muted" style="margin:0">${esc(t('line_wait_why'))}</p>`}
+        ${run.phone && run.phone.app ? `<p class="small muted" style="margin:4px 0 0">${esc(t('line_meta', { app: run.phone.app, models: (run.phone.models || []).join(', ') || '—', at: String(run.phone.at || '').slice(0, 10) }))}</p>` : ''}
+        <p class="small muted" style="margin:4px 0 0">${esc(t('danger_hint'))}</p>
         ${s.marked ? `<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;margin-top:10px">
           <div><strong class="small">${esc(t('by_kind'))}</strong><table><tr><th></th><th style="text-align:right">${esc(t('k_marked'))}</th><th style="text-align:right">${esc(t('k_right'))}</th><th></th></tr>${breakdown(s.byKind, kindName)}</table></div>
           <div><strong class="small">${esc(t('by_lang'))}</strong><table><tr><th></th><th style="text-align:right">${esc(t('k_marked'))}</th><th style="text-align:right">${esc(t('k_right'))}</th><th></th></tr>${breakdown(s.byLang, langName)}</table></div>
@@ -384,7 +424,7 @@ export async function aiTestPage(deps) {
         it.ai = a;
         n++;
       }
-      run.phone = { app: got.app, lang: got.lang, at: got.at };
+      run.phone = { app: got.app, lang: got.lang, at: got.at, models: got.models };
       touch();
       toast(t('loaded', { n }));
       drawRun();
@@ -406,7 +446,7 @@ export async function aiTestPage(deps) {
     document.getElementById('at-csv').addEventListener('click', () => {
       const cell = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
       const rows = [['n', 'language', 'question', 'understood', 'via', 'kind', 'answer', 'source', 'grade', 'note']]
-        .concat(run.items.map((it) => [it.n, it.lang, it.q, it.ai?.understood, it.ai?.via, it.ai?.kind, it.ai?.answer, it.ai?.source, it.grade || '', it.note || '']));
+        .concat(run.items.map((it) => [it.n, it.lang, it.q, it.ai?.understood, it.ai?.via, it.ai?.kind, it.ai?.answer, it.ai?.source, gradeOf(it) || '', it.note || '']));
       const blob = new Blob(['﻿' + rows.map((r) => r.map(cell).join(',')).join('\n')], { type: 'text/csv' });
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
