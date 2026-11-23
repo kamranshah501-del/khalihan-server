@@ -48,7 +48,7 @@ const T = {
     clear_q: 'Remove everything set here? Every phone goes back to the app\'s own (the history stays).',
     locked_h: 'Locked in the app — never from here',
     locked: [
-      'Aadhaar, bank, IFSC, OTP, password and captcha boxes are never filled by the AI (Aadhaar / PAN only by the phone, after the farmer\'s yes).',
+      'Aadhaar, bank, IFSC, OTP, password and captcha boxes are never filled by the AI. The phone itself types only: Aadhaar / PAN after the farmer\'s yes; a site password from its locked store after his fingerprint / face / PIN (23 Nov 2026); a captcha he reads out. Bank and OTP: always his own hand.',
       '"Submit" is never pressed by Khalihan — the farmer presses it.',
       'Only gov.in / nic.in sites open inside the app; a list here with another address is dropped by the phone.',
       'The farmer\'s details never go to the AI — only the page\'s own words, with long numbers hidden.',
