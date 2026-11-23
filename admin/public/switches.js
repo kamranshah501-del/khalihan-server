@@ -99,6 +99,8 @@ export const SWITCH_WORDS = {
     sw_ail_open: '"Ask anything" answers',
     sw_ail_deep: 'Google searches',
     sw_ail_photo: 'Photo reads — bill, soil card, paper, sick leaf',
+    sw_ail_page: 'Government pages read (while filling a form)',
+    sw_ail_help: '"Look it up on Google" in a form',
     sw_ail_voice: 'Kaptan\'s voice — minutes of new speech',
     sw_ail_free: 'Every farmer',
     sw_ail_pro: 'Khalihan Pro',
@@ -300,6 +302,8 @@ export const SWITCH_WORDS = {
     sw_ail_open: '"कुछ भी पूछें" के जवाब',
     sw_ail_deep: 'Google खोज',
     sw_ail_photo: 'फ़ोटो पढ़ना — बिल, मिट्टी कार्ड, कागज़, बीमार पत्ता',
+    sw_ail_page: 'सरकारी पेज पढ़ना (फ़ॉर्म भरते समय)',
+    sw_ail_help: 'फ़ॉर्म में "Google पर देखो"',
     sw_ail_voice: 'Kaptan की आवाज़ — नई बोली के मिनट',
     sw_ail_free: 'हर किसान',
     sw_ail_pro: 'Khalihan Pro',
@@ -674,13 +678,18 @@ export function trialState(key, todayIso) {
  *  keep the same) and what one use costs (₹, Google's bill, 16 Nov 2026).
  *  Voice is in seconds in the app; shown here in minutes. */
 export const AI_LIMITS = {
-  uses: ['ask', 'open', 'deep', 'photo', 'voice'],
-  free: { ask: [10, 150], open: [0, 0], deep: [0, 0], photo: [2, 20], voice: [0, 0] },
+  // page, help (23 Nov 2026): a government page read while a form is filled
+  // (about 50 paise) and a "look it up on Google" there — counted since the
+  // AI review; before, only a visit was capped. Until Khalihan Pro is on
+  // sale the app gives every farmer Pro's share of these two (the forms
+  // are open to all), whatever "free" says here.
+  uses: ['ask', 'open', 'deep', 'photo', 'voice', 'page', 'help'],
+  free: { ask: [10, 150], open: [0, 0], deep: [0, 0], photo: [2, 20], voice: [0, 0], page: [0, 0], help: [0, 0] },
   // Khalihan Pro — the one plan (owner, 16 Nov 2026, 19:13: doc "Khalihan Pro — final plan").
-  pro: { ask: [20, 350], open: [6, 120], deep: [2, 20], photo: [3, 30], voice: [120, 480] },
+  pro: { ask: [20, 350], open: [6, 120], deep: [2, 20], photo: [3, 30], voice: [120, 480], page: [30, 100], help: [6, 30] },
   // Its extra after the normal share, shown red in the app; cheap uses only.
-  proX: { ask: [5, 50], open: [1, 10], deep: [1, 10], photo: [0, 0], voice: [0, 0] },
-  rupees: { ask: 0.05, open: 0.14, deep: 0.16, photo: 1.1, voice: 1.7 / 60 },
+  proX: { ask: [5, 50], open: [1, 10], deep: [1, 10], photo: [0, 0], voice: [0, 0], page: [0, 0], help: [0, 0] },
+  rupees: { ask: 0.05, open: 0.14, deep: 0.16, photo: 1.1, voice: 1.7 / 60, page: 0.5, help: 0.16 },
 };
 
 /** The most one phone can cost in a month, in ₹, for a limits map ({free, pro} → {use_month, use_month_x}).
