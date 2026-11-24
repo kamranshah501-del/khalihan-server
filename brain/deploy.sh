@@ -2,9 +2,10 @@
 # form-brain — Claude reads a government page for Khalihan AI. Set up or
 # update it, from Cloud Shell (project owner):
 #   bash <(curl -s https://raw.githubusercontent.com/kamranshah501-del/khalihan-server/main/brain/deploy.sh)
-# Safe to run again. The first time it asks for Anthropic's key — pasted
-# once, not shown on the screen, kept only in Google's Secret Manager
-# (secret "anthropic-api-key"); the function alone may read it. To put a new
+# Safe to run again. When Anthropic's key is not in Secret Manager yet
+# (secret "anthropic-api-key") it asks for it — pasted once, not shown on
+# the screen; the function alone may read it. The key can also come from
+# GitHub's secret store with nobody typing it: key_door.sh. To put a new
 # key in later:   KH_NEW_KEY=1 bash <(curl -s …/brain/deploy.sh)
 # Ends with a call that is not from the app (must answer 401).
 set -euo pipefail
@@ -31,7 +32,8 @@ for role in roles/datastore.user roles/firebaseappcheck.tokenVerifier; do
 done
 
 echo "== 3/6 Anthropic's key, in Secret Manager"
-if gcloud secrets describe "$SECRET" --project "$P" >/dev/null 2>&1 && [ -z "${KH_NEW_KEY:-}" ]; then
+HAVE=$(gcloud secrets versions list "$SECRET" --project "$P" --filter='state:ENABLED' --format='value(name)' 2>/dev/null | wc -l || true)
+if [ "${HAVE:-0}" -gt 0 ] && [ -z "${KH_NEW_KEY:-}" ]; then
   echo "   already there (kept as it is)"
 else
   echo "   Paste the key from console.anthropic.com (it starts with sk-ant-) and press Enter."

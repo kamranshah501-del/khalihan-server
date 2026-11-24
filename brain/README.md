@@ -44,16 +44,22 @@ Claude model whatever the app names), `day`, `user`, `nologin` (the caps),
 **Files.** `index.js` (the HTTP function), `core.js` (the shape, the caps,
 what is sent and how the reply is read — no libraries), `test.js`,
 `test_handler.js` (the function with Google and Anthropic played by
-stand-ins), `deploy.sh`.
+stand-ins), `deploy.sh`, `key_door.sh`.
 
 **Set up / update** — Cloud Shell, as the project owner:
 
     bash <(curl -s https://raw.githubusercontent.com/kamranshah501-del/khalihan-server/main/brain/deploy.sh)
 
-The first time it asks for Anthropic's key (console.anthropic.com → API
-keys). Paste it and press Enter; nothing shows. It goes to Secret Manager
-(`anthropic-api-key`) and nowhere else. A new key later:
-`KH_NEW_KEY=1 bash <(curl -s …/brain/deploy.sh)`.
+When Anthropic's key is not in Secret Manager yet it asks for it
+(console.anthropic.com → API keys). Paste it and press Enter; nothing shows.
+It goes to Secret Manager (`anthropic-api-key`) and nowhere else. A new key
+later: `KH_NEW_KEY=1 bash <(curl -s …/brain/deploy.sh)`.
+
+On 24 Nov 2026 the key came without anyone typing it: `key_door.sh open`
+let the AI test kit's GitHub identity *add* a version (never read one), the
+app repository's run "Anthropic's key → the server's safe" copied the
+repository secret `ANTHROPIC_API_KEY` there, and `key_door.sh close` took
+the right away again.
 
 **To take it away again:** Admin → AI Forms → brain "Gemini", backup off;
 then `gcloud functions delete form-brain --gen2 --region=asia-south1`,
