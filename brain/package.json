@@ -1,0 +1,12 @@
+{
+  "name": "khalihan-form-brain",
+  "private": true,
+  "description": "Claude reads a government page for Khalihan AI; the key stays on the server.",
+  "main": "index.js",
+  "engines": { "node": ">=22" },
+  "scripts": { "test": "node test.js" },
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.4.0",
+    "firebase-admin": "^13.0.0"
+  }
+}

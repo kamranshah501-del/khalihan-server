@@ -23,7 +23,7 @@ import { farmersPage } from './farmers.js';
 import { ALERT_WORDS, alertsCard, bellList } from './alerts.js';
 import { MSG_WORDS, msgHead, msgStats, msgKind, openMessage } from './messages.js';
 
-const ADMIN_VERSION = '1.34 · 23 Nov 2026';
+const ADMIN_VERSION = '1.36 · 24 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));

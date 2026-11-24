@@ -29,6 +29,13 @@ const MODELS = [
   ['gemini-3.8-flash', 'm_flash'],
   ['gemini-3.5-flash-lite', 'm_lite'],
 ];
+// Claude reads a page through our own server (brain/ → form-brain), which
+// alone holds Anthropic's key — owner, 24 Nov 2026: "ek Gemini ka aur ek
+// Sonnet; jo sahi raha usko switch mein, doosre ko optional". Only for
+// reading the page: "Look it up on Google" is Gemini's own tool. Apps before
+// 1.0.9 skip a Claude name and read with the Gemini one beside it.
+const PAGE_MODELS = [...MODELS, ['claude-sonnet-5-5', 'm_sonnet']];
+export const isClaude = (m) => /^claude-/.test(String(m || ''));
 
 const T = {
   en: {
@@ -62,7 +69,10 @@ const T = {
     first: 'First', backup: 'If it fails',
     m_flash: 'Gemini 3.8 Flash (best)',
     m_lite: 'Gemini 3.5 Flash-Lite (cheap)',
-    m_why: 'Our test of 22 Nov, 12 government pages: Flash read 12 of 12 right (about 60 paise to ₹1.2 a page); Flash-Lite 8 of 12 (about 10 paise). Claude: not yet — Google Cloud has Claude switched off for our project, and the app would need an update to call it.',
+    m_sonnet: 'Claude Sonnet 5.5 (fast — through our server)',
+    m_why: 'Tests of 24 Nov, 12 government pages and 38 harder turns: Gemini Flash and Claude Sonnet read alike (115–116 of 116; 179 and 177 of 180). Sonnet answers in about 3 seconds; Flash in about 6, and now and then stalls for half a minute or more. A page costs about the same with either (70 paise to ₹1); Flash-Lite is cheap and misses more. Put one first and the other under "If it fails": when the first does not answer in 10 seconds, the other reads the page.',
+    m_claude: 'Claude: the page\'s words (long numbers hidden — the same as Gemini gets) go through our server to Anthropic, whose computers are in the USA. Try it on your test phones freely. Before sending it to every farmer, the privacy page and Play\'s data-safety form must name Anthropic.',
+    go_live_claude_q: 'This version reads pages with Claude: the page\'s words go to Anthropic (USA). Does the privacy page name Anthropic already? Press OK only if it does.',
     m_none: '— none —',
     help_h: 'Model for "Look it up on Google"',
     pages: 'Pages Khalihan AI reads on one visit',
@@ -141,7 +151,10 @@ const T = {
     first: 'पहले', backup: 'वो न चले तो',
     m_flash: 'Gemini 3.8 Flash (सबसे अच्छा)',
     m_lite: 'Gemini 3.5 Flash-Lite (सस्ता)',
-    m_why: '22 Nov की जाँच, 12 सरकारी पेज: Flash ने 12 में 12 सही पढ़े (लगभग 60 पैसे से ₹1.2 एक पेज); Flash-Lite ने 12 में 8 (लगभग 10 पैसे)। Claude: अभी नहीं — Google Cloud में हमारे प्रोजेक्ट के लिए Claude बंद है, और उसे बुलाने के लिए ऐप अपडेट चाहिए।',
+    m_sonnet: 'Claude Sonnet 5.5 (तेज़ — हमारे सर्वर से)',
+    m_why: '24 Nov की जाँच, 12 सरकारी पेज और 38 मुश्किल मोड़: Gemini Flash और Claude Sonnet बराबर पढ़ते हैं (116 में 115–116; 180 में 179 और 177)। Sonnet लगभग 3 सेकंड में जवाब देता है; Flash लगभग 6 में, और कभी-कभी आधा मिनट या ज़्यादा अटकता है। एक पेज का ख़र्च दोनों में लगभग बराबर (70 पैसे से ₹1); Flash-Lite सस्ता है और ज़्यादा चूकता है। एक को "पहले" रखें, दूसरे को "वो न चले तो" में: पहला 10 सेकंड में जवाब न दे तो दूसरा पेज पढ़ता है।',
+    m_claude: 'Claude: पेज के शब्द (लंबे नंबर छिपाकर — वही जो Gemini को जाते हैं) हमारे सर्वर से Anthropic को जाते हैं, जिसके कंप्यूटर अमेरिका में हैं। अपने टेस्ट फ़ोन पर बेझिझक आज़माएँ। हर किसान को भेजने से पहले privacy पेज और Play के data-safety फ़ॉर्म में Anthropic का नाम होना चाहिए।',
+    go_live_claude_q: 'यह वर्शन पेज Claude से पढ़ता है: पेज के शब्द Anthropic (अमेरिका) को जाते हैं। क्या privacy पेज में Anthropic का नाम आ चुका है? तभी OK दबाएँ।',
     m_none: '— कोई नहीं —',
     help_h: '"Google पर देखो" वाला मॉडल',
     pages: 'एक बार में Khalihan AI कितने पेज पढ़े',
@@ -229,10 +242,12 @@ export function setFrom(f) {
   if (!(pages >= 1 && pages <= 40) || !(searches >= 0 && searches <= 10) || !(typeMs >= 15 && typeMs <= 150)) return { error: 'bad_num' };
   const instr = String(f.instruction || '').trim();
   if (instr && (instr.length < 200 || instr.length > 20000)) return { error: 'bad_instr' };
-  const pick = (a) => a.map((x) => String(x || '').trim()).filter((x) => /^gemini[a-z0-9.\-]{1,60}$/.test(x)).filter((x, i, all) => all.indexOf(x) === i);
+  const pick = (a, claude) => a.map((x) => String(x || '').trim())
+    .filter((x) => (claude ? /^(gemini|claude-)[a-z0-9.\-]{1,60}$/ : /^gemini[a-z0-9.\-]{1,60}$/).test(x))
+    .filter((x, i, all) => all.indexOf(x) === i);
   const set = {
-    models: pick(f.models || []),
-    help_models: pick(f.help_models || []),
+    models: pick(f.models || [], true),
+    help_models: pick(f.help_models || [], false),
     pages: Math.round(pages),
     searches: Math.round(searches),
     type_ms: Math.round(typeMs),
@@ -309,9 +324,9 @@ export async function aiFormsPage(deps) {
     return p ? `<strong>${esc(t('ver', { v: p.v, when: day(p.at), by: p.by || '' }))}</strong>${p.note ? `<div class="small muted">${esc(p.note)}</div>` : ''}` : `<span class="muted">${esc(t('own'))}</span>`;
   }
 
-  function modelSelect(id, value, none) {
-    const opts = MODELS.map(([m, k]) => `<option value="${m}" ${m === value ? 'selected' : ''}>${esc(t(k))}</option>`);
-    const other = value && !MODELS.some(([m]) => m === value) ? `<option value="${esc(value)}" selected>${esc(value)}</option>` : '';
+  function modelSelect(id, value, none, list = MODELS) {
+    const opts = list.map(([m, k]) => `<option value="${m}" ${m === value ? 'selected' : ''}>${esc(t(k))}</option>`);
+    const other = value && !list.some(([m]) => m === value) ? `<option value="${esc(value)}" selected>${esc(value)}</option>` : '';
     return `<select id="${id}" style="max-width:100%">${none ? `<option value="" ${!value ? 'selected' : ''}>${esc(t('m_none'))}</option>` : ''}${opts.join('')}${other}</select>`;
   }
 
@@ -362,10 +377,11 @@ export async function aiFormsPage(deps) {
         <div class="ch"><h2>${esc(t('edit_h'))}</h2><span class="small muted">${esc(t('edit_from', { what: t(from) }))}</span></div>
         <h3 class="small">${esc(t('models_h'))}</h3>
         <div class="form">
-          <div><label for="af-m1">${esc(t('first'))}</label>${modelSelect('af-m1', form.models[0], false)}</div>
-          <div><label for="af-m2">${esc(t('backup'))}</label>${modelSelect('af-m2', form.models[1], true)}</div>
+          <div><label for="af-m1">${esc(t('first'))}</label>${modelSelect('af-m1', form.models[0], false, PAGE_MODELS)}</div>
+          <div><label for="af-m2">${esc(t('backup'))}</label>${modelSelect('af-m2', form.models[1], true, PAGE_MODELS)}</div>
         </div>
         <p class="small muted">${esc(t('m_why'))}</p>
+        <p class="small muted">${esc(t('m_claude'))}</p>
         <h3 class="small">${esc(t('help_h'))}</h3>
         <div class="form">
           <div><label for="af-h1">${esc(t('first'))}</label>${modelSelect('af-h1', form.help_models[0], false)}</div>
@@ -466,6 +482,7 @@ export async function aiFormsPage(deps) {
     });
     if ($('af-live')) $('af-live').addEventListener('click', async () => {
       if (!window.confirm(t('go_live_q', { v: data.test.v }))) return;
+      if (((data.test.set && data.test.set.models) || []).some(isClaude) && !window.confirm(t('go_live_claude_q'))) return;
       try { await db().aiFormsGoLive(); await aiFormsPage(deps); } catch (e) { fail(e); }
     });
     if ($('af-drop')) $('af-drop').addEventListener('click', async () => {
