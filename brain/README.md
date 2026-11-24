@@ -30,7 +30,7 @@ is switched on for every farmer.
 **Which brain reads** is chosen in Khalihan Admin → 🧠 AI Forms → "Model
 that reads the page": First and "If it fails" (`models`, for example
 `["claude-sonnet-5-5", "gemini-3.8-flash"]`). When the first does not answer
-within 10 seconds, or refuses, the other reads the page. On test phones
+within 15 seconds, or refuses, the other reads the page. On test phones
 first, like every AI Forms change. Apps before 1.0.9 skip a Claude name.
 
 **Which Claude model.** The one the app names (Admin → AI Forms), when it is
