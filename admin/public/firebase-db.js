@@ -351,6 +351,25 @@ export async function connect() {
       log('feedback_delete', { id });
     },
 
+    // ── what farmers asked Khalihan AI (Admin 1.38, aiwatch.js) ──
+    // Owner only (rules). The records the app kept in the last `days` days,
+    // newest first; each deletes itself on its `exp` day.
+    async aiTalks(days = 14) {
+      const since = Timestamp.fromMillis(Date.now() - days * 86400000);
+      const snap = await getDocs(query(collection(db, 'ai_talks'), where('upd', '>=', since), orderBy('upd', 'desc'), limit(400)));
+      return rows(snap).map((r) => ({ ...r, at: toDate(r.at), upd: toDate(r.upd), exp: toDate(r.exp) }));
+    },
+    async aiTalkDelete(id) {
+      await deleteDoc(doc(db, 'ai_talks', id));
+      log('ai_talk_delete', { id });
+    },
+    // The farmer behind a record: his account (name, mobile), if he was logged in.
+    async userOf(uid) {
+      if (!uid) return null;
+      const snap = await getDoc(doc(db, 'users', uid));
+      return snap.exists() ? { id: snap.id, ...snap.data() } : null;
+    },
+
     // ── farmers ──
     async usersCount() {
       const snap = await getCountFromServer(collection(db, 'users'));

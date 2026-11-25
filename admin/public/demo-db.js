@@ -48,6 +48,36 @@ export async function connect() {
   let festival = null;
   let aiLimits = null; // Khalihan AI limits per phone (null = the app's own)
   // Khalihan AI for forms (aiforms.js): live / test / history, as in config/app → ai_forms.
+  const talk = (id, mins, kind, site, host, end, worked, bad, turns, uid) => ({
+    id, kind, site, host, end, worked, bad, cut: false, n: turns.length, model: kind === 'ask' ? '' : 'claude-sonnet-5-5',
+    uid: uid || '', dev: 'demo' + id.padEnd(16, '0').slice(0, 16), state: 'Maharashtra', district: 'Jalgaon', lang: 'hi', app: '1.0.9',
+    at: new Date(Date.now() - (mins + 6) * 60000), upd: new Date(Date.now() - mins * 60000), exp: new Date(Date.now() + 60 * 86400000),
+    turns: JSON.stringify(turns),
+  });
+  let aiTalks = [
+    talk('a1', 12, 'doc', 'doc_712s', 'digitalsatbara.mahabhumi.gov.in', 'stopped', 'no', 9, [
+      { s: 0, ai: 'नमस्ते, 7/12 निकालने के लिए पहले लॉगिन करना होगा। क्या आपका खाता है?', ms: 5200, end: 'ask', pg: '/DSLR/Login' },
+      { s: 21, he: 'नया रजिस्टर करना है', ai: 'ठीक है, नया रजिस्ट्रेशन खोल रहा हूँ।', did: ['pressed "New User Registration"'], ms: 3800, end: 'next' },
+      { s: 34, ai: 'आपकी सेव की हुई जानकारी भर दी है। गाँव का नाम बताइए।', did: ['the phone wrote his saved first name into "First Name"', 'the phone wrote his saved mobile into "Mobile Number"', 'chose "Jamner (Jalgaon)" in "City Area"'], ms: 9500, end: 'ask', pg: '/DSLR/Registration' },
+      { s: 61, he: 'गांव का नाम डालो मेरी', ai: 'गाँव का नाम साफ़ नहीं सुनाई दिया। एक बार अक्षर-अक्षर बोलिए।', ms: 5100, end: 'ask' },
+      { s: 80, he: 'एन ए आर आई', ai: 'NARI लिखूँ? सही है?', ms: 6200, end: 'ok' },
+      { s: 96, he: 'नंबर गलत है, सब खाली करो', ai: 'ठीक है, खाली कर रहा हूँ।', did: ['emptied "Mobile Number"', '!"Aadhaar No." is his own to fill: the phone never writes there — it lit the box for him'], ms: 10200, end: 'ask' },
+      { s: 130, he: 'अभी बंद करो', ai: 'ठीक है।', ms: 4200, end: 'later' },
+    ], 'u1'),
+    talk('a2', 95, 'form', 'pmkisan', 'pmkisan.gov.in', 'farmer', '', 1, [
+      { s: 0, ai: 'PM-KISAN खुल गया है। नया पंजीकरण करना है या स्टेटस देखना है?', ms: 4100, end: 'ask', pg: '/' },
+      { s: 15, he: 'स्टेटस देखना है, मोबाइल [number] है', ai: 'मोबाइल लिख दिया। कैप्चा आप खुद भरिए, फिर Get OTP दबाइए।', did: ['pressed "Know Your Status"', 'wrote "[number]" into "Mobile Number"'], ms: 5600, end: 'farmer', pg: '/KnowYour_Status.aspx' },
+    ], 'u2'),
+    talk('a3', 200, 'ask', '', '', 'unknown', '', 2, [
+      { s: 0, he: 'गेहूँ कब लगाएँ?', ai: 'जलगाँव में गेहूँ की बुवाई 1 से 20 नवंबर के बीच सबसे अच्छी रहती है।', end: 'open_crop', ms: 2900 },
+      { s: 40, he: 'पेरणी के बाद कितने दिन में पानी देना है', ai: 'इसका पक्का जवाब मेरे पास अभी नहीं है।', end: 'unknown', ms: 2100 },
+    ]),
+    talk('a4', 400, 'form', 'mahadbt', 'mahadbt.maharashtra.gov.in', 'done', 'yes', 0, [
+      { s: 0, ai: 'MahaDBT खुल गया है। लॉगिन आईडी मैंने भर दी, पासवर्ड और कैप्चा आप भरिए।', did: ["the phone wrote his saved this site's login id into \"User Name\""], ms: 4700, end: 'farmer', pg: '/Login/Login' },
+      { s: 48, he: '(he pressed "Done": he says he has done his part on the page)', ai: 'आप लॉगिन हो गए हैं। ठिबक सिंचन का अर्ज़ खोल रहा हूँ।', did: ['pressed "Login"'], ms: 5300, end: 'next' },
+      { s: 120, ai: 'फ़ॉर्म पूरा भर गया है। जाँच लीजिए और Submit आप खुद दबाइए।', ms: 6100, end: 'done', pg: '/Scheme/Apply' },
+    ], 'u1'),
+  ];
   const aiForms = { live: { v: 2, set: { models: ['gemini-3.8-flash', 'gemini-3.5-flash-lite'], pages: 14, searches: 4, notes: { 'mahadbt.maharashtra.gov.in': 'OTP is sent to the mobile linked with Aadhaar.' } }, note: 'MahaDBT note', by: 'owner@khalihan.in', at: Date.now() - 86400000 }, test: null, history: [] };
   aiForms.history.push({ ...aiForms.live, to: 'live' });
   const aiFormsNext = () => Math.max(0, aiForms.live?.v || 0, aiForms.test?.v || 0, ...aiForms.history.map((e) => e.v || 0)) + 1;
@@ -343,6 +373,10 @@ export async function connect() {
     async feedbackDone(id, done) { const f = feedback.find((x) => x.id === id); if (f) { f.done = done; f.by = me.email; } log('feedback_done', { id, done }); },
     async feedbackNote(id, note) { const f = feedback.find((x) => x.id === id); if (f) { f.note = note; f.by = me.email; } log('feedback_note', { id }); },
     async feedbackDelete(id) { feedback = feedback.filter((x) => x.id !== id); log('feedback_delete', { id }); },
+    // What farmers asked Khalihan AI (Admin 1.38) — made-up visits, shaped like the app's records.
+    async aiTalks() { return aiTalks.map((r) => ({ ...r })); },
+    async aiTalkDelete(id) { aiTalks = aiTalks.filter((r) => r.id !== id); log('ai_talk_delete', { id }); },
+    async userOf(uid) { return users.find((u) => u.id === uid) || null; },
     async usersCount() { return users.length; },
     async users() { return users.map((u) => ({ ...u })); },
     async freeWeeks() { return weeks.map((w) => ({ ...w })); },

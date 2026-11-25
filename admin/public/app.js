@@ -19,11 +19,12 @@ import { statsPage } from './stats.js';
 import { budgetPage, sums as budgetSums } from './budget.js';
 import { aiTestPage } from './aitest.js';
 import { aiFormsPage } from './aiforms.js';
+import { aiWatchPage } from './aiwatch.js';
 import { farmersPage } from './farmers.js';
 import { ALERT_WORDS, alertsCard, bellList } from './alerts.js';
 import { MSG_WORDS, msgHead, msgStats, msgKind, openMessage } from './messages.js';
 
-const ADMIN_VERSION = '1.37 · 25 Nov 2026';
+const ADMIN_VERSION = '1.38 · 26 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -61,6 +62,7 @@ const I18N = {
     tab_stats: 'App numbers',
     tab_budget: 'Budget & targets',
     tab_aiforms: 'AI forms',
+    tab_aiwatch: 'What farmers asked AI',
     tab_aitest: 'AI test',
     tab_plus: 'Khalihan Pro',
     tab_team: 'Team',
@@ -373,6 +375,7 @@ const I18N = {
     tab_stats: 'आँकड़े',
     tab_budget: 'बजट और लक्ष्य',
     tab_aiforms: 'AI फ़ॉर्म',
+    tab_aiwatch: 'किसानों ने AI से क्या पूछा',
     tab_aitest: 'AI की जाँच',
     tab_plus: 'Khalihan Pro',
     tab_team: 'टीम',
@@ -1063,6 +1066,7 @@ const ICON_PATHS = {
   budget: 'M4 7h14a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2H4zM4 7V5a1 1 0 0 1 1-1h11v3M15.5 13.5h1.5',
   aitest: 'M9 3h6M10 3v6l-5 9a2 2 0 0 0 1.7 3h10.6a2 2 0 0 0 1.7-3l-5-9V3M7.5 15h9',
   aiforms: 'M6 3h9l4 4v14H6zM15 3v4h4M9 12h7M9 16h4M17.5 14.5l1 1.5 1.5.5-1.5.5-1 1.5-.5-1.5-1.5-.5 1.5-.5z',
+  aiwatch: 'M4 5h16v11H9l-5 4zM8 9h8M8 12h5M17.5 17.5 21 21',
   home: 'M3 11 12 4l9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z',
   later: 'M3 4h18M3 20h18M5 4v16M19 4v16M5 12h14M9 8h2M9 16h2',
   lock: 'M6 11h12v10H6zM8 11V8a4 4 0 0 1 8 0v3',
@@ -1167,7 +1171,7 @@ function tabs() {
     ${item('home', tr('tab_home'))}
     ${item('feedback', tr('tab_feedback'))}
     ${awakeTeam}
-    ${owner ? `<div class="navh">${tr('nav_owner')}</div>${item('stats', tr('tab_stats'))}${item('plus', tr('tab_plus'))}${item('budget', tr('tab_budget'))}${item('compliance', tr('tab_compliance'))}${item('features', tr('tab_features'))}${item('aiforms', tr('tab_aiforms'))}${item('team', tr('tab_team'))}${awakeOwner}` : ''}
+    ${owner ? `<div class="navh">${tr('nav_owner')}</div>${item('stats', tr('tab_stats'))}${item('plus', tr('tab_plus'))}${item('budget', tr('tab_budget'))}${item('compliance', tr('tab_compliance'))}${item('features', tr('tab_features'))}${item('aiforms', tr('tab_aiforms'))}${item('aiwatch', tr('tab_aiwatch'))}${item('team', tr('tab_team'))}${awakeOwner}` : ''}
     <div class="navgap"></div>
     ${shelf.length ? item('later', tr('tab_later')) : ''}
     ${item('settings', tr('tab_settings'))}
@@ -1932,6 +1936,14 @@ const PAGES = {
   async aiforms() {
     if (me.role !== 'owner') return PAGES.home();
     await aiFormsPage({ esc, setMain, lang: () => lang, db: () => db, fail, toast });
+  },
+
+  // Owner: what farmers asked Khalihan AI and where a form got stuck
+  // (Admin 1.38, see aiwatch.js — ai_talks, owner only; the app keeps a
+  // record only while the switch ai_record is on and the farmer said yes).
+  async aiwatch() {
+    if (me.role !== 'owner') return PAGES.home();
+    await aiWatchPage({ esc, setMain, lang: () => lang, db: () => db, fail, toast, switchOn: () => (cache.features || {}).ai_record === true });
   },
 
   // Owner: every feature, state and district switch, in sections.
