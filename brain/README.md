@@ -16,14 +16,25 @@ alone holds the key, asks Anthropic and hands the reading back.
 3. Caps a day's pages: 1500 for everyone together, 150 for one login, 300
    for all phones without a login together (`brain_use/dYYYYMMDD`, the day in
    India; only this function can read or write it).
-4. Asks Anthropic for a reading in one fixed shape (`core.js`, the same 14
-   keys the app gives Gemini) — whatever is sent, nothing else can come
-   back, so the function is no chat with our key.
+4. Asks Anthropic for an answer in one of two fixed shapes (`core.js`) —
+   whatever is sent, nothing else can come back, so the function is no chat
+   with our key:
+   - **a page read** (`kind` left out or `"page"`): the 14 keys the app gives
+     Gemini;
+   - **a turn of the whole work** (`kind: "turn"`, "full unlock", owner,
+     25 Nov 2026): `acts` (what the phone should do), `end` (where the work
+     stands), `say` (what to tell the farmer). The request carries the page
+     and, apart from it, the state now (`now`: the talk, what is done, what
+     the boxes hold). The instruction and the page are marked for Anthropic
+     to keep for five minutes, so the next turn pays a twentieth for them.
 
-**What is sent to Anthropic** is what the app already sends Gemini: the
-page's words with long numbers hidden, its boxes' labels, the *names* (never
-the values) of the details the phone holds. Nothing of it is kept or logged
-here; the log has counts and times only. Anthropic's computers are in the
+**What is sent to Anthropic** is what the app sends Gemini: the page's
+words with long numbers hidden, its boxes' labels, the *names* (never the
+values) of the details the phone holds — and, in a turn, what the farmer
+said while the form is filled (his name, a date, a village; a number of 9
+digits or more only as a mark the phone fills in itself) and what the boxes
+that are not private hold. Nothing of it is kept or logged here; the log has
+counts and times only. Anthropic's computers are in the
 USA — the privacy page and Play's data-safety form must say so before Claude
 is switched on for every farmer.
 

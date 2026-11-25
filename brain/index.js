@@ -12,12 +12,16 @@
 //   2. the farmer's login is noted when there is one (his own share a day);
 //   3. a day's pages are capped — for everyone together and for one login —
 //      so a mistake or a misuse cannot run the bill up;
-//   4. Anthropic is asked for a reading in one fixed shape (core.js), and
-//      the app gets that reading.
-// What is sent is what the app already sends Gemini: the page's words with
-// long numbers hidden, its boxes' labels, the names (never the values) of
-// the details the phone holds. Nothing of it is kept or logged here — the
-// log has only counts and times.
+//   4. Anthropic is asked for an answer in one of two fixed shapes (core.js)
+//      — a reading of a page, or one turn of the whole work ("full unlock",
+//      25 Nov 2026: what the phone should do, where the work stands, what
+//      to tell the farmer) — and the app gets that answer.
+// What is sent is what the app sends Gemini: the page's words with long
+// numbers hidden, its boxes' labels, the names (never the values) of the
+// details the phone holds — and, in a turn, what the farmer said (a number
+// of 9 digits or more only as a mark) and what the boxes hold that are not
+// private. Nothing of it is kept or logged here — the log has only counts
+// and times.
 
 const functions = require('@google-cloud/functions-framework');
 const admin = require('firebase-admin'); // used the same way as plus/index.js
@@ -69,6 +73,7 @@ functions.http('formBrain', async (req, res) => {
   const s = await settings();
   if (!key || s.off) return res.status(503).json({ error: 'off' });
   const model = core.modelFor(req.body.model, s);
+  const kind = req.body.kind === 'turn' ? 'turn' : 'page';
 
   // The day's shares. When they cannot be read nothing is asked (the app
   // then reads the page with its other brain).
@@ -96,7 +101,7 @@ functions.http('formBrain', async (req, res) => {
     const r = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: { 'x-api-key': key, 'anthropic-version': '2023-06-01', 'content-type': 'application/json' },
-      body: JSON.stringify(core.request({ system: req.body.system, page: req.body.page, model })),
+      body: JSON.stringify(core.request({ system: req.body.system, page: req.body.page, now: req.body.now, model, kind })),
       signal: AbortSignal.timeout(s.timeoutMs),
     });
     const j = await r.json().catch(() => null);
@@ -121,6 +126,6 @@ functions.http('formBrain', async (req, res) => {
     note({ is: 'unread', why: out.why, model, ms: Date.now() - asked });
     return res.status(502).json({ error: out.why });
   }
-  note({ is: 'ok', model, in: out.in, out: out.out, claudeMs: Date.now() - asked, ms: Date.now() - started, login: !!uid });
-  return res.json({ text: out.text, model, in: out.in, out: out.out, ms: Date.now() - asked });
+  note({ is: 'ok', kind, model, in: out.in, kept: out.kept, out: out.out, claudeMs: Date.now() - asked, ms: Date.now() - started, login: !!uid });
+  return res.json({ text: out.text, model, in: out.in, out: out.out, ms: Date.now() - asked, all: Date.now() - started });
 });

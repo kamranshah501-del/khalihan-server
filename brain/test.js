@@ -34,8 +34,14 @@ assert.equal(core.badBody(null), 'bad');
 assert.equal(core.badBody({ system: 'short', page: '{}' }), 'bad');
 assert.equal(core.badBody({ system, page: '' }), 'bad');
 assert.equal(core.badBody({ system, page: 'p'.repeat(40001) }), 'bad');
-assert.equal(core.badBody({ system: 'x'.repeat(20001), page: '{}' }), 'bad');
+assert.equal(core.badBody({ system: 'x'.repeat(24001), page: '{}' }), 'bad');
 assert.equal(core.badBody({ system, page: 42 }), 'bad');
+assert.equal(core.badBody({ system, page: '{}', kind: 'page' }), '');
+assert.equal(core.badBody({ system, page: '{}', kind: 'chat' }), 'bad');
+assert.equal(core.badBody({ system, page: '{}', kind: 'turn' }), 'bad'); // a turn needs the state now
+assert.equal(core.badBody({ system, page: '{}', kind: 'turn', now: '{"talk":[]}' }), '');
+assert.equal(core.badBody({ system, page: '{}', kind: 'turn', now: 'n'.repeat(24001) }), 'bad');
+assert.equal(core.badBody({ system: 'x'.repeat(24000), page: '{}' }), '');
 
 // the day is India's
 assert.equal(core.dayId(new Date('2026-11-24T18:29:00Z')), 'd20261124');
@@ -51,14 +57,31 @@ assert.equal(core.overCap({ day: 4, who: 3, login: false }, s), '');
 assert.equal(core.overCap({ day: 4, who: 5, login: false }, s), 'user');
 assert.equal(core.overCap({ day: 0, who: 0, login: true }, core.settings({ day: 0 })), 'day');
 
-// what Anthropic is sent: the fixed shape, no temperature, the page as the one message
+// what Anthropic is sent — a page read: the fixed shape, no temperature, the
+// page as the one message, the instruction marked to be kept
 const r = core.request({ system, page: '{"site":"x.gov.in"}', model: 'claude-sonnet-5-5' });
 assert.equal(r.model, 'claude-sonnet-5-5');
 assert.equal('temperature' in r, false);
-assert.equal(r.system, system);
-assert.deepEqual(r.messages, [{ role: 'user', content: '{"site":"x.gov.in"}' }]);
+assert.deepEqual(r.system, [{ type: 'text', text: system, cache_control: { type: 'ephemeral' } }]);
+assert.deepEqual(r.messages, [{ role: 'user', content: [{ type: 'text', text: '{"site":"x.gov.in"}' }] }]);
 assert.equal(r.output_config.format.type, 'json_schema');
 assert.equal(r.output_config.format.schema, core.PAGE_SCHEMA);
+assert.equal(r.max_tokens, 4000);
+
+// — a turn of the whole work: the other shape; the page kept, the state now after it
+const t = core.request({ system, page: '{"site":"x.gov.in"}', now: '{"talk":[]}', model: 'claude-sonnet-5-5', kind: 'turn' });
+assert.equal(t.output_config.format.schema, core.TURN_SCHEMA);
+assert.deepEqual(t.messages[0].content, [
+  { type: 'text', text: '{"site":"x.gov.in"}', cache_control: { type: 'ephemeral' } },
+  { type: 'text', text: '{"talk":[]}' },
+]);
+assert.equal(t.max_tokens, 2000);
+const ts = core.TURN_SCHEMA;
+assert.deepEqual(ts.required, ['acts', 'end', 'say']);
+assert.equal(ts.additionalProperties, false);
+assert.deepEqual(ts.properties.acts.items.required, ['do', 'i', 'v']);
+assert.deepEqual(ts.properties.acts.items.properties.do.enum, ['put', 'type', 'pick', 'tick', 'file', 'click', 'farmer']);
+assert.deepEqual(ts.properties.end.enum, ['next', 'ask', 'ok', 'farmer', 'later', 'no', 'done']);
 
 // the shape itself: the app's 14 keys, nothing else allowed, list items complete
 const p = core.PAGE_SCHEMA;
@@ -87,6 +110,6 @@ assert.deepEqual([a.ok, a.why], [false, 'shape']);
 assert.equal(core.answer(null).ok, false);
 assert.equal(core.answer({ error: { type: 'overloaded_error' } }).ok, false);
 a = core.answer({ content: [{ type: 'thinking', thinking: '…' }, { type: 'text', text: '{"kind":"info"}' }], stop_reason: 'end_turn', usage: { input_tokens: 10, cache_read_input_tokens: 90, output_tokens: 5 } });
-assert.deepEqual([a.ok, a.in, a.out], [true, 100, 5]);
+assert.deepEqual([a.ok, a.in, a.out, a.kept], [true, 100, 5, 90]);
 
 console.log('form-brain: all checks passed');

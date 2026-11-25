@@ -101,8 +101,10 @@ async function call({ method = 'POST', appCheck = 'token', login = 'uid-1', body
   assert.equal(sent.url, 'https://api.anthropic.com/v1/messages');
   assert.equal(sent.init.headers['x-api-key'], 'sk-ant-test-key');
   const asked = JSON.parse(sent.init.body);
-  assert.equal(asked.system, system);
-  assert.equal(asked.messages[0].content, page);
+  assert.equal(asked.system[0].text, system);
+  assert.deepEqual(asked.system[0].cache_control, { type: 'ephemeral' });
+  assert.equal(asked.messages[0].content[0].text, page);
+  assert.equal(asked.output_config.format.schema.properties.kind.enum.length, 7); // the page reader's shape
   assert.equal(asked.output_config.format.type, 'json_schema');
   assert.equal('temperature' in asked, false);
   assert.equal(store.get(day).n, 1);
@@ -118,17 +120,34 @@ async function call({ method = 'POST', appCheck = 'token', login = 'uid-1', body
   store.set(day, { ...store.get(day), n: 1 });
   store.set(`${day}/who/uid-1`, { n: 1 });
 
+  // a turn of the whole work: the other shape, the page kept and the state now after it
+  claude = async () => ({ ok: true, status: 200, json: async () => ({ content: [{ type: 'text', text: '{"acts":[{"do":"type","i":8,"v":"18/09/2000"}],"end":"ask","say":"ok"}' }], stop_reason: 'end_turn', usage: { input_tokens: 400, cache_read_input_tokens: 3000, output_tokens: 200 } }) });
+  r = await call({ body: { system, page, kind: 'turn', now: '{"talk":[{"who":"farmer","said":"SAID-BY-THE-FARMER 1809 2000"}]}' } });
+  assert.equal(r.status, 200);
+  assert.equal(JSON.parse(r.body.text).acts[0].v, '18/09/2000');
+  assert.equal(r.body.in, 3400);
+  var turnAsked = JSON.parse(sent.init.body);
+  assert.deepEqual(turnAsked.output_config.format.schema.required, ['acts', 'end', 'say']);
+  assert.equal(turnAsked.messages[0].content.length, 2);
+  assert.deepEqual(turnAsked.messages[0].content[0].cache_control, { type: 'ephemeral' });
+  assert.equal((await call({ body: { system, page, kind: 'turn' } })).status, 400); // a turn without the state now
+  assert.equal((await call({ body: { system, page, kind: 'chat', now: '{}' } })).status, 400);
+  store.set(day, { ...store.get(day), n: 3 });
+  store.set(`${day}/who/uid-1`, { n: 3 });
+  claude = async () => ({ ok: true, status: 200, json: async () => ({ content: [{ type: 'text', text: '{"kind":"login","say":"ok"}' }], stop_reason: 'end_turn', usage: { input_tokens: 2000, output_tokens: 300 } }) });
+
   // no login, or a login that does not check out: read, counted with the phones without a login
   await call({ login: '' });
   world.loginOk = false;
   await call();
   world.loginOk = true;
   assert.equal(store.get(`${day}/who/nologin`).n, 2);
-  assert.equal(store.get(day).n, 3);
+  assert.equal(store.get(day).n, 5);
 
   // nothing of the page, the instruction or the key in the log
   const all = logs.join('\n');
   assert.equal(all.includes('PRIVATE-WORDS'), false);
+  assert.equal(all.includes('SAID-BY-THE-FARMER'), false);
   assert.equal(all.includes('Khalihan AI.'), false);
   assert.equal(all.includes('sk-ant'), false);
   assert.equal(all.includes('uid-1'), false);

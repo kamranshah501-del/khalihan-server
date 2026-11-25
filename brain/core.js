@@ -32,6 +32,25 @@ const PAGE_SCHEMA = {
   additionalProperties: false,
 };
 
+// "Full unlock" (owner, 25 Nov 2026): Khalihan AI does the whole form — at
+// each turn it says what the phone should do (acts), where the work stands
+// (end) and what to tell the farmer (say). lib/ai/gov_agent.dart in the app;
+// tool/ai_compare/agent/agent_paper.py is the paper it was checked on.
+const TURN_SCHEMA = {
+  type: 'object',
+  properties: {
+    acts: item({
+      do: { type: 'string', enum: ['put', 'type', 'pick', 'tick', 'file', 'click', 'farmer'] },
+      i: { type: 'integer' },
+      v: { type: 'string' },
+    }),
+    end: { type: 'string', enum: ['next', 'ask', 'ok', 'farmer', 'later', 'no', 'done'] },
+    say: { type: 'string' },
+  },
+  required: ['acts', 'end', 'say'],
+  additionalProperties: false,
+};
+
 const OWN = {
   model: 'claude-sonnet-5-5', // tool/ai_compare/RESULT_2026-11-24_govpage.md (app repository)
   // The models the app may ask for by name (Admin → AI Forms names one).
@@ -68,12 +87,18 @@ function modelFor(asked, s) {
   return OWN.models.includes(name) ? name : s.model;
 }
 
-// '' when the request makes sense; else why not.
+// '' when the request makes sense; else why not. kind: "page" (a page read,
+// the first shape — also when left out) or "turn" (a turn of the whole
+// work); now: with a turn, the state now (the talk, what is done, what the
+// boxes hold) — the page before it does not change while he answers.
 function badBody(body) {
   if (!body || typeof body !== 'object') return 'bad';
-  const { system, page } = body;
-  if (typeof system !== 'string' || system.length < 200 || system.length > 20000) return 'bad';
+  const { system, page, kind, now } = body;
+  if (typeof system !== 'string' || system.length < 200 || system.length > 24000) return 'bad';
   if (typeof page !== 'string' || page.length < 2 || page.length > 40000) return 'bad';
+  if (kind !== undefined && kind !== 'page' && kind !== 'turn') return 'bad';
+  if (now !== undefined && (typeof now !== 'string' || now.length < 2 || now.length > 24000)) return 'bad';
+  if (kind === 'turn' && now === undefined) return 'bad';
   return '';
 }
 
@@ -91,14 +116,27 @@ function overCap({ day, who, login }, s) {
   return '';
 }
 
-// What Anthropic is sent. No temperature (these models refuse it).
-function request({ system, page, model }) {
+// What Anthropic is sent. No temperature (these models refuse it). The
+// answer can only be one of our two shapes. The instruction — and, in a
+// turn, the page — are marked to be kept by Anthropic for five minutes: they
+// do not change from one turn to the next, and a turn that finds them kept
+// pays a twentieth for them and answers a little sooner.
+function request({ system, page, now, model, kind }) {
+  const keep = { type: 'ephemeral' };
+  const turn = kind === 'turn';
   return {
     model,
-    max_tokens: 4000,
-    system,
-    messages: [{ role: 'user', content: page }],
-    output_config: { format: { type: 'json_schema', schema: PAGE_SCHEMA } },
+    max_tokens: turn ? 2000 : 4000,
+    system: [{ type: 'text', text: system, cache_control: keep }],
+    messages: [
+      {
+        role: 'user',
+        content: turn
+          ? [{ type: 'text', text: page, cache_control: keep }, { type: 'text', text: now }]
+          : [{ type: 'text', text: page }],
+      },
+    ],
+    output_config: { format: { type: 'json_schema', schema: turn ? TURN_SCHEMA : PAGE_SCHEMA } },
   };
 }
 
@@ -106,7 +144,8 @@ function request({ system, page, model }) {
 function answer(j) {
   if (!j || typeof j !== 'object' || !Array.isArray(j.content)) return { ok: false, why: 'empty' };
   const u = j.usage || {};
-  const tin = (u.input_tokens || 0) + (u.cache_read_input_tokens || 0) + (u.cache_creation_input_tokens || 0);
+  const kept = u.cache_read_input_tokens || 0; // read from what Anthropic kept
+  const tin = (u.input_tokens || 0) + kept + (u.cache_creation_input_tokens || 0);
   const tout = u.output_tokens || 0;
   if (j.stop_reason === 'max_tokens') return { ok: false, why: 'cut', in: tin, out: tout };
   if (j.stop_reason === 'refusal') return { ok: false, why: 'refused', in: tin, out: tout };
@@ -118,7 +157,7 @@ function answer(j) {
     return { ok: false, why: 'shape', in: tin, out: tout };
   }
   if (!obj || typeof obj !== 'object' || Array.isArray(obj)) return { ok: false, why: 'shape', in: tin, out: tout };
-  return { ok: true, text, in: tin, out: tout };
+  return { ok: true, text, in: tin, out: tout, kept };
 }
 
-module.exports = { PAGE_SCHEMA, OWN, settings, modelFor, badBody, dayId, overCap, request, answer };
+module.exports = { PAGE_SCHEMA, TURN_SCHEMA, OWN, settings, modelFor, badBody, dayId, overCap, request, answer };

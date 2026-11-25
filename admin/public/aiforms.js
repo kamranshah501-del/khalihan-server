@@ -79,6 +79,10 @@ const T = {
     searches: 'Google looks on one visit',
     type_ms: 'Slowest writing speed (milliseconds a letter)',
     ask_account: 'When he is not signed in on a site: ask "Your login is not found — shall I open a new account?"',
+    agent: 'Khalihan AI does the whole form itself — "full unlock" (app 1.0.9): it fills, asks, understands his answers and answers what he asks about the form. Bank account, Aadhaar, PAN, OTP and captcha stay his own hand; Submit and Pay are never pressed. Off: the page is read and the phone asks the questions, as before.',
+    agent_h: 'What Khalihan AI is told when it does the whole form',
+    agent_d: 'Empty = the app\'s own (lib/ai/gov_agent.dart). 200 to 24,000 letters. The safety rules are also locked in the phone itself: it never writes in a private box and never presses Submit or Pay, whatever is written here.',
+    bad_agent: 'The whole-form instruction must be empty or 200 to 24,000 letters.',
     instr_h: 'What Khalihan AI is told (its instruction)',
     instr_d: 'Empty = the app\'s own. 200 to 20,000 letters, or the phone keeps its own. The phone still checks every reply (private boxes, long numbers).',
     instr_own: 'Put the app\'s own text here',
@@ -161,6 +165,10 @@ const T = {
     searches: 'एक बार में Google पर कितनी बार देखे',
     type_ms: 'लिखने की सबसे धीमी रफ़्तार (एक अक्षर, मिलीसेकंड)',
     ask_account: 'साइट पर लॉगिन न हो तो पूछे: "आपका लॉगिन नहीं मिला — नया खाता खोल दूँ?"',
+    agent: 'Khalihan AI पूरा फॉर्म खुद करे — "full unlock" (ऐप 1.0.9): खुद भरे, पूछे, किसान के जवाब समझे और फॉर्म के बारे में उसके सवालों का जवाब दे। बैंक खाता, आधार, PAN, OTP और कैप्चा किसान के अपने हाथ से; Submit और Pay कभी नहीं दबते। बंद: पेज पढ़ा जाता है और सवाल फ़ोन पूछता है, पहले जैसा।',
+    agent_h: 'पूरा फॉर्म खुद करते समय Khalihan AI को क्या बताया जाए',
+    agent_d: 'खाली = ऐप का अपना (lib/ai/gov_agent.dart)। 200 से 24,000 अक्षर। सुरक्षा के नियम फ़ोन में भी बंद हैं: यहाँ कुछ भी लिखा हो, फ़ोन निजी बॉक्स में कभी नहीं लिखता और Submit या Pay कभी नहीं दबाता।',
+    bad_agent: 'पूरा-फॉर्म वाला निर्देश खाली हो या 200 से 24,000 अक्षर।',
     instr_h: 'Khalihan AI को क्या समझाया जाता है',
     instr_d: 'खाली = ऐप का अपना। 200 से 20,000 अक्षर, वरना फ़ोन अपना रखता है। हर जवाब फ़ोन फिर भी जाँचता है (निजी खाने, लंबे नंबर)।',
     instr_own: 'ऐप का अपना टेक्स्ट यहाँ डालें',
@@ -242,6 +250,8 @@ export function setFrom(f) {
   if (!(pages >= 1 && pages <= 40) || !(searches >= 0 && searches <= 10) || !(typeMs >= 15 && typeMs <= 150)) return { error: 'bad_num' };
   const instr = String(f.instruction || '').trim();
   if (instr && (instr.length < 200 || instr.length > 20000)) return { error: 'bad_instr' };
+  const agentInstr = String(f.agent_instruction || '').trim();
+  if (agentInstr && (agentInstr.length < 200 || agentInstr.length > 24000)) return { error: 'bad_agent' };
   const pick = (a, claude) => a.map((x) => String(x || '').trim())
     .filter((x) => (claude ? /^(gemini|claude-)[a-z0-9.\-]{1,60}$/ : /^gemini[a-z0-9.\-]{1,60}$/).test(x))
     .filter((x, i, all) => all.indexOf(x) === i);
@@ -253,6 +263,9 @@ export function setFrom(f) {
     type_ms: Math.round(typeMs),
     ask_account: !!f.ask_account,
   };
+  // "Full unlock" (owner, 25 Nov 2026): Khalihan AI does the whole form.
+  if (f.agent) set.agent = true;
+  if (agentInstr) set.agent_instruction = agentInstr;
   if (!set.models.length) delete set.models;
   if (!set.help_models.length) delete set.help_models;
   if (instr) set.instruction = instr;
@@ -313,6 +326,8 @@ export async function aiFormsPage(deps) {
     searches: base.searches ?? AIFORMS_DEFAULTS.searches,
     type_ms: base.type_ms ?? AIFORMS_DEFAULTS.type_ms,
     ask_account: base.ask_account !== false,
+    agent: base.agent === true,
+    agent_instruction: base.agent_instruction || '',
     instruction: base.instruction || '',
     notes: Object.entries(base.notes || {}).map(([site, text]) => ({ site, text })),
     forms: (base.forms || []).map((s) => ({ ...s, states: (s.states || []).join(', ') })),
@@ -393,6 +408,10 @@ export async function aiFormsPage(deps) {
           <div><label for="af-type">${esc(t('type_ms'))}</label><input id="af-type" type="number" min="15" max="150" value="${esc(String(form.type_ms))}"></div>
         </div>
         <label class="check" style="margin:10px 0"><input type="checkbox" id="af-ask" ${form.ask_account ? 'checked' : ''}> ${esc(t('ask_account'))}</label>
+        <label class="check" style="margin:10px 0"><input type="checkbox" id="af-agent" ${form.agent ? 'checked' : ''}> ${esc(t('agent'))}</label>
+        <h3 class="small" style="margin-top:12px">${esc(t('agent_h'))}</h3>
+        <p class="small muted">${esc(t('agent_d'))}</p>
+        <textarea id="af-agent-instr" rows="6" style="width:100%;box-sizing:border-box;font-family:ui-monospace,monospace;font-size:12.5px">${esc(form.agent_instruction)}</textarea>
 
         <h3 class="small" style="margin-top:12px">${esc(t('instr_h'))}</h3>
         <p class="small muted">${esc(t('instr_d'))}</p>
@@ -443,6 +462,8 @@ export async function aiFormsPage(deps) {
     form.searches = $('af-searches').value;
     form.type_ms = $('af-type').value;
     form.ask_account = $('af-ask').checked;
+    form.agent = $('af-agent').checked;
+    form.agent_instruction = $('af-agent-instr').value;
     form.instruction = $('af-instr').value;
     form.note = $('af-note').value;
     document.querySelectorAll('[data-note]').forEach((i) => { form.notes[+i.dataset.i][i.dataset.note] = i.value; });
