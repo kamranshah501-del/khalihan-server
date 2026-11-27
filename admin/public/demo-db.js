@@ -39,7 +39,7 @@ export async function connect() {
   const features = {
     login: false, sell: false, kendra: false, sell_menu: false, voice_search: true, share_link: true,
     weather: true, calendar: true, services: true, feedback: true, dark: true, update_prompt: true,
-    rate_prompt: true, setup_guide: true, whats_new: true, farm_weather: true, ai: false, ai_interrupt: true, ai_vertex: true,
+    rate_prompt: true, setup_guide: true, whats_new: true, farm_weather: true, weather_google: false, weather_om_backup: false, ai: false, ai_interrupt: true, ai_vertex: true,
   };
   const switchPrefs = {};
   let launchStates = ['Maharashtra'];

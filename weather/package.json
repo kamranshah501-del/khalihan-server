@@ -1,0 +1,12 @@
+{
+  "name": "khalihan-weather",
+  "private": true,
+  "description": "The farm's weather from Google's Weather API, in the shape the Khalihan app reads; no key anywhere.",
+  "main": "index.js",
+  "engines": { "node": ">=22" },
+  "scripts": { "test": "node test.js && node test_handler.js" },
+  "dependencies": {
+    "@google-cloud/functions-framework": "^3.4.0",
+    "firebase-admin": "^13.0.0"
+  }
+}
