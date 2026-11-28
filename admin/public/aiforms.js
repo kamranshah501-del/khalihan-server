@@ -347,7 +347,7 @@ export async function aiFormsPage(deps) {
 
   function siteRows(kind) {
     return form[kind].map((s, i) => `<div class="row" style="gap:6px;flex-wrap:wrap;margin:4px 0">
-      ${['id', 'url', 'hi', 'mr', 'en', 'states'].map((k) => `<input data-site="${kind}" data-i="${i}" data-k="${k}" value="${esc(s[k] || '')}" placeholder="${esc(t('s_' + k))}" style="flex:${k === 'url' ? 3 : 1};min-width:${k === 'url' ? 220 : 90}px">`).join('')}
+      ${['id', 'url', 'hi', 'mr', 'en', 'states'].map((k) => `<input data-site="${kind}" data-i="${i}" data-k="${k}" value="${esc(s[k] || '')}" placeholder="${esc(t('s_' + k))}" aria-label="${esc(t('s_' + k))}" style="flex:${k === 'url' ? 3 : 1};min-width:${k === 'url' ? 220 : 90}px">`).join('')}
       <button class="btn sec small" data-site-del="${kind}" data-i="${i}">${esc(t('remove'))}</button></div>`).join('');
   }
 
@@ -411,18 +411,18 @@ export async function aiFormsPage(deps) {
         <label class="check" style="margin:10px 0"><input type="checkbox" id="af-agent" ${form.agent ? 'checked' : ''}> ${esc(t('agent'))}</label>
         <h3 class="small" style="margin-top:12px">${esc(t('agent_h'))}</h3>
         <p class="small muted">${esc(t('agent_d'))}</p>
-        <textarea id="af-agent-instr" rows="6" style="width:100%;box-sizing:border-box;font-family:ui-monospace,monospace;font-size:12.5px">${esc(form.agent_instruction)}</textarea>
+        <textarea id="af-agent-instr" aria-label="${esc(t('agent_h'))}" rows="6" style="width:100%;box-sizing:border-box;font-family:ui-monospace,monospace;font-size:12.5px">${esc(form.agent_instruction)}</textarea>
 
         <h3 class="small" style="margin-top:12px">${esc(t('instr_h'))}</h3>
         <p class="small muted">${esc(t('instr_d'))}</p>
-        <textarea id="af-instr" rows="10" style="width:100%;box-sizing:border-box;font-family:ui-monospace,monospace;font-size:12.5px">${esc(form.instruction)}</textarea>
+        <textarea id="af-instr" aria-label="${esc(t('instr_h'))}" rows="10" style="width:100%;box-sizing:border-box;font-family:ui-monospace,monospace;font-size:12.5px">${esc(form.instruction)}</textarea>
         <div class="row" style="gap:8px"><button class="btn sec small" id="af-own">${esc(t('instr_own'))}</button><span class="small muted" id="af-n"></span></div>
 
         <h3 class="small" style="margin-top:14px">${esc(t('notes_h'))}</h3>
         <p class="small muted">${esc(t('notes_d'))}</p>
         ${form.notes.map((r, i) => `<div class="row" style="gap:6px;flex-wrap:wrap;margin:4px 0">
-          <input data-note="site" data-i="${i}" value="${esc(r.site)}" placeholder="${esc(t('note_site'))}" style="flex:1;min-width:200px">
-          <input data-note="text" data-i="${i}" value="${esc(r.text)}" placeholder="${esc(t('note_text'))}" maxlength="500" style="flex:3;min-width:240px">
+          <input data-note="site" data-i="${i}" value="${esc(r.site)}" placeholder="${esc(t('note_site'))}" aria-label="${esc(t('note_site'))}" style="flex:1;min-width:200px">
+          <input data-note="text" data-i="${i}" value="${esc(r.text)}" placeholder="${esc(t('note_text'))}" aria-label="${esc(t('note_text'))}" maxlength="500" style="flex:3;min-width:240px">
           <button class="btn sec small" data-note-del="${i}">${esc(t('remove'))}</button></div>`).join('')}
         <button class="btn sec small" id="af-add-note">${esc(t('add_note'))}</button>
 

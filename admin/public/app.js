@@ -23,7 +23,7 @@ import { farmersPage } from './farmers.js';
 import { ALERT_WORDS, alertsCard, bellList } from './alerts.js';
 import { MSG_WORDS, msgHead, msgStats, msgKind, openMessage } from './messages.js';
 
-const ADMIN_VERSION = '1.37 · 25 Nov 2026';
+const ADMIN_VERSION = '1.38 · 28 Nov 2026';
 const DEMO = new URLSearchParams(location.search).has('demo');
 const $ = (sel) => document.querySelector(sel);
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -2001,8 +2001,8 @@ const PAGES = {
         </div>`).join('')}
       <h2>${tr('new_member')}</h2>
       <div class="card"><div class="form">
-        <div><label>${tr('g_email')}</label><input id="s-email" type="email"></div>
-        <div><label>${tr('name')}</label><input id="s-name"></div>
+        <div><label for="s-email">${tr('g_email')}</label><input id="s-email" type="email"></div>
+        <div><label for="s-name">${tr('name')}</label><input id="s-name"></div>
         <div><label>${tr('role')}</label><select id="s-role"><option value="staff">staff</option><option value="owner">owner</option></select></div>
       </div><div class="actions"><button class="main" id="s-add">${tr('add')}</button></div></div>`);
     wireTeamTabs();

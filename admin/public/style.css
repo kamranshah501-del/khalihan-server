@@ -83,9 +83,9 @@ button.ghost.small { padding: 5px 10px; border-radius: 9px; font-size: 14px; }
 .badge.red { background: #FF453A; color: #fff; }
 .badge.amber { background: var(--amber-tint); color: var(--amber); }
 .badge.grey { background: #eef1f4; color: var(--muted); }
-.navh { font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: #8597a6; font-weight: 800; margin: 16px 10px 6px; }
+.navh { font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); font-weight: 800; margin: 16px 10px 6px; }
 .navgap { flex: 1; min-height: 14px; }
-.navfoot { font-size: 12px; color: #9aaab7; padding: 8px 10px 0; }
+.navfoot { font-size: 12px; color: var(--muted); padding: 8px 10px 0; }
 .navscrim { position: fixed; inset: 56px 0 0; background: rgba(10,46,74,.32); z-index: 18; }
 main { flex: 1; min-width: 0; max-width: 1180px; margin: 0 auto; padding: 22px 28px 48px; }
 @media (max-width: 900px) {
@@ -167,7 +167,7 @@ h2 { font-size: 19px; margin: 18px 0 8px; }
 button.main, button.ghost, button.danger, button.plain {
   border-radius: 12px; padding: 9px 16px; font-weight: 700; cursor: pointer; border: 1px solid transparent;
 }
-button.main { background: var(--green); color: #fff; }
+button.main { background: var(--green-dark); color: #fff; }
 a.btnlink { display: inline-block; border-radius: 12px; padding: 9px 16px; font-weight: 700; background: #fff; border: 1px solid var(--line); text-decoration: none; color: var(--ink); }
 button.main:disabled { background: #dde3e8; cursor: default; }
 button.ghost { background: transparent; color: inherit; border-color: currentColor; }
